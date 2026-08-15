@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ôn từ vựng · 22/07 → 16/08</title>
+<meta name="theme-color" content="#101E1B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ôn từ vựng">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,500;0,600;0,800;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,500;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lacquer:#101E1B;
+  --panel:#172A26;
+  --panel-2:#1E3630;
+  --eggshell:#EFE7D6;
+  --gold:#C8A15A;
+  --cinnabar:#C8452F;
+  --jade:#6FBFA0;
+  --line:rgba(200,161,90,.20);
+  --dim:rgba(239,231,214,.58);
+  --dimmer:rgba(239,231,214,.34);
+  --vi:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif;
+  --en:"Newsreader",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--lacquer);
+  color:var(--eggshell);
+  font-family:var(--vi);
+  min-height:100vh;
+  /* vỏ trứng — crushed eggshell inlay, very faint */
+  background-image:
+    radial-gradient(circle at 12% 22%, rgba(239,231,214,.045) 0 1.1px, transparent 1.6px),
+    radial-gradient(circle at 68% 9%,  rgba(239,231,214,.035) 0 .9px, transparent 1.4px),
+    radial-gradient(circle at 34% 71%, rgba(239,231,214,.04) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 87% 58%, rgba(239,231,214,.03) 0 .8px, transparent 1.3px);
+  background-size:180px 180px,240px 240px,300px 300px,210px 210px;
+}
+.eyebrow{
+  font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);
+}
+.wrap{max-width:760px;margin:0 auto;
+  padding:calc(18px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+          calc(48px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left))}
+textarea.box{width:100%;min-height:92px;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:3px;padding:10px;color:var(--dim);font-family:ui-monospace,Menlo,monospace;
+  font-size:11px;line-height:1.5;outline:none;resize:vertical}
+textarea.box:focus{border-color:var(--gold)}
+.ok-note{border:1px solid rgba(111,191,160,.35);background:rgba(111,191,160,.07);border-radius:3px;
+  padding:11px 12px;font-family:var(--en);font-size:14px;line-height:1.5;margin-top:16px}
+
+/* ── header ─────────────────────────────── */
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+h1{font-size:19px;font-weight:800;letter-spacing:-.015em;margin:3px 0 0}
+h1 span{color:var(--dim);font-weight:300}
+.hdr-btns{display:flex;gap:6px;flex-shrink:0}
+.icon{
+  background:transparent;border:1px solid var(--line);color:var(--eggshell);
+  border-radius:3px;height:34px;min-width:34px;padding:0 9px;cursor:pointer;
+  font-family:var(--vi);font-size:12px;font-weight:500;display:inline-flex;
+  align-items:center;justify-content:center;gap:5px;transition:.15s;
+}
+.icon:hover{border-color:var(--gold);background:rgba(200,161,90,.08)}
+.icon.on{border-color:var(--gold);color:var(--gold)}
+.rule{height:1px;background:var(--line);margin:14px 0}
+.stats{display:flex;gap:18px;flex-wrap:wrap;font-size:11.5px;color:var(--dim)}
+.stats b{color:var(--eggshell);font-weight:600}
+.stats .flame{color:var(--gold)}
+
+/* ── tabs ───────────────────────────────── */
+nav.tabs{display:flex;gap:2px;margin:14px 0 0}
+nav.tabs button{
+  background:transparent;border:0;border-bottom:2px solid transparent;
+  color:var(--dimmer);font-family:var(--vi);font-size:11px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;padding:8px 12px 7px;cursor:pointer;transition:.15s;
+}
+nav.tabs button:hover{color:var(--dim)}
+nav.tabs button[aria-selected="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ── deck chips ─────────────────────────── */
+.decks{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 4px}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 11px 7px 8px;
+  border:1px solid var(--line);border-radius:3px;background:transparent;
+  color:var(--dim);font-family:var(--vi);font-size:11.5px;font-weight:500;cursor:pointer;transition:.15s;
+}
+.chip:hover{border-color:rgba(200,161,90,.5)}
+.chip[aria-pressed="true"]{background:var(--panel);border-color:var(--gold);color:var(--eggshell)}
+.chip .ring{flex-shrink:0}
+.chip .n{color:var(--dimmer);font-size:10px;font-variant-numeric:tabular-nums}
+.deck-actions{display:flex;gap:14px;margin-top:10px;font-size:11px}
+.link{background:none;border:0;color:var(--gold);font-family:var(--vi);font-size:11px;
+  cursor:pointer;padding:0;border-bottom:1px solid rgba(200,161,90,.35)}
+.link:hover{border-bottom-color:var(--gold)}
+
+/* ── card ───────────────────────────────── */
+.card{
+  position:relative;background:var(--panel);border:1px solid var(--line);border-radius:4px;
+  padding:26px 22px 22px;margin-top:18px;overflow:hidden;
+}
+.card::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.card.sweep::after{width:100%}
+.card.shake{animation:shake .32s}
+@keyframes shake{10%,90%{transform:translateX(-2px)}30%,70%{transform:translateX(4px)}50%{transform:translateX(-4px)}}
+.q-label{margin-bottom:16px}
+.prompt-en{font-family:var(--en);font-size:26px;line-height:1.24;font-weight:300;letter-spacing:-.01em}
+.word{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1.06;margin:0}
+.word.sm{font-size:32px}
+.gloss{font-family:var(--en);font-style:italic;font-size:19px;color:var(--dim);margin-top:6px;font-weight:300}
+.sent{font-size:20px;font-weight:500;line-height:1.5;letter-spacing:-.01em}
+.sent .blank{color:var(--gold);border-bottom:1.5px solid var(--gold);padding:0 22px}
+.sent-en{font-family:var(--en);font-style:italic;font-size:15px;color:var(--dim);margin-top:8px;font-weight:300}
+.note{font-family:var(--en);font-size:14px;color:var(--dim);font-style:italic;margin-top:14px;
+  padding-left:11px;border-left:1px solid var(--line)}
+
+/* ── tone rail (signature) ──────────────── */
+.tones{display:flex;gap:12px;align-items:flex-end;height:22px;margin-bottom:9px}
+.tone-syl{display:flex;flex-direction:column;align-items:center;gap:2px}
+.tone-syl svg{display:block;overflow:visible}
+.tone-syl em{font-style:normal;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
+
+/* ── audio ──────────────────────────────── */
+.audio{display:flex;gap:7px;margin-top:16px;flex-wrap:wrap}
+.speak{
+  background:transparent;border:1px solid var(--line);color:var(--gold);border-radius:3px;
+  padding:8px 13px;font-family:var(--vi);font-size:11.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;transition:.15s;letter-spacing:.02em;
+}
+.speak:hover{background:rgba(200,161,90,.1);border-color:var(--gold)}
+.speak.playing{background:rgba(200,161,90,.16);border-color:var(--gold)}
+.speak kbd{font-family:var(--vi);font-size:9px;color:var(--dimmer);border:1px solid var(--line);
+  border-radius:2px;padding:1px 4px}
+.big-play{
+  width:100%;justify-content:center;padding:26px;font-size:14px;
+}
+
+/* ── options ────────────────────────────── */
+.opts{display:grid;gap:8px;margin-top:18px}
+@media(min-width:560px){.opts.two{grid-template-columns:1fr 1fr}}
+.opt{
+  text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  padding:14px 15px;color:var(--eggshell);font-family:var(--vi);font-size:16px;font-weight:500;
+  cursor:pointer;transition:.13s;display:flex;align-items:center;gap:11px;line-height:1.3;
+}
+.opt:hover:not(:disabled){border-color:var(--gold);background:var(--panel-2)}
+.opt:disabled{cursor:default}
+.opt .k{font-size:9.5px;color:var(--dimmer);border:1px solid var(--line);border-radius:2px;
+  padding:2px 5px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.opt.right{border-color:var(--jade);background:rgba(111,191,160,.1)}
+.opt.right .k{border-color:var(--jade);color:var(--jade)}
+.opt.wrong{border-color:var(--cinnabar);background:rgba(200,69,47,.1)}
+.opt.wrong .k{border-color:var(--cinnabar);color:var(--cinnabar)}
+.opt.fade{opacity:.4}
+.opt .en{font-family:var(--en);font-style:italic;font-weight:300}
+
+/* ── typing ─────────────────────────────── */
+.typebox{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+input.type{
+  flex:1;min-width:200px;background:var(--panel-2);border:1px solid var(--line);border-radius:3px;
+  padding:14px 15px;color:var(--eggshell);font-family:var(--vi);font-size:19px;font-weight:600;
+  outline:none;letter-spacing:-.01em;
+}
+input.type:focus{border-color:var(--gold)}
+.btn{
+  background:var(--gold);border:1px solid var(--gold);color:#0E1A17;border-radius:3px;
+  padding:13px 20px;font-family:var(--vi);font-size:12px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;cursor:pointer;transition:.15s;
+}
+.btn:hover{background:#D9B372;border-color:#D9B372}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn.ghost:hover{background:rgba(200,161,90,.12)}
+
+/* ── verdict ────────────────────────────── */
+.verdict{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.vtag{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.vtag.ok{color:var(--jade)}
+.vtag.no{color:var(--cinnabar)}
+.vtag.near{color:var(--gold)}
+.vrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:8px}
+.vrow .w{font-size:27px;font-weight:800;letter-spacing:-.02em}
+.vrow .g{font-family:var(--en);font-style:italic;color:var(--dim);font-size:17px;font-weight:300}
+.next-row{display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.hint{font-size:10.5px;color:var(--dimmer);letter-spacing:.04em}
+
+/* ── progress ───────────────────────────── */
+.foot{margin-top:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar{flex:1;min-width:140px;height:3px;background:rgba(239,231,214,.1);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .35s ease}
+.count{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+.combo{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+
+/* ── word list ──────────────────────────── */
+.list-head{display:flex;gap:10px;align-items:center;margin:16px 0 4px;flex-wrap:wrap}
+input.search{
+  flex:1;min-width:180px;background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  padding:10px 12px;color:var(--eggshell);font-family:var(--vi);font-size:14px;outline:none;
+}
+input.search:focus{border-color:var(--gold)}
+.row{
+  display:flex;align-items:center;gap:13px;padding:12px 4px;border-bottom:1px solid rgba(200,161,90,.1);
+}
+.row .pill{width:5px;height:5px;border-radius:50%;flex-shrink:0;background:var(--dimmer)}
+.row .vi{font-size:17px;font-weight:600;letter-spacing:-.01em;min-width:130px}
+.row .en{font-family:var(--en);font-style:italic;color:var(--dim);font-size:15px;font-weight:300;flex:1}
+.row .mini{background:none;border:0;color:var(--gold);cursor:pointer;font-size:14px;padding:5px 7px;border-radius:3px}
+.row .mini:hover{background:rgba(200,161,90,.12)}
+.row .bx{font-size:9px;letter-spacing:.1em;color:var(--dimmer);text-transform:uppercase}
+.group-h{margin:22px 0 2px;display:flex;align-items:baseline;gap:10px}
+
+/* ── sheet ──────────────────────────────── */
+.scrim{position:fixed;inset:0;background:rgba(8,15,13,.72);display:none;z-index:40;
+  align-items:flex-end;justify-content:center;padding:0}
+.scrim.open{display:flex}
+.sheet{background:var(--panel);border:1px solid var(--line);border-bottom:0;
+  border-radius:6px 6px 0 0;width:100%;max-width:560px;padding:22px 20px 30px;max-height:88vh;overflow:auto}
+@media(min-width:620px){.scrim{align-items:center}.sheet{border-radius:6px;border-bottom:1px solid var(--line)}}
+.field{margin-top:18px}
+.field label{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+select,input[type=range]{width:100%}
+select{background:var(--panel-2);border:1px solid var(--line);border-radius:3px;padding:10px;
+  color:var(--eggshell);font-family:var(--vi);font-size:14px;outline:none}
+select:focus{border-color:var(--gold)}
+input[type=range]{accent-color:var(--gold)}
+.seg{display:flex;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.seg button{flex:1;background:transparent;border:0;color:var(--dim);font-family:var(--vi);
+  font-size:12px;font-weight:600;padding:10px 6px;cursor:pointer;transition:.15s}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:rgba(200,161,90,.16);color:var(--gold)}
+.warn{border:1px solid rgba(200,69,47,.45);background:rgba(200,69,47,.08);border-radius:3px;
+  padding:12px 13px;font-family:var(--en);font-size:14px;line-height:1.5;color:var(--eggshell);margin-top:16px}
+.warn a{color:var(--gold)}
+.legend{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.legend div{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--dim)}
+.legend b{color:var(--eggshell);font-weight:600;font-size:13px}
+
+/* ── summary ────────────────────────────── */
+.score{font-size:66px;font-weight:800;letter-spacing:-.045em;line-height:1}
+.score small{font-size:20px;font-weight:300;color:var(--dim);letter-spacing:0}
+.sum-grid{display:flex;gap:26px;flex-wrap:wrap;margin-top:16px}
+.sum-grid div b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.sum-grid div span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer)}
+.empty{font-family:var(--en);font-size:16px;color:var(--dim);line-height:1.6;margin-top:20px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="eyebrow">Tiếng Việt miền Nam · 22/07 → 16/08</div>
+      <h1>Ôn từ vựng <span>— vocabulary drill</span></h1>
+    </div>
+    <div class="hdr-btns">
+      <button class="icon" id="voiceBtn" title="Voice &amp; audio">🔊</button>
+      <button class="icon" id="setBtn" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+  <div class="stats" id="stats"></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tabDrill" aria-selected="true">Drill</button>
+    <button role="tab" id="tabList" aria-selected="false">Word list</button>
+  </nav>
+
+  <main id="paneDrill">
+    <div class="decks" id="decks"></div>
+    <div class="deck-actions">
+      <button class="link" id="allDecks">Select all</button>
+      <button class="link" id="lastTwo">Last two lessons only</button>
+      <button class="link" id="resetProg">Reset progress</button>
+    </div>
+    <div id="stage"></div>
+  </main>
+
+  <main id="paneList" hidden>
+    <div class="list-head">
+      <input class="search" id="search" placeholder="Search Vietnamese or English…" autocomplete="off">
+      <button class="icon" id="listSpeakAll">▶ Play deck</button>
+    </div>
+    <div id="listBody"></div>
+  </main>
+</div>
+
+<!-- settings sheet -->
+<div class="scrim" id="scrim">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   DATA — every word, gloss and example sentence below is taken
+   from the lesson notes of 22/07, 29/07, 09/08 and 16/08.
+   ══════════════════════════════════════════════════════════ */
+const DECKS = [
+  {id:"d1", label:"22 Jul · Verbs"},
+  {id:"d2", label:"22 Jul · Out & about"},
+  {id:"d3", label:"Modals & chưa"},
+  {id:"d4", label:"29 Jul · Body, home, health"},
+  {id:"d5", label:"9 Aug · Bring & wear"},
+  {id:"d6", label:"16 Aug · Chores"},
+  {id:"d7", label:"16 Aug · Frequency"},
+  {id:"d8", label:"16 Aug · Opposites"},
+  {id:"d9", label:"So sánh · Structures"}
+];
+
+const DATA = [
+/* ── d1 ────────────────────────────────── */
+{vi:"viết",en:"write",d:"d1",exVi:"Em viết tên của em vào đây.",exEn:"Write your name here."},
+{vi:"thử",en:"try",d:"d1",exVi:"Em thử món này đi.",exEn:"Try this dish."},
+{vi:"hỏi",en:"ask",d:"d1",exVi:"Em hỏi cô giáo một câu đi.",exEn:"Ask the teacher a question."},
+{vi:"đọc",en:"read",d:"d1",exVi:"Em đọc quyển sách này đi.",exEn:"Read this book."},
+{vi:"cái này",en:"this one",d:"d1",exVi:"Cái này ngon lắm.",exEn:"This one is very delicious."},
+{vi:"cái khác",en:"another one",d:"d1",exVi:"Em muốn mua cái khác.",exEn:"I want to buy another one."},
+{vi:"nhanh",en:"fast",d:"d1",exVi:"Xe chạy rất nhanh.",exEn:"The car goes very fast.",opp:"chậm"},
+{vi:"chậm",en:"slow",d:"d1",exVi:"Nói chậm thôi.",exEn:"Speak slowly.",opp:"nhanh"},
+{vi:"ví dụ",en:"example",d:"d1",exVi:"Cô giáo cho một ví dụ.",exEn:"The teacher gives an example."},
+{vi:"tự",en:"by yourself",d:"d1",exVi:"Bé tự ăn.",exEn:"The child eats by himself."},
+{vi:"một chút",en:"a little, some",syn:"little",d:"d1",exVi:"Đợi một chút nha.",exEn:"Wait a little."},
+{vi:"nghỉ ngơi",en:"rest",d:"d1",exVi:"Ba đang nghỉ ngơi.",exEn:"Dad is resting."},
+{vi:"về nhà",en:"go home",d:"d1",exVi:"Em về nhà lúc 5 giờ.",exEn:"I go home at 5 o'clock."},
+{vi:"lái xe",en:"drive",d:"d1",exVi:"Chị biết lái xe.",exEn:"She can drive."},
+{vi:"cẩn thận",en:"careful",d:"d1",exVi:"Cẩn thận khi qua đường.",exEn:"Be careful when crossing the street."},
+/* ── d2 ────────────────────────────────── */
+{vi:"khách",en:"customer, guest",d:"d2",exVi:"Anh là khách đầu tiên của quán hôm nay.",exEn:"You are the first customer of the shop today."},
+{vi:"khách du lịch",en:"tourist",d:"d2",exVi:"Nhiều khách du lịch đến Việt Nam vào mùa hè.",exEn:"Many tourists come to Vietnam in the summer."},
+{vi:"sau khi",en:"after",d:"d2",exVi:"Sau khi ăn cơm, tôi đi làm.",exEn:"After eating, I go to work.",opp:"trước khi"},
+{vi:"trước khi",en:"before",d:"d2",exVi:"Trước khi đi ngủ, tôi đánh răng.",exEn:"Before going to bed, I brush my teeth.",opp:"sau khi"},
+{vi:"giảm giá",en:"discount, on sale",d:"d2",exVi:"Cửa hàng đang giảm giá nên đông người mua.",exEn:"The store is having a discount, so many people are shopping."},
+{vi:"không biết",en:"don't know",d:"d2",exVi:"Tôi không biết hôm nay có mưa hay không.",exEn:"I don't know whether it will rain today."},
+{vi:"rảnh",en:"free, not busy",d:"d2",exVi:"Hôm nay tôi rảnh nên đi uống cà phê với bạn.",exEn:"Today I am free, so I go for coffee with a friend."},
+{vi:"hình như",en:"it seems",d:"d2",exVi:"Hình như trời sắp mưa.",exEn:"It seems like it's going to rain."},
+{vi:"gần",en:"near",d:"d2",exVi:"Siêu thị ở gần nhà tôi.",exEn:"The supermarket is near my house.",opp:"xa"},
+{vi:"xa",en:"far",d:"d2",exVi:"Anh ấy ở rất xa công ty.",exEn:"He lives very far from the company.",opp:"gần"},
+{vi:"cái quần",en:"pants",d:"d2",exVi:"Chị ấy mua một cái quần màu đen.",exEn:"She buys a pair of black pants."},
+/* ── d3 ────────────────────────────────── */
+{vi:"muốn",en:"want",d:"d3",exVi:"Tôi muốn xem phim đó.",exEn:"I want to watch that movie.",note:"Modal verbs sit directly in front of the main verb: muốn / có thể / cần / phải / nên."},
+{vi:"có thể",en:"can, be able to",d:"d3",exVi:"Bạn tôi có thể nói tiếng Pháp.",exEn:"My friend can speak French.",note:"Covers ability, possibility and permission.",opp:"không thể"},
+{vi:"không thể",en:"cannot",d:"d3",exVi:"Ngày mai tôi không thể đến thăm anh ấy.",exEn:"Tomorrow I can't come to visit him.",opp:"có thể"},
+{vi:"cần",en:"need",d:"d3",exVi:"Tôi cần nói chuyện với anh.",exEn:"I need to talk to you."},
+{vi:"cần phải",en:"really need to",d:"d3",exVi:"Tôi cần phải đi làm bây giờ.",exEn:"I need to go to work right now.",note:"cần + phải stacks the two verbs to stress the necessity."},
+{vi:"phải",en:"must, have to",d:"d3",exVi:"Anh phải làm lại bài này.",exEn:"You must do this drill again."},
+{vi:"nên",en:"should, ought to",d:"d3",exVi:"Quyển sách này hay lắm. Anh nên đọc.",exEn:"This book is very good. You should read it."},
+{vi:"chưa",en:"not yet",d:"d3",exVi:"Tôi chưa ăn.",exEn:"I haven't eaten yet.",note:"Before the verb = 'not yet'. At the end of a sentence = a question: Bạn ăn cơm chưa?"},
+{vi:"rồi",en:"already, yes I have",d:"d3",exVi:"Bạn ăn cơm chưa? — Rồi.",exEn:"Have you eaten yet? — Yes, I have.",opp:"chưa"},
+{vi:"chưa bao giờ",en:"never (have never done it)",syn:"never",d:"d3",exVi:"Tôi chưa bao giờ uống cà phê.",exEn:"I have never drunk coffee.",note:"chưa bao giờ = have never. không bao giờ = won't ever."},
+/* ── d4 ────────────────────────────────── */
+{vi:"mở",en:"open",d:"d4",exVi:"Bạn mở cửa giúp tôi với.",exEn:"Please open the door for me.",opp:"đóng"},
+{vi:"cửa",en:"door",d:"d4",exVi:"Bạn nhớ đóng cửa trước khi đi ngủ nha.",exEn:"Remember to close the door before going to bed."},
+{vi:"tay",en:"hand(s)",d:"d4",exVi:"Nhớ rửa tay trước khi ăn nha.",exEn:"Remember to wash your hands before eating."},
+{vi:"chân",en:"leg(s)",d:"d4",exVi:"Tôi bị đau chân sau khi chạy.",exEn:"My legs hurt after running."},
+{vi:"mặc",en:"wear (clothes)",d:"d4",exVi:"Tôi mặc cái áo này vì nó rất đẹp.",exEn:"I wear this shirt because it is very nice."},
+{vi:"áo khoác",en:"jacket",d:"d4",exVi:"Trời lạnh rồi, bạn nên mặc áo khoác.",exEn:"It's cold now, so you should wear a jacket."},
+{vi:"bị",en:"to suffer, to get (something unwanted)",d:"d4",exVi:"Tôi bị đau chân sau khi chạy.",exEn:"My legs hurt after running.",note:"Usually pairs with đau, bệnh and other unwanted things."},
+{vi:"đau",en:"hurt, ache",d:"d4",exVi:"Tay tôi bị đau vì tôi nấu ăn cả buổi.",exEn:"My hands hurt because I cooked all morning."},
+{vi:"bị bệnh",en:"sick",d:"d4",exVi:"Tôi không khỏe, tôi đang bị bệnh.",exEn:"I don't feel well. I am sick."},
+{vi:"buổi họp",en:"meeting",d:"d4",exVi:"Ngày mai tôi có buổi họp lúc 9 giờ sáng.",exEn:"I have a meeting at 9 a.m. tomorrow.",note:"Also cuộc họp. Có buổi họp = to have a meeting."},
+{vi:"thức khuya",en:"stay up late",d:"d4",exVi:"Keiko có thường thức khuya không?",exEn:"Do you usually stay up late?",note:"thức trễ works the same way."},
+{vi:"dù",en:"umbrella",d:"d4",exVi:"Trời mưa, nhớ mang dù nha.",exEn:"It's raining, remember to bring an umbrella."},
+{vi:"chạy",en:"run",d:"d4",exVi:"Tôi chạy nhanh khi trời bắt đầu mưa.",exEn:"I run fast when it starts raining."},
+{vi:"thuốc",en:"medicine",d:"d4",exVi:"Tôi phải uống thuốc sau khi ăn.",exEn:"I have to take medicine after eating.",note:"You drink medicine in Vietnamese: uống thuốc."},
+{vi:"nhớ",en:"remember; miss",d:"d4",exVi:"Tôi nhớ mua sữa cho mẹ.",exEn:"I remember to buy milk for Mom.",note:"Same word for remembering and for missing someone."},
+{vi:"mua đồ",en:"go shopping",d:"d4",exVi:"Cuối tuần này tôi đi mua đồ với chị tôi.",exEn:"This weekend I am going shopping with my sister."},
+/* ── d5 ────────────────────────────────── */
+{vi:"có gì mới không?",en:"what's new?",d:"d5",exVi:"Có gì mới không? Dạo này sao rồi?",exEn:"What's new? How have you been?"},
+{vi:"không nhiều",en:"not much",d:"d5",exVi:"Con có tin gì mới không? — Không nhiều.",exEn:"Do you have any news? — Not much."},
+{vi:"đem",en:"bring",syn:"bring",d:"d5",exVi:"Đem cái ly đó đây cho má.",exEn:"Bring that glass here for Mom."},
+{vi:"đem theo",en:"bring something with you",syn:"bring",d:"d5",exVi:"Bạn đem dù chưa? Trời sắp mưa đó.",exEn:"Have you brought an umbrella? It's going to rain."},
+{vi:"cửa sổ",en:"window",d:"d5",exVi:"Bạn mở cửa sổ giùm tôi nha.",exEn:"Please open the window for me."},
+{vi:"đeo giày",en:"wear shoes",d:"d5",exVi:"Tôi đeo đôi giày mới hôm nay.",exEn:"I wear new shoes today.",note:"Shoes are đeo, not mặc — mặc is for clothes."},
+{vi:"hơi",en:"a little, slightly",syn:"little",d:"d5",exVi:"Tôi thức hơi trễ hôm qua vì xem phim.",exEn:"I stayed up a bit late yesterday because I watched a movie."},
+{vi:"đóng",en:"close",d:"d5",exVi:"Bạn nhớ đóng cửa trước khi đi ngủ nha.",exEn:"Remember to close the door before going to bed.",opp:"mở"},
+/* ── d6 ────────────────────────────────── */
+{vi:"rửa chén",en:"wash the dishes",d:"d6",exVi:"Má đang rửa chén ở dưới bếp.",exEn:"Mom is washing the dishes in the kitchen."},
+{vi:"giặt đồ",en:"do the laundry",d:"d6",exVi:"Má giặt đồ mỗi chiều thứ Bảy.",exEn:"Mom washes clothes every Saturday afternoon."},
+{vi:"cùng nhau",en:"together",d:"d6",exVi:"Tối nay tụi mình ăn cơm cùng nhau.",exEn:"Tonight we eat dinner together."},
+{vi:"lần",en:"time(s), occurrence",d:"d6",exVi:"Con thử làm món này ba lần rồi.",exEn:"I have tried making this dish three times."},
+/* ── d7 ────────────────────────────────── */
+{vi:"luôn luôn",en:"always",d:"d7",exVi:"Con luôn luôn mang theo áo khoác khi trời lạnh.",exEn:"I always bring a jacket when it is cold.",note:"luôn on its own works too."},
+{vi:"thường",en:"usually",syn:"often",d:"d7",exVi:"Mình thường đi ngủ lúc 12 giờ hay 1 giờ.",exEn:"I usually go to bed at 12 or 1."},
+{vi:"hay",en:"often",syn:"often",d:"d7",exVi:"Mình hay thức dậy trễ.",exEn:"I often wake up late.",note:"Careful: hay also means 'good / interesting' — Quyển sách này hay lắm."},
+{vi:"thường xuyên",en:"often, regularly",syn:"often",d:"d7",exVi:"Các anh chị phải tập luyện nói tiếng Việt thường xuyên.",exEn:"You have to practise speaking Vietnamese regularly."},
+{vi:"bình thường",en:"normally",d:"d7",exVi:"Bình thường, con ăn cơm ở nhà.",exEn:"Normally, I eat at home."},
+{vi:"lâu lâu",en:"sometimes, now and then",syn:"sometimes",d:"d7",exVi:"Tụi em lâu lâu coi TV cùng nhau.",exEn:"We sometimes watch TV together."},
+{vi:"thỉnh thoảng",en:"from time to time",syn:"sometimes",d:"d7"},
+{vi:"đôi khi",en:"occasionally",syn:"sometimes",d:"d7",exVi:"Đôi khi, nhà mình ăn ngoài.",exEn:"Occasionally, our family eats out."},
+{vi:"hiếm khi",en:"seldom",syn:"rarely",d:"d7",exVi:"Ba hiếm khi uống cà phê buổi tối.",exEn:"Dad rarely drinks coffee at night."},
+{vi:"ít khi",en:"rarely, not often",syn:"rarely",d:"d7",exVi:"Ít khi mình ăn sáng.",exEn:"I rarely eat breakfast."},
+{vi:"không bao giờ",en:"never (won't ever)",syn:"never",d:"d7",exVi:"Con không bao giờ quên đem chìa khóa.",exEn:"I never forget to bring my keys."},
+{vi:"mỗi ngày",en:"every day",d:"d7",exVi:"Tôi phải uống thuốc này mỗi ngày.",exEn:"I have to take this medicine every day."},
+{vi:"mỗi tuần",en:"every week",d:"d7"},
+{vi:"mỗi tháng",en:"every month",d:"d7"},
+{vi:"một lần mỗi ngày",en:"once a day",d:"d7"},
+{vi:"hai lần mỗi tuần",en:"twice a week",d:"d7"},
+{vi:"ba lần mỗi tháng",en:"three times a month",d:"d7"},
+{vi:"dạo này",en:"lately",d:"d7",exVi:"Có gì mới không? Dạo này sao rồi?",exEn:"What's new? How have you been lately?"},
+/* ── d8 ────────────────────────────────── */
+{vi:"tốt",en:"good",d:"d8",opp:"xấu"},
+{vi:"xấu",en:"bad",d:"d8",opp:"tốt"},
+{vi:"an toàn",en:"safe",d:"d8",opp:"nguy hiểm"},
+{vi:"nguy hiểm",en:"dangerous",d:"d8",opp:"an toàn"},
+{vi:"vui vẻ",en:"happy, cheerful",syn:"happy",d:"d8",opp:"buồn bã"},
+{vi:"buồn bã",en:"sad",d:"d8",opp:"vui vẻ"},
+{vi:"hạnh phúc",en:"blissful, deeply happy",syn:"happy",d:"d8"},
+{vi:"nặng",en:"heavy",d:"d8",opp:"nhẹ"},
+{vi:"nhẹ",en:"light (not heavy)",d:"d8",opp:"nặng"},
+{vi:"to",en:"big (in size)",syn:"big",d:"d8",opp:"nhỏ"},
+{vi:"lớn",en:"large, grown-up",syn:"big",d:"d8",opp:"nhỏ"},
+{vi:"nhỏ",en:"small",syn:"small",d:"d8",opp:"lớn"},
+{vi:"bé",en:"little, tiny",syn:"small",d:"d8"},
+{vi:"mạnh mẽ",en:"strong",d:"d8",opp:"yếu ớt"},
+{vi:"yếu ớt",en:"weak",d:"d8",opp:"mạnh mẽ"},
+{vi:"cao",en:"tall, high",d:"d8",opp:"thấp",exVi:"Linh thì cao nhất lớp tôi.",exEn:"Linh is the tallest in my class."},
+{vi:"thấp",en:"short (height)",syn:"shortp",d:"d8",opp:"cao"},
+{vi:"lùn",en:"short and stocky (of a person)",syn:"shortp",d:"d8"},
+{vi:"cứng",en:"hard",d:"d8",opp:"mềm"},
+{vi:"mềm",en:"soft",d:"d8",opp:"cứng"},
+{vi:"dài",en:"long",d:"d8",opp:"ngắn",exVi:"Cái bút chì này dài bằng cái bút chì kia.",exEn:"This pencil is as long as that pencil."},
+{vi:"ngắn",en:"short (length)",d:"d8",opp:"dài"},
+{vi:"thông minh",en:"smart",d:"d8",opp:"ngu ngốc",exVi:"Ali thông minh hơn tôi.",exEn:"Ali is more intelligent than me."},
+{vi:"ngu ngốc",en:"stupid",d:"d8",opp:"thông minh"},
+{vi:"già",en:"old (person)",d:"d8",opp:"trẻ"},
+{vi:"trẻ",en:"young",d:"d8",opp:"già"},
+{vi:"cũ",en:"old (thing)",d:"d8",opp:"mới"},
+{vi:"mới",en:"new",d:"d8",opp:"cũ"},
+{vi:"tốt bụng",en:"kind",d:"d8"},
+{vi:"đẹp",en:"beautiful",d:"d8",opp:"xấu xí"},
+{vi:"xấu xí",en:"ugly",d:"d8",opp:"đẹp"},
+{vi:"mập",en:"fat",d:"d8",opp:"ốm"},
+{vi:"ốm",en:"skinny",d:"d8",opp:"mập"},
+{vi:"nóng",en:"hot",d:"d8",opp:"lạnh"},
+{vi:"lạnh",en:"cold",d:"d8",opp:"nóng"},
+{vi:"đầy",en:"full (a container)",syn:"full",d:"d8",opp:"trống rỗng"},
+{vi:"no",en:"full (after eating)",syn:"full",d:"d8"},
+{vi:"trống rỗng",en:"empty",d:"d8",opp:"đầy"},
+{vi:"dễ",en:"easy",d:"d8",opp:"khó"},
+{vi:"khó",en:"difficult",d:"d8",opp:"dễ"},
+{vi:"đắt",en:"expensive",d:"d8",opp:"rẻ"},
+{vi:"rẻ",en:"cheap",d:"d8",opp:"đắt"},
+{vi:"giàu",en:"rich",d:"d8",opp:"nghèo"},
+{vi:"nghèo",en:"poor",d:"d8",opp:"giàu"},
+{vi:"sạch",en:"clean",d:"d8",opp:"bẩn"},
+{vi:"bẩn",en:"dirty",d:"d8",opp:"sạch"},
+/* ── d9 ────────────────────────────────── */
+{vi:"bằng",en:"as … as (equal)",syn:"asas",d:"d9",exVi:"Hoa cao bằng Mai.",exEn:"Hoa is as tall as Mai.",note:"adjective + bằng. For age, say bằng tuổi — not tuổi bằng."},
+{vi:"như",en:"as … as, like",syn:"asas",d:"d9",exVi:"Cái cây này cao như ngôi nhà kia.",exEn:"This tree is as high as that house."},
+{vi:"không … bằng",en:"not as … as",d:"d9",exVi:"Tôi không giỏi bằng bạn.",exEn:"I am not as good as you."},
+{vi:"hơn",en:"more … than",d:"d9",exVi:"Ali cao hơn tôi.",exEn:"Ali is taller than me.",note:"adjective / adverb / verb + hơn."},
+{vi:"nhất",en:"the most (superlative)",d:"d9",exVi:"Aris thì lớn tuổi nhất trong phòng này.",exEn:"Aris is the oldest in this room."},
+{vi:"bằng tuổi",en:"the same age as",d:"d9",exVi:"Aris bằng tuổi với bạn của bạn.",exEn:"Aris is the same age as your friend."},
+{vi:"trôi chảy",en:"fluently",d:"d9",exVi:"Ali nói tiếng Anh trôi chảy hơn tôi.",exEn:"Ali speaks English more fluently than me."},
+{vi:"giỏi",en:"good at, skilled",d:"d9",exVi:"Tôi không giỏi bằng bạn.",exEn:"I am not as good as you."}
+];
+DATA.forEach(function(it){ it.id = it.vi; });
+
+/* ══════════════════════════════════════════════════════════
+   TONES — the six Vietnamese tones, read off the diacritics.
+   ══════════════════════════════════════════════════════════ */
+const TONE_SETS = {
+  huyen:"àằầèềìòồờùừỳ",
+  sac:"áắấéếíóốớúứý",
+  hoi:"ảẳẩẻểỉỏổởủửỷ",
+  nga:"ãẵẫẽễĩõỗỡũữỹ",
+  nang:"ạặậẹệịọộợụựỵ"
+};
+const TONE_INFO = {
+  ngang:{name:"ngang", path:"M2,8 L26,8", dot:null, hue:"var(--gold)"},
+  huyen:{name:"huyền", path:"M2,4 L26,13", dot:null, hue:"var(--gold)"},
+  sac:  {name:"sắc",   path:"M2,13 L26,3", dot:null, hue:"var(--gold)"},
+  hoi:  {name:"hỏi",   path:"M2,4 C9,15 18,15 26,6", dot:null, hue:"var(--gold)"},
+  nga:  {name:"ngã",   path:"M2,4 C9,15 18,15 26,6", dot:[26,1], hue:"var(--gold)"},
+  nang: {name:"nặng",  path:"M2,5 L17,13", dot:[22,14], hue:"var(--gold)"}
+};
+function toneOf(syllable){
+  const s = syllable.normalize("NFC").toLowerCase();
+  for (const key in TONE_SETS){
+    for (const ch of s){ if (TONE_SETS[key].indexOf(ch) > -1) return key; }
+  }
+  return "ngang";
+}
+function syllables(word){
+  return word.normalize("NFC").replace(/[?!.,…]/g,"").trim().split(/\s+/).filter(Boolean);
+}
+function toneRail(word, showNames){
+  const syls = syllables(word);
+  if (!syls.length) return "";
+  let html = '<div class="tones">';
+  syls.forEach(function(s){
+    const t = TONE_INFO[toneOf(s)];
+    html += '<div class="tone-syl"><svg width="28" height="16" viewBox="0 0 28 16">'
+         + '<path d="'+t.path+'" fill="none" stroke="'+t.hue+'" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>'
+         + (t.dot ? '<circle cx="'+t.dot[0]+'" cy="'+t.dot[1]+'" r="1.5" fill="'+t.hue+'" opacity=".8"/>' : '')
+         + '</svg>' + (showNames ? '<em>'+t.name+'</em>' : '') + '</div>';
+  });
+  return html + '</div>';
+}
+
+/* ══════════════════════════════════════════════════════════
+   STORAGE
+   ══════════════════════════════════════════════════════════ */
+const KEY = "vivu:state:v1";
+let S = {
+  active:["d4","d5","d6","d7","d8"],
+  prog:{},           /* id -> {box, due, seen, right, wrong} */
+  streakDay:null, streak:0, xp:0,
+  voice:null, rate:0.9, autoplay:true, len:12
+};
+/* Progress lives in localStorage on a real phone; window.storage is the
+   fallback when this file is opened inside Claude. */
+let storeMode = "memory";
+function probeLocal(){
+  try{ localStorage.setItem("vivu:probe","1"); localStorage.removeItem("vivu:probe"); return true; }
+  catch(e){ return false; }
+}
+async function load(){
+  if (probeLocal()) storeMode = "local";
+  else if (window.storage) storeMode = "claude";
+  try{
+    let raw = null;
+    if (storeMode === "local") raw = localStorage.getItem(KEY);
+    else if (storeMode === "claude"){ const r = await window.storage.get(KEY); raw = r && r.value; }
+    if (raw) Object.assign(S, JSON.parse(raw));
+  }catch(e){ /* first run */ }
+}
+let saveTimer = null;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async function(){
+    const raw = JSON.stringify(S);
+    try{
+      if (storeMode === "local") localStorage.setItem(KEY, raw);
+      else if (storeMode === "claude") await window.storage.set(KEY, raw);
+    }catch(e){ storeMode = "memory"; }
+  }, 350);
+}
+function storeNote(){
+  if (storeMode === "local")  return {cls:"ok-note", txt:"Progress is saved on this phone. Closing the app, or your whole phone, does not touch it."};
+  if (storeMode === "claude") return {cls:"ok-note", txt:"Progress is saved inside this Claude conversation. Install it on your phone to keep it with you."};
+  return {cls:"warn", txt:"Progress is not being saved here. If you opened the file straight from Downloads, the browser blocks storage — put it online once (see the README) and it will stick."};
+}
+function prog(id){
+  if (!S.prog[id]) S.prog[id] = {box:0, due:0, seen:0, right:0, wrong:0};
+  return S.prog[id];
+}
+const DAY = 86400000;
+const INTERVAL = [0, 1*DAY, 2*DAY, 4*DAY, 9*DAY];
+function today(){ return new Date().toISOString().slice(0,10); }
+function bumpStreak(){
+  const t = today();
+  if (S.streakDay === t) return;
+  const y = new Date(Date.now()-DAY).toISOString().slice(0,10);
+  S.streak = (S.streakDay === y) ? S.streak+1 : 1;
+  S.streakDay = t; save();
+}
+
+/* ══════════════════════════════════════════════════════════
+   SPEECH — Web Speech API, preferring the Vi Vu (RHVoice) voice
+   ══════════════════════════════════════════════════════════ */
+const TTS = {
+  voices:[], ready:false, current:null,
+  refresh(){
+    if (!("speechSynthesis" in window)) return;
+    const all = speechSynthesis.getVoices() || [];
+    this.voices = all.filter(v => /^vi/i.test(v.lang) || /vi[\s_-]?vu|rhvoice/i.test(v.name));
+    if (S.voice) this.current = this.voices.find(v => v.name === S.voice) || null;
+    if (!this.current){
+      this.current =
+        this.voices.find(v => /vi[\s_-]?vu/i.test(v.name)) ||
+        this.voices.find(v => /rhvoice/i.test(v.name)) ||
+        this.voices.find(v => /^vi/i.test(v.lang)) || null;
+    }
+    this.ready = !!this.current;
+  },
+  say(text, rate, btn){
+    if (!("speechSynthesis" in window)) return;
+    try{
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text.replace(/—/g," "));
+      if (this.current) u.voice = this.current;
+      u.lang = (this.current && this.current.lang) || "vi-VN";
+      u.rate = rate || S.rate;
+      if (btn){
+        btn.classList.add("playing");
+        u.onend = u.onerror = () => btn.classList.remove("playing");
+      }
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+};
+if ("speechSynthesis" in window){
+  TTS.refresh();
+  speechSynthesis.onvoiceschanged = function(){ TTS.refresh(); renderStats(); };
+}
+
+/* ══════════════════════════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════════════════════════ */
+const $ = s => document.querySelector(s);
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
+function pick(a){ return a[Math.random()*a.length|0]; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function bare(s){
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/gi,"d")
+          .toLowerCase().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
+}
+function poolOf(){ return DATA.filter(it => S.active.indexOf(it.d) > -1); }
+function hasGap(it){ return it.exVi && it.exVi.toLowerCase().indexOf(it.vi.toLowerCase()) > -1; }
+
+/* ══════════════════════════════════════════════════════════
+   HEADER + DECKS
+   ══════════════════════════════════════════════════════════ */
+function renderStats(){
+  const pool = poolOf();
+  const now = Date.now();
+  const mastered = pool.filter(it => prog(it.id).box >= 4).length;
+  const due = pool.filter(it => { const p = prog(it.id); return p.seen > 0 && p.due <= now; }).length;
+  const fresh = pool.filter(it => prog(it.id).seen === 0).length;
+  $("#stats").innerHTML =
+    '<span class="flame">▲ ' + S.streak + '-day streak</span>' +
+    '<span><b>' + mastered + '</b> / ' + pool.length + ' mastered</span>' +
+    '<span><b>' + due + '</b> due now</span>' +
+    '<span><b>' + fresh + '</b> unseen</span>' +
+    '<span><b>' + S.xp + '</b> XP</span>' +
+    (TTS.ready ? '' : '<span style="color:var(--cinnabar)">no Vietnamese voice</span>');
+  $("#voiceBtn").classList.toggle("on", TTS.ready);
+}
+function renderDecks(){
+  $("#decks").innerHTML = DECKS.map(function(d){
+    const items = DATA.filter(i => i.d === d.id);
+    const done = items.filter(i => prog(i.id).box >= 3).length;
+    const pct = items.length ? done/items.length : 0;
+    const C = 2*Math.PI*6;
+    const on = S.active.indexOf(d.id) > -1;
+    return '<button class="chip" data-deck="'+d.id+'" aria-pressed="'+on+'">'
+      + '<svg class="ring" width="16" height="16" viewBox="0 0 16 16">'
+      + '<circle cx="8" cy="8" r="6" fill="none" stroke="rgba(239,231,214,.18)" stroke-width="2"/>'
+      + '<circle cx="8" cy="8" r="6" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"'
+      + ' stroke-dasharray="'+(pct*C).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 8 8)"/></svg>'
+      + esc(d.label) + ' <span class="n">' + items.length + '</span></button>';
+  }).join("");
+  document.querySelectorAll(".chip").forEach(function(c){
+    c.onclick = function(){
+      const id = c.dataset.deck, i = S.active.indexOf(id);
+      if (i > -1){ if (S.active.length > 1) S.active.splice(i,1); } else S.active.push(id);
+      save(); renderDecks(); renderStats(); if (!session) idle(); renderList();
+    };
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   SESSION ENGINE
+   ══════════════════════════════════════════════════════════ */
+let session = null;
+function buildSession(){
+  const pool = poolOf(), now = Date.now();
+  const due = [], fresh = [], rest = [];
+  pool.forEach(function(it){
+    const p = prog(it.id);
+    if (p.seen === 0) fresh.push(it);
+    else if (p.due <= now) due.push(it);
+    else rest.push(it);
+  });
+  shuffle(due); shuffle(fresh); shuffle(rest);
+  const out = [];
+  const newCap = Math.min(fresh.length, Math.max(3, Math.round(S.len/3)));
+  for (let i=0; i<newCap; i++) out.push(fresh[i]);
+  for (let i=0; i<due.length && out.length < S.len; i++) out.push(due[i]);
+  for (let i=0; i<rest.length && out.length < S.len; i++) out.push(rest[i]);
+  shuffle(out);
+  session = {queue: out.map(it => ({it:it, retry:false})), i:0, total:out.length,
+             right:0, wrong:0, combo:0, best:0, learned:[], missed:[]};
+  step();
+}
+function pickType(it){
+  const p = prog(it.id);
+  if (p.seen === 0) return "intro";
+  const t = [];
+  if (p.box <= 1) t.push("mc_vi_en","mc_vi_en");
+  if (p.box >= 1) t.push("mc_en_vi");
+  if (p.box >= 2 && TTS.ready) t.push("listen");
+  if (p.box >= 2 && hasGap(it)) t.push("gap");
+  if (p.box >= 3) t.push("type","type");
+  if (it.opp && p.box >= 1) t.push("opp");
+  return t.length ? pick(t) : "mc_vi_en";
+}
+function distractors(item, key, n){
+  let same = poolOf().filter(x => x.d === item.d && x.id !== item.id);
+  let any  = DATA.filter(x => x.id !== item.id);
+  const seen = {}; seen[item[key]] = 1;
+  const out = [];
+  shuffle(same); shuffle(any);
+  [].concat(same, any).forEach(function(x){
+    if (out.length >= n) return;
+    if (seen[x[key]]) return;
+    /* near-synonyms would make two options both defensible */
+    if (item.syn && x.syn === item.syn) return;
+    seen[x[key]] = 1; out.push(x);
+  });
+  return out;
+}
+
+function step(){
+  if (!session) return;
+  if (session.i >= session.queue.length) return summary();
+  const entry = session.queue[session.i];
+  const it = entry.it;
+  render(it, entry.retry ? "mc_vi_en" : pickType(it));
+}
+
+/* ── question renderers ─────────────────── */
+function shell(inner, extraClass){
+  $("#stage").innerHTML = '<div class="card '+(extraClass||"")+'" id="card">'+inner+'</div>'+footer();
+  wireFooter();
+}
+function footer(){
+  const pct = session ? (session.i / session.total)*100 : 0;
+  return '<div class="foot">'
+    + '<div class="bar"><i style="width:'+pct+'%"></i></div>'
+    + '<span class="count">'+(session.i)+' / '+session.total+'</span>'
+    + (session.combo >= 3 ? '<span class="combo">COMBO ×'+Math.min(3,Math.floor(session.combo/3)+1)+'</span>' : '')
+    + '</div>';
+}
+function wireFooter(){}
+function speakRow(text){
+  return '<div class="audio">'
+    + '<button class="speak" data-say="'+esc(text)+'">▶ Nghe <kbd>Space</kbd></button>'
+    + '<button class="speak" data-say="'+esc(text)+'" data-slow="1">▶ Chậm <kbd>S</kbd></button>'
+    + '</div>';
+}
+function wireSpeak(){
+  document.querySelectorAll("[data-say]").forEach(function(b){
+    b.onclick = function(){ TTS.say(b.dataset.say, b.dataset.slow ? 0.55 : S.rate, b); };
+  });
+}
+
+function render(it, type){
+  const p = prog(it.id);
+  let inner = "";
+  if (type === "intro"){
+    inner = '<div class="eyebrow q-label">New word · '+esc(deckLabel(it.d))+'</div>'
+      + toneRail(it.vi, true)
+      + '<h2 class="word">'+esc(it.vi)+'</h2>'
+      + '<div class="gloss">'+esc(it.en)+'</div>'
+      + (it.exVi ? '<div class="note">'+esc(it.exVi)+'<br><span style="opacity:.7">'+esc(it.exEn||"")+'</span></div>' : '')
+      + (it.note ? '<div class="note">'+esc(it.note)+'</div>' : '')
+      + speakRow(it.vi)
+      + '<div class="next-row"><button class="btn" id="go">Got it</button>'
+      + '<span class="hint">Enter to continue</span></div>';
+    shell(inner);
+    wireSpeak();
+    if (S.autoplay) setTimeout(() => TTS.say(it.vi), 260);
+    $("#go").onclick = function(){ grade(it, true, null, true); };
+    keyHandler = function(e){
+      if (e.key === "Enter" || e.key === " "){ e.preventDefault(); if (e.key===" ") return TTS.say(it.vi); grade(it,true,null,true); }
+      if (e.key.toLowerCase() === "s") TTS.say(it.vi, 0.55);
+    };
+    return;
+  }
+
+  if (type === "mc_vi_en" || type === "listen"){
+    const opts = shuffle(distractors(it,"en",3).concat([it]));
+    const listen = type === "listen";
+    inner = '<div class="eyebrow q-label">'+(listen ? "Listen — what does it mean?" : "What does it mean?")+'</div>'
+      + (listen
+          ? '<button class="speak big-play" data-say="'+esc(it.vi)+'">▶ Nghe lại</button>'
+          : toneRail(it.vi,false) + '<h2 class="word'+(it.vi.length>14?" sm":"")+'">'+esc(it.vi)+'</h2>' + speakRow(it.vi))
+      + optsHTML(opts, "en", it, "class-en");
+    shell(inner); wireSpeak(); wireOpts(opts, it, "en");
+    if (listen) setTimeout(() => TTS.say(it.vi), 200);
+    else if (S.autoplay) setTimeout(() => TTS.say(it.vi), 200);
+    return;
+  }
+
+  if (type === "mc_en_vi" || type === "opp"){
+    const isOpp = type === "opp";
+    const target = isOpp ? DATA.find(x => x.id === it.opp) : it;
+    if (isOpp && !target) return render(it, "mc_en_vi");
+    const opts = shuffle(distractors(target,"vi",3).concat([target]));
+    inner = '<div class="eyebrow q-label">'+(isOpp ? "Opposite — trái nghĩa" : "Say it in Vietnamese")+'</div>'
+      + '<div class="prompt-en">'+(isOpp ? esc(it.vi)+' <span style="color:var(--dim);font-family:var(--en);font-style:italic">('+esc(it.en)+')</span> ↔ ?' : esc(it.en))+'</div>'
+      + optsHTML(opts, "vi", target);
+    shell(inner); wireOpts(opts, target, "vi", it);
+    return;
+  }
+
+  if (type === "gap"){
+    const re = new RegExp(it.vi.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"), "i");
+    const sentence = it.exVi.replace(re, '<span class="blank"></span>');
+    const opts = shuffle(distractors(it,"vi",3).concat([it]));
+    inner = '<div class="eyebrow q-label">Fill the gap</div>'
+      + '<div class="sent">'+sentence+'</div>'
+      + '<div class="sent-en">'+esc(it.exEn||"")+'</div>'
+      + optsHTML(opts, "vi", it);
+    shell(inner); wireOpts(opts, it, "vi");
+    return;
+  }
+
+  /* type it out */
+  inner = '<div class="eyebrow q-label">Write it in Vietnamese</div>'
+    + '<div class="prompt-en">'+esc(it.en)+'</div>'
+    + (it.exEn ? '<div class="sent-en">Context: '+esc(it.exEn)+'</div>' : '')
+    + '<div class="typebox"><input class="type" id="tin" autocomplete="off" autocapitalize="off" '
+    + 'autocorrect="off" spellcheck="false" placeholder="type here — tones count"><button class="btn" id="tgo">Check</button></div>'
+    + '<div class="hint" style="margin-top:9px">Accents missing? Type it plain — you\'ll get half credit and see the tones.</div>';
+  shell(inner);
+  const input = $("#tin"); input.focus();
+  function submit(){
+    const v = input.value.trim();
+    if (!v) return;
+    const exact = v.normalize("NFC").toLowerCase() === it.vi.normalize("NFC").toLowerCase();
+    const near  = !exact && bare(v) === bare(it.vi);
+    grade(it, exact, near ? "near" : (exact ? null : "typed:"+v));
+  }
+  $("#tgo").onclick = submit;
+  input.onkeydown = function(e){ if (e.key === "Enter") submit(); };
+  keyHandler = null;
+}
+
+function optsHTML(opts, key, correct, cls){
+  return '<div class="opts'+(key==="vi"?" two":"")+'">' + opts.map(function(o,i){
+    return '<button class="opt" data-i="'+i+'"><span class="k">'+(i+1)+'</span>'
+      + '<span class="'+(key==="en"?"en":"")+'">'+esc(o[key])+'</span></button>';
+  }).join("") + '</div>';
+}
+function wireOpts(opts, correct, key, sourceItem){
+  const btns = Array.prototype.slice.call(document.querySelectorAll(".opt"));
+  function choose(i){
+    if (btns[0].disabled) return;
+    btns.forEach(function(b,j){
+      b.disabled = true;
+      if (opts[j].id === correct.id) b.classList.add("right");
+      else if (j === i) b.classList.add("wrong");
+      else b.classList.add("fade");
+    });
+    const ok = opts[i].id === correct.id;
+    TTS.say(correct.vi);
+    setTimeout(function(){ grade(sourceItem || correct, ok, null, false, correct); }, ok ? 520 : 900);
+  }
+  btns.forEach(function(b,i){ b.onclick = function(){ choose(i); }; });
+  keyHandler = function(e){
+    const n = parseInt(e.key,10);
+    if (n >= 1 && n <= btns.length) choose(n-1);
+    if (e.key === " "){ e.preventDefault(); TTS.say(correct.vi); }
+    if (e.key.toLowerCase() === "s") TTS.say(correct.vi, 0.55);
+  };
+}
+
+/* ── grading ────────────────────────────── */
+function grade(it, ok, flag, silent, shown){
+  const p = prog(it.id);
+  const near = flag === "near";
+
+  if (silent){                       /* first meeting — shown, not tested */
+    p.seen++; p.box = 1; p.due = Date.now() + INTERVAL[1];
+    session.learned.push(it);
+    bumpStreak(); save();
+    session.i++; renderStats(); renderDecks();
+    return step();
+  }
+
+  p.seen++;
+  if (ok || near){
+    p.right++;
+    if (ok) p.box = Math.min(4, p.box+1);
+    session.right += ok ? 1 : 0;
+    if (ok){ session.combo++; session.best = Math.max(session.best, session.combo); }
+    S.xp += ok ? 10*Math.min(3, Math.floor(session.combo/3)+1) : 4;
+  } else {
+    p.wrong++; p.box = 0; session.wrong++; session.combo = 0;
+    if (session.missed.indexOf(it) < 0) session.missed.push(it);
+    /* immediate re-drill: the word comes back a few cards later */
+    const at = Math.min(session.queue.length, session.i + 3 + (Math.random()*2|0));
+    session.queue.splice(at, 0, {it:it, retry:true});
+    session.total = session.queue.length;
+  }
+  p.due = Date.now() + INTERVAL[p.box];
+  bumpStreak(); save();
+  verdict(it, ok, near, shown);
+}
+
+function verdict(it, ok, near, shown){
+  const card = $("#card");
+  if (card){
+    if (ok) card.classList.add("sweep");
+    else card.classList.add("shake");
+  }
+  const target = shown || it;
+  const tag = ok ? '<span class="vtag ok">Đúng rồi</span>'
+      : near ? '<span class="vtag near">Right word — check the tones</span>'
+             : '<span class="vtag no">Chưa đúng — you\'ll see it again</span>';
+  const html = '<div class="verdict">' + tag
+    + toneRail(target.vi, true)
+    + '<div class="vrow"><span class="w">'+esc(target.vi)+'</span><span class="g">'+esc(target.en)+'</span></div>'
+    + (target.exVi ? '<div class="note">'+esc(target.exVi)+'<br><span style="opacity:.7">'+esc(target.exEn||"")+'</span></div>' : '')
+    + (target.note ? '<div class="note">'+esc(target.note)+'</div>' : '')
+    + '<div class="audio"><button class="speak" data-say="'+esc(target.exVi||target.vi)+'">▶ Nghe câu</button>'
+    + '<button class="speak" data-say="'+esc(target.vi)+'" data-slow="1">▶ Chậm</button></div>'
+    + '<div class="next-row"><button class="btn" id="next">Tiếp</button>'
+    + '<span class="hint">Enter</span></div></div>';
+  const stage = $("#stage");
+  const holder = document.createElement("div");
+  holder.innerHTML = html;
+  card.appendChild(holder.firstChild);
+  wireSpeak();
+  card.scrollIntoView({behavior:"smooth", block:"nearest"});
+  function go(){ session.i++; renderStats(); renderDecks(); step(); }
+  $("#next").onclick = go;
+  keyHandler = function(e){
+    if (e.key === "Enter"){ e.preventDefault(); go(); }
+    if (e.key === " "){ e.preventDefault(); TTS.say(target.vi); }
+    if (e.key.toLowerCase() === "s") TTS.say(target.vi, 0.55);
+  };
+}
+
+/* ── summary + idle ─────────────────────── */
+function summary(){
+  const total = session.right + session.wrong;
+  const pct = total ? Math.round(session.right/total*100) : 0;
+  let html = '<div class="card"><div class="eyebrow q-label">Xong rồi — session complete</div>'
+    + '<div class="score">'+pct+'<small>% correct</small></div>'
+    + '<div class="sum-grid">'
+    + '<div><b>'+session.right+'</b><span>right</span></div>'
+    + '<div><b>'+session.wrong+'</b><span>missed</span></div>'
+    + '<div><b>×'+Math.min(3,Math.floor(session.best/3)+1)+'</b><span>best combo</span></div>'
+    + '<div><b>'+session.learned.length+'</b><span>new words</span></div></div>';
+  if (session.missed.length){
+    html += '<div class="group-h" style="margin-top:26px"><span class="eyebrow">Review these</span></div>';
+    session.missed.forEach(function(it){
+      html += '<div class="row"><span class="pill" style="background:var(--cinnabar)"></span>'
+        + '<span class="vi">'+esc(it.vi)+'</span><span class="en">'+esc(it.en)+'</span>'
+        + '<button class="mini" data-say="'+esc(it.vi)+'">▶</button></div>';
+    });
+  }
+  html += '<div class="next-row" style="margin-top:24px"><button class="btn" id="again">Another round</button>'
+       + '<button class="btn ghost" id="stop">Done for now</button></div></div>';
+  $("#stage").innerHTML = html;
+  wireSpeak();
+  $("#again").onclick = function(){ buildSession(); };
+  $("#stop").onclick = function(){ session = null; idle(); };
+  keyHandler = function(e){ if (e.key === "Enter") buildSession(); };
+  renderStats(); renderDecks();
+}
+function idle(){
+  const pool = poolOf(), now = Date.now();
+  const due = pool.filter(it => { const p = prog(it.id); return p.seen>0 && p.due<=now; }).length;
+  const fresh = pool.filter(it => prog(it.id).seen === 0).length;
+  $("#stage").innerHTML = '<div class="card">'
+    + '<div class="eyebrow q-label">'+pool.length+' words selected</div>'
+    + '<div class="prompt-en">'
+    + (due+fresh ? (due ? due+' due for review' : '') + (due&&fresh ? ' · ' : '') + (fresh ? fresh+' still unseen' : '')
+                 : 'Nothing due right now — a round of free review still counts.')
+    + '</div>'
+    + '<div class="next-row" style="margin-top:22px"><button class="btn" id="start">Bắt đầu · Start</button>'
+    + '<span class="hint">'+S.len+' cards · keys 1–4, Space to hear, S for slow</span></div></div>';
+  $("#start").onclick = buildSession;
+  keyHandler = function(e){ if (e.key === "Enter") buildSession(); };
+}
+function deckLabel(id){ const d = DECKS.find(x => x.id === id); return d ? d.label : ""; }
+
+/* ══════════════════════════════════════════════════════════
+   WORD LIST
+   ══════════════════════════════════════════════════════════ */
+function renderList(){
+  const q = bare($("#search") ? $("#search").value : "");
+  let html = "";
+  DECKS.forEach(function(d){
+    if (S.active.indexOf(d.id) < 0) return;
+    const items = DATA.filter(function(i){
+      return i.d === d.id && (!q || bare(i.vi).indexOf(q) > -1 || bare(i.en).indexOf(q) > -1);
+    });
+    if (!items.length) return;
+    html += '<div class="group-h"><span class="eyebrow">'+esc(d.label)+'</span>'
+         +  '<span class="hint">'+items.length+'</span></div>';
+    items.forEach(function(it){
+      const b = prog(it.id).box;
+      const col = b>=4 ? "var(--jade)" : b>=2 ? "var(--gold)" : b>=1 ? "rgba(200,161,90,.45)" : "var(--dimmer)";
+      html += '<div class="row"><span class="pill" style="background:'+col+'"></span>'
+        + '<span class="vi">'+esc(it.vi)+'</span>'
+        + '<span class="en">'+esc(it.en)+'</span>'
+        + '<span class="bx">'+(b>=4?"mastered":"box "+b)+'</span>'
+        + '<button class="mini" data-say="'+esc(it.vi)+'">▶</button></div>';
+    });
+  });
+  $("#listBody").innerHTML = html || '<div class="empty">No word matches that. Try the Vietnamese spelling without tones — the search ignores diacritics.</div>';
+  wireSpeak();
+}
+
+/* ══════════════════════════════════════════════════════════
+   SHEETS
+   ══════════════════════════════════════════════════════════ */
+function openSheet(html){
+  $("#sheet").innerHTML = html;
+  $("#scrim").classList.add("open");
+}
+function closeSheet(){ $("#scrim").classList.remove("open"); }
+$("#scrim").onclick = function(e){ if (e.target === $("#scrim")) closeSheet(); };
+
+function voiceSheet(){
+  TTS.refresh();
+  let html = '<div class="eyebrow">Audio</div>'
+    + '<h2 style="font-size:20px;font-weight:800;margin:4px 0 0">Giọng đọc · voice</h2>';
+  if (!("speechSynthesis" in window)){
+    html += '<div class="warn">This browser has no speech engine, so audio is off. Everything else works.</div>';
+  } else if (!TTS.voices.length){
+    html += '<div class="warn"><b>No Vietnamese voice found on this device.</b><br>'
+      + 'Install <b>Vi Vu</b>, the Southern Vietnamese RHVoice voice, and the browser will pick it up here.<br><br>'
+      + '<b>Android:</b> install the RHVoice app, open it, choose Tiếng Việt, install “Vi Vu”, then set RHVoice as the system speech engine in Android settings.<br>'
+      + '<b>Windows:</b> run the SAPI-5 installer, then reload this page.<br><br>'
+      + '<a href="https://louderpages.org/vi-vu" target="_blank" rel="noopener">louderpages.org/vi-vu →</a></div>';
+  } else {
+    html += '<div class="field"><label>Voice</label><select id="vsel">'
+      + TTS.voices.map(v => '<option value="'+esc(v.name)+'"'
+        + (TTS.current && v.name === TTS.current.name ? " selected" : "") + '>'
+        + esc(v.name) + ' — ' + esc(v.lang) + '</option>').join("")
+      + '</select></div>'
+      + '<div class="field"><label>Speed · '+S.rate.toFixed(2)+'×</label>'
+      + '<input type="range" id="vrate" min="0.5" max="1.2" step="0.05" value="'+S.rate+'"></div>'
+      + '<div class="field"><label>Play automatically</label><div class="seg">'
+      + '<button id="apOn" aria-pressed="'+(S.autoplay?"true":"false")+'">On</button>'
+      + '<button id="apOff" aria-pressed="'+(!S.autoplay?"true":"false")+'">Off</button></div></div>'
+      + '<div class="next-row"><button class="btn ghost" id="vtest">▶ Test: Trời mưa, nhớ mang dù nha.</button></div>';
+    const nm = (TTS.current && TTS.current.name) || "";
+    if (/vi[\s_-]?vu/i.test(nm)){
+      html += '<div class="ok-note">Vi Vu is doing the talking. That is the Southern accent you are learning.</div>';
+    } else if (/rhvoice/i.test(nm)){
+      html += '<div class="ok-note">RHVoice is doing the talking. If Vi Vu is the voice you picked inside the RHVoice app, this is it.</div>';
+    } else {
+      html += '<div class="warn">This voice does not name its engine. On Android that is normal — Chrome just says '
+        + '“Vietnamese”, and whatever you set as the system speech engine is what you hear. '
+        + 'If you installed RHVoice and chose Vi Vu, set RHVoice as the system engine in '
+        + 'Android settings → Accessibility → Text-to-speech output, and you are already listening to it. '
+        + 'Otherwise this is the built-in voice, usually Northern. '
+        + '<a href="https://louderpages.org/vi-vu" target="_blank" rel="noopener">louderpages.org/vi-vu →</a></div>';
+    }
+  }
+  html += '<div class="field" style="margin-top:26px"><label>Tone marks</label>'
+    + '<div class="legend">'
+    + ["ngang","huyen","sac","hoi","nga","nang"].map(function(k){
+        const t = TONE_INFO[k];
+        return '<div><svg width="28" height="16" viewBox="0 0 28 16">'
+          + '<path d="'+t.path+'" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round"/>'
+          + (t.dot ? '<circle cx="'+t.dot[0]+'" cy="'+t.dot[1]+'" r="1.5" fill="var(--gold)"/>' : '')
+          + '</svg><b>'+t.name+'</b></div>';
+      }).join("")
+    + '</div><div class="hint" style="margin-top:10px;line-height:1.6">In the southern dialect hỏi and ngã collapse into one tone — same contour, different spelling. The dot marks the one spelled with ngã.</div></div>'
+    + '<div class="next-row" style="margin-top:24px"><button class="btn" id="closeS">Close</button></div>';
+  openSheet(html);
+  const sel = $("#vsel");
+  if (sel) sel.onchange = function(){ S.voice = sel.value; TTS.refresh(); save(); renderStats(); voiceSheet(); };
+  const rate = $("#vrate");
+  if (rate) rate.oninput = function(){ S.rate = parseFloat(rate.value); save();
+    rate.previousElementSibling.textContent = "Speed · " + S.rate.toFixed(2) + "×"; };
+  if ($("#apOn"))  $("#apOn").onclick  = function(){ S.autoplay = true;  save(); voiceSheet(); };
+  if ($("#apOff")) $("#apOff").onclick = function(){ S.autoplay = false; save(); voiceSheet(); };
+  if ($("#vtest")) $("#vtest").onclick = function(){ TTS.say("Trời mưa, nhớ mang dù nha."); };
+  $("#closeS").onclick = closeSheet;
+}
+
+function setSheet(){
+  const html = '<div class="eyebrow">Settings</div>'
+    + '<h2 style="font-size:20px;font-weight:800;margin:4px 0 0">Cách học · how you drill</h2>'
+    + '<div class="field"><label>Cards per session</label><div class="seg">'
+    + [8,12,20,30].map(n => '<button data-len="'+n+'" aria-pressed="'+(S.len===n)+'">'+n+'</button>').join("")
+    + '</div></div>'
+    + '<div class="field"><label>How it works</label>'
+    + '<div class="hint" style="line-height:1.75">Every word sits in one of five boxes. Get it right and it moves up and comes '
+    + 'back later — after a day, two days, four, then nine. Get it wrong and it drops to box one and reappears three '
+    + 'cards later in the same session.<br><br>The question type follows the box: you meet a word, then recognise it, '
+    + 'then hear it, then fill it into a sentence, then write it from memory.</div></div>'
+    + '<div class="field"><label>Where your progress lives</label>'
+    + '<div class="'+storeNote().cls+'">'+storeNote().txt+'</div></div>'
+    + '<div class="field"><label>Backup · move it to another device</label>'
+    + '<textarea class="box" id="dump" spellcheck="false">'+esc(JSON.stringify(S))+'</textarea>'
+    + '<div class="next-row"><button class="btn ghost" id="copyDump">Copy</button>'
+    + '<button class="btn ghost" id="loadDump">Restore what is in the box</button></div>'
+    + '<div class="hint" style="margin-top:8px;line-height:1.6">Copy this text somewhere safe. Paste it back into the box on another phone and press Restore.</div></div>'
+    + '<div class="next-row" style="margin-top:24px"><button class="btn" id="closeS2">Close</button></div>';
+  openSheet(html);
+  document.querySelectorAll("[data-len]").forEach(function(b){
+    b.onclick = function(){ S.len = parseInt(b.dataset.len,10); save(); setSheet(); };
+  });
+  $("#copyDump").onclick = function(){
+    const t = $("#dump"); t.select();
+    try{ navigator.clipboard.writeText(t.value); }catch(e){ document.execCommand("copy"); }
+    $("#copyDump").textContent = "Copied";
+  };
+  $("#loadDump").onclick = function(){
+    try{
+      const incoming = JSON.parse($("#dump").value);
+      if (!incoming || typeof incoming !== "object" || !incoming.prog) throw new Error("shape");
+      Object.assign(S, incoming); save();
+      closeSheet(); session = null; renderDecks(); renderStats(); idle(); renderList();
+    }catch(e){
+      $("#loadDump").textContent = "That is not a valid backup";
+    }
+  };
+  $("#closeS2").onclick = closeSheet;
+}
+
+/* ══════════════════════════════════════════════════════════
+   WIRING
+   ══════════════════════════════════════════════════════════ */
+let keyHandler = null;
+document.addEventListener("keydown", function(e){
+  if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "SELECT")) return;
+  if ($("#scrim").classList.contains("open")){ if (e.key === "Escape") closeSheet(); return; }
+  if (keyHandler) keyHandler(e);
+});
+$("#voiceBtn").onclick = voiceSheet;
+$("#setBtn").onclick = setSheet;
+$("#tabDrill").onclick = function(){ tab(true); };
+$("#tabList").onclick  = function(){ tab(false); };
+function tab(drill){
+  $("#tabDrill").setAttribute("aria-selected", drill);
+  $("#tabList").setAttribute("aria-selected", !drill);
+  $("#paneDrill").hidden = !drill;
+  $("#paneList").hidden = drill;
+  if (!drill) renderList();
+}
+$("#allDecks").onclick = function(){ S.active = DECKS.map(d => d.id); save(); renderDecks(); renderStats(); if(!session) idle(); };
+$("#lastTwo").onclick  = function(){ S.active = ["d5","d6","d7","d8"]; save(); renderDecks(); renderStats(); if(!session) idle(); };
+$("#resetProg").onclick = function(){
+  openSheet('<div class="eyebrow">Reset</div><h2 style="font-size:20px;font-weight:800;margin:4px 0 12px">Clear all progress?</h2>'
+   + '<div class="hint" style="line-height:1.7">Boxes, streak and XP go back to zero for every deck. The words stay.</div>'
+   + '<div class="next-row" style="margin-top:22px"><button class="btn" id="doReset">Clear it</button>'
+   + '<button class="btn ghost" id="noReset">Keep my progress</button></div>');
+  $("#doReset").onclick = function(){ S.prog = {}; S.xp = 0; S.streak = 0; S.streakDay = null; save();
+    closeSheet(); session = null; renderDecks(); renderStats(); idle(); renderList(); };
+  $("#noReset").onclick = closeSheet;
+};
+$("#search").oninput = renderList;
+$("#listSpeakAll").onclick = function(){
+  const items = poolOf();
+  let i = 0;
+  (function nextWord(){
+    if (i >= items.length) return;
+    const it = items[i++];
+    if (!("speechSynthesis" in window)) return;
+    const u = new SpeechSynthesisUtterance(it.vi);
+    if (TTS.current) u.voice = TTS.current;
+    u.lang = "vi-VN"; u.rate = S.rate;
+    u.onend = function(){ setTimeout(nextWord, 500); };
+    speechSynthesis.speak(u);
+  })();
+};
+
+(async function init(){
+  await load();
+  TTS.refresh();
+  renderDecks(); renderStats(); idle(); renderList();
+  /* Android fills the voice list late, and again after the first utterance */
+  setTimeout(function(){ TTS.refresh(); renderStats(); }, 700);
+  setTimeout(function(){ TTS.refresh(); renderStats(); }, 2500);
+})();
+
+/* offline support — only when served over http(s); inside Claude this is skipped */
+if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)){
+  window.addEventListener("load", function(){
+    navigator.serviceWorker.register("sw.js").catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

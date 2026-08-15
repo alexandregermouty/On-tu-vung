@@ -1,0 +1,17 @@
+{
+  "name": "Ôn từ vựng — Vietnamese vocabulary drill",
+  "short_name": "Ôn từ vựng",
+  "description": "Spaced-repetition drill for the vocabulary of the 22/07 → 16/08 Vietnamese lessons, with Southern-accent audio.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#101E1B",
+  "theme_color": "#101E1B",
+  "lang": "vi",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
