@@ -3,13 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101E1B">
+<meta name="theme-color" content="#0C1816">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ôn tiếng Việt">
+<meta name="application-name" content="Ôn tiếng Việt">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Ôn tiếng Việt — Alexandre’s personal Vietnamese learning app. Learn to belong.">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
-<title>Ôn tiếng Việt · Alexandre · v7</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta property="og:title" content="Ôn tiếng Việt · Alexandre">
+<meta property="og:description" content="Learn to belong — a personal Vietnamese learning app with a Southern focus.">
+<meta property="og:image" content="https://alexandregermouty.github.io/On-tu-vung/logo.png">
+<meta property="og:type" content="website">
+<title>Ôn tiếng Việt · Alexandre</title>
 <style>
 
 :root{
@@ -790,6 +801,14 @@ body.in-session .opt{min-height:54px}body.in-session .conf{min-height:48px}body.
 @media(max-width:520px){.today-tone-orbit{display:none!important}.course-title-row{align-items:flex-start;flex-direction:column;gap:3px}.course-count{white-space:normal}}
 @media(max-width:390px){:root{--phone-gutter:14px}.brand-tones{display:none}.brand-sub{display:none}.today-h{font-size:38px}.quickrow{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}.class-row{grid-template-columns:48px minmax(0,1fr)}.class-state{grid-column:2;font-size:10px;margin-top:-5px}}
 
+
+/* V7.1 brand image */
+.brand-logo{width:46px;height:46px;object-fit:contain;display:block;flex:0 0 auto;filter:drop-shadow(0 5px 12px rgba(0,0,0,.18));transition:transform .18s var(--ease),opacity .18s}
+.brand-logo:hover{transform:translateY(-1px)}
+body.in-session .brand-logo{width:34px;height:34px;opacity:.76}
+@media(max-width:700px){.brand-logo{width:40px;height:40px}.brand-lockup{gap:10px}}
+@media(max-width:390px){.brand-logo{width:34px;height:34px}.brand-copy h1{font-size:19px}}
+
 </style>
 </head>
 <body>
@@ -797,13 +816,10 @@ body.in-session .opt{min-height:54px}body.in-session .conf{min-height:48px}body.
 
   <header class="app-header">
     <div class="brand-lockup">
-      <div class="brand-tones" aria-hidden="true">
-        <span class="tone-ngang"></span><span class="tone-huyen"></span><span class="tone-sac"></span>
-        <span class="tone-hoi"></span><span class="tone-nga"></span><span class="tone-nang"></span>
-      </div>
+      <img class="brand-logo" src="logo.png" alt="Ôn tiếng Việt logo" width="46" height="46">
       <div class="brand-copy">
         <h1>Ôn tiếng Việt</h1>
-        <div class="brand-sub">Alexandre · Miền Nam</div>
+        <div class="brand-sub">Alexandre · Miền Nam · Learn to belong</div>
       </div>
     </div>
     <div class="hdr-btns">
