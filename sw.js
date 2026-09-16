@@ -1,31 +1,26 @@
-/* Cache the app shell so it opens with no signal. */
-const CACHE = "vivu-v2";
-const SHELL = ["./", "./index.html", "./manifest.webmanifest",
-               "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
+/* cache name bumped for v3 — the old v1/v2 caches are cleared on activate */
+const CACHE = "vivu-v3";
+const ASSETS = ["./", "./index.html", "./manifest.webmanifest",
+                "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
-
 self.addEventListener("activate", e => {
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  e.waitUntil(caches.keys()
+    .then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))
+    .then(() => self.clients.claim()));
 });
-
-/* Network first so an updated file lands next time you have signal,
-   cache second so the app still opens on the métro. */
+/* network first, so a fresh upload wins as soon as the device is online */
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   e.respondWith(
     fetch(e.request)
-      .then(res => {
-        const copy = res.clone();
+      .then(r => {
+        const copy = r.clone();
         caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
-        return res;
+        return r;
       })
-      .catch(() => caches.match(e.request).then(hit => hit || caches.match("./index.html")))
+      .catch(() => caches.match(e.request).then(r => r || caches.match("./index.html")))
   );
 });

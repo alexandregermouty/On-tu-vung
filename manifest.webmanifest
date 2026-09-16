@@ -1,7 +1,7 @@
 {
-  "name": "Ôn từ vựng — Vietnamese vocabulary drill",
-  "short_name": "Ôn từ vựng",
-  "description": "Spaced-repetition drill for the vocabulary of the 22/07 → 16/08 Vietnamese lessons, with Southern-accent audio.",
+  "name": "Ôn tiếng Việt · Alexandre",
+  "short_name": "Ôn tiếng Việt",
+  "description": "A personal Vietnamese training system built from Alexandre's course, with a southern focus.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
