@@ -488,6 +488,20 @@ textarea.box:focus{border-color:var(--gold)}
   .skn{ flex-basis:90px; font-size:12px; }
   .rt{ flex-basis:76px; }
 }
+
+
+/* content manager + richer evidence feedback */
+.content-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.lesson-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px;margin-bottom:9px}
+.lesson-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.lesson-title{font-size:15.5px;font-weight:600}.lesson-meta{font-size:11.5px;color:var(--dim);margin-top:4px;line-height:1.5}
+.lesson-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.lesson-actions button{font-size:10.5px}
+.import-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.import-summary div{border:1px solid var(--line);border-radius:9px;padding:10px}.import-summary b{display:block;font-family:var(--en);font-size:24px;color:var(--gold)}.import-summary span{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid .wide{grid-column:1/-1}.field input[type=text],.field input[type=date]{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:3px;padding:10px 11px;color:var(--eggshell);font-family:var(--vi);font-size:14px;outline:none}.field input:focus{border-color:var(--gold)}
+.pill-status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.vtag.near{padding:3px 8px;border-radius:999px;display:inline-block}
+@media(max-width:520px){.formgrid,.import-summary{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -2032,7 +2046,7 @@ const SOUTHERN_ITEMS = ["ba","má","chén","ly","nón","coi","mắc","xe hơi","
                         "quẹo","mền","giùm","ảnh","chỉ","ổng","bả","cổ","tụi mình","dù","mập","ốm",
                         "dề","chời","xữa"];
 
-const COURSE = (function build(){
+let COURSE = (function build(){
   const items = [];
   LEGACY_ITEMS.forEach(function(x){
     items.push({
@@ -2121,6 +2135,169 @@ const COURSE = (function build(){
     pron:PRON, scenarios:SCENARIOS, survival:SURVIVAL, classes:CLASSES
   };
 })();
+const CORE_COURSE = COURSE;
+let CUSTOM_PACKS = [];
+
+/* ── permanent content layer: core course + weekly lesson packs ─────── */
+const CONTENT_DB_NAME = "alexandre-vietnamese";
+const CONTENT_DB_VERSION = 1;
+const CONTENT_FALLBACK_KEY = "vivu:custom:packs:v1";
+const CONTENT_HISTORY_KEY = "vivu:custom:history:v1";
+function slugify(s){
+  return bare(s||"").replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"").replace(/-+/g,"-").replace(/^-|-$/g,"").slice(0,42)||"item";
+}
+function shortHash(s){ let h=2166136261; for(const ch of String(s)){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return (h>>>0).toString(36); }
+function cloneJSON(x){ return JSON.parse(JSON.stringify(x)); }
+function contentDbOpen(){
+  return new Promise(function(resolve,reject){
+    if(!("indexedDB" in window)) return reject(new Error("no indexedDB"));
+    const q=indexedDB.open(CONTENT_DB_NAME,CONTENT_DB_VERSION);
+    q.onupgradeneeded=function(){ const db=q.result;
+      if(!db.objectStoreNames.contains("packs")) db.createObjectStore("packs",{keyPath:"lesson.id"});
+      if(!db.objectStoreNames.contains("history")) db.createObjectStore("history",{keyPath:"id",autoIncrement:true});
+    };
+    q.onsuccess=()=>resolve(q.result); q.onerror=()=>reject(q.error);
+  });
+}
+const ContentStore = {
+  async all(store){
+    try{ const db=await contentDbOpen(); return await new Promise((resolve,reject)=>{ const tx=db.transaction(store,"readonly"), rq=tx.objectStore(store).getAll(); rq.onsuccess=()=>resolve(rq.result||[]); rq.onerror=()=>reject(rq.error); }); }
+    catch(e){
+      try{ return JSON.parse(localStorage.getItem(store==="packs"?CONTENT_FALLBACK_KEY:CONTENT_HISTORY_KEY)||"[]"); }catch(e2){ return []; }
+    }
+  },
+  async putPack(pack){
+    try{ const db=await contentDbOpen(); await new Promise((resolve,reject)=>{ const tx=db.transaction("packs","readwrite"); tx.objectStore("packs").put(pack); tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error); }); }
+    catch(e){ const xs=await this.all("packs"), i=xs.findIndex(x=>x.lesson&&x.lesson.id===pack.lesson.id); if(i>=0) xs[i]=pack; else xs.push(pack); localStorage.setItem(CONTENT_FALLBACK_KEY,JSON.stringify(xs)); }
+  },
+  async deletePack(id){
+    try{ const db=await contentDbOpen(); await new Promise((resolve,reject)=>{ const tx=db.transaction("packs","readwrite"); tx.objectStore("packs").delete(id); tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error); }); }
+    catch(e){ const xs=(await this.all("packs")).filter(x=>!(x.lesson&&x.lesson.id===id)); localStorage.setItem(CONTENT_FALLBACK_KEY,JSON.stringify(xs)); }
+  },
+  async addHistory(entry){
+    entry=Object.assign({at:Date.now()},entry);
+    try{ const db=await contentDbOpen(); await new Promise((resolve,reject)=>{ const tx=db.transaction("history","readwrite"); tx.objectStore("history").add(entry); tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error); }); }
+    catch(e){ const xs=await this.all("history"); entry.id=(xs.reduce((m,x)=>Math.max(m,x.id||0),0)+1); xs.push(entry); if(xs.length>20) xs.splice(0,xs.length-20); localStorage.setItem(CONTENT_HISTORY_KEY,JSON.stringify(xs)); }
+  },
+  async deleteHistory(id){
+    try{ const db=await contentDbOpen(); await new Promise((resolve,reject)=>{ const tx=db.transaction("history","readwrite"); tx.objectStore("history").delete(id); tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error); }); }
+    catch(e){ const xs=(await this.all("history")).filter(x=>x.id!==id); localStorage.setItem(CONTENT_HISTORY_KEY,JSON.stringify(xs)); }
+  }
+};
+function normalizeConceptInput(c,lessonId){
+  if(!c) return null; const title=(c.title||c.name||"").trim(); if(!title) return null;
+  const id=(c.id||("custom.concept."+slugify(title)+"."+shortHash(title))).trim();
+  return {id:id,unit:c.unit||"u10",title:title,kind:c.kind||"grammar",rule:(c.rule||c.note||"").trim(),
+    examples:Array.isArray(c.examples)?c.examples:[],courseNote:c.courseNote||null,requires:Array.isArray(c.requires)?c.requires:[],
+    source:{type:"weekly-class",lessonId:lessonId}};
+}
+function existingWordFor(vi){ const key=normalizeAnswerText(vi); return COURSE.words.find(x=>normalizeAnswerText(x.vi)===key)||null; }
+function resolveConceptId(v){
+  if(!v) return "c.sent.svo"; if(COURSE.conceptById[v]) return v;
+  const k=bare(v), c=COURSE.concepts.find(x=>bare(x.title)===k||bare(x.id)===k); return c?c.id:v;
+}
+function normalizeLessonPack(raw){
+  raw=cloneJSON(raw||{}); const now=Date.now();
+  const l=raw.lesson||{}; const date=l.date||new Date().toISOString().slice(0,10); const title=(l.title||("Vietnamese class · "+date)).trim();
+  const lessonId=l.id||("lesson-"+date+"-"+shortHash(title));
+  const inputSchema=Number(raw.schemaVersion||1);
+  if(inputSchema>COURSE_SCHEMA_VERSION) throw new Error("This lesson pack uses course schema v"+inputSchema+", but this app supports v"+COURSE_SCHEMA_VERSION+".");
+  const pack={schemaVersion:COURSE_SCHEMA_VERSION,contentVersion:Number(raw.contentVersion||1),createdAt:raw.createdAt||now,updatedAt:raw.updatedAt||now,
+    lesson:{id:lessonId,date:date,title:title,notes:l.notes||"",archived:!!l.archived},concepts:[],vocabulary:[],examples:[],dialogues:[],pronunciation:raw.pronunciation||[],exercises:raw.exercises||[],notes:raw.notes||[]};
+  const cs=[].concat(raw.concepts||[],raw.grammar||[]).map(c=>normalizeConceptInput(c,lessonId)).filter(Boolean); pack.concepts=cs;
+  const localConcepts={}; cs.forEach(c=>localConcepts[bare(c.title)]=c.id);
+  (raw.vocabulary||raw.words||[]).forEach(function(v,i){
+    if(!v) return; if(typeof v==="string"){ const z=v.split(/\s*=\s*/); v={vi:z[0],en:z.slice(1).join(" = ")}; }
+    const vi=(v.vi||v.vietnamese||"").trim(); if(!vi) return; const en=(v.en||v.english||"").trim();
+    const existing=v.id?COURSE.byId[v.id]:existingWordFor(vi); const cid=v.concept?(localConcepts[bare(v.concept)]||resolveConceptId(v.concept)):(v.south?"c.south.lexicon":"c.sent.svo");
+    const id=v.id||(existing&&existing.id)||("custom.word."+lessonId+"."+slugify(vi)+"."+shortHash(normalizeAnswerText(vi)));
+    pack.vocabulary.push({id:id,vi:vi,en:en,unit:v.unit||(COURSE.conceptById[cid]&&COURSE.conceptById[cid].unit)||"u10",concept:cid,
+      matchedExistingId:(!v.id&&existing)?existing.id:(v.matchedExistingId||null),
+      ex:v.ex||(v.exampleVi?{vi:v.exampleVi,en:v.exampleEn||""}:null),note:v.note||v.teacherNote||null,north:v.north||null,south:!!v.south,
+      studyMode:v.studyMode||"active",appearsIn:Array.from(new Set([].concat(v.appearsIn||[],[lessonId]))),source:{type:"weekly-class",lessonId:lessonId,date:date,addedAt:now}});
+  });
+  (raw.examples||[]).forEach(function(x,i){ if(!x) return; const vi=(x.vi||x.vietnamese||"").trim(); if(!vi) return;
+    const en=(x.en||x.english||"").trim();
+    pack.examples.push({id:x.id||("custom.example."+lessonId+"."+shortHash(normalizeAnswerText(vi)+"|"+normalizeAnswerText(en))),vi:vi,en:en,concept:x.concept?resolveConceptId(x.concept):null,itemId:x.itemId||null}); });
+  (raw.dialogues||[]).forEach(function(d,i){ if(!d) return; const lines=(d.lines||[]).map(z=>({who:z.who||z.speaker||"",vi:z.vi||z.vietnamese||"",en:z.en||z.english||""})).filter(z=>z.vi);
+    if(!lines.length) return; const dTitle=d.title||"Dialogue", dKey=dTitle+"|"+lines.map(z=>z.who+":"+z.vi).join("|");
+    pack.dialogues.push({id:d.id||("custom.dialogue."+lessonId+"."+slugify(dTitle)+"."+shortHash(dKey)),title:dTitle,setting:d.setting||"Weekly class",concept:d.concept?resolveConceptId(d.concept):"c.sent.svo",lines:lines}); });
+  return pack;
+}
+function validateLessonPack(pack){
+  const errors=[],warnings=[],ids=new Set();
+  if(!pack||!pack.lesson||!pack.lesson.id) errors.push("Missing lesson ID.");
+  if(pack&&Number(pack.schemaVersion||1)!==COURSE_SCHEMA_VERSION) errors.push("Unsupported course schema version: "+pack.schemaVersion+".");
+  [].concat(pack.concepts||[],pack.vocabulary||[],pack.examples||[],pack.dialogues||[]).forEach(function(x){ if(!x.id) errors.push("An object has no permanent ID."); else if(ids.has(x.id)) errors.push("Duplicate ID inside pack: "+x.id); else ids.add(x.id); });
+  (pack.vocabulary||[]).forEach(v=>{ if(!v.vi) errors.push("Active vocabulary item without Vietnamese text."); if(!v.en) warnings.push("No English gloss for "+v.vi); });
+  return {errors:errors,warnings:warnings,info:[(pack.vocabulary||[]).length+" vocabulary",(pack.concepts||[]).length+" concepts",(pack.dialogues||[]).length+" dialogues"]};
+}
+function previewLessonPack(pack){
+  let fresh=0,updates=0,duplicates=0;
+  (pack.vocabulary||[]).forEach(function(v){ const byId=COURSE.byId[v.id], same=existingWordFor(v.vi); if(v.matchedExistingId){duplicates++;updates++;} else if(byId) updates++; else if(same){duplicates++;updates++;} else fresh++; });
+  fresh+=(pack.concepts||[]).filter(c=>!COURSE.conceptById[c.id]).length+(pack.dialogues||[]).filter(d=>!COURSE.byId["dlg:"+d.id]).length;
+  return {fresh:fresh,updates:updates,duplicates:duplicates};
+}
+function majorContentChanges(pack){
+  const out=[];
+  (pack.vocabulary||[]).forEach(function(v){
+    const old=COURSE.byId[v.id]; if(!old)return;
+    const viChanged=normalizeAnswerText(old.vi||"")!==normalizeAnswerText(v.vi||"");
+    const conceptChanged=(old.concept||"")!==(v.concept||"");
+    if(viChanged||conceptChanged)out.push({id:v.id,oldVi:old.vi,newVi:v.vi,oldConcept:old.concept,newConcept:v.concept,reason:[viChanged?"Vietnamese target changed":null,conceptChanged?"concept changed":null].filter(Boolean).join(" + ")});
+  });
+  return out;
+}
+function rebuildCourse(){
+  const units=CORE_COURSE.units.map(cloneJSON), concepts=CORE_COURSE.concepts.map(cloneJSON), words=CORE_COURSE.words.map(cloneJSON),
+        dialogues=CORE_COURSE.dialogues.map(cloneJSON), sentences=CORE_COURSE.sentences.map(cloneJSON), reference=[];
+  let all=CORE_COURSE.all.map(function(x){ const y=Object.assign({},x); if(x.ex)y.ex=cloneJSON(x.ex); return y; });
+  const conceptById={}; concepts.forEach(c=>conceptById[c.id]=c);
+  function upsertConcept(c){ const i=concepts.findIndex(x=>x.id===c.id); if(i>=0) concepts[i]=Object.assign(concepts[i],c); else concepts.push(c); conceptById[c.id]=concepts.find(x=>x.id===c.id); }
+  function upsertWord(v){
+    if(v.studyMode==="reference"){ reference.push(v); return; }
+    const wi=words.findIndex(x=>x.id===v.id), ai=all.findIndex(x=>x.id===v.id);
+    const prior=wi>=0?words[wi]:null;
+    const base=prior?Object.assign({},prior,v):Object.assign({kind:"word",origin:"custom"},v);
+    base.appearsIn=Array.from(new Set([].concat(prior&&prior.appearsIn||[],v.appearsIn||[],v.source&&v.source.lessonId?[v.source.lessonId]:[])));
+    if(wi>=0) words[wi]=base; else words.push(base);
+    if(ai>=0) all[ai]=Object.assign({},all[ai],base); else all.push(Object.assign({kind:"word"},base));
+  }
+  CUSTOM_PACKS.filter(p=>p&&p.lesson&&!p.lesson.archived).forEach(function(pack){
+    (pack.concepts||[]).forEach(upsertConcept);
+    (pack.vocabulary||[]).forEach(upsertWord);
+    (pack.examples||[]).forEach(function(x){ sentences.push({vi:x.vi,en:x.en,c:x.concept||"c.sent.svo",custom:true});
+      if(x.itemId){ const w=words.find(z=>z.id===x.itemId); if(w&&!w.ex) w.ex={vi:x.vi,en:x.en}; }
+    });
+    (pack.dialogues||[]).forEach(function(d){ dialogues.push(d); const id="dlg:"+d.id; if(!all.some(x=>x.id===id)) all.push({id:id,kind:"dialogue",vi:d.title,en:d.setting,unit:(conceptById[d.concept]||{}).unit||"u10",concept:d.concept,dialogue:d,origin:"custom",lessonId:pack.lesson.id}); });
+  });
+  /* custom concepts are referenceable in the course map; only concepts with a real check become scheduled concept cards */
+  concepts.forEach(function(c){ if(!CORE_COURSE.conceptById[c.id]&&c.micro&&c.micro.check&&!all.some(x=>x.id==="cpt:"+c.id)) all.push({id:"cpt:"+c.id,kind:"concept",vi:c.title,en:(c.rule||"").slice(0,90),unit:c.unit,concept:c.id,ref:c,origin:"custom"}); });
+  const finalConceptById={}; concepts.forEach(c=>finalConceptById[c.id]=c);
+  all.forEach(x=>{ if(x.kind==="concept"&&finalConceptById[x.concept]) x.ref=finalConceptById[x.concept]; });
+  const byId={}; all.forEach(x=>byId[x.id]=x); reference.forEach(x=>{if(!byId[x.id])byId[x.id]=x;});
+  const itemsByConcept={}; words.forEach(it=>(itemsByConcept[it.concept]=itemsByConcept[it.concept]||[]).push(it));
+  const sentByConcept={}; sentences.forEach(x=>(sentByConcept[x.c||"c.sent.svo"]=sentByConcept[x.c||"c.sent.svo"]||[]).push(x));
+  COURSE={units:units,concepts:concepts,conceptById:finalConceptById,words:words,all:all,byId:byId,itemsByConcept:itemsByConcept,
+    sentencesByConcept:sentByConcept,sentences:sentences,dialogues:dialogues,contrasts:CORE_COURSE.contrasts,pron:CORE_COURSE.pron,
+    scenarios:CORE_COURSE.scenarios,survival:CORE_COURSE.survival,classes:CORE_COURSE.classes,reference:reference,lessons:CUSTOM_PACKS.map(p=>p.lesson)};
+}
+async function loadCustomContent(){ CUSTOM_PACKS=await ContentStore.all("packs"); CUSTOM_PACKS.sort((a,b)=>(a.lesson.date||"").localeCompare(b.lesson.date||"")); rebuildCourse(); }
+async function commitLessonPack(pack,opts){
+  pack=normalizeLessonPack(pack); const v=validateLessonPack(pack); if(v.errors.length) throw new Error(v.errors.join("\n"));
+  opts=opts||{}; const previous=CUSTOM_PACKS.find(x=>x.lesson.id===pack.lesson.id), progressBackup={};
+  (opts.resetIds||[]).forEach(function(id){if(S.rev[id])progressBackup[id]=cloneJSON(S.rev[id]);});
+  await ContentStore.addHistory({action:"put",packId:pack.lesson.id,previous:previous?cloneJSON(previous):null,
+    progressBackup:Object.keys(progressBackup).length?progressBackup:null});
+  (opts.resetIds||[]).forEach(function(id){delete S.rev[id]; S.mistakes=S.mistakes.filter(x=>x.item!==id); S.repairs=S.repairs.filter(x=>x.item!==id);});
+  if((opts.resetIds||[]).length)save();
+  await ContentStore.putPack(pack); await loadCustomContent(); return pack;
+}
+async function removeLessonPack(id){ const previous=CUSTOM_PACKS.find(x=>x.lesson.id===id); if(previous) await ContentStore.addHistory({action:"delete",packId:id,previous:cloneJSON(previous)}); await ContentStore.deletePack(id); await loadCustomContent(); }
+async function undoLastContentChange(){ const hs=await ContentStore.all("history"); if(!hs.length) return false; const h=hs.slice().sort((a,b)=>(b.id||0)-(a.id||0))[0];
+  if(h.previous) await ContentStore.putPack(h.previous); else await ContentStore.deletePack(h.packId);
+  if(h.progressBackup){Object.keys(h.progressBackup).forEach(id=>S.rev[id]=ensureReviewRecord(cloneJSON(h.progressBackup[id])));save();}
+  await ContentStore.deleteHistory(h.id); await loadCustomContent(); return true; }
 
 /* ── the five skills, and which exercise trains which ─────────────────── */
 const SKILLS = [
@@ -2145,6 +2322,7 @@ const TYPES = {
   place:        {skill:"context",     level:4, label:"Where does it go"},
   listen_word:  {skill:"listening",   level:2, label:"Hear the word"},
   listen_sent:  {skill:"listening",   level:4, label:"Hear the sentence"},
+  listen_chunks:{skill:"listening",   level:5, label:"Rebuild what you heard"},
   listen_type:  {skill:"listening",   level:6, label:"Hear it and write it"},
   build:        {skill:"context",     level:5, label:"Reorder the sentence"},
   translate_h:  {skill:"production",  level:6, label:"Translate, with a hint"},
@@ -2159,19 +2337,26 @@ const TYPES = {
 };
 
 /* ── state ────────────────────────────────────────────────────────────── */
-const KEY = "vivu:alexandre:v3";
+const STATE_SCHEMA_VERSION = 4;
+const COURSE_SCHEMA_VERSION = 1;
+const KEY = "vivu:alexandre:v4";
+const LEGACY_KEY_V3 = "vivu:alexandre:v3";
 const DAY = 86400000;
 let S = {
-  v:3,
+  v:STATE_SCHEMA_VERSION,
   profile:{name:"Alexandre"},
   rev:{},              /* itemId -> review record */
-  concept:{},          /* conceptId -> {fails, passes, lastFail, taught, streak} */
+  concept:{},          /* conceptId -> concept evidence */
   notes:{},            /* itemId -> {star, hard, text} */
   mistakes:[],         /* rolling log */
+  repairs:[],          /* lighter form/tone repairs */
   log:[],              /* per-day counters */
   diag:[],             /* weekly diagnostics */
   xp:0, streak:0, streakDay:null,
   southernMode:true, voice:null, rate:0.9, autoplay:true, readSentence:true,
+  writingMode:"learning", newPerDay:5,
+  newIntroductions:{date:"",ids:[]},
+  readingCalibration:{factor:1,samples:[]},
   dailyMinutes:12, lastPlan:null, session:null
 };
 let storeMode = "memory";
@@ -2183,10 +2368,14 @@ async function load(){
   else if (window.storage) storeMode = "claude";
   try{
     let raw = null;
-    if (storeMode === "local") raw = localStorage.getItem(KEY) || migrateV2();
-    else if (storeMode === "claude"){ const r = await window.storage.get(KEY); raw = r && r.value; }
+    if (storeMode === "local") raw = localStorage.getItem(KEY) || localStorage.getItem(LEGACY_KEY_V3) || migrateV2();
+    else if (storeMode === "claude"){
+      const r = await window.storage.get(KEY); raw = r && r.value;
+      if (!raw){ const r3 = await window.storage.get(LEGACY_KEY_V3); raw = r3 && r3.value; }
+    }
     if (raw) Object.assign(S, JSON.parse(raw));
-  }catch(e){}
+    migrateStateInPlace();
+  }catch(e){ migrateStateInPlace(); }
 }
 /* an older install keeps its boxes — they seed recognition */
 function migrateV2(){
@@ -2201,10 +2390,12 @@ function migrateV2(){
       r.skills.recognition.n = p.seen||0;
       r.skills.recognition.ok = p.right||0;
       r.skills.recognition.m = Math.min(1, (p.box||0)/4);
+      r.skills.recognition.ivl = Math.max(1,(p.box||0));
+      r.skills.recognition.due = p.due || 0;
       r.reps = p.seen||0; r.lapses = p.wrong||0;
-      r.due = p.due || 0; r.ivl = Math.max(1,(p.box||0));
     });
     S.xp = o.xp || 0; S.streak = o.streak || 0; S.streakDay = o.streakDay || null;
+    S.v = STATE_SCHEMA_VERSION;
     return JSON.stringify(S);
   }catch(e){ return null; }
 }
@@ -2212,6 +2403,7 @@ let saveT=null;
 function save(){
   clearTimeout(saveT);
   saveT = setTimeout(async function(){
+    S.v = STATE_SCHEMA_VERSION;
     const raw = JSON.stringify(S);
     try{
       if (storeMode === "local") localStorage.setItem(KEY, raw);
@@ -2220,21 +2412,73 @@ function save(){
   }, 300);
 }
 function storeNote(){
-  if (storeMode === "local")  return {cls:"ok-note", txt:"Progress is saved on this device."};
-  if (storeMode === "claude") return {cls:"ok-note", txt:"Progress is saved inside this Claude conversation."};
+  if (storeMode === "local")  return {cls:"ok-note", txt:"Progress is saved separately from course content on this device."};
+  if (storeMode === "claude") return {cls:"ok-note", txt:"Progress is saved separately from course content inside this conversation."};
   return {cls:"warn", txt:"Progress is not being saved. Serve the file over https and it will stick."};
 }
 
-/* ── the review record ────────────────────────────────────────────────── */
-function blankSkill(){ return {n:0, ok:0, m:0, rt:0, due:0, ivl:0}; }
+/* ── review records: each skill owns its own schedule ────────────────── */
+function blankSkill(){
+  return {n:0, ok:0, m:0, due:0, ivl:0, ease:2.3, lapses:0,
+          lastSeen:0, lastSuccess:0, dates:[], fluency:null,
+          plays:0, slowPlays:0, onePlayOk:0};
+}
+function blankForm(){
+  return {attempts:0, exact:0, toneMissing:0, wrongTone:0, vowelLetterErrors:0,
+          spellingErrors:0, repaired:0};
+}
+function ensureSkill(sk, legacyDue, legacyIvl){
+  sk = sk || blankSkill();
+  const d = blankSkill();
+  Object.keys(d).forEach(k => { if (sk[k] === undefined || sk[k] === null) sk[k] = d[k]; });
+  if (sk.n > 0 && !sk.due && legacyDue) sk.due = legacyDue;
+  if (sk.n > 0 && !sk.ivl && legacyIvl) sk.ivl = legacyIvl;
+  if (!Array.isArray(sk.dates)) sk.dates = [];
+  return sk;
+}
+function ensureReviewRecord(r){
+  r = r || {};
+  if (r.reps === undefined) r.reps = 0;
+  if (r.lapses === undefined) r.lapses = 0;
+  if (r.run === undefined) r.run = 0;
+  if (r.last === undefined) r.last = 0;
+  if (r.level === undefined) r.level = 1;
+  if (!r.conf) r.conf = {knew:0, unsure:0, guess:0};
+  if (!r.passed) r.passed = [];
+  if (!r.failed) r.failed = [];
+  if (!r.dates) r.dates = [];
+  if (!r.form) r.form = blankForm();
+  else Object.keys(blankForm()).forEach(k=>{ if (r.form[k]===undefined) r.form[k]=0; });
+  if (!r.timing) r.timing = {};
+  if (!r.produced) r.produced = [];
+  if (!r.skills) r.skills = {};
+  const legacyDue = r.due || 0, legacyIvl = r.ivl || 0;
+  ["recognition","recall","production","listening","context"].forEach(function(k){
+    r.skills[k] = ensureSkill(r.skills[k], legacyDue, legacyIvl);
+  });
+  return r;
+}
+function migrateStateInPlace(){
+  S.v = STATE_SCHEMA_VERSION;
+  if (!S.rev) S.rev = {};
+  if (!S.concept) S.concept = {};
+  if (!S.notes) S.notes = {};
+  if (!Array.isArray(S.mistakes)) S.mistakes = [];
+  if (!Array.isArray(S.repairs)) S.repairs = [];
+  if (!Array.isArray(S.log)) S.log = [];
+  if (!Array.isArray(S.diag)) S.diag = [];
+  if (!S.writingMode) S.writingMode = "learning";
+  if (!Number.isFinite(S.newPerDay)) S.newPerDay = 5;
+  if (!S.newIntroductions||typeof S.newIntroductions!=="object") S.newIntroductions={date:"",ids:[]};
+  if (!Array.isArray(S.newIntroductions.ids)) S.newIntroductions.ids=[];
+  if (!S.readingCalibration) S.readingCalibration={factor:1,samples:[]};
+  if (!Array.isArray(S.readingCalibration.samples)) S.readingCalibration.samples=[];
+  if (!Number.isFinite(S.readingCalibration.factor)) S.readingCalibration.factor=1;
+  Object.keys(S.rev).forEach(id => { S.rev[id] = ensureReviewRecord(S.rev[id]); });
+}
 function rec(id){
-  if (!S.rev[id]) S.rev[id] = {
-    ease:2.3, ivl:0, due:0, reps:0, lapses:0, run:0, last:0,
-    level:1, rtAvg:0, rtN:0, conf:{knew:0, unsure:0, guess:0},
-    passed:[], failed:[],
-    skills:{recognition:blankSkill(), recall:blankSkill(), production:blankSkill(),
-            listening:blankSkill(), context:blankSkill()}
-  };
+  if (!S.rev[id]) S.rev[id] = ensureReviewRecord({});
+  else S.rev[id] = ensureReviewRecord(S.rev[id]);
   return S.rev[id];
 }
 function cRec(id){
@@ -2246,107 +2490,323 @@ function overall(id){
   const r = rec(id), s = r.skills;
   return (s.recognition.m*0.2 + s.recall.m*0.25 + s.context.m*0.25 + s.listening.m*0.15 + s.production.m*0.15);
 }
-/* honest status, not a badge */
+function reviewDue(r){
+  const xs = Object.values(r.skills||{}).filter(sk => sk && sk.n>0 && sk.due>0).map(sk=>sk.due);
+  return xs.length ? Math.min.apply(null,xs) : 0;
+}
+function reviewInterval(r){
+  const xs = Object.values(r.skills||{}).filter(sk => sk && sk.n>0 && sk.ivl>0).map(sk=>sk.ivl);
+  return xs.length ? Math.min.apply(null,xs) : 0;
+}
+/* learner-facing states are bands; numeric mastery remains internal */
 function status(id){
   const r = S.rev[id];
   if (!r || r.reps === 0) return "new";
-  const o = overall(id);
-  const overdue = r.due ? (Date.now() - r.due) / Math.max(DAY, r.ivl*DAY) : 0;
-  if (o >= 0.8 && r.run >= 3) return "mastered";
+  ensureReviewRecord(r);
+  const o = overall(id), due = reviewDue(r), ivl = reviewInterval(r);
+  const overdue = due ? (Date.now() - due) / Math.max(DAY, ivl*DAY) : 0;
+  const evidenceDates = new Set(r.dates||[]).size || (r.reps>=6 ? 3 : 0);
+  const supported=supportedSkills(COURSE.byId[id]||{kind:"word",vi:"",en:""});
+  const activeSkills=supported.filter(k=>r.skills[k]&&r.skills[k].n>0&&r.skills[k].m>=0.62);
+  const recallOK=!supported.includes("recall")||(r.skills.recall.n>=2&&r.skills.recall.m>=0.68);
+  const listenOK=!supported.includes("listening")||(r.skills.listening.n>=1&&r.skills.listening.m>=0.55);
+  const contextOK=!supported.includes("context")||(r.skills.context.n>=1&&r.skills.context.m>=0.55);
+  const productionOK=!supported.includes("production")||(r.skills.production.n>=1&&r.skills.production.m>=0.50);
+  const variedEvidence=activeSkills.length>=Math.min(3,supported.length)&&recallOK&&listenOK&&contextOK&&productionOK;
+  if (o >= 0.8 && r.run >= 3 && evidenceDates >= 3 && variedEvidence) return "mastered";
   if (o >= 0.55 && overdue < 1) return "stable";
   if (overdue >= 1 || (o >= 0.3 && o < 0.55)) return "fading";
   return "weak";
 }
 const STATUS_GLYPH = {mastered:"●", stable:"●", fading:"◐", weak:"○", new:"·"};
+const STATUS_LABEL = {mastered:"strong", stable:"stable", fading:"fragile", weak:"building", new:"new"};
 const STATUS_COLOR = {mastered:"var(--jade)", stable:"var(--gold)", fading:"rgba(200,161,90,.5)",
                       weak:"var(--cinnabar)", new:"var(--dimmer)"};
 
-/* hesitation bands, as specified */
-function band(ms){
+/* ── timing: reading/listening time is not retrieval time ───────────── */
+const TIMING_POLICY = {
+  mc_vi_en:{family:"recognitionChoice", mode:"choice", speed:true},
+  mc_en_vi:{family:"recallChoice", mode:"choice", speed:true},
+  two_choice:{family:"recognitionChoice", mode:"choice", speed:true},
+  odd:{family:"recognitionChoice", mode:"readingChoice", speed:true},
+  south_form:{family:"recallChoice", mode:"readingChoice", speed:true},
+  pair_eye:{family:"recallChoice", mode:"readingChoice", speed:true},
+  contrast_mc:{family:"recognitionChoice", mode:"readingChoice", speed:true},
+  gap:{family:"contextChoice", mode:"readingChoice", speed:true},
+  place:{family:"contextBuild", mode:"readingInteraction", speed:true},
+  build:{family:"contextBuild", mode:"readingInteraction", speed:true},
+  judge:{family:"contextChoice", mode:"readingChoice", speed:true},
+  judge_concept:{family:"contextChoice", mode:"readingChoice", speed:true},
+  dialogue_gap:{family:"contextChoice", mode:"readingChoice", speed:true},
+  listen_word:{family:"listeningChoice", mode:"listening", speed:true},
+  listen_sent:{family:"listeningChoice", mode:"listening", speed:true},
+  listen_chunks:{family:"listeningChunks", mode:"listening", speed:true},
+  pair_ear:{family:"listeningChoice", mode:"listening", speed:true},
+  tone_id:{family:"listeningChoice", mode:"listening", speed:true},
+  listen_type:{family:"listeningTyped", mode:"listeningTyped", speed:true},
+  translate_h:{family:"typedRecall", mode:"typed", speed:false},
+  translate:{family:"typedRecall", mode:"typed", speed:false},
+  error_fix:{family:"typedRecall", mode:"typed", speed:false},
+  free:{family:"freeProduction", mode:"free", speed:false},
+  scenario:{family:"freeProduction", mode:"free", speed:false},
+  shadow:{family:"shadow", mode:"free", speed:false}
+};
+let CURRENT_TIMING = null;
+let ACTIVE_EXERCISE = null;
+function basePromptReadingAllowance(type,item){
+  const p=TIMING_POLICY[type]||{};
+  if(p.mode!=="readingChoice"&&p.mode!=="readingInteraction"&&p.mode!=="typed"&&p.mode!=="free") return 0;
+  let en="",vi="";
+  if(item){
+    en+=" "+(item.en||""); vi+=" "+(item.vi||"");
+    if(item.ex){en+=" "+(item.ex.en||"");vi+=" "+(item.ex.vi||"");}
+    if(item.dialogue){item.dialogue.lines.slice(0,3).forEach(l=>{en+=" "+(l.en||"");vi+=" "+(l.vi||"");});}
+    const c=item.concept&&COURSE.conceptById[item.concept];
+    if(type==="judge_concept"&&c&&c.micro&&c.micro.check) en+=" "+c.micro.check.q;
+  }
+  return Math.min(8000,800+toks(en).length*250+toks(vi).length*350);
+}
+function promptReadingAllowance(type,item){
+  const base=basePromptReadingAllowance(type,item);
+  if(!base) return 0;
+  const f=Math.max(.8,Math.min(1.4,(S.readingCalibration&&S.readingCalibration.factor)||1));
+  return Math.min(10000,Math.round(base*f));
+}
+function learnReadingCalibration(timing,valid){
+  if(!valid||!timing||timing.baseReadingAllowanceMs<1200||timing.preResponseMs==null||timing.retrievalMs==null) return;
+  if(["readingChoice","readingInteraction"].indexOf(timing.mode)<0) return;
+  /* Learn only from correct, reasonably fluent trials so hesitation is not mistaken for reading speed. */
+  if(timing.retrievalMs>4500) return;
+  const inferred=Math.max(400,timing.preResponseMs-2500);
+  const factor=Math.max(.65,Math.min(1.7,inferred/timing.baseReadingAllowanceMs));
+  const rc=S.readingCalibration||(S.readingCalibration={factor:1,samples:[]});
+  rc.samples.push(factor); if(rc.samples.length>30)rc.samples.shift();
+  if(rc.samples.length>=10){
+    const a=rc.samples.slice().sort((x,y)=>x-y), med=a[Math.floor(a.length/2)];
+    rc.factor=Math.max(.8,Math.min(1.4,rc.factor*.8+med*.2));
+  }
+}
+function beginTiming(type, item){
+  const now = Date.now();
+  const policy = TIMING_POLICY[type] || {family:"other",mode:"choice",speed:false};
+  const baseRead=basePromptReadingAllowance(type,item);
+  CURRENT_TIMING = {type:type, family:policy.family, mode:policy.mode, speedEligible:!!policy.speed,
+    shownAt:now, promptReadyAt:now, firstInteractionAt:0, firstKeyAt:0, firstChoiceAt:0,
+    audioStartedAt:0, audioEndedAt:0, answerLockedAt:0, submitAt:0,
+    hiddenStartedAt:0, hiddenTimeMs:0, baseReadingAllowanceMs:baseRead, readingAllowanceMs:promptReadingAllowance(type,item),
+    plays:0, slowPlays:0};
+}
+function markTimingInteraction(kind){
+  const t = CURRENT_TIMING; if (!t || askAnswered) return;
+  const now = Date.now();
+  if (!t.firstInteractionAt) t.firstInteractionAt = now;
+  if (kind === "key" && !t.firstKeyAt) t.firstKeyAt = now;
+  if (kind === "choice" && !t.firstChoiceAt) t.firstChoiceAt = now;
+}
+function markAudioStart(rate){
+  const t = CURRENT_TIMING;
+  if (!t || (t.mode!=="listening" && t.mode!=="listeningTyped") || t.answerLockedAt) return;
+  const now = Date.now();
+  t.audioStartedAt = now; t.audioEndedAt = 0; t.plays++;
+  if (Number(rate||1) < 0.9) t.slowPlays++;
+}
+function markAudioEnd(){
+  const t = CURRENT_TIMING;
+  if (!t || (t.mode!=="listening" && t.mode!=="listeningTyped") || t.answerLockedAt) return;
+  t.audioEndedAt = Date.now();
+}
+function bandFromMs(ms){
+  if (ms == null || !isFinite(ms)) return "not scored";
   if (ms < 2000) return "automatic";
-  if (ms < 5000) return "normal";
-  if (ms < 10000) return "hesitant";
-  return "weak retrieval";
+  if (ms < 4500) return "fluent";
+  if (ms < 7000) return "normal";
+  if (ms < 12000) return "slow retrieval";
+  return "very slow retrieval";
+}
+function fluencyScoreMs(ms){
+  if (ms <= 2000) return 1;
+  if (ms <= 4500) return 1 - (ms-2000)/2500*0.15;
+  if (ms <= 7000) return 0.85 - (ms-4500)/2500*0.15;
+  if (ms <= 12000) return 0.70 - (ms-7000)/5000*0.30;
+  return Math.max(0.05, 0.40 - (ms-12000)/12000*0.35);
+}
+function finalizeTiming(type, item){
+  const t = CURRENT_TIMING || {shownAt:Date.now(), readingAllowanceMs:0, speedEligible:false, family:"other", mode:"choice", hiddenTimeMs:0};
+  const now = Date.now(); t.submitAt = now;
+  if (t.hiddenStartedAt){ t.hiddenTimeMs += now - t.hiddenStartedAt; t.hiddenStartedAt = 0; }
+  let rawPoint = t.firstChoiceAt || t.firstInteractionAt || now;
+  let retrieval = null, production = null;
+  if (t.mode === "listening" || t.mode === "listeningTyped"){
+    const base = t.audioEndedAt || t.audioStartedAt || t.shownAt;
+    const point = t.mode === "listeningTyped" ? (t.firstKeyAt || rawPoint) : rawPoint;
+    retrieval = Math.max(0, point - base - t.hiddenTimeMs);
+    if (t.firstKeyAt) production = Math.max(0, now - t.firstKeyAt);
+  } else if (t.mode === "typed" || t.mode === "free"){
+    const point = t.firstKeyAt || rawPoint;
+    retrieval = Math.max(0, point - t.shownAt - t.hiddenTimeMs - t.readingAllowanceMs);
+    if (t.firstKeyAt) production = Math.max(0, now - t.firstKeyAt);
+  } else {
+    retrieval = Math.max(0, rawPoint - t.shownAt - t.hiddenTimeMs - t.readingAllowanceMs);
+  }
+  const preResponseMs=Math.max(0,rawPoint-t.shownAt-t.hiddenTimeMs);
+  return Object.assign({}, t, {totalMs:Math.max(0, now-t.shownAt-t.hiddenTimeMs), preResponseMs:preResponseMs, retrievalMs:retrieval,
+    productionMs:production, band:t.speedEligible?bandFromMs(retrieval):"not scored"});
+}
+function timingStat(r, family){
+  if (!r.timing[family]) r.timing[family] = {n:0, samples:[], median:null, ema:null};
+  return r.timing[family];
+}
+function recordTiming(r, timing, valid){
+  if (!timing || !timing.speedEligible || !valid || timing.retrievalMs==null || !isFinite(timing.retrievalMs)) return;
+  const st = timingStat(r, timing.family||"other");
+  st.n++; st.samples.push(Math.round(timing.retrievalMs));
+  if (st.samples.length > 15) st.samples.shift();
+  const a = st.samples.slice().sort((x,y)=>x-y);
+  st.median = a.length ? a[Math.floor(a.length/2)] : null;
+  st.ema = st.ema==null ? timing.retrievalMs : st.ema*0.75 + timing.retrievalMs*0.25;
 }
 function fluencyOf(id){
-  const r = S.rev[id];
-  if (!r || !r.rtN) return null;
-  const t = r.rtAvg;
-  return Math.max(0, Math.min(1, 1 - (t - 1500) / 9000));
+  const r = S.rev[id]; if (!r) return null; ensureReviewRecord(r);
+  const vals = Object.values(r.timing||{}).filter(x=>x && x.n>=1 && x.median!=null).map(x=>fluencyScoreMs(x.median));
+  return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
 }
 
-/* ── grading: correctness, confidence and speed all move the interval ── */
-function applyResult(item, type, correct, ms, confidence){
-  const id = item.id, r = rec(id), t = TYPES[type] || {skill:"recognition", level:1};
-  const sk = r.skills[t.skill];
-  const conf = confidence || "none";
-
-  r.reps++; r.last = Date.now();
-  r.rtAvg = r.rtN ? (r.rtAvg*r.rtN + ms) / (r.rtN+1) : ms;
-  r.rtN++;
-  sk.n++; sk.rt = sk.rt ? (sk.rt*0.7 + ms*0.3) : ms;
-  if (conf !== "none") r.conf[conf] = (r.conf[conf]||0) + 1;
-
-  /* how much a pass is worth: slow or guessed counts for less */
-  let credit = 0;
-  if (correct){
-    credit = 1;
-    if (conf === "guess") credit = 0.35;
-    else if (conf === "unsure") credit = 0.7;
-    if (ms > 10000) credit *= 0.6;
-    else if (ms > 5000) credit *= 0.8;
-    credit *= (0.75 + 0.05 * t.level);       /* harder formats are worth more */
-    credit = Math.min(1, credit);
-    sk.ok++; sk.m = Math.min(1, sk.m + (1 - sk.m) * (0.28 + 0.06*credit));
-    r.run++;
-    if (r.passed.indexOf(type) < 0) r.passed.push(type);
+/* ── grading: knowledge, form, confidence and fluency remain separate ── */
+function normalizeGrade(correct, meta){
+  const g = Object.assign({outcome:correct?"correct":"wrong", skillCorrect:!!correct,
+    knowledgeCredit:correct?1:0, masteryCredit:correct?1:0,
+    orthographyCredit:null, toneCredit:null, repair:null, conceptError:!correct}, meta||{});
+  if (g.skillCorrect === undefined) g.skillCorrect = !!correct;
+  return g;
+}
+function recordFormEvidence(r, g){
+  if (!g || g.orthographyCredit===null && !g.repair) return;
+  r.form.attempts++;
+  if (g.outcome === "exact") r.form.exact++;
+  if (g.outcome === "tone_missing") r.form.toneMissing++;
+  if (g.outcome === "wrong_tone") r.form.wrongTone++;
+  if (g.outcome === "orthographic_near") r.form.vowelLetterErrors++;
+  if (g.outcome === "minor_typo") r.form.spellingErrors++;
+}
+function addRepair(item, kind, type){
+  if (!kind) return;
+  const key=item.id+"|"+kind;
+  let x=S.repairs.find(r=>r.key===key);
+  if(!x){x={key:key,item:item.id,concept:item.concept,kind:kind,n:0,status:"active",first:Date.now(),passes:0};S.repairs.push(x);}
+  else if(x.status==="repaired"){x.status="reopened";x.passes=0;x.reopenedAt=Date.now();}
+  else if(x.status!=="repairing")x.status="active";
+  x.n++;x.last=Date.now();x.type=type;
+  if(S.repairs.length>200)S.repairs=S.repairs.slice(-200);
+}
+function markRepairSuccess(item){
+  S.repairs.filter(x=>x.item===item.id && x.status!=="repaired").forEach(function(x){
+    x.passes=(x.passes||0)+1; x.lastPass=Date.now();
+    if (x.passes>=3) x.status="repaired"; else x.status="repairing";
+  });
+  S.mistakes.filter(x=>x.item===item.id && x.status!=="repaired").forEach(function(x){
+    x.repairPasses=(x.repairPasses||0)+1;
+    if (x.repairPasses>=3) x.status="repaired";
+  });
+}
+function skillIntervalUpdate(sk, g, conf, timing){
+  if (g.skillCorrect){
+    let q = conf === "guess" ? 3 : conf === "unsure" ? 4 : 5;
+    if (g.masteryCredit < .8) q = Math.min(q,4);
+    sk.ease = Math.max(1.3, (sk.ease||2.3) + (0.1 - (5-q)*(0.08 + (5-q)*0.02)));
+    let speedFactor = 1;
+    if (timing && timing.speedEligible && timing.retrievalMs!=null){
+      if (timing.retrievalMs < 2000) speedFactor = 1.10;
+      else if (timing.retrievalMs > 12000) speedFactor = 0.90;
+    }
+    if (sk.ivl === 0) sk.ivl = conf === "guess" ? 0.25 : (g.masteryCredit<.8 ? .5 : 1);
+    else if (sk.ivl <= 1) sk.ivl = conf === "guess" ? 1 : (g.masteryCredit<.8 ? 1.5 : 3);
+    else sk.ivl = Math.round(sk.ivl * sk.ease * (conf === "guess" ? 0.55 : 1) * speedFactor * 10)/10;
+    sk.due = Date.now() + sk.ivl*DAY;
+  } else if(g.conceptError===false && (g.knowledgeCredit||0)>0){
+    sk.ease=Math.max(1.3,(sk.ease||2.3)-0.06);
+    sk.ivl=Math.min(sk.ivl||0.5,0.5); /* same day / next half-day form repair, without lexical reset */
+    sk.due=Date.now()+sk.ivl*DAY;
   } else {
-    sk.m = Math.max(0, sk.m * 0.45);
-    r.run = 0; r.lapses++;
-    if (r.failed.indexOf(type) < 0) r.failed.push(type);
-    noteMistake(item, type);
+    sk.ease = Math.max(1.3, (sk.ease||2.3)-0.22);
+    sk.ivl = 0.02; sk.due = Date.now()+sk.ivl*DAY; sk.lapses++;
   }
+}
+function applyResult(item, type, grade, timing, confidence){
+  const id=item.id, wasUnseen=!S.rev[id]||!S.rev[id].reps, r=rec(id), t=TYPES[type]||{skill:"recognition",level:1};
+  const sk=r.skills[t.skill], conf=confidence||"none";
+  const g=normalizeGrade(grade && grade.skillCorrect, grade);
+  const today=new Date().toISOString().slice(0,10);
 
-  /* SM-2 flavoured interval, tempered by confidence */
-  if (correct){
-    const q = conf === "guess" ? 3 : conf === "unsure" ? 4 : (ms < 2000 ? 5 : 4);
-    r.ease = Math.max(1.3, r.ease + (0.1 - (5-q)*(0.08 + (5-q)*0.02)));
-    r.ivl = r.ivl === 0 ? (conf === "guess" ? 0.25 : 1)
-          : r.ivl === 1 ? (conf === "guess" ? 1 : 3)
-          : Math.round(r.ivl * r.ease * (conf === "guess" ? 0.5 : 1) * 10) / 10;
+  r.reps++; r.last=Date.now(); if (r.dates.indexOf(today)<0) r.dates.push(today);
+  if(wasUnseen) noteNewIntroduction(id);
+  sk.n++; sk.lastSeen=Date.now(); if (sk.dates.indexOf(today)<0) sk.dates.push(today);
+  if (conf!=="none") r.conf[conf]=(r.conf[conf]||0)+1;
+  recordFormEvidence(r,g);
+
+  let evidence=g.masteryCredit;
+  if (conf==="guess") evidence*=0.45; else if (conf==="unsure") evidence*=0.75;
+  let listeningFactor=1;
+  if(t.skill==="listening"&&timing){
+    const plays=Math.max(1,timing.plays||1), slow=timing.slowPlays||0;
+    sk.plays=(sk.plays||0)+plays; sk.slowPlays=(sk.slowPlays||0)+slow;
+    if(g.skillCorrect&&plays===1&&!slow) sk.onePlayOk=(sk.onePlayOk||0)+1;
+    listeningFactor=plays<=1?1:plays===2?.86:.68;
+    if(slow) listeningFactor*=.82;
+    evidence*=listeningFactor;
+  }
+  evidence=Math.max(0,Math.min(1,evidence));
+  const formOnlyPartial=!g.skillCorrect && g.conceptError===false && (g.knowledgeCredit||0)>0;
+  if (g.skillCorrect){
+    sk.ok++; sk.lastSuccess=Date.now();
+    sk.m=Math.min(1, sk.m+(1-sk.m)*(0.22+0.16*evidence));
+    r.run++; if (r.passed.indexOf(type)<0) r.passed.push(type);
+    if (!g.repair) markRepairSuccess(item);
+  } else if(formOnlyPartial){
+    /* The learner retrieved the lexical/grammatical content but the written form needs repair. */
+    const partial=Math.max(0.15,Math.min(0.65,g.knowledgeCredit||g.masteryCredit||0.35));
+    sk.m=Math.min(1,Math.max(sk.m*0.94,sk.m+(1-sk.m)*0.07*partial));
+    r.run=0;
+    if (r.failed.indexOf(type)<0) r.failed.push(type);
   } else {
-    r.ease = Math.max(1.3, r.ease - 0.22);
-    r.ivl = 0.02;                               /* about half an hour */
+    sk.m=Math.max(0, sk.m*0.62); r.run=0; r.lapses++;
+    if (r.failed.indexOf(type)<0) r.failed.push(type);
+    if (g.conceptError!==false) noteMistake(item,type,g.outcome||"concept");
   }
-  r.due = Date.now() + r.ivl * DAY;
+  if (g.repair) addRepair(item,g.repair,type);
+  const scheduleGrade=listeningFactor<1?Object.assign({},g,{masteryCredit:(g.masteryCredit||0)*listeningFactor}):g;
+  skillIntervalUpdate(sk,scheduleGrade,conf,timing);
+  recordTiming(r,timing,g.skillCorrect && conf!=="guess");
+  learnReadingCalibration(timing,g.skillCorrect && conf!=="guess");
+  sk.fluency = timing && timing.speedEligible && timing.retrievalMs!=null ? fluencyScoreMs(timing.retrievalMs) : sk.fluency;
 
-  /* ladder: climbs on a clean pass, drops on a miss */
-  if (correct && conf !== "guess" && ms < 8000) r.level = Math.min(10, r.level + (t.level >= r.level ? 1 : 0));
-  else if (!correct) r.level = Math.max(1, r.level - 1);
+  /* keep old aggregate fields as read-only compatibility summaries */
+  r.due=reviewDue(r); r.ivl=reviewInterval(r); r.ease=sk.ease;
+  if (g.skillCorrect && conf!=="guess" && g.masteryCredit>=0.8) r.level=Math.min(10,r.level+(t.level>=r.level?1:0));
+  else if (!g.skillCorrect) r.level=Math.max(1,r.level-1);
 
-  /* concept-level bookkeeping */
-  const c = cRec(item.concept);
-  if (correct){ c.passes++; c.run++; }
-  else { c.fails++; c.run = 0; c.lastFail = Date.now(); }
+  const c=cRec(item.concept);
+  if (g.skillCorrect){ c.passes++; c.run++; }
+  else if (g.conceptError!==false){ c.fails++; c.run=0; c.lastFail=Date.now(); }
 
-  /* XP rewards the hard things, not the clicks */
-  if (correct){
-    let xp = 2 + t.level * 2;
-    if (conf === "knew" && ms < 2000) xp += 4;
-    if (r.run >= 3) xp += 3;
-    if (status(id) === "fading" || status(id) === "weak") xp += 5;
-    S.xp += xp;
+  if (g.skillCorrect){
+    let xp=2+t.level*2;
+    if (conf==="knew" && timing && timing.speedEligible && timing.retrievalMs<2000) xp+=4;
+    if (g.masteryCredit<1) xp=Math.max(1,Math.round(xp*g.masteryCredit));
+    if (r.run>=3) xp+=3;
+    S.xp+=xp;
   }
-  bumpStreak(); logDay(correct); save();
-  return {credit:credit, band:band(ms)};
+  bumpStreak(); logDay(g.skillCorrect); save();
+  return {credit:evidence, band:timing?timing.band:"not scored", timing:timing, grade:g};
 }
 
-function noteMistake(item, type){
-  const key = item.concept + "|" + item.id;
-  let m = S.mistakes.find(x => x.key === key);
-  if (!m){ m = {key:key, item:item.id, concept:item.concept, n:0, first:Date.now()}; S.mistakes.push(m); }
-  m.n++; m.last = Date.now(); m.type = type;
-  if (S.mistakes.length > 200) S.mistakes = S.mistakes.sort((a,b)=>b.last-a.last).slice(0,200);
+function noteMistake(item, type, kind){
+  const key=item.concept+"|"+item.id+"|"+(kind||"concept");
+  let m=S.mistakes.find(x=>x.key===key);
+  if(!m){m={key:key,item:item.id,concept:item.concept,kind:kind||"concept",n:0,first:Date.now(),status:"active",repairPasses:0};S.mistakes.push(m);}
+  else if(m.status==="repaired"){m.status="reopened";m.repairPasses=0;m.reopenedAt=Date.now();}
+  else m.status="active";
+  m.n++;m.last=Date.now();m.type=type;
+  if(S.mistakes.length>200)S.mistakes=S.mistakes.sort((a,b)=>b.last-a.last).slice(0,200);
 }
 function bumpStreak(){
   const t = new Date().toISOString().slice(0,10);
@@ -2362,127 +2822,131 @@ function logDay(correct){
   d.n++; if (correct) d.ok++;
 }
 
-/* ── what to study: the daily plan ───────────────────────────────────── */
-function dueItems(){
-  const now = Date.now();
-  return COURSE.all.filter(function(it){
-    const r = S.rev[it.id];
-    return r && r.reps > 0 && r.due <= now;
+/* ── what to study: item + skill pairs, planned by time ─────────────── */
+function supportedSkills(it){
+  return ["recognition","recall","context","listening","production"].filter(s=>typesForSkill(it,s).length>0);
+}
+function duePairs(){
+  const now=Date.now(), out=[];
+  COURSE.all.forEach(function(it){
+    const r=S.rev[it.id]; if (!r || !r.reps) return; ensureReviewRecord(r);
+    supportedSkills(it).forEach(function(skill){
+      const sk=r.skills[skill]; if (sk.n>0 && sk.due>0 && sk.due<=now) out.push({it:it,skill:skill,due:sk.due});
+    });
   });
+  return out.sort((a,b)=>a.due-b.due);
+}
+function dueItems(){
+  const seenId={}; return duePairs().map(x=>x.it).filter(it=>!seenId[it.id]&&(seenId[it.id]=1));
 }
 function unseen(){ return COURSE.all.filter(it => !S.rev[it.id] || S.rev[it.id].reps === 0); }
 function seen(){ return COURSE.all.filter(it => S.rev[it.id] && S.rev[it.id].reps > 0); }
+function newIntroductionsToday(){
+  const d=new Date().toISOString().slice(0,10), x=S.newIntroductions||(S.newIntroductions={date:d,ids:[]});
+  if(x.date!==d){x.date=d;x.ids=[];} if(!Array.isArray(x.ids))x.ids=[]; return x.ids;
+}
+function noteNewIntroduction(id){ const xs=newIntroductionsToday(); if(xs.indexOf(id)<0){xs.push(id); save();} }
 
-/* the weakest meaningful skill for an item — what to ask next */
 function typesForSkill(it, skill){
-  /* an exercise only counts towards a skill if that is the skill it credits —
-     otherwise an item can sit forever on a skill nothing ever raises */
   return availableTypes(it, skill).filter(t => TYPES[t] && TYPES[t].skill === skill);
 }
+/* interleave skills early: hearing and supported recall do not wait for a 45% gate */
 function nextSkillFor(it){
-  const r = rec(it.id);
-  const order = ["recognition","recall","context","listening","production"];
-  const can = {}; order.forEach(s => can[s] = typesForSkill(it, s).length > 0);
-  for (const s of order){
-    const prior = order.slice(0, order.indexOf(s)).filter(p => can[p]);
-    const ready = prior.every(p => r.skills[p].m >= 0.45);
-    if (ready && can[s] && r.skills[s].m < 0.8) return s;
-  }
-  const open = order.filter(s => can[s] && r.skills[s].m < 0.95);
-  if (open.length) return open.sort((a,b)=>r.skills[a].m - r.skills[b].m)[0];
-  const any = order.filter(s => can[s]);
-  return any.length ? any[0] : "recognition";
+  const r=rec(it.id), order=["recognition","listening","recall","context","production"];
+  const can=order.filter(s=>typesForSkill(it,s).length>0);
+  if (!can.length) return "recognition";
+  const due=can.filter(s=>r.skills[s].n>0 && r.skills[s].due>0 && r.skills[s].due<=Date.now())
+               .sort((a,b)=>r.skills[a].due-r.skills[b].due);
+  if (due.length) return due[0];
+  const early=order[(Math.max(0,r.reps-1))%order.length];
+  if (r.reps<=5 && can.indexOf(early)>-1 && r.skills[early].n===0) return early;
+  const untested=can.filter(s=>r.skills[s].n===0);
+  if (untested.length) return untested[0];
+  return can.sort((a,b)=>r.skills[a].m-r.skills[b].m)[0];
 }
 /* which exercises this item can actually support, for a given skill */
 function availableTypes(it, skill){
-  const r = rec(it.id), out = [];
-  const lvl = r.level;
-  const has = t => TYPES[t].level <= lvl + 1;
-  if (it.kind === "pair")     return (it.pair.merged || !TTS.ready) ? ["pair_eye"] : (skill==="listening"?["pair_ear"]:["pair_eye"]);
-  if (it.kind === "judge")    return ["judge"];
-  if (it.kind === "contrast") return TTS.ready && skill === "listening" ? ["contrast_mc"] : ["contrast_mc"];
-  if (it.kind === "concept")  return ["judge_concept"];
-  if (it.kind === "dialogue") return ["dialogue_gap"];
-  const sent = it.ex && it.ex.vi;
-  if (skill === "recognition"){ out.push("mc_vi_en"); if (has("two_choice")) out.push("two_choice");
-    if (has("odd") && classOf(it)) out.push("odd"); }
-  if (skill === "recall"){ out.push("mc_en_vi"); if (it.north && has("south_form")) out.push("south_form"); }
-  if (skill === "listening" && TTS.ready){ out.push("listen_word");
-    if (sent && has("listen_sent")) out.push("listen_sent");
-    if (syllables(it.vi).length === 1 && has("tone_id")) out.push("tone_id");
-    if (sent && has("listen_type")) out.push("listen_type"); }
-  if (skill === "context" && sent){
-    if (spanOf(it)) out.push("gap");
-    if (spanOf(it) && has("place")) out.push("place");
-    const n = toks(it.ex.vi).length;
-    if (has("build") && n >= 4 && n <= 9) out.push("build");
+  const r=rec(it.id), out=[];
+  const lvl=r.level;
+  const has=t=>TYPES[t].level<=lvl+1;
+  if (it.kind==="pair") return (it.pair.merged || !TTS.ready) ? ["pair_eye"] : (skill==="listening"?["pair_ear"]:["pair_eye"]);
+  if (it.kind==="judge") return ["judge"];
+  if (it.kind==="contrast") return ["contrast_mc"];
+  if (it.kind==="concept") return ["judge_concept"];
+  if (it.kind==="dialogue") return ["dialogue_gap"];
+  const sent=it.ex&&it.ex.vi;
+  if (skill==="recognition"){ out.push("mc_vi_en"); if (has("two_choice")) out.push("two_choice"); if (has("odd")&&classOf(it)) out.push("odd"); }
+  if (skill==="recall"){ out.push("mc_en_vi"); if (it.north&&has("south_form")) out.push("south_form"); }
+  if (skill==="listening"&&TTS.ready){ out.push("listen_word"); if (sent&&has("listen_sent")) out.push("listen_sent");
+    if (sent&&has("listen_chunks")&&toks(sent).length>=4) out.push("listen_chunks");
+    if (syllables(it.vi).length===1&&has("tone_id")) out.push("tone_id"); if (sent&&has("listen_type")) out.push("listen_type"); }
+  if (skill==="context"&&sent){ if (spanOf(it)) out.push("gap"); if (spanOf(it)&&has("place")) out.push("place");
+    const n=toks(it.ex.vi).length; if (has("build")&&n>=4&&n<=9) out.push("build"); }
+  if (skill==="production"){
+    if (sent&&has("translate_h")) out.push("translate_h"); out.push(lvl>=7?"translate":"translate_h");
+    if (sent&&has("error_fix")) out.push("error_fix"); if (sent&&has("free")&&lvl>=8) out.push("free");
   }
-  if (skill === "production"){
-    if (sent && has("translate_h")) out.push("translate_h");
-    out.push(lvl >= 7 ? "translate" : "translate_h");
-    if (sent && has("error_fix")) out.push("error_fix");
-    if (sent && has("free") && lvl >= 8) out.push("free");
+  return out.filter(t=>TYPES[t]);
+}
+function classOf(it){ for (const k in COURSE.classes) if (COURSE.classes[k].indexOf(it.vi)>-1) return k; return null; }
+function expectedSeconds(entry){
+  if (entry.why==="micro" || entry.it.kind==="micro") return 60;
+  const skill=entry.skill||nextSkillFor(entry.it), r=S.rev[entry.it.id];
+  const defaults={recognition:8,recall:11,listening:16,context:24,production:45};
+  if (r && r.timing){
+    const vals=Object.values(r.timing).filter(x=>x&&x.n>=3&&x.median!=null).map(x=>x.median/1000);
+    if (vals.length) return Math.max(5,Math.min(75,vals.reduce((a,b)=>a+b,0)/vals.length+4));
   }
-  return out.filter(t => TYPES[t]);
+  return defaults[skill]||15;
 }
-function classOf(it){
-  for (const k in COURSE.classes) if (COURSE.classes[k].indexOf(it.vi) > -1) return k;
-  return null;
+function recentPairs(exclude){
+  const cut=Date.now()-3*DAY, used=exclude||new Set();
+  return seen().filter(it=>rec(it.id).last>=cut).map(it=>({it:it,skill:nextSkillFor(it)}))
+    .filter(x=>!used.has(x.it.id+"|"+x.skill));
 }
-
-/* Today's plan: due, weak, cumulative, recent, new — mixed on purpose */
+function weakPairs(exclude){
+  const used=exclude||new Set();
+  return seen().filter(it=>["weak","fading"].indexOf(status(it.id))>-1).map(it=>({it:it,skill:nextSkillFor(it)}))
+    .filter(x=>!used.has(x.it.id+"|"+x.skill)).sort((a,b)=>overall(a.it.id)-overall(b.it.id));
+}
 function buildPlan(){
-  const now = Date.now();
-  const target = Math.max(8, Math.round(S.dailyMinutes * 1.6));
-  const due = dueItems().sort((a,b)=> S.rev[a.id].due - S.rev[b.id].due);
-  const weak = seen().filter(it => ["weak","fading"].indexOf(status(it.id)) > -1 && due.indexOf(it) < 0)
-                     .sort((a,b)=> overall(a.id) - overall(b.id));
-  const older = seen().filter(it => due.indexOf(it) < 0 && weak.indexOf(it) < 0)
-                      .sort((a,b)=> (S.rev[a.id].last||0) - (S.rev[b.id].last||0));
-  const fresh = unseen().sort(function(a,b){
-    const ua = COURSE.units.findIndex(u=>u.id===a.unit), ub = COURSE.units.findIndex(u=>u.id===b.unit);
-    if (ua !== ub) return ua - ub;
-    return conceptReady(b.concept) - conceptReady(a.concept);
+  const targetSec=Math.max(5,S.dailyMinutes)*60;
+  const due=duePairs().map(x=>({it:x.it,skill:x.skill,why:"due"}));
+  const used=new Set(due.map(x=>x.it.id+"|"+x.skill));
+  const weak=weakPairs(used).map(x=>Object.assign(x,{why:"weak"})); weak.forEach(x=>used.add(x.it.id+"|"+x.skill));
+  const recent=recentPairs(used).map(x=>Object.assign(x,{why:"recent"})); recent.forEach(x=>used.add(x.it.id+"|"+x.skill));
+  const older=seen().filter(it=>Date.now()-rec(it.id).last>=3*DAY).map(it=>({it:it,skill:nextSkillFor(it),why:"older"}))
+    .filter(x=>!used.has(x.it.id+"|"+x.skill)).sort((a,b)=>rec(a.it.id).last-rec(b.it.id).last);
+  const fresh=unseen().filter(it=>it.studyMode!=="reference").sort(function(a,b){
+    const ac=a.source&&a.source.addedAt||0, bc=b.source&&b.source.addedAt||0; if(ac!==bc) return bc-ac; return (a.origin==="custom"?-1:1)-(b.origin==="custom"?-1:1);
+  }).slice(0,Math.max(0,S.newPerDay-newIntroductionsToday().length)).map(it=>({it:it,skill:"recognition",why:"new"}));
+  const buckets=[{share:.40,arr:due},{share:.23,arr:weak},{share:.15,arr:recent},{share:.10,arr:older},{share:.12,arr:fresh}];
+  const plan=[]; let total=0;
+  buckets.forEach(function(b){
+    const cap=targetSec*b.share; let spent=0;
+    for (const x of b.arr){ const sec=expectedSeconds(x); if (spent && spent+sec>cap*1.25) break;
+      const key=x.it.id+"|"+x.skill; if (plan.some(y=>y.it.id+"|"+y.skill===key)) continue;
+      plan.push(x); spent+=sec; total+=sec; if (spent>=cap) break; }
   });
-
-  const quota = [["due",0.40,due], ["weak",0.25,weak], ["older",0.15,older], ["new",0.20,fresh]];
-  const plan = [];
-  quota.forEach(function(q){
-    const n = Math.round(target * q[1]);
-    for (let i=0; i<n && i<q[2].length; i++) plan.push({it:q[2][i], why:q[0]});
-  });
-  /* fill any shortfall from whatever is left */
-  const pools = [due, weak, older, fresh];
-  let p = 0;
-  while (plan.length < target && p < 40){
-    const pool = pools[p % 4];
-    const cand = pool.find(x => !plan.some(y => y.it.id === x.id));
-    if (cand) plan.push({it:cand, why:"fill"});
-    p++;
+  const fill=[due,weak,recent,older,fresh]; let loops=0;
+  while (total<targetSec*.92 && loops<100){
+    let added=false;
+    for (const pool of fill){
+      const x=pool.find(c=>!plan.some(y=>y.it.id===c.it.id&&y.skill===c.skill));
+      if (x){ plan.push(x); total+=expectedSeconds(x); added=true; if (total>=targetSec) break; }
+    }
+    if (!added) break; loops++;
   }
-  /* a concept that keeps failing jumps the queue as a micro-lesson */
-  const broken = brokenConcepts();
-  if (broken.length){
-    const c = broken[0];
-    plan.unshift({it:{id:"cpt:"+c.id, kind:"micro", vi:c.title, en:c.rule, concept:c.id, ref:c},
-                  why:"micro"});
-  }
-  /* interleave so two cards on the same concept are never adjacent */
-  const out = [];
-  const byC = {};
-  plan.forEach(function(x){ (byC[x.it.concept] = byC[x.it.concept]||[]).push(x); });
-  const keys = Object.keys(byC);
-  let added = true;
-  while (added){
-    added = false;
-    keys.forEach(function(k){ if (byC[k].length){ out.push(byC[k].shift()); added = true; } });
-  }
-  if (plan[0] && plan[0].why === "micro"){
-    const i = out.findIndex(x => x.why === "micro");
-    if (i > 0){ const m = out.splice(i,1)[0]; out.unshift(m); }
-  }
-  return out.slice(0, target);
+  const broken=brokenConcepts();
+  if (broken.length){ const c=broken[0]; plan.unshift({it:{id:"cpt:"+c.id,kind:"micro",vi:c.title,en:c.rule,concept:c.id,ref:c},why:"micro",skill:"context"}); }
+  const out=[], byC={};
+  plan.forEach(x=>(byC[x.it.concept]=byC[x.it.concept]||[]).push(x));
+  const keys=Object.keys(byC); let more=true;
+  while(more){ more=false; keys.forEach(k=>{ if(byC[k].length){ out.push(byC[k].shift()); more=true; } }); }
+  if (plan[0]&&plan[0].why==="micro"){ const i=out.findIndex(x=>x.why==="micro"); if(i>0) out.unshift(out.splice(i,1)[0]); }
+  return out;
 }
+function planMinutes(plan){ return Math.max(1,Math.round(plan.reduce((s,x)=>s+expectedSeconds(x),0)/60)); }
 function conceptReady(cid){
   const c = COURSE.conceptById[cid];
   if (!c || !c.requires || !c.requires.length) return 1;
@@ -2495,7 +2959,7 @@ function conceptReady(cid){
   return met / c.requires.length;
 }
 function brokenConcepts(){
-  return CONCEPTS.filter(function(c){
+  return COURSE.concepts.filter(function(c){
     const r = S.concept[c.id];
     if (!r) return false;
     const recent = Date.now() - (r.lastFail||0) < 7*DAY;
@@ -2508,7 +2972,7 @@ function brokenConcepts(){
 function weaknesses(){
   const out = [];
   /* 1 · concepts that keep breaking */
-  CONCEPTS.forEach(function(c){
+  COURSE.concepts.forEach(function(c){
     const r = S.concept[c.id];
     if (!r || r.fails < 2) return;
     const rate = r.fails / Math.max(1, r.fails + r.passes);
@@ -2518,16 +2982,14 @@ function weaknesses(){
       severity: rate * Math.min(3, r.fails) , concept:c.id,
       line:"You are not failing separate questions here — this is one structure."});
   });
-  /* 2 · slow retrieval: known but not reachable */
+  /* 2 · slow retrieval: only valid, reading-adjusted timing samples count */
   seen().forEach(function(it){
-    const r = S.rev[it.id];
-    if (!r || r.rtN < 3) return;
-    if (overall(it.id) < 0.5) return;
-    if (r.rtAvg < 5000) return;
-    out.push({kind:"slow", id:it.id, title:it.vi,
-      detail:"average " + (r.rtAvg/1000).toFixed(1) + " sec",
-      severity: 0.6 + r.rtAvg/20000, concept:it.concept,
-      line:"You know this. You cannot get to it quickly."});
+    const r=S.rev[it.id], xs=validTimingSamples(r);
+    if (!r || overall(it.id)<0.5 || xs.length<3) return;
+    const med=medianMs(xs);
+    if (med<7000) return;
+    out.push({kind:"slow",id:it.id,title:it.vi,detail:"adjusted median "+(med/1000).toFixed(1)+" sec",
+      severity:0.7+med/20000,concept:it.concept,line:"Knowledge is there; retrieval still needs repeated access."});
   });
   /* 3 · production gap: recognised often, never produced */
   seen().forEach(function(it){
@@ -2558,7 +3020,13 @@ function weaknesses(){
       severity:1.1, concept:"c.south.finals",
       line:"The written form and the southern sound are not lining up yet."});
   }
-  /* 6 · a whole skill lagging */
+  /* 6 · active written-form repairs */
+  S.repairs.filter(x=>x.status!=="repaired").forEach(function(x){
+    const it=COURSE.byId[x.item]; if(!it)return;
+    out.push({kind:"form",id:x.item,title:it.vi,detail:(x.kind==="tone"?"tone repair":"spelling repair")+" · "+x.n+" occurrence"+(x.n===1?"":"s")+" · "+x.status,
+      severity:.55+Math.min(.8,x.n*.12),concept:it.concept,line:x.kind==="tone"?"The word is retrievable; its written tone still needs stable recall.":"The language content is partly there; standard Vietnamese spelling still needs repair."});
+  });
+  /* 7 · a whole skill lagging */
   const prof = profile();
   SKILLS.forEach(function(sk){
     if (prof[sk.id] === null) return;
@@ -2600,28 +3068,26 @@ function unitProgress(uid){
 }
 
 /* ── tutor lines, generated from the data ────────────────────────────── */
+function validTimingSamples(r){
+  const out=[]; Object.values((r&&r.timing)||{}).forEach(st=>{ if(st&&Array.isArray(st.samples)) st.samples.forEach(x=>{if(Number.isFinite(x))out.push(x);}); }); return out;
+}
+function medianMs(xs){ if(!xs||!xs.length)return null; const a=xs.slice().sort((x,y)=>x-y),m=Math.floor(a.length/2); return a.length%2?a[m]:(a[m-1]+a[m])/2; }
 function tutorLines(){
-  const out = [], p = profile();
-  const slow = seen().filter(it => { const r=S.rev[it.id]; return r.rtN>=3 && r.rtAvg>6000 && overall(it.id)>0.55; });
-  if (slow.length) out.push("You know " + slow[0].vi + ", but it takes you " +
-    (S.rev[slow[0].id].rtAvg/1000).toFixed(1) + " seconds to get to it.");
-  const gap = seen().filter(it => rec(it.id).skills.recognition.m>0.7 && rec(it.id).skills.production.n===0);
-  if (gap.length >= 3) out.push("Recognition is running ahead of production on " + gap.length +
-    " items — " + gap.slice(0,2).map(x=>x.vi).join(" and ") + " among them.");
-  const bc = brokenConcepts();
-  if (bc.length) out.push("You keep coming apart on " + bc[0].title.toLowerCase() + ". Worth ten minutes on its own.");
-  if (p.listening !== null && p.recognition !== null && p.recognition - p.listening > 0.25)
-    out.push("Strong on the page, weaker in the ear. Listening is the bottleneck right now.");
-  if (p.knowledge !== null && p.fluency !== null && p.knowledge - p.fluency > 0.2)
-    out.push("Accuracy " + Math.round(p.knowledge*100) + "%, fluency " + Math.round(p.fluency*100) +
-             "% — you are getting there, slowly.");
-  const ready = seen().filter(it => rec(it.id).level >= 7);
-  if (ready.length >= 5) out.push(ready.length + " items are ready to leave multiple choice behind.");
-  if (!out.length && seen().length < 5) out.push("Nothing measured yet. A first session will tell us where you actually are.");
+  const out=[], p=profile();
+  const slow=seen().filter(function(it){ const r=S.rev[it.id], xs=validTimingSamples(r), med=medianMs(xs); return xs.length>=3 && med>7000 && overall(it.id)>0.55; });
+  if (slow.length){ const xs=validTimingSamples(S.rev[slow[0].id]), med=medianMs(xs);
+    out.push("You know "+slow[0].vi+", but adjusted median retrieval is still around "+(med/1000).toFixed(1)+" seconds."); }
+  const gap=seen().filter(it=>rec(it.id).skills.recognition.m>0.7&&rec(it.id).skills.production.n===0);
+  if (gap.length>=3) out.push("Recognition is running ahead of production on "+gap.length+" items — "+gap.slice(0,2).map(x=>x.vi).join(" and ")+" among them.");
+  const bc=brokenConcepts(); if (bc.length) out.push("The recurring issue is "+bc[0].title.toLowerCase()+". A short repair lesson is queued.");
+  if (p.listening!==null&&p.recognition!==null&&p.recognition-p.listening>0.25) out.push("Strong on the page, weaker in the ear. Listening is the current bottleneck.");
+  if (p.knowledge!==null&&p.fluency!==null&&p.knowledge-p.fluency>0.2) out.push("Knowledge is ahead of retrieval fluency. The scheduler will favour repeated active recall.");
+  const ready=seen().filter(it=>rec(it.id).level>=7); if(ready.length>=5) out.push(ready.length+" items are ready for less scaffolding and more production.");
+  if (!out.length&&seen().length<5) out.push("Nothing measured yet. A first session will establish the baseline.");
   return out;
 }
 
-/* ── weekly diagnostic ───────────────────────────────────────────────── */
+/* ── weekly diagnostic ───────────────────────────────────────────────── *//* ── weekly diagnostic ───────────────────────────────────────────────── */
 function diagnosticDue(){
   if (!S.diag.length) return seen().length >= 20;
   return Date.now() - S.diag[S.diag.length-1].at > 7*DAY;
@@ -2682,6 +3148,69 @@ function lev(a,b){
   return prev[n];
 }
 function sim(a,b){ const A=bare(a),B=bare(b); return 1 - lev(A,B)/Math.max(A.length,B.length,1); }
+function normalizeAnswerText(s){
+  return String(s==null?"":s).normalize("NFC").toLowerCase().replace(/[?!.,…;:]+$/g,"").replace(/\s+/g," ").trim();
+}
+const TONE_COMBINING=/[\u0300\u0301\u0303\u0309\u0323]/g;
+function stripToneMarksPreserveLetters(s){
+  return normalizeAnswerText(s).normalize("NFD").replace(TONE_COMBINING,"").normalize("NFC");
+}
+function countToneMarks(s){ const m=normalizeAnswerText(s).normalize("NFD").match(TONE_COMBINING); return m?m.length:0; }
+function toneSignature(s){
+  return normalizeAnswerText(s).normalize("NFD").split(/\s+/).map(function(w){
+    const m=w.match(TONE_COMBINING); return m?m.join(""):"";
+  }).join("|");
+}
+function onlyHoiNgaDifference(a,b){
+  const A=syllables(normalizeAnswerText(a)),B=syllables(normalizeAnswerText(b));
+  if(A.length!==B.length||stripToneMarksPreserveLetters(a)!==stripToneMarksPreserveLetters(b))return false;
+  let changed=false;
+  for(let i=0;i<A.length;i++){
+    const x=toneOf(A[i]),y=toneOf(B[i]); if(x===y)continue;
+    if(!((x==="hoi"&&y==="nga")||(x==="nga"&&y==="hoi")))return false;
+    changed=true;
+  }
+  return changed;
+}
+function classifyTypedAnswer(user,target){
+  const U=normalizeAnswerText(user), T=normalizeAnswerText(target);
+  if (U===T) return {outcome:"exact",skillCorrect:true,knowledgeCredit:1,masteryCredit:1,orthographyCredit:1,toneCredit:1,repair:null,conceptError:false};
+  const uToneLess=stripToneMarksPreserveLetters(U), tToneLess=stripToneMarksPreserveLetters(T);
+  if (uToneLess===tToneLess){
+    const us=syllables(U), ts=syllables(T); let missing=false, wrong=false;
+    for(let i=0;i<Math.max(us.length,ts.length);i++){
+      const ut=toneOf(us[i]||""), tt=toneOf(ts[i]||"");
+      if(ut===tt) continue;
+      if(ut==="ngang"&&tt!=="ngang") missing=true; else wrong=true;
+    }
+    if (missing && !wrong){
+      const strict=S.writingMode==="strict";
+      return {outcome:"tone_missing",skillCorrect:!strict,knowledgeCredit:1,masteryCredit:strict?0.45:0.82,
+        orthographyCredit:0.75,toneCredit:0.45,repair:"tone",conceptError:false};
+    }
+    const southernMerge=onlyHoiNgaDifference(U,T);
+    return {outcome:"wrong_tone",skillCorrect:S.writingMode!=="strict",knowledgeCredit:0.85,masteryCredit:S.writingMode==="strict"?0.35:0.65,
+      orthographyCredit:0.55,toneCredit:0.2,repair:"tone",conceptError:false,southernMerge:southernMerge};
+  }
+  if (bare(U)===bare(T)){
+    return {outcome:"orthographic_near",skillCorrect:false,knowledgeCredit:0.55,masteryCredit:0.35,
+      orthographyCredit:0.25,toneCredit:null,repair:"spelling",conceptError:false};
+  }
+  const dist=lev(U,T), maxlen=Math.max(U.length,T.length,1);
+  if (dist===1 && maxlen>=5){
+    return {outcome:"minor_typo",skillCorrect:S.writingMode!=="strict",knowledgeCredit:0.8,masteryCredit:S.writingMode==="strict"?0.35:0.6,
+      orthographyCredit:0.5,toneCredit:null,repair:"spelling",conceptError:false};
+  }
+  return {outcome:"wrong",skillCorrect:false,knowledgeCredit:0,masteryCredit:0,orthographyCredit:0,toneCredit:0,repair:"concept",conceptError:true};
+}
+function formLabel(g){
+  if (!g) return "";
+  if (g.outcome==="tone_missing") return "Accepted · tone missing";
+  if (g.outcome==="wrong_tone") return "Partial · wrong tone";
+  if (g.outcome==="orthographic_near") return "Close · spelling mark/letter";
+  if (g.outcome==="minor_typo") return "Close · typing slip";
+  return "";
+}
 function spanOf(it){
   if (!it.ex || !it.ex.vi) return null;
   const list = toks(it.ex.vi), len = toks(it.vi).length, p = bare(it.vi);
@@ -2741,18 +3270,22 @@ const TTS = {
     if (!("speechSynthesis" in window) || !text) return;
     this.plays++;
     try{
-      speechSynthesis.cancel();
-      const u = this.utter(text, rate);
-      if (btn){ btn.classList.add("playing"); u.onend = u.onerror = () => btn.classList.remove("playing"); }
+      speechSynthesis.cancel(); markAudioStart(rate||S.rate);
+      const u=this.utter(text,rate);
+      u.onend=function(){ if(btn) btn.classList.remove("playing"); markAudioEnd(); };
+      u.onerror=function(){ if(btn) btn.classList.remove("playing"); markAudioEnd(); };
+      if (btn) btn.classList.add("playing");
       speechSynthesis.speak(u);
     }catch(e){}
   },
   seq(list, rate){
     if (!("speechSynthesis" in window)) return;
-    const xs = (list||[]).filter(Boolean);
-    if (!xs.length) return;
+    const xs=(list||[]).filter(Boolean); if(!xs.length) return;
     this.plays++;
-    try{ speechSynthesis.cancel(); xs.forEach(t => speechSynthesis.speak(this.utter(t, rate))); }catch(e){}
+    try{
+      speechSynthesis.cancel(); markAudioStart(rate||S.rate);
+      xs.forEach(function(t,i){ const u=TTS.utter(t,rate); if(i===xs.length-1){ u.onend=u.onerror=markAudioEnd; } speechSynthesis.speak(u); });
+    }catch(e){}
   }
 };
 if ("speechSynthesis" in window){
@@ -2819,54 +3352,66 @@ function wireNotes(){
 function card(inner){ return '<div class="card" id="card">'+inner+'</div>'; }
 
 /* ── the session runner ───────────────────────────────────────────────── */
-let SESS = null;
+let SESS=null;
 function startSession(plan, opts){
-  SESS = Object.assign({queue:plan.slice(), i:0, results:[], started:Date.now(),
-                        right:0, wrong:0, run:0, best:0, xp0:S.xp, mode:"today"}, opts||{});
+  SESS=Object.assign({queue:plan.slice(),i:0,results:[],started:Date.now(),right:0,partial:0,wrong:0,run:0,best:0,xp0:S.xp,mode:"today"},opts||{});
   nextCard();
 }
 function nextCard(){
-  if (!SESS) return;
-  if (SESS.i >= SESS.queue.length) return endSession();
-  const entry = SESS.queue[SESS.i];
-  const it = entry.it;
-  if (entry.why === "micro" || it.kind === "micro") return renderMicro(it, entry);
-  const skill = entry.skill || nextSkillFor(it);
-  const types = entry.force ? [entry.force]
-             : (typesForSkill(it, skill).length ? typesForSkill(it, skill) : availableTypes(it, skill));
-  const type = types.length ? pick(types) : "mc_vi_en";
-  renderExercise(it, type, skill);
+  if(!SESS) return;
+  if(SESS.i>=SESS.queue.length) return endSession();
+  const entry=SESS.queue[SESS.i], it=entry.it;
+  if(entry.why==="micro"||it.kind==="micro") return renderMicro(it,entry);
+  const skill=entry.skill||nextSkillFor(it);
+  const types=entry.force?[entry.force]:(typesForSkill(it,skill).length?typesForSkill(it,skill):availableTypes(it,skill));
+  const type=types.length?pick(types):"mc_vi_en";
+  ACTIVE_EXERCISE={item:it,type:type,skill:skill};
+  renderExercise(it,type,skill);
 }
-function finishCard(item, type, ok, conf){
-  const ms = Date.now() - askTimer;
-  const res = applyResult(item, type, ok, ms, conf);
-  SESS.results.push({id:item.id, type:type, ok:ok, ms:ms, conf:conf});
-  if (ok){ SESS.right++; SESS.run++; SESS.best = Math.max(SESS.best, SESS.run); }
+function finishCard(item,type,ok,conf,timing,grade){
+  const g=normalizeGrade(ok,grade), res=applyResult(item,type,g,timing,conf);
+  SESS.results.push({id:item.id,type:type,ok:g.skillCorrect,grade:g,timing:timing,ms:timing?timing.totalMs:0,conf:conf});
+  const formOnlyPartial=!g.skillCorrect&&g.conceptError===false&&(g.knowledgeCredit||0)>0;
+  if(g.skillCorrect){ SESS.right++; SESS.run++; SESS.best=Math.max(SESS.best,SESS.run); }
+  else if(formOnlyPartial){ SESS.partial=(SESS.partial||0)+1; SESS.run=0; }
   else {
-    SESS.wrong++; SESS.run = 0;
-    /* delayed re-testing: same session, a few cards later */
-    const at = Math.min(SESS.queue.length, SESS.i + 3 + (Math.random()*3|0));
-    SESS.queue.splice(at, 0, {it:item, why:"retry", retry:true});
+    SESS.wrong++; SESS.run=0;
+    const current=SESS.queue[SESS.i]||{}, skill=(TYPES[type]||{}).skill;
+    if(!current.retryStage){
+      const at=Math.min(SESS.queue.length,SESS.i+3+(Math.random()*3|0));
+      SESS.queue.splice(at,0,{it:item,skill:skill,why:"retry",retry:true,retryStage:1});
+      SESS.queue.push({it:item,skill:skill,why:"late retry",retry:true,retryStage:2});
+    }
+  }
+  if(g.repair && (g.skillCorrect||formOnlyPartial)){
+    const at=Math.min(SESS.queue.length,SESS.i+4+(Math.random()*3|0));
+    SESS.queue.splice(at,0,{it:item,skill:(TYPES[type]||{}).skill,why:"repair",retry:true,retryStage:1});
+  }
+  const current=SESS.queue[SESS.i]||{};
+  if(g.skillCorrect && (current.retry||current.why==="repair")){
+    const skill=(TYPES[type]||{}).skill, sk=skill&&rec(item.id).skills[skill];
+    if(sk && sk.ivl>1){sk.ivl=1;sk.due=Date.now()+DAY;const rr=rec(item.id);rr.due=reviewDue(rr);rr.ivl=reviewInterval(rr);}
   }
   return res;
 }
 function advance(){ SESS.i++; paintStats(); nextCard(); }
-
 function progressFoot(){
-  const total = SESS ? SESS.queue.length : 0, i = SESS ? SESS.i : 0;
-  return '<div class="foot"><div class="bar"><i style="width:'+(total? i/total*100 : 0)+'%"></i></div>'
-    + '<span class="count">'+i+' / '+total+'</span>'
-    + (SESS && SESS.run >= 3 ? '<span class="combo">'+SESS.run+' in a row</span>' : '')
-    + '</div>';
+  const total=SESS?SESS.queue.length:0,i=SESS?SESS.i:0;
+  return '<div class="foot"><div class="bar"><i style="width:'+(total?i/total*100:0)+'%"></i></div>'
+    +'<span class="count">'+i+' / '+total+'</span>'+(SESS&&SESS.run>=3?'<span class="combo">'+SESS.run+' in a row</span>':'')+'</div>';
 }
-function stage(html){ $("#stage").innerHTML = html + progressFoot(); askTimer = Date.now(); askAnswered = false; }
+function stage(html){
+  $("#stage").innerHTML=html+progressFoot(); askTimer=Date.now(); askAnswered=false;
+  if(ACTIVE_EXERCISE) beginTiming(ACTIVE_EXERCISE.type,ACTIVE_EXERCISE.item); else CURRENT_TIMING=null;
+}
 
-/* ── confidence + verdict ─────────────────────────────────────────────── */
+/* ── confidence + verdict ─────────────────────────────────────────────── *//* ── confidence + verdict ─────────────────────────────────────────────── */
 function needsConfidence(type){
   const t = TYPES[type];
   return !!t && (t.level >= 3 || t.skill === "production");
 }
 function askConfidence(cb){
+  let chosen=false; const once=function(v){ if(chosen)return; chosen=true; $$(".conf").forEach(b=>b.disabled=true); cb(v); };
   const el = document.createElement("div");
   el.className = "verdict";
   el.innerHTML = '<div class="eyebrow">How did that feel?</div>'
@@ -2877,84 +3422,82 @@ function askConfidence(cb){
     + '<div class="hint" style="margin-top:9px">A guess that happened to be right comes back sooner.</div>';
   $("#card").appendChild(el);
   $("#card").scrollIntoView({behavior:"smooth", block:"nearest"});
-  $$(".conf").forEach(function(b){ b.onclick = function(){ cb(b.dataset.c); }; });
+  $$(".conf").forEach(function(b){ b.onclick = function(){ once(b.dataset.c); }; });
   keyHandler = function(e){
-    if (e.key === "1") cb("knew");
-    if (e.key === "2") cb("unsure");
-    if (e.key === "3") cb("guess");
+    if (e.key === "1") once("knew");
+    if (e.key === "2") once("unsure");
+    if (e.key === "3") once("guess");
   };
 }
 /* answer → optional confidence → verdict */
-function settle(item, type, ok, extra){
-  if (askAnswered) return;
-  askAnswered = true;
-  const ms = Date.now() - askTimer;
-  if (needsConfidence(type) && ok){
-    askConfidence(function(c){ const r = finishCard(item, type, ok, c); verdict(item, type, ok, extra, ms, r); });
+function settle(item,type,ok,extra){
+  if(askAnswered) return;
+  askAnswered=true;
+  if(CURRENT_TIMING) CURRENT_TIMING.answerLockedAt=Date.now();
+  const timing=finalizeTiming(type,item), e=extra||{}, grade=normalizeGrade(ok,e.grade);
+  if(needsConfidence(type)&&grade.skillCorrect){
+    askConfidence(function(c){ const r=finishCard(item,type,grade.skillCorrect,c,timing,grade); verdict(item,type,grade.skillCorrect,e,timing,r); });
   } else {
-    const r = finishCard(item, type, ok, ok && ms < 2000 ? "knew" : "none");
-    verdict(item, type, ok, extra, ms, r);
+    const autoConf=grade.skillCorrect && timing.speedEligible && timing.retrievalMs<2000 ? "knew" : "none";
+    const r=finishCard(item,type,grade.skillCorrect,autoConf,timing,grade); verdict(item,type,grade.skillCorrect,e,timing,r);
   }
 }
-function verdict(item, type, ok, extra, ms, res){
-  const c = $("#card");
-  if (c) c.classList.add(ok ? "sweep" : "shake");
-  const concept = COURSE.conceptById[item.concept];
-  const e = extra || {};
-  let body = '';
-
-  if (!ok){
-    /* why did I get this wrong */
-    body += '<div class="vtag no">Chưa đúng</div>';
-    if (e.yours) body += '<div class="wrongline"><b>You said</b> '+esc(e.yours)+
-                         (e.yoursWhy ? ' — '+esc(e.yoursWhy) : '')+'</div>';
-    body += '<div class="rightline"><b>Correct</b> '+esc(e.answer || item.vi)+
-            (e.answerWhy ? ' — '+esc(e.answerWhy) : '')+'</div>';
-    if (concept) body += '<div class="note"><b>Pattern.</b> '+esc(concept.rule)+'</div>';
-    if (concept && concept.micro && concept.micro.contrast)
-      body += '<div class="note"><b>Contrast.</b> '+esc(concept.micro.contrast)+'</div>';
-    const fresh = concept && (COURSE.sentencesByConcept[concept.id]||[])
-      .filter(s => bare(s.vi) !== bare(item.ex && item.ex.vi));
-    if (fresh && fresh.length){
-      const s = pick(fresh);
-      body += '<div class="note"><b>One more.</b> '+esc(s.vi)+' <span style="opacity:.7">— '+esc(s.en)+'</span></div>';
-    }
-  } else {
-    body += '<div class="vtag ok">Đúng rồi</div>';
-    if (e.answer) body += '<div class="rightline">'+esc(e.answer)+'</div>';
+function timingFeedback(t){
+  if(!t) return "";
+  if(!t.speedEligible){
+    if((t.mode==="typed"||t.mode==="free")&&t.firstKeyAt) return 'First response '+(Math.max(0,t.firstKeyAt-t.shownAt-t.readingAllowanceMs-t.hiddenTimeMs)/1000).toFixed(1)+' s · speed not scored';
+    return 'Reading/production task · speed not scored';
   }
+  const sec=(t.retrievalMs/1000).toFixed(1);
+  if(t.mode==="listening"||t.mode==="listeningTyped") return sec+' s listening response · '+(t.plays||1)+' play'+((t.plays||1)!==1?'s':'')+(t.slowPlays?' · slow audio used':'');
+  return sec+' s adjusted retrieval · '+t.band;
+}
+function verdict(item,type,ok,extra,timing,res){
+  const c=$("#card"), e=extra||{}, g=(res&&res.grade)||e.grade||normalizeGrade(ok);
+  const formOnlyPartial=!ok&&g.conceptError===false&&(g.knowledgeCredit||0)>0;
+  if(c){ if(ok)c.classList.add("sweep"); else if(!formOnlyPartial)c.classList.add("shake"); }
+  const concept=COURSE.conceptById[item.concept];
+  let body='';
+  if(formOnlyPartial){
+    body+='<div class="vtag near">'+esc(formLabel(g)||"Partial · written form needs repair")+'</div>';
+    if(e.yours) body+='<div class="wrongline"><b>You typed</b> '+esc(e.yours)+'</div>';
+    body+='<div class="rightline"><b>Standard form</b> '+esc(e.answer||item.vi)+'</div>';
+    if(g.outcome==="orthographic_near") body+='<div class="note course-note"><b>Written form.</b> ă/â/ê/ô/ơ/ư and đ are letters, not optional tone marks. Your lexical retrieval is kept as partial evidence.</div>';
+    else body+='<div class="note"><b>Form repair.</b> The content you retrieved still counts as partial knowledge evidence.</div>';
+  } else if(!ok){
+    body+='<div class="vtag no">Chưa đúng</div>';
+    if(e.yours) body+='<div class="wrongline"><b>You said</b> '+esc(e.yours)+(e.yoursWhy?' — '+esc(e.yoursWhy):'')+'</div>';
+    body+='<div class="rightline"><b>Correct</b> '+esc(e.answer||item.vi)+(e.answerWhy?' — '+esc(e.answerWhy):'')+'</div>';
+    if(g.outcome==="orthographic_near") body+='<div class="note course-note"><b>Written form.</b> This is not only a missing tone: ă/â/ê/ô/ơ/ư and đ are part of the spelling.</div>';
+    if(concept&&g.conceptError!==false) body+='<div class="note"><b>Pattern.</b> '+esc(concept.rule)+'</div>';
+    if(concept&&concept.micro&&concept.micro.contrast&&g.conceptError!==false) body+='<div class="note"><b>Contrast.</b> '+esc(concept.micro.contrast)+'</div>';
+  } else if(g.outcome&&g.outcome!=="correct"&&g.outcome!=="exact"){
+    body+='<div class="vtag near">'+esc(formLabel(g)||"Accepted · partial")+'</div>';
+    if(e.yours) body+='<div class="wrongline"><b>You typed</b> '+esc(e.yours)+'</div>';
+    body+='<div class="rightline"><b>Standard form</b> '+esc(e.answer||item.vi)+'</div>';
+    if(g.outcome==="tone_missing") body+='<div class="note south-note"><b>Lexical retrieval passed.</b> The tone mark still needs repair; it does not erase the word you retrieved.</div>';
+    if(g.outcome==="wrong_tone") body+='<div class="note south-note"><b>Word identified.</b> '+(g.southernMerge?'In Southern speech hỏi and ngã merge, so the listening evidence remains valid; standard spelling still needs repair.':'The tone changes the written word, so this receives partial form credit.')+'</div>';
+  } else {
+    body+='<div class="vtag ok">Đúng rồi</div>'; if(e.answer) body+='<div class="rightline">'+esc(e.answer)+'</div>';
+  }
+  const tf=timingFeedback(timing);
+  if(tf) body+='<div class="speedline"><span class="'+(timing&&timing.speedEligible&&timing.band==="automatic"?"fast":timing&&timing.speedEligible&&timing.retrievalMs>=7000?"slow":"")+'">'+esc(tf)+'</span>'
+    +(res&&res.credit!==undefined&&ok&&res.credit<0.8?' <span class="dim">— partial learning credit</span>':'')+'</div>';
 
-  /* speed feedback — the thing worth measuring */
-  const b = band(ms);
-  body += '<div class="speedline"><span class="'+(b==="automatic"?"fast":b==="normal"?"":"slow")+'">'
-        + (ms/1000).toFixed(1)+' s · '+b+'</span>'
-        + (res && res.credit !== undefined && ok && res.credit < 0.7
-            ? ' <span class="dim">— counted as a partial pass</span>' : '') + '</div>';
-
-  if (item.kind === "word" || item.kind === "phrase"){
-    body += toneRail(item.vi, true)
-      + '<div class="vrow"><span class="w">'+esc(item.vi)+'</span><span class="g">'+esc(item.en)+'</span></div>'
-      + (item.north ? '<div class="note south-note">Northern form: <b>'+esc(item.north)+'</b></div>' : '')
-      + (item.note ? '<div class="note">'+esc(item.note)+'</div>' : '')
-      + (item.ex ? '<div class="note">'+esc(item.ex.vi)+'<br><span style="opacity:.7">'+esc(item.ex.en)+'</span></div>' : '')
-      + speakRow(item.vi, item.ex && item.ex.vi);
-    autoSay(fullAudio(item));
-  } else if (e.say){ autoSay([e.say]); }
-
-  body += '<div class="next-row">'+whyBtn(item.concept)
-        + '<button class="btn" id="next">Tiếp</button><span class="hint">Enter</span></div>'
-        + noteBar(item.id);
-
-  const holder = document.createElement("div");
-  holder.innerHTML = '<div class="verdict">'+body+'</div>';
-  c.appendChild(holder.firstChild);
-  wireSpeak(); wireWhy(); wireNotes();
-  c.scrollIntoView({behavior:"smooth", block:"nearest"});
-  $("#next").onclick = advance;
-  keyHandler = function(ev){ if (ev.key === "Enter"){ ev.preventDefault(); advance(); } };
+  if(item.kind==="word"||item.kind==="phrase"){
+    body+=toneRail(item.vi,true)+'<div class="vrow"><span class="w">'+esc(item.vi)+'</span><span class="g">'+esc(item.en)+'</span></div>'
+      +(item.north?'<div class="note south-note">Northern form: <b>'+esc(item.north)+'</b></div>':'')
+      +(item.note?'<div class="note">'+esc(item.note)+'</div>':'')
+      +(item.ex?'<div class="note">'+esc(item.ex.vi)+'<br><span style="opacity:.7">'+esc(item.ex.en)+'</span></div>':'')
+      +speakRow(item.vi,item.ex&&item.ex.vi); autoSay(fullAudio(item));
+  } else if(e.say){ autoSay([e.say]); }
+  body+='<div class="next-row">'+whyBtn(item.concept)+'<button class="btn" id="next">Tiếp</button><span class="hint">Enter</span></div>'+noteBar(item.id);
+  const holder=document.createElement("div"); holder.innerHTML='<div class="verdict">'+body+'</div>'; c.appendChild(holder.firstChild);
+  wireSpeak(); wireWhy(); wireNotes(); c.scrollIntoView({behavior:"smooth",block:"nearest"});
+  $("#next").onclick=advance; keyHandler=function(ev){ if(ev.key==="Enter"){ ev.preventDefault(); advance(); } };
 }
 
-/* ── generic choice rendering ────────────────────────────────────────── */
+/* ── generic choice rendering ────────────────────────────────────────── *//* ── generic choice rendering ────────────────────────────────────────── */
 function choicesHTML(list, two, tall){
   return '<div class="opts'+(two?" two":"")+'">' + list.map(function(o,i){
     return '<button class="opt'+(tall?" tall":"")+'" data-i="'+i+'">'
@@ -2965,6 +3508,7 @@ function wireChoices(correctIdx, after, sayOnPick){
   const btns = $$(".opt");
   function choose(i){
     if (!btns.length || btns[0].disabled) return;
+    markTimingInteraction("choice"); if (CURRENT_TIMING) CURRENT_TIMING.answerLockedAt = Date.now();
     btns.forEach(function(b,j){
       b.disabled = true;
       if (j === correctIdx) b.classList.add("right");
@@ -2999,6 +3543,20 @@ function distractors(item, key, n, hard){
   return out;
 }
 
+function chunkSentence(text){
+  const ws=toks(text), chunks=[]; if(!ws.length)return chunks;
+  const breakers=new Set(["vì","nhưng","nên","nếu","thì","khi","mà","rồi"]);
+  let cur=[];
+  ws.forEach(function(w,idx){
+    const key=bare(w);
+    if(cur.length>=2&&(breakers.has(key)||cur.length>=3)){ chunks.push(cur.join(" "));cur=[]; }
+    cur.push(w);
+    if(cur.length>=3||idx===ws.length-1){chunks.push(cur.join(" "));cur=[];}
+  });
+  if(cur.length)chunks.push(cur.join(" "));
+  if(chunks.length===1&&ws.length>=4){const mid=Math.ceil(ws.length/2);return [ws.slice(0,mid).join(" "),ws.slice(mid).join(" ")];}
+  return chunks;
+}
 /* ═══ the exercises ═══════════════════════════════════════════════════ */
 function renderExercise(it, type, skill){
   const r = rec(it.id), hard = r.level >= 3;
@@ -3018,8 +3576,10 @@ function renderExercise(it, type, skill){
       + '<div class="next-row"><button class="btn" id="go">Got it</button><span class="hint">Enter</span></div>'
       + noteBar(it.id)));
     wireSpeak(); wireWhy(); wireNotes(); autoSay(fullAudio(it));
-    $("#go").onclick = function(){ rec(it.id).reps++; rec(it.id).due = Date.now() + 0.02*DAY; save(); advance(); };
-    keyHandler = e => { if (e.key === "Enter") { rec(it.id).reps++; save(); advance(); } };
+    function met(){ const rr=rec(it.id), today=new Date().toISOString().slice(0,10); rr.reps++; rr.last=Date.now(); if(rr.dates.indexOf(today)<0) rr.dates.push(today);
+      rr.skills.recognition.due=Date.now()+0.02*DAY; if(TTS.ready&&typesForSkill(it,"listening").length) rr.skills.listening.due=Date.now()+0.04*DAY; save(); advance(); }
+    $("#go").onclick = met;
+    keyHandler = e => { if (e.key === "Enter") met(); };
     return;
   }
 
@@ -3102,6 +3662,23 @@ function renderExercise(it, type, skill){
     wireChoices(idx, function(ok,i){ settle(it, type, ok, {answer:it.ex.vi+" — "+it.ex.en,
       yours: ok?null:opts[i].ex.en}); }, [it.ex.vi]);
     return;
+  }
+  if(type==="listen_chunks"){
+    const target=it.ex&&it.ex.vi?it.ex.vi:it.vi, chunks=chunkSentence(target);
+    let bank=shuffle(chunks.map((x,i)=>({text:x,key:i})));
+    if(bank.map(x=>x.key).join(",")===chunks.map((x,i)=>i).join(",")) bank=shuffle(bank);
+    stage(card(head("Hear it — rebuild the sentence","chunked dictation")
+      +replayBlock(target)
+      +'<div class="answer-line" id="ans"></div>'
+      +'<div class="bank">'+bank.map((x,i)=>'<button class="tile" data-i="'+i+'">'+esc(x.text)+'</button>').join("")+'</div>'
+      +'<div class="next-row"><button class="btn ghost" id="undo">Undo</button><span class="hint">Start with chunks; full transcription comes later.</span></div>'));
+    wireWhy();wireReplay(target);setTimeout(()=>TTS.say(target),220);
+    const chosen=[],ans=$("#ans"),tiles=$$(".tile");
+    function paintChunks(){ans.innerHTML=chosen.map(i=>'<span class="tok">'+esc(bank[i].text)+'</span>').join("");tiles.forEach((t,i)=>t.classList.toggle("used",chosen.indexOf(i)>-1));}
+    tiles.forEach(function(t,i){t.onclick=function(){if(t.disabled||chosen.indexOf(i)>-1)return;markTimingInteraction("choice");chosen.push(i);paintChunks();if(chosen.length===bank.length){
+      const said=chosen.map(k=>bank[k].text).join(" "),ok=normalizeAnswerText(said)===normalizeAnswerText(target);tiles.forEach(x=>x.disabled=true);setTimeout(()=>settle(it,type,ok,{answer:target,yours:ok?null:said,say:target}),ok?450:800);
+    }};});
+    $("#undo").onclick=function(){chosen.pop();paintChunks();};keyHandler=null;return;
   }
   if (type === "listen_type"){
     stage(card(head("Hear it, then write the key word", "dictation")
@@ -3323,24 +3900,32 @@ function renderExercise(it, type, skill){
     stage(card(head("Say it yourself", "free production")
       + '<div class="prompt-en">'+esc(freePrompt(it))+'</div>'
       + '<div class="typebox"><input class="type" id="tin" autocomplete="off" autocapitalize="off" autocorrect="off" '
-      + 'spellcheck="false" placeholder="your own sentence, using '+esc(it.vi)+'"><button class="btn" id="tgo">Check</button></div>'
-      + '<div class="hint" style="margin-top:9px">It only has to contain '+esc(it.vi)+' and read as a sentence.</div>'));
-    wireWhy();
-    const input = $("#tin"); input.focus();
-    function go(){
-      const v = input.value.trim();
-      if (!v) return;
-      const used = bare(v).indexOf(bare(it.vi)) > -1;
-      const long = toks(v).length >= 3;
-      const ok = used && long;
-      if (ok) markProduced(it.id, v);
-      settle(it, type, ok, {answer: ok ? "“"+v+"” — logged as free production" : "Needs "+it.vi+" inside a sentence of at least three words",
-        yours: ok?null:v});
+      + 'spellcheck="false" placeholder="write your own sentence"><button class="btn" id="tgo">Review</button></div>'
+      + '<div class="hint" style="margin-top:9px">Open production is not auto-approved by a string matcher. You will compare it with the target and self-grade.</div>'));
+    wireWhy(); const input=$("#tin"); input.focus(); input.addEventListener("input",()=>markTimingInteraction("key"),{once:true});
+    function review(){
+      const v=input.value.trim(); if(!v) return; if(askAnswered) return; markTimingInteraction("key");
+      const exactTarget=normalizeAnswerText(v).indexOf(normalizeAnswerText(it.vi))>-1;
+      const toneTarget=stripToneMarksPreserveLetters(v).indexOf(stripToneMarksPreserveLetters(it.vi))>-1;
+      const model=(it.ex&&it.ex.vi)||((COURSE.conceptById[it.concept]||{}).micro||{}).produce?.vi||it.vi;
+      const box=document.createElement("div"); box.className="verdict";
+      box.innerHTML='<div class="eyebrow">Compare before grading</div>'
+        +'<div class="wrongline"><b>Your sentence</b> '+esc(v)+'</div>'
+        +'<div class="rightline"><b>Model</b> '+esc(model)+'</div>'
+        +(!toneTarget?'<div class="note course-note">The target expression <b>'+esc(it.vi)+'</b> is not clearly present.</div>':'')
+        +(toneTarget&&!exactTarget?'<div class="note south-note">The target looks present without its full tone spelling. Treat form separately from meaning.</div>':'')
+        +'<div class="conf-row"><button class="conf" data-self="correct"'+(!toneTarget?' disabled':'')+'>Correct</button>'
+        +'<button class="conf" data-self="partial">Mostly correct</button><button class="conf" data-self="wrong">Needs correction</button></div>';
+      $("#card").appendChild(box); $("#tgo").disabled=true; input.disabled=true;
+      $$('[data-self]').forEach(function(b){ b.onclick=function(){
+        const k=b.dataset.self, g=k==="correct"?{outcome:"self_correct",skillCorrect:true,knowledgeCredit:1,masteryCredit:1,conceptError:false}
+          : k==="partial"?{outcome:"self_partial",skillCorrect:true,knowledgeCredit:.7,masteryCredit:.68,repair:"production",conceptError:false}
+          : {outcome:"wrong",skillCorrect:false,knowledgeCredit:0,masteryCredit:0,repair:"production",conceptError:true};
+        if(g.skillCorrect) markProduced(it.id,v);
+        settle(it,type,g.skillCorrect,{answer:model,yours:v,grade:g});
+      }; });
     }
-    $("#tgo").onclick = go;
-    input.onkeydown = e => { if (e.key === "Enter") go(); };
-    keyHandler = null;
-    return;
+    $("#tgo").onclick=review; input.onkeydown=e=>{ if(e.key==="Enter") review(); }; keyHandler=null; return;
   }
 
   /* ── dialogue completion ──────────────────────────────────────────── */
@@ -3384,6 +3969,7 @@ function wireReplay(text){
   $$("[data-play]").forEach(function(b){
     b.onclick = function(){
       replayCount++;
+      if (CURRENT_TIMING) CURRENT_TIMING.plays = Math.max(CURRENT_TIMING.plays||0, replayCount-1);
       TTS.say(b.dataset.play, Number(b.dataset.rate) * S.rate, b);
       const n = $("#replayN");
       if (n) n.textContent = replayCount > 1 ? replayCount + " plays" : "";
@@ -3391,31 +3977,26 @@ function wireReplay(text){
   });
 }
 
-/* typed answers: exact, tones-missing, or wrong */
-function typeCheck(it, type, targetVi, extraWhy){
-  const target = targetVi || it.vi;
-  const input = $("#tin"); input.focus();
+/* typed answers: lexical retrieval and written form are graded separately */
+function typeCheck(it,type,targetVi,extraWhy){
+  const target=targetVi||it.vi, input=$("#tin"); input.focus();
   function go(){
-    const v = input.value.trim();
-    if (!v) return;
-    const exact = v.normalize("NFC").toLowerCase() === target.normalize("NFC").toLowerCase();
-    const near  = !exact && bare(v) === bare(target);
-    if (exact || near) markProduced(it.id, v);
-    if (near){
-      /* counted as a pass, but the tones get shown and the credit is cut */
-      askAnswered = true;
-      const r = finishCard(it, type, true, "unsure");
-      verdict(it, type, true, {answer:target+" — you had the word, not the tones", yours:v, say:target},
-              Date.now()-askTimer, r);
-      return;
+    const v=input.value.trim(); if(!v) return;
+    markTimingInteraction("key");
+    const g=classifyTypedAnswer(v,target);
+    if(type==="listen_type"&&g.southernMerge){
+      /* Southern speech does not acoustically distinguish hỏi from ngã. Keep listening success; repair standard spelling separately. */
+      g.skillCorrect=true; g.masteryCredit=Math.max(g.masteryCredit||0,.78); g.knowledgeCredit=Math.max(g.knowledgeCredit||0,.9); g.conceptError=false;
     }
-    settle(it, type, exact, {answer:target, answerWhy:extraWhy, yours:v, say:target});
+    if(g.skillCorrect && TYPES[type] && TYPES[type].skill==="production") markProduced(it.id,v);
+    settle(it,type,g.skillCorrect,{answer:target,answerWhy:extraWhy,yours:v,say:target,grade:g});
   }
-  $("#tgo").onclick = go;
-  input.onkeydown = e => { if (e.key === "Enter") go(); };
-  keyHandler = null;
+  $("#tgo").onclick=go;
+  input.onkeydown=e=>{ if(e.key==="Enter") go(); };
+  input.addEventListener("input",()=>markTimingInteraction("key"),{once:true});
+  keyHandler=null;
 }
-/* conversation memory: what has actually been produced unaided */
+/* conversation memory: what has actually been produced unaided *//* conversation memory: what has actually been produced unaided */
 function markProduced(id, text){
   const r = rec(id);
   r.produced = r.produced || [];
@@ -3529,38 +4110,37 @@ function microProduce(c, checkOk){
 
 /* ── end of session ──────────────────────────────────────────────────── */
 function endSession(){
-  const res = SESS.results;
-  const n = res.length, ok = res.filter(r=>r.ok).length;
-  const mins = Math.max(1, Math.round((Date.now()-SESS.started)/60000));
-  const avg = n ? res.reduce((s,r)=>s+r.ms,0)/n : 0;
-  const auto = res.filter(r=>r.ms<2000).length;
-  const gained = S.xp - SESS.xp0;
-  const missed = res.filter(r=>!r.ok).map(r=>COURSE.byId[r.id]).filter(Boolean);
-  const uniqMissed = missed.filter((x,i)=>missed.findIndex(y=>y.id===x.id)===i);
-
-  if (SESS.mode === "diagnostic"){ return renderDiagnosticReport(res); }
-
-  let html = card(label("Xong rồi", "session complete")
-    + '<div class="score">'+(n?Math.round(ok/n*100):0)+'<small>% correct</small></div>'
-    + '<div class="sum-grid">'
-    + '<div><b>'+n+'</b><span>cards</span></div>'
-    + '<div><b>'+mins+'</b><span>minutes</span></div>'
-    + '<div><b>'+(avg/1000).toFixed(1)+'s</b><span>average</span></div>'
-    + '<div><b>'+auto+'</b><span>automatic</span></div>'
-    + '<div><b>'+gained+'</b><span>XP</span></div></div>'
-    + (uniqMissed.length ? '<div class="group-h" style="margin-top:24px"><span class="eyebrow">Coming back tomorrow</span></div>'
-        + uniqMissed.map(x=>'<div class="row"><span class="pill" style="background:var(--cinnabar)"></span>'
-          + '<span class="vi">'+esc(x.vi)+'</span><span class="en">'+esc(x.en)+'</span>'
-          + '<button class="mini" data-say="'+esc((x.ex&&x.ex.vi)||x.vi)+'">▶</button></div>').join("") : '')
-    + tutorBlock()
-    + '<div class="next-row" style="margin-top:22px"><button class="btn" id="again">Another set</button>'
-    + '<button class="btn ghost" id="done">Done</button></div>');
-  $("#stage").innerHTML = html;
-  wireSpeak();
-  $("#again").onclick = function(){ startSession(buildPlan()); };
-  $("#done").onclick = function(){ SESS = null; go("today"); };
-  keyHandler = e => { if (e.key === "Enter") go("today"); };
-  paintStats(); save();
+  const res=SESS.results, n=res.length, ok=res.filter(r=>r.ok).length;
+  const partial=res.filter(r=>!r.ok&&r.grade&&r.grade.conceptError===false&&(r.grade.knowledgeCredit||0)>0).length;
+  const knowledgeEvidence=ok+partial*0.5;
+  const mins=Math.max(1,Math.round((Date.now()-SESS.started)/60000));
+  const valid=res.filter(r=>r.timing&&r.timing.speedEligible&&r.timing.retrievalMs!=null&&r.ok);
+  const fluent=valid.filter(r=>r.timing.retrievalMs<7000).length;
+  const slow=valid.filter(r=>r.timing.retrievalMs>=7000).length;
+  const toneMissing=res.filter(r=>r.grade&&r.grade.outcome==="tone_missing").length;
+  const formErr=res.filter(r=>r.grade&&["wrong_tone","orthographic_near","minor_typo"].indexOf(r.grade.outcome)>-1).length;
+  const listening=res.filter(r=>(TYPES[r.type]||{}).skill==="listening");
+  const extraReplays=listening.reduce((n,r)=>n+Math.max(0,((r.timing&&r.timing.plays)||1)-1),0);
+  const slowAudio=listening.reduce((n,r)=>n+((r.timing&&r.timing.slowPlays)||0),0);
+  const production=res.filter(r=>(TYPES[r.type]||{}).skill==="production");
+  const gained=S.xp-SESS.xp0;
+  const missed=res.filter(r=>!r.ok).map(r=>COURSE.byId[r.id]).filter(Boolean);
+  const uniqMissed=missed.filter((x,i)=>missed.findIndex(y=>y.id===x.id)===i);
+  if(SESS.mode==="diagnostic") return renderDiagnosticReport(res);
+  let html=card(label("Xong rồi","session complete")
+    +'<div class="score">'+(n?Math.round(knowledgeEvidence/n*100):0)+'<small>% knowledge evidence</small></div>'
+    +'<div class="sum-grid"><div><b>'+n+'</b><span>activities</span></div><div><b>'+mins+'</b><span>minutes</span></div>'
+    +(partial?'<div><b>'+partial+'</b><span>form-only partial</span></div>':'')
+    +'<div><b>'+fluent+'</b><span>fluent recalls</span></div><div><b>'+slow+'</b><span>slow recalls</span></div><div><b>'+gained+'</b><span>XP</span></div></div>'
+    +'<div class="report" style="margin-top:20px">'
+    +'<div class="rrow"><span class="rt">Listening</span><span class="rv">'+(listening.length?listening.filter(x=>x.ok).length+' / '+listening.length+' successful · '+extraReplays+' extra replay'+(extraReplays===1?'':'s')+(slowAudio?' · slow audio used '+slowAudio+'×':''):'No listening evidence this session')+'</span></div>'
+    +'<div class="rrow"><span class="rt">Production</span><span class="rv">'+(production.length?production.filter(x=>x.ok).length+' / '+production.length+' successful':'No production evidence this session')+'</span></div>'
+    +'<div class="rrow"><span class="rt">Writing</span><span class="rv">'+toneMissing+' tone omission'+(toneMissing===1?'':'s')+' · '+formErr+' other form repair'+(formErr===1?'':'s')+'</span></div></div>'
+    +(uniqMissed.length?'<div class="group-h" style="margin-top:24px"><span class="eyebrow">Coming back</span></div>'
+      +uniqMissed.map(x=>'<div class="row"><span class="pill" style="background:var(--cinnabar)"></span><span class="vi">'+esc(x.vi)+'</span><span class="en">'+esc(x.en)+'</span><button class="mini" data-say="'+esc((x.ex&&x.ex.vi)||x.vi)+'">▶</button></div>').join(''):'')
+    +tutorBlock()+'<div class="next-row" style="margin-top:22px"><button class="btn" id="again">Another set</button><button class="btn ghost" id="done">Done</button></div>');
+  $("#stage").innerHTML=html; wireSpeak(); $("#again").onclick=()=>startSession(buildPlan()); $("#done").onclick=()=>{SESS=null;go("today");};
+  keyHandler=e=>{if(e.key==="Enter")go("today");}; paintStats(); save();
 }
 function tutorBlock(){
   const lines = tutorLines();
@@ -3581,6 +4161,7 @@ const NAV = [
   {id:"speak",      label:"Speak"},
   {id:"weaknesses", label:"Weak"},
   {id:"words",      label:"Words"},
+  {id:"content",    label:"Content"},
   {id:"progress",   label:"Progress"}
 ];
 let VIEW = "today";
@@ -3590,13 +4171,13 @@ function go(v){
   const host = $("#stage");
   host.scrollTop = 0;
   ({today:viewToday, course:viewCourse, review:viewReview, listen:viewListen,
-    speak:viewSpeak, weaknesses:viewWeak, words:viewWords, progress:viewProgress}[v] || viewToday)();
+    speak:viewSpeak, weaknesses:viewWeak, words:viewWords, content:viewContent, progress:viewProgress}[v] || viewToday)();
   paintStats();
   window.scrollTo({top:0, behavior:"instant"});
 }
 function paintStats(){
   const p = profile();
-  const due = dueItems().length;
+  const due = duePairs().length;
   $("#stats").innerHTML =
       '<span class="flame">▲ '+S.streak+'d</span>'
     + '<span><b>'+due+'</b> due</span>'
@@ -3618,7 +4199,7 @@ function viewToday(){
   S.lastPlan = plan.map(p=>p.it.id);
   const counts = {};
   plan.forEach(p => counts[p.why] = (counts[p.why]||0)+1);
-  const mins = Math.max(4, Math.round(plan.length / 1.6));
+  const mins = planMinutes(plan);
   const broken = brokenConcepts();
   const hour = new Date().getHours();
   const greet = hour < 11 ? "Chào buổi sáng" : hour < 18 ? "Chào buổi chiều" : "Chào buổi tối";
@@ -3627,20 +4208,21 @@ function viewToday(){
   if (counts.micro) bits.push({n:counts.micro, t:"micro-lesson on " + broken[0].title.toLowerCase()});
   if (counts.due) bits.push({n:counts.due, t:"due review" + (counts.due>1?"s":"")});
   if (counts.weak) bits.push({n:counts.weak, t:"weak item" + (counts.weak>1?"s":"")});
+  if (counts.recent) bits.push({n:counts.recent, t:"recent consolidation"});
   if (counts.older) bits.push({n:counts.older, t:"older cumulative review"});
-  if (counts["new"]) bits.push({n:counts["new"], t:"new from the course"});
+  if (counts["new"]) bits.push({n:counts["new"], t:"new material"});
   if (counts.fill) bits.push({n:counts.fill, t:"extra"});
 
   const skillMix = {};
   plan.forEach(function(p){
-    const s = p.why === "micro" ? "concept" : nextSkillFor(p.it);
+    const s = p.why === "micro" ? "concept" : (p.skill||nextSkillFor(p.it));
     skillMix[s] = (skillMix[s]||0)+1;
   });
 
   $("#stage").innerHTML =
     '<div class="hero"><div class="eyebrow">'+esc(greet)+', Alexandre</div>'
     + '<h2 class="today-h">Hôm nay</h2>'
-    + '<div class="today-min">'+mins+' min · '+plan.length+' cards</div></div>'
+    + '<div class="today-min">'+mins+' min estimated · '+plan.length+' learning activities</div></div>'
     + (diagnosticDue() ? '<div class="card accent"><div class="eyebrow">Weekly check</div>'
         + '<div class="prompt-en" style="font-size:19px">A diagnostic is due. Ten minutes across every skill, then a written report.</div>'
         + '<div class="next-row"><button class="btn" id="startDiag">Run the diagnostic</button></div></div>' : '')
@@ -3956,64 +4538,75 @@ function viewSpeak(){
 }
 function runScenario(id){
   const sc = COURSE.scenarios.find(x=>x.id===id);
-  let i = 0, hits = 0;
-  const t0 = Date.now();
+  let i=0, points=0, rated=0;
+  const t0=Date.now();
   function step(){
-    if (i >= sc.steps.length) return finish();
-    const st = sc.steps[i];
-    $("#stage").innerHTML = card(label(sc.title, "scenario · "+(i+1)+" of "+sc.steps.length, whyBtn(sc.concept))
-      + (i===0 ? '<div class="note">'+esc(sc.setting)+'</div>' : '')
-      + '<div class="goal">'+esc(st.goal)+'</div>'
-      + (st.note ? '<div class="note south-note">'+esc(st.note)+'</div>' : '')
-      + '<div class="typebox"><input class="type" id="sin" autocomplete="off" autocapitalize="off" autocorrect="off" '
-      + 'spellcheck="false" placeholder="say it in Vietnamese"><button class="btn" id="sgo">Check</button></div>'
-      + '<div class="next-row"><button class="btn ghost" id="hint">Hint</button>'
-      + (SR.ok ? '<button class="btn ghost" id="mic">🎙 Speak</button>' : '')
-      + '<button class="btn ghost" id="skip">Show me</button></div>');
+    if(i>=sc.steps.length) return finish();
+    const st=sc.steps[i];
+    $("#stage").innerHTML=card(label(sc.title,"scenario · "+(i+1)+" of "+sc.steps.length,whyBtn(sc.concept))
+      +(i===0?'<div class="note">'+esc(sc.setting)+'</div>':'')
+      +'<div class="goal">'+esc(st.goal)+'</div>'
+      +(st.note?'<div class="note south-note">'+esc(st.note)+'</div>':'')
+      +'<div class="typebox"><input class="type" id="sin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="say it in Vietnamese"><button class="btn" id="sgo">Compare</button></div>'
+      +'<div class="hint" style="margin-top:9px">Open production is self-checked after you compare it with course-supported models. The app does not pretend string similarity proves grammar.</div>'
+      +'<div class="next-row"><button class="btn ghost" id="hint">Hint</button>'
+      +(SR.ok?'<button class="btn ghost" id="mic">🎙 Speak</button>':'')
+      +'<button class="btn ghost" id="skip">Show models</button></div>');
     wireWhy();
-    const input = $("#sin"); input.focus();
-    $("#hint").onclick = function(){ $("#hint").outerHTML = '<span class="hint">'+esc(st.hint||"")+'</span>'; };
-    if ($("#mic")) $("#mic").onclick = function(){ SR.listen(function(txt){ input.value = txt; check(); }); };
-    $("#skip").onclick = function(){ reveal(false, null); };
-    $("#sgo").onclick = check;
-    input.onkeydown = e => { if (e.key === "Enter") check(); };
-    function check(){
-      const v = input.value.trim();
-      if (!v) return;
-      const b = bare(v);
-      const ok = st.expect.some(e => b.indexOf(bare(e)) > -1 || bare(e).indexOf(b) > -1 || sim(v,e) > 0.82);
-      reveal(ok, v);
+    const input=$("#sin"); input.focus();
+    $("#hint").onclick=function(){ $("#hint").outerHTML='<span class="hint">'+esc(st.hint||"")+'</span>'; };
+    if($("#mic")) $("#mic").onclick=function(){ SR.listen(function(txt){ input.value=txt; compare(txt); }); };
+    $("#skip").onclick=function(){ compare(""); };
+    $("#sgo").onclick=function(){ const v=input.value.trim(); if(v) compare(v); };
+    input.onkeydown=e=>{ if(e.key==="Enter"&&input.value.trim()) compare(input.value.trim()); };
+
+    function compare(said){
+      if($("#scenarioEval")) return;
+      const b=bare(said), modelMatch=said&&st.expect.some(e=>b===bare(e)||b.indexOf(bare(e))>-1||bare(e).indexOf(b)>-1||sim(said,e)>.82);
+      let toneNote="";
+      if(said){
+        const grades=st.expect.map(e=>classifyTypedAnswer(said,e));
+        const tg=grades.find(g=>g.outcome==="tone_missing"||g.outcome==="wrong_tone");
+        if(tg) toneNote='<div class="note south-note"><b>Written form.</b> Your wording matches a model apart from tone marks. Count the language separately from the spelling repair.</div>';
+      }
+      const el=document.createElement("div"); el.className="verdict"; el.id="scenarioEval";
+      el.innerHTML='<div class="eyebrow">Compare, then rate the language</div>'
+        +(said?'<div class="wrongline"><b>You said</b> '+esc(said)+'</div>':'<div class="hint">You revealed the models without answering.</div>')
+        +(modelMatch?'<div class="note south-note"><b>Pattern signal.</b> Your answer is close to a stored model. Treat this as a clue, not an automatic grammar verdict.</div>':'')
+        +toneNote
+        +'<div class="rightline"><b>Course model</b> '+esc(st.expect[0])+'</div>'
+        +(st.expect.length>1?'<div class="hint">Other accepted models: '+st.expect.slice(1).map(esc).join(" · ")+'</div>':'')
+        +(st.hint?'<div class="note"><b>Target.</b> '+esc(st.hint)+'</div>':'')
+        +'<div class="eyebrow" style="margin-top:16px">How well did your answer express the target?</div>'
+        +'<div class="conf-row"><button class="conf" data-self="1">Correct</button><button class="conf" data-self="0.65">Mostly correct</button><button class="conf" data-self="0">Needs correction</button></div>';
+      $("#card").appendChild(el); wireSpeak(); autoSay([st.expect[0]]);
+      $$('[data-self]').forEach(function(btn){ btn.onclick=function(){ rate(Number(btn.dataset.self),said); }; });
+      keyHandler=function(e){ if(e.key==="1")rate(1,said); if(e.key==="2")rate(.65,said); if(e.key==="3")rate(0,said); };
     }
-    function reveal(ok, said){
-      if (ok) hits++;
-      const el = document.createElement("div"); el.className = "verdict";
-      el.innerHTML = (ok?'<div class="vtag ok">That works</div>':'<div class="vtag near">One natural way</div>')
-        + (said && !ok ? '<div class="wrongline"><b>You said</b> '+esc(said)+'</div>' : '')
-        + '<div class="vrow"><span class="w">'+esc(st.expect[0])+'</span></div>'
-        + (st.expect.length>1 ? '<div class="hint">also fine: '+st.expect.slice(1).map(esc).join(" · ")+'</div>' : '')
-        + '<div class="audio"><button class="speak" data-say="'+esc(st.expect[0])+'">▶ Nghe</button>'
-        + '<button class="speak" data-say="'+esc(st.expect[0])+'" data-slow="0.6">▶ Chậm</button></div>'
-        + '<div class="next-row"><button class="btn" id="n">Tiếp</button></div>';
-      $("#card").appendChild(el);
-      wireSpeak(); autoSay([st.expect[0]]);
-      $("#n").onclick = function(){ i++; step(); };
-      keyHandler = e => { if (e.key==="Enter"){ i++; step(); } };
+    function rate(score,said){
+      if(!$("#scenarioEval")) return;
+      points+=score; rated++;
+      if(said&&score>0){
+        /* Link successful free production back to course vocabulary actually used. */
+        COURSE.words.forEach(function(w){ if(w.vi&&bare(said).indexOf(bare(w.vi))>-1) markProduced(w.id,said); });
+      }
+      i++; step();
     }
   }
   function finish(){
-    const id2 = "sc:"+sc.id, r = rec(id2);
-    r.reps++; r.last = Date.now();
-    r.skills.production.n++; r.skills.production.ok += hits;
-    r.skills.production.m = Math.min(1, r.skills.production.m + (hits/sc.steps.length) * 0.3);
-    S.xp += 10 + hits*6; save();
-    $("#stage").innerHTML = card(label("Xong rồi", "scenario complete")
-      + '<div class="score">'+hits+'<small> / '+sc.steps.length+' unaided</small></div>'
-      + '<div class="hint" style="margin-top:12px">'+Math.round((Date.now()-t0)/1000)+' seconds. Production credit has been logged '
-      + 'against the words you used.</div>'
-      + '<div class="next-row" style="margin-top:20px"><button class="btn" id="again">Run it again</button>'
-      + '<button class="btn ghost" id="back">Back</button></div>');
-    $("#again").onclick = function(){ runScenario(id); };
-    $("#back").onclick = function(){ go("speak"); };
+    const id2="sc:"+sc.id, r=rec(id2), sk=r.skills.production, ratio=sc.steps.length?points/sc.steps.length:0;
+    r.reps++; r.last=Date.now(); sk.n++; sk.lastSeen=Date.now();
+    if(ratio>=.6){ sk.ok++; sk.lastSuccess=Date.now(); }
+    sk.m=Math.min(1,Math.max(0,sk.m*.65+ratio*.35));
+    const grade={skillCorrect:ratio>=.6,masteryCredit:ratio,knowledgeCredit:ratio,conceptError:ratio<.4};
+    skillIntervalUpdate(sk,grade,ratio>=.85?"knew":ratio>=.6?"unsure":"none",{speedEligible:false});
+    r.due=reviewDue(r); r.ivl=reviewInterval(r);
+    S.xp+=Math.round(8+points*5); save();
+    $("#stage").innerHTML=card(label("Xong rồi","scenario complete")
+      +'<div class="score">'+Math.round(ratio*100)+'<small>% self-rated production</small></div>'
+      +'<div class="hint" style="margin-top:12px">'+rated+' responses assessed. '+Math.round((Date.now()-t0)/1000)+' seconds recorded for analytics only; free-production speed does not reduce mastery.</div>'
+      +'<div class="next-row" style="margin-top:20px"><button class="btn" id="again">Run it again</button><button class="btn ghost" id="back">Back</button></div>');
+    $("#again").onclick=function(){ runScenario(id); }; $("#back").onclick=function(){ go("speak"); };
   }
   step();
 }
@@ -4048,9 +4641,12 @@ function runShadow(id){
         const id2 = "shd:"+d.id+":"+i, r = rec(id2);
         r.reps++; r.last = Date.now();
         const v = b.dataset.r === "easy" ? 1 : b.dataset.r === "ok" ? 0.6 : 0.2;
-        r.skills.production.n++; r.skills.production.m = Math.min(1, r.skills.production.m*0.6 + v*0.4);
-        r.ivl = b.dataset.r === "hard" ? 0.5 : b.dataset.r === "ok" ? 2 : 5;
-        r.due = Date.now() + r.ivl*DAY;
+        const sk=r.skills.production;
+        sk.n++; sk.lastSeen=Date.now(); if(b.dataset.r!=="hard"){sk.ok++;sk.lastSuccess=Date.now();}
+        sk.m = Math.min(1, sk.m*0.6 + v*0.4);
+        sk.ivl = b.dataset.r === "hard" ? 0.5 : b.dataset.r === "ok" ? 2 : 5;
+        sk.due = Date.now() + sk.ivl*DAY;
+        r.ivl=reviewInterval(r); r.due=reviewDue(r);
         S.xp += b.dataset.r === "hard" ? 6 : 4;
         save();
         i++; phase = 0; step();
@@ -4077,13 +4673,13 @@ const SR = {
 /* ══ WEAKNESSES ══════════════════════════════════════════════════════ */
 function viewWeak(){
   const w = weaknesses();
-  const groups = {concept:[], slow:[], gap:[], confusion:[], south:[], skill:[]};
+  const groups = {concept:[], slow:[], gap:[], confusion:[], south:[], form:[], skill:[]};
   w.forEach(x => (groups[x.kind]||groups.concept).push(x));
   const title = {concept:"Grammar instability", slow:"Slow recall", gap:"Production gap",
-                 confusion:"Repeatedly confused", south:"Southern pronunciation", skill:"Skill imbalance"};
+                 confusion:"Repeatedly confused", south:"Southern pronunciation", form:"Writing repairs", skill:"Skill imbalance"};
   const blurb = {concept:"one structure, several symptoms", slow:"known, but not reachable",
                  gap:"recognised, never produced", confusion:"they keep swapping",
-                 south:"page against ear", skill:"one skill trailing the rest"};
+                 south:"page against ear", form:"tone and spelling, separate from meaning", skill:"one skill trailing the rest"};
   let html = '<div class="eyebrow">Weaknesses</div><h2 class="screen-h">Where it is actually breaking</h2>';
   if (!w.length) html += '<div class="empty">Not enough evidence yet. A few sessions and this screen fills itself in.</div>';
   Object.keys(groups).forEach(function(k){
@@ -4137,8 +4733,8 @@ function viewWords(){
 }
 function visibleWords(){
   const q = bare($("#search") ? $("#search").value : "");
-  return COURSE.all.filter(function(it){
-    if (q && bare(it.vi).indexOf(q) < 0 && bare(it.en).indexOf(q) < 0) return false;
+  return COURSE.all.concat(COURSE.reference||[]).filter(function(it){
+    if (q && bare(it.vi).indexOf(q) < 0 && bare(it.en).indexOf(q) < 0 && bare(it.note||"").indexOf(q)<0) return false;
     if (wordFilter === "all") return true;
     if (wordFilter === "southern") return !!it.south;
     if (wordFilter === "flagged") return !!(S.notes[it.id] && (S.notes[it.id].star||S.notes[it.id].hard||S.notes[it.id].text));
@@ -4188,9 +4784,10 @@ function itemSheet(id){
         + '<div class="skbar"><i style="width:'+(r.skills[sk.id].m*100)+'%"></i></div>'
         + '<span class="skv">'+Math.round(r.skills[sk.id].m*100)+'%</span></div>').join("")+'</div>'
         + '<div class="hint" style="margin-top:10px">Ladder level '+r.level+' of 10 · '+r.reps+' reviews · '
-        + (r.rtN?(r.rtAvg/1000).toFixed(1)+'s average':'no timing yet')
+        + (validTimingSamples(r).length?'adjusted fluency evidence':'no valid timing yet')
         + (r.produced&&r.produced.length?' · produced unaided '+r.produced.length+'×':'')+'</div>'
       : '<div class="hint" style="margin-top:14px">Not met yet.</div>')
+    + (it.source&&it.source.lessonId?'<div class="hint" style="margin-top:12px">Source: '+esc(it.source.type||"weekly class")+(it.source.date?' · '+esc(it.source.date):'')+' · '+esc(it.source.lessonId)+'</div>':'')
     + (n.text?'<div class="note"><b>Your note.</b> '+esc(n.text)+'</div>':'')
     + noteBar(id)
     + '<div class="next-row" style="margin-top:18px">'
@@ -4202,6 +4799,191 @@ function itemSheet(id){
   $("#drillOne").onclick = function(){ closeSheet();
     drill([it].concat(shuffle(COURSE.itemsByConcept[it.concept]||[]).slice(0,5)), {why:"single"}); };
   $("#closeI").onclick = closeSheet;
+}
+
+/* ══ CONTENT MANAGER ═══════════════════════════════════════════════ */
+function downloadJSON(name,obj){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"}), url=URL.createObjectURL(blob), a=document.createElement("a");
+  a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function downloadText(name,text,type){
+  const blob=new Blob([text],{type:type||"text/plain;charset=utf-8"}), url=URL.createObjectURL(blob), a=document.createElement("a");
+  a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function csvTemplate(){
+  return "type,id,vi,en,concept,exampleVi,exampleEn,note,south,studyMode\n"
+    +"vocab,,rảnh,free / available,c.sent.svo,Hôm nay em rảnh.,I am free today.,,false,active\n"
+    +"grammar,,,Use chưa at the end for ‘yet?’,c.asp.chua,,,,,reference\n";
+}
+function lessonPackTemplate(){
+  const date=new Date().toISOString().slice(0,10);
+  return {schemaVersion:COURSE_SCHEMA_VERSION,contentVersion:1,lesson:{id:"lesson-"+date+"-my-class",date:date,title:"Vietnamese class · "+date,notes:""},
+    concepts:[{id:"custom.concept.example",title:"Example grammar point",kind:"grammar",rule:"Write the rule from class here.",examples:[]}],
+    vocabulary:[{id:"",vi:"rảnh",en:"free / available",concept:"c.sent.svo",exampleVi:"Hôm nay em rảnh.",exampleEn:"I am free today.",note:"",south:false,studyMode:"active"}],
+    examples:[],dialogues:[],pronunciation:[],exercises:[]};
+}
+function csvRows(text){
+  const rows=[]; let row=[],cell="",q=false;
+  for(let i=0;i<String(text).length;i++){ const c=text[i],n=text[i+1];
+    if(c==='"'){ if(q&&n==='"'){cell+='"';i++;} else q=!q; }
+    else if(c===','&&!q){row.push(cell);cell="";}
+    else if((c==='\n'||c==='\r')&&!q){ if(c==='\r'&&n==='\n')i++; row.push(cell); if(row.some(x=>x.trim()))rows.push(row); row=[];cell=""; }
+    else cell+=c;
+  }
+  row.push(cell); if(row.some(x=>x.trim()))rows.push(row); return rows;
+}
+function parseCSVLesson(text,date,title){
+  const rows=csvRows(text); if(!rows.length) throw new Error("CSV is empty.");
+  const h=rows[0].map(x=>x.trim().toLowerCase()), get=(r,names)=>{ for(const n of names){const i=h.indexOf(n);if(i>=0)return (r[i]||"").trim();} return ""; };
+  const raw={lesson:{date:date,title:title},vocabulary:[],concepts:[],examples:[],dialogues:[]};
+  rows.slice(1).forEach(function(r){ const type=(get(r,["type"])||"vocab").toLowerCase();
+    if(type==="vocab"||type==="word"||type==="vocabulary") raw.vocabulary.push({id:get(r,["id"]),vi:get(r,["vi","vietnamese"]),en:get(r,["en","english"]),concept:get(r,["concept"]),exampleVi:get(r,["examplevi","example vi"]),exampleEn:get(r,["exampleen","example en"]),note:get(r,["note"]),south:/^(1|true|yes)$/i.test(get(r,["south"])),studyMode:get(r,["studymode","study mode"])||"active"});
+    else if(type==="grammar"||type==="concept") raw.concepts.push({id:get(r,["id"]),title:get(r,["title","vi"]),rule:get(r,["rule","en","note"]),unit:get(r,["unit"])});
+    else if(type==="example") raw.examples.push({id:get(r,["id"]),vi:get(r,["vi","vietnamese"]),en:get(r,["en","english"]),concept:get(r,["concept"])});
+  });
+  return normalizeLessonPack(raw);
+}
+function splitLessonPair(z){
+  const tab=z.indexOf("\t"); if(tab>=0) return [z.slice(0,tab).trim(),z.slice(tab+1).trim()];
+  const arrow=z.indexOf("->"); if(arrow>=0) return [z.slice(0,arrow).trim(),z.slice(arrow+2).trim()];
+  const eq=z.indexOf("="); if(eq>=0) return [z.slice(0,eq).trim(),z.slice(eq+1).trim()];
+  return [z.trim()];
+}
+function parseBulkLesson(text,date,title){
+  const raw={lesson:{date:date,title:title},vocabulary:[],concepts:[],examples:[],dialogues:[],pronunciation:[],exercises:[],notes:[]};
+  let section="", currentDialogue=[];
+  function flushDialogue(){ if(currentDialogue.length){ raw.dialogues.push({title:"Class dialogue",lines:currentDialogue}); currentDialogue=[]; } }
+  String(text||"").split(/\r?\n/).forEach(function(line){ const z=line.trim(); if(!z)return;
+    const sec=z.match(/^\[([^\]]+)\]$/); if(sec){ flushDialogue(); section=sec[1].toLowerCase(); return; }
+    if(section.indexOf("vocab")===0){ const m=splitLessonPair(z); if(m.length>=2&&m[1]) raw.vocabulary.push({vi:m[0],en:m[1]}); else raw.notes.push(z); }
+    else if(section.indexOf("grammar")===0){ const m=splitLessonPair(z); if(m.length>=2&&m[1]) raw.concepts.push({title:m[0],rule:m[1]}); else raw.notes.push(z); }
+    else if(section.indexOf("example")===0){ const m=splitLessonPair(z); if(m.length>=2&&m[1]) raw.examples.push({vi:m[0],en:m[1]}); else raw.notes.push(z); }
+    else if(section.indexOf("pron")===0){ const m=splitLessonPair(z); raw.pronunciation=raw.pronunciation||[]; raw.pronunciation.push({id:"pron-"+shortHash(z),written:m[0],note:m.slice(1).join(" ")}); }
+    else if(section.indexOf("exercise")===0){ const m=splitLessonPair(z); raw.exercises=raw.exercises||[]; raw.exercises.push({id:"exercise-"+shortHash(z),prompt:m[0],answer:m.slice(1).join(" ")}); }
+    else if(section.indexOf("dialog")===0){ const m=z.match(/^([^:]+):\s*(.*?)(?:\s*\|\s*(.*))?$/); if(m) currentDialogue.push({who:m[1].trim(),vi:m[2].trim(),en:(m[3]||"").trim()}); else raw.notes.push(z); }
+    else raw.notes.push(z);
+  }); flushDialogue(); raw.lesson.notes=raw.notes.join("\n"); return normalizeLessonPack(raw);
+}
+function lessonCounts(p){ return {words:(p.vocabulary||[]).length,concepts:(p.concepts||[]).length,dialogues:(p.dialogues||[]).length,examples:(p.examples||[]).length,pronunciation:(p.pronunciation||[]).length,exercises:(p.exercises||[]).length}; }
+function viewContent(){
+  const packs=CUSTOM_PACKS.slice().sort((a,b)=>(b.lesson.date||"").localeCompare(a.lesson.date||""));
+  $("#stage").innerHTML='<div class="eyebrow">Course content</div><h2 class="screen-h">Weekly class manager</h2>'
+    +'<div class="hint">Add future classes without editing this HTML. Course packs and learner progress are stored separately; stable item IDs reconnect existing mastery automatically.</div>'
+    +'<div class="content-actions"><button class="btn" id="addClass">+ Add class</button><button class="btn ghost" id="quickAdd">Quick add</button><button class="btn ghost" id="importFile">Import JSON / CSV</button><button class="btn ghost" id="csvTemplate">CSV template</button><button class="btn ghost" id="jsonTemplate">JSON template</button><button class="btn ghost" id="exportContent">Export content</button><button class="btn ghost" id="fullBackup">Full backup</button><button class="btn ghost" id="undoImport">Undo last import</button></div>'
+    +'<input type="file" id="contentFile" accept=".json,.csv,application/json,text/csv" hidden>'
+    +'<input type="file" id="backupFile" accept=".json,application/json" hidden>'
+    +'<div class="group-h"><span class="eyebrow">Imported lessons</span><span class="hint">'+packs.length+' class'+(packs.length===1?'':'es')+'</span></div>'
+    +(packs.length?packs.map(function(p){ const c=lessonCounts(p), a=p.lesson.archived;
+      return '<div class="lesson-card"><div class="lesson-top"><div><div class="lesson-title">'+esc(p.lesson.title)+'</div><div class="lesson-meta">'+esc(p.lesson.date||'')+' · '+c.words+' words · '+c.concepts+' concepts · '+c.examples+' examples · '+c.dialogues+' dialogues'+(c.pronunciation?' · '+c.pronunciation+' pronunciation':'')+(c.exercises?' · '+c.exercises+' exercises':'')+' · v'+(p.contentVersion||1)+'</div></div><span class="pill-status">'+(a?'archived':'active')+'</span></div>'
+        +'<div class="lesson-actions"><button class="btn ghost" data-view-lesson="'+esc(p.lesson.id)+'">View</button><button class="btn ghost" data-export-lesson="'+esc(p.lesson.id)+'">Export</button><button class="btn ghost" data-edit="'+esc(p.lesson.id)+'">Edit JSON</button><button class="btn ghost" data-archive="'+esc(p.lesson.id)+'">'+(a?'Restore':'Archive')+'</button><button class="btn ghost" data-remove="'+esc(p.lesson.id)+'">Remove</button></div></div>';
+    }).join(''):'<div class="empty">No weekly class imported yet.</div>');
+  $("#addClass").onclick=addClassSheet; $("#quickAdd").onclick=quickAddSheet;
+  $("#importFile").onclick=()=>$("#contentFile").click();
+  $("#csvTemplate").onclick=()=>downloadText("alexandre-lesson-template.csv",csvTemplate(),"text/csv;charset=utf-8");
+  $("#jsonTemplate").onclick=()=>downloadJSON("alexandre-lesson-template.json",lessonPackTemplate());
+  $("#exportContent").onclick=()=>downloadJSON("alexandre-course-content.json",{schemaVersion:COURSE_SCHEMA_VERSION,packs:CUSTOM_PACKS});
+  $("#fullBackup").onclick=()=>downloadJSON("alexandre-vietnamese-full-backup.json",{appVersion:STATE_SCHEMA_VERSION,courseSchemaVersion:COURSE_SCHEMA_VERSION,exportDate:new Date().toISOString(),state:S,courseContent:CUSTOM_PACKS});
+  $("#undoImport").onclick=async function(){ if(await undoLastContentChange())viewContent(); else alert("No import change to undo."); };
+  $("#contentFile").onchange=async function(){ const f=this.files[0]; if(!f)return; const txt=await f.text(); try{ let pack;
+    if(f.name.toLowerCase().endsWith(".csv")) pack=parseCSVLesson(txt,new Date().toISOString().slice(0,10),f.name.replace(/\.csv$/i,''));
+    else { const obj=JSON.parse(txt); if(obj.courseContent&&obj.state) return backupPreview(obj); if(Array.isArray(obj.packs)) return previewPackBundleSheet(obj.packs); pack=normalizeLessonPack(obj); }
+    previewImportSheet(pack); }catch(e){ alert("Could not import: "+e.message); } };
+  $$('[data-view-lesson]').forEach(b=>b.onclick=()=>lessonPackSheet(b.dataset.viewLesson));
+  $$('[data-export-lesson]').forEach(b=>b.onclick=function(){const p=CUSTOM_PACKS.find(x=>x.lesson.id===b.dataset.exportLesson);if(p)downloadJSON((p.lesson.id||"lesson")+".json",p);});
+  $$('[data-edit]').forEach(b=>b.onclick=()=>editPackSheet(b.dataset.edit));
+  $$('[data-archive]').forEach(b=>b.onclick=async function(){ const p=CUSTOM_PACKS.find(x=>x.lesson.id===b.dataset.archive); if(!p)return; const q=cloneJSON(p); q.lesson.archived=!q.lesson.archived; q.contentVersion=(q.contentVersion||1)+1; await commitLessonPack(q); viewContent(); });
+  $$('[data-remove]').forEach(b=>b.onclick=async function(){ if(!confirm("Remove this lesson from the active course? Learning progress is retained and will reconnect if the same IDs return."))return; await removeLessonPack(b.dataset.remove); viewContent(); });
+}
+function lessonPackSheet(id){
+  const p=CUSTOM_PACKS.find(x=>x.lesson.id===id); if(!p)return;
+  const activeWords=(p.vocabulary||[]).filter(v=>v.studyMode!=="reference").map(v=>COURSE.byId[v.id]).filter(Boolean);
+  const vocab=(p.vocabulary||[]).map(function(v){const r=S.rev[v.id],st=r?STATUS_LABEL[status(v.id)]:"new";return '<div class="row"><span class="pill" style="background:'+STATUS_COLOR[r?status(v.id):"new"]+'"></span><span class="vi">'+esc(v.vi)+'</span><span class="en">'+esc(v.en)+'</span><span class="bx">'+(v.studyMode==="reference"?'reference':esc(st))+'</span></div>';}).join("");
+  const concepts=(p.concepts||[]).map(c=>'<div class="note"><b>'+esc(c.title)+'</b><br>'+esc(c.rule||"")+'</div>').join("");
+  const examples=(p.examples||[]).map(x=>'<div class="ex-line"><span class="vi">'+esc(x.vi)+'</span><span class="en">'+esc(x.en||"")+'</span></div>').join("");
+  const dialogues=(p.dialogues||[]).map(d=>'<div class="note"><b>'+esc(d.title)+'</b><br>'+d.lines.map(l=>'<span class="vi-inline">'+esc(l.who?l.who+": ":"")+esc(l.vi)+'</span>'+(l.en?' <span class="dim">· '+esc(l.en)+'</span>':'')).join('<br>')+'</div>').join("");
+  const pron=(p.pronunciation||[]).map(x=>'<div class="note south-note"><b>'+esc(x.written||x.vi||x.title||"Pronunciation")+'</b><br>'+esc(x.note||x.sound||x.southern||"")+'</div>').join("");
+  const exs=(p.exercises||[]).map(x=>'<div class="note"><b>Exercise.</b> '+esc(x.prompt||x.q||"")+(x.answer?'<br><span class="dim">Answer: '+esc(x.answer)+'</span>':'')+'</div>').join("");
+  openSheet('<div class="eyebrow">Weekly class · '+esc(p.lesson.date||"")+'</div><h2 class="sheet-h">'+esc(p.lesson.title)+'</h2>'
+    +(p.lesson.notes?'<div class="note">'+esc(p.lesson.notes).replace(/\n/g,"<br>")+'</div>':'')
+    +(vocab?'<div class="group-h"><span class="eyebrow">Vocabulary</span></div>'+vocab:'')
+    +(concepts?'<div class="group-h"><span class="eyebrow">Grammar / concepts</span></div>'+concepts:'')
+    +(examples?'<div class="group-h"><span class="eyebrow">Examples</span></div>'+examples:'')
+    +(dialogues?'<div class="group-h"><span class="eyebrow">Dialogues</span></div>'+dialogues:'')
+    +(pron?'<div class="group-h"><span class="eyebrow">Pronunciation</span></div>'+pron:'')
+    +(exs?'<div class="group-h"><span class="eyebrow">Exercises / reference</span></div>'+exs:'')
+    +'<div class="next-row" style="margin-top:20px">'+(!p.lesson.archived&&activeWords.length?'<button class="btn" id="studyLesson">Study this class</button>':'')+'<button class="btn ghost" id="exportLessonSheet">Export lesson</button><button class="btn ghost" id="closeLessonSheet">Close</button></div>');
+  if($("#studyLesson"))$("#studyLesson").onclick=function(){closeSheet();drill(shuffle(activeWords).slice(0,Math.max(12,Math.min(24,activeWords.length))),{why:"weekly class"});};
+  $("#exportLessonSheet").onclick=()=>downloadJSON((p.lesson.id||"lesson")+".json",p); $("#closeLessonSheet").onclick=closeSheet;
+}
+function addClassSheet(){
+  const today=new Date().toISOString().slice(0,10);
+  openSheet('<div class="eyebrow">Content manager</div><h2 class="sheet-h">Add weekly class</h2>'
+    +'<div class="formgrid"><div class="field"><label>Date</label><input type="date" id="lcDate" value="'+today+'"></div><div class="field"><label>Title</label><input type="text" id="lcTitle" value="Vietnamese class · '+today+'"></div>'
+    +'<div class="field wide"><label>Paste lesson material</label><textarea class="box" id="lcBulk" style="min-height:260px" placeholder="[VOCABULARY]\nrảnh = free / available\nbận = busy\n\n[GRAMMAR]\nchưa = use at the end of a yes/no question for ‘yet?’\n\n[EXAMPLES]\nBạn ăn cơm chưa? = Have you eaten yet?\n\n[DIALOGUE]\nA: Hôm nay em rảnh không? | Are you free today?\nB: Dạ, em rảnh. | Yes, I am.\n\n[PRONUNCIATION]\ntrời = standard spelling; southern sound approximation: chời\n\n[EXERCISES]\nTell someone you are free tomorrow = Ngày mai em rảnh."></textarea></div></div>'
+    +'<div class="hint">This parser is deterministic: [VOCABULARY], [GRAMMAR], [EXAMPLES], [DIALOGUE], [PRONUNCIATION] and [EXERCISES]. Unsorted lines are kept as lesson notes rather than discarded.</div>'
+    +'<div class="next-row"><button class="btn" id="previewClass">Preview</button><button class="btn ghost" id="closeClass">Cancel</button></div>');
+  $("#previewClass").onclick=function(){ try{ previewImportSheet(parseBulkLesson($("#lcBulk").value,$("#lcDate").value,$("#lcTitle").value)); }catch(e){ alert(e.message); } };
+  $("#closeClass").onclick=closeSheet;
+}
+function quickAddSheet(){
+  const opts=COURSE.concepts.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.title)+'</option>').join('');
+  openSheet('<div class="eyebrow">Quick add</div><h2 class="sheet-h">One thing you just learned</h2>'
+    +'<div class="field"><label>Vietnamese</label><input type="text" id="qaVi"></div><div class="field"><label>English</label><input type="text" id="qaEn"></div>'
+    +'<div class="field"><label>Example Vietnamese</label><input type="text" id="qaExVi"></div><div class="field"><label>Example English</label><input type="text" id="qaExEn"></div>'
+    +'<div class="field"><label>Concept</label><select id="qaConcept">'+opts+'</select></div><div class="field"><label>Note</label><input type="text" id="qaNote" placeholder="teacher note / usage note"></div>'
+    +'<div class="field"><label>Variety</label><select id="qaSouth"><option value="0">General / standard written form</option><option value="1">Southern usage</option></select></div><div class="field"><label>Study mode</label><select id="qaMode"><option value="active">Active — enters review</option><option value="reference">Reference only</option></select></div>'
+    +'<div class="next-row"><button class="btn" id="qaSave">Add to course</button><button class="btn ghost" id="qaCancel">Cancel</button></div>');
+  $("#qaSave").onclick=async function(){ const vi=$("#qaVi").value.trim(); if(!vi)return alert("Add the Vietnamese form first."); const date=new Date().toISOString().slice(0,10), id="quick-"+date;
+    const old=CUSTOM_PACKS.find(x=>x.lesson.id===id); const raw=old?cloneJSON(old):{lesson:{id:id,date:date,title:"Quick additions · "+date},vocabulary:[]};
+    raw.vocabulary=raw.vocabulary||[]; raw.vocabulary.push({vi:vi,en:$("#qaEn").value.trim(),concept:$("#qaConcept").value,exampleVi:$("#qaExVi").value.trim(),exampleEn:$("#qaExEn").value.trim(),note:$("#qaNote").value.trim(),south:$("#qaSouth").value==="1",studyMode:$("#qaMode").value}); raw.contentVersion=(raw.contentVersion||0)+1;
+    await commitLessonPack(raw); closeSheet(); go("content"); };
+  $("#qaCancel").onclick=closeSheet;
+}
+function previewImportSheet(pack){
+  const v=validateLessonPack(pack), p=previewLessonPack(pack), c=lessonCounts(pack), major=majorContentChanges(pack);
+  openSheet('<div class="eyebrow">Import preview</div><h2 class="sheet-h">'+esc(pack.lesson.title)+'</h2><div class="hint">'+esc(pack.lesson.date||'')+'</div>'
+    +'<div class="import-summary"><div><b>'+p.fresh+'</b><span>new</span></div><div><b>'+p.updates+'</b><span>updates</span></div><div><b>'+p.duplicates+'</b><span>same-form matches</span></div></div>'
+    +'<div class="note">'+c.words+' vocabulary · '+c.concepts+' concepts · '+c.examples+' examples · '+c.dialogues+' dialogues</div>'
+    +(p.duplicates?'<div class="ok-note"><b>'+p.duplicates+' same-form match'+(p.duplicates===1?'':'es')+'.</b> By default the importer reuses the existing permanent item ID, so the word gains this lesson as another source without creating a second mastery record. If you intentionally need a separate learning item, give it an explicit unique ID in CSV/JSON.</div>':'')
+    +(major.length?'<div class="warn"><b>'+major.length+' change'+(major.length===1?'':'s')+' may alter what an existing item tests.</b><br>'+major.map(x=>esc((x.oldVi||x.id)+' → '+(x.newVi||x.id)+' · '+x.reason)).join('<br>')+'<br><br>Keeping progress is safe for gloss/example edits; a changed Vietnamese target or concept may justify resetting only those affected item records.</div>':'')
+    +(v.warnings.length?'<div class="warn">'+v.warnings.map(esc).join('<br>')+'</div>':'')+(v.errors.length?'<div class="warn">'+v.errors.map(esc).join('<br>')+'</div>':'')
+    +'<div class="next-row"><button class="btn" id="commitPack"'+(v.errors.length?' disabled':'')+'>'+(major.length?'Update · keep progress':'Add to course')+'</button>'
+    +(major.length?'<button class="btn ghost" id="commitReset">Update · reset affected mastery</button>':'')
+    +'<button class="btn ghost" id="cancelPack">Cancel</button></div>');
+  if(!v.errors.length){
+    $("#commitPack").onclick=async function(){this.disabled=true;this.textContent="Adding…";await commitLessonPack(pack);closeSheet();go("content");};
+    if($("#commitReset"))$("#commitReset").onclick=async function(){if(!confirm("Reset mastery only for the "+major.length+" item(s) whose target/concept changed? Notes and all other progress stay."))return;this.disabled=true;await commitLessonPack(pack,{resetIds:major.map(x=>x.id)});closeSheet();go("content");};
+  }
+  $("#cancelPack").onclick=closeSheet;
+}
+function previewPackBundleSheet(packs){
+  packs=(packs||[]).map(normalizeLessonPack); const errors=[]; let fresh=0,updates=0,duplicates=0;
+  packs.forEach(function(p){ const v=validateLessonPack(p), q=previewLessonPack(p); v.errors.forEach(e=>errors.push(p.lesson.title+": "+e)); fresh+=q.fresh;updates+=q.updates;duplicates+=q.duplicates; });
+  openSheet('<div class="eyebrow">Content bundle</div><h2 class="sheet-h">Import '+packs.length+' lessons</h2>'
+    +'<div class="import-summary"><div><b>'+fresh+'</b><span>new</span></div><div><b>'+updates+'</b><span>updates</span></div><div><b>'+duplicates+'</b><span>same-form matches</span></div></div>'
+    +(errors.length?'<div class="warn">'+errors.map(esc).join('<br>')+'</div>':'')
+    +'<div class="hint">Existing learner records remain keyed to their permanent item IDs. Re-importing the same bundle updates content without duplicating progress.</div>'
+    +'<div class="next-row"><button class="btn" id="commitBundle"'+(errors.length?' disabled':'')+'>Import bundle</button><button class="btn ghost" id="cancelBundle">Cancel</button></div>');
+  if(!errors.length) $("#commitBundle").onclick=async function(){ this.disabled=true;this.textContent="Importing…"; for(const p of packs) await commitLessonPack(p); closeSheet();go("content"); };
+  $("#cancelBundle").onclick=closeSheet;
+}
+function editPackSheet(id){ const p=CUSTOM_PACKS.find(x=>x.lesson.id===id); if(!p)return;
+  openSheet('<div class="eyebrow">Edit lesson</div><h2 class="sheet-h">'+esc(p.lesson.title)+'</h2><div class="hint">Stable IDs are preserved. Editing glosses or examples does not reset progress.</div>'
+    +'<textarea class="box" id="editPackJson" style="min-height:420px">'+esc(JSON.stringify(p,null,2))+'</textarea><div class="next-row"><button class="btn" id="savePackJson">Validate & save</button><button class="btn ghost" id="cancelEdit">Cancel</button></div>');
+  $("#savePackJson").onclick=function(){ try{ const q=normalizeLessonPack(JSON.parse($("#editPackJson").value)); q.lesson.id=id; q.contentVersion=(p.contentVersion||1)+1; previewImportSheet(q); }catch(e){alert("Invalid JSON: "+e.message);} };
+  $("#cancelEdit").onclick=closeSheet;
+}
+function backupPreview(obj){
+  openSheet('<div class="eyebrow">Full backup</div><h2 class="sheet-h">Restore backup</h2><div class="warn">Restore can change both learning history and custom course content. Merge keeps newer local evidence where possible; Replace uses the backup exactly.</div>'
+    +'<div class="next-row"><button class="btn" id="mergeBackup">Merge</button><button class="btn ghost" id="replaceBackup">Replace</button><button class="btn ghost" id="cancelBackup">Cancel</button></div>');
+  $("#mergeBackup").onclick=()=>restoreFullBackup(obj,"merge"); $("#replaceBackup").onclick=()=>restoreFullBackup(obj,"replace"); $("#cancelBackup").onclick=closeSheet;
+}
+async function restoreFullBackup(obj,mode){
+  if(!obj||!obj.state) return alert("Not a valid full backup.");
+  if(mode==="replace"){ S=cloneJSON(obj.state); migrateStateInPlace(); for(const p of CUSTOM_PACKS.slice()) await ContentStore.deletePack(p.lesson.id); for(const p of (obj.courseContent||[])) await ContentStore.putPack(normalizeLessonPack(p)); }
+  else { const incoming=cloneJSON(obj.state); migrateStateInPlace(); Object.keys(incoming.rev||{}).forEach(function(id){ const a=S.rev[id], b=ensureReviewRecord(incoming.rev[id]); if(!a||(b.last||0)>(a.last||0))S.rev[id]=b; }); S.xp=Math.max(S.xp||0,incoming.xp||0); S.streak=Math.max(S.streak||0,incoming.streak||0);
+    for(const p0 of (obj.courseContent||[])){ const p=normalizeLessonPack(p0), old=CUSTOM_PACKS.find(x=>x.lesson.id===p.lesson.id); if(!old||(p.updatedAt||0)>(old.updatedAt||0)) await ContentStore.putPack(p); } }
+  save(); await loadCustomContent(); closeSheet(); go("today");
 }
 
 /* ══ PROGRESS ════════════════════════════════════════════════════════ */
@@ -4322,45 +5104,66 @@ function seg(lbl, k, on){
 }
 function wireSeg(k, cb){ $$('[data-seg="'+k+'"]').forEach(b => b.onclick = function(){ cb(b.dataset.v === "1"); }); }
 
-function settingsSheet(){
-  const n = storeNote();
-  openSheet('<div class="eyebrow">Settings</div><h2 class="sheet-h">How the engine behaves</h2>'
-    + '<div class="field"><label>Daily target · '+S.dailyMinutes+' minutes</label>'
-    + '<input type="range" id="dm" min="5" max="40" step="1" value="'+S.dailyMinutes+'"></div>'
-    + seg("Southern mode", "sm", S.southernMode)
-    + '<div class="hint" style="margin-top:8px">On: southern words, sounds and particles get priority in the daily mix. '
-    + 'The written form is always shown alongside.</div>'
-    + '<div class="field"><label>How a card is scheduled</label><div class="hint" style="line-height:1.75">'
-    + 'Every item carries five separate skills — recognition, recall, production, listening, contextual use — and the '
-    + 'engine always asks about the weakest one that is ready. A correct answer only strengthens the skill it tested. '
-    + 'Speed and confidence both change the interval: a right answer you guessed comes back in a day, a right answer '
-    + 'you knew instantly goes out several. Fail and it returns within the hour, then tomorrow, then later.</div></div>'
-    + '<div class="field"><label>Where your progress lives</label><div class="'+n.cls+'">'+n.txt+'</div></div>'
-    + '<div class="field"><label>Backup</label>'
-    + '<textarea class="box" id="dump" spellcheck="false">'+esc(JSON.stringify(S))+'</textarea>'
-    + '<div class="next-row"><button class="btn ghost" id="copyD">Copy</button>'
-    + '<button class="btn ghost" id="loadD">Restore</button></div></div>'
-    + '<div class="next-row" style="margin-top:18px"><button class="btn ghost" id="reset">Reset progress</button>'
-    + '<button class="btn" id="closeS">Close</button></div>');
-  $("#dm").oninput = function(){ S.dailyMinutes = parseInt(this.value,10); save();
-    this.previousElementSibling.textContent = "Daily target · "+S.dailyMinutes+" minutes"; };
-  wireSeg("sm", v => { S.southernMode = v; save(); settingsSheet(); });
-  $("#copyD").onclick = function(){ const t=$("#dump"); t.select();
-    try{ navigator.clipboard.writeText(t.value); }catch(e){ try{ document.execCommand("copy"); }catch(e2){} }
-    $("#copyD").textContent = "Copied"; };
-  $("#loadD").onclick = function(){
-    try{ const o = JSON.parse($("#dump").value);
-      if (!o || !o.rev) throw new Error("shape");
-      Object.assign(S, o); save(); closeSheet(); go("today");
-    }catch(e){ $("#loadD").textContent = "Not a valid backup"; }
-  };
-  $("#reset").onclick = function(){
-    if (!confirm("Clear every review record, note and mistake? The course itself stays.")) return;
-    S.rev = {}; S.concept = {}; S.mistakes = []; S.notes = {}; S.log = []; S.diag = [];
-    S.xp = 0; S.streak = 0; S.streakDay = null; save(); closeSheet(); go("today");
-  };
-  $("#closeS").onclick = closeSheet;
+function runEngineSelfTests(){
+  const results=[]; function test(name,fn){try{fn();results.push({name:name,ok:true});}catch(e){results.push({name:name,ok:false,error:e.message});}}
+  const oldMode=S.writingMode; S.writingMode="learning";
+  test("Exact tone spelling",()=>{if(classifyTypedAnswer("má","má").outcome!=="exact")throw new Error("má should be exact");});
+  test("Missing tone is accepted partial",()=>{const g=classifyTypedAnswer("ma","má");if(g.outcome!=="tone_missing"||!g.skillCorrect)throw new Error("ma → má should be accepted tone-missing");});
+  test("Wrong tone remains distinct",()=>{if(classifyTypedAnswer("má","mà").outcome!=="wrong_tone")throw new Error("wrong tone misclassified");});
+  test("Vietnamese vowel identity is preserved",()=>{if(classifyTypedAnswer("toi","tôi").outcome==="tone_missing")throw new Error("ô cannot be treated as a missing tone");});
+  test("đ is a real letter",()=>{if(classifyTypedAnswer("di","đi").outcome==="tone_missing")throw new Error("đ/d cannot be treated as tone-only");});
+  test("Southern hỏi/ngã merger is identified",()=>{const g=classifyTypedAnswer("nghỉ","nghĩ");if(!g.southernMerge)throw new Error("hỏi/ngã merger not detected");});
+  test("Seven-second retrieval boundary",()=>{if(bandFromMs(6999)==="slow retrieval"||bandFromMs(7001)!=="slow retrieval")throw new Error("7s boundary wrong");});
+  test("Per-skill schedules stay independent",()=>{const r=ensureReviewRecord({});r.skills.recognition.due=Date.now()+10*DAY;r.skills.listening.due=Date.now()-1;if(!(r.skills.listening.due<r.skills.recognition.due))throw new Error("skill schedules coupled");});
+  test("Generated custom word IDs survive row reordering",()=>{const d="2099-01-01",a=normalizeLessonPack({lesson:{date:d,title:"ID test"},vocabulary:[{vi:"từ alpha",en:"a"},{vi:"từ beta",en:"b"}]}),b=normalizeLessonPack({lesson:{date:d,title:"ID test"},vocabulary:[{vi:"từ beta",en:"b"},{vi:"từ alpha",en:"a"}]});const ma=Object.fromEntries(a.vocabulary.map(x=>[x.vi,x.id])),mb=Object.fromEntries(b.vocabulary.map(x=>[x.vi,x.id]));if(ma["từ alpha"]!==mb["từ alpha"]||ma["từ beta"]!==mb["từ beta"])throw new Error("IDs depend on row order");});
+  S.writingMode=oldMode;
+  return {ok:results.every(x=>x.ok),results:results};
 }
+function engineTestSheet(){
+  const r=runEngineSelfTests();
+  openSheet('<div class="eyebrow">Learning engine</div><h2 class="sheet-h">Self-tests</h2>'
+    +'<div class="'+(r.ok?'ok-note':'warn')+'">'+(r.ok?'All '+r.results.length+' checks passed.':'One or more checks failed.')+'</div>'
+    +r.results.map(x=>'<div class="rrow"><span class="rt">'+(x.ok?'PASS':'FAIL')+'</span><span class="rv">'+esc(x.name)+(x.error?'<br><span class="bad">'+esc(x.error)+'</span>':'')+'</span></div>').join('')
+    +'<div class="next-row" style="margin-top:18px"><button class="btn" id="closeTests">Close</button></div>');
+  $("#closeTests").onclick=closeSheet;
+}
+
+function settingsSheet(){
+  const n=storeNote();
+  openSheet('<div class="eyebrow">Settings</div><h2 class="sheet-h">Learning engine</h2>'
+    +'<div class="field"><label>Daily target · '+S.dailyMinutes+' minutes</label><input type="range" id="dm" min="5" max="40" step="1" value="'+S.dailyMinutes+'"></div>'
+    +seg("Southern mode","sm",S.southernMode)
+    +'<div class="hint" style="margin-top:8px">Southern listening and vocabulary receive priority; standard written forms stay visible.</div>'
+    +'<div class="field"><label>Writing feedback</label><select id="wm"><option value="learning"'+(S.writingMode==="learning"?' selected':'')+'>Learning mode — missing tones are accepted, then repaired</option><option value="strict"'+(S.writingMode==="strict"?' selected':'')+'>Strict writing — full standard spelling required</option></select></div>'
+    +'<div class="field"><label>New items per day · '+S.newPerDay+'</label><input type="range" id="nipd" min="0" max="15" step="1" value="'+S.newPerDay+'"></div>'
+    +'<div class="field"><label>Scheduling model</label><div class="hint" style="line-height:1.75">Recognition, recall, context, listening and production have independent intervals and due dates. Reading allowance is removed before retrieval speed is judged. Listening timing begins after audio ends. Translation and free writing record response time for analytics but are not penalized for slow typing. A correct slow answer strengthens knowledge and separately records lower fluency.</div></div>'
+    +'<div class="field"><label>Reading calibration</label><div class="hint">Current reading allowance factor: '+((S.readingCalibration&&S.readingCalibration.factor)||1).toFixed(2)+'× · '+((S.readingCalibration&&S.readingCalibration.samples||[]).length)+' calibration samples. After 10 clean reading-heavy responses the allowance adapts conservatively to your own pace.</div></div>'
+    +'<div class="field"><label>Where progress lives</label><div class="'+n.cls+'">'+n.txt+'</div></div>'
+    +'<div class="field"><label>Progress-only backup</label><textarea class="box" id="dump" spellcheck="false">'+esc(JSON.stringify(S))+'</textarea><div class="next-row"><button class="btn ghost" id="copyD">Copy</button><button class="btn ghost" id="loadD">Restore progress</button><button class="btn ghost" id="openContent">Course content</button><button class="btn ghost" id="engineTests">Run engine self-tests</button></div></div>'
+    +'<div class="next-row" style="margin-top:18px"><button class="btn ghost" id="reset">Reset progress</button><button class="btn" id="closeS">Close</button></div>');
+  $("#dm").oninput=function(){ S.dailyMinutes=parseInt(this.value,10); save(); this.previousElementSibling.textContent="Daily target · "+S.dailyMinutes+" minutes"; };
+  wireSeg("sm",v=>{S.southernMode=v;save();settingsSheet();});
+  $("#wm").onchange=function(){S.writingMode=this.value;save();};
+  $("#nipd").oninput=function(){S.newPerDay=parseInt(this.value,10);save();this.previousElementSibling.textContent="New items per day · "+S.newPerDay;};
+  $("#copyD").onclick=function(){const t=$("#dump");t.select();try{navigator.clipboard.writeText(t.value);}catch(e){try{document.execCommand("copy");}catch(e2){}}this.textContent="Copied";};
+  $("#loadD").onclick=function(){try{const o=JSON.parse($("#dump").value);if(!o||!o.rev)throw new Error("shape");S=Object.assign(S,o);migrateStateInPlace();save();closeSheet();go("today");}catch(e){this.textContent="Not a valid progress backup";}};
+  $("#openContent").onclick=function(){closeSheet();go("content");};
+  $("#engineTests").onclick=engineTestSheet;
+  $("#reset").onclick=function(){if(!confirm("Clear every review record, note and mistake? Course content is kept."))return;S.rev={};S.concept={};S.mistakes=[];S.repairs=[];S.notes={};S.log=[];S.diag=[];S.xp=0;S.streak=0;S.streakDay=null;save();closeSheet();go("today");};
+  $("#closeS").onclick=closeSheet;
+}
+
+/* timing guards */
+document.addEventListener("visibilitychange",function(){
+  if(!CURRENT_TIMING) return;
+  if(document.visibilityState==="hidden"){ if(!CURRENT_TIMING.hiddenStartedAt) CURRENT_TIMING.hiddenStartedAt=Date.now(); }
+  else if(CURRENT_TIMING.hiddenStartedAt){ CURRENT_TIMING.hiddenTimeMs+=Date.now()-CURRENT_TIMING.hiddenStartedAt; CURRENT_TIMING.hiddenStartedAt=0; }
+});
+document.addEventListener("input",function(e){ if(e.target&&e.target.classList&&e.target.classList.contains("type")) markTimingInteraction("key"); });
+document.addEventListener("pointerdown",function(e){
+  if(!CURRENT_TIMING||askAnswered) return; const t=e.target.closest&&e.target.closest(".opt,.tile,.slot,#tgo");
+  if(t) markTimingInteraction(t.id==="tgo"?"submit":"choice");
+});
 
 /* ── boot ─────────────────────────────────────────────────────────────── */
 document.addEventListener("keydown", function(e){
@@ -4377,6 +5180,7 @@ $$("#nav button").forEach(b => b.onclick = function(){ go(b.dataset.v); });
 
 (async function init(){
   await load();
+  await loadCustomContent();
   TTS.refresh();
   go("today");
   setTimeout(function(){ TTS.refresh(); paintStats(); }, 700);
