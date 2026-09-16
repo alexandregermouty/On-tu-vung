@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#101E1B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Ôn từ vựng">
+<meta name="apple-mobile-web-app-title" content="Ôn tiếng Việt">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>Ôn tiếng Việt · Alexandre</title>
+<title>Ôn tiếng Việt · Alexandre · v7</title>
 <style>
 
 :root{
@@ -502,19 +502,317 @@ textarea.box:focus{border-color:var(--gold)}
 .vtag.near{padding:3px 8px;border-radius:999px;display:inline-block}
 @media(max-width:520px){.formgrid,.import-summary{grid-template-columns:1fr}}
 
+
+/* ═══════════════════════════════════════════════════════════════════════
+   V6 VISUAL SYSTEM · lacquer × editorial notebook × native app
+   Purely presentational: learning logic and stored progress stay untouched.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root{
+  --serif:var(--en);
+  --lacquer:#0C1816;
+  --panel:#142622;
+  --panel-2:#1A302B;
+  --surface:#142622;
+  --surface-raised:#19302B;
+  --surface-soft:#10211E;
+  --eggshell:#F3EBDD;
+  --gold:#C9A565;
+  --gold-soft:rgba(201,165,101,.12);
+  --cinnabar:#CF5A43;
+  --jade:#7AC4A6;
+  --line:rgba(243,235,221,.11);
+  --line-strong:rgba(243,235,221,.18);
+  --text-2:rgba(243,235,221,.72);
+  --text-3:rgba(243,235,221,.50);
+  --text-4:rgba(243,235,221,.34);
+  --dim:var(--text-2);
+  --dimmer:var(--text-4);
+  --r-xs:8px;
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:22px;
+  --shadow-soft:0 10px 30px rgba(0,0,0,.14);
+  --shadow-raised:0 20px 55px rgba(0,0,0,.22);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --shell:1020px;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth;background:var(--lacquer)}
+body{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  background:
+    radial-gradient(900px 580px at 8% -5%, rgba(122,196,166,.065), transparent 58%),
+    radial-gradient(820px 620px at 96% 3%, rgba(201,165,101,.06), transparent 60%),
+    linear-gradient(180deg,#0E1D1A 0%,var(--lacquer) 36%,#091310 100%);
+  background-attachment:fixed;
+  color:var(--eggshell);
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.22;
+  background-image:radial-gradient(rgba(243,235,221,.18) .45px,transparent .55px);
+  background-size:6px 6px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 72%);
+}
+::selection{background:rgba(201,165,101,.30);color:var(--eggshell)}
+button,input,select,textarea{font:inherit}
+button{touch-action:manipulation}
+.wrap{max-width:var(--shell);padding:calc(24px + env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) calc(72px + env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));}
+
+/* header + brand */
+.app-header{align-items:center;min-height:54px;margin-bottom:4px}
+.brand-lockup{display:flex;align-items:center;gap:13px;min-width:0}
+.brand-copy h1{font-family:var(--serif);font-size:24px;line-height:1;font-weight:500;letter-spacing:-.025em;margin:0;color:var(--eggshell)}
+.brand-sub{font-size:11px;color:var(--text-3);margin-top:6px;letter-spacing:.045em}
+.brand-tones{display:grid;grid-template-columns:repeat(3,10px);grid-template-rows:repeat(2,9px);gap:3px 4px;padding:8px 9px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(243,235,221,.04),rgba(201,165,101,.05));box-shadow:inset 0 1px rgba(255,255,255,.035)}
+.brand-tones span{position:relative;width:10px;height:9px;display:block}
+.brand-tones span::before,.brand-tones span::after{content:"";position:absolute;background:var(--gold);opacity:.92;border-radius:99px}
+.tone-ngang::before{width:9px;height:1.4px;left:.5px;top:4px}
+.tone-huyen::before{width:9px;height:1.4px;left:.5px;top:4px;transform:rotate(29deg)}
+.tone-sac::before{width:9px;height:1.4px;left:.5px;top:4px;transform:rotate(-29deg)}
+.tone-hoi::before{width:7px;height:5px;left:1px;top:1px;background:transparent!important;border:1.4px solid var(--gold);border-left-color:transparent;border-bottom-color:transparent;transform:rotate(-15deg);border-radius:50%}
+.tone-nga::before{width:8px;height:4px;left:1px;top:2px;background:transparent!important;border-top:1.4px solid var(--gold);border-radius:50%;transform:skewY(-16deg)}
+.tone-nang::before{width:3px;height:3px;left:3.5px;top:5px;border-radius:50%}
+.hdr-btns{gap:8px}
+.icon.icon-round{width:40px;height:40px;min-width:40px;padding:0;border-radius:13px;background:rgba(243,235,221,.025);border-color:var(--line);color:var(--text-2);transition:transform .18s var(--ease),background .18s,border-color .18s,color .18s}
+.icon.icon-round svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.icon.icon-round svg path:first-child{fill:currentColor;stroke:none}
+.icon.icon-round:hover{transform:translateY(-1px);color:var(--gold);background:var(--gold-soft);border-color:rgba(201,165,101,.32)}
+.rule{background:var(--line);margin:16px 0 11px}
+.stats{min-height:29px;gap:8px;font-size:11px;color:var(--text-3);align-items:center}
+.stats span{border:1px solid transparent;border-radius:999px;padding:5px 8px;white-space:nowrap}
+.stats b{color:var(--text-2);font-weight:650}
+.stats .flame{color:var(--gold);background:var(--gold-soft);border-color:rgba(201,165,101,.15)}
+
+/* navigation */
+#nav{margin:7px 0 26px;padding:4px;border:1px solid var(--line);border-radius:15px;background:rgba(243,235,221,.025);gap:3px;overflow-x:auto;box-shadow:inset 0 1px rgba(255,255,255,.018)}
+#nav button{display:flex;align-items:center;justify-content:center;gap:7px;border:0!important;border-radius:11px;padding:9px 11px;color:var(--text-3);opacity:1;font-size:11.5px;letter-spacing:.015em;text-transform:none;transition:background .18s,color .18s,transform .16s var(--ease)}
+#nav button:hover{color:var(--text-2);background:rgba(243,235,221,.035)}
+#nav button[aria-selected="true"]{color:var(--eggshell);background:rgba(201,165,101,.12);box-shadow:inset 0 0 0 1px rgba(201,165,101,.13)}
+#nav button:active{transform:scale(.98)}
+.nav-glyph{font-family:var(--vi);font-size:13px;line-height:1;color:var(--gold);min-width:16px;text-align:center}
+#moreNav{display:none}
+
+/* type scale + labels */
+.eyebrow{font-size:10px;font-weight:650;letter-spacing:.135em;text-transform:uppercase;color:var(--gold)}
+.screen-h,.today-h,.sheet-h{font-family:var(--serif);font-weight:450;letter-spacing:-.028em;color:var(--eggshell)}
+.screen-h{font-size:34px;margin:7px 0 10px}.sheet-h{font-size:31px}.today-h{font-size:48px;margin:5px 0 5px}
+.hint,.unit-sub,.ts,.wl,.today-min,.lesson-meta,.sce,.scn,.dlg-line .en{color:var(--text-3)!important;opacity:1!important}
+.prompt-en{font-family:var(--serif);font-size:28px;line-height:1.22;color:var(--eggshell)}
+.word{font-size:54px;line-height:1.01;letter-spacing:-.045em}.word.sm{font-size:38px}
+.gloss{color:var(--text-2);font-size:18px}.sent{line-height:1.55}
+
+/* surfaces */
+.card,.unit,.tile-btn,.lab,.wrow,.lesson-card,.report,.quick,.tonecell{
+  border-color:var(--line);background:linear-gradient(155deg,rgba(25,48,43,.96),rgba(17,35,31,.96));
+  box-shadow:inset 0 1px rgba(255,255,255,.025);
+}
+.card{border-radius:var(--r-lg);padding:30px 29px 27px;margin-top:18px;box-shadow:var(--shadow-soft),inset 0 1px rgba(255,255,255,.025)}
+.card::after{height:2px;background:linear-gradient(90deg,var(--gold),rgba(201,165,101,.2));transition-duration:.55s}
+.card.accent{border-color:rgba(201,165,101,.25);background:linear-gradient(155deg,rgba(42,50,37,.72),rgba(20,39,34,.98))}
+.quick,.unit,.tile-btn,.lab,.wrow,.lesson-card{border-radius:var(--r-md);transition:transform .18s var(--ease),border-color .18s,background .18s,box-shadow .18s}
+.quick:hover,.unit:hover,.tile-btn:hover,.lab:hover,.wrow:hover{transform:translateY(-2px);border-color:rgba(201,165,101,.24);box-shadow:0 12px 24px rgba(0,0,0,.10)}
+.quick:active,.unit:active,.tile-btn:active,.lab:active,.wrow:active{transform:translateY(0) scale(.99)}
+
+/* controls */
+.btn{min-height:44px;border-radius:12px;padding:12px 18px;background:var(--gold);border-color:var(--gold);color:#0D1916;font-size:11.5px;font-weight:750;letter-spacing:.055em;text-transform:none;box-shadow:0 7px 18px rgba(0,0,0,.12);transition:transform .16s var(--ease),box-shadow .18s,background .18s,border-color .18s}
+.btn:hover{background:#D7B77A;border-color:#D7B77A;transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.16)}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn.ghost{background:rgba(243,235,221,.025);border-color:var(--line-strong);color:var(--text-2);box-shadow:none}
+.btn.ghost:hover{background:rgba(201,165,101,.08);border-color:rgba(201,165,101,.28);color:var(--eggshell)}
+.link{border-bottom:0;color:var(--gold)}
+.opt{border-color:var(--line);border-radius:13px;background:rgba(243,235,221,.025);padding:15px 16px;transition:transform .15s var(--ease),border-color .15s,background .15s}
+.opt:hover:not(:disabled){transform:translateY(-1px);border-color:rgba(201,165,101,.32);background:rgba(201,165,101,.055)}
+.opt.right{border-color:rgba(122,196,166,.45);background:rgba(122,196,166,.09)}
+.opt.wrong{border-color:rgba(207,90,67,.48);background:rgba(207,90,67,.08)}
+.opt .k{border-radius:7px;border-color:var(--line);color:var(--text-4)}
+input.type,input.search,.field input[type=text],.field input[type=date],select,textarea.box{border-radius:12px!important;border-color:var(--line);background:rgba(243,235,221,.035);transition:border-color .16s,box-shadow .16s,background .16s}
+input.type:focus,input.search:focus,.field input:focus,select:focus,textarea.box:focus{border-color:rgba(201,165,101,.52);box-shadow:0 0 0 3px rgba(201,165,101,.08);background:rgba(243,235,221,.045)}
+input.type{min-height:51px;padding:13px 15px}
+.speak{border-radius:11px;border-color:var(--line);background:rgba(243,235,221,.025);transition:transform .16s var(--ease),background .16s,border-color .16s}
+.speak:hover{transform:translateY(-1px);background:var(--gold-soft);border-color:rgba(201,165,101,.26)}
+.conf{border-radius:12px;border-color:var(--line);background:rgba(243,235,221,.03)}
+.tag,.filt,.mixtag,.why-btn,.pill-status{border-color:var(--line);background:rgba(243,235,221,.02)}
+
+/* today */
+[data-view="today"] #stage{max-width:900px;margin:0 auto}
+.today-hero{position:relative;overflow:hidden;border:1px solid rgba(201,165,101,.18);border-radius:26px;padding:30px 31px 28px;background:linear-gradient(135deg,rgba(30,57,49,.96),rgba(15,31,27,.98));box-shadow:var(--shadow-raised),inset 0 1px rgba(255,255,255,.035)}
+.today-hero::before{content:"";position:absolute;width:360px;height:360px;right:-190px;top:-220px;border-radius:50%;border:1px solid rgba(201,165,101,.09);box-shadow:0 0 0 35px rgba(201,165,101,.018),0 0 0 78px rgba(201,165,101,.012)}
+.today-hero-top{display:flex;justify-content:space-between;gap:22px;align-items:flex-start;position:relative;z-index:1}
+.today-session-note{font-family:var(--serif);font-size:17px;line-height:1.45;color:var(--text-2);max-width:590px;margin-top:12px}
+.today-metrics{display:flex;gap:7px;flex-wrap:wrap;margin-top:21px;position:relative;z-index:1}
+.today-metric{display:flex;align-items:baseline;gap:6px;border:1px solid var(--line);background:rgba(243,235,221,.027);border-radius:999px;padding:6px 10px;color:var(--text-3);font-size:11px}
+.today-metric b{font-family:var(--serif);font-size:18px;color:var(--eggshell);font-weight:450;line-height:1}
+.today-start{display:flex;align-items:center;gap:13px;margin-top:23px;position:relative;z-index:1}.today-start .btn{min-width:170px}
+.today-tone-orbit{display:flex;align-items:center;justify-content:center;width:78px;height:78px;border-radius:50%;border:1px solid rgba(201,165,101,.15);background:rgba(201,165,101,.035);color:var(--gold);font-family:var(--serif);font-size:30px;letter-spacing:-.18em;padding-right:.18em;flex:0 0 auto}
+.today-plan-card{margin-top:15px;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 23px;background:rgba(243,235,221,.018)}
+.today-plan-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:6px}.today-plan-head h3{margin:0;font-size:14px;font-weight:650;color:var(--text-2)}
+.planlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+.planlist li{padding:10px 0;border-color:rgba(243,235,221,.07);font-size:13.5px;color:var(--text-2)}
+.planlist .n{font-family:var(--serif);font-size:20px;color:var(--gold)}
+.mixrow{gap:5px;margin-top:14px}.mixtag{font-size:9.5px;letter-spacing:.065em;text-transform:none;color:var(--text-3);opacity:1;padding:5px 8px}
+.quickrow{grid-template-columns:repeat(4,1fr);gap:9px;margin-top:15px}
+.quick{padding:16px 16px 15px;min-height:104px;position:relative}
+.quick::before{display:block;margin-bottom:14px;font-family:var(--serif);font-size:19px;color:var(--gold);opacity:.9}
+.quick[data-q="survival"]::before{content:"↗"}.quick[data-q="south"]::before{content:"˜"}.quick[data-q="weak"]::before{content:"△"}.quick[data-q="listen"]::before{content:"◖"}
+.quick b{font-size:14px}.quick span{color:var(--text-3);opacity:1}
+.tutor{border-left:0;padding:17px 19px;margin:15px 0 0;border:1px solid var(--line);border-radius:var(--r-md);background:rgba(243,235,221,.018)}
+.tutor .eyebrow{color:var(--text-3)}.tutor p{font-family:var(--serif);font-size:15.5px;color:var(--text-2);opacity:1;line-height:1.55}
+
+/* course as an editorial vertical path */
+[data-view="course"] #stage{max-width:820px;margin:0 auto}
+[data-view="course"] .unit{position:relative;padding:18px 19px 17px 67px;margin:0 0 10px;overflow:visible;counter-increment:course-unit}
+[data-view="course"] #stage{counter-reset:course-unit}
+[data-view="course"] .unit::before{content:counter(course-unit,decimal-leading-zero);position:absolute;left:18px;top:18px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(201,165,101,.22);background:var(--surface-soft);color:var(--gold);font-family:var(--serif);font-size:12px}
+[data-view="course"] .unit::after{content:"";position:absolute;left:35px;top:53px;bottom:-14px;width:1px;background:linear-gradient(var(--line-strong),transparent)}
+[data-view="course"] .unit:last-child::after{display:none}
+.unit-t{font-size:15px;font-weight:620}.unit-pct{font-family:var(--serif);font-size:18px;color:var(--gold)}
+.ubar{height:4px;background:rgba(243,235,221,.07);border-radius:99px}.ubar i{background:linear-gradient(90deg,var(--gold),#D8BC87)}
+
+/* study mode: quieter, narrower, distraction-free */
+body.in-session .wrap{max-width:760px}
+body.in-session .stats,body.in-session #nav,body.in-session .rule{display:none}
+body.in-session .app-header{margin-bottom:20px}
+body.in-session .brand-sub{display:none}
+body.in-session .brand-copy h1{font-size:18px;color:var(--text-3)}
+body.in-session .brand-tones{transform:scale(.88);transform-origin:left center}
+body.in-session #stage{max-width:680px;margin:0 auto}
+body.in-session .card{padding:34px 32px 28px;border-radius:24px}
+body.in-session .foot{margin-top:18px}.bar{height:4px;background:rgba(243,235,221,.07);border-radius:99px}.bar i{background:linear-gradient(90deg,var(--gold),#D8BC87)}
+
+/* feedback */
+.verdict{margin-top:21px;padding:17px 18px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(243,235,221,.018),transparent);border-radius:13px 13px 0 0}
+.vtag{letter-spacing:.09em;font-size:9.5px}.vtag.ok{color:var(--jade)}.vtag.no{color:var(--cinnabar)}.vtag.near{border:1px solid rgba(201,165,101,.22);background:rgba(201,165,101,.08);padding:4px 9px;border-radius:999px;color:var(--gold)}
+.vrow .w{font-family:var(--serif);font-size:31px;font-weight:500}.wrongline,.rightline{padding:7px 0;color:var(--text-2)}
+.speedline{color:var(--text-3);opacity:1}.speedline .slow{color:var(--gold)}
+.card.shake{animation:errorPulse .34s var(--ease)}
+@keyframes errorPulse{0%,100%{box-shadow:var(--shadow-soft)}50%{box-shadow:0 0 0 2px rgba(207,90,67,.20),var(--shadow-soft)}}
+
+/* sheets */
+.scrim{background:rgba(4,10,8,.72);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.sheet{max-width:600px;padding:27px 25px 31px;border-radius:24px 24px 0 0;border-color:var(--line);background:linear-gradient(165deg,#19302B,#10201D);box-shadow:0 -20px 65px rgba(0,0,0,.34)}
+.scrim.open .sheet{animation:sheetIn .26s var(--ease) both}
+@keyframes sheetIn{from{opacity:0;transform:translateY(18px) scale(.99)}to{opacity:1;transform:none}}
+@media(min-width:620px){.sheet{border-radius:22px}}
+
+/* lists + analytics */
+.row{padding:13px 5px;border-color:rgba(243,235,221,.07)}
+.row .vi{font-family:var(--serif);font-size:18px;font-weight:500}.row .en{color:var(--text-3)}
+.cardrow{gap:10px}.tile-btn{padding:18px 16px}.tile-btn b,.bignum{font-family:var(--serif);font-weight:450}
+.report{border-radius:var(--r-md);padding:17px 18px;background:rgba(243,235,221,.018)}
+.rrow{padding:9px 0;border-color:rgba(243,235,221,.07)}.rt{color:var(--text-3);opacity:1;letter-spacing:.08em}.rv{color:var(--text-2);opacity:1}
+.skillgrid{padding:4px 0}.skbar{height:5px;background:rgba(243,235,221,.07)}.skbar i{background:linear-gradient(90deg,var(--gold),#D8BC87)}
+.spark span{background:linear-gradient(180deg,#D8BC87,var(--gold));border-radius:3px 3px 1px 1px}
+.lesson-card{padding:17px 18px}.lesson-actions{gap:6px}.import-summary div{border-radius:12px;border-color:var(--line);background:rgba(243,235,221,.02)}
+
+/* enter motion */
+#stage>*{animation:stageEnter .28s var(--ease) both}
+#stage>*:nth-child(2){animation-delay:.025s}#stage>*:nth-child(3){animation-delay:.05s}#stage>*:nth-child(4){animation-delay:.075s}
+@keyframes stageEnter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* desktop richness without widening study cards */
+@media(min-width:900px){
+  .wrap{padding-top:30px}
+  .app-header{padding:0 3px}
+  #nav{justify-content:flex-start}
+  #nav button{flex:0 0 auto;padding-left:13px;padding-right:13px}
+  [data-view="progress"] #stage,[data-view="content"] #stage{max-width:930px;margin:0 auto}
+  .sheet{max-height:82vh}
+}
+
+/* phone: native bottom dock, roomy content, only four primaries + More */
+@media(max-width:700px){
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom))}
+  .wrap{padding:calc(17px + env(safe-area-inset-top)) 15px calc(32px + env(safe-area-inset-bottom))}
+  .brand-copy h1{font-size:21px}.brand-tones{transform:scale(.92);transform-origin:left center}.brand-sub{font-size:10.5px}
+  .stats{overflow-x:auto;flex-wrap:nowrap;margin-right:-15px;padding-right:15px;scrollbar-width:none}.stats::-webkit-scrollbar{display:none}
+  #nav{position:fixed;z-index:35;left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom));margin:0;padding:5px;border-radius:19px;background:rgba(15,30,27,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(0,0,0,.38);overflow:visible;justify-content:space-around}
+  #nav button{display:none;flex:1;min-width:0;flex-direction:column;gap:3px;padding:7px 4px 6px;font-size:9.5px;line-height:1}
+  #nav button.primary-mobile,#moreNav{display:flex}
+  #nav .nav-glyph{font-size:16px;min-width:0}
+  #nav button[aria-selected="true"]{background:rgba(201,165,101,.11)}
+  body.in-session{padding-bottom:0} body.in-session #nav{display:none}
+  .screen-h{font-size:31px}.today-h{font-size:42px}.prompt-en{font-size:25px}.word{font-size:46px}
+  .today-hero{padding:25px 21px 22px;border-radius:22px}.today-hero-top{gap:12px}.today-tone-orbit{width:58px;height:58px;font-size:23px}.today-session-note{font-size:15.5px}.today-start{align-items:stretch;flex-direction:column}.today-start .btn{width:100%}.today-start .hint{display:none}
+  .planlist{grid-template-columns:1fr}.quickrow{grid-template-columns:1fr 1fr}.quick{min-height:96px}
+  .card{padding:24px 19px 21px;border-radius:19px}body.in-session .card{padding:27px 20px 23px;border-radius:20px}
+  .opts.two{grid-template-columns:1fr!important}.opt{padding:14px 14px}
+  .typebox{display:grid;grid-template-columns:1fr}.typebox .btn{width:100%}
+  .today-plan-card{padding:18px 18px}
+  [data-view="course"] .unit{padding-left:61px}
+  .cardrow,.labgrid,.twocol{grid-template-columns:1fr}
+}
+@media(max-width:410px){
+  .brand-tones{display:none}.quickrow{grid-template-columns:1fr}.today-tone-orbit{display:none}
+  .today-h{font-size:39px}.screen-h{font-size:29px}.stats span{padding-left:6px;padding-right:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+
+
+.more-nav-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.more-nav-item{display:flex;align-items:center;gap:13px;text-align:left;background:rgba(243,235,221,.025);border:1px solid var(--line);border-radius:14px;padding:14px;color:var(--eggshell);cursor:pointer;transition:transform .16s var(--ease),border-color .16s,background .16s}.more-nav-item:hover{transform:translateY(-1px);border-color:rgba(201,165,101,.27);background:rgba(201,165,101,.05)}.more-nav-glyph{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(201,165,101,.08);color:var(--gold);font-family:var(--serif);font-size:16px;flex:0 0 auto}.more-nav-item b{display:block;font-size:13.5px;font-weight:650}.more-nav-item small{display:block;margin-top:3px;color:var(--text-3);font-size:11.5px;line-height:1.35}@media(max-width:430px){.more-nav-grid{grid-template-columns:1fr}}
+
+
+/* V7 MOBILE-FIRST REFINEMENT */
+:root{--phone-gutter:16px;--tap:52px}
+.mobile-streak{display:none}
+.today-compact-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:7px 1px 18px}
+.today-focus{border:1px solid rgba(201,165,101,.18);border-radius:24px;padding:22px;background:linear-gradient(145deg,rgba(29,54,47,.94),rgba(14,29,25,.98));box-shadow:0 14px 38px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.028)}
+.today-focus .today-session-note{margin-top:7px}.today-primary{width:100%;margin-top:18px;min-height:52px;font-size:13px}
+.today-inline-callout,.today-row-link{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 2px;border-bottom:1px solid rgba(243,235,221,.08)}
+.today-inline-callout{padding:14px 0}.inline-title{margin-top:4px;color:var(--text-2);font-size:14px}
+.today-row-link{cursor:pointer;color:var(--eggshell)}.today-row-link:active{opacity:.68}.today-row-link b{display:block;margin-top:4px;font-size:14px;font-weight:600;line-height:1.35}.today-row-link>span{color:var(--gold);font-size:12px;white-space:nowrap}
+.today-details{margin-top:13px;border-top:1px solid rgba(243,235,221,.07)}.today-details summary{cursor:pointer;list-style:none;padding:13px 0 5px;color:var(--text-3);font-size:12px}.today-details summary::-webkit-details-marker{display:none}.today-details summary::after{content:"＋";float:right;color:var(--gold)}.today-details[open] summary::after{content:"−"}.today-details .mixrow{margin:5px 0 8px}.today-details .mixtag b{font-family:var(--serif);font-size:14px;color:var(--eggshell);font-weight:500}
+.today-details+.tutor{border:0;border-left:2px solid rgba(201,165,101,.40);border-radius:0;background:transparent;padding:7px 0 7px 14px;box-shadow:none}
+.course-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:14px}.course-count{font-size:11px;color:var(--text-3);white-space:nowrap}
+.course-switch{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px;margin:12px 0 15px;border:1px solid var(--line);border-radius:13px;background:rgba(243,235,221,.018)}
+.course-switch button{min-height:38px;border:0;border-radius:10px;background:transparent;color:var(--text-3);cursor:pointer;font-size:12px}.course-switch button[aria-selected="true"]{background:rgba(201,165,101,.12);color:var(--eggshell);box-shadow:inset 0 0 0 1px rgba(201,165,101,.10)}
+.course-intro{font-family:var(--serif);font-size:14px;line-height:1.55;color:var(--text-3);margin:0 2px 16px}
+.class-list{border-top:1px solid rgba(243,235,221,.08)}.class-row{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:start;width:100%;padding:15px 2px;background:none;border:0;border-bottom:1px solid rgba(243,235,221,.08);color:var(--eggshell);text-align:left;cursor:pointer}
+.class-date{font-family:var(--serif);font-size:14px;color:var(--gold)}.class-copy b{display:block;font-size:14px;font-weight:620;line-height:1.35}.class-copy small{display:block;margin-top:4px;color:var(--text-3);font-size:11.5px;line-height:1.45}.class-state{font-size:10.5px;color:var(--text-3);padding-top:2px}.course-class-summary{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--text-2);margin:7px 0 17px}
+body.in-session .opt{min-height:54px}body.in-session .conf{min-height:48px}body.in-session .btn{min-height:50px}body.in-session .next-row{gap:9px}body.in-session .next-row .btn{flex:1}.mini,.why-btn,.tag{min-height:40px}
+@media(hover:none){.quick:hover,.unit:hover,.tile-btn:hover,.lab:hover,.wrow:hover,.btn:hover,.opt:hover:not(:disabled),.icon.icon-round:hover,.more-nav-item:hover{transform:none;box-shadow:inherit}}
+@media(max-width:700px){
+ body{padding-bottom:calc(78px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#0E1D1A 0%,#0B1714 48%,#091310 100%);background-attachment:scroll}body::before{display:none}
+ .wrap{padding:calc(15px + env(safe-area-inset-top)) var(--phone-gutter) calc(28px + env(safe-area-inset-bottom))}
+ .app-header{min-height:46px;margin:0}.brand-lockup{gap:10px}.brand-copy h1{font-size:20px}.brand-sub{font-size:10px;margin-top:4px}.brand-tones{grid-template-columns:repeat(3,8px);grid-template-rows:repeat(2,7px);padding:6px 7px;border-radius:11px;gap:2px 3px}.icon.icon-round{width:38px;height:38px;min-width:38px;border-radius:12px}.rule{margin:12px 0 0}
+ #stats{display:none}#nav{left:9px;right:9px;bottom:calc(8px + env(safe-area-inset-bottom));height:61px;padding:5px 6px;border-radius:19px;justify-content:space-around}#nav button{min-height:50px}#nav button.primary-mobile,#moreNav{display:flex}#nav .nav-glyph{font-size:17px}.nav-label{font-size:9px}
+ .today-compact-head{margin-top:18px}.today-h{font-size:40px;margin:4px 0 2px}.today-min{font-size:13px}.mobile-streak{display:block;align-self:flex-end;margin-bottom:5px;border:1px solid rgba(201,165,101,.16);background:rgba(201,165,101,.08);color:var(--gold);border-radius:999px;padding:6px 9px;font-size:11px}
+ .today-focus{padding:19px 18px 18px;border-radius:20px;box-shadow:0 10px 28px rgba(0,0,0,.13)}.today-session-note{font-size:15px;line-height:1.48}.today-metrics{margin-top:16px}.today-metric{padding:5px 9px}
+ .quickrow{display:flex;overflow-x:auto;grid-template-columns:none;gap:8px;margin:15px -16px 0;padding:0 16px 4px;scroll-snap-type:x proximity;scrollbar-width:none}.quickrow::-webkit-scrollbar{display:none}.quick{flex:0 0 132px;min-height:70px;padding:12px 13px;scroll-snap-align:start;border-radius:14px}.quick::before{margin-bottom:7px!important;font-size:15px!important}.quick b{font-size:13px}.quick span{font-size:10.5px}
+ .tutor p{font-size:14.5px}.screen-h{font-size:30px}.course-count{font-size:10px}[data-view="course"] .unit{padding:15px 14px 14px 48px;margin-bottom:8px}[data-view="course"] .unit::before{left:10px;top:15px;width:27px;height:27px;font-size:10px}[data-view="course"] .unit::after{left:23px;top:44px;bottom:-11px}.unit-t{font-size:14px}.unit-sub{font-size:11.5px}.unit-pct{font-size:16px}
+ .class-row{grid-template-columns:52px minmax(0,1fr) auto;gap:10px;padding:14px 1px}.class-copy small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ body.in-session .app-header{margin-bottom:13px}body.in-session .brand-tones{display:none}body.in-session .brand-copy h1{font-size:16px}body.in-session .card{margin-top:5px;padding:25px 18px 19px;border-radius:18px;box-shadow:none}body.in-session .q-label{margin-bottom:14px}.prompt-en{font-size:24px}.word{font-size:44px}.sent{font-size:18px}body.in-session .opts{gap:9px}.opt{min-height:56px;padding:14px;border-radius:13px}body.in-session input.type{min-height:54px;font-size:18px}
+ body.in-session .next-row{position:sticky;bottom:calc(5px + env(safe-area-inset-bottom));z-index:5;padding:8px 0 4px;background:linear-gradient(180deg,transparent 0%,rgba(12,24,22,.95) 35%,rgba(12,24,22,.99) 100%)}body.in-session .next-row .btn{min-height:52px}
+ #stage>*{animation:none}.scrim{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}.sheet{max-height:91vh;padding:23px 18px calc(25px + env(safe-area-inset-bottom));border-radius:22px 22px 0 0;box-shadow:0 -14px 42px rgba(0,0,0,.28)}
+}
+@media(max-width:520px){.today-tone-orbit{display:none!important}.course-title-row{align-items:flex-start;flex-direction:column;gap:3px}.course-count{white-space:normal}}
+@media(max-width:390px){:root{--phone-gutter:14px}.brand-tones{display:none}.brand-sub{display:none}.today-h{font-size:38px}.quickrow{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}.class-row{grid-template-columns:48px minmax(0,1fr)}.class-state{grid-column:2;font-size:10px;margin-top:-5px}}
+
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header>
-    <div>
-      <div class="eyebrow">Tiếng Việt miền Nam · khóa học của Alexandre</div>
-      <h1>Ôn tiếng Việt <span>— a training system, not a deck</span></h1>
+  <header class="app-header">
+    <div class="brand-lockup">
+      <div class="brand-tones" aria-hidden="true">
+        <span class="tone-ngang"></span><span class="tone-huyen"></span><span class="tone-sac"></span>
+        <span class="tone-hoi"></span><span class="tone-nga"></span><span class="tone-nang"></span>
+      </div>
+      <div class="brand-copy">
+        <h1>Ôn tiếng Việt</h1>
+        <div class="brand-sub">Alexandre · Miền Nam</div>
+      </div>
     </div>
     <div class="hdr-btns">
-      <button class="icon" id="voiceBtn" title="Voice and audio">🔊</button>
-      <button class="icon" id="setBtn" title="Settings">⚙</button>
+      <button class="icon icon-round" id="voiceBtn" title="Voice and audio" aria-label="Voice and audio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h3l4 3V7L8 10H5Z"></path><path d="M15.5 9.2c1.2 1.4 1.2 4.2 0 5.6"></path><path d="M18.1 7c2.3 2.7 2.3 7.3 0 10"></path></svg>
+      </button>
+      <button class="icon icon-round" id="setBtn" title="Settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19 13.5v-3l-2-.7a7 7 0 0 0-.7-1.7l.9-1.9-2.1-2.1-1.9.9a7 7 0 0 0-1.7-.7L10.5 2h-3l-.7 2a7 7 0 0 0-1.7.7l-1.9-.9-2.1 2.1.9 1.9a7 7 0 0 0-.7 1.7L0 10.5v3l2 .7a7 7 0 0 0 .7 1.7l-.9 1.9 2.1 2.1 1.9-.9a7 7 0 0 0 1.7.7l.7 2h3l.7-2a7 7 0 0 0 1.7-.7l1.9.9 2.1-2.1-.9-1.9a7 7 0 0 0 .7-1.7L19 13.5Z" transform="translate(2.5 0)"></path></svg>
+      </button>
     </div>
   </header>
 
@@ -1135,6 +1433,111 @@ const CONCEPTS = [
  requires:["c.cmp.equal"]}
 ];
 
+
+/* V7 COURSE EXPANSION · additional structures explicitly taught in ALEXANDRE.docx.
+   Existing IDs stay untouched so all previous learner progress survives. */
+CONCEPTS.push(
+{id:"c.pron.possessive",unit:"u1",title:"Possession with của",kind:"grammar",
+ rule:"Possession is expressed with của + the possessor: của tôi, của anh ấy, của cô ấy, của chúng tôi, của bạn.",
+ examples:[{vi:"Chìa khoá của em ở đâu?",en:"Where are my keys?"},{vi:"Ba mẹ của con yêu con rất nhiều.",en:"My parents love me very much."}],
+ micro:{rule:"Put của before the possessor.",examples:[{vi:"Công việc của bạn là gì?",en:"What is your job?"}],contrast:"của marks possession; cửa means door.",check:{q:"“my keys”:",options:["chìa khoá của em","chìa khoá em của"],answer:0},produce:{en:"Where are my keys?",vi:"Chìa khoá của em ở đâu?"}},requires:["c.pron.basic"]},
+
+{id:"c.intro.greeting",unit:"u1",title:"Greetings by relationship",kind:"pragmatics",
+ rule:"The course distinguishes xin chào for a first meeting/formal situation, dạ + chào + pronoun for older people or high respect, chào + pronoun generally, and chào + name for a peer or younger person.",
+ examples:[{vi:"Dạ, chào chị.",en:"Hello. (respectfully)"},{vi:"Con chào bà ạ.",en:"Hello, Grandma."}],
+ micro:{rule:"Greeting choice follows the relationship.",examples:[{vi:"Chào bạn.",en:"Hello. (peer)"}],contrast:"xin chào is formal; chào + pronoun is relational everyday speech.",check:{q:"Greeting an older woman politely:",options:["Chào tên thôi.","Dạ, chào chị."],answer:1},produce:{en:"Hello, Grandma.",vi:"Con chào bà ạ."}},requires:["c.pron.age"]},
+
+{id:"c.intro.name",unit:"u1",title:"Asking and giving a name",kind:"grammar",
+ rule:"The course gives both Tên + pronoun + là gì? and Pronoun + tên là gì? Answers use Pronoun + tên là … or Tên + pronoun + là …",
+ examples:[{vi:"Tên chị là gì?",en:"What is your name?"},{vi:"Em tên là Alexandre.",en:"My name is Alexandre."}],
+ micro:{rule:"Tên can lead the question or follow the pronoun.",examples:[{vi:"Bác tên là gì?",en:"What is your name? (to an elder)"}],contrast:"Keep the relationship pronoun inside the name question.",check:{q:"Natural name question:",options:["Tên chị là gì?","Chị gì tên là?"],answer:0},produce:{en:"My name is Alexandre.",vi:"Em tên là Alexandre."}},requires:["c.pron.age"]},
+
+{id:"c.intro.origin",unit:"u1",title:"Origin, nationality and residence",kind:"grammar",
+ rule:"The course uses đến từ đâu? for origin, là người nước nào? for nationality, and sống ở đâu? for residence.",
+ examples:[{vi:"Bạn đến từ đâu?",en:"Where are you from?"},{vi:"Em là người nước nào?",en:"What nationality are you?"},{vi:"Anh sống ở đâu?",en:"Where do you live?"}],
+ micro:{rule:"đến từ = come from; là người + country = nationality; sống ở = live in.",examples:[{vi:"Em đến từ Pháp.",en:"I am from France."},{vi:"Em sống ở Paris.",en:"I live in Paris."}],contrast:"Origin and residence are separate questions.",check:{q:"Ask where someone lives:",options:["Anh đến từ đâu?","Anh sống ở đâu?"],answer:1},produce:{en:"I live in Paris.",vi:"Em sống ở Paris."}},requires:["c.pron.basic","c.sent.o"]},
+
+{id:"c.intro.health",unit:"u1",title:"Asking how someone is",kind:"pragmatics",
+ rule:"Pronoun + (có) khoẻ không? asks how someone is. Answer with Pronoun + khoẻ, optionally followed by còn + pronoun? to return the question.",
+ examples:[{vi:"Dạ chị có khoẻ không?",en:"How are you?"},{vi:"Anh khoẻ, còn em?",en:"I'm fine, and you?"}],
+ micro:{rule:"The pronoun pair remains visible even in a short exchange.",examples:[{vi:"Dạ ba mẹ có khoẻ không?",en:"Are Mom and Dad well?"}],contrast:"có … không frames the adjective question.",check:{q:"Ask an older woman how she is:",options:["Chị khoẻ?","Dạ chị có khoẻ không?"],answer:1},produce:{en:"I'm fine, and you?",vi:"Em khoẻ, còn anh?"}},requires:["c.pron.age","c.sent.yesno"]},
+
+{id:"c.sent.demonstratives",unit:"u4",title:"Demonstratives — này, đây, đó, kia",kind:"grammar",
+ rule:"The course uses đây/ở đây for here, đó/đấy for there or that, kia for something farther away, and này for this.",
+ examples:[{vi:"Cái này là gì?",en:"What is this?"},{vi:"Cuốn sách đó là của tôi.",en:"That book is mine."},{vi:"Ngôi nhà kia đẹp quá.",en:"That house over there is beautiful."}],
+ micro:{rule:"Distance from the speaker matters.",examples:[{vi:"Đó là ba mẹ của tôi.",en:"Those are my parents."}],contrast:"này/đây near · đó moderate · kia farther.",check:{q:"“this one”:",options:["cái này","cái kia"],answer:0},produce:{en:"What is this?",vi:"Cái này là gì?"}},requires:["c.sent.la"]},
+
+{id:"c.sent.quantifiers",unit:"u4",title:"Quantifiers before nouns",kind:"grammar",
+ rule:"The course places quantity before the noun: nhiều, vài, một số, một vài, mấy, tất cả, mỗi and others express amount without changing the noun.",
+ examples:[{vi:"nhiều con mèo",en:"many cats"},{vi:"vài người bạn",en:"a few friends"},{vi:"một số học sinh",en:"some students"},{vi:"tất cả học sinh",en:"all students"}],
+ micro:{rule:"Amount comes first; the noun does not take a plural ending.",examples:[{vi:"mỗi ngày",en:"every day"}],contrast:"Quantifiers express amount; classifiers classify a counted noun.",check:{q:"“a few friends”:",options:["bạn vài người","vài người bạn"],answer:1},produce:{en:"many cats",vi:"nhiều con mèo"}},requires:["c.sent.classifier"]},
+
+{id:"c.sent.have",unit:"u4",title:"Có — have and there is",kind:"grammar",
+ rule:"The course uses có for possession and existence. Không có negates it, and có … không? asks whether something exists or is available.",
+ examples:[{vi:"Tôi có một quyển sách.",en:"I have a book."},{vi:"Ở đây có nhà hàng không?",en:"Is there a restaurant here?"},{vi:"Họ không có xe hơi.",en:"They do not have a car."}],
+ micro:{rule:"Có can mean have or there is depending on the sentence.",examples:[{vi:"Anh ấy có một công việc tốt.",en:"He has a good job."}],contrast:"Identity uses là; possession/existence uses có.",check:{q:"“I have a book.”",options:["Tôi là một quyển sách.","Tôi có một quyển sách."],answer:1},produce:{en:"I have a book.",vi:"Tôi có một quyển sách."}},requires:["c.sent.svo"]},
+
+{id:"c.question.wh",unit:"u4",title:"Open questions — the WH system",kind:"grammar",
+ rule:"The 15/09 class groups open questions around gì, ở đâu, khi nào, tại sao/sao, nào, thế nào/làm sao and bao nhiêu/mấy. The question word can remain in the information slot.",
+ examples:[{vi:"Em đi đâu?",en:"Where are you going?"},{vi:"Bạn làm gì?",en:"What are you doing?"},{vi:"Thời tiết ở ngoài sao?",en:"How is the weather outside?"}],
+ micro:{rule:"Vietnamese often leaves the question word where the missing information belongs.",examples:[{vi:"Chị sống ở đâu?",en:"Where do you live?"}],contrast:"Do not force English WH word order onto every Vietnamese question.",check:{q:"Natural “Where do you live?”",options:["Ở đâu chị sống?","Chị sống ở đâu?"],answer:1},produce:{en:"Where do you live?",vi:"Chị sống ở đâu?"}},requires:["c.sent.svo"]},
+
+{id:"c.question.what",unit:"u4",title:"Gì, cái gì and là gì",kind:"grammar",
+ rule:"The course distinguishes gì for actions or missing content, cái gì for a thing, and là gì for definition or identity.",
+ examples:[{vi:"Bạn làm gì?",en:"What are you doing?"},{vi:"Đây là cái gì?",en:"What is this?"},{vi:"Công việc của bạn là gì?",en:"What is your job?"}],
+ micro:{rule:"Use là gì when the answer is an identity or definition.",examples:[{vi:"Từ này nghĩa là gì?",en:"What does this word mean?"}],contrast:"gì asks for missing content; là gì asks what something is.",check:{q:"“What is your job?”",options:["Công việc của bạn gì?","Công việc của bạn là gì?"],answer:1},produce:{en:"What do you want to eat?",vi:"Em muốn ăn gì?"}},requires:["c.question.wh"]},
+
+{id:"c.question.where",unit:"u4",title:"Ở đâu and đâu — where",kind:"grammar",
+ rule:"The course puts ở đâu/đâu most often at the end: Bạn đang ở đâu? Em đi đâu? It can also begin a question such as Ở đâu bán phở?",
+ examples:[{vi:"Chị sống ở đâu?",en:"Where do you live?"},{vi:"Siêu thị gần nhất ở đâu?",en:"Where is the nearest supermarket?"},{vi:"Ở đâu bán phở?",en:"Where do they sell phở?"}],
+ micro:{rule:"Keep ở đâu in the location slot unless the course pattern deliberately fronts it.",examples:[{vi:"Chúng ta nên gặp nhau ở đâu?",en:"Where should we meet?"}],contrast:"đâu alone works naturally after a movement verb: Em đi đâu?",check:{q:"“Where should we meet?”",options:["Chúng ta nên gặp nhau ở đâu?","Ở đâu chúng ta nên gặp nhau?"],answer:0},produce:{en:"Where is the nearest supermarket?",vi:"Siêu thị gần nhất ở đâu?"}},requires:["c.question.wh","c.sent.o"]},
+
+{id:"c.question.when",unit:"u4",title:"Khi nào, bao giờ, chừng nào — when",kind:"grammar",
+ rule:"The 15/09 lesson lists khi nào, bao giờ and chừng nào as ways to ask when.",
+ examples:[{vi:"Khi nào em đi?",en:"When are you going?"}],
+ micro:{rule:"These ask for a time/date rather than a clock reading.",examples:[{vi:"Bao giờ chị về?",en:"When are you coming back?"}],contrast:"mấy giờ asks what clock time; khi nào/bao giờ ask when.",check:{q:"Ask “when”, not “what time”:",options:["khi nào","mấy giờ"],answer:0},produce:{en:"When are you going?",vi:"Khi nào em đi?"}},requires:["c.question.wh","c.time.clock"]},
+
+{id:"c.question.why",unit:"u4",title:"Tại sao and sao — why",kind:"grammar",
+ rule:"The course lists tại sao and sao for why. Sao also appears in conversation such as Sao thức khuya vậy?",
+ examples:[{vi:"Sao thức khuya vậy?",en:"Why do you stay up so late?"},{vi:"Tại sao em học tiếng Việt?",en:"Why are you learning Vietnamese?"}],
+ micro:{rule:"Tại sao is explicit; sao is shorter and conversational.",examples:[{vi:"Sao vậy?",en:"Why? / What happened?"}],contrast:"sao can also mean how in other structures.",check:{q:"A short conversational “why?”:",options:["sao","ở đâu"],answer:0},produce:{en:"Why are you learning Vietnamese?",vi:"Tại sao em học tiếng Việt?"}},requires:["c.question.wh"]},
+
+{id:"c.question.how",unit:"u4",title:"Sao, thế nào, làm sao, như thế nào — how",kind:"grammar",
+ rule:"The 15/09 lesson groups sao, thế nào, làm sao and như thế nào for how and practises weather, feelings, weekends, knowing and doing.",
+ examples:[{vi:"Em thấy sao?",en:"How do you feel?"},{vi:"Thời tiết ở ngoài sao?",en:"How is the weather outside?"},{vi:"Làm sao anh biết?",en:"How do you know?"}],
+ micro:{rule:"The course accepts several conversational forms depending on the construction.",examples:[{vi:"Cuối tuần của em sao?",en:"How was your weekend?"}],contrast:"sao can ask why or how; context decides.",check:{q:"“How do you know?”",options:["Làm sao anh biết?","Ở đâu anh biết?"],answer:0},produce:{en:"How do you feel?",vi:"Em thấy sao?"}},requires:["c.question.wh"]},
+
+{id:"c.question.which",unit:"u4",title:"Nào — which",kind:"grammar",
+ rule:"The course uses nào to ask which item or choice.",
+ examples:[{vi:"Bạn thích cái nào?",en:"Which one do you like?"},{vi:"Món ăn nào là ngon nhất?",en:"Which dish is the best?"}],
+ micro:{rule:"Nào normally follows the noun being selected.",examples:[{vi:"Tháng nào vui nhất?",en:"Which month is the most fun?"}],contrast:"gì asks what; nào asks which from a set.",check:{q:"“Which one do you like?”",options:["Bạn thích cái gì?","Bạn thích cái nào?"],answer:1},produce:{en:"Which dish is the best?",vi:"Món ăn nào là ngon nhất?"}},requires:["c.question.wh"]},
+
+{id:"c.question.quantity",unit:"u7",title:"Bao nhiêu and mấy — how much / how many",kind:"grammar",
+ rule:"The 15/09 class uses bao nhiêu for how much/how many, bao nhiêu tiền for price, and mấy for a smaller count.",
+ examples:[{vi:"Chị cần bao nhiêu tiền?",en:"How much money do you need?"},{vi:"Có mấy trái táo trên bàn?",en:"How many apples are on the table?"},{vi:"Có mấy cái xe hơi ở bãi đậu xe?",en:"How many cars are in the parking lot?"}],
+ micro:{rule:"Bao nhiêu is open quantity; mấy usually expects a small count.",examples:[{vi:"Bao nhiêu nước chị uống mỗi ngày?",en:"How much water do you drink every day?"}],contrast:"mấy giờ = what time; bao nhiêu tiền = how much money.",check:{q:"“How much money do you need?”",options:["Chị cần mấy tiền?","Chị cần bao nhiêu tiền?"],answer:1},produce:{en:"How many apples are on the table?",vi:"Có mấy trái táo trên bàn?"}},requires:["c.num.basic","c.question.wh"]},
+
+{id:"c.lex.good",unit:"u10",title:"Choosing the right “good”",kind:"lexicon",
+ rule:"The 28/08 and 11/09 classes distinguish tốt for a good person/job, ngon for food, hay for films/music/content, and ngoan for children/animals.",
+ examples:[{vi:"Cô ấy là một người tốt.",en:"The lady is a good person."},{vi:"Món ăn này rất ngon.",en:"This dish is delicious."},{vi:"Phim này rất hay.",en:"This movie is very good."},{vi:"Con chó của tôi rất ngoan.",en:"My dog is very good."}],
+ micro:{rule:"English good splits according to what is being judged.",examples:[{vi:"Đây là một bài hát hay.",en:"This is a good song."}],contrast:"tốt person/job · ngon food · hay content · ngoan child/animal.",check:{q:"A good movie is:",options:["phim ngon","phim hay","phim ngoan"],answer:1},produce:{en:"This dish is delicious.",vi:"Món ăn này rất ngon."}},requires:["c.sent.adjafter"]},
+
+{id:"c.lex.bad",unit:"u10",title:"Choosing the right “bad”",kind:"lexicon",
+ rule:"The classes distinguish xấu for ugly/bad people or appearance, tệ for bad conditions such as weather, dở for bad food/content, and hư for badly behaved children.",
+ examples:[{vi:"Cái áo này rất xấu.",en:"This T-shirt is very ugly."},{vi:"Thời tiết hôm nay tệ.",en:"Today's weather is bad."},{vi:"Bộ phim này rất dở.",en:"This movie is bad."},{vi:"Cậu bé này rất hư.",en:"This boy is really bad."}],
+ micro:{rule:"Bad is contextual too.",examples:[{vi:"Món ăn này dở.",en:"This dish is bad."}],contrast:"xấu appearance/person · tệ situation/weather · dở content/food · hư child behaviour.",check:{q:"A bad movie is:",options:["phim dở","phim hư","phim tệ người"],answer:0},produce:{en:"Today's weather is bad.",vi:"Thời tiết hôm nay tệ."}},requires:["c.sent.adjafter"]},
+
+{id:"c.south.tui",unit:"u3",title:"Tui — everyday southern I",kind:"pragmatics",
+ rule:"The late-course speaking examples repeatedly use tui as an informal southern first-person pronoun.",
+ examples:[{vi:"Bữa nay tui thấy buồn quá.",en:"I feel very sad today."},{vi:"Tui thích căn bếp này vì nó rất sạch.",en:"I like this kitchen because it is very clean."}],
+ micro:{rule:"Tui is informal southern speech; keep tôi or a relationship pronoun where more distance or respect is needed.",examples:[{vi:"Anh tui cao, còn tui thì lùn.",en:"My brother is tall, but I am short."}],contrast:"tôi neutral/formal · tui casual southern.",check:{q:"Casual southern “I”:",options:["tui","họ"],answer:0},produce:{en:"I feel sad today.",vi:"Bữa nay tui thấy buồn."}},requires:["c.pron.basic"]},
+
+{id:"c.south.dauco",unit:"u3",title:"Đâu có … đâu — spoken denial",kind:"pragmatics",
+ rule:"The 28/08 practice uses đâu có … đâu for emphatic conversational denial: Tui đâu có ngu đâu, tui chỉ không biết thôi.",
+ examples:[{vi:"Tui đâu có ngu đâu, tui chỉ không biết thôi.",en:"I'm not stupid; I just don't know."}],
+ micro:{rule:"The denied idea is wrapped with đâu có … đâu.",examples:[{vi:"Tui đâu có nói vậy đâu.",en:"I didn't say that."}],contrast:"không gives plain negation; đâu có … đâu is conversational and emphatic.",check:{q:"The course's emphatic spoken denial:",options:["đâu có … đâu","sẽ … rồi"],answer:0},produce:{en:"I didn't say that.",vi:"Tui đâu có nói vậy đâu."}},requires:["c.sent.neg","c.south.tui"]}
+);
+
 /* ═══════════════════════════════════════════════════════════════════════
    COURSE CONTENT — PART 2b · vocabulary added from ALEXANDRE.docx,
    course sentences, dialogues, pronunciation data, contrast sets,
@@ -1306,6 +1709,59 @@ const COURSE_ITEMS = [
 {vi:"xữa", en:"southern sound of sữa (milk)", d:"u3", concept:"c.south.consonants", north:"sữa", sound:1}
 ];
 
+
+/* V7 vocabulary expansion · stable IDs and source dates */
+COURSE_ITEMS.push(
+{id:"course.poss.cua",vi:"của",en:"of; belonging to",d:"u1",concept:"c.pron.possessive",sourceDate:"2026-02-15",ex:{vi:"Chìa khoá của em ở đâu?",en:"Where are my keys?"}},
+{id:"course.intro.xinchao",vi:"xin chào",en:"hello (formal / first meeting)",d:"u1",concept:"c.intro.greeting",sourceDate:"2026-02-15"},
+{id:"course.intro.ten",vi:"tên",en:"name",d:"u1",concept:"c.intro.name",sourceDate:"2026-02-15",ex:{vi:"Tên chị là gì?",en:"What is your name?"}},
+{id:"course.intro.dentu",vi:"đến từ",en:"to come from",d:"u1",concept:"c.intro.origin",sourceDate:"2026-02-15",ex:{vi:"Bạn đến từ đâu?",en:"Where are you from?"}},
+{id:"course.intro.song",vi:"sống",en:"to live",d:"u1",concept:"c.intro.origin",sourceDate:"2026-02-15",ex:{vi:"Anh sống ở đâu?",en:"Where do you live?"}},
+{id:"course.intro.khoe",vi:"khoẻ",en:"well; healthy",d:"u1",concept:"c.intro.health",sourceDate:"2026-02-15",ex:{vi:"Dạ chị có khoẻ không?",en:"How are you?"}},
+{id:"course.intro.ratvui",vi:"rất vui được gặp",en:"nice to meet",d:"u1",concept:"c.intro.greeting",sourceDate:"2026-02-15"},
+{id:"course.demo.nay",vi:"này",en:"this",d:"u4",concept:"c.sent.demonstratives",sourceDate:"2026-02-28",ex:{vi:"Cái này là gì?",en:"What is this?"}},
+{id:"course.demo.kia",vi:"kia",en:"that over there",d:"u4",concept:"c.sent.demonstratives",sourceDate:"2026-02-28"},
+{id:"course.quant.nhieu",vi:"nhiều",en:"many; much",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-02-28"},
+{id:"course.quant.vai",vi:"vài",en:"several; a few",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-02-28"},
+{id:"course.quant.motso",vi:"một số",en:"some; a number of",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-02-28"},
+{id:"course.quant.motvai",vi:"một vài",en:"a few",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-02-28"},
+{id:"course.quant.tatca",vi:"tất cả",en:"all",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-09-15"},
+{id:"course.quant.moi",vi:"mỗi",en:"each; every",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-06-17"},
+{id:"course.quant.du",vi:"đủ",en:"enough",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-02-28"},
+{id:"course.quant.them",vi:"thêm",en:"more; add",d:"u4",concept:"c.sent.quantifiers",sourceDate:"2026-02-28"},
+{id:"course.have.co",vi:"có",en:"have; there is",d:"u4",concept:"c.sent.have",sourceDate:"2026-03-22",ex:{vi:"Tôi có một quyển sách.",en:"I have a book."}},
+{id:"course.have.khongco",vi:"không có",en:"do not have; there is not",d:"u4",concept:"c.sent.have",sourceDate:"2026-04-05"},
+{id:"course.wh.gi",vi:"gì",en:"what",d:"u4",concept:"c.question.what",sourceDate:"2026-09-15",ex:{vi:"Bạn làm gì?",en:"What are you doing?"}},
+{id:"course.wh.caigi",vi:"cái gì",en:"what thing; what",d:"u4",concept:"c.question.what",sourceDate:"2026-09-15"},
+{id:"course.wh.lagi",vi:"là gì",en:"what is; what does … mean",d:"u4",concept:"c.question.what",sourceDate:"2026-09-15"},
+{id:"course.wh.odau",vi:"ở đâu",en:"where",d:"u4",concept:"c.question.where",sourceDate:"2026-09-15",ex:{vi:"Chị sống ở đâu?",en:"Where do you live?"}},
+{id:"course.wh.kh-nao",vi:"khi nào",en:"when",d:"u4",concept:"c.question.when",sourceDate:"2026-09-15"},
+{id:"course.wh.baogio",vi:"bao giờ",en:"when; ever",d:"u4",concept:"c.question.when",sourceDate:"2026-09-15"},
+{id:"course.wh.chungnao",vi:"chừng nào",en:"when; around when",d:"u4",concept:"c.question.when",sourceDate:"2026-09-15"},
+{id:"course.wh.taisao",vi:"tại sao",en:"why",d:"u4",concept:"c.question.why",sourceDate:"2026-09-15"},
+{id:"course.wh.sao",vi:"sao",en:"why; how (context-dependent)",d:"u4",concept:"c.question.how",sourceDate:"2026-09-15",ex:{vi:"Em thấy sao?",en:"How do you feel?"}},
+{id:"course.wh.nao",vi:"nào",en:"which",d:"u4",concept:"c.question.which",sourceDate:"2026-09-15"},
+{id:"course.wh.thenao",vi:"thế nào",en:"how; what … like",d:"u4",concept:"c.question.how",sourceDate:"2026-09-15"},
+{id:"course.wh.lamsao",vi:"làm sao",en:"how",d:"u4",concept:"c.question.how",sourceDate:"2026-09-15",ex:{vi:"Làm sao anh biết?",en:"How do you know?"}},
+{id:"course.wh.nhuthenao",vi:"như thế nào",en:"how; in what way",d:"u4",concept:"c.question.how",sourceDate:"2026-09-15"},
+{id:"course.wh.baonhieutien",vi:"bao nhiêu tiền",en:"how much money; how much",d:"u7",concept:"c.question.quantity",sourceDate:"2026-09-15"},
+{id:"course.sep.thietha",vi:"thiệt hả",en:"really? (southern)",d:"u3",concept:"c.part.south",sourceDate:"2026-09-15"},
+{id:"course.sep.khacnhau",vi:"khác nhau",en:"different from each other",d:"u10",concept:"c.sent.adjafter",sourceDate:"2026-09-15"},
+{id:"course.sep.loai",vi:"loại",en:"type; kind",d:"u10",concept:"c.sent.classifier",sourceDate:"2026-09-15"},
+{id:"course.sep.migoi",vi:"mì gói",en:"instant noodles",d:"u10",concept:"c.sent.classifier",sourceDate:"2026-09-15"},
+{id:"course.bad.te",vi:"tệ",en:"bad; poor (weather/situation)",d:"u10",concept:"c.lex.bad",sourceDate:"2026-09-11",ex:{vi:"Thời tiết hôm nay tệ.",en:"Today's weather is bad."}},
+{id:"course.bad.hu",vi:"hư",en:"badly behaved; naughty",d:"u10",concept:"c.lex.bad",sourceDate:"2026-09-11",ex:{vi:"Cậu bé này rất hư.",en:"This boy is really bad."}},
+{id:"course.bad.do",vi:"dơ",en:"dirty (southern)",d:"u3",concept:"c.south.lexicon",sourceDate:"2026-08-28"},
+{id:"course.good.nguoitot",vi:"người tốt",en:"a good person",d:"u10",concept:"c.lex.good",sourceDate:"2026-09-11"},
+{id:"course.bad.nguoixau",vi:"người xấu",en:"a bad person",d:"u10",concept:"c.lex.bad",sourceDate:"2026-08-28"},
+{id:"course.south.tui",vi:"tui",en:"I (casual southern)",d:"u3",concept:"c.south.tui",sourceDate:"2026-08-28",ex:{vi:"Bữa nay tui thấy buồn quá.",en:"I feel very sad today."}},
+{id:"course.south.buanay",vi:"bữa nay",en:"today (southern, conversational)",d:"u3",concept:"c.south.tui",sourceDate:"2026-08-28"},
+{id:"course.south.dauco",vi:"đâu có … đâu",en:"not at all; emphatic denial",d:"u3",concept:"c.south.dauco",sourceDate:"2026-08-28"},
+{id:"course.sep.baidauxe",vi:"bãi đậu xe",en:"parking lot",d:"u10",concept:"c.question.quantity",sourceDate:"2026-09-15"},
+{id:"course.sep.aosomi",vi:"áo sơ mi",en:"shirt",d:"u10",concept:"c.sent.classifier",sourceDate:"2026-09-15"},
+{id:"course.sep.aothun",vi:"áo thun",en:"T-shirt",d:"u10",concept:"c.sent.classifier",sourceDate:"2026-09-15"}
+);
+
 /* ── sentences from the course, keyed to the concept they demonstrate ── */
 const COURSE_SENTENCES = [
 {vi:"Tôi học tiếng Việt.", en:"I learn Vietnamese.", c:"c.sent.svo"},
@@ -1430,6 +1886,44 @@ const COURSE_SENTENCES = [
 {vi:"Cái áo này mắc quá.", en:"This shirt is so expensive.", c:"c.south.lexicon"}
 ];
 
+
+COURSE_SENTENCES.push(
+{vi:"Tên chị là gì?",en:"What is your name?",c:"c.intro.name"},
+{vi:"Em tên là Alexandre.",en:"My name is Alexandre.",c:"c.intro.name"},
+{vi:"Bạn đến từ đâu?",en:"Where are you from?",c:"c.intro.origin"},
+{vi:"Anh sống ở đâu?",en:"Where do you live?",c:"c.intro.origin"},
+{vi:"Dạ chị có khoẻ không?",en:"How are you?",c:"c.intro.health"},
+{vi:"Anh khoẻ, còn em?",en:"I'm fine, and you?",c:"c.intro.health"},
+{vi:"Chìa khoá của em ở đâu?",en:"Where are my keys?",c:"c.pron.possessive"},
+{vi:"Cuốn sách đó là của tôi.",en:"That book is mine.",c:"c.sent.demonstratives"},
+{vi:"Cái này là gì?",en:"What is this?",c:"c.sent.demonstratives"},
+{vi:"Tôi có một quyển sách.",en:"I have a book.",c:"c.sent.have"},
+{vi:"Ở đây có nhà hàng không?",en:"Is there a restaurant here?",c:"c.sent.have"},
+{vi:"Chị sống ở đâu?",en:"Where do you live?",c:"c.question.where"},
+{vi:"Chị có thể kiếm taxi ở đâu?",en:"Where can I find a taxi?",c:"c.question.where"},
+{vi:"Siêu thị gần nhất ở đâu?",en:"Where is the nearest supermarket?",c:"c.question.where"},
+{vi:"Chúng ta nên gặp nhau ở đâu?",en:"Where should we meet?",c:"c.question.where"},
+{vi:"Bạn làm gì?",en:"What are you doing?",c:"c.question.what"},
+{vi:"Em muốn ăn gì?",en:"What do you want to eat?",c:"c.question.what"},
+{vi:"Màu yêu thích của em là gì?",en:"What is your favourite colour?",c:"c.question.what"},
+{vi:"Em thấy sao?",en:"How do you feel?",c:"c.question.how"},
+{vi:"Thời tiết ở ngoài sao?",en:"How is the weather outside?",c:"c.question.how"},
+{vi:"Làm sao anh biết?",en:"How do you know?",c:"c.question.how"},
+{vi:"Chị cần bao nhiêu tiền?",en:"How much money do you need?",c:"c.question.quantity"},
+{vi:"Có mấy trái táo trên bàn?",en:"How many apples are on the table?",c:"c.question.quantity"},
+{vi:"Có mấy cái xe hơi ở bãi đậu xe?",en:"How many cars are in the parking lot?",c:"c.question.quantity"},
+{vi:"Cô ấy là một người tốt.",en:"The lady is a good person.",c:"c.lex.good"},
+{vi:"Món ăn này rất ngon.",en:"This dish is delicious.",c:"c.lex.good"},
+{vi:"Phim này rất hay.",en:"This movie is very good.",c:"c.lex.good"},
+{vi:"Con chó của tôi rất ngoan.",en:"My dog is very good.",c:"c.lex.good"},
+{vi:"Thời tiết hôm nay tệ.",en:"Today's weather is bad.",c:"c.lex.bad"},
+{vi:"Bộ phim này rất dở.",en:"This movie is bad.",c:"c.lex.bad"},
+{vi:"Cậu bé này rất hư.",en:"This boy is really bad.",c:"c.lex.bad"},
+{vi:"Bữa nay tui thấy buồn quá.",en:"I feel very sad today.",c:"c.south.tui"},
+{vi:"Tui đâu có ngu đâu, tui chỉ không biết thôi.",en:"I'm not stupid; I just don't know.",c:"c.south.dauco"},
+{vi:"Ở Pháp có nhiều loại mì khác nhau.",en:"There are many different kinds of noodles in France.",c:"c.sent.quantifiers"}
+);
+
 /* ── dialogues from the course ───────────────────────────────────────── */
 const DIALOGUES = [
 {id:"dlg.shop", title:"Ở siêu thị · In the supermarket", concept:"c.sent.yesno",
@@ -1486,6 +1980,33 @@ const DIALOGUES = [
   {who:"B", vi:"Được, lặp lại nhé.", en:"Okay, I'll repeat."},
   {who:"A", vi:"Nhanh quá. Cảm ơn chị.", en:"Too fast. Thank you."}]}
 ];
+
+
+DIALOGUES.push(
+{id:"dlg.intro",title:"Gặp nhau lần đầu · First meeting",concept:"c.intro.origin",
+ setting:"Greeting, name, origin, occupation and residence.",
+ lines:[
+  {who:"Huy",vi:"Chào chị. Tôi tên là Huy. Chị tên là gì?",en:"Hello. My name is Huy. What is your name?"},
+  {who:"Jane",vi:"Chào anh. Tôi tên là Jane.",en:"Hello. My name is Jane."},
+  {who:"Huy",vi:"Rất hân hạnh được biết chị.",en:"Nice to meet you."},
+  {who:"Jane",vi:"Rất vui được gặp anh.",en:"Nice to meet you too."},
+  {who:"Huy",vi:"Chị là người nước nào?",en:"Where are you from?"},
+  {who:"Jane",vi:"Tôi là người Mỹ.",en:"I'm American."},
+  {who:"Huy",vi:"Chị làm nghề gì?",en:"What do you do?"},
+  {who:"Jane",vi:"Tôi là một luật sư.",en:"I'm a lawyer."},
+  {who:"Huy",vi:"Chị sống ở đâu?",en:"Where do you live?"},
+  {who:"Jane",vi:"Tôi sống ở Bình Dương.",en:"I live in Binh Duong."}]},
+{id:"dlg.comparefood",title:"So sánh món ăn · Comparing food",concept:"c.cmp.more",
+ setting:"Nam and Linh compare dishes and prices.",
+ lines:[
+  {who:"Nam",vi:"Linh ơi, menu ở đây có nhiều món ăn ngon quá!",en:"Linh, there are so many delicious dishes on the menu here!"},
+  {who:"Linh",vi:"Món phở bò ở đây nhìn ngon như phở ở Hà Nội vậy.",en:"The beef phở here looks as good as phở in Hanoi."},
+  {who:"Nam",vi:"Nhưng tớ thấy món bún chả ăn ngon hơn phở nhiều.",en:"But I think bún chả tastes much better than phở."},
+  {who:"Linh",vi:"Thiệt hả? Món bún chả này có mắc hơn món phở không?",en:"Really? Is this bún chả more expensive than the phở?"},
+  {who:"Nam",vi:"Không đâu, giá của hai món này rẻ bằng nhau, đều là năm mươi ngàn một tô.",en:"No, the two dishes cost the same, fifty thousand per bowl."},
+  {who:"Linh",vi:"Đối với tớ, bánh xèo là ngon nhất!",en:"For me, bánh xèo is the best!"},
+  {who:"Nam",vi:"Được rồi, vậy tụi mình gọi một bún chả và một bánh xèo nhé!",en:"Okay, let's order one bún chả and one bánh xèo."}]}
+);
 
 /* ── contrast sets · deliberately confusable, drilled side by side ───── */
 const CONTRASTS = [
@@ -1679,6 +2200,33 @@ const SCENARIOS = [
   {goal:"Say you will go home at five.", expect:["em sẽ về nhà lúc 5 giờ","em về nhà lúc 5 giờ"], hint:"sẽ is optional once the time is stated."}]}
 ];
 
+
+SCENARIOS.push(
+{id:"sc.intro2",title:"Làm quen",en:"Introducing yourself",concept:"c.intro.name",
+ setting:"You meet someone for the first time in Vietnam.",
+ steps:[
+  {goal:"Greet an older woman politely.",expect:["dạ chào chị","chào chị"],hint:"Use chị for her."},
+  {goal:"Say your name is Alexandre.",expect:["em tên là alexandre","tên em là alexandre"],hint:"The course allows both orders."},
+  {goal:"Say you are from France.",expect:["em đến từ pháp","em là người pháp"],hint:"đến từ + place, or là người + country."},
+  {goal:"Say you live in Paris.",expect:["em sống ở paris","em ở paris"],hint:"sống ở / ở."},
+  {goal:"Say it is nice to meet her.",expect:["rất vui được gặp chị","em rất vui được gặp chị"],hint:"Keep the relationship pronoun."}]},
+{id:"sc.wh15sep",title:"Hỏi cho đúng",en:"Open questions",concept:"c.question.wh",
+ setting:"You need practical information in a new place.",
+ steps:[
+  {goal:"Ask where the nearest supermarket is.",expect:["siêu thị gần nhất ở đâu"],hint:"ở đâu stays in the location slot."},
+  {goal:"Ask what the other person wants to eat.",expect:["chị muốn ăn gì","bạn muốn ăn gì"],hint:"gì after the verb."},
+  {goal:"Ask how they feel.",expect:["chị thấy sao","bạn thấy sao","chị cảm thấy thế nào"],hint:"sao / thế nào."},
+  {goal:"Ask how much money they need.",expect:["chị cần bao nhiêu tiền","bạn cần bao nhiêu tiền"],hint:"bao nhiêu before tiền."},
+  {goal:"Ask how many cars are in the parking lot.",expect:["có mấy cái xe hơi ở bãi đậu xe","có mấy xe hơi ở bãi đậu xe"],hint:"mấy for a count."}]},
+{id:"sc.goodbad",title:"Tốt, ngon, hay hay ngoan?",en:"Choosing good and bad",concept:"c.lex.good",
+ setting:"Describe people, food, films, weather and a child using the course's contextual adjectives.",
+ steps:[
+  {goal:"Say the dish is delicious.",expect:["món ăn này rất ngon","món này ngon"],hint:"Food → ngon."},
+  {goal:"Say the movie is very good.",expect:["phim này rất hay","bộ phim này hay"],hint:"Content → hay."},
+  {goal:"Say the child is very naughty.",expect:["cậu bé này rất hư","đứa bé này hư"],hint:"Child behaviour → hư."},
+  {goal:"Say today's weather is bad.",expect:["thời tiết hôm nay tệ"],hint:"Weather/situation → tệ."}]}
+);
+
 /* ── survival phrases — what Alexandre can say today ─────────────────── */
 const SURVIVAL = [
 {vi:"Em chưa hiểu.", en:"I don't understand yet.", c:"c.asp.chua"},
@@ -1709,6 +2257,42 @@ const SURVIVAL = [
 {vi:"Giúp em một chút nha.", en:"Help me a bit, please.", c:"c.part.nhe"},
 {vi:"Em xin phép.", en:"Excuse me, may I.", c:"c.part.a"},
 {vi:"Em không biết.", en:"I don't know.", c:"c.sent.neg"}
+];
+
+
+SURVIVAL.push(
+{vi:"Chị sống ở đâu?",en:"Where do you live?",c:"c.question.where"},
+{vi:"Em muốn ăn gì?",en:"What do you want to eat?",c:"c.question.what"},
+{vi:"Em thấy sao?",en:"How do you feel?",c:"c.question.how"},
+{vi:"Thiệt hả?",en:"Really?",c:"c.part.south"},
+{vi:"Chị cần bao nhiêu tiền?",en:"How much money do you need?",c:"c.question.quantity"}
+);
+
+
+/* Chronological index of the 22 dated classes in ALEXANDRE.docx. */
+const CORE_LESSONS = [
+{id:"core-2026-02-15",date:"2026-02-15",title:"Pronouns, greetings and introductions",summary:"Personal pronouns, family address, greetings, name, age, origin, nationality, residence and health.",concepts:["c.pron.basic","c.pron.family","c.pron.age","c.pron.plural","c.pron.possessive","c.intro.greeting","c.intro.name","c.intro.origin","c.intro.health"]},
+{id:"core-2026-02-22",date:"2026-02-22",title:"Alphabet, vowels and tones",summary:"Letters, compound vowels, consonant combinations and the six-tone system.",concepts:["c.read.sequence","c.tones.six"]},
+{id:"core-2026-02-28",date:"2026-02-28",title:"Sentence components and noun phrases",summary:"Subject, verb, object, adjectives, adverbs, prepositions, quantifiers, classifiers, demonstratives, plurals and particles.",concepts:["c.sent.svo","c.sent.adjafter","c.sent.classifier","c.sent.quantifiers","c.sent.demonstratives","c.sent.plural","c.part.nhe"]},
+{id:"core-2026-03-08",date:"2026-03-08",title:"Nouns, adjectives and syllable structure",summary:"Noun/adjective definitions, Vietnamese syllable structure and pronunciation review.",concepts:["c.sent.adjafter","c.read.sequence"]},
+{id:"core-2026-03-22",date:"2026-03-22",title:"Small talk and basic sentence practice",summary:"Small talk, true/false work and basic possession/existence patterns.",concepts:["c.sent.have","c.sent.svo","c.sent.yesno"]},
+{id:"core-2026-04-05",date:"2026-04-05",title:"Negation and common verbs",summary:"không, chưa and high-frequency verbs.",concepts:["c.sent.neg","c.asp.chua","c.mod.core"]},
+{id:"core-2026-04-12",date:"2026-04-12",title:"Survival Vietnamese and meals",summary:"Asking someone to slow down or repeat, meal vocabulary and practical phrases.",concepts:["c.mod.core","c.time.buoi","c.part.nhe"]},
+{id:"core-2026-04-19",date:"2026-04-19",title:"Numbers in real situations",summary:"Counting, phone numbers, delivery confirmation and number practice.",concepts:["c.num.basic","c.sent.yesno"]},
+{id:"core-2026-04-25",date:"2026-04-25",title:"Clock time and duration",summary:"Mấy giờ rồi?, giờ, phút and talking about when things happen.",concepts:["c.time.clock","c.num.basic"]},
+{id:"core-2026-05-08",date:"2026-05-08",title:"Days and routines",summary:"Weekdays, early/late and everyday routine practice.",concepts:["c.time.clock","c.freq.adv"]},
+{id:"core-2026-05-17",date:"2026-05-17",title:"Aspect and sequencing actions",summary:"trước khi, đang, mới, sắp, xong and routine verbs.",concepts:["c.asp.da","c.asp.moi","c.asp.dang","c.asp.se","c.mod.beforeafter"]},
+{id:"core-2026-05-27",date:"2026-05-27",title:"Pronunciation review and self-introduction",summary:"Extended self-introduction, family, work, Paris, Vietnam and motivation for learning Vietnamese.",concepts:["c.intro.name","c.intro.origin","c.pron.family","c.read.sequence"]},
+{id:"core-2026-06-07",date:"2026-06-07",title:"Adjectives, tense markers and numbers",summary:"Adjective/noun sentences, aspect markers and number practice.",concepts:["c.sent.adjafter","c.asp.da","c.num.basic"]},
+{id:"core-2026-06-17",date:"2026-06-17",title:"Frequency and yes/no questions",summary:"mỗi, home-working routine, true/false practice and adjective yes/no questions.",concepts:["c.freq.adv","c.sent.yesno","c.sent.quantifiers"]},
+{id:"core-2026-07-14",date:"2026-07-14",title:"Out and about",summary:"khách, khách du lịch, rảnh, gần/xa, discounts and yes/no review.",concepts:["c.sent.yesno","c.sent.o","c.sent.thi"]},
+{id:"core-2026-07-22",date:"2026-07-22",title:"Core verbs and instructions",summary:"viết, thử, hỏi, đọc, nhanh/chậm, tự, nghỉ ngơi and practical actions.",concepts:["c.sent.svo","c.sent.adjafter"]},
+{id:"core-2026-07-29",date:"2026-07-29",title:"Modals, health and before/after",summary:"muốn, có thể, cần, phải, nên, chưa, health vocabulary and sequencing.",concepts:["c.mod.core","c.mod.canphai","c.mod.bi","c.mod.beforeafter","c.asp.chua"]},
+{id:"core-2026-08-09",date:"2026-08-09",title:"Bring, wear and everyday objects",summary:"đem, đem theo, cửa sổ, đeo giày, hơi and đóng.",concepts:["c.mod.wear","c.sent.svo"]},
+{id:"core-2026-08-16",date:"2026-08-16",title:"Chores, frequency and opposites",summary:"Household chores, frequency expressions and adjective opposites.",concepts:["c.freq.adv","c.sent.adjafter","c.south.lexicon"]},
+{id:"core-2026-08-28",date:"2026-08-28",title:"Good/bad adjectives and southern speech",summary:"Context-dependent adjectives, colloquial tui, southern pronunciation and spoken contrast.",concepts:["c.lex.good","c.lex.bad","c.south.tui","c.south.dauco","c.south.consonants","c.south.finals","c.south.hoinga"]},
+{id:"core-2026-09-11",date:"2026-09-11",title:"Choosing the right good or bad adjective",summary:"tốt/ngon/hay/ngoan and xấu/tệ/dở/hư in context, plus comparative restaurant language.",concepts:["c.lex.good","c.lex.bad","c.cmp.equal","c.cmp.more","c.cmp.most"]},
+{id:"core-2026-09-15",date:"2026-09-15",title:"Open questions",summary:"gì, ở đâu, khi nào, tại sao/sao, nào, thế nào/làm sao, bao nhiêu/mấy and practical question practice.",concepts:["c.question.wh","c.question.what","c.question.where","c.question.when","c.question.why","c.question.how","c.question.which","c.question.quantity"]}
 ];
 
 /* word classes, used by the odd-one-out drill */
@@ -2021,6 +2605,11 @@ const LEGACY_UNIT = {d1:"u10", d2:"u10", d3:"u8", d4:"u10", d5:"u10", d6:"u10",
 const LEGACY_THEME = {d1:"Verbs", d2:"Out and about", d3:"Modals and chưa",
                       d4:"Body, home, health", d5:"Bring and wear", d6:"Chores",
                       d7:"Frequency", d8:"Opposites", d9:"Comparison", d10:"Southern words"};
+const LEGACY_SOURCE_DATE = {
+  d1:"2026-07-22", d2:"2026-07-14", d3:"2026-07-29", d4:"2026-07-29",
+  d5:"2026-08-09", d6:"2026-08-16", d7:"2026-08-16", d8:"2026-08-28",
+  d9:"2026-09-11", d10:"2026-08-28"
+};
 /* which concept each carried-over word demonstrates */
 const LEGACY_CONCEPT = {
   "muốn":"c.mod.core","có thể":"c.mod.core","không thể":"c.mod.core","cần":"c.mod.core",
@@ -2057,6 +2646,7 @@ let COURSE = (function build(){
       north: x.north || null, opp: x.opp || null, syn: x.syn || null,
       note: x.note || null,
       ex: x.exVi ? {vi:x.exVi, en:x.exEn||""} : null,
+      sourceDate:LEGACY_SOURCE_DATE[x.d]||null,
       origin:"lesson"
     });
   });
@@ -2065,7 +2655,7 @@ let COURSE = (function build(){
       id: x.id || x.vi, vi:x.vi, en:x.en,
       unit: x.d, theme: "", concept: x.concept || null,
       north: x.north || null, opp:null, syn:null, note:x.note||null,
-      ex: x.ex || null, sound: !!x.sound, origin:"course"
+      ex: x.ex || null, sound: !!x.sound, sourceDate:x.sourceDate||null, origin:"course"
     });
   });
   /* attach a sentence to any item that has none but appears in one */
@@ -2132,7 +2722,7 @@ let COURSE = (function build(){
     words:items, all:all, byId:byId,
     itemsByConcept:itemsByConcept, sentencesByConcept:sentByConcept,
     sentences:COURSE_SENTENCES, dialogues:DIALOGUES, contrasts:CONTRASTS,
-    pron:PRON, scenarios:SCENARIOS, survival:SURVIVAL, classes:CLASSES
+    pron:PRON, scenarios:SCENARIOS, survival:SURVIVAL, classes:CLASSES, lessons:CORE_LESSONS
   };
 })();
 const CORE_COURSE = COURSE;
@@ -2280,7 +2870,7 @@ function rebuildCourse(){
   const sentByConcept={}; sentences.forEach(x=>(sentByConcept[x.c||"c.sent.svo"]=sentByConcept[x.c||"c.sent.svo"]||[]).push(x));
   COURSE={units:units,concepts:concepts,conceptById:finalConceptById,words:words,all:all,byId:byId,itemsByConcept:itemsByConcept,
     sentencesByConcept:sentByConcept,sentences:sentences,dialogues:dialogues,contrasts:CORE_COURSE.contrasts,pron:CORE_COURSE.pron,
-    scenarios:CORE_COURSE.scenarios,survival:CORE_COURSE.survival,classes:CORE_COURSE.classes,reference:reference,lessons:CUSTOM_PACKS.map(p=>p.lesson)};
+    scenarios:CORE_COURSE.scenarios,survival:CORE_COURSE.survival,classes:CORE_COURSE.classes,reference:reference,lessons:CORE_LESSONS.concat(CUSTOM_PACKS.map(p=>p.lesson))};
 }
 async function loadCustomContent(){ CUSTOM_PACKS=await ContentStore.all("packs"); CUSTOM_PACKS.sort((a,b)=>(a.lesson.date||"").localeCompare(b.lesson.date||"")); rebuildCourse(); }
 async function commitLessonPack(pack,opts){
@@ -3355,6 +3945,9 @@ function card(inner){ return '<div class="card" id="card">'+inner+'</div>'; }
 let SESS=null;
 function startSession(plan, opts){
   SESS=Object.assign({queue:plan.slice(),i:0,results:[],started:Date.now(),right:0,partial:0,wrong:0,run:0,best:0,xp0:S.xp,mode:"today"},opts||{});
+  document.body.classList.add("in-session");
+  document.body.dataset.view = "study";
+  window.scrollTo({top:0,behavior:"smooth"});
   nextCard();
 }
 function nextCard(){
@@ -4154,20 +4747,26 @@ function unitTitle(uid){ const u = COURSE.units.find(x=>x.id===uid); return u ? 
    UI · the eight screens
    ═══════════════════════════════════════════════════════════════════════ */
 const NAV = [
-  {id:"today",      label:"Today"},
-  {id:"course",     label:"Course"},
-  {id:"review",     label:"Review"},
-  {id:"listen",     label:"Listen"},
-  {id:"speak",      label:"Speak"},
-  {id:"weaknesses", label:"Weak"},
-  {id:"words",      label:"Words"},
-  {id:"content",    label:"Content"},
-  {id:"progress",   label:"Progress"}
+  {id:"today",      label:"Today",    glyph:"⌂",  primary:true},
+  {id:"course",     label:"Course",   glyph:"▤",  primary:true},
+  {id:"review",     label:"Review",   glyph:"↺",  primary:true},
+  {id:"listen",     label:"Listen",   glyph:"◖",  primary:false},
+  {id:"speak",      label:"Speak",    glyph:"◉",  primary:false},
+  {id:"weaknesses", label:"Weak",     glyph:"△",  primary:false},
+  {id:"words",      label:"Words",    glyph:"Aa", primary:false},
+  {id:"content",    label:"Content",  glyph:"＋", primary:false},
+  {id:"progress",   label:"Progress", glyph:"∿",  primary:false}
 ];
 let VIEW = "today";
 function go(v){
   VIEW = v; SESS = null; keyHandler = null;
-  $$("#nav button").forEach(b => b.setAttribute("aria-selected", b.dataset.v === v));
+  document.body.classList.remove("in-session");
+  document.body.dataset.view = v;
+  const secondary = NAV.filter(n=>!n.primary).map(n=>n.id);
+  $$("#nav button").forEach(function(b){
+    const selected = b.id === "moreNav" ? secondary.indexOf(v) > -1 : b.dataset.v === v;
+    b.setAttribute("aria-selected", selected);
+  });
   const host = $("#stage");
   host.scrollTop = 0;
   ({today:viewToday, course:viewCourse, review:viewReview, listen:viewListen,
@@ -4195,80 +4794,61 @@ function drill(items, opts){
 
 /* ══ TODAY ═══════════════════════════════════════════════════════════ */
 function viewToday(){
-  const plan = buildPlan();
-  S.lastPlan = plan.map(p=>p.it.id);
-  const counts = {};
-  plan.forEach(p => counts[p.why] = (counts[p.why]||0)+1);
-  const mins = planMinutes(plan);
-  const broken = brokenConcepts();
-  const hour = new Date().getHours();
-  const greet = hour < 11 ? "Chào buổi sáng" : hour < 18 ? "Chào buổi chiều" : "Chào buổi tối";
-
-  const bits = [];
-  if (counts.micro) bits.push({n:counts.micro, t:"micro-lesson on " + broken[0].title.toLowerCase()});
-  if (counts.due) bits.push({n:counts.due, t:"due review" + (counts.due>1?"s":"")});
-  if (counts.weak) bits.push({n:counts.weak, t:"weak item" + (counts.weak>1?"s":"")});
-  if (counts.recent) bits.push({n:counts.recent, t:"recent consolidation"});
-  if (counts.older) bits.push({n:counts.older, t:"older cumulative review"});
-  if (counts["new"]) bits.push({n:counts["new"], t:"new material"});
-  if (counts.fill) bits.push({n:counts.fill, t:"extra"});
-
-  const skillMix = {};
-  plan.forEach(function(p){
-    const s = p.why === "micro" ? "concept" : (p.skill||nextSkillFor(p.it));
-    skillMix[s] = (skillMix[s]||0)+1;
-  });
-
-  $("#stage").innerHTML =
-    '<div class="hero"><div class="eyebrow">'+esc(greet)+', Alexandre</div>'
-    + '<h2 class="today-h">Hôm nay</h2>'
-    + '<div class="today-min">'+mins+' min estimated · '+plan.length+' learning activities</div></div>'
-    + (diagnosticDue() ? '<div class="card accent"><div class="eyebrow">Weekly check</div>'
-        + '<div class="prompt-en" style="font-size:19px">A diagnostic is due. Ten minutes across every skill, then a written report.</div>'
-        + '<div class="next-row"><button class="btn" id="startDiag">Run the diagnostic</button></div></div>' : '')
-    + '<div class="card">'
-    + '<ol class="planlist">' + bits.map(b =>
-        '<li><span class="n">'+b.n+'</span><span>'+esc(b.t)+'</span></li>').join("") + '</ol>'
-    + '<div class="mixrow">' + Object.keys(skillMix).map(k =>
-        '<span class="mixtag">'+esc(k)+' ×'+skillMix[k]+'</span>').join("") + '</div>'
-    + '<div class="next-row" style="margin-top:20px"><button class="btn" id="start">Bắt đầu</button>'
-    + '<span class="hint">Enter</span></div></div>'
-    + tutorBlock()
-    + '<div class="quickrow">'
-    + '<button class="quick" data-q="survival"><b>Survival</b><span>What you can say today</span></button>'
-    + '<button class="quick" data-q="south"><b>Southern</b><span>Sound and word choices</span></button>'
-    + '<button class="quick" data-q="weak"><b>Weak spots</b><span>Straight at the problems</span></button>'
-    + '<button class="quick" data-q="listen"><b>Listening lab</b><span>Ear work only</span></button>'
-    + '</div>';
-
-  $("#start").onclick = function(){ startSession(plan); };
-  if ($("#startDiag")) $("#startDiag").onclick = runDiagnostic;
-  keyHandler = e => { if (e.key === "Enter") startSession(plan); };
-  $$(".quick").forEach(function(b){
-    b.onclick = function(){
-      const q = b.dataset.q;
-      if (q === "survival") drill(shuffle(COURSE.all.filter(x=>x.survival)).slice(0,12), {why:"survival"});
-      if (q === "south")    drill(shuffle(COURSE.all.filter(x=>x.south)).slice(0,12), {why:"south"});
-      if (q === "weak")     go("weaknesses");
-      if (q === "listen")   go("listen");
-    };
-  });
+  const plan=buildPlan(); S.lastPlan=plan.map(p=>p.it.id);
+  const counts={}; plan.forEach(p=>counts[p.why]=(counts[p.why]||0)+1);
+  const mins=planMinutes(plan), broken=brokenConcepts(), hour=new Date().getHours();
+  const greet=hour<11?"Chào buổi sáng":hour<18?"Chào buổi chiều":"Chào buổi tối";
+  const dueN=counts.due||0, weakN=counts.weak||0, newN=counts["new"]||0;
+  const recentLesson=CORE_LESSONS[CORE_LESSONS.length-1];
+  const objective=broken.length?"Repair “"+broken[0].title+"” and retrieve what is due.":"Retrieve what is due, hear some Vietnamese, then add a little new material.";
+  const bits=[]; ["due","weak","recent","older","new"].forEach(k=>{if(counts[k])bits.push({n:counts[k],t:k});});
+  if(counts.micro)bits.unshift({n:counts.micro,t:"micro-lesson"});
+  $("#stage").innerHTML=
+    '<div class="today-compact-head"><div><div class="eyebrow">'+esc(greet)+', Alexandre</div><h2 class="today-h">Hôm nay</h2><div class="today-min">'+mins+' minutes</div></div>'
+    +'<div class="mobile-streak" aria-label="'+S.streak+' day streak">▲ '+S.streak+'</div></div>'
+    +'<section class="today-focus"><div class="today-focus-copy"><div class="eyebrow">Today’s focus</div><div class="today-session-note">'+esc(objective)+'</div></div>'
+    +'<div class="today-metrics"><span class="today-metric"><b>'+dueN+'</b> due</span><span class="today-metric"><b>'+weakN+'</b> weak</span><span class="today-metric"><b>'+newN+'</b> new</span></div>'
+    +'<button class="btn today-primary" id="start">Bắt đầu · '+mins+' min</button></section>'
+    +(diagnosticDue()?'<section class="today-inline-callout"><div><div class="eyebrow">Weekly check</div><div class="inline-title">Your diagnostic is due.</div></div><button class="btn ghost" id="startDiag">Run</button></section>':'')
+    +(broken.length?'<section class="today-row-link" id="weakToday"><div><div class="eyebrow">Weak today</div><b>'+esc(broken[0].title)+'</b></div><span>Practice ›</span></section>':'')
+    +'<section class="today-row-link" id="recentClass"><div><div class="eyebrow">Recent class</div><b>'+formatLessonDate(recentLesson.date)+' · '+esc(recentLesson.title)+'</b></div><span>Open ›</span></section>'
+    +'<div class="quickrow"><button class="quick" data-q="listen"><b>Listen</b><span>Ear work</span></button><button class="quick" data-q="speak"><b>Speak</b><span>Active production</span></button><button class="quick" data-q="weak"><b>Weak spots</b><span>Repair errors</span></button><button class="quick" data-q="south"><b>Miền Nam</b><span>Southern forms</span></button></div>'
+    +'<details class="today-details"><summary>Today’s mix</summary><div class="mixrow">'+bits.map(b=>'<span class="mixtag"><b>'+b.n+'</b> '+esc(b.t)+'</span>').join("")+'</div></details>'+tutorBlock();
+  $("#start").onclick=()=>startSession(plan);
+  if($("#startDiag"))$("#startDiag").onclick=runDiagnostic;
+  if($("#weakToday"))$("#weakToday").onclick=()=>go("weaknesses");
+  if($("#recentClass"))$("#recentClass").onclick=function(){COURSE_VIEW_MODE="classes";go("course");setTimeout(()=>classSheet(recentLesson.id),0);};
+  keyHandler=e=>{if(e.key==="Enter")startSession(plan);};
+  $$(".quick").forEach(b=>b.onclick=function(){const q=b.dataset.q;if(q==="south")drill(shuffle(COURSE.all.filter(x=>x.south)).slice(0,12),{why:"south"});if(q==="weak")go("weaknesses");if(q==="listen")go("listen");if(q==="speak")go("speak");});
 }
-
 /* ══ COURSE ══════════════════════════════════════════════════════════ */
+let COURSE_VIEW_MODE="topics";
+function formatLessonDate(date){const d=new Date(date+"T12:00:00");return isNaN(d)?(date||""):d.toLocaleDateString(undefined,{day:"numeric",month:"short"});}
 function viewCourse(){
-  $("#stage").innerHTML = '<div class="eyebrow">The course</div>'
-    + '<h2 class="screen-h">Course map</h2>'
-    + '<div class="hint" style="margin-bottom:4px">Bars are measured performance, not lessons ticked off.</div>'
-    + COURSE.units.map(function(u){
-        const p = unitProgress(u.id);
-        return '<button class="unit" data-u="'+u.id+'">'
-          + '<div class="unit-top"><span class="unit-t">'+esc(u.title)+'</span>'
-          + '<span class="unit-pct">'+Math.round(p.pct*100)+'%</span></div>'
-          + '<div class="ubar"><i style="width:'+(p.pct*100)+'%"></i></div>'
-          + '<div class="unit-sub">'+esc(u.blurb)+' · '+p.seen+'/'+p.n+' met</div></button>';
-      }).join("");
-  $$(".unit").forEach(b => b.onclick = function(){ unitSheet(b.dataset.u); });
+  const switcher='<div class="course-switch" role="tablist"><button data-cm="topics" aria-selected="'+(COURSE_VIEW_MODE==="topics")+'">Topics</button><button data-cm="classes" aria-selected="'+(COURSE_VIEW_MODE==="classes")+'">Classes</button></div>';
+  if(COURSE_VIEW_MODE==="classes"){
+    const lessons=CORE_LESSONS.slice().reverse();
+    $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Classes</h2><span class="course-count">'+lessons.length+' classes</span></div>'+switcher
+      +'<div class="class-list">'+lessons.map(function(l){const cs=(l.concepts||[]).filter(id=>COURSE.conceptById[id]);const avg=cs.length?cs.reduce((sum,id)=>{const its=COURSE.itemsByConcept[id]||[];return sum+(its.length?its.reduce((a,x)=>a+overall(x.id),0)/its.length:0);},0)/cs.length:0;return '<button class="class-row" data-class="'+l.id+'"><span class="class-date">'+formatLessonDate(l.date)+'</span><span class="class-copy"><b>'+esc(l.title)+'</b><small>'+esc(l.summary)+'</small></span><span class="class-state">'+(avg?Math.round(avg*100)+'%':'New')+'</span></button>';}).join("")+'</div>';
+    $$(".class-row").forEach(b=>b.onclick=()=>classSheet(b.dataset.class));
+  }else{
+    $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Course map</h2><span class="course-count">'+COURSE.concepts.length+' concepts · '+COURSE.words.length+' words</span></div>'+switcher
+      +'<div class="course-intro">Browse by linguistic system. Progress reflects demonstrated performance, not pages completed.</div>'
+      +COURSE.units.map(function(u){const p=unitProgress(u.id);return '<button class="unit" data-u="'+u.id+'"><div class="unit-top"><span class="unit-t">'+esc(u.title)+'</span><span class="unit-pct">'+Math.round(p.pct*100)+'%</span></div><div class="ubar"><i style="width:'+(p.pct*100)+'%"></i></div><div class="unit-sub">'+esc(u.blurb)+' · '+p.seen+'/'+p.n+' met</div></button>';}).join("");
+    $$(".unit").forEach(b=>b.onclick=function(){unitSheet(b.dataset.u);});
+  }
+  $$(".course-switch button").forEach(b=>b.onclick=function(){COURSE_VIEW_MODE=b.dataset.cm;viewCourse();});
+}
+function classSheet(id){
+  const l=CORE_LESSONS.find(x=>x.id===id);if(!l)return;
+  const cs=(l.concepts||[]).map(id=>COURSE.conceptById[id]).filter(Boolean), itemMap={};
+  cs.forEach(c=>(COURSE.itemsByConcept[c.id]||[]).forEach(x=>itemMap[x.id]=x)); const items=Object.values(itemMap);
+  openSheet('<div class="eyebrow">'+formatLessonDate(l.date)+'</div><h2 class="sheet-h">'+esc(l.title)+'</h2><div class="course-class-summary">'+esc(l.summary)+'</div>'
+    +'<div class="group-h"><span class="eyebrow">Concepts</span><span class="hint">'+cs.length+' linked</span></div>'
+    +cs.map(c=>{const its=COURSE.itemsByConcept[c.id]||[],m=its.length?its.reduce((s,x)=>s+overall(x.id),0)/its.length:0;return '<button class="crow" data-c="'+esc(c.id)+'"><span class="cdot" style="background:'+(m>.7?"var(--jade)":m>.35?"var(--gold)":"var(--dimmer)")+'"></span><span class="ct">'+esc(c.title)+'</span><span class="cm">'+Math.round(m*100)+'%</span></button>';}).join("")
+    +'<div class="next-row"><button class="btn" id="practiceClass">Practice this class</button><button class="btn ghost" id="closeClass">Close</button></div>');
+  $$(".crow").forEach(b=>b.onclick=function(){closeSheet();explainSheet(b.dataset.c);});
+  $("#practiceClass").onclick=function(){closeSheet();drill(shuffle(items).slice(0,16),{why:"class"});}; $("#closeClass").onclick=closeSheet;
 }
 function unitSheet(uid){
   const u = COURSE.units.find(x=>x.id===uid);
@@ -5128,6 +5708,17 @@ function engineTestSheet(){
   $("#closeTests").onclick=closeSheet;
 }
 
+function navMoreSheet(){
+  const secondary = NAV.filter(n=>!n.primary);
+  openSheet('<div class="eyebrow">More</div><h2 class="sheet-h">Practice & library</h2>'
+    + '<div class="more-nav-grid">' + secondary.map(n => '<button class="more-nav-item" data-more-view="'+n.id+'"><span class="more-nav-glyph">'+esc(n.glyph)+'</span><span><b>'+esc(n.label)+'</b><small>'
+      + (n.id==="speak"?"Shadowing and conversation":n.id==="weaknesses"?"Repair active weak spots":n.id==="words"?"Search the vocabulary":n.id==="content"?"Add weekly class material":"Learning evidence and reports")
+      + '</small></span></button>').join('') + '</div>'
+    + '<div class="next-row" style="margin-top:18px"><button class="btn ghost" id="closeMore">Close</button></div>');
+  $$("[data-more-view]").forEach(b=>b.onclick=function(){const v=b.dataset.moreView;closeSheet();go(v);});
+  $("#closeMore").onclick=closeSheet;
+}
+
 function settingsSheet(){
   const n=storeNote();
   openSheet('<div class="eyebrow">Settings</div><h2 class="sheet-h">Learning engine</h2>'
@@ -5175,8 +5766,11 @@ document.addEventListener("keydown", function(e){
 $("#scrim").onclick = function(e){ if (e.target === $("#scrim")) closeSheet(); };
 $("#voiceBtn").onclick = voiceSheet;
 $("#setBtn").onclick = settingsSheet;
-$("#nav").innerHTML = NAV.map(n => '<button data-v="'+n.id+'" aria-selected="'+(n.id==="today")+'">'+esc(n.label)+'</button>').join("");
-$$("#nav button").forEach(b => b.onclick = function(){ go(b.dataset.v); });
+$("#nav").innerHTML = NAV.map(function(n){
+  return '<button class="'+(n.primary?'primary-mobile':'secondary-mobile')+'" data-v="'+n.id+'" aria-selected="'+(n.id==="today")+'"><span class="nav-glyph">'+esc(n.glyph)+'</span><span class="nav-label">'+esc(n.label)+'</span></button>';
+}).join("") + '<button id="moreNav" aria-selected="false"><span class="nav-glyph">•••</span><span class="nav-label">More</span></button>';
+$$("#nav button[data-v]").forEach(b => b.onclick = function(){ go(b.dataset.v); });
+$("#moreNav").onclick = navMoreSheet;
 
 (async function init(){
   await load();
