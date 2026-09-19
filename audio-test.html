@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Audio diagnostic</title>
+<style>
+:root{--bg:#0C1816;--panel:#142622;--ink:#F3EBDD;--gold:#C9A565;--jade:#7AC4A6;--red:#CF5A43;
+  --line:rgba(243,235,221,.12);--dim:rgba(243,235,221,.55)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,sans-serif;
+  padding:20px 16px calc(40px + env(safe-area-inset-bottom))}
+h1{font-size:20px;margin:0 0 4px}
+.sub{color:var(--dim);font-size:13px;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:12px}
+h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid rgba(243,235,221,.07);font-size:13.5px}
+.row:last-child{border-bottom:0}
+.row b{font-weight:600;text-align:right;word-break:break-word}
+.ok{color:var(--jade)}.bad{color:var(--red)}.warn{color:var(--gold)}
+button{width:100%;min-height:54px;margin-top:9px;background:var(--gold);border:0;border-radius:12px;
+  color:#0D1916;font:600 15px system-ui;cursor:pointer}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+#log{font:12px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;
+  background:#0A1412;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;
+  max-height:300px;overflow:auto;color:var(--dim)}
+.verdict{font-size:15px;line-height:1.55;padding:13px 14px;border-radius:11px;margin-top:10px}
+.v-ok{background:rgba(122,196,166,.1);border:1px solid rgba(122,196,166,.4)}
+.v-bad{background:rgba(207,90,67,.1);border:1px solid rgba(207,90,67,.4)}
+.v-warn{background:rgba(201,165,101,.1);border:1px solid rgba(201,165,101,.4)}
+ol{padding-left:20px;margin:8px 0 0}li{margin-bottom:6px;font-size:13.5px}
+</style>
+</head>
+<body>
+<h1>Audio diagnostic</h1>
+<div class="sub">Turn your ringer up and take the phone off silent first. Then press the buttons in order.</div>
+
+<div class="card">
+  <h2>What this browser reports</h2>
+  <div id="facts"></div>
+</div>
+
+<div class="card">
+  <h2>Tests — press each one</h2>
+  <button id="t1">1 · Speak English (is the engine alive at all?)</button>
+  <button id="t2">2 · Speak Vietnamese, no voice chosen</button>
+  <button id="t3">3 · Speak Vietnamese with a Vietnamese voice</button>
+  <button class="ghost" id="t4">4 · Play a plain beep (is it the speaker?)</button>
+  <button class="ghost" id="copy">Copy the report</button>
+  <div id="verdict"></div>
+  <div id="log">waiting…</div>
+</div>
+
+<script>
+var L=[], facts={};
+function log(s){ L.push(s); var el=document.getElementById("log"); el.textContent=L.join("\n"); el.scrollTop=1e6; }
+function esc(s){ return String(s==null?"":s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+function row(k,v,cls){ return '<div class="row"><span>'+esc(k)+'</span><b class="'+(cls||"")+'">'+esc(v)+'</b></div>'; }
+
+var SS = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+var ua = navigator.userAgent;
+var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+var isAndroid = /Android/.test(ua);
+
+function voices(){ try{ return SS ? (SS.getVoices()||[]) : []; }catch(e){ return []; } }
+function viVoices(){ return voices().filter(function(v){ return /^vi/i.test(v.lang); }); }
+
+function paint(){
+  var all=voices(), vi=viVoices();
+  facts.phone = isIOS?"iPhone / iPad":isAndroid?"Android":"other";
+  facts.engine = SS?"yes":"NO";
+  facts.total = all.length;
+  facts.vietnamese = vi.length;
+  facts.viNames = vi.map(function(v){return v.name+" ("+v.lang+")";}).join(" · ") || "none";
+  facts.standalone = (window.navigator.standalone || matchMedia("(display-mode: standalone)").matches) ? "installed app":"browser tab";
+  var h = row("Device", facts.phone)
+    + row("Speech engine present", facts.engine, SS?"ok":"bad")
+    + row("Voices the browser lists", all.length, all.length?"ok":"warn")
+    + row("Vietnamese voices", vi.length, vi.length?"ok":"bad")
+    + row("Vietnamese voice names", facts.viNames, vi.length?"":"bad")
+    + row("Running as", facts.standalone)
+    + row("Browser", ua.slice(0,70));
+  document.getElementById("facts").innerHTML=h;
+}
+paint();
+if (SS) { SS.onvoiceschanged = function(){ log("→ voice list changed, now "+voices().length+" voices"); paint(); }; }
+[300,1200,3000].forEach(function(ms){ setTimeout(paint, ms); });
+
+var RESULT={en:null, viPlain:null, viVoice:null, beep:null};
+function verdict(){
+  var v=document.getElementById("verdict"), cls="v-warn", msg="";
+  if (RESULT.en===false && RESULT.viPlain===false && RESULT.beep===true){
+    cls="v-bad"; msg="<b>The speech engine is not producing sound, but the speaker works.</b> "
+      + (isIOS ? "On iPhone this is usually a missing Vietnamese voice: Settings → Accessibility → Spoken Content → Voices → Vietnamese, and download one."
+               : "On Android the system text-to-speech engine is either missing or disabled: Settings → Accessibility → Text-to-speech output.");
+  } else if (RESULT.beep===false){
+    cls="v-bad"; msg="<b>Even a plain beep is silent.</b> This is the phone, not the app — check the silent switch, the media volume (press volume up while a sound plays), and whether Bluetooth is grabbing the audio.";
+  } else if (RESULT.en===true && RESULT.viPlain===false && RESULT.viVoice===false){
+    cls="v-warn"; msg="<b>The engine speaks English but not Vietnamese.</b> No Vietnamese voice is installed. "
+      + (isIOS ? "Settings → Accessibility → Spoken Content → Voices → Vietnamese."
+               : "Install RHVoice, add the Vietnamese Vi Vu voice, then set RHVoice as the system engine in Settings → Accessibility → Text-to-speech output.");
+  } else if (RESULT.viPlain===true || RESULT.viVoice===true){
+    cls="v-ok"; msg="<b>Vietnamese speech works on this phone.</b> If the learning app is still silent, it is serving an old cached copy — see the note below.";
+  } else return;
+  v.className="verdict "+cls; v.innerHTML=msg;
+}
+
+function speak(text, lang, voice, key, label){
+  if (!SS){ log("✗ "+label+": no speech engine in this browser"); RESULT[key]=false; verdict(); return; }
+  try{ SS.cancel(); }catch(e){}
+  setTimeout(function(){
+    var u=new SpeechSynthesisUtterance(text);
+    if (voice) u.voice=voice;
+    if (lang) u.lang=lang;
+    u.volume=1; u.rate=.9;
+    window._keep=u;                      // hold a reference
+    var started=false, ended=false;
+    u.onstart=function(){ started=true; log("  ▸ started"); };
+    u.onend=function(){ ended=true; log("✓ "+label+": finished"+(started?"":" (never reported a start)"));
+      RESULT[key]=started; verdict(); };
+    u.onerror=function(e){ log("✗ "+label+": error = "+((e&&e.error)||"unknown")); RESULT[key]=false; verdict(); };
+    log("… "+label+"  [lang="+(u.lang||"-")+", voice="+(voice?voice.name:"none")+"]");
+    try{ SS.resume(); SS.speak(u); }catch(e){ log("✗ "+label+": speak() threw "+e.message); RESULT[key]=false; verdict(); }
+    setTimeout(function(){
+      if (!started && !ended){ log("✗ "+label+": nothing happened within 3 s — silent failure"); RESULT[key]=false; verdict(); }
+    }, 3000);
+  }, 80);
+}
+
+document.getElementById("t1").onclick=function(){ speak("Hello, testing one two three.", "en-US", null, "en", "English test"); };
+document.getElementById("t2").onclick=function(){ speak("Trời mưa, nhớ mang dù nha.", "vi-VN", null, "viPlain", "Vietnamese, language tag only"); };
+document.getElementById("t3").onclick=function(){
+  var vi=viVoices();
+  if (!vi.length){ log("✗ Vietnamese voice test: this browser lists no Vietnamese voice"); RESULT.viVoice=false; verdict(); return; }
+  speak("Trời mưa, nhớ mang dù nha.", vi[0].lang, vi[0], "viVoice", "Vietnamese with "+vi[0].name);
+};
+document.getElementById("t4").onclick=function(){
+  try{
+    var C=window.AudioContext||window.webkitAudioContext;
+    if(!C){ log("✗ Beep: no audio support"); RESULT.beep=false; verdict(); return; }
+    var ctx=new C(); ctx.resume();
+    var o=ctx.createOscillator(), g=ctx.createGain();
+    o.frequency.value=440; g.gain.value=.25; o.connect(g); g.connect(ctx.destination);
+    o.start(); setTimeout(function(){ o.stop(); ctx.close(); }, 600);
+    log("✓ Beep: played a 440 Hz tone for 0.6 s — did you hear it?");
+    RESULT.beep=true; verdict();
+  }catch(e){ log("✗ Beep failed: "+e.message); RESULT.beep=false; verdict(); }
+};
+document.getElementById("copy").onclick=function(){
+  var r="AUDIO REPORT\n"+Object.keys(facts).map(function(k){return k+": "+facts[k];}).join("\n")
+    +"\n\nTESTS\n"+JSON.stringify(RESULT)+"\n\nLOG\n"+L.join("\n");
+  try{ navigator.clipboard.writeText(r); this.textContent="Copied — paste it to Claude"; }
+  catch(e){ log("\n--- copy this ---\n"+r); }
+};
+log("Ready. Press test 1.");
+</script>
+</body>
+</html>
