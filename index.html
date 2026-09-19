@@ -3851,52 +3851,229 @@ function toneRail(word, names){
   }).join("") + '</div>';
 }
 
-/* ── speech ───────────────────────────────────────────────────────────── */
+/* ── speech ───────────────────────────────────────────────────────────────
+   Android runs the system speech engine in a separate process that the OS is
+   free to kill at any moment. When it comes back, Chrome rebuilds its voice
+   list and every SpeechSynthesisVoice handed out earlier becomes a dead
+   handle: speak() with one attached produces no sound, no onend and no
+   onerror. That is why audio survived a phone restart and then stopped for
+   good. This engine therefore never keeps a voice object between calls — it
+   stores the NAME and re-resolves it from a fresh getVoices() before every
+   single utterance — and it watches for a speak that never starts so it can
+   heal itself instead of going quiet forever. */
 const TTS = {
   voices:[], ready:false, current:null, plays:0,
-  refresh(){
-    if (!("speechSynthesis" in window)) return;
-    const all = speechSynthesis.getVoices() || [];
-    this.voices = all.filter(v => /^vi/i.test(v.lang) || /vi[\s_-]?vu|rhvoice/i.test(v.name));
-    if (S.voice) this.current = this.voices.find(v => v.name === S.voice) || null;
-    if (!this.current) this.current =
-      this.voices.find(v => /vi[\s_-]?vu/i.test(v.name)) ||
-      this.voices.find(v => /rhvoice/i.test(v.name)) ||
-      this.voices.find(v => /^vi/i.test(v.lang)) || null;
-    this.ready = !!this.current;
+  engine:false, voiceName:null, lastError:"", lastSpoke:0, resets:0, starts:0,
+  _u:null, _queue:[], _busy:false, _watch:0, _stall:0, _keep:0,
+  _noVoice:false, _unlocked:false,
+
+  supported(){
+    return typeof speechSynthesis !== "undefined" && typeof SpeechSynthesisUtterance !== "undefined";
   },
-  utter(text, rate){
+  allVoices(){ try{ return speechSynthesis.getVoices() || []; }catch(e){ return []; } },
+  viOnly(all){ return (all||[]).filter(v => /^vi/i.test(v.lang) || /vi[\s_-]?vu|rhvoice/i.test(v.name)); },
+  resolve(vs){
+    return (S.voice && vs.find(v => v.name === S.voice))
+      || vs.find(v => /vi[\s_-]?vu/i.test(v.name))
+      || vs.find(v => /rhvoice/i.test(v.name))
+      || vs.find(v => /^vi/i.test(v.lang))
+      || null;
+  },
+  /* resolved against the voice list as it stands right now, never cached */
+  freshVoice(){
+    if (this._noVoice) return null;
+    const all = this.allVoices();
+    if (!all.length) return null;
+    this.voices = this.viOnly(all);
+    return this.resolve(this.voices);
+  },
+  refresh(){
+    if (!this.supported()){ this.engine=false; this.ready=false; this.current=null; return; }
+    this.engine = true;
+    const all = this.allVoices();
+    this.voices = this.viOnly(all);
+    const v = this.resolve(this.voices);
+    this.current = v;                       /* for the settings panel only */
+    this.voiceName = v ? v.name : null;
+    /* Chrome on Android very often reports an empty voice list while the
+       system engine still speaks correctly from a lang tag alone. Treating
+       that as "no audio" would also switch every listening drill off, so an
+       empty list counts as usable rather than broken. */
+    this.ready = !!v || all.length === 0;
+  },
+  utter(text, rate){                        /* kept for callers that build their own */
     const u = new SpeechSynthesisUtterance(String(text).replace(/[—•·]/g," "));
-    if (this.current) u.voice = this.current;
-    u.lang = (this.current && this.current.lang) || "vi-VN";
+    const v = this.freshVoice();
+    if (v) u.voice = v;
+    u.lang = (v && v.lang) || "vi-VN";
     u.rate = rate || S.rate;
     return u;
   },
-  say(text, rate, btn){
-    if (!("speechSynthesis" in window) || !text) return;
+
+  say(text, rate, btn){ this.enqueue([text], rate, btn); },
+  seq(list, rate){ this.enqueue(list, rate, null); },
+  enqueue(list, rate, btn){
+    if (!this.supported()) return;
+    const xs = (Array.isArray(list) ? list : [list]).filter(Boolean).map(String);
+    if (!xs.length) return;
     this.plays++;
+    this.stop();
+    markAudioStart(rate || S.rate);
+    this._queue = xs.map(t => ({text:t, rate:rate || S.rate, btn:btn}));
+    /* Android silently drops a speak() issued in the same task as a cancel(),
+       and can leave the queue wedged when that happens. */
+    const self = this;
+    setTimeout(function(){ self._pump(); }, 90);
+  },
+
+  /* clear timers and the platform queue without touching the voice list */
+  stop(){
+    clearTimeout(this._watch); clearTimeout(this._stall); clearInterval(this._keep);
+    this._watch = this._stall = this._keep = 0;
+    this._queue = []; this._busy = false; this._u = null;
+    try{ speechSynthesis.resume(); }catch(e){}
+    try{ speechSynthesis.cancel(); }catch(e){}
+    try{ $$(".speak.playing").forEach(b => b.classList.remove("playing")); }catch(e){}
+  },
+  /* full recovery: drop any stale handles and re-read the voice list */
+  hardReset(){
+    this.stop();
+    this._noVoice = false;
+    this.resets++;
+    this.refresh();
+    try{ if ($("#stats")) paintStats(); }catch(e){}
+  },
+
+  _pump(){
+    const job = this._queue.shift();
+    if (!job){ this._busy = false; this._u = null; markAudioEnd(); return; }
+    this._busy = true;
+    this._run(job, 0);
+  },
+  _run(job, attempt){
+    const self = this;
+    let started = false, settled = false;
+
+    /* a queue that claims to be speaking while nothing is happening is wedged */
+    try{ if (speechSynthesis.speaking && !started) speechSynthesis.cancel(); }catch(e){}
+
+    const v = this.freshVoice();
+    const u = new SpeechSynthesisUtterance(String(job.text).replace(/[—•·]/g," "));
+    if (v) u.voice = v;
+    u.lang = (v && v.lang) || "vi-VN";
+    u.rate = job.rate || S.rate;
+    this._u = u;        /* strong reference: a floating utterance can be collected mid-speech */
+
+    function clearTimers(){
+      clearTimeout(self._watch); clearTimeout(self._stall); clearInterval(self._keep);
+      self._watch = self._stall = self._keep = 0;
+    }
+    function next(){
+      if (settled) return; settled = true; clearTimers();
+      if (job.btn) job.btn.classList.remove("playing");
+      self.lastSpoke = Date.now();
+      setTimeout(function(){ self._pump(); }, 70);
+    }
+    function recover(reason){
+      if (settled) return;
+      settled = true; clearTimers();
+      self.lastError = reason || "silent";
+      if (attempt === 0){
+        /* most likely a stale voice handle — keep the language, drop the voice */
+        self._noVoice = true;
+        setTimeout(function(){ self._run(job, 1); }, 120);
+        return;
+      }
+      if (attempt === 1){
+        /* engine wedged — clear the platform queue and try once more */
+        try{ speechSynthesis.cancel(); }catch(e){}
+        setTimeout(function(){ self._run(job, 2); }, 320);
+        return;
+      }
+      if (job.btn) job.btn.classList.remove("playing");
+      setTimeout(function(){ self._pump(); }, 70);
+    }
+
+    u.onstart = function(){
+      started = true; self.starts++; self.lastError = "";
+      clearTimeout(self._watch); self._watch = 0;
+    };
+    u.onend = next;
+    u.onerror = function(e){
+      const err = (e && e.error) || "";
+      /* we cancel on purpose all the time; that is not a failure */
+      if (err === "canceled" || err === "interrupted"){ settled = true; clearTimers(); return; }
+      if (started) return next();
+      recover(err || "error");
+    };
+
+    if (job.btn) job.btn.classList.add("playing");
     try{
-      speechSynthesis.cancel(); markAudioStart(rate||S.rate);
-      const u=this.utter(text,rate);
-      u.onend=function(){ if(btn) btn.classList.remove("playing"); markAudioEnd(); };
-      u.onerror=function(){ if(btn) btn.classList.remove("playing"); markAudioEnd(); };
-      if (btn) btn.classList.add("playing");
+      speechSynthesis.resume();
       speechSynthesis.speak(u);
+    }catch(e){ return recover("throw"); }
+
+    /* nothing started: the classic silent failure */
+    this._watch = setTimeout(function(){ if (!started) recover("no start"); }, 1800);
+    /* started but never finished: advance rather than block the whole app */
+    const budget = Math.min(30000, 4000 + String(job.text).length * 95);
+    this._stall = setTimeout(function(){ try{ speechSynthesis.cancel(); }catch(e){} next(); }, budget);
+    /* Chrome cuts long utterances at ~15s unless nudged */
+    if (String(job.text).length > 90){
+      this._keep = setInterval(function(){
+        try{ if (speechSynthesis.speaking){ speechSynthesis.pause(); speechSynthesis.resume(); } }catch(e){}
+      }, 9000);
+    }
+  },
+
+  /* some builds refuse to speak until the page has had a user gesture */
+  unlock(){
+    if (this._unlocked || !this.supported()) return;
+    this._unlocked = true;
+    try{
+      const u = new SpeechSynthesisUtterance(" ");
+      u.volume = 0; u.lang = "vi-VN";
+      speechSynthesis.speak(u);
+      setTimeout(function(){ try{ speechSynthesis.cancel(); }catch(e){} }, 20);
     }catch(e){}
   },
-  seq(list, rate){
-    if (!("speechSynthesis" in window)) return;
-    const xs=(list||[]).filter(Boolean); if(!xs.length) return;
-    this.plays++;
-    try{
-      speechSynthesis.cancel(); markAudioStart(rate||S.rate);
-      xs.forEach(function(t,i){ const u=TTS.utter(t,rate); if(i===xs.length-1){ u.onend=u.onerror=markAudioEnd; } speechSynthesis.speak(u); });
-    }catch(e){}
+  status(){
+    if (!this.supported()) return {cls:"warn", txt:"This browser has no speech engine."};
+    const all = this.allVoices();
+    if (this.voiceName) return {cls:"ok-note", txt:"Speaking with “"+this.voiceName+"”."
+      + (this.lastError ? " Last problem: "+this.lastError+", recovered." : "")};
+    if (!all.length) return {cls:"ok-note", txt:"Chrome is not listing any voice, which is normal on Android. "
+      + "Audio is sent to the system engine with the Vietnamese language tag, so Vi Vu will speak if it is the system engine."};
+    return {cls:"warn", txt:"No Vietnamese voice among the "+all.length+" the browser lists."};
   }
 };
-if ("speechSynthesis" in window){
+if (TTS.supported()){
   TTS.refresh();
-  speechSynthesis.onvoiceschanged = function(){ TTS.refresh(); if ($("#stats")) paintStats(); };
+  speechSynthesis.onvoiceschanged = function(){
+    /* the list was rebuilt, so any handle we were avoiding is fresh again */
+    TTS._noVoice = false;
+    TTS.refresh();
+    if ($("#stats")) paintStats();
+  };
+  /* Android populates the list late and repopulates it after an engine restart */
+  [400, 1500, 4000].forEach(function(ms){ setTimeout(function(){ TTS.refresh(); }, ms); });
+  setInterval(function(){
+    if (document.visibilityState !== "visible" || TTS._busy) return;
+    const before = TTS.ready + "|" + TTS.voiceName;
+    TTS.refresh();
+    if (before !== TTS.ready + "|" + TTS.voiceName && $("#stats")) paintStats();
+  }, 15000);
+  /* coming back from the background is where the queue is usually found wedged */
+  document.addEventListener("visibilitychange", function(){
+    if (document.visibilityState === "visible") TTS.hardReset();
+  });
+  /* first touch or key unlocks the engine on the builds that require it */
+  ["pointerdown","keydown","touchend"].forEach(function(ev){
+    document.addEventListener(ev, function once(){
+      TTS.unlock();
+      document.removeEventListener(ev, once, true);
+    }, true);
+  });
 }
 /* whenever a card carries a sentence, the sentence is what gets read */
 function fullAudio(it){
@@ -4974,8 +5151,8 @@ function tile(t, n, sub, k){
 function viewListen(){
   const ready = TTS.ready;
   $("#stage").innerHTML = '<div class="eyebrow">Listening lab</div><h2 class="screen-h">Ear work</h2>'
-    + (ready ? '' : '<div class="warn">No Vietnamese voice on this device, so the listening exercises are off. '
-        + 'The 🔊 panel explains how to install Vi Vu.</div>')
+    + (ready ? '' : '<div class="warn">No Vietnamese voice is being reported. Audio is still sent to the system '
+        + 'engine, so try a lab anyway; the 🔊 panel has a reset button and the Vi Vu setup steps.</div>')
     + '<div class="labgrid">'
     + lab("Hear a word","choose the meaning","l1")
     + lab("Hear a sentence","choose the translation","l2")
@@ -5320,10 +5497,7 @@ function viewWords(){
   $$(".filt").forEach(b => b.onclick = function(){ wordFilter = b.dataset.f; viewWords(); });
   $("#playDeck").onclick = function(){
     const xs = visibleWords().slice(0,40);
-    let i = 0;
-    (function nx(){ if (i>=xs.length || !("speechSynthesis" in window)) return;
-      const it = xs[i++]; const u = TTS.utter(S.readSentence && it.ex ? it.ex.vi : it.vi);
-      u.onend = () => setTimeout(nx, 380); speechSynthesis.speak(u); })();
+    TTS.enqueue(xs.map(it => S.readSentence && it.ex ? it.ex.vi : it.vi), S.rate);
   };
   paintList();
 }
@@ -5655,7 +5829,11 @@ function closeSheet(){ $("#scrim").classList.remove("open"); }
 function voiceSheet(){
   TTS.refresh();
   let html = '<div class="eyebrow">Audio</div><h2 class="sheet-h">Giọng đọc · voice</h2>';
-  if (!("speechSynthesis" in window)){
+  const st = TTS.status();
+  html += '<div class="'+st.cls+'">'+esc(st.txt)+'</div>'
+       + '<div class="next-row" style="margin-top:12px"><button class="btn ghost" id="vreset">Reset audio engine</button>'
+       + '<span class="hint">Use this if the sound stops. It clears a stuck queue and re-reads the voice list.</span></div>';
+  if (!TTS.supported()){
     html += '<div class="warn">This browser has no speech engine. Everything else still works.</div>';
   } else if (!TTS.voices.length){
     html += '<div class="warn"><b>No Vietnamese voice on this device.</b><br>Install <b>Vi Vu</b>, the southern '
@@ -5691,6 +5869,12 @@ function voiceSheet(){
   wireSeg("ap", v => { S.autoplay = v; save(); voiceSheet(); });
   wireSeg("rs", v => { S.readSentence = v; save(); voiceSheet(); });
   if ($("#vtest")) $("#vtest").onclick = function(){ TTS.say("Trời mưa, nhớ mang dù nha."); };
+  if ($("#vreset")) $("#vreset").onclick = function(){
+    TTS.hardReset();
+    this.textContent = "Reset · speaking test line";
+    setTimeout(function(){ TTS.say("Trời mưa, nhớ mang dù nha."); }, 200);
+    setTimeout(voiceSheet, 1800);
+  };
   $("#closeV").onclick = closeSheet;
 }
 function seg(lbl, k, on){
