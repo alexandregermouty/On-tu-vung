@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Ôn tiếng Việt">
 <meta name="application-name" content="Ôn tiếng Việt">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="description" content="Ôn tiếng Việt — Alexandre’s personal Vietnamese learning app. Learn to belong.">
+<meta name="description" content="Ôn tiếng Việt — Alexandre’s personal Vietnamese learning app with visual pedagogy, active games and a Southern focus. Learn to belong.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -809,6 +809,27 @@ body.in-session .brand-logo{width:34px;height:34px;opacity:.76}
 @media(max-width:700px){.brand-logo{width:40px;height:40px}.brand-lockup{gap:10px}}
 @media(max-width:390px){.brand-logo{width:34px;height:34px}.brand-copy h1{font-size:19px}}
 
+
+/* V8 · PEDAGOGICAL STUDIO ------------------------------------------------ */
+.studio-lead{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--text-2);max-width:660px;margin:5px 0 18px}
+.studio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 22px}
+.studio-card{position:relative;min-height:132px;padding:17px 16px 15px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,rgba(28,51,45,.82),rgba(16,31,27,.93));color:var(--eggshell);text-align:left;cursor:pointer;overflow:hidden;transition:transform .17s var(--ease),border-color .17s,background .17s}
+.studio-card:active{transform:scale(.985)}.studio-card:hover{border-color:rgba(201,165,101,.32);background:linear-gradient(145deg,rgba(31,57,49,.9),rgba(16,31,27,.98))}
+.studio-card .sglyph{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:rgba(201,165,101,.08);color:var(--gold);font-family:var(--serif);font-size:19px;margin-bottom:13px}
+.studio-card b{display:block;font-size:14px;font-weight:650;line-height:1.3}.studio-card small{display:block;color:var(--text-3);font-size:11.5px;line-height:1.4;margin-top:5px}.studio-card .sparkline{position:absolute;right:12px;top:13px;opacity:.7}
+.studio-section{margin:28px 0 10px}.studio-section-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:11px}.studio-section-h h3{font-family:var(--serif);font-size:22px;font-weight:470;margin:0}.studio-section-h span{font-size:10.5px;color:var(--text-3)}
+.figure-card{border:1px solid var(--line);border-radius:18px;background:rgba(243,235,221,.018);padding:18px;margin:12px 0}.figure-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}.figure-title b{font-size:13px}.figure-title span{color:var(--text-3);font-size:10.5px}
+.tone-landscape{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.tone-curve{position:relative;min-height:96px;padding:12px 10px;border-radius:14px;background:rgba(10,24,20,.36);border:1px solid rgba(243,235,221,.065);text-align:center}.tone-curve svg{width:100%;height:36px;margin:2px 0 5px}.tone-curve b{display:block;font-family:var(--serif);font-size:18px;font-weight:500}.tone-curve small{display:block;color:var(--text-3);font-size:10px;margin-top:2px}.tone-curve .mini{position:absolute;right:5px;top:5px;min-height:30px;height:30px;width:30px;padding:0}
+.pronoun-orbit{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pronoun-zone{padding:12px;border-radius:14px;border:1px solid rgba(243,235,221,.07);background:rgba(243,235,221,.018)}.pronoun-zone strong{display:block;color:var(--gold);font-family:var(--serif);font-size:19px;font-weight:520}.pronoun-zone b{display:block;font-size:12px;margin-top:3px}.pronoun-zone small{display:block;font-size:10.5px;line-height:1.4;color:var(--text-3);margin-top:4px}.pronoun-self{grid-column:1/-1;text-align:center;padding:11px;border:1px dashed rgba(201,165,101,.28);border-radius:999px;color:var(--text-2);font-size:11px}.pronoun-self b{color:var(--eggshell);font-size:13px}
+.sentence-rail{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.syntax-chip{padding:10px 11px;border-radius:11px;border:1px solid rgba(243,235,221,.07);background:rgba(243,235,221,.025)}.syntax-chip em{display:block;font-style:normal;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}.syntax-chip b{font-family:var(--serif);font-size:17px;font-weight:500}.syntax-chip.subject{border-color:rgba(115,188,157,.22)}.syntax-chip.aspect{border-color:rgba(201,165,101,.25)}.syntax-chip.verb{border-color:rgba(194,82,62,.22)}.syntax-chip.object{border-color:rgba(113,170,181,.22)}.syntax-chip.particle{border-color:rgba(177,181,132,.22)}
+.question-map{display:grid;gap:8px}.qpattern{display:grid;grid-template-columns:88px 1fr;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(243,235,221,.065)}.qpattern:last-child{border-bottom:0}.qpattern .qw{font-family:var(--serif);font-size:17px;color:var(--gold)}.qpattern code{font-family:var(--vi);font-size:11.5px;color:var(--text-2);white-space:normal}.qpattern small{display:block;color:var(--text-3);font-size:10.5px;margin-top:3px}
+.aspect-line{position:relative;padding:24px 3px 4px}.aspect-line::before{content:"";position:absolute;left:4%;right:4%;top:37px;height:1px;background:linear-gradient(90deg,rgba(243,235,221,.15),var(--gold),rgba(243,235,221,.15))}.aspect-points{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;position:relative}.aspect-point{text-align:center}.aspect-point i{display:block;width:10px;height:10px;border-radius:50%;background:var(--panel);border:2px solid var(--gold);margin:8px auto 9px}.aspect-point b{display:block;font-family:var(--serif);font-size:15px}.aspect-point small{display:block;color:var(--text-3);font-size:9.5px;line-height:1.25;margin-top:3px}
+.game-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.game-progress{font-size:10.5px;color:var(--text-3)}.game-prompt{font-family:var(--serif);font-size:25px;line-height:1.25;margin:4px 0 8px}.game-context{color:var(--text-3);font-size:12.5px;line-height:1.5;margin-bottom:17px}.game-feedback{margin-top:15px;padding:13px 14px;border-radius:13px;background:rgba(243,235,221,.025);border:1px solid rgba(243,235,221,.07);font-size:12px;line-height:1.5;color:var(--text-2)}.game-feedback.good{border-color:rgba(115,188,157,.25)}.game-feedback.bad{border-color:rgba(194,82,62,.24)}
+.flashcard-shell{perspective:1000px;min-height:310px}.flashcard-card{position:relative;min-height:292px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(30,54,47,.96),rgba(12,25,21,.98));padding:28px 23px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;box-shadow:0 18px 45px rgba(0,0,0,.16)}.flashcard-card .fc-side{font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}.flashcard-card .fc-main{font-family:var(--serif);font-size:42px;line-height:1.08;font-weight:500}.flashcard-card .fc-sub{font-family:var(--serif);font-size:20px;color:var(--text-2);margin-top:10px}.flashcard-card .fc-example{margin-top:22px;font-size:14px;line-height:1.55;color:var(--text-3)}.flashcard-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.flashcard-actions .btn{min-height:50px;padding:0 8px}.flashcard-actions small{display:block;font-size:9px;opacity:.62;margin-top:2px}
+.visual-launch{border-left:2px solid rgba(201,165,101,.36);padding:10px 0 10px 14px;margin:16px 0;color:var(--text-2);font-size:12px;line-height:1.5}.visual-launch b{color:var(--eggshell)}
+@media(max-width:700px){#nav #moreNav{display:flex}.studio-grid{grid-template-columns:1fr 1fr;gap:8px}.studio-card{min-height:118px;padding:14px 13px}.studio-card .sglyph{width:34px;height:34px;margin-bottom:10px}.tone-landscape{grid-template-columns:1fr 1fr}.figure-card{padding:15px;border-radius:16px}.pronoun-orbit{grid-template-columns:1fr 1fr}.qpattern{grid-template-columns:72px 1fr}.game-prompt{font-size:23px}.flashcard-card{min-height:270px;padding:23px 18px}.flashcard-card .fc-main{font-size:38px}.flashcard-actions{position:sticky;bottom:calc(6px + env(safe-area-inset-bottom));z-index:5;background:linear-gradient(180deg,transparent,rgba(12,24,22,.96) 30%,rgba(12,24,22,.99));padding-top:14px}.brand-logo{width:44px;height:44px}}
+@media(max-width:390px){.studio-grid{grid-template-columns:1fr}.studio-card{min-height:92px;display:grid;grid-template-columns:38px 1fr;column-gap:12px;align-items:center}.studio-card .sglyph{margin:0;grid-row:1/3}.studio-card small{margin-top:2px}.tone-landscape{grid-template-columns:1fr 1fr}.pronoun-orbit{grid-template-columns:1fr}.pronoun-self{grid-column:1}.aspect-point small{font-size:8.5px}.flashcard-card .fc-main{font-size:34px}}
+
 </style>
 </head>
 <body>
@@ -1554,6 +1575,67 @@ CONCEPTS.push(
  micro:{rule:"The denied idea is wrapped with đâu có … đâu.",examples:[{vi:"Tui đâu có nói vậy đâu.",en:"I didn't say that."}],contrast:"không gives plain negation; đâu có … đâu is conversational and emphatic.",check:{q:"The course's emphatic spoken denial:",options:["đâu có … đâu","sẽ … rồi"],answer:0},produce:{en:"I didn't say that.",vi:"Tui đâu có nói vậy đâu."}},requires:["c.sent.neg","c.south.tui"]}
 );
 
+
+
+/* V8 COURSE EXPANSION · concepts previously present in the notebook but not yet explicit in the app. */
+CONCEPTS.push(
+{id:"c.pron.peers",unit:"u1",title:"Peer and close-friend pronouns",kind:"pragmatics",
+ rule:"The course adds mình / cậu and tớ / cậu for friendly peer relationships, and tao / mày for very close or very informal speech. Register matters as much as literal meaning.",
+ examples:[{vi:"Mình nhớ cậu lắm.",en:"I miss you a lot."},{vi:"Tớ với cậu cùng đi nhé.",en:"You and I will go together, okay?"},{vi:"Tao nói rồi mà!",en:"I already told you! (very informal)"}],
+ courseNote:"The course warns that tao / mày can sound casual or aggressive depending on the relationship. Treat them as recognition-first unless the social context is very clear.",
+ micro:{rule:"Pick a pronoun pair from the relationship, not from an English dictionary.",examples:[{vi:"Mình nhớ cậu lắm.",en:"I miss you a lot."}],contrast:"tôi / bạn = neutral · mình / cậu or tớ / cậu = close peers · tao / mày = highly familiar and potentially rough.",check:{q:"Close friends of similar age, warm but not rough:",options:["mình / cậu","ông / cháu","tao / mày"],answer:0},produce:{en:"I miss you a lot. (to a close peer)",vi:"Mình nhớ cậu lắm."}},requires:["c.pron.basic"]},
+
+{id:"c.read.vowelglides",unit:"u2",title:"Compound vowels as one glide",kind:"pronunciation",
+ rule:"The course teaches that two or more vowels can combine into one syllable sound. Rather than memorising every combination as an isolated spelling, pronounce each vowel clearly and let the mouth glide from the first position to the next.",
+ examples:[{vi:"ai",en:"like the glide in eye"},{vi:"ao",en:"a glide like ow in cow"},{vi:"eo",en:"a moving e-to-o sound"},{vi:"ưa",en:"as in mưa — rain"}],
+ micro:{rule:"See the vowel group as one movement of the mouth inside one syllable.",examples:[{vi:"hay",en:"often / good — ay"},{vi:"đau",en:"hurt — au"},{vi:"mưa",en:"rain — ưa"}],contrast:"Vowel quality is part of the word itself. Losing â / ă / ê / ô / ơ / ư is not merely losing a tone mark.",check:{q:"Which pair differs in vowel quality rather than tone?",options:["tay / tai","má / mà"],answer:0},produce:{en:"rain",vi:"mưa"}},requires:["c.read.sequence"]},
+
+{id:"c.read.clusters",unit:"u2",title:"Consonant combinations",kind:"pronunciation",
+ rule:"The course groups common consonant combinations such as ch, gh, gi, kh, ng, ngh, nh, ph, th, tr and qu. They should be recognised as sound units rather than decoded letter by letter.",
+ examples:[{vi:"chó",en:"dog — ch"},{vi:"không",en:"no / not — kh"},{vi:"người",en:"person — ng"},{vi:"nhà",en:"house — nh"},{vi:"phở",en:"phở — ph"},{vi:"trời",en:"sky / weather — tr"}],
+ micro:{rule:"Read the consonant group first, then the vowel, then the tone.",examples:[{vi:"nghệ",en:"turmeric — ngh"},{vi:"qua",en:"through / across — qu"}],contrast:"Standard spelling stays stable even when several of these groups merge in southern speech.",check:{q:"Which spelling begins with the sound unit for ng in “sing”?",options:["ng / ngh","ph","th"],answer:0},produce:{en:"house",vi:"nhà"}},requires:["c.read.sequence"]},
+
+{id:"c.sent.prepositions",unit:"u4",title:"Location phrases — trên, dưới, bên cạnh",kind:"grammar",
+ rule:"The course introduces location relations with ở plus words such as trên (on/above), dưới (under/below) and bên cạnh (beside). The location phrase follows the thing being located.",
+ examples:[{vi:"Con mèo ở trên bàn.",en:"The cat is on the table."},{vi:"Má đang rửa chén ở dưới bếp.",en:"Mom is washing the dishes in the kitchen downstairs / below."},{vi:"Cái ghế ở bên cạnh bàn.",en:"The chair is beside the table."}],
+ micro:{rule:"Use ở for location, then refine the relation: ở trên, ở dưới, ở bên cạnh.",examples:[{vi:"Con mèo ở trên bàn.",en:"The cat is on the table."}],contrast:"ở names location; là names identity.",check:{q:"“The cat is on the table.”",options:["Con mèo là trên bàn.","Con mèo ở trên bàn."],answer:1},produce:{en:"The chair is beside the table.",vi:"Cái ghế ở bên cạnh bàn."}},requires:["c.sent.o"]},
+
+{id:"c.part.attention",unit:"u5",title:"Attention and reaction particles",kind:"pragmatics",
+ rule:"The course expands the particle system with á / à for reaction, hả for confirmation or surprise, nè / nà and này for drawing attention, and ha for a light friendly tag. These change interactional tone rather than the core proposition.",
+ examples:[{vi:"Vậy á?",en:"Really?"},{vi:"Cậu đi rồi hả?",en:"You left already?"},{vi:"Cầm cái này nè!",en:"Hold this!"},{vi:"Trời đẹp quá ha!",en:"The weather is so nice, huh!"}],
+ micro:{rule:"Listen for what the speaker is doing socially: reacting, checking, pointing, or softening.",examples:[{vi:"Món này ngon ha!",en:"This dish is good, right!"}],contrast:"hả actively asks/checks · ha only softens or shares a reaction.",check:{q:"Which one explicitly checks / asks for confirmation?",options:["ha","hả"],answer:1},produce:{en:"Hold this! (friendly southern)",vi:"Cầm cái này nè!"}},requires:["c.part.south"]},
+
+{id:"c.part.realization",unit:"u5",title:"Realization and conversational colour",kind:"pragmatics",
+ rule:"The course uses ra là to express a new realization, vậy ta for curious surprise, and lẹ as an everyday southern way to urge speed.",
+ examples:[{vi:"À, ra là cậu làm việc ở đó.",en:"Oh, so you work there."},{vi:"Cậu học tiếng Nhật hả? Vậy ta!",en:"You're learning Japanese? Really?"},{vi:"Đi lẹ!",en:"Hurry up!"}],
+ micro:{rule:"These expressions package stance: realization, curiosity, urgency.",examples:[{vi:"Đi lẹ!",en:"Hurry up!"}],contrast:"ra là = I have just understood · vậy ta = curious reaction · lẹ = quickly / hurry.",check:{q:"You have just understood the situation:",options:["ra là","lẹ"],answer:0},produce:{en:"Oh, so you work there.",vi:"À, ra là cậu làm việc ở đó."}},requires:["c.part.south"]},
+
+{id:"c.part.continuation",unit:"u5",title:"Nữa, đâu, thôi and cho",kind:"pragmatics",
+ rule:"The course gives nữa for more/again, đâu in negative sentences for denial or softening, thôi for stopping or simply doing something, and cho as for/to give or in constructions offering to do something for someone.",
+ examples:[{vi:"Anh ăn nữa không?",en:"Do you want to eat more?"},{vi:"Mình có nói gì đâu.",en:"I didn't say anything."},{vi:"Mình ăn cơm thôi.",en:"Let's just eat."},{vi:"Để tôi làm cho.",en:"Let me do it for you."}],
+ micro:{rule:"These small words often carry the conversational intention more than the dictionary meaning.",examples:[{vi:"Đừng nói nữa, thôi đi!",en:"Stop talking, enough!"}],contrast:"nữa continues · thôi limits/stops · đâu reinforces denial · cho can mark benefit/permission/help.",check:{q:"“Do you want to eat more?” needs:",options:["nữa","đã"],answer:0},produce:{en:"Let me do it for you.",vi:"Để tôi làm cho."}},requires:["c.part.ma"]},
+
+{id:"c.num.money",unit:"u7",title:"Prices and paying",kind:"grammar",
+ rule:"The course practises asking prices with bao nhiêu tiền / giá bao nhiêu and paying with trả tiền. Payment method uses bằng: Em trả tiền bằng thẻ.",
+ examples:[{vi:"Một ly cà phê bao nhiêu tiền?",en:"How much is a cup of coffee?"},{vi:"Một lon coca giá bao nhiêu?",en:"How much is a can of cola?"},{vi:"Em trả tiền bằng thẻ.",en:"I pay by card."}],
+ micro:{rule:"Ask the amount with bao nhiêu tiền or giá bao nhiêu; say the method with bằng.",examples:[{vi:"Em trả tiền bằng tiền mặt.",en:"I pay in cash."}],contrast:"bao nhiêu counts/asks amount · bao nhiêu tiền asks price · bằng introduces the payment method.",check:{q:"“I pay by card.”",options:["Em trả tiền bằng thẻ.","Em trả thẻ tiền."],answer:0},produce:{en:"How much is this?",vi:"Cái này bao nhiêu tiền?"}},requires:["c.question.quantity","c.num.basic"]},
+
+{id:"c.num.ordinal",unit:"u7",title:"Ordinal numbers with thứ",kind:"grammar",
+ rule:"The course forms ordinals with thứ + number. Two forms are highlighted: thứ nhất for first and thứ tư for fourth.",
+ examples:[{vi:"Em là con thứ nhất trong gia đình của em.",en:"I am the first child in my family."},{vi:"Chị ấy là con gái thứ hai trong gia đình của chị ấy.",en:"She is the second daughter in her family."},{vi:"Chỗ ngồi em ở hàng thứ năm.",en:"My seat is in the fifth row."}],
+ micro:{rule:"Place thứ before the ordinal number.",examples:[{vi:"Hôm nay cô ấy là khách hàng thứ mười.",en:"She is the tenth customer today."}],contrast:"1 → thứ nhất, not thứ một · 4 → thứ tư, not thứ bốn in the course's ordinal pattern.",check:{q:"“first”:",options:["thứ một","thứ nhất"],answer:1},produce:{en:"the fourth floor",vi:"lầu thứ tư"}},requires:["c.num.basic"]},
+
+{id:"c.time.duration",unit:"u7",title:"Clock time versus duration",kind:"grammar",
+ rule:"The course distinguishes giờ for clock time and tiếng for duration. It also practises approximate time with khoảng, hơn một chút and gần.",
+ examples:[{vi:"Bây giờ là 6 giờ 20 phút.",en:"It is 6:20 now."},{vi:"Bạn ngủ mấy tiếng?",en:"How many hours do you sleep?"},{vi:"Khoảng sáu giờ.",en:"Around six o'clock."},{vi:"Gần bảy giờ.",en:"Almost seven o'clock."}],
+ micro:{rule:"giờ answers what time; tiếng answers how many hours.",examples:[{vi:"Em ngủ 7 tiếng.",en:"I sleep seven hours."}],contrast:"6 giờ = six o'clock · 6 tiếng = six hours of duration.",check:{q:"“How many hours do you sleep?”",options:["Bạn ngủ mấy giờ?","Bạn ngủ mấy tiếng?"],answer:1},produce:{en:"around six o'clock",vi:"khoảng sáu giờ"}},requires:["c.time.clock"]},
+
+{id:"c.asp.da.nuance",unit:"u6",title:"Đã beyond simple past",kind:"pragmatics",
+ rule:"The course gives three uses of đã: completed past action, priority/order in expressions such as Để mình lấy ví đã, and expressive satisfaction such as đã quá.",
+ examples:[{vi:"Tôi đã ăn cơm.",en:"I ate / I have eaten."},{vi:"Để mình lấy ví đã.",en:"Let me get my wallet first."},{vi:"Uống ly nước mía mát lạnh đã quá!",en:"That cold sugarcane juice is so refreshing!"}],
+ micro:{rule:"Do not assume every đã is a past-tense marker; use the sentence's function.",examples:[{vi:"Để mình lấy ví đã.",en:"Let me get my wallet first."}],contrast:"đã + verb often marks completed past · clause-final đã can mean first / before we continue · đã quá can express satisfaction.",check:{q:"In “Để mình lấy ví đã”, đã means closest to:",options:["past tense","first / before continuing"],answer:1},produce:{en:"Let me get my wallet first.",vi:"Để mình lấy ví đã."}},requires:["c.asp.da"]}
+);
+
 /* ═══════════════════════════════════════════════════════════════════════
    COURSE CONTENT — PART 2b · vocabulary added from ALEXANDRE.docx,
    course sentences, dialogues, pronunciation data, contrast sets,
@@ -1778,6 +1860,39 @@ COURSE_ITEMS.push(
 {id:"course.sep.aothun",vi:"áo thun",en:"T-shirt",d:"u10",concept:"c.sent.classifier",sourceDate:"2026-09-15"}
 );
 
+
+
+/* V8 vocabulary additions from the same course; permanent IDs keep future updates safe. */
+COURSE_ITEMS.push(
+{id:"course.peer.to",vi:"tớ",en:"I / me (very casual peer speech)",d:"u1",concept:"c.pron.peers",sourceDate:"2026-02-15"},
+{id:"course.peer.cau",vi:"cậu",en:"you (close peer / friend)",d:"u1",concept:"c.pron.peers",sourceDate:"2026-02-15",ex:{vi:"Mình nhớ cậu lắm.",en:"I miss you a lot."}},
+{id:"course.peer.tao",vi:"tao",en:"I (very informal / potentially rough)",d:"u1",concept:"c.pron.peers",sourceDate:"2026-02-15"},
+{id:"course.peer.may",vi:"mày",en:"you (very informal / potentially rough)",d:"u1",concept:"c.pron.peers",sourceDate:"2026-02-15"},
+{id:"course.peer.chu",vi:"chủ",en:"owner; boss",d:"u1",concept:"c.pron.family",sourceDate:"2026-02-15"},
+{id:"course.loc.duoi",vi:"dưới",en:"under; below",d:"u4",concept:"c.sent.prepositions",sourceDate:"2026-02-28"},
+{id:"course.loc.bencanh",vi:"bên cạnh",en:"beside; next to",d:"u4",concept:"c.sent.prepositions",sourceDate:"2026-02-28"},
+{id:"course.part.luon",vi:"luôn",en:"definitely; right away; always (context-dependent)",d:"u5",concept:"c.part.attention",sourceDate:"2026-02-28"},
+{id:"course.part.aacute",vi:"á",en:"reaction particle — surprise / realization",d:"u5",concept:"c.part.attention",sourceDate:"2026-02-28"},
+{id:"course.part.agrave",vi:"à",en:"reaction particle — ah / realization",d:"u5",concept:"c.part.attention",sourceDate:"2026-02-28"},
+{id:"course.part.rala",vi:"ra là",en:"oh, so…; it turns out that…",d:"u5",concept:"c.part.realization",sourceDate:"2026-02-28",ex:{vi:"À, ra là cậu làm việc ở đó.",en:"Oh, so you work there."}},
+{id:"course.part.le",vi:"lẹ",en:"quickly; hurry (southern)",d:"u5",concept:"c.part.realization",sourceDate:"2026-02-28",ex:{vi:"Đi lẹ!",en:"Hurry up!"}},
+{id:"course.part.vayta",vi:"vậy ta",en:"really?; is that so?",d:"u5",concept:"c.part.realization",sourceDate:"2026-02-28"},
+{id:"course.part.ne",vi:"nè",en:"hey; here; attention softener (southern)",d:"u5",concept:"c.part.attention",sourceDate:"2026-02-28",ex:{vi:"Cầm cái này nè!",en:"Hold this!"}},
+{id:"course.part.na",vi:"nà",en:"attention / encouragement particle",d:"u5",concept:"c.part.attention",sourceDate:"2026-02-28"},
+{id:"course.part.nua",vi:"nữa",en:"more; again",d:"u5",concept:"c.part.continuation",sourceDate:"2026-02-28",ex:{vi:"Anh ăn nữa không?",en:"Do you want to eat more?"}},
+{id:"course.part.ha",vi:"ha",en:"friendly softening tag",d:"u5",concept:"c.part.attention",sourceDate:"2026-02-28",ex:{vi:"Trời đẹp quá ha!",en:"The weather is so nice, huh!"}},
+{id:"course.money.tinhtien",vi:"tính tiền",en:"to calculate / ask for the bill",d:"u7",concept:"c.num.money",sourceDate:"2026-04-19"},
+{id:"course.money.tratien",vi:"trả tiền",en:"to pay",d:"u7",concept:"c.num.money",sourceDate:"2026-04-19",ex:{vi:"Em trả tiền bằng thẻ.",en:"I pay by card."}},
+{id:"course.money.the",vi:"thẻ",en:"card",d:"u7",concept:"c.num.money",sourceDate:"2026-04-19"},
+{id:"course.money.tienmat",vi:"tiền mặt",en:"cash",d:"u7",concept:"c.num.money",sourceDate:"2026-04-19"},
+{id:"course.money.gia",vi:"giá",en:"price",d:"u7",concept:"c.num.money",sourceDate:"2026-04-19"},
+{id:"course.ordinal.first",vi:"thứ nhất",en:"first",d:"u7",concept:"c.num.ordinal",sourceDate:"2026-04-19"},
+{id:"course.ordinal.fourth",vi:"thứ tư",en:"fourth",d:"u7",concept:"c.num.ordinal",sourceDate:"2026-04-19"},
+{id:"course.time.phut",vi:"phút",en:"minute",d:"u7",concept:"c.time.duration",sourceDate:"2026-04-25"},
+{id:"course.time.tieng",vi:"tiếng",en:"hour(s) of duration",d:"u7",concept:"c.time.duration",sourceDate:"2026-04-25"},
+{id:"course.time.khoang",vi:"khoảng",en:"around; approximately",d:"u7",concept:"c.time.duration",sourceDate:"2026-04-25"}
+);
+
 /* ── sentences from the course, keyed to the concept they demonstrate ── */
 const COURSE_SENTENCES = [
 {vi:"Tôi học tiếng Việt.", en:"I learn Vietnamese.", c:"c.sent.svo"},
@@ -1941,6 +2056,36 @@ COURSE_SENTENCES.push(
 );
 
 /* ── dialogues from the course ───────────────────────────────────────── */
+
+
+/* V8 example sentences · added as reusable context rather than duplicate cards. */
+COURSE_SENTENCES.push(
+{vi:"Mình nhớ cậu lắm.",en:"I miss you a lot.",c:"c.pron.peers"},
+{vi:"Tớ với cậu cùng đi nhé.",en:"You and I will go together, okay?",c:"c.pron.peers"},
+{vi:"Con mèo ở trên bàn.",en:"The cat is on the table.",c:"c.sent.prepositions"},
+{vi:"Cái ghế ở bên cạnh bàn.",en:"The chair is beside the table.",c:"c.sent.prepositions"},
+{vi:"Vậy á?",en:"Really?",c:"c.part.attention"},
+{vi:"Cậu đi rồi hả?",en:"You left already?",c:"c.part.attention"},
+{vi:"Cầm cái này nè!",en:"Hold this!",c:"c.part.attention"},
+{vi:"Trời đẹp quá ha!",en:"The weather is so nice, huh!",c:"c.part.attention"},
+{vi:"À, ra là cậu làm việc ở đó.",en:"Oh, so you work there.",c:"c.part.realization"},
+{vi:"Đi lẹ!",en:"Hurry up!",c:"c.part.realization"},
+{vi:"Anh ăn nữa không?",en:"Do you want to eat more?",c:"c.part.continuation"},
+{vi:"Mình có nói gì đâu.",en:"I didn't say anything.",c:"c.part.continuation"},
+{vi:"Để tôi làm cho.",en:"Let me do it for you.",c:"c.part.continuation"},
+{vi:"Một ly cà phê bao nhiêu tiền?",en:"How much is a cup of coffee?",c:"c.num.money"},
+{vi:"Một lon coca giá bao nhiêu?",en:"How much is a can of cola?",c:"c.num.money"},
+{vi:"Em trả tiền bằng thẻ.",en:"I pay by card.",c:"c.num.money"},
+{vi:"Em là con thứ nhất trong gia đình của em.",en:"I am the first child in my family.",c:"c.num.ordinal"},
+{vi:"Chỗ ngồi em ở hàng thứ năm.",en:"My seat is in the fifth row.",c:"c.num.ordinal"},
+{vi:"Bây giờ là 6 giờ 20 phút.",en:"It is 6:20 now.",c:"c.time.duration"},
+{vi:"Bạn ngủ mấy tiếng?",en:"How many hours do you sleep?",c:"c.time.duration"},
+{vi:"Khoảng sáu giờ.",en:"Around six o'clock.",c:"c.time.duration"},
+{vi:"Gần bảy giờ.",en:"Almost seven o'clock.",c:"c.time.duration"},
+{vi:"Để mình lấy ví đã.",en:"Let me get my wallet first.",c:"c.asp.da.nuance"},
+{vi:"Uống ly nước mía mát lạnh đã quá!",en:"That cold sugarcane juice is so refreshing!",c:"c.asp.da.nuance"}
+);
+
 const DIALOGUES = [
 {id:"dlg.shop", title:"Ở siêu thị · In the supermarket", concept:"c.sent.yesno",
  setting:"Two shoppers, one of whom turns out to work there.",
@@ -2022,6 +2167,25 @@ DIALOGUES.push(
   {who:"Nam",vi:"Không đâu, giá của hai món này rẻ bằng nhau, đều là năm mươi ngàn một tô.",en:"No, the two dishes cost the same, fifty thousand per bowl."},
   {who:"Linh",vi:"Đối với tớ, bánh xèo là ngon nhất!",en:"For me, bánh xèo is the best!"},
   {who:"Nam",vi:"Được rồi, vậy tụi mình gọi một bún chả và một bánh xèo nhé!",en:"Okay, let's order one bún chả and one bánh xèo."}]}
+);
+
+
+
+DIALOGUES.push(
+{id:"dlg.payment",title:"Tính tiền · Paying at a café",concept:"c.num.money",
+ setting:"Ask the price, choose a payment method and pay.",
+ lines:[
+  {who:"A",vi:"Một ly cà phê bao nhiêu tiền?",en:"How much is a cup of coffee?"},
+  {who:"B",vi:"Sáu ơ rô cho latte, ba ơ rô cho cà phê đen.",en:"Six euros for a latte, three euros for black coffee."},
+  {who:"A",vi:"Được. Em trả tiền bằng thẻ.",en:"Okay. I'll pay by card."},
+  {who:"B",vi:"Dạ, được ạ.",en:"Yes, that's fine."}]},
+{id:"dlg.friends",title:"Mình với cậu · Close-friend register",concept:"c.pron.peers",
+ setting:"Two close peers make a simple plan using the peer pronoun system from the course.",
+ lines:[
+  {who:"A",vi:"Cậu rảnh tối nay không?",en:"Are you free tonight?"},
+  {who:"B",vi:"Ừ, mình rảnh. Cậu muốn đi ăn không?",en:"Yeah, I'm free. Do you want to go eat?"},
+  {who:"A",vi:"Được. Tớ với cậu cùng đi nhé.",en:"Okay. You and I will go together."},
+  {who:"B",vi:"Ừ, gặp nhau lúc 7 giờ nha.",en:"Yeah, let's meet at seven."}]}
 );
 
 /* ── contrast sets · deliberately confusable, drilled side by side ───── */
@@ -2243,6 +2407,26 @@ SCENARIOS.push(
   {goal:"Say today's weather is bad.",expect:["thời tiết hôm nay tệ"],hint:"Weather/situation → tệ."}]}
 );
 
+
+
+SCENARIOS.push(
+{id:"sc.payment",title:"Tính tiền",en:"Paying",concept:"c.num.money",
+ setting:"You are paying at a café. Ask the price and say you will pay by card.",
+ steps:[
+  {goal:"Ask how much one coffee costs.",expect:["một ly cà phê bao nhiêu tiền","một ly cà phê giá bao nhiêu"],hint:"bao nhiêu tiền / giá bao nhiêu"},
+  {goal:"Say you pay by card.",expect:["em trả tiền bằng thẻ","tôi trả tiền bằng thẻ"],hint:"bằng introduces the payment method."}]},
+{id:"sc.peerregister",title:"Bạn thân",en:"Close-friend register",concept:"c.pron.peers",
+ setting:"You are talking to a close peer of similar age. Use the friendly pair taught in the course.",
+ steps:[
+  {goal:"Say: I miss you a lot.",expect:["mình nhớ cậu lắm","tớ nhớ cậu lắm"],hint:"mình / cậu or tớ / cậu."},
+  {goal:"Ask: Are you free tonight?",expect:["cậu rảnh tối nay không","tối nay cậu rảnh không"],hint:"cậu = you, close peer."}]},
+{id:"sc.time",title:"Hẹn giờ",en:"Time and duration",concept:"c.time.duration",
+ setting:"Arrange a time and distinguish clock time from duration.",
+ steps:[
+  {goal:"Say: around six o'clock.",expect:["khoảng sáu giờ","khoảng 6 giờ"],hint:"giờ = clock time."},
+  {goal:"Ask: how many hours do you sleep?",expect:["bạn ngủ mấy tiếng","chị ngủ mấy tiếng","anh ngủ mấy tiếng"],hint:"tiếng = duration in hours."}]}
+);
+
 /* ── survival phrases — what Alexandre can say today ─────────────────── */
 const SURVIVAL = [
 {vi:"Em chưa hiểu.", en:"I don't understand yet.", c:"c.asp.chua"},
@@ -2310,6 +2494,18 @@ const CORE_LESSONS = [
 {id:"core-2026-09-11",date:"2026-09-11",title:"Choosing the right good or bad adjective",summary:"tốt/ngon/hay/ngoan and xấu/tệ/dở/hư in context, plus comparative restaurant language.",concepts:["c.lex.good","c.lex.bad","c.cmp.equal","c.cmp.more","c.cmp.most"]},
 {id:"core-2026-09-15",date:"2026-09-15",title:"Open questions",summary:"gì, ở đâu, khi nào, tại sao/sao, nào, thế nào/làm sao, bao nhiêu/mấy and practical question practice.",concepts:["c.question.wh","c.question.what","c.question.where","c.question.when","c.question.why","c.question.how","c.question.which","c.question.quantity"]}
 ];
+
+
+
+/* V8 · link new concepts back to the dated classes without changing any permanent content ID. */
+[
+ ["core-2026-02-15",["c.pron.peers"]],
+ ["core-2026-02-22",["c.read.vowelglides","c.read.clusters"]],
+ ["core-2026-02-28",["c.sent.prepositions","c.part.attention","c.part.realization","c.part.continuation"]],
+ ["core-2026-04-19",["c.num.money","c.num.ordinal"]],
+ ["core-2026-04-25",["c.time.duration"]],
+ ["core-2026-05-17",["c.asp.da.nuance"]]
+].forEach(function(entry){const l=CORE_LESSONS.find(x=>x.id===entry[0]);if(l)entry[1].forEach(cid=>{if(l.concepts.indexOf(cid)<0)l.concepts.push(cid);});});
 
 /* word classes, used by the odd-one-out drill */
 const CLASSES = {
@@ -2941,6 +3137,8 @@ const TYPES = {
   shadow:       {skill:"production",  level:9, label:"Shadow it"},
   scenario:     {skill:"production",  level:9, label:"Conversation"}
 };
+
+TYPES.flashcard={skill:"recognition",level:2,label:"Flashcard recall"};
 
 /* ── state ────────────────────────────────────────────────────────────── */
 const STATE_SCHEMA_VERSION = 4;
@@ -4946,6 +5144,7 @@ const NAV = [
   {id:"listen",     label:"Listen",   glyph:"◖",  primary:false},
   {id:"speak",      label:"Speak",    glyph:"◉",  primary:false},
   {id:"weaknesses", label:"Weak",     glyph:"△",  primary:false},
+  {id:"studio",     label:"Studio",   glyph:"◇",  primary:false},
   {id:"words",      label:"Words",    glyph:"Aa", primary:false},
   {id:"content",    label:"Content",  glyph:"＋", primary:false},
   {id:"progress",   label:"Progress", glyph:"∿",  primary:false}
@@ -4963,7 +5162,7 @@ function go(v){
   const host = $("#stage");
   host.scrollTop = 0;
   ({today:viewToday, course:viewCourse, review:viewReview, listen:viewListen,
-    speak:viewSpeak, weaknesses:viewWeak, words:viewWords, content:viewContent, progress:viewProgress}[v] || viewToday)();
+    speak:viewSpeak, weaknesses:viewWeak, studio:viewStudio, words:viewWords, content:viewContent, progress:viewProgress}[v] || viewToday)();
   paintStats();
   window.scrollTo({top:0, behavior:"instant"});
 }
@@ -4983,6 +5182,212 @@ function drill(items, opts){
   if (!items.length) return;
   startSession(items.map(x => ({it:x, why:(opts&&opts.why)||"targeted", skill:opts&&opts.skill, force:opts&&opts.force})),
                opts);
+}
+
+
+
+/* ══ STUDIO · visual explanations + active games ══════════════════════ */
+function studioToneMini(){return '<svg class="sparkline" width="38" height="24" viewBox="0 0 38 24" aria-hidden="true"><path d="M2 17 C10 5 15 20 22 9 S31 6 36 3" fill="none" stroke="var(--gold)" stroke-width="1.5" opacity=".72"/></svg>';}
+function visualForConcept(cid){
+  if(/^c\\.(tones|read|south\\.(consonants|finals|hoinga))/.test(cid))return "tones";
+  if(/^c\\.pron/.test(cid)||/^c\\.intro/.test(cid))return "pronouns";
+  if(/^c\\.question/.test(cid))return "questions";
+  if(/^c\\.asp/.test(cid))return "aspect";
+  if(/^c\\.sent/.test(cid)||/^c\\.mod/.test(cid)||/^c\\.freq/.test(cid))return "sentence";
+  return null;
+}
+function viewStudio(){
+  const games=[
+    ["flashcards","▤","Smart flashcards","Flip, retrieve, then grade yourself."],
+    ["pronounGame","◎","Pronoun compass","Choose the relationship before the pronoun."],
+    ["classifierGame","▦","Classifier sort","Match objects to cái, con, quyển, tờ…"],
+    ["particleGame","…","Particle mood","Pick the particle that fits the social intention."],
+    ["questionGame","?","Question map","Choose the WH word that fills the information slot."],
+    ["contextGame","≠","Context words","Pick ngon / hay / tốt / ngoan and their negative partners."],
+    ["soundGame","∿","Sound detective","Separate spelling, vowel quality, tone and Southern realization."],
+    ["timeMoneyGame","₫","Time & money","Choose giờ / tiếng, prices, payment and ordinal forms."]
+  ];
+  $("#stage").innerHTML='<div class="eyebrow">Pedagogical studio</div><h2 class="screen-h">See the system, then use it</h2>'
+    +'<div class="studio-lead">Short visual explanations turn course rules into patterns you can see. The games then force retrieval in a different form, so the same knowledge is not learned from one repetitive card type.</div>'
+    +'<div class="studio-section"><div class="studio-section-h"><h3>Visual maps</h3><span>tap to open</span></div><div class="studio-grid">'
+    +[['tones','∿','Tone landscape','Six written tones; five spoken contours in much southern speech.'],['syllable','m+a','Syllable builder','Build a word from consonant, vowel movement and tone.'],['pronouns','◎','Pronoun compass','Age, relationship and register decide who you are in the sentence.'],['sentence','SVO','Sentence anatomy','See the movable layers around the Vietnamese S–V–O spine.'],['questions','?','Question map','Leave the question word in the information slot.'],['aspect','↔','Aspect timeline','đã · mới · đang · sắp · sẽ on one temporal rail.']].map(x=>'<button class="studio-card" data-visual="'+x[0]+'"><span class="sglyph">'+x[1]+'</span><b>'+x[2]+'</b><small>'+x[3]+'</small>'+(x[0]==='tones'?studioToneMini():'')+'</button>').join('')
+    +'</div></div><div class="studio-section"><div class="studio-section-h"><h3>Active games</h3><span>progress-aware</span></div><div class="studio-grid">'
+    +games.map(x=>'<button class="studio-card" data-game="'+x[0]+'"><span class="sglyph">'+x[1]+'</span><b>'+x[2]+'</b><small>'+x[3]+'</small></button>').join('')+'</div></div>'
+    +'<div class="visual-launch"><b>Pedagogical principle.</b> Visual maps do not replace recall. Use the map to form the mental model, then close it and retrieve the form in a game, listening task, sentence or conversation.</div>';
+  $$('[data-visual]').forEach(b=>b.onclick=()=>openVisual(b.dataset.visual));
+  $$('[data-game]').forEach(b=>b.onclick=function(){const g=b.dataset.game;if(g==='flashcards')startFlashcards();if(g==='pronounGame')startPronounGame();if(g==='classifierGame')startClassifierGame();if(g==='particleGame')startParticleGame();if(g==='questionGame')startQuestionGame();if(g==='contextGame')startContextGame();if(g==='soundGame')startSoundGame();if(g==='timeMoneyGame')startTimeMoneyGame();});
+}
+function toneBigSvg(k){
+  const paths={ngang:'M5 25 L95 25',huyen:'M6 10 L94 40',sac:'M6 40 L94 8',hoi:'M5 12 C30 48 65 48 95 16',nga:'M5 14 C28 43 51 42 70 17 C79 6 88 8 96 13',nang:'M8 10 L67 41'};
+  return '<svg viewBox="0 0 100 50" aria-hidden="true"><path d="'+paths[k]+'" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>'+(k==='nang'?'<circle cx="80" cy="42" r="5" fill="currentColor"/>':'')+'</svg>';
+}
+function openVisual(kind){
+  if(kind==='tones'){
+    const cols=['#D7B86E','#B8A56F','#D98F4E','#D35E48','#9BA679','#6FA9AA'];
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">The six tone contours</h2><div class="hint" style="line-height:1.6;margin-bottom:14px">Each syllable carries a tone. Standard writing keeps six distinctions; the course notes that hỏi and ngã merge in southern speech, so context must sometimes do the listening work.</div><div class="tone-landscape">'+COURSE.pron.tones.map((t,i)=>'<div class="tone-curve" style="color:'+cols[i]+'">'+toneBigSvg(t.key)+'<b>'+esc(t.demo)+'</b><small>'+esc(t.name)+' · '+esc(t.shape)+'</small><button class="mini" data-say="'+esc(t.demo)+'">▶</button></div>').join('')+'</div><div class="visual-launch"><b>Southern listening.</b> Keep nghỉ and nghĩ separate in writing even when a southern voice gives you the same tone contour.</div><div class="next-row"><button class="btn" id="toneGame">Train tones</button><button class="btn ghost" id="closeV">Close</button></div>');
+    wireSpeak();$('#toneGame').onclick=function(){closeSheet();tonePairTrainer();};$('#closeV').onclick=closeSheet;return;
+  }
+  if(kind==='syllable'){
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Build the syllable in three moves</h2><div class="hint" style="line-height:1.6;margin-bottom:14px">The course reads Vietnamese as initial consonant → vowel or vowel group → tone. A compound vowel is one continuous mouth movement inside the syllable.</div><div class="figure-card"><div class="figure-title"><b>m + a + sắc → má</b><span>sound assembly</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>initial</em><b>m</b></span><span class="syntax-chip verb"><em>vowel</em><b>a</b></span><span class="syntax-chip particle"><em>tone</em><b>sắc ´</b></span><span class="syntax-chip object"><em>result</em><b>má</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Compound vowels are a glide</b><span>one syllable movement</span></div><div class="sentence-rail"><span class="syntax-chip verb"><em>ai</em><b>hay</b></span><span class="syntax-chip verb"><em>au</em><b>đau</b></span><span class="syntax-chip verb"><em>ưa</em><b>mưa</b></span><span class="syntax-chip verb"><em>eo</em><b>heo</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Write standard · expect Southern speech</b><span>sound is not alternative spelling</span></div><div class="sentence-rail"><span class="syntax-chip aspect"><em>write trời</em><b>hear chời</b></span><span class="syntax-chip aspect"><em>write về</em><b>hear dề</b></span><span class="syntax-chip aspect"><em>write mát</em><b>hear mác</b></span></div></div><div class="visual-launch"><b>Writing cue.</b> Tone marks can be repaired separately, but ă / â / ê / ô / ơ / ư and đ belong to the letter itself. Keep them distinct when typing.</div><div class="next-row"><button class="btn" id="soundGame">Play sound detective</button><button class="btn ghost" id="closeV">Close</button></div>');$('#soundGame').onclick=function(){closeSheet();startSoundGame();};$('#closeV').onclick=closeSheet;return;
+  }
+  if(kind==='pronouns'){
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Pronoun compass</h2><div class="hint" style="line-height:1.55;margin-bottom:13px">Start from the relationship. The same Vietnamese word can mean I, you or me depending on who occupies the sentence slot.</div><div class="pronoun-orbit"><div class="pronoun-self"><b>YOU</b> · choose the relationship before speaking</div><div class="pronoun-zone"><strong>anh / chị</strong><b>older, near your generation</b><small>Older man / older woman; the younger side is em.</small></div><div class="pronoun-zone"><strong>em</strong><b>younger person</b><small>Gender-neutral for the younger side of the pair.</small></div><div class="pronoun-zone"><strong>cô / chú / bác</strong><b>parents’ generation</b><small>cô / chú around your parents’ age; bác older.</small></div><div class="pronoun-zone"><strong>con</strong><b>family / senior relative</b><small>Southern child-to-parent/senior-family self-reference.</small></div><div class="pronoun-zone"><strong>mình / cậu</strong><b>close peers</b><small>Friendly and intimate; tớ / cậu is another course pair.</small></div><div class="pronoun-zone"><strong>tôi / bạn</strong><b>neutral distance</b><small>Safe in formal or unfamiliar settings.</small></div></div><div class="visual-launch"><b>Rule of thumb from the course.</b> With an unfamiliar adult who seems a little older, anh / chị is safer than calling them em.</div><div class="next-row"><button class="btn" id="pronGame">Play pronoun compass</button><button class="btn ghost" id="closeV">Close</button></div>');
+    $('#pronGame').onclick=function(){closeSheet();startPronounGame();};$('#closeV').onclick=closeSheet;return;
+  }
+  if(kind==='sentence'){
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Sentence anatomy</h2><div class="hint" style="line-height:1.6;margin-bottom:15px">Keep the S–V–O spine visible, then insert aspect, modal, frequency and pragmatic information around it.</div><div class="figure-card"><div class="figure-title"><b>Em đang học tiếng Việt nha.</b><span>one sentence, five jobs</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>subject</em><b>Em</b></span><span class="syntax-chip aspect"><em>aspect</em><b>đang</b></span><span class="syntax-chip verb"><em>verb</em><b>học</b></span><span class="syntax-chip object"><em>object</em><b>tiếng Việt</b></span><span class="syntax-chip particle"><em>particle</em><b>nha</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Frequency + modal</b><span>before the verb</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>subject</em><b>Con</b></span><span class="syntax-chip aspect"><em>frequency</em><b>luôn luôn</b></span><span class="syntax-chip aspect"><em>modal</em><b>phải</b></span><span class="syntax-chip verb"><em>verb</em><b>mang</b></span><span class="syntax-chip object"><em>object</em><b>áo khoác</b></span></div></div><div class="visual-launch"><b>Useful contrast.</b> là links identity to a noun, ở carries location, and a plain adjective often needs neither.</div><div class="next-row"><button class="btn" id="closeV">Close</button></div>');$('#closeV').onclick=closeSheet;return;
+  }
+  if(kind==='questions'){
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Question words stay in the information slot</h2><div class="question-map"><div class="qpattern"><span class="qw">đâu</span><div><code>S + V + đâu?</code><small>Em đi đâu? · Where are you going?</small></div></div><div class="qpattern"><span class="qw">ở đâu</span><div><code>S + sống / ở + ở đâu?</code><small>Chị sống ở đâu?</small></div></div><div class="qpattern"><span class="qw">gì</span><div><code>S + V + gì?</code><small>Em muốn ăn gì?</small></div></div><div class="qpattern"><span class="qw">là gì</span><div><code>N + là gì?</code><small>Công việc của bạn là gì?</small></div></div><div class="qpattern"><span class="qw">bao nhiêu</span><div><code>bao nhiêu + N / N + bao nhiêu tiền?</code><small>Chị cần bao nhiêu tiền?</small></div></div><div class="qpattern"><span class="qw">sao</span><div><code>S + thấy / … + sao?</code><small>Em thấy sao?</small></div></div></div><div class="visual-launch"><b>Memory cue.</b> Do not drag every WH word to the front as English does. First identify what information is missing; put the Vietnamese question word there.</div><div class="next-row"><button class="btn" id="qGame">Play question map</button><button class="btn ghost" id="closeV">Close</button></div>');$('#qGame').onclick=function(){closeSheet();startQuestionGame();};$('#closeV').onclick=closeSheet;return;
+  }
+  if(kind==='aspect'){
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Aspect on a timeline</h2><div class="figure-card"><div class="aspect-line"><div class="aspect-points"><div class="aspect-point"><b>đã</b><i></i><small>completed past</small></div><div class="aspect-point"><b>mới</b><i></i><small>just happened</small></div><div class="aspect-point"><b>đang</b><i></i><small>happening now</small></div><div class="aspect-point"><b>sắp</b><i></i><small>about to</small></div><div class="aspect-point"><b>sẽ</b><i></i><small>future</small></div></div></div></div><div class="visual-launch"><b>Speech note.</b> The course repeatedly notes that context or a time expression can make đã and sẽ unnecessary in ordinary speech. Rồi often marks completion at the end.</div><div class="next-row"><button class="btn" id="closeV">Close</button></div>');$('#closeV').onclick=closeSheet;return;
+  }
+}
+function studioRecord(concept,correct,confidence){
+  const it=COURSE.byId['cpt:'+concept];if(!it)return;
+  const g=normalizeGrade(correct,{outcome:correct?'correct':'concept_error',skillCorrect:correct,knowledgeCredit:correct?1:0,masteryCredit:correct?1:0,conceptError:!correct});
+  applyResult(it,'judge_concept',g,{speedEligible:false,retrievalMs:null,band:'not scored',family:'studio',totalMs:0},confidence||(correct?'knew':'none'));
+}
+function playStudioRounds(title,rounds){
+  let i=0,score=0;document.body.classList.add('in-session');
+  function step(){
+    if(i>=rounds.length){document.body.classList.remove('in-session');$('#stage').innerHTML=card('<div class="eyebrow">Studio complete</div><div class="score">'+score+'<small>/ '+rounds.length+' correct</small></div><div class="visual-launch">The point is transfer: you saw the same course rule through a new decision, not another copy of the same flashcard.</div><div class="next-row"><button class="btn" id="studioAgain">Again</button><button class="btn ghost" id="studioDone">Back to Studio</button></div>');$('#studioAgain').onclick=()=>{i=0;score=0;document.body.classList.add('in-session');step();};$('#studioDone').onclick=()=>go('studio');return;}
+    const r=rounds[i];$('#stage').innerHTML=card('<div class="game-head"><span class="eyebrow">'+esc(title)+'</span><span class="game-progress">'+(i+1)+' / '+rounds.length+'</span></div><div class="game-prompt">'+esc(r.prompt)+'</div>'+(r.context?'<div class="game-context">'+esc(r.context)+'</div>':'')+'<div class="opts">'+r.options.map((o,j)=>'<button class="opt" data-a="'+j+'">'+esc(o)+'</button>').join('')+'</div><div id="gameFb"></div><div class="next-row"><button class="btn ghost" id="gameExit">Exit</button></div>');
+    $('#gameExit').onclick=()=>go('studio');$$('[data-a]').forEach(b=>b.onclick=function(){const a=Number(b.dataset.a),ok=a===r.answer;if(ok)score++;studioRecord(r.concept,ok,ok?'knew':'none');$$('[data-a]').forEach((x,j)=>{x.disabled=true;if(j===r.answer)x.classList.add('correct');else if(j===a&&!ok)x.classList.add('wrong');});$('#gameFb').innerHTML='<div class="game-feedback '+(ok?'good':'bad')+'"><b>'+(ok?'Đúng rồi.':'Not quite.')+'</b> '+esc(r.explain||'')+(r.say?'<button class="mini" data-say="'+esc(r.say)+'">▶</button>':'')+'</div><div class="next-row"><button class="btn" id="gameNext">Continue</button></div>';wireSpeak();$('#gameNext').onclick=()=>{i++;step();};});
+  } step();
+}
+function startPronounGame(){playStudioRounds('Pronoun compass',[
+ {prompt:'You meet a woman a little older than you.',context:'Not old enough to be your aunt.',options:['chị','em','bà'],answer:0,concept:'c.pron.age',explain:'The course says chị is the safer respectful choice for an unfamiliar older woman.',say:'Chị'},
+ {prompt:'You speak to your partner’s mother.',context:'You are speaking from the younger family position.',options:['con / cô or mẹ','tôi / bạn','tao / mày'],answer:0,concept:'c.pron.family',explain:'Family terms encode the relationship. Con is the younger self-reference in the course’s southern family system.'},
+ {prompt:'A close peer of similar age.',context:'Warm and friendly, not rough.',options:['mình / cậu','ông / cháu','bác / con'],answer:0,concept:'c.pron.peers',explain:'mình / cậu is the course’s friendly peer pair.',say:'Mình nhớ cậu lắm.'},
+ {prompt:'A male colleague slightly older than you.',context:'You are the younger side.',options:['em / anh','anh / em','con / chú'],answer:0,concept:'c.pron.age',explain:'The younger speaker is em; the older man is anh.'},
+ {prompt:'A stranger around your age.',context:'Neutral and polite.',options:['tôi / bạn','tao / mày','con / ba'],answer:0,concept:'c.pron.basic',explain:'tôi / bạn is the neutral pair taught for unfamiliar or formal situations.'},
+ {prompt:'Very close friends using rough, highly informal speech.',context:'Recognise it; use only when the relationship clearly licenses it.',options:['tao / mày','tôi / bạn','cháu / bác'],answer:0,concept:'c.pron.peers',explain:'The course marks tao / mày as southern and highly informal, potentially aggressive.'}
+]);}
+function startClassifierGame(){playStudioRounds('Classifier sort',[
+ {prompt:'ba ___ mèo',context:'three cats',options:['con','cái','tờ'],answer:0,concept:'c.sent.classifier',explain:'Animals take con.',say:'ba con mèo'},
+ {prompt:'một ___ sách',context:'one book',options:['quyển','người','bức'],answer:0,concept:'c.sent.classifier',explain:'Books take quyển / cuốn.',say:'một quyển sách'},
+ {prompt:'một ___ tiền',context:'one banknote',options:['tờ','bức','con'],answer:0,concept:'c.sent.classifier',explain:'The course explicitly warns that money takes tờ, not bức.',say:'một tờ tiền'},
+ {prompt:'hai ___ cam',context:'two oranges',options:['trái','người','toa'],answer:0,concept:'c.sent.classifier',explain:'Round fruit can take trái in southern usage.',say:'hai trái cam'},
+ {prompt:'một ___ bạn',context:'one friend / one person',options:['người','chiếc','quyển'],answer:0,concept:'c.sent.classifier',explain:'People take người.',say:'một người bạn'},
+ {prompt:'một ___ xe máy',context:'one motorbike',options:['chiếc','con','tờ'],answer:0,concept:'c.sent.classifier',explain:'Vehicles can take chiếc (and the course notes cái can also appear in speech).',say:'một chiếc xe máy'}
+]);}
+function startParticleGame(){playStudioRounds('Particle mood',[
+ {prompt:'A polite softener you can use at work',context:'“Repeat, please.”',options:['nhé','nha','hư'],answer:0,concept:'c.part.nhe',explain:'The course marks nhé as the more formal / workplace-safe softener.',say:'Lặp lại nhé.'},
+ {prompt:'A warmer southern softener with family or close friends',context:'“Wait a little, okay?”',options:['nha','ạ','đã'],answer:0,concept:'c.part.nhe',explain:'nha carries a warmer, familiar tone.',say:'Đợi một chút nha.'},
+ {prompt:'Respect marker at the end of a sentence',context:'Greeting an elder.',options:['ạ','dạ','hả'],answer:0,concept:'c.part.a',explain:'ạ closes the sentence respectfully.',say:'Con chào bà ạ.'},
+ {prompt:'You are checking in surprise: “You left already?”',context:'Which particle actively asks for confirmation?',options:['hả','ha','nữa'],answer:0,concept:'c.part.attention',explain:'hả is the checking / surprise particle.',say:'Cậu đi rồi hả?'},
+ {prompt:'Friendly attention: “Hold this!”',context:'Southern conversational texture.',options:['nè','rồi','đã'],answer:0,concept:'c.part.attention',explain:'nè draws friendly attention to what is being handed or shown.',say:'Cầm cái này nè!'},
+ {prompt:'You have just understood: “Oh, so you work there.”',context:'Pick the realization expression.',options:['ra là','lẹ','nữa'],answer:0,concept:'c.part.realization',explain:'ra là packages a new realization.',say:'À, ra là cậu làm việc ở đó.'}
+]);}
+function startQuestionGame(){playStudioRounds('Question map',[
+ {prompt:'Where do you live?',options:['Chị sống ở đâu?','Ở đâu chị tên là?','Chị sống gì?'],answer:0,concept:'c.question.where',explain:'ở đâu stays in the location slot.',say:'Chị sống ở đâu?'},
+ {prompt:'What do you want to eat?',options:['Em muốn ăn gì?','Gì em muốn ăn?','Em ăn ở đâu gì?'],answer:0,concept:'c.question.what',explain:'gì occupies the missing object slot.',say:'Em muốn ăn gì?'},
+ {prompt:'What is your job?',options:['Công việc của bạn là gì?','Công việc gì của bạn là?','Bạn ở đâu công việc?'],answer:0,concept:'c.question.what',explain:'Identity / definition uses là gì.',say:'Công việc của bạn là gì?'},
+ {prompt:'How much money do you need?',options:['Chị cần bao nhiêu tiền?','Chị cần mấy tiền?','Bao giờ chị cần tiền?'],answer:0,concept:'c.question.quantity',explain:'bao nhiêu tiền asks an amount of money.',say:'Chị cần bao nhiêu tiền?'},
+ {prompt:'How do you feel?',options:['Em thấy sao?','Em thấy đâu?','Sao em tên?'],answer:0,concept:'c.question.how',explain:'The course practises Em thấy sao? for how you feel.',say:'Em thấy sao?'},
+ {prompt:'Which dish is the best?',options:['Món ăn nào là ngon nhất?','Món ăn gì đâu nhất?','Bao nhiêu món ăn nhất?'],answer:0,concept:'c.question.which',explain:'nào follows the noun when selecting from a set.',say:'Món ăn nào là ngon nhất?'}
+]);}
+function startContextGame(){playStudioRounds('Context words',[
+ {prompt:'A good movie',options:['phim hay','phim ngon','phim ngoan'],answer:0,concept:'c.lex.good',explain:'Content such as films, books and songs takes hay.',say:'Phim này rất hay.'},
+ {prompt:'A delicious dish',options:['món ăn ngon','món ăn ngoan','món ăn tốt'],answer:0,concept:'c.lex.good',explain:'Food takes ngon.',say:'Món ăn này rất ngon.'},
+ {prompt:'A well-behaved dog',options:['con chó ngoan','con chó hay','con chó ngon'],answer:0,concept:'c.lex.good',explain:'Children and animals can be ngoan.',say:'Con chó của tôi rất ngoan.'},
+ {prompt:'Bad weather today',options:['thời tiết hôm nay tệ','thời tiết hôm nay dở người','thời tiết hôm nay hư'],answer:0,concept:'c.lex.bad',explain:'The course uses tệ for weather / a bad situation.',say:'Thời tiết hôm nay tệ.'},
+ {prompt:'A bad movie',options:['phim dở','phim hư','phim dơ'],answer:0,concept:'c.lex.bad',explain:'Content that is bad is dở.',say:'Bộ phim này rất dở.'},
+ {prompt:'A naughty child',options:['cậu bé hư','cậu bé dở phim','cậu bé ngon'],answer:0,concept:'c.lex.bad',explain:'hư describes bad behaviour in a child.',say:'Cậu bé này rất hư.'}
+]);}
+function startSoundGame(){playStudioRounds('Sound detective',[
+ {prompt:'You hear “chời” in Southern speech. What do you write?',context:'Standard spelling remains the target.',options:['trời','chời','chơi'],answer:0,concept:'c.south.consonants',explain:'The course maps written tr to a Southern ch realization in words such as trời.',say:'trời'},
+ {prompt:'Which pair differs in vowel quality, not just tone?',context:'A letter distinction changes the vowel itself.',options:['tay / tai','má / mà','mả / mã'],answer:0,concept:'c.read.vowelglides',explain:'ay and ai are different vowel movements; this is not a tone-only difference.'},
+ {prompt:'You hear Southern “mác”. Which standard spelling may be intended?',context:'Final -t and -c can converge in Southern speech.',options:['mát or mác','only mát','only mác'],answer:0,concept:'c.south.finals',explain:'The course notes final t → c in Southern realization, so context must decide.'},
+ {prompt:'Which pair can share one Southern tone contour?',context:'The written distinction remains.',options:['nghỉ / nghĩ','hay / hai','đau / đâu'],answer:0,concept:'c.south.hoinga',explain:'hỏi and ngã merge in much Southern speech; writing still keeps nghỉ and nghĩ separate.'},
+ {prompt:'Build the syllable: m + a + sắc',options:['má','mà','mạ'],answer:0,concept:'c.read.sequence',explain:'Initial, vowel, then tone: m + a + sắc → má.',say:'má'},
+ {prompt:'Which sequence matches the course reading strategy?',options:['consonant → vowel → tone','tone → vowel → consonant','vowel → translation → tone'],answer:0,concept:'c.read.sequence',explain:'Read the initial first, then the vowel or vowel group, then apply the tone.'}
+]);}
+function startTimeMoneyGame(){playStudioRounds('Time & money',[
+ {prompt:'“I sleep seven hours.” Which word marks duration?',options:['tiếng','giờ','phút'],answer:0,concept:'c.time.duration',explain:'The course distinguishes tiếng for duration from giờ for clock time.',say:'Bảy tiếng.'},
+ {prompt:'6:20 now',options:['Bây giờ là 6 giờ 20 phút.','Bây giờ là 6 tiếng 20 phút.','Bây giờ là 6 thứ 20.'],answer:0,concept:'c.time.clock',explain:'Clock time uses giờ; minutes use phút.',say:'Bây giờ là sáu giờ hai mươi phút.'},
+ {prompt:'“I pay by card.”',options:['Em trả tiền bằng thẻ.','Em trả thẻ tiền.','Em tính thẻ bằng tiền.'],answer:0,concept:'c.num.money',explain:'Payment uses trả tiền; the method is introduced with bằng.',say:'Em trả tiền bằng thẻ.'},
+ {prompt:'Ask the price of a cola.',options:['Một lon coca giá bao nhiêu?','Một lon coca mấy tuổi?','Một lon coca ở đâu giờ?'],answer:0,concept:'c.num.money',explain:'The course practises giá bao nhiêu / bao nhiêu tiền for price.',say:'Một lon coca giá bao nhiêu?'},
+ {prompt:'“first”',options:['thứ nhất','thứ một','một thứ'],answer:0,concept:'c.num.ordinal',explain:'The course highlights thứ nhất as the ordinal form of first.'},
+ {prompt:'“fourth”',options:['thứ tư','thứ bốn','bốn thứ'],answer:0,concept:'c.num.ordinal',explain:'The course highlights thứ tư for fourth.'}
+]);}
+function startFlashcards(){
+  const seenWeak=seen().filter(x=>x.kind==='word'&&['weak','fading'].indexOf(status(x.id))>-1);
+  const due=dueItems().filter(x=>x.kind==='word');
+  const fresh=COURSE.words.filter(x=>!S.rev[x.id]||!S.rev[x.id].reps);
+  const pool=[], used=new Set();
+  [...due,...seenWeak,...shuffle(fresh),...shuffle(COURSE.words)].forEach(function(x){
+    if(x&&!used.has(x.id)){used.add(x.id);pool.push(x);}
+  });
+  const deck=pool.slice(0,15);
+  let i=0, flipped=false;
+  document.body.classList.add('in-session');
+
+  function gradeCard(value,it){
+    let grade, confidence='none';
+    if(value==='again'){
+      grade=normalizeGrade(false,{outcome:'forgot',skillCorrect:false,knowledgeCredit:0,masteryCredit:0,conceptError:true});
+    }else if(value==='hard'){
+      grade=normalizeGrade(true,{outcome:'hard_recall',skillCorrect:true,knowledgeCredit:1,masteryCredit:.72,conceptError:false});
+      confidence='unsure';
+    }else{
+      grade=normalizeGrade(true,{outcome:'correct',skillCorrect:true,knowledgeCredit:1,masteryCredit:1,conceptError:false});
+      confidence='knew';
+    }
+    applyResult(it,'flashcard',grade,{speedEligible:false,retrievalMs:null,band:'not scored',family:'flashcard',totalMs:0},confidence);
+  }
+
+  function render(){
+    if(i>=deck.length){
+      document.body.classList.remove('in-session');
+      $('#stage').innerHTML=card(
+        '<div class="eyebrow">Flashcards complete</div>'+
+        '<div class="score">'+deck.length+'<small>retrievals</small></div>'+
+        '<div class="next-row"><button class="btn" id="fcAgain">Another deck</button><button class="btn ghost" id="fcDone">Back to Studio</button></div>'
+      );
+      $('#fcAgain').onclick=startFlashcards;
+      $('#fcDone').onclick=()=>go('studio');
+      return;
+    }
+
+    const it=deck[i];
+    const front=
+      '<div class="fc-side">retrieve Vietnamese</div>'+
+      '<div class="fc-main">'+esc(it.en)+'</div>'+
+      '<div class="fc-example">Try to say the Vietnamese form before revealing it.</div>';
+    const back=
+      '<div class="fc-side">answer</div>'+
+      '<div class="fc-main">'+esc(it.vi)+'</div>'+
+      '<div class="fc-sub">'+esc(it.en)+'</div>'+
+      (it.ex?'<div class="fc-example">'+esc(it.ex.vi)+'<br><span>'+esc(it.ex.en||'')+'</span></div>':'');
+    const controls=flipped
+      ? '<div class="flashcard-actions"><button class="btn ghost" data-fc="again">Again<small>didn’t know</small></button><button class="btn ghost" data-fc="hard">Hard<small>retrieved with effort</small></button><button class="btn" data-fc="good">Good<small>knew it</small></button></div>'
+      : '<div class="next-row"><button class="btn" id="fcFlip">Show answer</button><button class="btn ghost" id="fcExit">Exit</button></div>';
+
+    $('#stage').innerHTML=
+      '<div class="game-head"><span class="eyebrow">Smart flashcards</span><span class="game-progress">'+(i+1)+' / '+deck.length+'</span></div>'+
+      '<div class="flashcard-shell"><div class="flashcard-card" id="fc">'+(flipped?back:front)+'</div></div>'+controls;
+
+    if(!flipped){
+      const flip=()=>{flipped=true;render();};
+      $('#fc').onclick=flip;
+      $('#fcFlip').onclick=flip;
+      $('#fcExit').onclick=()=>go('studio');
+    }else{
+      $('#fc').onclick=()=>TTS.say((it.ex&&it.ex.vi)||it.vi);
+      $$('[data-fc]').forEach(function(b){
+        b.onclick=function(){
+          gradeCard(b.dataset.fc,it);
+          i++;
+          flipped=false;
+          render();
+        };
+      });
+    }
+  }
+  render();
 }
 
 /* ══ TODAY ═══════════════════════════════════════════════════════════ */
@@ -5005,14 +5410,14 @@ function viewToday(){
     +(diagnosticDue()?'<section class="today-inline-callout"><div><div class="eyebrow">Weekly check</div><div class="inline-title">Your diagnostic is due.</div></div><button class="btn ghost" id="startDiag">Run</button></section>':'')
     +(broken.length?'<section class="today-row-link" id="weakToday"><div><div class="eyebrow">Weak today</div><b>'+esc(broken[0].title)+'</b></div><span>Practice ›</span></section>':'')
     +'<section class="today-row-link" id="recentClass"><div><div class="eyebrow">Recent class</div><b>'+formatLessonDate(recentLesson.date)+' · '+esc(recentLesson.title)+'</b></div><span>Open ›</span></section>'
-    +'<div class="quickrow"><button class="quick" data-q="listen"><b>Listen</b><span>Ear work</span></button><button class="quick" data-q="speak"><b>Speak</b><span>Active production</span></button><button class="quick" data-q="weak"><b>Weak spots</b><span>Repair errors</span></button><button class="quick" data-q="south"><b>Miền Nam</b><span>Southern forms</span></button></div>'
+    +'<div class="quickrow"><button class="quick" data-q="listen"><b>Listen</b><span>Ear work</span></button><button class="quick" data-q="speak"><b>Speak</b><span>Active production</span></button><button class="quick" data-q="weak"><b>Weak spots</b><span>Repair errors</span></button><button class="quick" data-q="south"><b>Miền Nam</b><span>Southern forms</span></button><button class="quick" data-q="studio"><b>Studio</b><span>Visual maps & games</span></button></div>'
     +'<details class="today-details"><summary>Today’s mix</summary><div class="mixrow">'+bits.map(b=>'<span class="mixtag"><b>'+b.n+'</b> '+esc(b.t)+'</span>').join("")+'</div></details>'+tutorBlock();
   $("#start").onclick=()=>startSession(plan);
   if($("#startDiag"))$("#startDiag").onclick=runDiagnostic;
   if($("#weakToday"))$("#weakToday").onclick=()=>go("weaknesses");
   if($("#recentClass"))$("#recentClass").onclick=function(){COURSE_VIEW_MODE="classes";go("course");setTimeout(()=>classSheet(recentLesson.id),0);};
   keyHandler=e=>{if(e.key==="Enter")startSession(plan);};
-  $$(".quick").forEach(b=>b.onclick=function(){const q=b.dataset.q;if(q==="south")drill(shuffle(COURSE.all.filter(x=>x.south)).slice(0,12),{why:"south"});if(q==="weak")go("weaknesses");if(q==="listen")go("listen");if(q==="speak")go("speak");});
+  $$(".quick").forEach(b=>b.onclick=function(){const q=b.dataset.q;if(q==="south")drill(shuffle(COURSE.all.filter(x=>x.south)).slice(0,12),{why:"south"});if(q==="weak")go("weaknesses");if(q==="listen")go("listen");if(q==="speak")go("speak");if(q==="studio")go("studio");});
 }
 /* ══ COURSE ══════════════════════════════════════════════════════════ */
 let COURSE_VIEW_MODE="topics";
@@ -5089,6 +5494,7 @@ function explainSheet(cid){
         + (r.taught?', taught '+r.taught+' time'+(r.taught>1?'s':''):'')+'.</div>' : '')
     + '<div class="next-row" style="margin-top:20px">'
     + '<button class="btn" id="microNow">Micro-lesson</button>'
+    + (visualForConcept(cid) ? '<button class="btn ghost" id="visualNow">Visualize</button>' : '')
     + (its.length ? '<button class="btn ghost" id="drillC">Drill its words ('+its.length+')</button>' : '')
     + '<button class="btn ghost" id="closeC">Close</button></div>');
   wireSpeak();
@@ -5098,6 +5504,7 @@ function explainSheet(cid){
     SESS.queue.splice(SESS.i, 0, {it:{id:"cpt:"+c.id, kind:"micro", vi:c.title, en:c.rule, concept:c.id, ref:c}, why:"micro"});
     renderMicro({id:"cpt:"+c.id, kind:"micro", concept:c.id, ref:c});
   };
+  if ($("#visualNow")) $("#visualNow").onclick = function(){ const v=visualForConcept(cid); closeSheet(); openVisual(v); };
   if ($("#drillC")) $("#drillC").onclick = function(){ closeSheet(); drill(shuffle(its).slice(0,12), {why:"concept"}); };
   $("#closeC").onclick = closeSheet;
 }
@@ -5912,7 +6319,7 @@ function navMoreSheet(){
   const secondary = NAV.filter(n=>!n.primary);
   openSheet('<div class="eyebrow">More</div><h2 class="sheet-h">Practice & library</h2>'
     + '<div class="more-nav-grid">' + secondary.map(n => '<button class="more-nav-item" data-more-view="'+n.id+'"><span class="more-nav-glyph">'+esc(n.glyph)+'</span><span><b>'+esc(n.label)+'</b><small>'
-      + (n.id==="speak"?"Shadowing and conversation":n.id==="weaknesses"?"Repair active weak spots":n.id==="words"?"Search the vocabulary":n.id==="content"?"Add weekly class material":"Learning evidence and reports")
+      + (n.id==="speak"?"Shadowing and conversation":n.id==="weaknesses"?"Repair active weak spots":n.id==="studio"?"Visual maps, flashcards and active games":n.id==="words"?"Search the vocabulary":n.id==="content"?"Add weekly class material":"Learning evidence and reports")
       + '</small></span></button>').join('') + '</div>'
     + '<div class="next-row" style="margin-top:18px"><button class="btn ghost" id="closeMore">Close</button></div>');
   $$("[data-more-view]").forEach(b=>b.onclick=function(){const v=b.dataset.moreView;closeSheet();go(v);});
