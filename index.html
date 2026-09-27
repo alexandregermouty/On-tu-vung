@@ -5570,19 +5570,19 @@ function classPracticePlan(j){
   const words=j.words.filter(w=>w.studyMode!=="reference").sort((a,b)=>overall(a.id)-overall(b.id));
   function add(items,n,force,phase,valid){let count=0;for(const it of items){if(count>=n)break;if(valid&&!valid(it))continue;
     const key=it.id+":"+force;if(used.has(key))continue;used.add(key);plan.push({it:it,force:force,skill:TYPES[force].skill,why:"class · "+phase,phase:phase});count++;}}
-  add(words,5,"mc_vi_en","1 · Recognize meanings");
-  add(words.slice(5).concat(words.slice(0,5)),5,"mc_en_vi","2 · Recall Vietnamese");
-  add(j.concepts.map(c=>COURSE.byId["cpt:"+c.id]).filter(Boolean),j.concepts.length,"judge_concept","3 · Check structures",it=>!!(it.ref&&it.ref.micro&&it.ref.micro.check));
+  add(words,5,"mc_vi_en","Recognize meanings");
+  add(words.slice(5).concat(words.slice(0,5)),5,"mc_en_vi","Recall Vietnamese");
+  add(j.concepts.map(c=>COURSE.byId["cpt:"+c.id]).filter(Boolean),j.concepts.length,"judge_concept","Check structures",it=>!!(it.ref&&it.ref.micro&&it.ref.micro.check));
   if(j.lesson.id==="core-2026-02-22"){
     const pairs=COURSE.all.filter(it=>it.kind==="pair"&&!it.pair.merged);
-    add(pairs,3,"pair_eye","4 · Distinguish written sounds");
-    if(TTS.ready)add(pairs,2,"pair_ear","5 · Distinguish spoken sounds");
+    add(pairs,3,"pair_eye","Distinguish written sounds");
+    if(TTS.ready)add(pairs,2,"pair_ear","Distinguish spoken sounds");
   }
-  add(words,3,"gap","4 · Use words in context",it=>!!(it.ex&&spanOf(it)));
-  add(words,2,"build","5 · Build sentences",it=>!!(it.ex&&toks(it.ex.vi).length>=4&&toks(it.ex.vi).length<=9));
-  if(TTS.ready)add(words,2,"listen_word","6 · Listen and understand");
-  add(words,2,"translate_h","7 · Write with a hint",it=>!!it.ex);
-  add(words.slice(2).concat(words.slice(0,2)),2,"translate","8 · Write independently",it=>!!it.ex);
+  add(words,3,"gap","Use words in context",it=>!!(it.ex&&spanOf(it)));
+  add(words,2,"build","Build sentences",it=>!!(it.ex&&toks(it.ex.vi).length>=4&&toks(it.ex.vi).length<=9));
+  if(TTS.ready)add(words,2,"listen_word","Listen and understand");
+  add(words,2,"translate_h","Write with a hint",it=>!!it.ex);
+  add(words.slice(2).concat(words.slice(0,2)),2,"translate","Write independently",it=>!!it.ex);
   return plan;
 }
 function unitSheet(uid){
