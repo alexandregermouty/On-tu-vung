@@ -783,6 +783,14 @@ body.in-session .foot{margin-top:18px}.bar{height:4px;background:rgba(243,235,22
 .class-list{border-top:1px solid rgba(243,235,221,.08)}.class-row{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:start;width:100%;padding:15px 2px;background:none;border:0;border-bottom:1px solid rgba(243,235,221,.08);color:var(--eggshell);text-align:left;cursor:pointer}
 .class-date{font-family:var(--serif);font-size:14px;color:var(--gold)}.class-copy b{display:block;font-size:14px;font-weight:620;line-height:1.35}.class-copy small{display:block;margin-top:4px;color:var(--text-3);font-size:11.5px;line-height:1.45}.class-state{font-size:10.5px;color:var(--text-3);padding-top:2px}.course-class-summary{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--text-2);margin:7px 0 17px}
 .class-route{display:grid;gap:8px;margin:16px 0}.class-route-step{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}.class-route-step b{display:block;font-size:13px;color:var(--eggshell)}.class-route-step span{display:block;margin-top:3px;color:var(--text-3);font-size:11.5px;line-height:1.5}.class-review-card{max-width:700px;margin:0 auto}.class-review-count{color:var(--gold);font-size:11px;font-weight:650;letter-spacing:.08em;text-transform:uppercase}.class-review-rule{font-size:17px;line-height:1.65;margin:17px 0;color:var(--eggshell)}.class-review-vocab{display:grid;gap:8px;margin:16px 0}.class-review-word{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}.class-review-word b{font-size:16px}.class-review-word small{display:block;grid-column:1;color:var(--text-3);line-height:1.45}.class-review-word .mini{grid-column:2;grid-row:1 / span 2;align-self:center}.class-phase{color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.02em}
+.class-review-card .sheet-h{font-size:clamp(25px,3.2vw,34px);line-height:1.15;margin:10px 0 18px}.class-review-card .next-row{margin-top:22px}
+.teach-focus{border-left:3px solid var(--gold);padding:3px 0 3px 16px;margin:14px 0 18px}.teach-focus small,.teach-example small{display:block;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}.teach-focus strong{display:block;font-size:clamp(17px,2vw,21px);font-weight:550;line-height:1.45;color:var(--eggshell)}
+.teach-pattern{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:15px 0}.teach-pattern span{padding:8px 11px;background:rgba(201,165,101,.12);border:1px solid rgba(201,165,101,.26);border-radius:9px;color:var(--eggshell);font-size:14px;font-weight:650}.teach-pattern i{color:var(--gold);font-style:normal;font-size:18px}
+.teach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin:15px 0}.teach-option{padding:11px 13px;border:1px solid var(--line);border-radius:11px;background:var(--panel-2)}.teach-option b{display:block;color:var(--gold);font-size:17px;font-weight:650;line-height:1.25}.teach-option span{display:block;color:var(--text-2);font-size:12px;line-height:1.4;margin-top:4px}
+.teach-example{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:15px 16px;margin:17px 0 8px;background:rgba(243,235,221,.045);border:1px solid var(--line);border-radius:12px}.teach-example small{grid-column:1 / -1}.teach-example .vi{font-size:19px;line-height:1.4;color:var(--eggshell)}.teach-example .en{grid-column:1;color:var(--text-3);font-size:13px;line-height:1.4}.teach-example .mini{grid-column:2;grid-row:2 / span 2;align-self:center}
+.teach-more{margin:14px 0 4px;border-top:1px solid var(--line);padding-top:11px}.teach-more summary{color:var(--gold);font-size:12px;font-weight:650;cursor:pointer;list-style:none}.teach-more summary::-webkit-details-marker{display:none}.teach-more summary::before{content:'＋';margin-right:7px}.teach-more[open] summary::before{content:'−'}.teach-more-content{padding:12px 0 2px;color:var(--text-2);font-size:13px;line-height:1.55}.teach-more-content p{margin:0 0 10px}.teach-more-content .ex-line{padding:8px 0}
+.class-review-word{align-items:center}.class-review-word small{font-size:12px}.class-review-word .mini{grid-row:1 / span 2}.class-review-word details{grid-column:1 / -1}.class-review-word details summary{color:var(--gold);font-size:11px;cursor:pointer}.class-review-word details p{margin:6px 0 0;color:var(--text-2);font-size:12px;line-height:1.4}
+@media(max-width:560px){.teach-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.teach-example .vi{font-size:17px}.teach-focus strong{font-size:17px}}
 body.in-session .opt{min-height:54px}body.in-session .conf{min-height:48px}body.in-session .btn{min-height:50px}body.in-session .next-row{gap:9px}body.in-session .next-row .btn{flex:1}.mini,.why-btn,.tag{min-height:40px}
 @media(hover:none){.quick:hover,.unit:hover,.tile-btn:hover,.lab:hover,.wrow:hover,.btn:hover,.opt:hover:not(:disabled),.icon.icon-round:hover,.more-nav-item:hover{transform:none;box-shadow:inherit}}
 @media(max-width:700px){
@@ -4512,8 +4520,7 @@ function verdict(item,type,ok,extra,timing,res){
     if(e.yours) body+='<div class="wrongline"><b>You said</b> '+esc(e.yours)+(e.yoursWhy?' — '+esc(e.yoursWhy):'')+'</div>';
     body+='<div class="rightline"><b>Correct</b> '+esc(e.answer||item.vi)+(e.answerWhy?' — '+esc(e.answerWhy):'')+'</div>';
     if(g.outcome==="orthographic_near") body+='<div class="note course-note"><b>Written form.</b> This is not only a missing tone: ă/â/ê/ô/ơ/ư and đ are part of the spelling.</div>';
-    if(concept&&g.conceptError!==false) body+='<div class="note"><b>Pattern.</b> '+esc(concept.rule)+'</div>';
-    if(concept&&concept.micro&&concept.micro.contrast&&g.conceptError!==false) body+='<div class="note"><b>Contrast.</b> '+esc(concept.micro.contrast)+'</div>';
+    if(concept&&g.conceptError!==false) body+='<div class="note"><b>Remember.</b> '+esc(teachingLead(concept))+'</div>';
   } else if(g.outcome&&g.outcome!=="correct"&&g.outcome!=="exact"){
     body+='<div class="vtag near">'+esc(formLabel(g)||"Accepted · partial")+'</div>';
     if(e.yours) body+='<div class="wrongline"><b>You typed</b> '+esc(e.yours)+'</div>';
@@ -5089,6 +5096,78 @@ function freePrompt(it){
   return prompts[it.concept] || ("Write your own sentence using " + it.vi + (c ? " — " + c.title.toLowerCase() : "") + ".");
 }
 
+/* A compact teaching surface shared by class review, Why? and repair cards. */
+const TEACHING_GUIDES={
+  "c.question.wh":{lead:"Keep the question word where the missing answer would go.",pattern:["statement","missing part → question word","question"],choices:[["gì","what"],["ở đâu","where"],["khi nào","when"],["tại sao","why"]]},
+  "c.question.what":{lead:"Choose the form by what you are asking for.",choices:[["gì","an action or missing object"],["cái gì","a thing"],["là gì","a name, role or definition"]]},
+  "c.question.where":{lead:"Ask for a place in the place slot.",choices:[["ở đâu","where someone or something is"],["đâu","where someone goes"]]},
+  "c.question.who":{lead:"Ask ai for an unknown person; người nào for a choice.",choices:[["ai","who is it?"],["người nào","which person?"]]},
+  "c.question.why":{lead:"Start with tại sao or conversational sao to ask why.",pattern:["tại sao / sao","action?","vì …"]},
+  "c.question.when":{lead:"Ask when an event happens; use mấy giờ for clock time.",choices:[["khi nào / bao giờ","when?"],["mấy giờ","what time?"]]},
+  "c.question.how":{lead:"Ask about a state or a method.",choices:[["thế nào / sao","what is it like?"],["làm sao","how is it done?"]]},
+  "c.question.which":{lead:"Put nào after the noun you are choosing.",pattern:["noun","nào?"],choices:[["món ăn nào","which dish?"],["ngày nào","which day?"]]},
+  "c.question.quantity":{lead:"Use bao nhiêu for an open amount; mấy for a small count.",choices:[["bao nhiêu","how much / how many?"],["mấy + noun","how many? (small count)"],["bao nhiêu tiền","what price?"]]},
+  "c.question.yet":{lead:"Put chưa at the end to ask if something has happened yet.",pattern:["person","action","chưa?"],choices:[["rồi","yes, already"],["chưa","no, not yet"]]},
+  "c.question.whose":{lead:"Put của ai after the thing whose owner you want to know.",pattern:["thing","của ai?"]},
+  "c.question.duration":{lead:"Separate duration from frequency.",choices:[["bao lâu","how long?"],["bao lâu một lần","how often?"]]},
+  "c.intro.age":{lead:"Ask an adult with bao nhiêu tuổi; mấy tuổi is common for a child.",pattern:["person","bao nhiêu tuổi?"],choices:[["bao nhiêu tuổi","adult / general"],["mấy tuổi","child"]]},
+  "c.asp.chua":{lead:"The position of chưa changes the job it does.",choices:[["chưa + action","has not happened yet"],["action + chưa?","has it happened yet?"]]},
+  "c.sent.svo":{lead:"Build a basic sentence in subject–verb–object order.",pattern:["who?","does what?","to what?"]},
+  "c.sent.classifier":{lead:"Count with number + classifier + noun.",pattern:["number","classifier","noun"],choices:[["con","animals"],["cái","general objects"],["quyển / cuốn","books"]]},
+  "c.lex.good":{lead:"The noun decides which word for good fits.",choices:[["tốt","person / job"],["ngon","food"],["hay","film / music"],["ngoan","child / animal"]]},
+  "c.lex.bad":{lead:"The noun decides which word for bad fits.",choices:[["xấu","appearance / person"],["tệ","situation / weather"],["dở","food / content"],["hư","behavior"]]},
+  "c.south.consonants":{choices:[["tr → ch","Southern speech"],["s → x","Southern speech"],["v → d","Southern speech"],["qu → w","Southern speech"]]},
+  "c.sent.o":{choices:[["ở trên","on top"],["ở trong","inside"],["ở gần","near"]]},
+  "c.part.nhe":{choices:[["nhé","polite / neutral"],["nha","warm / familiar"]]},
+  "c.part.a":{choices:[["dạ","at the start of a polite answer"],["ạ","at the end of a respectful sentence"]]},
+  "c.part.ma":{choices:[["mà","push back"],["chứ","affirm"],["đấy","point out"]]},
+  "c.asp.da":{choices:[["đã","before a completed action"],["rồi","completion at the end"]]},
+  "c.asp.moi":{choices:[["đã","past action"],["mới","just happened"]]},
+  "c.asp.dang":{choices:[["đã","past"],["đang","happening now"],["sẽ","future"]]},
+  "c.asp.se":{choices:[["sẽ","later"],["sắp","about to happen"]]},
+  "c.num.basic":{choices:[["mười","ten"],["mươi","tens in numbers above twenty"]]},
+  "c.time.clock":{choices:[["rưỡi","half past"],["kém","minutes to the next hour"]]},
+  "c.mod.bi":{choices:[["bị","unwanted event"],["được","welcome event"]]},
+  "c.mod.wear":{choices:[["mặc","clothes"],["đeo","glasses / jewellery"],["mang / đi","shoes"]]},
+  "c.mod.beforeafter":{choices:[["trước khi","before"],["sau khi","after"]]},
+  "c.freq.adv":{choices:[["chưa bao giờ","never so far"],["không bao giờ","never / not ever"]]},
+  "c.cmp.most":{choices:[["hơn","more than"],["nhất","the most"]]},
+  "c.sent.demonstratives":{choices:[["này / đây","near"],["đó","there"],["kia","farther away"]]},
+  "c.south.tui":{choices:[["tôi","neutral / formal"],["tui","casual Southern"]]},
+  "c.pron.peers":{choices:[["tôi / bạn","neutral"],["mình / cậu","close peers"],["tao / mày","very familiar; use carefully"]]},
+  "c.part.attention":{choices:[["hả","asks or checks"],["ha","softens a reaction"]]},
+  "c.part.realization":{choices:[["ra là","now I understand"],["vậy ta","curious reaction"],["lẹ","quickly / hurry"]]},
+  "c.part.continuation":{choices:[["nữa","more / again"],["thôi","stop / only"],["đâu","emphatic denial"],["cho","for someone"]]},
+  "c.num.money":{choices:[["bao nhiêu","amount"],["bao nhiêu tiền","price"],["bằng","payment method"]]},
+  "c.num.ordinal":{choices:[["thứ nhất","first"],["thứ tư","fourth"]]},
+  "c.time.duration":{choices:[["giờ","clock time"],["tiếng","hours of duration"]]},
+  "c.asp.da.nuance":{choices:[["đã + action","completed"],["… đã","first, before continuing"],["đã quá!","satisfaction"]]}
+};
+function teachingLead(c){
+  const g=TEACHING_GUIDES[c.id];if(g&&g.lead)return g.lead;
+  const raw=((c.micro&&c.micro.rule)||c.rule||c.title).trim();
+  const first=raw.match(/^.*?[.!?](?=\s|$)/);
+  const short=first&&first[0].length<=155?first[0]:raw;
+  return short.length<=155?short:short.slice(0,152).replace(/\s+\S*$/,'')+'…';
+}
+function teachingCard(c,extra){
+  const g=TEACHING_GUIDES[c.id]||{},lead=teachingLead(c),examples=(c.examples||[]).concat(c.micro&&c.micro.examples||[]);
+  const first=examples[0],contrast=c.micro&&c.micro.contrast||"",choices=g.choices||[];
+  let html='<div class="teach-focus"><small>Remember</small><strong>'+esc(lead)+'</strong></div>';
+  if(g.pattern)html+='<div class="teach-pattern" aria-label="Sentence pattern">'+g.pattern.map((part,i)=>(i?'<i aria-hidden="true">→</i>':'')+'<span>'+esc(part)+'</span>').join('')+'</div>';
+  if(choices.length)html+='<div class="teach-grid">'+choices.map(x=>'<div class="teach-option"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div>';
+  if(first)html+='<div class="teach-example"><small>Example</small><span class="vi">'+esc(first.vi)+'</span><span class="en">'+esc(first.en||'')+'</span><button class="mini" data-say="'+esc(first.vi)+'" aria-label="Play example">▶</button></div>';
+  const seen=new Set(first?[first.vi]:[]),more=[];
+  examples.slice(1).concat(extra||[]).forEach(e=>{if(e&&e.vi&&!seen.has(e.vi)){seen.add(e.vi);more.push(e);}});
+  const detail=[];
+  if(c.rule&&c.rule!==lead)detail.push('<p>'+esc(c.rule)+'</p>');
+  if(c.courseNote)detail.push('<p>'+esc(c.courseNote)+'</p>');
+  if(contrast)detail.push('<p><b>Compare:</b> '+esc(contrast)+'</p>');
+  detail.push(...more.slice(0,6).map(e=>'<div class="ex-line"><span class="vi">'+esc(e.vi)+'</span><span class="en">'+esc(e.en||'')+'</span><button class="mini" data-say="'+esc(e.vi)+'">▶</button></div>'));
+  if(detail.length)html+='<details class="teach-more"><summary>More examples and detail</summary><div class="teach-more-content">'+detail.join('')+'</div></details>';
+  return html;
+}
+
 /* ── micro-lesson: rule, examples, contrast, check, produce ──────────── */
 function renderMicro(item, entry){
   const c = item.ref || COURSE.conceptById[item.concept];
@@ -5097,11 +5176,7 @@ function renderMicro(item, entry){
   const cr = cRec(c.id); cr.taught++; cr.lastTaught = Date.now(); save();
   stage(card(label("Let's fix this", "micro-lesson", whyBtn(c.id))
     + '<h2 class="word sm">'+esc(c.title)+'</h2>'
-    + '<div class="note big"><b>Rule.</b> '+esc(m.rule)+'</div>'
-    + m.examples.map(e => '<div class="ex-line"><span class="vi">'+esc(e.vi)+'</span>'
-        + (e.en?'<span class="en">'+esc(e.en)+'</span>':'')
-        + '<button class="mini" data-say="'+esc(e.vi)+'">▶</button></div>').join("")
-    + '<div class="note south-note"><b>Contrast.</b> '+esc(m.contrast)+'</div>'
+    + teachingCard(c)
     + '<div class="micro-check"><div class="eyebrow">Quick check</div>'
     + '<div class="prompt-en" style="font-size:18px;margin:8px 0 0">'+esc(m.check.q)+'</div>'
     + choicesHTML(m.check.options.map(o => esc(o)), true) + '</div>'));
@@ -5132,7 +5207,7 @@ function microProduce(c, checkOk){
     el.innerHTML = (ok ? '<div class="vtag ok">Đúng rồi</div>' : '<div class="vtag near">Here it is</div>')
       + '<div class="vrow"><span class="w">'+esc(p.vi)+'</span></div>'
       + (yours && !ok ? '<div class="wrongline"><b>You wrote</b> '+esc(yours)+'</div>' : '')
-      + '<div class="note">'+esc(c.rule)+'</div>'
+      + '<div class="note">'+esc(teachingLead(c))+'</div>'
       + '<div class="audio"><button class="speak" data-say="'+esc(p.vi)+'">▶ Nghe</button></div>'
       + '<div class="next-row"><button class="btn" id="next">Back to the session</button></div>';
     $("#card").appendChild(el);
@@ -5249,11 +5324,12 @@ function drill(items, opts){
 /* ══ STUDIO · visual explanations + active games ══════════════════════ */
 function studioToneMini(){return '<svg class="sparkline" width="38" height="24" viewBox="0 0 38 24" aria-hidden="true"><path d="M2 17 C10 5 15 20 22 9 S31 6 36 3" fill="none" stroke="var(--gold)" stroke-width="1.5" opacity=".72"/></svg>';}
 function visualForConcept(cid){
-  if(/^c\\.(tones|read|south\\.(consonants|finals|hoinga))/.test(cid))return "tones";
-  if(/^c\\.pron/.test(cid)||/^c\\.intro/.test(cid))return "pronouns";
-  if(/^c\\.question/.test(cid))return "questions";
-  if(/^c\\.asp/.test(cid))return "aspect";
-  if(/^c\\.sent/.test(cid)||/^c\\.mod/.test(cid)||/^c\\.freq/.test(cid))return "sentence";
+  if(/^c\.(tones|south\.hoinga)/.test(cid))return "tones";
+  if(/^c\.(read|south\.(consonants|finals))/.test(cid))return "syllable";
+  if(/^c\.(pron|intro)/.test(cid))return "pronouns";
+  if(/^c\.question/.test(cid))return "questions";
+  if(/^c\.asp/.test(cid))return "aspect";
+  if(/^c\.(sent|mod|freq)/.test(cid))return "sentence";
   return null;
 }
 function viewStudio(){
@@ -5268,12 +5344,12 @@ function viewStudio(){
     ["timeMoneyGame","₫","Time & money","Choose giờ / tiếng, prices, payment and ordinal forms."]
   ];
   $("#stage").innerHTML='<div class="eyebrow">Pedagogical studio</div><h2 class="screen-h">See the system, then use it</h2>'
-    +'<div class="studio-lead">Short visual explanations turn course rules into patterns you can see. The games then force retrieval in a different form, so the same knowledge is not learned from one repetitive card type.</div>'
+    +'<div class="studio-lead">See the pattern. Try a game. Use it in a sentence.</div>'
     +'<div class="studio-section"><div class="studio-section-h"><h3>Visual maps</h3><span>tap to open</span></div><div class="studio-grid">'
     +[['tones','∿','Tone landscape','Six written tones; five spoken contours in much southern speech.'],['syllable','m+a','Syllable builder','Build a word from consonant, vowel movement and tone.'],['pronouns','◎','Pronoun compass','Age, relationship and register decide who you are in the sentence.'],['sentence','SVO','Sentence anatomy','See the movable layers around the Vietnamese S–V–O spine.'],['questions','?','Question map','Leave the question word in the information slot.'],['aspect','↔','Aspect timeline','đã · mới · đang · sắp · sẽ on one temporal rail.']].map(x=>'<button class="studio-card" data-visual="'+x[0]+'"><span class="sglyph">'+x[1]+'</span><b>'+x[2]+'</b><small>'+x[3]+'</small>'+(x[0]==='tones'?studioToneMini():'')+'</button>').join('')
     +'</div></div><div class="studio-section"><div class="studio-section-h"><h3>Active games</h3><span>progress-aware</span></div><div class="studio-grid">'
     +games.map(x=>'<button class="studio-card" data-game="'+x[0]+'"><span class="sglyph">'+x[1]+'</span><b>'+x[2]+'</b><small>'+x[3]+'</small></button>').join('')+'</div></div>'
-    +'<div class="visual-launch"><b>Pedagogical principle.</b> Visual maps do not replace recall. Use the map to form the mental model, then close it and retrieve the form in a game, listening task, sentence or conversation.</div>';
+    +'<div class="visual-launch"><b>Pedagogical principle.</b> Look at the pattern, then close the map and try it yourself.</div>';
   $$('[data-visual]').forEach(b=>b.onclick=()=>openVisual(b.dataset.visual));
   $$('[data-game]').forEach(b=>b.onclick=function(){const g=b.dataset.game;if(g==='flashcards')startFlashcards();if(g==='pronounGame')startPronounGame();if(g==='classifierGame')startClassifierGame();if(g==='particleGame')startParticleGame();if(g==='questionGame')startQuestionGame();if(g==='contextGame')startContextGame();if(g==='soundGame')startSoundGame();if(g==='timeMoneyGame')startTimeMoneyGame();});
 }
@@ -5284,21 +5360,21 @@ function toneBigSvg(k){
 function openVisual(kind){
   if(kind==='tones'){
     const cols=['#D7B86E','#B8A56F','#D98F4E','#D35E48','#9BA679','#6FA9AA'];
-    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">The six tone contours</h2><div class="hint" style="line-height:1.6;margin-bottom:14px">Each syllable carries a tone. Standard writing keeps six distinctions; the course notes that hỏi and ngã merge in southern speech, so context must sometimes do the listening work.</div><div class="tone-landscape">'+COURSE.pron.tones.map((t,i)=>'<div class="tone-curve" style="color:'+cols[i]+'">'+toneBigSvg(t.key)+'<b>'+esc(t.demo)+'</b><small>'+esc(t.name)+' · '+esc(t.shape)+'</small><button class="mini" data-say="'+esc(t.demo)+'">▶</button></div>').join('')+'</div><div class="visual-launch"><b>Southern listening.</b> Keep nghỉ and nghĩ separate in writing even when a southern voice gives you the same tone contour.</div><div class="next-row"><button class="btn" id="toneGame">Train tones</button><button class="btn ghost" id="closeV">Close</button></div>');
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">The six tone contours</h2><div class="hint" style="line-height:1.6;margin-bottom:14px">Each syllable has a tone. Southern speech often sounds the same for hỏi and ngã.</div><div class="tone-landscape">'+COURSE.pron.tones.map((t,i)=>'<div class="tone-curve" style="color:'+cols[i]+'">'+toneBigSvg(t.key)+'<b>'+esc(t.demo)+'</b><small>'+esc(t.name)+' · '+esc(t.shape)+'</small><button class="mini" data-say="'+esc(t.demo)+'">▶</button></div>').join('')+'</div><div class="visual-launch"><b>Southern listening.</b> Keep nghỉ and nghĩ separate in writing even when a southern voice gives you the same tone contour.</div><div class="next-row"><button class="btn" id="toneGame">Train tones</button><button class="btn ghost" id="closeV">Close</button></div>');
     wireSpeak();$('#toneGame').onclick=function(){closeSheet();tonePairTrainer();};$('#closeV').onclick=closeSheet;return;
   }
   if(kind==='syllable'){
-    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Build the syllable in three moves</h2><div class="hint" style="line-height:1.6;margin-bottom:14px">The course reads Vietnamese as initial consonant → vowel or vowel group → tone. A compound vowel is one continuous mouth movement inside the syllable.</div><div class="figure-card"><div class="figure-title"><b>m + a + sắc → má</b><span>sound assembly</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>initial</em><b>m</b></span><span class="syntax-chip verb"><em>vowel</em><b>a</b></span><span class="syntax-chip particle"><em>tone</em><b>sắc ´</b></span><span class="syntax-chip object"><em>result</em><b>má</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Compound vowels are a glide</b><span>one syllable movement</span></div><div class="sentence-rail"><span class="syntax-chip verb"><em>ai</em><b>hay</b></span><span class="syntax-chip verb"><em>au</em><b>đau</b></span><span class="syntax-chip verb"><em>ưa</em><b>mưa</b></span><span class="syntax-chip verb"><em>eo</em><b>heo</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Write standard · expect Southern speech</b><span>sound is not alternative spelling</span></div><div class="sentence-rail"><span class="syntax-chip aspect"><em>write trời</em><b>hear chời</b></span><span class="syntax-chip aspect"><em>write về</em><b>hear dề</b></span><span class="syntax-chip aspect"><em>write mát</em><b>hear mác</b></span></div></div><div class="visual-launch"><b>Writing cue.</b> Tone marks can be repaired separately, but ă / â / ê / ô / ơ / ư and đ belong to the letter itself. Keep them distinct when typing.</div><div class="next-row"><button class="btn" id="soundGame">Play sound detective</button><button class="btn ghost" id="closeV">Close</button></div>');$('#soundGame').onclick=function(){closeSheet();startSoundGame();};$('#closeV').onclick=closeSheet;return;
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Build the syllable in three moves</h2><div class="hint" style="line-height:1.6;margin-bottom:14px">Build a syllable: first sound → vowel → tone.</div><div class="figure-card"><div class="figure-title"><b>m + a + sắc → má</b><span>sound assembly</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>initial</em><b>m</b></span><span class="syntax-chip verb"><em>vowel</em><b>a</b></span><span class="syntax-chip particle"><em>tone</em><b>sắc ´</b></span><span class="syntax-chip object"><em>result</em><b>má</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Compound vowels are a glide</b><span>one syllable movement</span></div><div class="sentence-rail"><span class="syntax-chip verb"><em>ai</em><b>hay</b></span><span class="syntax-chip verb"><em>au</em><b>đau</b></span><span class="syntax-chip verb"><em>ưa</em><b>mưa</b></span><span class="syntax-chip verb"><em>eo</em><b>heo</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Write standard · expect Southern speech</b><span>sound is not alternative spelling</span></div><div class="sentence-rail"><span class="syntax-chip aspect"><em>write trời</em><b>hear chời</b></span><span class="syntax-chip aspect"><em>write về</em><b>hear dề</b></span><span class="syntax-chip aspect"><em>write mát</em><b>hear mác</b></span></div></div><div class="visual-launch"><b>Writing cue.</b> Tone marks can be repaired separately, but ă / â / ê / ô / ơ / ư and đ belong to the letter itself. Keep them distinct when typing.</div><div class="next-row"><button class="btn" id="soundGame">Play sound detective</button><button class="btn ghost" id="closeV">Close</button></div>');$('#soundGame').onclick=function(){closeSheet();startSoundGame();};$('#closeV').onclick=closeSheet;return;
   }
   if(kind==='pronouns'){
-    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Pronoun compass</h2><div class="hint" style="line-height:1.55;margin-bottom:13px">Start from the relationship. The same Vietnamese word can mean I, you or me depending on who occupies the sentence slot.</div><div class="pronoun-orbit"><div class="pronoun-self"><b>YOU</b> · choose the relationship before speaking</div><div class="pronoun-zone"><strong>anh / chị</strong><b>older, near your generation</b><small>Older man / older woman; the younger side is em.</small></div><div class="pronoun-zone"><strong>em</strong><b>younger person</b><small>Gender-neutral for the younger side of the pair.</small></div><div class="pronoun-zone"><strong>cô / chú / bác</strong><b>parents’ generation</b><small>cô / chú around your parents’ age; bác older.</small></div><div class="pronoun-zone"><strong>con</strong><b>family / senior relative</b><small>Southern child-to-parent/senior-family self-reference.</small></div><div class="pronoun-zone"><strong>mình / cậu</strong><b>close peers</b><small>Friendly and intimate; tớ / cậu is another course pair.</small></div><div class="pronoun-zone"><strong>tôi / bạn</strong><b>neutral distance</b><small>Safe in formal or unfamiliar settings.</small></div></div><div class="visual-launch"><b>Rule of thumb from the course.</b> With an unfamiliar adult who seems a little older, anh / chị is safer than calling them em.</div><div class="next-row"><button class="btn" id="pronGame">Play pronoun compass</button><button class="btn ghost" id="closeV">Close</button></div>');
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Pronoun compass</h2><div class="hint" style="line-height:1.55;margin-bottom:13px">Choose the relationship first. That tells you which pronoun to use.</div><div class="pronoun-orbit"><div class="pronoun-self"><b>YOU</b> · choose the relationship before speaking</div><div class="pronoun-zone"><strong>anh / chị</strong><b>older, near your generation</b><small>Older man / older woman; the younger side is em.</small></div><div class="pronoun-zone"><strong>em</strong><b>younger person</b><small>Gender-neutral for the younger side of the pair.</small></div><div class="pronoun-zone"><strong>cô / chú / bác</strong><b>parents’ generation</b><small>cô / chú around your parents’ age; bác older.</small></div><div class="pronoun-zone"><strong>con</strong><b>family / senior relative</b><small>Southern child-to-parent/senior-family self-reference.</small></div><div class="pronoun-zone"><strong>mình / cậu</strong><b>close peers</b><small>Friendly and intimate; tớ / cậu is another course pair.</small></div><div class="pronoun-zone"><strong>tôi / bạn</strong><b>neutral distance</b><small>Safe in formal or unfamiliar settings.</small></div></div><div class="visual-launch"><b>Rule of thumb from the course.</b> With an unfamiliar adult who seems a little older, anh / chị is safer than calling them em.</div><div class="next-row"><button class="btn" id="pronGame">Play pronoun compass</button><button class="btn ghost" id="closeV">Close</button></div>');
     $('#pronGame').onclick=function(){closeSheet();startPronounGame();};$('#closeV').onclick=closeSheet;return;
   }
   if(kind==='sentence'){
-    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Sentence anatomy</h2><div class="hint" style="line-height:1.6;margin-bottom:15px">Keep the S–V–O spine visible, then insert aspect, modal, frequency and pragmatic information around it.</div><div class="figure-card"><div class="figure-title"><b>Em đang học tiếng Việt nha.</b><span>one sentence, five jobs</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>subject</em><b>Em</b></span><span class="syntax-chip aspect"><em>aspect</em><b>đang</b></span><span class="syntax-chip verb"><em>verb</em><b>học</b></span><span class="syntax-chip object"><em>object</em><b>tiếng Việt</b></span><span class="syntax-chip particle"><em>particle</em><b>nha</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Frequency + modal</b><span>before the verb</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>subject</em><b>Con</b></span><span class="syntax-chip aspect"><em>frequency</em><b>luôn luôn</b></span><span class="syntax-chip aspect"><em>modal</em><b>phải</b></span><span class="syntax-chip verb"><em>verb</em><b>mang</b></span><span class="syntax-chip object"><em>object</em><b>áo khoác</b></span></div></div><div class="visual-launch"><b>Useful contrast.</b> là links identity to a noun, ở carries location, and a plain adjective often needs neither.</div><div class="next-row"><button class="btn" id="closeV">Close</button></div>');$('#closeV').onclick=closeSheet;return;
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Sentence anatomy</h2><div class="hint" style="line-height:1.6;margin-bottom:15px">Start with who + action + object. Add time and tone around it.</div><div class="figure-card"><div class="figure-title"><b>Em đang học tiếng Việt nha.</b><span>one sentence, five jobs</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>subject</em><b>Em</b></span><span class="syntax-chip aspect"><em>aspect</em><b>đang</b></span><span class="syntax-chip verb"><em>verb</em><b>học</b></span><span class="syntax-chip object"><em>object</em><b>tiếng Việt</b></span><span class="syntax-chip particle"><em>particle</em><b>nha</b></span></div></div><div class="figure-card"><div class="figure-title"><b>Frequency + modal</b><span>before the verb</span></div><div class="sentence-rail"><span class="syntax-chip subject"><em>subject</em><b>Con</b></span><span class="syntax-chip aspect"><em>frequency</em><b>luôn luôn</b></span><span class="syntax-chip aspect"><em>modal</em><b>phải</b></span><span class="syntax-chip verb"><em>verb</em><b>mang</b></span><span class="syntax-chip object"><em>object</em><b>áo khoác</b></span></div></div><div class="visual-launch"><b>Useful contrast.</b> là links identity to a noun, ở carries location, and a plain adjective often needs neither.</div><div class="next-row"><button class="btn" id="closeV">Close</button></div>');$('#closeV').onclick=closeSheet;return;
   }
   if(kind==='questions'){
-    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Question words stay in the information slot</h2><div class="question-map"><div class="qpattern"><span class="qw">đâu</span><div><code>S + V + đâu?</code><small>Em đi đâu? · Where are you going?</small></div></div><div class="qpattern"><span class="qw">ở đâu</span><div><code>S + sống / ở + ở đâu?</code><small>Chị sống ở đâu?</small></div></div><div class="qpattern"><span class="qw">gì</span><div><code>S + V + gì?</code><small>Em muốn ăn gì?</small></div></div><div class="qpattern"><span class="qw">là gì</span><div><code>N + là gì?</code><small>Công việc của bạn là gì?</small></div></div><div class="qpattern"><span class="qw">bao nhiêu</span><div><code>bao nhiêu + N / N + bao nhiêu tiền?</code><small>Chị cần bao nhiêu tiền?</small></div></div><div class="qpattern"><span class="qw">sao</span><div><code>S + thấy / … + sao?</code><small>Em thấy sao?</small></div></div></div><div class="visual-launch"><b>Memory cue.</b> Do not drag every WH word to the front as English does. First identify what information is missing; put the Vietnamese question word there.</div><div class="next-row"><button class="btn" id="qGame">Play question map</button><button class="btn ghost" id="closeV">Close</button></div>');$('#qGame').onclick=function(){closeSheet();startQuestionGame();};$('#closeV').onclick=closeSheet;return;
+    openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Question words stay in the information slot</h2><div class="question-map"><div class="qpattern"><span class="qw">đâu</span><div><code>S + V + đâu?</code><small>Em đi đâu? · Where are you going?</small></div></div><div class="qpattern"><span class="qw">ở đâu</span><div><code>S + sống / ở + ở đâu?</code><small>Chị sống ở đâu?</small></div></div><div class="qpattern"><span class="qw">gì</span><div><code>S + V + gì?</code><small>Em muốn ăn gì?</small></div></div><div class="qpattern"><span class="qw">là gì</span><div><code>N + là gì?</code><small>Công việc của bạn là gì?</small></div></div><div class="qpattern"><span class="qw">bao nhiêu</span><div><code>bao nhiêu + N / N + bao nhiêu tiền?</code><small>Chị cần bao nhiêu tiền?</small></div></div><div class="qpattern"><span class="qw">sao</span><div><code>S + thấy / … + sao?</code><small>Em thấy sao?</small></div></div></div><div class="visual-launch"><b>Memory cue.</b> Put the question word where the answer would go.</div><div class="next-row"><button class="btn" id="qGame">Play question map</button><button class="btn ghost" id="closeV">Close</button></div>');$('#qGame').onclick=function(){closeSheet();startQuestionGame();};$('#closeV').onclick=closeSheet;return;
   }
   if(kind==='aspect'){
     openSheet('<div class="eyebrow">Visual map</div><h2 class="sheet-h">Aspect on a timeline</h2><div class="figure-card"><div class="aspect-line"><div class="aspect-points"><div class="aspect-point"><b>đã</b><i></i><small>completed past</small></div><div class="aspect-point"><b>mới</b><i></i><small>just happened</small></div><div class="aspect-point"><b>đang</b><i></i><small>happening now</small></div><div class="aspect-point"><b>sắp</b><i></i><small>about to</small></div><div class="aspect-point"><b>sẽ</b><i></i><small>future</small></div></div></div></div><div class="visual-launch"><b>Speech note.</b> The course repeatedly notes that context or a time expression can make đã and sẽ unnecessary in ordinary speech. Rồi often marks completion at the end.</div><div class="next-row"><button class="btn" id="closeV">Close</button></div>');$('#closeV').onclick=closeSheet;return;
@@ -5312,7 +5388,7 @@ function studioRecord(concept,correct,confidence){
 function playStudioRounds(title,rounds){
   let i=0,score=0;document.body.classList.add('in-session');
   function step(){
-    if(i>=rounds.length){document.body.classList.remove('in-session');$('#stage').innerHTML=card('<div class="eyebrow">Studio complete</div><div class="score">'+score+'<small>/ '+rounds.length+' correct</small></div><div class="visual-launch">The point is transfer: you saw the same course rule through a new decision, not another copy of the same flashcard.</div><div class="next-row"><button class="btn" id="studioAgain">Again</button><button class="btn ghost" id="studioDone">Back to Studio</button></div>');$('#studioAgain').onclick=()=>{i=0;score=0;document.body.classList.add('in-session');step();};$('#studioDone').onclick=()=>go('studio');return;}
+    if(i>=rounds.length){document.body.classList.remove('in-session');$('#stage').innerHTML=card('<div class="eyebrow">Studio complete</div><div class="score">'+score+'<small>/ '+rounds.length+' correct</small></div><div class="visual-launch">You used the rule in a new way.</div><div class="next-row"><button class="btn" id="studioAgain">Again</button><button class="btn ghost" id="studioDone">Back to Studio</button></div>');$('#studioAgain').onclick=()=>{i=0;score=0;document.body.classList.add('in-session');step();};$('#studioDone').onclick=()=>go('studio');return;}
     const r=rounds[i];$('#stage').innerHTML=card('<div class="game-head"><span class="eyebrow">'+esc(title)+'</span><span class="game-progress">'+(i+1)+' / '+rounds.length+'</span></div><div class="game-prompt">'+esc(r.prompt)+'</div>'+(r.context?'<div class="game-context">'+esc(r.context)+'</div>':'')+'<div class="opts">'+r.options.map((o,j)=>'<button class="opt" data-a="'+j+'">'+esc(o)+'</button>').join('')+'</div><div id="gameFb"></div><div class="next-row"><button class="btn ghost" id="gameExit">Exit</button></div>');
     $('#gameExit').onclick=()=>go('studio');$$('[data-a]').forEach(b=>b.onclick=function(){const a=Number(b.dataset.a),ok=a===r.answer;if(ok)score++;studioRecord(r.concept,ok,ok?'knew':'none');$$('[data-a]').forEach((x,j)=>{x.disabled=true;if(j===r.answer)x.classList.add('correct');else if(j===a&&!ok)x.classList.add('wrong');});$('#gameFb').innerHTML='<div class="game-feedback '+(ok?'good':'bad')+'"><b>'+(ok?'Đúng rồi.':'Not quite.')+'</b> '+esc(r.explain||'')+(r.say?'<button class="mini" data-say="'+esc(r.say)+'">▶</button>':'')+'</div><div class="next-row"><button class="btn" id="gameNext">Continue</button></div>';wireSpeak();$('#gameNext').onclick=()=>{i++;step();};});
   } step();
@@ -5548,13 +5624,11 @@ function renderClassReview(){
   if(isConcept){
     const c=step.value;
     body+='<div class="eyebrow" style="margin-top:17px">Structure</div><h2 class="sheet-h">'+esc(c.title)+'</h2>'
-      +'<div class="class-review-rule">'+esc(c.rule)+'</div>'
-      +(c.micro&&c.micro.contrast?'<div class="note south-note"><b>Compare.</b> '+esc(c.micro.contrast)+'</div>':'')
-      +(c.examples||[]).slice(0,3).map(e=>'<div class="ex-line"><span class="vi">'+esc(e.vi)+'</span><span class="en">'+esc(e.en)+'</span><button class="mini" data-say="'+esc(e.vi)+'">▶</button></div>').join('');
+      +teachingCard(c,COURSE.sentencesByConcept[c.id]||[]);
   }else{
     body+='<div class="eyebrow" style="margin-top:17px">Vocabulary</div><h2 class="sheet-h">Words and phrases</h2>'
-      +'<div class="hint">Read each form aloud, recall its meaning, then listen. Every linked word appears in this review.</div>'
-      +'<div class="class-review-vocab">'+step.value.map(w=>'<div class="class-review-word"><b>'+esc(w.vi)+'</b><small>'+esc(w.en)+(w.ex?' · '+esc(w.ex.vi):'')+'</small><button class="mini" data-say="'+esc(w.vi)+'">▶</button></div>').join('')+'</div>';
+      +'<div class="hint">Say each word, then tap to hear it.</div>'
+      +'<div class="class-review-vocab">'+step.value.map(w=>'<div class="class-review-word"><b>'+esc(w.vi)+'</b><small>'+esc(w.en)+'</small><button class="mini" data-say="'+esc(w.vi)+'" aria-label="Play '+esc(w.vi)+'">▶</button>'+(w.ex?'<details><summary>Example</summary><p>'+esc(w.ex.vi)+' · '+esc(w.ex.en||'')+'</p></details>':'')+'</div>').join('')+'</div>';
   }
   body+='<div class="next-row"><button class="btn" id="classReviewNext">'+(j.index===j.steps.length-1?'Begin practice':'Next card')+'</button>'
     +(j.index?'<button class="btn ghost" id="classReviewBack">Previous</button>':'')
@@ -5618,24 +5692,16 @@ function explainSheet(cid){
   const r = S.concept[cid];
   openSheet('<div class="eyebrow">'+esc((COURSE.units.find(u=>u.id===c.unit)||{}).title||"")+'</div>'
     + '<h2 class="sheet-h">'+esc(c.title)+'</h2>'
-    + '<div class="note big"><b>Rule.</b> '+esc(c.rule)+'</div>'
-    + (c.courseNote ? '<div class="note course-note"><b>COURSE NOTE.</b> '+esc(c.courseNote)+'</div>' : '')
-    + c.examples.map(e => '<div class="ex-line"><span class="vi">'+esc(e.vi)+'</span>'
-        + '<span class="en">'+esc(e.en)+(e.note?' · '+esc(e.note):'')+'</span>'
-        + '<button class="mini" data-say="'+esc(e.vi)+'">▶</button></div>').join("")
-    + (c.micro ? '<div class="note south-note"><b>Contrast.</b> '+esc(c.micro.contrast)+'</div>' : '')
-    + (sents.length > c.examples.length ? '<div class="group-h"><span class="eyebrow">More from the course</span></div>'
-        + sents.slice(0,6).map(s => '<div class="ex-line"><span class="vi">'+esc(s.vi)+'</span>'
-          + '<span class="en">'+esc(s.en)+'</span><button class="mini" data-say="'+esc(s.vi)+'">▶</button></div>').join("") : '')
+    + teachingCard(c,sents)
     + (r && r.fails ? '<div class="hint" style="margin-top:14px">Your record: '+r.passes+' right, '+r.fails+' wrong'
         + (r.taught?', taught '+r.taught+' time'+(r.taught>1?'s':''):'')+'.</div>' : '')
     + '<div class="next-row" style="margin-top:20px">'
-    + '<button class="btn" id="microNow">Micro-lesson</button>'
+    + (c.micro?'<button class="btn" id="microNow">Micro-lesson</button>':'')
     + (visualForConcept(cid) ? '<button class="btn ghost" id="visualNow">Visualize</button>' : '')
     + (its.length ? '<button class="btn ghost" id="drillC">Drill its words ('+its.length+')</button>' : '')
     + '<button class="btn ghost" id="closeC">Close</button></div>');
   wireSpeak();
-  $("#microNow").onclick = function(){
+  if($("#microNow"))$("#microNow").onclick = function(){
     closeSheet();
     SESS = SESS || {queue:[], i:0, results:[], started:Date.now(), right:0, wrong:0, run:0, best:0, xp0:S.xp, mode:"micro"};
     SESS.queue.splice(SESS.i, 0, {it:{id:"cpt:"+c.id, kind:"micro", vi:c.title, en:c.rule, concept:c.id, ref:c}, why:"micro"});
@@ -6212,7 +6278,7 @@ function lessonPackSheet(id){
   const p=CUSTOM_PACKS.find(x=>x.lesson.id===id); if(!p)return;
   const activeWords=(p.vocabulary||[]).filter(v=>v.studyMode!=="reference").map(v=>COURSE.byId[v.id]).filter(Boolean);
   const vocab=(p.vocabulary||[]).map(function(v){const r=S.rev[v.id],st=r?STATUS_LABEL[status(v.id)]:"new";return '<div class="row"><span class="pill" style="background:'+STATUS_COLOR[r?status(v.id):"new"]+'"></span><span class="vi">'+esc(v.vi)+'</span><span class="en">'+esc(v.en)+'</span><span class="bx">'+(v.studyMode==="reference"?'reference':esc(st))+'</span></div>';}).join("");
-  const concepts=(p.concepts||[]).map(c=>'<div class="note"><b>'+esc(c.title)+'</b><br>'+esc(c.rule||"")+'</div>').join("");
+  const concepts=(p.concepts||[]).map(c=>'<div class="note"><b>'+esc(c.title)+'</b><br>'+esc(teachingLead(c))+(c.rule&&c.rule!==teachingLead(c)?'<details class="teach-more"><summary>Full explanation</summary><p>'+esc(c.rule)+'</p></details>':'')+'</div>').join("");
   const examples=(p.examples||[]).map(x=>'<div class="ex-line"><span class="vi">'+esc(x.vi)+'</span><span class="en">'+esc(x.en||"")+'</span></div>').join("");
   const dialogues=(p.dialogues||[]).map(d=>'<div class="note"><b>'+esc(d.title)+'</b><br>'+d.lines.map(l=>'<span class="vi-inline">'+esc(l.who?l.who+": ":"")+esc(l.vi)+'</span>'+(l.en?' <span class="dim">· '+esc(l.en)+'</span>':'')).join('<br>')+'</div>').join("");
   const pron=(p.pronunciation||[]).map(x=>'<div class="note south-note"><b>'+esc(x.written||x.vi||x.title||"Pronunciation")+'</b><br>'+esc(x.note||x.sound||x.southern||"")+'</div>').join("");
