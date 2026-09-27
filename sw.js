@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v9 — refresh installed PWAs with progressive class lessons and new course content. */
-const CACHE = "vivu-v9";
+/* Ôn tiếng Việt · v10 — refresh installed PWAs with concise visual explanations. */
+const CACHE = "vivu-v10";
 const ASSETS = [
   "./",
   "./index.html",
