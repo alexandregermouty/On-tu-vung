@@ -4,6 +4,13 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v9
+
+- Weekly classes now open with a structured review of every linked concept and vocabulary item before practice.
+- Class practice moves from meaning recognition to Vietnamese recall, rule checks, sentence completion and building, listening (when a voice is available), and written production. Missed items return at the end of the class.
+- The 27 September class is included, with fuller explanations for open questions, `chưa` questions, ownership, duration and frequency, plus vocabulary from the class notes.
+- Question and context-adjective explanations now give usable patterns, examples and contrasts.
+
 ## What is in v8
 
 - New circular tone-mark logo throughout the app, browser favicons and installable phone icons.
