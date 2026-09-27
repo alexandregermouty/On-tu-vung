@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v8 — cache version bumped so installed PWAs receive the new logo, Studio and course data. */
-const CACHE = "vivu-v8";
+/* Ôn tiếng Việt · v9 — refresh installed PWAs with progressive class lessons and new course content. */
+const CACHE = "vivu-v9";
 const ASSETS = [
   "./",
   "./index.html",
