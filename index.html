@@ -5457,7 +5457,7 @@ function viewToday(){
   const mins=planMinutes(plan), broken=brokenConcepts(), hour=new Date().getHours();
   const greet=hour<11?"Chào buổi sáng":hour<18?"Chào buổi chiều":"Chào buổi tối";
   const dueN=counts.due||0, weakN=counts.weak||0, newN=counts["new"]||0;
-  const recentLesson=CORE_LESSONS[CORE_LESSONS.length-1];
+  const recentLesson=COURSE.lessons.filter(l=>!l.archived).slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).pop()||CORE_LESSONS[CORE_LESSONS.length-1];
   const objective=broken.length?"Repair “"+broken[0].title+"” and retrieve what is due.":"Retrieve what is due, hear some Vietnamese, then add a little new material.";
   const bits=[]; ["due","weak","recent","older","new"].forEach(k=>{if(counts[k])bits.push({n:counts[k],t:k});});
   if(counts.micro)bits.unshift({n:counts.micro,t:"micro-lesson"});
@@ -5485,9 +5485,9 @@ function formatLessonDate(date){const d=new Date(date+"T12:00:00");return isNaN(
 function viewCourse(){
   const switcher='<div class="course-switch" role="tablist"><button data-cm="topics" aria-selected="'+(COURSE_VIEW_MODE==="topics")+'">Topics</button><button data-cm="classes" aria-selected="'+(COURSE_VIEW_MODE==="classes")+'">Classes</button></div>';
   if(COURSE_VIEW_MODE==="classes"){
-    const lessons=CORE_LESSONS.slice().reverse();
+    const lessons=COURSE.lessons.filter(l=>!l.archived).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
     $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Classes</h2><span class="course-count">'+lessons.length+' classes</span></div>'+switcher
-      +'<div class="class-list">'+lessons.map(function(l){const cs=(l.concepts||[]).filter(id=>COURSE.conceptById[id]);const avg=cs.length?cs.reduce((sum,id)=>{const its=COURSE.itemsByConcept[id]||[];return sum+(its.length?its.reduce((a,x)=>a+overall(x.id),0)/its.length:0);},0)/cs.length:0;return '<button class="class-row" data-class="'+l.id+'"><span class="class-date">'+formatLessonDate(l.date)+'</span><span class="class-copy"><b>'+esc(l.title)+'</b><small>'+esc(l.summary)+'</small></span><span class="class-state">'+(avg?Math.round(avg*100)+'%':'New')+'</span></button>';}).join("")+'</div>';
+      +'<div class="class-list">'+lessons.map(function(l){const cs=classConcepts(l),ids=cs.map(c=>c.id);const avg=ids.length?ids.reduce((sum,id)=>{const its=COURSE.itemsByConcept[id]||[];return sum+(its.length?its.reduce((a,x)=>a+overall(x.id),0)/its.length:0);},0)/ids.length:0;return '<button class="class-row" data-class="'+esc(l.id)+'"><span class="class-date">'+formatLessonDate(l.date)+'</span><span class="class-copy"><b>'+esc(l.title)+'</b><small>'+esc(l.summary||l.notes||'Weekly class')+'</small></span><span class="class-state">'+(avg?Math.round(avg*100)+'%':'New')+'</span></button>';}).join("")+'</div>';
     $$(".class-row").forEach(b=>b.onclick=()=>classSheet(b.dataset.class));
   }else{
     $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Course map</h2><span class="course-count">'+COURSE.concepts.length+' concepts · '+COURSE.words.length+' words</span></div>'+switcher
@@ -5498,9 +5498,9 @@ function viewCourse(){
   $$(".course-switch button").forEach(b=>b.onclick=function(){COURSE_VIEW_MODE=b.dataset.cm;viewCourse();});
 }
 function classSheet(id){
-  const l=CORE_LESSONS.find(x=>x.id===id);if(!l)return;
+  const l=COURSE.lessons.find(x=>x.id===id);if(!l)return;
   const cs=classConcepts(l), words=classVocabulary(l);
-  openSheet('<div class="eyebrow">'+formatLessonDate(l.date)+'</div><h2 class="sheet-h">'+esc(l.title)+'</h2><div class="course-class-summary">'+esc(l.summary)+'</div>'
+  openSheet('<div class="eyebrow">'+formatLessonDate(l.date)+'</div><h2 class="sheet-h">'+esc(l.title)+'</h2><div class="course-class-summary">'+esc(l.summary||l.notes||'Review this class step by step.')+'</div>'
     +'<div class="class-route"><div class="class-route-step"><b>1 · Review the structures</b><span>'+cs.length+' explanation cards, with examples and contrasts.</span></div>'
     +'<div class="class-route-step"><b>2 · Review the vocabulary</b><span>'+words.length+' linked words and phrases, grouped into short cards.</span></div>'
     +'<div class="class-route-step"><b>3 · Practice in steps</b><span>Meaning → recall → rule checks → sentences → listening → writing.</span></div></div>'
@@ -5510,18 +5510,23 @@ function classSheet(id){
   $$(".crow").forEach(b=>b.onclick=function(){closeSheet();explainSheet(b.dataset.c);});
   $("#practiceClass").onclick=function(){closeSheet();startClassJourney(id);}; $("#closeClass").onclick=closeSheet;
 }
-function classConcepts(l){return (l.concepts||[]).map(id=>COURSE.conceptById[id]).filter(Boolean);}
+function classConcepts(l){
+  const pack=CUSTOM_PACKS.find(p=>p.lesson&&p.lesson.id===l.id);
+  const ids=[].concat(l.concepts||[],pack?(pack.concepts||[]).map(c=>c.id):[],pack?(pack.vocabulary||[]).map(w=>w.concept):[]);
+  return [...new Set(ids)].map(id=>COURSE.conceptById[id]).filter(Boolean);
+}
 function classVocabulary(l){
-  const linked=new Set((l.concepts||[]));
-  const dated=COURSE.words.filter(w=>w.sourceDate===l.date||w.appearsIn&&w.appearsIn.indexOf(l.id)>-1);
-  const undated=COURSE.words.filter(w=>linked.has(w.concept)&&(!w.sourceDate||w.sourceDate<=l.date));
+  const linked=new Set(classConcepts(l).map(c=>c.id));
+  const isCore=CORE_LESSONS.some(x=>x.id===l.id);
+  const dated=COURSE.words.filter(w=>(isCore&&w.sourceDate===l.date)||w.appearsIn&&w.appearsIn.indexOf(l.id)>-1);
+  const undated=isCore?COURSE.words.filter(w=>linked.has(w.concept)&&(!w.sourceDate||w.sourceDate<=l.date)):[];
   const soundWords=l.id==="core-2026-02-22"?COURSE.words.filter(w=>["ba","má","mưa","heo","đau","hay","trời","mà"].indexOf(w.vi)>-1&&w.id!=="num.ba"):[];
   const seenIds=new Set();
   return dated.concat(undated,soundWords).filter(w=>{if(seenIds.has(w.id))return false;seenIds.add(w.id);return true;});
 }
 let CLASS_JOURNEY=null;
 function startClassJourney(id){
-  const lesson=CORE_LESSONS.find(l=>l.id===id);if(!lesson)return;
+  const lesson=COURSE.lessons.find(l=>l.id===id);if(!lesson)return;
   const concepts=classConcepts(lesson), words=classVocabulary(lesson);
   const steps=concepts.map(c=>({kind:"concept",value:c}));
   for(let i=0;i<words.length;i+=8)steps.push({kind:"vocabulary",value:words.slice(i,i+8)});
@@ -5562,7 +5567,7 @@ function renderClassReview(){
 }
 function classPracticePlan(j){
   const plan=[],used=new Set();
-  const words=j.words.slice().sort((a,b)=>overall(a.id)-overall(b.id));
+  const words=j.words.filter(w=>w.studyMode!=="reference").sort((a,b)=>overall(a.id)-overall(b.id));
   function add(items,n,force,phase,valid){let count=0;for(const it of items){if(count>=n)break;if(valid&&!valid(it))continue;
     const key=it.id+":"+force;if(used.has(key))continue;used.add(key);plan.push({it:it,force:force,skill:TYPES[force].skill,why:"class · "+phase,phase:phase});count++;}}
   add(words,5,"mc_vi_en","1 · Recognize meanings");
@@ -6221,7 +6226,7 @@ function lessonPackSheet(id){
     +(pron?'<div class="group-h"><span class="eyebrow">Pronunciation</span></div>'+pron:'')
     +(exs?'<div class="group-h"><span class="eyebrow">Exercises / reference</span></div>'+exs:'')
     +'<div class="next-row" style="margin-top:20px">'+(!p.lesson.archived&&activeWords.length?'<button class="btn" id="studyLesson">Study this class</button>':'')+'<button class="btn ghost" id="exportLessonSheet">Export lesson</button><button class="btn ghost" id="closeLessonSheet">Close</button></div>');
-  if($("#studyLesson"))$("#studyLesson").onclick=function(){closeSheet();drill(shuffle(activeWords).slice(0,Math.max(12,Math.min(24,activeWords.length))),{why:"weekly class"});};
+  if($("#studyLesson"))$("#studyLesson").onclick=function(){closeSheet();startClassJourney(p.lesson.id);};
   $("#exportLessonSheet").onclick=()=>downloadJSON((p.lesson.id||"lesson")+".json",p); $("#closeLessonSheet").onclick=closeSheet;
 }
 function addClassSheet(){
