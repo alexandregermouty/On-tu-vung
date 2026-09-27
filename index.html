@@ -782,6 +782,7 @@ body.in-session .foot{margin-top:18px}.bar{height:4px;background:rgba(243,235,22
 .course-intro{font-family:var(--serif);font-size:14px;line-height:1.55;color:var(--text-3);margin:0 2px 16px}
 .class-list{border-top:1px solid rgba(243,235,221,.08)}.class-row{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:start;width:100%;padding:15px 2px;background:none;border:0;border-bottom:1px solid rgba(243,235,221,.08);color:var(--eggshell);text-align:left;cursor:pointer}
 .class-date{font-family:var(--serif);font-size:14px;color:var(--gold)}.class-copy b{display:block;font-size:14px;font-weight:620;line-height:1.35}.class-copy small{display:block;margin-top:4px;color:var(--text-3);font-size:11.5px;line-height:1.45}.class-state{font-size:10.5px;color:var(--text-3);padding-top:2px}.course-class-summary{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--text-2);margin:7px 0 17px}
+.class-route{display:grid;gap:8px;margin:16px 0}.class-route-step{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}.class-route-step b{display:block;font-size:13px;color:var(--eggshell)}.class-route-step span{display:block;margin-top:3px;color:var(--text-3);font-size:11.5px;line-height:1.5}.class-review-card{max-width:700px;margin:0 auto}.class-review-count{color:var(--gold);font-size:11px;font-weight:650;letter-spacing:.08em;text-transform:uppercase}.class-review-rule{font-size:17px;line-height:1.65;margin:17px 0;color:var(--eggshell)}.class-review-vocab{display:grid;gap:8px;margin:16px 0}.class-review-word{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}.class-review-word b{font-size:16px}.class-review-word small{display:block;grid-column:1;color:var(--text-3);line-height:1.45}.class-review-word .mini{grid-column:2;grid-row:1 / span 2;align-self:center}.class-phase{color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.02em}
 body.in-session .opt{min-height:54px}body.in-session .conf{min-height:48px}body.in-session .btn{min-height:50px}body.in-session .next-row{gap:9px}body.in-session .next-row .btn{flex:1}.mini,.why-btn,.tag{min-height:40px}
 @media(hover:none){.quick:hover,.unit:hover,.tile-btn:hover,.lab:hover,.wrow:hover,.btn:hover,.opt:hover:not(:disabled),.icon.icon-round:hover,.more-nav-item:hover{transform:none;box-shadow:inherit}}
 @media(max-width:700px){
@@ -1515,52 +1516,52 @@ CONCEPTS.push(
  micro:{rule:"Có can mean have or there is depending on the sentence.",examples:[{vi:"Anh ấy có một công việc tốt.",en:"He has a good job."}],contrast:"Identity uses là; possession/existence uses có.",check:{q:"“I have a book.”",options:["Tôi là một quyển sách.","Tôi có một quyển sách."],answer:1},produce:{en:"I have a book.",vi:"Tôi có một quyển sách."}},requires:["c.sent.svo"]},
 
 {id:"c.question.wh",unit:"u4",title:"Open questions — the WH system",kind:"grammar",
- rule:"The 15/09 class groups open questions around gì, ở đâu, khi nào, tại sao/sao, nào, thế nào/làm sao and bao nhiêu/mấy. The question word can remain in the information slot.",
+ rule:"Start with a statement, then replace the missing information with its question word. Keep gì after the verb, ở đâu in the place slot and nào after the noun being chosen. Tại sao often begins a why-question. This pattern lets you build a real question instead of translating English word order.",
  examples:[{vi:"Em đi đâu?",en:"Where are you going?"},{vi:"Bạn làm gì?",en:"What are you doing?"},{vi:"Thời tiết ở ngoài sao?",en:"How is the weather outside?"}],
  micro:{rule:"Vietnamese often leaves the question word where the missing information belongs.",examples:[{vi:"Chị sống ở đâu?",en:"Where do you live?"}],contrast:"Do not force English WH word order onto every Vietnamese question.",check:{q:"Natural “Where do you live?”",options:["Ở đâu chị sống?","Chị sống ở đâu?"],answer:1},produce:{en:"Where do you live?",vi:"Chị sống ở đâu?"}},requires:["c.sent.svo"]},
 
 {id:"c.question.what",unit:"u4",title:"Gì, cái gì and là gì",kind:"grammar",
- rule:"The course distinguishes gì for actions or missing content, cái gì for a thing, and là gì for definition or identity.",
+ rule:"Ask gì after a verb when you need its missing action or object: Bạn làm gì? Use cái gì to identify a thing: Đây là cái gì? Ask là gì when you need a name, role or definition: Công việc của bạn là gì?",
  examples:[{vi:"Bạn làm gì?",en:"What are you doing?"},{vi:"Đây là cái gì?",en:"What is this?"},{vi:"Công việc của bạn là gì?",en:"What is your job?"}],
  micro:{rule:"Use là gì when the answer is an identity or definition.",examples:[{vi:"Từ này nghĩa là gì?",en:"What does this word mean?"}],contrast:"gì asks for missing content; là gì asks what something is.",check:{q:"“What is your job?”",options:["Công việc của bạn gì?","Công việc của bạn là gì?"],answer:1},produce:{en:"What do you want to eat?",vi:"Em muốn ăn gì?"}},requires:["c.question.wh"]},
 
 {id:"c.question.where",unit:"u4",title:"Ở đâu and đâu — where",kind:"grammar",
- rule:"The course puts ở đâu/đâu most often at the end: Bạn đang ở đâu? Em đi đâu? It can also begin a question such as Ở đâu bán phở?",
+ rule:"Put ở đâu where the place belongs, usually after a place verb or noun phrase: Chị sống ở đâu? After a movement verb, đâu alone is natural: Em đi đâu? You can start with Ở đâu when asking which place provides something: Ở đâu bán phở?",
  examples:[{vi:"Chị sống ở đâu?",en:"Where do you live?"},{vi:"Siêu thị gần nhất ở đâu?",en:"Where is the nearest supermarket?"},{vi:"Ở đâu bán phở?",en:"Where do they sell phở?"}],
  micro:{rule:"Keep ở đâu in the location slot unless the course pattern deliberately fronts it.",examples:[{vi:"Chúng ta nên gặp nhau ở đâu?",en:"Where should we meet?"}],contrast:"đâu alone works naturally after a movement verb: Em đi đâu?",check:{q:"“Where should we meet?”",options:["Chúng ta nên gặp nhau ở đâu?","Ở đâu chúng ta nên gặp nhau?"],answer:0},produce:{en:"Where is the nearest supermarket?",vi:"Siêu thị gần nhất ở đâu?"}},requires:["c.question.wh","c.sent.o"]},
 
 {id:"c.question.when",unit:"u4",title:"Khi nào, bao giờ, chừng nào — when",kind:"grammar",
- rule:"The 15/09 lesson lists khi nào, bao giờ and chừng nào as ways to ask when.",
+ rule:"Use khi nào or bao giờ to ask for an occasion or date; chừng nào is a conversational alternative. The time question can appear before the clause or at its end: Khi nào em đi? / Em đi khi nào? Use mấy giờ when you need a clock time.",
  examples:[{vi:"Khi nào em đi?",en:"When are you going?"}],
  micro:{rule:"These ask for a time/date rather than a clock reading.",examples:[{vi:"Bao giờ chị về?",en:"When are you coming back?"}],contrast:"mấy giờ asks what clock time; khi nào/bao giờ ask when.",check:{q:"Ask “when”, not “what time”:",options:["khi nào","mấy giờ"],answer:0},produce:{en:"When are you going?",vi:"Khi nào em đi?"}},requires:["c.question.wh","c.time.clock"]},
 
 {id:"c.question.why",unit:"u4",title:"Tại sao and sao — why",kind:"grammar",
- rule:"The course lists tại sao and sao for why. Sao also appears in conversation such as Sao thức khuya vậy?",
+ rule:"Begin with tại sao for an explicit why-question: Tại sao em học tiếng Việt? Short sao is common in conversation: Sao anh đến trễ? The answer often starts with vì or tại vì.",
  examples:[{vi:"Sao thức khuya vậy?",en:"Why do you stay up so late?"},{vi:"Tại sao em học tiếng Việt?",en:"Why are you learning Vietnamese?"}],
  micro:{rule:"Tại sao is explicit; sao is shorter and conversational.",examples:[{vi:"Sao vậy?",en:"Why? / What happened?"}],contrast:"sao can also mean how in other structures.",check:{q:"A short conversational “why?”:",options:["sao","ở đâu"],answer:0},produce:{en:"Why are you learning Vietnamese?",vi:"Tại sao em học tiếng Việt?"}},requires:["c.question.wh"]},
 
 {id:"c.question.how",unit:"u4",title:"Sao, thế nào, làm sao, như thế nào — how",kind:"grammar",
- rule:"The 15/09 lesson groups sao, thế nào, làm sao and như thế nào for how and practises weather, feelings, weekends, knowing and doing.",
+ rule:"Ask thế nào or sao about a state or impression: Thời tiết thế nào? / Em thấy sao? Ask làm sao or như thế nào about a method: Làm sao anh biết? Context decides whether sao means how or why.",
  examples:[{vi:"Em thấy sao?",en:"How do you feel?"},{vi:"Thời tiết ở ngoài sao?",en:"How is the weather outside?"},{vi:"Làm sao anh biết?",en:"How do you know?"}],
  micro:{rule:"The course accepts several conversational forms depending on the construction.",examples:[{vi:"Cuối tuần của em sao?",en:"How was your weekend?"}],contrast:"sao can ask why or how; context decides.",check:{q:"“How do you know?”",options:["Làm sao anh biết?","Ở đâu anh biết?"],answer:0},produce:{en:"How do you feel?",vi:"Em thấy sao?"}},requires:["c.question.wh"]},
 
 {id:"c.question.which",unit:"u4",title:"Nào — which",kind:"grammar",
- rule:"The course uses nào to ask which item or choice.",
+ rule:"Use nào when selecting from a set. Put it after the noun: món ăn nào, ngày nào. When the noun is understood, cái nào means which one. For an open what-question without a set, use gì.",
  examples:[{vi:"Bạn thích cái nào?",en:"Which one do you like?"},{vi:"Món ăn nào là ngon nhất?",en:"Which dish is the best?"}],
  micro:{rule:"Nào normally follows the noun being selected.",examples:[{vi:"Tháng nào vui nhất?",en:"Which month is the most fun?"}],contrast:"gì asks what; nào asks which from a set.",check:{q:"“Which one do you like?”",options:["Bạn thích cái gì?","Bạn thích cái nào?"],answer:1},produce:{en:"Which dish is the best?",vi:"Món ăn nào là ngon nhất?"}},requires:["c.question.wh"]},
 
 {id:"c.question.quantity",unit:"u7",title:"Bao nhiêu and mấy — how much / how many",kind:"grammar",
- rule:"The 15/09 class uses bao nhiêu for how much/how many, bao nhiêu tiền for price, and mấy for a smaller count.",
+ rule:"Use bao nhiêu for an open amount or count, and bao nhiêu tiền for price. Put mấy before a countable noun when you expect a small number: mấy trái táo. With a noun such as tiền or nước, bao nhiêu goes before that noun.",
  examples:[{vi:"Chị cần bao nhiêu tiền?",en:"How much money do you need?"},{vi:"Có mấy trái táo trên bàn?",en:"How many apples are on the table?"},{vi:"Có mấy cái xe hơi ở bãi đậu xe?",en:"How many cars are in the parking lot?"}],
  micro:{rule:"Bao nhiêu is open quantity; mấy usually expects a small count.",examples:[{vi:"Bao nhiêu nước chị uống mỗi ngày?",en:"How much water do you drink every day?"}],contrast:"mấy giờ = what time; bao nhiêu tiền = how much money.",check:{q:"“How much money do you need?”",options:["Chị cần mấy tiền?","Chị cần bao nhiêu tiền?"],answer:1},produce:{en:"How many apples are on the table?",vi:"Có mấy trái táo trên bàn?"}},requires:["c.num.basic","c.question.wh"]},
 
 {id:"c.lex.good",unit:"u10",title:"Choosing the right “good”",kind:"lexicon",
- rule:"The 28/08 and 11/09 classes distinguish tốt for a good person/job, ngon for food, hay for films/music/content, and ngoan for children/animals.",
+ rule:"Choose the adjective by what is good: tốt for a person or job, ngon for food, hay for a film, song or story, and ngoan for a well-behaved child or animal. Translate the situation, not the English word good in isolation.",
  examples:[{vi:"Cô ấy là một người tốt.",en:"The lady is a good person."},{vi:"Món ăn này rất ngon.",en:"This dish is delicious."},{vi:"Phim này rất hay.",en:"This movie is very good."},{vi:"Con chó của tôi rất ngoan.",en:"My dog is very good."}],
  micro:{rule:"English good splits according to what is being judged.",examples:[{vi:"Đây là một bài hát hay.",en:"This is a good song."}],contrast:"tốt person/job · ngon food · hay content · ngoan child/animal.",check:{q:"A good movie is:",options:["phim ngon","phim hay","phim ngoan"],answer:1},produce:{en:"This dish is delicious.",vi:"Món ăn này rất ngon."}},requires:["c.sent.adjafter"]},
 
 {id:"c.lex.bad",unit:"u10",title:"Choosing the right “bad”",kind:"lexicon",
- rule:"The classes distinguish xấu for ugly/bad people or appearance, tệ for bad conditions such as weather, dở for bad food/content, and hư for badly behaved children.",
+ rule:"Choose xấu for ugly appearance or a bad person, tệ for a poor situation or weather, dở for disappointing food or content, and hư for a badly behaved child or animal. The noun tells you which Vietnamese word fits.",
  examples:[{vi:"Cái áo này rất xấu.",en:"This T-shirt is very ugly."},{vi:"Thời tiết hôm nay tệ.",en:"Today's weather is bad."},{vi:"Bộ phim này rất dở.",en:"This movie is bad."},{vi:"Cậu bé này rất hư.",en:"This boy is really bad."}],
  micro:{rule:"Bad is contextual too.",examples:[{vi:"Món ăn này dở.",en:"This dish is bad."}],contrast:"xấu appearance/person · tệ situation/weather · dở content/food · hư child behaviour.",check:{q:"A bad movie is:",options:["phim dở","phim hư","phim tệ người"],answer:0},produce:{en:"Today's weather is bad.",vi:"Thời tiết hôm nay tệ."}},requires:["c.sent.adjafter"]},
 
@@ -1634,6 +1635,30 @@ CONCEPTS.push(
  rule:"The course gives three uses of đã: completed past action, priority/order in expressions such as Để mình lấy ví đã, and expressive satisfaction such as đã quá.",
  examples:[{vi:"Tôi đã ăn cơm.",en:"I ate / I have eaten."},{vi:"Để mình lấy ví đã.",en:"Let me get my wallet first."},{vi:"Uống ly nước mía mát lạnh đã quá!",en:"That cold sugarcane juice is so refreshing!"}],
  micro:{rule:"Do not assume every đã is a past-tense marker; use the sentence's function.",examples:[{vi:"Để mình lấy ví đã.",en:"Let me get my wallet first."}],contrast:"đã + verb often marks completed past · clause-final đã can mean first / before we continue · đã quá can express satisfaction.",check:{q:"In “Để mình lấy ví đã”, đã means closest to:",options:["past tense","first / before continuing"],answer:1},produce:{en:"Let me get my wallet first.",vi:"Để mình lấy ví đã."}},requires:["c.asp.da"]}
+);
+
+/* The 27/09 follow-up develops the open-question lesson into useful conversations. */
+CONCEPTS.push(
+{id:"c.intro.age",unit:"u1",title:"Bao nhiêu tuổi — asking age",kind:"grammar",
+ rule:"Ask someone’s age with pronoun + bao nhiêu tuổi? Use mấy tuổi mainly for a child. Answer with pronoun + number + tuổi. Choose a respectful pronoun before asking; age questions can feel personal with strangers.",
+ examples:[{vi:"Chị bao nhiêu tuổi?",en:"How old are you?"},{vi:"Em mấy tuổi?",en:"How old are you? (to a child)"},{vi:"Em hai mươi tuổi.",en:"I am twenty years old."}],
+ micro:{rule:"Put the age expression after the person.",examples:[{vi:"Bác bao nhiêu tuổi?",en:"How old are you? (respectful)"}],contrast:"bao nhiêu tuổi works broadly · mấy tuổi is common for children.",check:{q:"Ask an adult politely how old they are:",options:["Chị bao nhiêu tuổi?","Chị mấy giờ?"],answer:0},produce:{en:"How old are you?",vi:"Chị bao nhiêu tuổi?"}},requires:["c.pron.age","c.num.basic"]},
+{id:"c.question.who",unit:"u4",title:"Ai and người nào — asking who",kind:"grammar",
+ rule:"Use ai when the person's identity is unknown. Use người nào when choosing a person from a known group. Ai can begin a question as the subject or remain after the verb as the missing person.",
+ examples:[{vi:"Ai đang ngồi ở đó?",en:"Who is sitting over there?"},{vi:"Chị đi tiệc với ai?",en:"Who are you going to the party with?"},{vi:"Bạn học với người nào?",en:"Which person do you study with?"}],
+ micro:{rule:"Put ai in the position of the person you are asking about.",examples:[{vi:"Ai nói với chị về cái này?",en:"Who told you about this?"}],contrast:"ai = unknown identity · người nào = selection from a group.",check:{q:"Ask who is sitting there:",options:["Ai đang ngồi ở đó?","Người nào đang ngồi ai?"],answer:0},produce:{en:"Who are you going to the party with?",vi:"Chị đi tiệc với ai?"}},requires:["c.question.wh"]},
+{id:"c.question.yet",unit:"u4",title:"Chưa at the end — have you yet?",kind:"grammar",
+ rule:"To ask whether an action has happened yet, put chưa at the end: subject + (có) + verb + object + chưa? A short answer is rồi if it has happened, or chưa if it has not.",
+ examples:[{vi:"Bạn ăn tối chưa?",en:"Have you eaten dinner yet?"},{vi:"Bạn gửi email chưa?",en:"Have you sent the email yet?"}],
+ micro:{rule:"Question-final chưa asks whether the action has happened by now.",examples:[{vi:"Bạn gọi cho mẹ chưa?",en:"Have you called your mother yet?"}],contrast:"chưa before a verb states not yet; chưa after a clause asks yet?",check:{q:"Ask whether someone has eaten dinner yet:",options:["Bạn chưa ăn tối?","Bạn ăn tối chưa?"],answer:1},produce:{en:"Have you sent the email yet?",vi:"Bạn gửi email chưa?"}},requires:["c.asp.chua","c.sent.yesno"]},
+{id:"c.question.whose",unit:"u4",title:"Của ai — asking whose",kind:"grammar",
+ rule:"Keep của ai after the thing whose owner you are asking about. Đây là + noun + của ai? asks whose thing it is.",
+ examples:[{vi:"Đây là xe hơi của ai?",en:"Whose car is this?"},{vi:"Chìa khóa này của ai?",en:"Whose keys are these?"}],
+ micro:{rule:"Name the thing first, then ask của ai.",examples:[{vi:"Cái áo này của ai?",en:"Whose shirt is this?"}],contrast:"ai asks who a person is · của ai asks who owns something.",check:{q:"Whose car is this?",options:["Đây là xe hơi của ai?","Của ai đây xe hơi?"],answer:0},produce:{en:"Whose keys are these?",vi:"Chìa khóa này của ai?"}},requires:["c.question.who","c.pron.possessive"]},
+{id:"c.question.duration",unit:"u7",title:"Bao lâu and bao lâu một lần",kind:"grammar",
+ rule:"Bao lâu asks how long an activity lasts or has continued. Bao lâu một lần asks how often it repeats. Add rồi when asking how long something has been true up to now.",
+ examples:[{vi:"Bạn học tiếng Việt bao lâu rồi?",en:"How long have you studied Vietnamese?"},{vi:"Bạn tập thể dục bao lâu một lần?",en:"How often do you exercise?"}],
+ micro:{rule:"Duration and frequency are different questions.",examples:[{vi:"Bạn ở đây bao lâu?",en:"How long are you staying here?"}],contrast:"bao lâu = how long · bao lâu một lần = how often.",check:{q:"Ask how often someone exercises:",options:["Bạn tập thể dục bao lâu?","Bạn tập thể dục bao lâu một lần?"],answer:1},produce:{en:"How long have you studied Vietnamese?",vi:"Bạn học tiếng Việt bao lâu rồi?"}},requires:["c.question.wh","c.freq.adv"]}
 );
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1891,6 +1916,38 @@ COURSE_ITEMS.push(
 {id:"course.time.phut",vi:"phút",en:"minute",d:"u7",concept:"c.time.duration",sourceDate:"2026-04-25"},
 {id:"course.time.tieng",vi:"tiếng",en:"hour(s) of duration",d:"u7",concept:"c.time.duration",sourceDate:"2026-04-25"},
 {id:"course.time.khoang",vi:"khoảng",en:"around; approximately",d:"u7",concept:"c.time.duration",sourceDate:"2026-04-25"}
+);
+
+/* Key words named in the 15/09 and 27/09 class notes. */
+COURSE_ITEMS.push(
+{id:"course.intro.baonhieutuoi",vi:"bao nhiêu tuổi",en:"how old",d:"u1",concept:"c.intro.age",sourceDate:"2026-02-15",ex:{vi:"Chị bao nhiêu tuổi?",en:"How old are you?"}},
+{id:"course.intro.maytuoi",vi:"mấy tuổi",en:"how old (usually to a child)",d:"u1",concept:"c.intro.age",sourceDate:"2026-02-15",ex:{vi:"Em mấy tuổi?",en:"How old are you? (to a child)"}},
+{id:"course.wh.camthay",vi:"cảm thấy",en:"to feel",d:"u4",concept:"c.question.how",sourceDate:"2026-09-15",ex:{vi:"Hôm nay em cảm thấy sao?",en:"How do you feel today?"}},
+{id:"course.wh.thay",vi:"thấy",en:"to see; to feel (in context)",d:"u4",concept:"c.question.how",sourceDate:"2026-09-15",ex:{vi:"Em thấy sao?",en:"How do you feel?"}},
+{id:"course.wh.yeuthich",vi:"yêu thích",en:"favorite; to love",d:"u4",concept:"c.question.which",sourceDate:"2026-09-15",ex:{vi:"Màu yêu thích của em là gì?",en:"What is your favorite color?"}},
+{id:"course.wh.gannhat",vi:"gần nhất",en:"nearest",d:"u4",concept:"c.question.where",sourceDate:"2026-09-15",ex:{vi:"Siêu thị gần nhất ở đâu?",en:"Where is the nearest supermarket?"}},
+{id:"course.wh.kiem",vi:"kiếm",en:"to find; look for",d:"u4",concept:"c.question.where",sourceDate:"2026-09-15",ex:{vi:"Chị có thể kiếm taxi ở đâu?",en:"Where can you find a taxi?"}},
+{id:"course.wh.chiakhoa",vi:"chìa khóa",en:"keys",d:"u10",concept:"c.question.whose",sourceDate:"2026-09-15",ex:{vi:"Chìa khóa của em ở đâu?",en:"Where are my keys?"}},
+{id:"course.wh.mau",vi:"màu",en:"color",d:"u10",concept:"c.question.which",sourceDate:"2026-09-15"},
+{id:"course.wh.duong",vi:"đường",en:"sugar; road (context-dependent)",d:"u10",concept:"c.question.quantity",sourceDate:"2026-09-15",ex:{vi:"Cà phê này có bao nhiêu đường?",en:"How much sugar is in this coffee?"}},
+{id:"course.sep.motminh",vi:"một mình",en:"alone; by oneself",d:"u10",concept:"c.question.who",sourceDate:"2026-09-27"},
+{id:"course.sep.tiec",vi:"tiệc",en:"party",d:"u10",concept:"c.question.who",sourceDate:"2026-09-27",ex:{vi:"Chị đi tiệc với ai?",en:"Who are you going to the party with?"}},
+{id:"course.sep.ngoi",vi:"ngồi",en:"to sit",d:"u10",concept:"c.question.who",sourceDate:"2026-09-27",ex:{vi:"Ai đang ngồi ở đó?",en:"Who is sitting over there?"}},
+{id:"course.sep.bucminh",vi:"bực mình",en:"upset; annoyed",d:"u10",concept:"c.question.why",sourceDate:"2026-09-27",ex:{vi:"Sao anh ấy bực mình?",en:"Why is he upset?"}},
+{id:"course.sep.ngaynghi",vi:"ngày nghỉ",en:"day off",d:"u10",concept:"c.question.when",sourceDate:"2026-09-27",ex:{vi:"Ngày nghỉ tiếp theo của chị là khi nào?",en:"When is your next day off?"}},
+{id:"course.sep.tieptheo",vi:"tiếp theo",en:"next; following",d:"u10",concept:"c.question.when",sourceDate:"2026-09-27"},
+{id:"course.sep.tap",vi:"tập thể dục",en:"to exercise",d:"u10",concept:"c.question.duration",sourceDate:"2026-09-27",ex:{vi:"Bạn tập thể dục bao lâu một lần?",en:"How often do you exercise?"}},
+{id:"course.sep.baolau",vi:"bao lâu",en:"how long",d:"u7",concept:"c.question.duration",sourceDate:"2026-09-27"},
+{id:"course.sep.baolaumotlan",vi:"bao lâu một lần",en:"how often",d:"u7",concept:"c.question.duration",sourceDate:"2026-09-27"},
+{id:"course.sep.cuaai",vi:"của ai",en:"whose",d:"u4",concept:"c.question.whose",sourceDate:"2026-09-27"}
+,{id:"course.sep.nguoinao",vi:"người nào",en:"which person",d:"u4",concept:"c.question.who",sourceDate:"2026-09-27"}
+,{id:"course.sep.goidienthoai",vi:"gọi điện thoại",en:"to make a phone call",d:"u10",concept:"c.question.who",sourceDate:"2026-09-27",ex:{vi:"Ai đang gọi điện thoại?",en:"Who is calling?"}}
+,{id:"course.sep.odo",vi:"ở đó",en:"over there",d:"u4",concept:"c.question.where",sourceDate:"2026-09-27",ex:{vi:"Ai đang ngồi ở đó?",en:"Who is sitting over there?"}}
+,{id:"course.sep.sangnay",vi:"sáng nay",en:"this morning",d:"u10",concept:"c.question.why",sourceDate:"2026-09-27",ex:{vi:"Tại sao chị gọi em sáng nay?",en:"Why did you call me this morning?"}}
+,{id:"course.sep.dimuado",vi:"đi mua đồ",en:"to go shopping",d:"u10",concept:"c.question.when",sourceDate:"2026-09-27",ex:{vi:"Chị hay đi mua đồ khi nào?",en:"When do you usually go shopping?"}}
+,{id:"course.sep.guiemail",vi:"gửi email",en:"to send an email",d:"u10",concept:"c.question.yet",sourceDate:"2026-09-27",ex:{vi:"Bạn gửi email chưa?",en:"Have you sent the email yet?"}}
+,{id:"course.sep.cuoituan",vi:"cuối tuần",en:"weekend",d:"u10",concept:"c.question.how",sourceDate:"2026-09-27",ex:{vi:"Cuối tuần của em sao?",en:"How was your weekend?"}}
+,{id:"course.sep.sach",vi:"sách",en:"book",d:"u10",concept:"c.question.quantity",sourceDate:"2026-09-27",ex:{vi:"Bạn có mấy quyển sách?",en:"How many books do you have?"}}
 );
 
 /* ── sentences from the course, keyed to the concept they demonstrate ── */
@@ -2469,7 +2526,7 @@ SURVIVAL.push(
 );
 
 
-/* Chronological index of the 22 dated classes in ALEXANDRE.docx. */
+/* Chronological index of the dated classes in ALEXANDRE.docx. */
 const CORE_LESSONS = [
 {id:"core-2026-02-15",date:"2026-02-15",title:"Pronouns, greetings and introductions",summary:"Personal pronouns, family address, greetings, name, age, origin, nationality, residence and health.",concepts:["c.pron.basic","c.pron.family","c.pron.age","c.pron.plural","c.pron.possessive","c.intro.greeting","c.intro.name","c.intro.origin","c.intro.health"]},
 {id:"core-2026-02-22",date:"2026-02-22",title:"Alphabet, vowels and tones",summary:"Letters, compound vowels, consonant combinations and the six-tone system.",concepts:["c.read.sequence","c.tones.six"]},
@@ -2493,13 +2550,14 @@ const CORE_LESSONS = [
 {id:"core-2026-08-28",date:"2026-08-28",title:"Good/bad adjectives and southern speech",summary:"Context-dependent adjectives, colloquial tui, southern pronunciation and spoken contrast.",concepts:["c.lex.good","c.lex.bad","c.south.tui","c.south.dauco","c.south.consonants","c.south.finals","c.south.hoinga"]},
 {id:"core-2026-09-11",date:"2026-09-11",title:"Choosing the right good or bad adjective",summary:"tốt/ngon/hay/ngoan and xấu/tệ/dở/hư in context, plus comparative restaurant language.",concepts:["c.lex.good","c.lex.bad","c.cmp.equal","c.cmp.more","c.cmp.most"]},
 {id:"core-2026-09-15",date:"2026-09-15",title:"Open questions",summary:"gì, ở đâu, khi nào, tại sao/sao, nào, thế nào/làm sao, bao nhiêu/mấy and practical question practice.",concepts:["c.question.wh","c.question.what","c.question.where","c.question.when","c.question.why","c.question.how","c.question.which","c.question.quantity"]}
+,{id:"core-2026-09-27",date:"2026-09-27",title:"Open questions in conversation",summary:"Who and which person, why and when, questions with chưa, whose, how long and how often, plus a review of the full question system.",concepts:["c.question.wh","c.question.what","c.question.where","c.question.who","c.question.why","c.question.when","c.question.how","c.question.which","c.question.quantity","c.question.yet","c.question.whose","c.question.duration","c.intro.age","c.asp.chua"]}
 ];
 
 
 
 /* V8 · link new concepts back to the dated classes without changing any permanent content ID. */
 [
- ["core-2026-02-15",["c.pron.peers"]],
+ ["core-2026-02-15",["c.pron.peers","c.intro.age"]],
  ["core-2026-02-22",["c.read.vowelglides","c.read.clusters"]],
  ["core-2026-02-28",["c.sent.prepositions","c.part.attention","c.part.realization","c.part.continuation"]],
  ["core-2026-04-19",["c.num.money","c.num.ordinal"]],
@@ -4348,7 +4406,7 @@ function nextCard(){
   if(entry.why==="micro"||it.kind==="micro") return renderMicro(it,entry);
   const skill=entry.skill||nextSkillFor(it);
   const types=entry.force?[entry.force]:(typesForSkill(it,skill).length?typesForSkill(it,skill):availableTypes(it,skill));
-  const type=types.length?pick(types):"mc_vi_en";
+  const type=types.length?(entry.force?types[0]:pick(types)):"mc_vi_en";
   ACTIVE_EXERCISE={item:it,type:type,skill:skill};
   renderExercise(it,type,skill);
 }
@@ -4362,9 +4420,9 @@ function finishCard(item,type,ok,conf,timing,grade){
     SESS.wrong++; SESS.run=0;
     const current=SESS.queue[SESS.i]||{}, skill=(TYPES[type]||{}).skill;
     if(!current.retryStage){
-      const at=Math.min(SESS.queue.length,SESS.i+3+(Math.random()*3|0));
+      const at=SESS.mode==="class"?SESS.queue.length:Math.min(SESS.queue.length,SESS.i+3+(Math.random()*3|0));
       SESS.queue.splice(at,0,{it:item,skill:skill,why:"retry",retry:true,retryStage:1});
-      SESS.queue.push({it:item,skill:skill,why:"late retry",retry:true,retryStage:2});
+      if(SESS.mode!=="class") SESS.queue.push({it:item,skill:skill,why:"late retry",retry:true,retryStage:2});
     }
   }
   if(g.repair && (g.skillCorrect||formOnlyPartial)){
@@ -4381,7 +4439,8 @@ function finishCard(item,type,ok,conf,timing,grade){
 function advance(){ SESS.i++; paintStats(); nextCard(); }
 function progressFoot(){
   const total=SESS?SESS.queue.length:0,i=SESS?SESS.i:0;
-  return '<div class="foot"><div class="bar"><i style="width:'+(total?i/total*100:0)+'%"></i></div>'
+  const phase=SESS&&SESS.mode==="class"&&SESS.queue[i]&&SESS.queue[i].phase;
+  return (phase?'<div class="class-phase">'+esc(phase)+'</div>':'')+'<div class="foot"><div class="bar"><i style="width:'+(total?i/total*100:0)+'%"></i></div>'
     +'<span class="count">'+i+' / '+total+'</span>'+(SESS&&SESS.run>=3?'<span class="combo">'+SESS.run+' in a row</span>':'')+'</div>';
 }
 function stage(html){
@@ -4548,7 +4607,7 @@ function renderExercise(it, type, skill){
   const head = function(txt, why){ return label(txt, why || T.label, whyBtn(it.concept)); };
 
   /* first sight */
-  if (!r.reps && it.kind === "word"){
+  if (!r.reps && it.kind === "word" && !(SESS&&SESS.mode==="class")){
     stage(card(head("New · " + unitTitle(it.unit), "meet it")
       + toneRail(it.vi, true)
       + '<h2 class="word'+(it.vi.length>16?" sm":"")+'">'+esc(it.vi)+'</h2>'
@@ -5122,9 +5181,10 @@ function endSession(){
     +'<div class="rrow"><span class="rt">Writing</span><span class="rv">'+toneMissing+' tone omission'+(toneMissing===1?'':'s')+' · '+formErr+' other form repair'+(formErr===1?'':'s')+'</span></div></div>'
     +(uniqMissed.length?'<div class="group-h" style="margin-top:24px"><span class="eyebrow">Coming back</span></div>'
       +uniqMissed.map(x=>'<div class="row"><span class="pill" style="background:var(--cinnabar)"></span><span class="vi">'+esc(x.vi)+'</span><span class="en">'+esc(x.en)+'</span><button class="mini" data-say="'+esc((x.ex&&x.ex.vi)||x.vi)+'">▶</button></div>').join(''):'')
-    +tutorBlock()+'<div class="next-row" style="margin-top:22px"><button class="btn" id="again">Another set</button><button class="btn ghost" id="done">Done</button></div>');
-  $("#stage").innerHTML=html; wireSpeak(); $("#again").onclick=()=>startSession(buildPlan()); $("#done").onclick=()=>{SESS=null;go("today");};
-  keyHandler=e=>{if(e.key==="Enter")go("today");}; paintStats(); save();
+    +tutorBlock()+'<div class="next-row" style="margin-top:22px"><button class="btn" id="again">'+(SESS.mode==="class"?'Review class again':'Another set')+'</button><button class="btn ghost" id="done">'+(SESS.mode==="class"?'Back to classes':'Done')+'</button></div>');
+  const classId=SESS.classId,wasClass=SESS.mode==="class";
+  $("#stage").innerHTML=html; wireSpeak(); $("#again").onclick=()=>wasClass?startClassJourney(classId):startSession(buildPlan()); $("#done").onclick=()=>{SESS=null;if(wasClass)COURSE_VIEW_MODE="classes";go(wasClass?"course":"today");};
+  keyHandler=e=>{if(e.key==="Enter"){if(wasClass)COURSE_VIEW_MODE="classes";go(wasClass?"course":"today");}}; paintStats(); save();
 }
 function tutorBlock(){
   const lines = tutorLines();
@@ -5439,14 +5499,86 @@ function viewCourse(){
 }
 function classSheet(id){
   const l=CORE_LESSONS.find(x=>x.id===id);if(!l)return;
-  const cs=(l.concepts||[]).map(id=>COURSE.conceptById[id]).filter(Boolean), itemMap={};
-  cs.forEach(c=>(COURSE.itemsByConcept[c.id]||[]).forEach(x=>itemMap[x.id]=x)); const items=Object.values(itemMap);
+  const cs=classConcepts(l), words=classVocabulary(l);
   openSheet('<div class="eyebrow">'+formatLessonDate(l.date)+'</div><h2 class="sheet-h">'+esc(l.title)+'</h2><div class="course-class-summary">'+esc(l.summary)+'</div>'
-    +'<div class="group-h"><span class="eyebrow">Concepts</span><span class="hint">'+cs.length+' linked</span></div>'
+    +'<div class="class-route"><div class="class-route-step"><b>1 · Review the structures</b><span>'+cs.length+' explanation cards, with examples and contrasts.</span></div>'
+    +'<div class="class-route-step"><b>2 · Review the vocabulary</b><span>'+words.length+' linked words and phrases, grouped into short cards.</span></div>'
+    +'<div class="class-route-step"><b>3 · Practice in steps</b><span>Meaning → recall → rule checks → sentences → listening → writing.</span></div></div>'
+    +'<div class="group-h"><span class="eyebrow">Structures</span><span class="hint">'+cs.length+' linked</span></div>'
     +cs.map(c=>{const its=COURSE.itemsByConcept[c.id]||[],m=its.length?its.reduce((s,x)=>s+overall(x.id),0)/its.length:0;return '<button class="crow" data-c="'+esc(c.id)+'"><span class="cdot" style="background:'+(m>.7?"var(--jade)":m>.35?"var(--gold)":"var(--dimmer)")+'"></span><span class="ct">'+esc(c.title)+'</span><span class="cm">'+Math.round(m*100)+'%</span></button>';}).join("")
-    +'<div class="next-row"><button class="btn" id="practiceClass">Practice this class</button><button class="btn ghost" id="closeClass">Close</button></div>');
+    +'<div class="next-row"><button class="btn" id="practiceClass">Start class</button><button class="btn ghost" id="closeClass">Close</button></div>');
   $$(".crow").forEach(b=>b.onclick=function(){closeSheet();explainSheet(b.dataset.c);});
-  $("#practiceClass").onclick=function(){closeSheet();drill(shuffle(items).slice(0,16),{why:"class"});}; $("#closeClass").onclick=closeSheet;
+  $("#practiceClass").onclick=function(){closeSheet();startClassJourney(id);}; $("#closeClass").onclick=closeSheet;
+}
+function classConcepts(l){return (l.concepts||[]).map(id=>COURSE.conceptById[id]).filter(Boolean);}
+function classVocabulary(l){
+  const linked=new Set((l.concepts||[]));
+  const dated=COURSE.words.filter(w=>w.sourceDate===l.date||w.appearsIn&&w.appearsIn.indexOf(l.id)>-1);
+  const undated=COURSE.words.filter(w=>linked.has(w.concept)&&(!w.sourceDate||w.sourceDate<=l.date));
+  const soundWords=l.id==="core-2026-02-22"?COURSE.words.filter(w=>["ba","má","mưa","heo","đau","hay","trời","mà"].indexOf(w.vi)>-1&&w.id!=="num.ba"):[];
+  const seenIds=new Set();
+  return dated.concat(undated,soundWords).filter(w=>{if(seenIds.has(w.id))return false;seenIds.add(w.id);return true;});
+}
+let CLASS_JOURNEY=null;
+function startClassJourney(id){
+  const lesson=CORE_LESSONS.find(l=>l.id===id);if(!lesson)return;
+  const concepts=classConcepts(lesson), words=classVocabulary(lesson);
+  const steps=concepts.map(c=>({kind:"concept",value:c}));
+  for(let i=0;i<words.length;i+=8)steps.push({kind:"vocabulary",value:words.slice(i,i+8)});
+  CLASS_JOURNEY={lesson:lesson,words:words,concepts:concepts,steps:steps,index:0};
+  document.body.classList.add("in-session");document.body.dataset.view="study";
+  renderClassReview();
+}
+function renderClassReview(){
+  const j=CLASS_JOURNEY;if(!j)return;
+  if(j.index>=j.steps.length){
+    const plan=classPracticePlan(j);
+    CLASS_JOURNEY=null;
+    if(plan.length)startSession(plan,{mode:"class",classId:j.lesson.id});
+    else {document.body.classList.remove("in-session");COURSE_VIEW_MODE="classes";go("course");}
+    return;
+  }
+  const step=j.steps[j.index], isConcept=step.kind==="concept";
+  let body='<div class="class-review-count">'+esc(j.lesson.title)+' · Review '+(j.index+1)+' / '+j.steps.length+'</div>';
+  if(isConcept){
+    const c=step.value;
+    body+='<div class="eyebrow" style="margin-top:17px">Structure</div><h2 class="sheet-h">'+esc(c.title)+'</h2>'
+      +'<div class="class-review-rule">'+esc(c.rule)+'</div>'
+      +(c.micro&&c.micro.contrast?'<div class="note south-note"><b>Compare.</b> '+esc(c.micro.contrast)+'</div>':'')
+      +(c.examples||[]).slice(0,3).map(e=>'<div class="ex-line"><span class="vi">'+esc(e.vi)+'</span><span class="en">'+esc(e.en)+'</span><button class="mini" data-say="'+esc(e.vi)+'">▶</button></div>').join('');
+  }else{
+    body+='<div class="eyebrow" style="margin-top:17px">Vocabulary</div><h2 class="sheet-h">Words and phrases</h2>'
+      +'<div class="hint">Read each form aloud, recall its meaning, then listen. Every linked word appears in this review.</div>'
+      +'<div class="class-review-vocab">'+step.value.map(w=>'<div class="class-review-word"><b>'+esc(w.vi)+'</b><small>'+esc(w.en)+(w.ex?' · '+esc(w.ex.vi):'')+'</small><button class="mini" data-say="'+esc(w.vi)+'">▶</button></div>').join('')+'</div>';
+  }
+  body+='<div class="next-row"><button class="btn" id="classReviewNext">'+(j.index===j.steps.length-1?'Begin practice':'Next card')+'</button>'
+    +(j.index?'<button class="btn ghost" id="classReviewBack">Previous</button>':'')
+    +'<button class="btn ghost" id="classReviewExit">Exit</button></div>';
+  $("#stage").innerHTML='<div class="card class-review-card">'+body+'</div>';wireSpeak();
+  $("#classReviewNext").onclick=()=>{j.index++;renderClassReview();};
+  if($("#classReviewBack"))$("#classReviewBack").onclick=()=>{j.index--;renderClassReview();};
+  $("#classReviewExit").onclick=()=>{CLASS_JOURNEY=null;document.body.classList.remove("in-session");COURSE_VIEW_MODE="classes";go("course");};
+  window.scrollTo({top:0,behavior:"instant"});
+}
+function classPracticePlan(j){
+  const plan=[],used=new Set();
+  const words=j.words.slice().sort((a,b)=>overall(a.id)-overall(b.id));
+  function add(items,n,force,phase,valid){let count=0;for(const it of items){if(count>=n)break;if(valid&&!valid(it))continue;
+    const key=it.id+":"+force;if(used.has(key))continue;used.add(key);plan.push({it:it,force:force,skill:TYPES[force].skill,why:"class · "+phase,phase:phase});count++;}}
+  add(words,5,"mc_vi_en","1 · Recognize meanings");
+  add(words.slice(5).concat(words.slice(0,5)),5,"mc_en_vi","2 · Recall Vietnamese");
+  add(j.concepts.map(c=>COURSE.byId["cpt:"+c.id]).filter(Boolean),j.concepts.length,"judge_concept","3 · Check structures",it=>!!(it.ref&&it.ref.micro&&it.ref.micro.check));
+  if(j.lesson.id==="core-2026-02-22"){
+    const pairs=COURSE.all.filter(it=>it.kind==="pair"&&!it.pair.merged);
+    add(pairs,3,"pair_eye","4 · Distinguish written sounds");
+    if(TTS.ready)add(pairs,2,"pair_ear","5 · Distinguish spoken sounds");
+  }
+  add(words,3,"gap","4 · Use words in context",it=>!!(it.ex&&spanOf(it)));
+  add(words,2,"build","5 · Build sentences",it=>!!(it.ex&&toks(it.ex.vi).length>=4&&toks(it.ex.vi).length<=9));
+  if(TTS.ready)add(words,2,"listen_word","6 · Listen and understand");
+  add(words,2,"translate_h","7 · Write with a hint",it=>!!it.ex);
+  add(words.slice(2).concat(words.slice(0,2)),2,"translate","8 · Write independently",it=>!!it.ex);
+  return plan;
 }
 function unitSheet(uid){
   const u = COURSE.units.find(x=>x.id===uid);
