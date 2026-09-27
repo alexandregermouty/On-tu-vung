@@ -4,6 +4,13 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v10
+
+- Class review, concept help and correction cards now lead with one short rule, a visual pattern or comparison, and one spoken example.
+- Longer notes and additional examples remain available in an expandable section.
+- Vocabulary review cards are simpler, and the Pedagogical Studio text is shorter.
+- The question visual map is available from the related concept cards.
+
 ## What is new in v9
 
 - Weekly classes now open with a structured review of every linked concept and vocabulary item before practice.
