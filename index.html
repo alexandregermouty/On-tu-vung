@@ -146,6 +146,9 @@ input.type{flex:1;min-width:200px;background:var(--panel-2);border:1px solid var
   padding:14px 15px;color:var(--eggshell);font-family:var(--vi);font-size:19px;font-weight:600;
   outline:none;letter-spacing:-.01em}
 input.type:focus{border-color:var(--gold)}
+textarea.type{flex:1 1 100%;box-sizing:border-box;width:100%;min-width:0;resize:vertical;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--eggshell);font:17px/1.5 var(--vi)}
+textarea.type:focus{outline:2px solid var(--gold);outline-offset:2px}
+#classIntensity{box-sizing:border-box;background:var(--panel-2);color:var(--eggshell);border:1px solid var(--line);border-radius:10px;padding:12px;font:14px var(--vi)}
 .btn{background:var(--gold);border:1px solid var(--gold);color:#0E1A17;border-radius:3px;padding:13px 20px;
   font-family:var(--vi);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
   cursor:pointer;transition:.15s}
@@ -2913,6 +2916,919 @@ const SOUTHERN_ITEMS = ["ba","má","chén","ly","nón","coi","mắc","xe hơi","
                         "quẹo","mền","giùm","ảnh","chỉ","ổng","bả","cổ","tụi mình","dù","mập","ốm",
                         "dề","chời","xữa"];
 
+
+/* V11: original A1–A2 extension material. Usage references are listed in README. */
+const CLASS_EXAMPLES = [
+  {
+    "id": "extra-1",
+    "c": "c.pron.basic",
+    "vi": "Em học tiếng Việt với chị.",
+    "en": "I study Vietnamese with you (an older woman).",
+    "focus": "chị"
+  },
+  {
+    "id": "extra-2",
+    "c": "c.pron.family",
+    "vi": "Cuối tuần em ăn cơm với ba má.",
+    "en": "At the weekend I eat with my parents.",
+    "focus": "ba má"
+  },
+  {
+    "id": "extra-3",
+    "c": "c.pron.age",
+    "vi": "Chị lớn hơn em ba tuổi.",
+    "en": "You are three years older than me.",
+    "focus": "hơn"
+  },
+  {
+    "id": "extra-4",
+    "c": "c.pron.plural",
+    "vi": "Tụi mình đi uống cà phê nha.",
+    "en": "Let’s go for coffee together.",
+    "focus": "Tụi mình"
+  },
+  {
+    "id": "extra-5",
+    "c": "c.pron.possessive",
+    "vi": "Điện thoại của chị ở trên bàn.",
+    "en": "Your phone is on the table.",
+    "focus": "của"
+  },
+  {
+    "id": "extra-6",
+    "c": "c.pron.peers",
+    "vi": "Mình muốn học cùng bạn.",
+    "en": "I want to study with you (a peer).",
+    "focus": "cùng"
+  },
+  {
+    "id": "extra-7",
+    "c": "c.intro.greeting",
+    "vi": "Dạ, em chào cô.",
+    "en": "Hello (respectfully addressing an older woman).",
+    "focus": "Dạ"
+  },
+  {
+    "id": "extra-8",
+    "c": "c.intro.name",
+    "vi": "Em tên là Alexandre, còn chị?",
+    "en": "My name is Alexandre, and yours?",
+    "focus": "tên"
+  },
+  {
+    "id": "extra-9",
+    "c": "c.intro.origin",
+    "vi": "Em sống ở Paris nhưng hay đi Việt Nam.",
+    "en": "I live in Paris but often travel to Vietnam.",
+    "focus": "sống"
+  },
+  {
+    "id": "extra-10",
+    "c": "c.intro.health",
+    "vi": "Hôm nay em khỏe hơn hôm qua.",
+    "en": "Today I feel better than yesterday.",
+    "focus": "khỏe"
+  },
+  {
+    "id": "extra-11",
+    "c": "c.intro.age",
+    "vi": "Năm nay em ba mươi tuổi.",
+    "en": "I am thirty this year.",
+    "focus": "tuổi"
+  },
+  {
+    "id": "extra-12",
+    "c": "c.sent.svo",
+    "vi": "Buổi tối em đọc sách ở nhà.",
+    "en": "In the evening I read at home.",
+    "focus": "đọc"
+  },
+  {
+    "id": "extra-13",
+    "c": "c.sent.svo",
+    "vi": "Chị mở cửa sổ giùm em nha.",
+    "en": "Please open the window for me.",
+    "focus": "mở"
+  },
+  {
+    "id": "extra-14",
+    "c": "c.sent.adjafter",
+    "vi": "Em muốn mua một cái áo xanh.",
+    "en": "I want to buy a blue shirt.",
+    "focus": "xanh"
+  },
+  {
+    "id": "extra-15",
+    "c": "c.sent.adjafter",
+    "vi": "Quán cà phê này nhỏ nhưng đẹp.",
+    "en": "This café is small but beautiful.",
+    "focus": "nhỏ"
+  },
+  {
+    "id": "extra-16",
+    "c": "c.sent.classifier",
+    "vi": "Cho em hai ly trà đá.",
+    "en": "Two glasses of iced tea, please.",
+    "focus": "ly"
+  },
+  {
+    "id": "extra-17",
+    "c": "c.sent.quantifiers",
+    "vi": "Mỗi buổi sáng em uống một ly nước.",
+    "en": "Every morning I drink a glass of water.",
+    "focus": "Mỗi"
+  },
+  {
+    "id": "extra-18",
+    "c": "c.sent.demonstratives",
+    "vi": "Em thích cái nón kia hơn cái này.",
+    "en": "I prefer that hat over there to this one.",
+    "focus": "kia"
+  },
+  {
+    "id": "extra-19",
+    "c": "c.sent.plural",
+    "vi": "Những cái áo này mắc quá.",
+    "en": "These shirts are too expensive.",
+    "focus": "Những"
+  },
+  {
+    "id": "extra-20",
+    "c": "c.sent.have",
+    "vi": "Ở gần nhà em có một tiệm bánh.",
+    "en": "There is a bakery near my home.",
+    "focus": "có"
+  },
+  {
+    "id": "extra-21",
+    "c": "c.sent.yesno",
+    "vi": "Ngày mai chị có rảnh không?",
+    "en": "Are you free tomorrow?",
+    "focus": "không"
+  },
+  {
+    "id": "extra-22",
+    "c": "c.sent.neg",
+    "vi": "Em không uống cà phê vào buổi tối.",
+    "en": "I do not drink coffee in the evening.",
+    "focus": "không"
+  },
+  {
+    "id": "extra-23",
+    "c": "c.sent.o",
+    "vi": "Chìa khóa ở trong túi của em.",
+    "en": "The keys are inside my bag.",
+    "focus": "trong"
+  },
+  {
+    "id": "extra-24",
+    "c": "c.sent.thi",
+    "vi": "Em thì thích trà, còn chị?",
+    "en": "As for me, I like tea. What about you?",
+    "focus": "thì"
+  },
+  {
+    "id": "extra-25",
+    "c": "c.sent.prepositions",
+    "vi": "Em đi chợ với má vào buổi sáng.",
+    "en": "I go to the market with my mom in the morning.",
+    "focus": "với"
+  },
+  {
+    "id": "extra-26",
+    "c": "c.part.nhe",
+    "vi": "Chị nói chậm một chút nha.",
+    "en": "Please speak a little more slowly.",
+    "focus": "chậm"
+  },
+  {
+    "id": "extra-27",
+    "c": "c.part.attention",
+    "vi": "Chị cũng học tiếng Việt hả?",
+    "en": "You study Vietnamese too?",
+    "focus": "hả"
+  },
+  {
+    "id": "extra-28",
+    "c": "c.part.realization",
+    "vi": "Ra là chị cũng sống ở đây.",
+    "en": "Oh, so you live here too.",
+    "focus": "Ra là"
+  },
+  {
+    "id": "extra-29",
+    "c": "c.part.continuation",
+    "vi": "Em muốn uống thêm một ly nữa.",
+    "en": "I would like one more glass.",
+    "focus": "nữa"
+  },
+  {
+    "id": "extra-30",
+    "c": "c.num.basic",
+    "vi": "Em cần ba cái ly và hai cái chén.",
+    "en": "I need three glasses and two bowls.",
+    "focus": "ba"
+  },
+  {
+    "id": "extra-31",
+    "c": "c.num.money",
+    "vi": "Hai ly nước này hết bốn mươi nghìn đồng.",
+    "en": "These two drinks cost forty thousand dong altogether.",
+    "focus": "bốn mươi"
+  },
+  {
+    "id": "extra-32",
+    "c": "c.num.ordinal",
+    "vi": "Hôm nay là lần thứ hai em tới đây.",
+    "en": "Today is my second time here.",
+    "focus": "thứ hai"
+  },
+  {
+    "id": "extra-33",
+    "c": "c.time.clock",
+    "vi": "Buổi họp bắt đầu lúc chín giờ rưỡi.",
+    "en": "The meeting starts at half past nine.",
+    "focus": "rưỡi"
+  },
+  {
+    "id": "extra-34",
+    "c": "c.time.duration",
+    "vi": "Em học tiếng Việt một tiếng mỗi tối.",
+    "en": "I study Vietnamese for one hour every evening.",
+    "focus": "tiếng"
+  },
+  {
+    "id": "extra-35",
+    "c": "c.time.buoi",
+    "vi": "Buổi trưa em ăn cơm ở chỗ làm.",
+    "en": "At lunchtime I eat at work.",
+    "focus": "trưa"
+  },
+  {
+    "id": "extra-36",
+    "c": "c.freq.adv",
+    "vi": "Em hiếm khi uống cà phê sau sáu giờ tối.",
+    "en": "I rarely drink coffee after six in the evening.",
+    "focus": "hiếm khi"
+  },
+  {
+    "id": "extra-37",
+    "c": "c.freq.adv",
+    "vi": "Em đi bộ ba lần mỗi tuần.",
+    "en": "I go for a walk three times a week.",
+    "focus": "ba lần"
+  },
+  {
+    "id": "extra-38",
+    "c": "c.freq.adv",
+    "vi": "Lâu lâu tụi mình đi ăn ngoài.",
+    "en": "Every now and then we eat out.",
+    "focus": "Lâu lâu"
+  },
+  {
+    "id": "extra-39",
+    "c": "c.asp.da",
+    "vi": "Hôm qua em đã gọi cho ba.",
+    "en": "Yesterday I called my dad.",
+    "focus": "đã"
+  },
+  {
+    "id": "extra-40",
+    "c": "c.asp.chua",
+    "vi": "Em chưa mua vé vì chưa biết ngày đi.",
+    "en": "I have not bought tickets because I do not know the travel date yet.",
+    "focus": "chưa mua"
+  },
+  {
+    "id": "extra-41",
+    "c": "c.asp.dang",
+    "vi": "Má đang nấu cơm trong bếp.",
+    "en": "Mom is cooking in the kitchen.",
+    "focus": "đang"
+  },
+  {
+    "id": "extra-42",
+    "c": "c.asp.moi",
+    "vi": "Em mới làm xong bài tập.",
+    "en": "I have just finished the exercise.",
+    "focus": "mới"
+  },
+  {
+    "id": "extra-43",
+    "c": "c.asp.se",
+    "vi": "Tuần sau em sẽ đi Việt Nam.",
+    "en": "Next week I will go to Vietnam.",
+    "focus": "sẽ"
+  },
+  {
+    "id": "extra-44",
+    "c": "c.asp.da.nuance",
+    "vi": "Để em uống nước đã.",
+    "en": "Let me drink some water first.",
+    "focus": "đã"
+  },
+  {
+    "id": "extra-45",
+    "c": "c.mod.core",
+    "vi": "Em muốn ăn phở nhưng không muốn uống cà phê.",
+    "en": "I want to eat pho but do not want coffee.",
+    "focus": "muốn"
+  },
+  {
+    "id": "extra-46",
+    "c": "c.mod.canphai",
+    "vi": "Ngày mai em phải đi làm sớm.",
+    "en": "Tomorrow I have to go to work early.",
+    "focus": "phải"
+  },
+  {
+    "id": "extra-47",
+    "c": "c.mod.bi",
+    "vi": "Em bị đau đầu nên muốn nghỉ ngơi.",
+    "en": "I have a headache, so I want to rest.",
+    "focus": "nên"
+  },
+  {
+    "id": "extra-48",
+    "c": "c.mod.beforeafter",
+    "vi": "Sau khi ăn tối, em gọi cho má.",
+    "en": "After dinner, I call my mom.",
+    "focus": "Sau khi"
+  },
+  {
+    "id": "extra-49",
+    "c": "c.mod.wear",
+    "vi": "Trời lạnh nên em mặc áo khoác.",
+    "en": "It is cold, so I wear a jacket.",
+    "focus": "mặc"
+  },
+  {
+    "id": "extra-50",
+    "c": "c.south.lexicon",
+    "vi": "Em mua trái cây cho ba má.",
+    "en": "I buy fruit for my parents.",
+    "focus": "trái cây"
+  },
+  {
+    "id": "extra-51",
+    "c": "c.south.tui",
+    "vi": "Tui thích coi phim ở nhà.",
+    "en": "I like watching films at home (casual Southern speech).",
+    "focus": "coi"
+  },
+  {
+    "id": "extra-52",
+    "c": "c.south.dauco",
+    "vi": "Tui đâu có quên, tui nhớ mà.",
+    "en": "I did not forget; I do remember.",
+    "focus": "đâu có"
+  },
+  {
+    "id": "extra-53",
+    "c": "c.lex.good",
+    "vi": "Món cá này ngon nhưng hơi mắc.",
+    "en": "This fish dish tastes good but is a little expensive.",
+    "focus": "ngon"
+  },
+  {
+    "id": "extra-54",
+    "c": "c.lex.bad",
+    "vi": "Bộ phim này dở nhưng nhạc hay.",
+    "en": "This film is bad, but its music is good.",
+    "focus": "dở"
+  },
+  {
+    "id": "extra-55",
+    "c": "c.cmp.equal",
+    "vi": "Ly trà này mắc bằng ly cà phê đó.",
+    "en": "This tea costs as much as that coffee.",
+    "focus": "bằng"
+  },
+  {
+    "id": "extra-56",
+    "c": "c.cmp.more",
+    "vi": "Quán này rẻ hơn quán gần nhà em.",
+    "en": "This place is cheaper than the one near my home.",
+    "focus": "hơn"
+  },
+  {
+    "id": "extra-57",
+    "c": "c.cmp.most",
+    "vi": "Trong ba món này, em thích món cá nhất.",
+    "en": "Of these three dishes, I like the fish best.",
+    "focus": "nhất"
+  },
+  {
+    "id": "extra-58",
+    "c": "c.question.wh",
+    "vi": "Chị mua trái cây ở đâu?",
+    "en": "Where did you buy fruit?",
+    "focus": "ở đâu"
+  },
+  {
+    "id": "extra-59",
+    "c": "c.question.what",
+    "vi": "Tối nay chị muốn nấu món gì?",
+    "en": "What dish do you want to cook tonight?",
+    "focus": "gì"
+  },
+  {
+    "id": "extra-60",
+    "c": "c.question.what",
+    "vi": "Công việc mới của chị là gì?",
+    "en": "What is your new job?",
+    "focus": "là gì"
+  },
+  {
+    "id": "extra-61",
+    "c": "c.question.where",
+    "vi": "Quán cà phê gần chỗ làm của chị ở đâu?",
+    "en": "Where is the café near your workplace?",
+    "focus": "ở đâu"
+  },
+  {
+    "id": "extra-62",
+    "c": "c.question.who",
+    "vi": "Cuối tuần chị đi mua đồ với ai?",
+    "en": "Who are you going shopping with this weekend?",
+    "focus": "ai"
+  },
+  {
+    "id": "extra-63",
+    "c": "c.question.why",
+    "vi": "Sao chị chưa ăn trưa?",
+    "en": "Why have you not had lunch yet?",
+    "focus": "Sao"
+  },
+  {
+    "id": "extra-64",
+    "c": "c.question.when",
+    "vi": "Khi nào tụi mình đi ăn tối?",
+    "en": "When are we going for dinner?",
+    "focus": "Khi nào"
+  },
+  {
+    "id": "extra-65",
+    "c": "c.question.how",
+    "vi": "Chị thấy món cá này thế nào?",
+    "en": "What do you think of this fish dish?",
+    "focus": "thế nào"
+  },
+  {
+    "id": "extra-66",
+    "c": "c.question.which",
+    "vi": "Chị muốn thử loại trà nào?",
+    "en": "Which type of tea would you like to try?",
+    "focus": "nào"
+  },
+  {
+    "id": "extra-67",
+    "c": "c.question.quantity",
+    "vi": "Tụi mình cần mấy cái chén?",
+    "en": "How many bowls do we need (a small number)?",
+    "focus": "mấy"
+  },
+  {
+    "id": "extra-68",
+    "c": "c.question.yet",
+    "vi": "Chị làm xong bài tập chưa?",
+    "en": "Have you finished the exercise yet?",
+    "focus": "chưa"
+  },
+  {
+    "id": "extra-69",
+    "c": "c.question.whose",
+    "vi": "Cái áo khoác trên ghế là của ai?",
+    "en": "Whose jacket is on the chair?",
+    "focus": "của ai"
+  },
+  {
+    "id": "extra-70",
+    "c": "c.question.duration",
+    "vi": "Chị gọi cho ba má bao lâu một lần?",
+    "en": "How often do you call your parents?",
+    "focus": "bao lâu một lần"
+  },
+  {
+    "id": "extra-71",
+    "c": "c.question.duration",
+    "vi": "Từ nhà tới chỗ làm mất bao lâu?",
+    "en": "How long does it take from home to work?",
+    "focus": "bao lâu"
+  }
+];
+const CLASS_TASKS = [
+  {
+    "id": "task-1",
+    "c": "c.question.what",
+    "type": "class_ask",
+    "prompt": "Ask what she wants to drink. Use chị.",
+    "context": "Chị muốn uống trà đá.",
+    "answers": [
+      "Chị muốn uống gì?"
+    ],
+    "why": "Replace the drink with gì.",
+    "gloss": ""
+  },
+  {
+    "id": "task-2",
+    "c": "c.question.where",
+    "type": "class_ask",
+    "prompt": "Ask where she works. Keep chị.",
+    "context": "Chị làm việc ở Paris.",
+    "answers": [
+      "Chị làm việc ở đâu?"
+    ],
+    "why": "Keep ở before đâu.",
+    "gloss": ""
+  },
+  {
+    "id": "task-3",
+    "c": "c.question.who",
+    "type": "class_ask",
+    "prompt": "Ask who is cooking. Keep đang nấu cơm.",
+    "context": "Má đang nấu cơm.",
+    "answers": [
+      "Ai đang nấu cơm?"
+    ],
+    "why": "Ai replaces the unknown subject.",
+    "gloss": ""
+  },
+  {
+    "id": "task-4",
+    "c": "c.question.who",
+    "type": "class_ask",
+    "prompt": "Ask who she is calling. Keep chị and gọi cho.",
+    "context": "Chị gọi cho Lan.",
+    "answers": [
+      "Chị gọi cho ai?"
+    ],
+    "why": "Ai replaces the person after cho.",
+    "gloss": ""
+  },
+  {
+    "id": "task-5",
+    "c": "c.question.when",
+    "type": "class_ask",
+    "prompt": "Ask when the meeting starts. Use khi nào.",
+    "context": "Buổi họp bắt đầu lúc chín giờ.",
+    "answers": [
+      "Khi nào buổi họp bắt đầu?",
+      "Buổi họp bắt đầu khi nào?"
+    ],
+    "why": "Khi nào can go at either end.",
+    "gloss": "buổi họp = meeting; bắt đầu = start"
+  },
+  {
+    "id": "task-6",
+    "c": "c.question.why",
+    "type": "class_ask",
+    "prompt": "Ask why she stays home. Use sao or tại sao.",
+    "context": "Chị ở nhà vì mệt.",
+    "answers": [
+      "Sao chị ở nhà?",
+      "Tại sao chị ở nhà?"
+    ],
+    "why": "Ask about the reason with sao / tại sao.",
+    "gloss": ""
+  },
+  {
+    "id": "task-7",
+    "c": "c.question.which",
+    "type": "class_ask",
+    "prompt": "Ask which shirt she wants. Keep chị muốn mua.",
+    "context": "Chị muốn mua cái áo xanh.",
+    "answers": [
+      "Chị muốn mua cái áo nào?"
+    ],
+    "why": "Nào follows the noun being chosen.",
+    "gloss": ""
+  },
+  {
+    "id": "task-8",
+    "c": "c.question.whose",
+    "type": "class_ask",
+    "prompt": "Ask whose phone this is. Start with Đây.",
+    "context": "Đây là điện thoại của Lan.",
+    "answers": [
+      "Đây là điện thoại của ai?"
+    ],
+    "why": "Replace the owner with ai, keeping của.",
+    "gloss": ""
+  },
+  {
+    "id": "task-9",
+    "c": "c.question.quantity",
+    "type": "class_ask",
+    "prompt": "Ask the price. Keep Ly trà này.",
+    "context": "Ly trà này hai mươi nghìn đồng.",
+    "answers": [
+      "Ly trà này bao nhiêu tiền?",
+      "Ly trà này bao nhiêu?"
+    ],
+    "why": "Bao nhiêu tiền asks the price.",
+    "gloss": ""
+  },
+  {
+    "id": "task-10",
+    "c": "c.question.duration",
+    "type": "class_ask",
+    "prompt": "Ask how often she exercises. Keep chị tập thể dục.",
+    "context": "Chị tập thể dục ba lần mỗi tuần.",
+    "answers": [
+      "Chị tập thể dục bao lâu một lần?"
+    ],
+    "why": "Bao lâu một lần asks about frequency.",
+    "gloss": ""
+  },
+  {
+    "id": "task-11",
+    "c": "c.question.yet",
+    "type": "class_reply",
+    "prompt": "Reply with a full sentence using em: you have not finished work yet.",
+    "context": "Chị: Em làm xong chưa?",
+    "answers": [
+      "Em chưa làm xong.",
+      "Dạ, em chưa làm xong."
+    ],
+    "why": "Chưa goes before the unfinished action.",
+    "gloss": ""
+  },
+  {
+    "id": "task-12",
+    "c": "c.question.yet",
+    "type": "class_reply",
+    "prompt": "Reply with em: you have already bought the tickets.",
+    "context": "Chị: Em mua vé chưa?",
+    "answers": [
+      "Em mua vé rồi.",
+      "Em đã mua vé rồi.",
+      "Dạ, em mua vé rồi."
+    ],
+    "why": "Rồi marks completion.",
+    "gloss": "vé = ticket"
+  },
+  {
+    "id": "task-13",
+    "c": "c.question.how",
+    "type": "class_reply",
+    "prompt": "Reply with em: you feel a little tired.",
+    "context": "Chị: Hôm nay em thấy sao?",
+    "answers": [
+      "Em thấy hơi mệt.",
+      "Em cảm thấy hơi mệt."
+    ],
+    "why": "Hơi softens the adjective: a little.",
+    "gloss": ""
+  },
+  {
+    "id": "task-14",
+    "c": "c.question.when",
+    "type": "class_reply",
+    "prompt": "Say: Tomorrow is my day off. Use em.",
+    "context": "Chị: Ngày nghỉ tiếp theo của em là khi nào?",
+    "answers": [
+      "Ngày mai là ngày nghỉ của em."
+    ],
+    "why": "Ngày mai = tomorrow.",
+    "gloss": ""
+  },
+  {
+    "id": "task-15",
+    "c": "c.sent.neg",
+    "type": "class_repair",
+    "prompt": "Correct the sentence using không. Keep em and uống.",
+    "context": "Em uống không cà phê.",
+    "answers": [
+      "Em không uống cà phê."
+    ],
+    "why": "Không precedes the verb.",
+    "gloss": ""
+  },
+  {
+    "id": "task-16",
+    "c": "c.sent.adjafter",
+    "type": "class_repair",
+    "prompt": "Put the adjective after the noun. Keep em muốn mua.",
+    "context": "Em muốn mua một xanh cái áo.",
+    "answers": [
+      "Em muốn mua một cái áo xanh."
+    ],
+    "why": "Number + classifier + noun + adjective.",
+    "gloss": ""
+  },
+  {
+    "id": "task-17",
+    "c": "c.sent.classifier",
+    "type": "class_repair",
+    "prompt": "Replace the wrong classifier for a book.",
+    "context": "Em mua một con sách.",
+    "answers": [
+      "Em mua một quyển sách.",
+      "Em mua một cuốn sách."
+    ],
+    "why": "Books take quyển or cuốn.",
+    "gloss": ""
+  },
+  {
+    "id": "task-18",
+    "c": "c.asp.chua",
+    "type": "class_repair",
+    "prompt": "Say you have not eaten yet. Keep em and ăn.",
+    "context": "Em ăn chưa.",
+    "answers": [
+      "Em chưa ăn."
+    ],
+    "why": "Before the verb, chưa means not yet.",
+    "gloss": ""
+  },
+  {
+    "id": "task-19",
+    "c": "c.cmp.more",
+    "type": "class_repair",
+    "prompt": "Correct the comparison. Keep cái này and cái kia.",
+    "context": "Cái này hơn rẻ cái kia.",
+    "answers": [
+      "Cái này rẻ hơn cái kia."
+    ],
+    "why": "Hơn follows the adjective.",
+    "gloss": ""
+  },
+  {
+    "id": "task-20",
+    "c": "c.time.duration",
+    "type": "class_ask",
+    "prompt": "Rewrite using tiếng to express duration. Keep the other words.",
+    "context": "Buổi học kéo dài hai giờ.",
+    "answers": [
+      "Buổi học kéo dài hai tiếng."
+    ],
+    "why": "Use tiếng to practise duration; giờ is also used for hours in some contexts.",
+    "gloss": "kéo dài = last (duration)"
+  },
+  {
+    "id": "task-21",
+    "c": "c.freq.adv",
+    "type": "class_read",
+    "prompt": "How often does Mai study Vietnamese? Answer with a short Vietnamese phrase.",
+    "context": "Mai học tiếng Việt vào thứ Ba và thứ Bảy. Chủ nhật Mai đi bộ với má.",
+    "answers": [
+      "Hai lần mỗi tuần.",
+      "Hai lần một tuần.",
+      "Hai lần mỗi tuần",
+      "Hai lần một tuần"
+    ],
+    "why": "Two study days mean twice a week.",
+    "gloss": "thứ Ba = Tuesday; thứ Bảy = Saturday"
+  },
+  {
+    "id": "task-22",
+    "c": "c.question.when",
+    "type": "class_read",
+    "prompt": "When can Lan meet? Answer briefly in Vietnamese.",
+    "context": "Sáng mai Lan có buổi họp. Lan làm xong lúc mười hai giờ. Buổi chiều Lan rảnh.",
+    "answers": [
+      "Buổi chiều.",
+      "Chiều mai.",
+      "Buổi chiều ngày mai."
+    ],
+    "why": "Her meeting is in the morning; she is free in the afternoon.",
+    "gloss": "rảnh = free / available"
+  },
+  {
+    "id": "task-23",
+    "c": "c.question.where",
+    "type": "class_read",
+    "prompt": "Where is the phone? Give the place only.",
+    "context": "Chìa khóa ở trong túi. Điện thoại ở trên bàn, bên cạnh ly nước.",
+    "answers": [
+      "Ở trên bàn.",
+      "Trên bàn.",
+      "Ở trên bàn, bên cạnh ly nước.",
+      "Trên bàn, bên cạnh ly nước."
+    ],
+    "why": "Follow điện thoại, not chìa khóa.",
+    "gloss": "bên cạnh = next to; chìa khóa = key"
+  },
+  {
+    "id": "task-24",
+    "c": "c.question.why",
+    "type": "class_read",
+    "prompt": "Why does Minh stay home? Start with vì.",
+    "context": "Hôm nay Minh muốn đi chợ. Nhưng Minh bị đau đầu nên ở nhà nghỉ ngơi.",
+    "answers": [
+      "Vì Minh bị đau đầu.",
+      "Vì bị đau đầu.",
+      "Vì đau đầu."
+    ],
+    "why": "Nên introduces the result; vì introduces its reason.",
+    "gloss": "đau đầu = headache; nghỉ ngơi = rest"
+  },
+  {
+    "id": "task-25",
+    "c": "c.lex.good",
+    "type": "class_read",
+    "prompt": "Which food did she enjoy? Answer with the dish name.",
+    "context": "Lan nói: Phở ở đây ngon. Cá thì dở. Cà phê hơi mắc.",
+    "answers": [
+      "Phở."
+    ],
+    "why": "Only the pho is described as ngon.",
+    "gloss": ""
+  },
+  {
+    "id": "task-26",
+    "c": "c.cmp.more",
+    "type": "class_read",
+    "prompt": "Which drink is cheaper? Answer with the drink name.",
+    "context": "Một ly trà hai mươi nghìn. Một ly cà phê ba mươi nghìn.",
+    "answers": [
+      "Trà.",
+      "Ly trà."
+    ],
+    "why": "Twenty thousand is less than thirty thousand.",
+    "gloss": ""
+  },
+  {
+    "id": "task-27",
+    "c": "c.mod.beforeafter",
+    "type": "class_read",
+    "prompt": "What does she do first? Give the action only.",
+    "context": "Sau khi làm xong bài tập, Lan gọi cho má. Rồi Lan đi ngủ.",
+    "answers": [
+      "Làm bài tập.",
+      "Làm xong bài tập."
+    ],
+    "why": "The action after sau khi happens first.",
+    "gloss": "bài tập = exercise / homework"
+  },
+  {
+    "id": "task-28",
+    "c": "c.intro.origin",
+    "type": "class_reply",
+    "prompt": "Introduce yourself: say you are French and live in Paris. Use em.",
+    "context": "You meet a Vietnamese colleague older than you.",
+    "answers": [
+      "Em là người Pháp và em sống ở Paris.",
+      "Em là người Pháp, em sống ở Paris.",
+      "Em là người Pháp và sống ở Paris."
+    ],
+    "why": "Use em when speaking to this older colleague.",
+    "gloss": ""
+  },
+  {
+    "id": "task-29",
+    "c": "c.mod.core",
+    "type": "class_reply",
+    "prompt": "Politely ask her to speak a little more slowly. Start with chị.",
+    "context": "The person you are speaking with talks too fast.",
+    "answers": [
+      "Chị nói chậm một chút nha.",
+      "Chị nói chậm một chút nhé.",
+      "Chị nói chậm một chút được không?"
+    ],
+    "why": "Chậm một chút = a little more slowly.",
+    "gloss": ""
+  },
+  {
+    "id": "task-30",
+    "c": "c.num.money",
+    "type": "class_reply",
+    "prompt": "Order two glasses of iced tea. Start with cho em.",
+    "context": "You are ordering drinks for yourself and a friend.",
+    "answers": [
+      "Cho em hai ly trà đá.",
+      "Cho em hai ly trà đá nha."
+    ],
+    "why": "Use ly to count glasses.",
+    "gloss": ""
+  },
+  {
+    "id": "task-31",
+    "c": "c.freq.adv",
+    "type": "class_reply",
+    "prompt": "Say that you rarely watch films because you are busy. Use em.",
+    "context": "A friend asks about your routine.",
+    "answers": [
+      "Em hiếm khi coi phim vì em bận.",
+      "Em hiếm khi xem phim vì em bận.",
+      "Em hiếm khi coi phim vì bận.",
+      "Em hiếm khi xem phim vì bận."
+    ],
+    "why": "Hiếm khi goes before the action; vì gives the reason.",
+    "gloss": ""
+  }
+];
+CLASS_EXAMPLES.push(...[{"id": "extra-more-0", "c": "c.sent.svo", "vi": "Sáng nay em viết email cho chị.", "en": "This morning I write an email to you.", "focus": "viết"}, {"id": "extra-more-1", "c": "c.sent.svo", "vi": "Sau buổi học, em đọc một quyển sách.", "en": "After class, I read a book.", "focus": "đọc"}, {"id": "extra-more-2", "c": "c.sent.svo", "vi": "Em đóng cửa rồi đi ngủ.", "en": "I close the door, then go to bed.", "focus": "đóng"}, {"id": "extra-more-3", "c": "c.sent.svo", "vi": "Chị thử món này trước đi.", "en": "Try this dish first.", "focus": "thử"}, {"id": "extra-more-4", "c": "c.sent.adjafter", "vi": "Em có một cái túi nhỏ.", "en": "I have a small bag.", "focus": "nhỏ"}, {"id": "extra-more-5", "c": "c.sent.adjafter", "vi": "Cái bàn mới ở gần cửa sổ.", "en": "The new table is near the window.", "focus": "mới"}, {"id": "extra-more-6", "c": "c.sent.adjafter", "vi": "Em không thích cà phê ngọt.", "en": "I do not like sweet coffee.", "focus": "ngọt"}, {"id": "extra-more-7", "c": "c.sent.adjafter", "vi": "Nhà chị xa nhưng quán này gần.", "en": "Your house is far away, but this café is nearby.", "focus": "xa"}, {"id": "extra-more-8", "c": "c.sent.have", "vi": "Trong túi em không có tiền.", "en": "There is no money in my bag.", "focus": "không có"}, {"id": "extra-more-9", "c": "c.sent.have", "vi": "Chị có thời gian học hôm nay không?", "en": "Do you have time to study today?", "focus": "thời gian"}, {"id": "extra-more-10", "c": "c.sent.yesno", "vi": "Cái áo này có mắc không?", "en": "Is this shirt expensive?", "focus": "mắc"}, {"id": "extra-more-11", "c": "c.sent.yesno", "vi": "Chị có muốn ăn thêm không?", "en": "Would you like to eat some more?", "focus": "thêm"}, {"id": "extra-more-12", "c": "c.sent.yesno", "vi": "Quán này có bán trà không?", "en": "Does this café sell tea?", "focus": "bán"}, {"id": "extra-more-13", "c": "c.sent.neg", "vi": "Em không biết tên quán này.", "en": "I do not know this café’s name.", "focus": "không"}, {"id": "extra-more-14", "c": "c.sent.neg", "vi": "Hôm nay em không đi mua đồ.", "en": "Today I am not going shopping.", "focus": "không"}, {"id": "extra-more-15", "c": "c.time.clock", "vi": "Em đi làm lúc tám giờ sáng.", "en": "I go to work at eight in the morning.", "focus": "tám"}, {"id": "extra-more-16", "c": "c.time.clock", "vi": "Buổi học bắt đầu lúc bảy giờ tối.", "en": "Class starts at seven in the evening.", "focus": "bảy"}, {"id": "extra-more-17", "c": "c.time.clock", "vi": "Bây giờ là mười giờ mười lăm.", "en": "It is now ten fifteen.", "focus": "mười lăm"}, {"id": "extra-more-18", "c": "c.time.duration", "vi": "Buổi họp kéo dài ba mươi phút.", "en": "The meeting lasts thirty minutes.", "focus": "phút"}, {"id": "extra-more-19", "c": "c.time.duration", "vi": "Em nghỉ ngơi nửa tiếng rồi đi làm.", "en": "I rest for half an hour, then go to work.", "focus": "nửa tiếng"}, {"id": "extra-more-20", "c": "c.num.basic", "vi": "Nhà em có bốn người.", "en": "There are four people in my household.", "focus": "bốn"}, {"id": "extra-more-21", "c": "c.num.basic", "vi": "Chị mua mười hai trái táo.", "en": "You buy twelve apples.", "focus": "mười hai"}, {"id": "extra-more-22", "c": "c.num.basic", "vi": "Em cần hai cái chén nữa.", "en": "I need two more bowls.", "focus": "hai"}, {"id": "extra-more-23", "c": "c.num.money", "vi": "Em trả bằng tiền mặt được không?", "en": "Can I pay in cash?", "focus": "tiền mặt"}, {"id": "extra-more-24", "c": "c.num.money", "vi": "Cái áo này một trăm nghìn đồng.", "en": "This shirt costs one hundred thousand dong.", "focus": "một trăm"}, {"id": "extra-more-25", "c": "c.mod.wear", "vi": "Đi làm em thường mặc áo sơ mi.", "en": "For work I usually wear a shirt.", "focus": "mặc"}, {"id": "extra-more-26", "c": "c.mod.wear", "vi": "Chị đeo kính khi đọc sách.", "en": "You wear glasses when reading.", "focus": "đeo"}, {"id": "extra-more-27", "c": "c.mod.wear", "vi": "Em đem theo áo khoác vì trời lạnh.", "en": "I bring a jacket because it is cold.", "focus": "đem theo"}, {"id": "extra-more-28", "c": "c.mod.core", "vi": "Em cần mua nước trước khi về nhà.", "en": "I need to buy water before going home.", "focus": "cần"}, {"id": "extra-more-29", "c": "c.mod.core", "vi": "Chị nên nghỉ ngơi một chút.", "en": "You should rest a little.", "focus": "nên"}, {"id": "extra-more-30", "c": "c.part.nhe", "vi": "Cho em thêm một cái chén nha.", "en": "Please give me one more bowl.", "focus": "thêm"}, {"id": "extra-more-31", "c": "c.part.nhe", "vi": "Chị đợi em năm phút nha.", "en": "Please wait for me for five minutes.", "focus": "đợi"}, {"id": "extra-more-32", "c": "c.time.buoi", "vi": "Buổi sáng em ăn bánh mì ở nhà.", "en": "In the morning I eat bread at home.", "focus": "sáng"}, {"id": "extra-more-33", "c": "c.time.buoi", "vi": "Buổi chiều tụi mình đi uống trà.", "en": "In the afternoon we go for tea.", "focus": "chiều"}, {"id": "extra-more-34", "c": "c.freq.adv", "vi": "Em thường gọi cho má vào buổi tối.", "en": "I usually call my mom in the evening.", "focus": "thường"}, {"id": "extra-more-35", "c": "c.freq.adv", "vi": "Dạo này em học mỗi ngày.", "en": "Lately I study every day.", "focus": "Dạo này"}, {"id": "extra-more-36", "c": "c.freq.adv", "vi": "Em chưa bao giờ đi Đà Nẵng.", "en": "I have never been to Da Nang.", "focus": "chưa bao giờ"}, {"id": "extra-more-37", "c": "c.intro.name", "vi": "Chị tên là Lan, còn em tên gì?", "en": "My name is Lan; what is your name?", "focus": "tên gì"}, {"id": "extra-more-38", "c": "c.intro.origin", "vi": "Em là người Pháp, còn má em là người Việt.", "en": "I am French, and my mom is Vietnamese.", "focus": "người Pháp"}, {"id": "extra-more-39", "c": "c.pron.family", "vi": "Em có một chị gái và một em trai.", "en": "I have an older sister and a younger brother.", "focus": "chị gái"}, {"id": "extra-more-40", "c": "c.sent.o", "vi": "Quán ăn ở gần chỗ làm của em.", "en": "The eatery is near my workplace.", "focus": "gần"}, {"id": "extra-more-41", "c": "c.sent.o", "vi": "Cái ly ở bên cạnh quyển sách.", "en": "The glass is beside the book.", "focus": "bên cạnh"}, {"id": "extra-more-42", "c": "c.sent.thi", "vi": "Trà thì rẻ, cà phê thì mắc.", "en": "Tea is cheap; coffee is expensive.", "focus": "thì"}, {"id": "extra-more-43", "c": "c.asp.da", "vi": "Em đã học bài này tuần trước.", "en": "I studied this lesson last week.", "focus": "đã"}, {"id": "extra-more-44", "c": "c.asp.chua", "vi": "Ba chưa về nhà nên em đợi ba.", "en": "Dad has not come home yet, so I am waiting for him.", "focus": "chưa"}, {"id": "extra-more-45", "c": "c.south.lexicon", "vi": "Má mua một cái nón mới cho em.", "en": "Mom buys me a new hat.", "focus": "nón"}, {"id": "extra-more-46", "c": "c.lex.good", "vi": "Bài hát này hay nhưng hơi dài.", "en": "This song is good but a little long.", "focus": "hay"}, {"id": "extra-more-47", "c": "c.lex.bad", "vi": "Hôm nay thời tiết tệ nên em ở nhà.", "en": "Today the weather is bad, so I stay home.", "focus": "tệ"}]);
+CLASS_EXAMPLES.forEach(e=>COURSE_SENTENCES.push({vi:e.vi,en:e.en,c:e.c}));
+CORE_LESSONS.push({id:"core-2026-10-01",date:"2026-10-01",title:"Choosing, planning and finishing",summary:"Ask which, when and whether something is finished; practise meetings, days off and useful replies.",concepts:["c.question.when","c.question.which","c.question.yet","c.asp.chua","c.question.whose","c.question.duration","c.freq.adv"]});
+COURSE_ITEMS.push(
+{id:"course.oct.tuyvao",vi:"tùy vào",en:"depend on",d:"u10",concept:"c.question.when",sourceDate:"2026-10-01",ex:{vi:"Giờ đi tùy vào buổi họp.",en:"The departure time depends on the meeting."}},
+{id:"course.oct.buoihop",vi:"buổi họp",en:"meeting",d:"u10",concept:"c.question.when",sourceDate:"2026-10-01",ex:{vi:"Em có buổi họp lúc chín giờ.",en:"I have a meeting at nine."}},
+{id:"course.oct.xong",vi:"xong",en:"finished; done",d:"u8",concept:"c.question.yet",sourceDate:"2026-10-01",ex:{vi:"Em dọn phòng xong rồi.",en:"I have finished cleaning the room."}},
+{id:"course.oct.tapmoi",vi:"tập mới",en:"new episode",d:"u10",concept:"c.question.yet",sourceDate:"2026-10-01",ex:{vi:"Chị coi tập mới chưa?",en:"Have you watched the new episode yet?"}}
+);
+
 let COURSE = (function build(){
   const items = [];
   LEGACY_ITEMS.forEach(function(x){
@@ -3205,6 +4121,15 @@ const TYPES = {
 };
 
 TYPES.flashcard={skill:"recognition",level:2,label:"Flashcard recall"};
+Object.assign(TYPES,{
+ class_gap:{skill:"recall",level:4,label:"Recall the missing words"},
+ class_ask:{skill:"production",level:6,label:"Transform the sentence"},
+ class_repair:{skill:"production",level:7,label:"Correct the mistake"},
+ class_read:{skill:"context",level:6,label:"Read and work it out"},
+ class_write:{skill:"production",level:7,label:"Write the sentence"},
+ class_reply:{skill:"production",level:8,label:"Continue the conversation"},
+ class_open:{skill:"production",level:8,label:"Make it your own"}
+});
 
 /* ── state ────────────────────────────────────────────────────────────── */
 const STATE_SCHEMA_VERSION = 4;
@@ -3421,6 +4346,7 @@ const TIMING_POLICY = {
   scenario:{family:"freeProduction", mode:"free", speed:false},
   shadow:{family:"shadow", mode:"free", speed:false}
 };
+['class_gap','class_ask','class_repair','class_read','class_write','class_reply','class_open'].forEach(t=>{TIMING_POLICY[t]={family:"typedRecall",mode:"typed",speed:false};});
 let CURRENT_TIMING = null;
 let ACTIVE_EXERCISE = null;
 function basePromptReadingAllowance(type,item){
@@ -4415,6 +5341,7 @@ function nextCard(){
   const skill=entry.skill||nextSkillFor(it);
   const types=entry.force?[entry.force]:(typesForSkill(it,skill).length?typesForSkill(it,skill):availableTypes(it,skill));
   const type=types.length?(entry.force?types[0]:pick(types)):"mc_vi_en";
+  if(SESS.mode==="class"&&it.practiceKey){const cr=classRecord(SESS.classId);cr.seen=cr.seen||{};cr.seen[it.practiceKey]=Date.now();cr.formats=cr.formats||{};cr.formats[it.practiceKey]=type;save();}
   ACTIVE_EXERCISE={item:it,type:type,skill:skill};
   renderExercise(it,type,skill);
 }
@@ -4429,13 +5356,13 @@ function finishCard(item,type,ok,conf,timing,grade){
     const current=SESS.queue[SESS.i]||{}, skill=(TYPES[type]||{}).skill;
     if(!current.retryStage){
       const at=SESS.mode==="class"?SESS.queue.length:Math.min(SESS.queue.length,SESS.i+3+(Math.random()*3|0));
-      SESS.queue.splice(at,0,{it:item,skill:skill,why:"retry",retry:true,retryStage:1});
+      SESS.queue.splice(at,0,{it:item,skill:skill,why:"retry",force:item.task?type:undefined,retry:true,retryStage:1});
       if(SESS.mode!=="class") SESS.queue.push({it:item,skill:skill,why:"late retry",retry:true,retryStage:2});
     }
   }
   if(g.repair && (g.skillCorrect||formOnlyPartial)){
     const at=Math.min(SESS.queue.length,SESS.i+4+(Math.random()*3|0));
-    SESS.queue.splice(at,0,{it:item,skill:(TYPES[type]||{}).skill,why:"repair",retry:true,retryStage:1});
+    SESS.queue.splice(at,0,{it:item,skill:(TYPES[type]||{}).skill,why:"repair",force:item.task?type:undefined,retry:true,retryStage:1});
   }
   const current=SESS.queue[SESS.i]||{};
   if(g.skillCorrect && (current.retry||current.why==="repair")){
@@ -4612,6 +5539,8 @@ function renderExercise(it, type, skill){
   const r = rec(it.id), hard = r.level >= 3;
   const T = TYPES[type] || TYPES.mc_vi_en;
   const head = function(txt, why){ return label(txt, why || T.label, whyBtn(it.concept)); };
+
+  if(it.task&&type.startsWith("class_"))return renderClassTask(it,type);
 
   /* first sight */
   if (!r.reps && it.kind === "word" && !(SESS&&SESS.mode==="class")){
@@ -5241,6 +6170,7 @@ function endSession(){
   const extraReplays=listening.reduce((n,r)=>n+Math.max(0,((r.timing&&r.timing.plays)||1)-1),0);
   const slowAudio=listening.reduce((n,r)=>n+((r.timing&&r.timing.slowPlays)||0),0);
   const production=res.filter(r=>(TYPES[r.type]||{}).skill==="production");
+  if(SESS.mode==="class"&&!SESS.classRecorded){classRecord(SESS.classId).completed++;SESS.classRecorded=true;}
   const gained=S.xp-SESS.xp0;
   const missed=res.filter(r=>!r.ok).map(r=>COURSE.byId[r.id]).filter(Boolean);
   const uniqMissed=missed.filter((x,i)=>missed.findIndex(y=>y.id===x.id)===i);
@@ -5256,7 +6186,7 @@ function endSession(){
     +'<div class="rrow"><span class="rt">Writing</span><span class="rv">'+toneMissing+' tone omission'+(toneMissing===1?'':'s')+' · '+formErr+' other form repair'+(formErr===1?'':'s')+'</span></div></div>'
     +(uniqMissed.length?'<div class="group-h" style="margin-top:24px"><span class="eyebrow">Coming back</span></div>'
       +uniqMissed.map(x=>'<div class="row"><span class="pill" style="background:var(--cinnabar)"></span><span class="vi">'+esc(x.vi)+'</span><span class="en">'+esc(x.en)+'</span><button class="mini" data-say="'+esc((x.ex&&x.ex.vi)||x.vi)+'">▶</button></div>').join(''):'')
-    +tutorBlock()+'<div class="next-row" style="margin-top:22px"><button class="btn" id="again">'+(SESS.mode==="class"?'Review class again':'Another set')+'</button><button class="btn ghost" id="done">'+(SESS.mode==="class"?'Back to classes':'Done')+'</button></div>');
+    +tutorBlock()+'<div class="next-row" style="margin-top:22px"><button class="btn" id="again">'+(SESS.mode==="class"?'Practise this class again':'Another set')+'</button><button class="btn ghost" id="done">'+(SESS.mode==="class"?'Back to classes':'Done')+'</button></div>');
   const classId=SESS.classId,wasClass=SESS.mode==="class";
   $("#stage").innerHTML=html; wireSpeak(); $("#again").onclick=()=>wasClass?startClassJourney(classId):startSession(buildPlan()); $("#done").onclick=()=>{SESS=null;if(wasClass)COURSE_VIEW_MODE="classes";go(wasClass?"course":"today");};
   keyHandler=e=>{if(e.key==="Enter"){if(wasClass)COURSE_VIEW_MODE="classes";go(wasClass?"course":"today");}}; paintStats(); save();
@@ -5575,16 +6505,19 @@ function viewCourse(){
 }
 function classSheet(id){
   const l=COURSE.lessons.find(x=>x.id===id);if(!l)return;
-  const cs=classConcepts(l), words=classVocabulary(l);
+  const cs=classConcepts(l), words=classVocabulary(l), returning=classRecord(id).visits>0;
   openSheet('<div class="eyebrow">'+formatLessonDate(l.date)+'</div><h2 class="sheet-h">'+esc(l.title)+'</h2><div class="course-class-summary">'+esc(l.summary||l.notes||'Review this class step by step.')+'</div>'
     +'<div class="class-route"><div class="class-route-step"><b>1 · Review the structures</b><span>'+cs.length+' explanation cards, with examples and contrasts.</span></div>'
     +'<div class="class-route-step"><b>2 · Review the vocabulary</b><span>'+words.length+' linked words and phrases, grouped into short cards.</span></div>'
-    +'<div class="class-route-step"><b>3 · Practice in steps</b><span>Meaning → recall → rule checks → sentences → listening → writing.</span></div></div>'
-    +'<div class="group-h"><span class="eyebrow">Structures</span><span class="hint">'+cs.length+' linked</span></div>'
+    +'<div class="class-route-step"><b>3 · Practice in steps</b><span>Recall → sentence building → questions and replies → reading → independent writing.</span></div></div>'
+    +'<details class="teach-more"><summary>Structures in this lesson ('+cs.length+')</summary>'
     +cs.map(c=>{const its=COURSE.itemsByConcept[c.id]||[],m=its.length?its.reduce((s,x)=>s+overall(x.id),0)/its.length:0;return '<button class="crow" data-c="'+esc(c.id)+'"><span class="cdot" style="background:'+(m>.7?"var(--jade)":m>.35?"var(--gold)":"var(--dimmer)")+'"></span><span class="ct">'+esc(c.title)+'</span><span class="cm">'+Math.round(m*100)+'%</span></button>';}).join("")
-    +'<div class="next-row"><button class="btn" id="practiceClass">Start class</button><button class="btn ghost" id="closeClass">Close</button></div>');
+    +'</details><label class="hint" for="classIntensity">Practice level</label><select id="classIntensity" class="type" style="width:100%;margin:8px 0"><option value="standard">Progressive · brief warm-up, then harder tasks</option><option value="challenge"'+(returning?' selected':'')+'>Challenge · more writing, no vocabulary quiz</option></select>'
+    +'<div class="hint">Examples and exercise types rotate across visits. '+(returning?'Welcome back — choose where to start.':'You can review first or go straight to practice.')+'</div>'
+    +'<div class="next-row"><button class="btn" id="practiceClass">Review & practise</button><button class="btn ghost" id="exercisesOnly">Exercises only</button><button class="btn ghost" id="closeClass">Close</button></div>');
   $$(".crow").forEach(b=>b.onclick=function(){closeSheet();explainSheet(b.dataset.c);});
-  $("#practiceClass").onclick=function(){closeSheet();startClassJourney(id);}; $("#closeClass").onclick=closeSheet;
+  function launch(skip){const intensity=$("#classIntensity").value;closeSheet();startClassJourney(id,{skipReview:skip,intensity});}
+  $("#practiceClass").onclick=()=>launch(false);$("#exercisesOnly").onclick=()=>launch(true);$("#closeClass").onclick=closeSheet;
 }
 function classConcepts(l){
   const pack=CUSTOM_PACKS.find(p=>p.lesson&&p.lesson.id===l.id);
@@ -5601,24 +6534,21 @@ function classVocabulary(l){
   return dated.concat(undated,soundWords).filter(w=>{if(seenIds.has(w.id))return false;seenIds.add(w.id);return true;});
 }
 let CLASS_JOURNEY=null;
-function startClassJourney(id){
+function startClassJourney(id,opts){
   const lesson=COURSE.lessons.find(l=>l.id===id);if(!lesson)return;
+  const record=classRecord(id);if(record.visits>0&&!opts)return classSheet(id);
+  opts=opts||{};record.visits++;save();SESS=null;ACTIVE_EXERCISE=null;keyHandler=null;
   const concepts=classConcepts(lesson), words=classVocabulary(lesson);
   const steps=concepts.map(c=>({kind:"concept",value:c}));
   for(let i=0;i<words.length;i+=8)steps.push({kind:"vocabulary",value:words.slice(i,i+8)});
-  CLASS_JOURNEY={lesson:lesson,words:words,concepts:concepts,steps:steps,index:0};
+  CLASS_JOURNEY={lesson:lesson,words:words,concepts:concepts,steps:steps,index:0,intensity:opts.intensity||"standard"};
+  if(opts.skipReview)return beginClassPractice(CLASS_JOURNEY);
   document.body.classList.add("in-session");document.body.dataset.view="study";
   renderClassReview();
 }
 function renderClassReview(){
   const j=CLASS_JOURNEY;if(!j)return;
-  if(j.index>=j.steps.length){
-    const plan=classPracticePlan(j);
-    CLASS_JOURNEY=null;
-    if(plan.length)startSession(plan,{mode:"class",classId:j.lesson.id});
-    else {document.body.classList.remove("in-session");COURSE_VIEW_MODE="classes";go("course");}
-    return;
-  }
+  if(j.index>=j.steps.length)return beginClassPractice(j);
   const step=j.steps[j.index], isConcept=step.kind==="concept";
   let body='<div class="class-review-count">'+esc(j.lesson.title)+' · Review '+(j.index+1)+' / '+j.steps.length+'</div>';
   if(isConcept){
@@ -5639,26 +6569,122 @@ function renderClassReview(){
   $("#classReviewExit").onclick=()=>{CLASS_JOURNEY=null;document.body.classList.remove("in-session");COURSE_VIEW_MODE="classes";go("course");};
   window.scrollTo({top:0,behavior:"instant"});
 }
+function beginClassPractice(j){
+  const plan=classPracticePlan(j);CLASS_JOURNEY=null;
+  if(plan.length){classRecord(j.lesson.id).runs++;save();startSession(plan,{mode:"class",classId:j.lesson.id});}
+  else{document.body.classList.remove("in-session");COURSE_VIEW_MODE="classes";go("course");}
+}
+/* Rotating practice preserves concept credit and tracks examples separately. */
+function classRecord(id){
+  S.classes=S.classes||{};
+  return S.classes[id]||(S.classes[id]={visits:0,runs:0,completed:0,seen:{}});
+}
+function classCandidates(j){
+  const out=[];
+  j.concepts.forEach(c=>{
+    const authored=CLASS_EXAMPLES.filter(e=>e.c===c.id);
+    const examples=authored.concat((c.examples||[]).concat(c.micro&&c.micro.examples||[],COURSE.sentencesByConcept[c.id]||[],j.words.filter(w=>w.concept===c.id&&w.ex).map(w=>w.ex)).map((e,i)=>({id:'course-'+c.id+'-'+i,c:c.id,vi:e.vi,en:e.en})));
+    const seen=new Set();
+    examples.forEach(e=>{
+      if(!e.vi||!e.en||seen.has(normalizeAnswerText(e.vi)))return;
+      seen.add(normalizeAnswerText(e.vi));
+      const key='sentence:'+normalizeAnswerText(e.vi), words=toks(e.vi);
+      if(e.focus&&e.vi.toLowerCase().includes(e.focus.toLowerCase())){
+        const at=e.vi.toLowerCase().indexOf(e.focus.toLowerCase());
+        out.push({key,c:c.id,type:'class_gap',prompt:'Type the missing word or phrase.',context:e.vi.slice(0,at)+' _____ '+e.vi.slice(at+e.focus.length),en:e.en,answers:[e.focus],model:e.vi,why:teachingLead(c)});
+      }
+      if(words.length>=4&&words.length<=14)out.push({key,c:c.id,type:'build',prompt:e.en,answers:[e.vi],model:e.vi});
+      out.push({key,c:c.id,type:'class_write',prompt:e.en,answers:[e.vi],model:e.vi,why:teachingLead(c)});
+    });
+  });
+  j.words.filter(w=>w.studyMode!=='reference').forEach(w=>{
+    const sp=w.ex&&spanOf(w),key=w.ex?'sentence:'+normalizeAnswerText(w.ex.vi):'word:'+w.id;
+    if(sp){const parts=toks(w.ex.vi);out.push({key,baseId:w.id,c:w.concept,type:'class_gap',prompt:'Recall the missing expression.',context:parts.slice(0,sp.at).join(' ')+' _____ '+parts.slice(sp.at+sp.len).join(' '),en:w.ex.en,answers:[w.vi],model:w.ex.vi});}
+    if(w.ex)out.push({key,baseId:w.id,c:w.concept,type:'class_write',prompt:w.ex.en,answers:[w.ex.vi],model:w.ex.vi});
+    else out.push({key,baseId:w.id,c:w.concept,type:'class_gap',prompt:'Write this word or phrase in Vietnamese: '+w.en,answers:[w.vi],model:w.vi});
+  });
+  CLASS_TASKS.filter(t=>j.concepts.some(c=>c.id===t.c)).forEach(t=>out.push(Object.assign({key:t.id},t)));
+  return out;
+}
+function classTaskItem(t){
+  const c=COURSE.conceptById[t.c],base=COURSE.byId[t.baseId]||COURSE.byId['cpt:'+t.c]||(COURSE.itemsByConcept[t.c]||[])[0]||{id:'cpt:'+t.c,unit:c&&c.unit,concept:t.c};
+  return Object.assign({},base,{kind:'classTask',vi:t.answers[0],en:t.prompt,ex:{vi:t.model||t.answers[0],en:t.en||t.prompt},task:t,practiceKey:t.key});
+}
 function classPracticePlan(j){
-  const plan=[],used=new Set();
-  const words=j.words.filter(w=>w.studyMode!=="reference").sort((a,b)=>overall(a.id)-overall(b.id));
-  function add(items,n,force,phase,valid){let count=0;for(const it of items){if(count>=n)break;if(valid&&!valid(it))continue;
-    const key=it.id+":"+force;if(used.has(key))continue;used.add(key);plan.push({it:it,force:force,skill:TYPES[force].skill,why:"class · "+phase,phase:phase});count++;}}
-  add(words,5,"mc_vi_en","Recognize meanings");
-  add(words.slice(5).concat(words.slice(0,5)),5,"mc_en_vi","Recall Vietnamese");
-  add(j.concepts.map(c=>COURSE.byId["cpt:"+c.id]).filter(Boolean),j.concepts.length,"judge_concept","Check structures",it=>!!(it.ref&&it.ref.micro&&it.ref.micro.check));
-  if(j.lesson.id==="core-2026-02-22"){
-    const pairs=COURSE.all.filter(it=>it.kind==="pair"&&!it.pair.merged);
-    add(pairs,3,"pair_eye","Distinguish written sounds");
-    if(TTS.ready)add(pairs,2,"pair_ear","Distinguish spoken sounds");
+  const record=classRecord(j.lesson.id),history=record.seen||{},challenge=j.intensity==='challenge';
+  const plan=[],used=new Set(),typeCounts={};
+  const phases={class_gap:'Recall in context',build:'Build a sentence',class_ask:'Change the sentence',class_repair:'Repair a mistake',class_read:'Read and infer',class_write:'Write independently',class_reply:'Reply in a conversation',class_open:'Make it your own'};
+  const order={class_gap:1,build:2,class_ask:3,class_repair:3,class_read:4,class_write:5,class_reply:6,class_open:7};
+  function add(t){
+    if(used.has(t.key))return;used.add(t.key);typeCounts[t.type]=(typeCounts[t.type]||0)+1;
+    plan.push({it:classTaskItem(t),force:t.type,skill:TYPES[t.type].skill,why:'class',phase:phases[t.type]});
   }
-  add(words,3,"gap","Use words in context",it=>!!(it.ex&&spanOf(it)));
-  add(words,2,"build","Build sentences",it=>!!(it.ex&&toks(it.ex.vi).length>=4&&toks(it.ex.vi).length<=9));
-  if(TTS.ready)add(words,2,"listen_word","Listen and understand");
-  add(words,2,"translate_h","Write with a hint",it=>!!it.ex);
-  add(words.slice(2).concat(words.slice(0,2)),2,"translate","Write independently",it=>!!it.ex);
+  const pool=shuffle(classCandidates(j)).sort((a,b)=>(history[a.key]||0)-(history[b.key]||0));
+  function choose(candidates){
+    const fresh=candidates.filter(t=>!used.has(t.key));if(!fresh.length)return;
+    const oldest=Math.min(...fresh.map(t=>history[t.key]||0));
+    const choices=fresh.filter(t=>(history[t.key]||0)===oldest);
+    choices.sort((a,b)=>((typeCounts[a.type]||0)+(challenge&&a.type==='class_gap'?3:0)+((record.formats||{})[a.key]===a.type?5:0))-((typeCounts[b.type]||0)+(challenge&&b.type==='class_gap'?3:0)+((record.formats||{})[b.key]===b.type?5:0)));
+    add(choices[0]);
+  }
+  // Every linked structure gets practice; the remaining slots rotate unseen contexts.
+  shuffle(j.concepts).forEach(c=>choose(pool.filter(t=>t.c===c.id)));
+  ['class_gap','build','class_ask','class_repair','class_read','class_reply'].forEach(type=>choose(pool.filter(t=>t.type===type)));
+  const target=Math.max(challenge?22:18,j.concepts.length*2);
+  while(plan.length<target){const before=plan.length;choose(pool);if(plan.length===before)break;}
+  if(j.concepts.length){
+    const c=j.concepts[(record.runs||0)%j.concepts.length],sample=CLASS_EXAMPLES.find(e=>e.c===c.id)||(c.examples||[])[0]||((c.micro||{}).examples||[])[0];
+    if(sample)add({key:'open:'+c.id,c:c.id,type:'class_open',prompt:'Write two connected sentences about your own life using '+c.title+'.',answers:[sample.vi],model:sample.vi,why:teachingLead(c)});
+  }
+  plan.sort((a,b)=>(order[a.force]||0)-(order[b.force]||0));
+  // A brief varied warm-up; repeat/challenge runs start directly with production work.
+  const words=shuffle(j.words.filter(w=>w.studyMode!=='reference')).sort((a,b)=>(history['word:'+a.id]||0)-(history['word:'+b.id]||0));
+  if(!challenge)plan.unshift(...words.filter(w=>!used.has('word:'+w.id)).slice(0,3).map((w,i)=>({it:Object.assign({},w,{practiceKey:'word:'+w.id}),force:i?'mc_en_vi':'mc_vi_en',skill:i?'recall':'recognition',why:'class',phase:'Quick warm-up'})));
+  if(TTS.ready){
+    const spoken=words.find(w=>w.ex&&toks(w.ex.vi).length<=14);
+    if(spoken)plan.splice(Math.max(0,plan.length-1),0,{it:spoken,force:'listen_type',skill:'listening',why:'class',phase:'Listen and write'});
+  }
+  if(j.lesson.id==='core-2026-02-22'){
+    const pairs=shuffle(COURSE.all.filter(it=>it.kind==='pair'&&!it.pair.merged)).slice(0,4);
+    pairs.forEach(it=>plan.unshift({it,force:TTS.ready?'pair_ear':'pair_eye',skill:TTS.ready?'listening':'recall',why:'class',phase:'Distinguish sounds and spelling'}));
+  }
   return plan;
 }
+function classAnswerGrade(value,answers){
+  return answers.map(a=>({answer:a,grade:classifyTypedAnswer(value,a)})).sort((a,b)=>(b.grade.masteryCredit||0)-(a.grade.masteryCredit||0))[0];
+}
+function renderClassTask(it,type){
+  const t=it.task,open=type==='class_open';
+  stage(card(label(TYPES[type].label,'class practice',whyBtn(it.concept))
+    +(t.context?'<div class="teach-example"><span class="vi">'+esc(t.context)+'</span></div>':'')
+    +'<div class="prompt-en" style="font-size:20px">'+esc(t.prompt)+'</div>'
+    +(t.en?'<div class="sent-en">'+esc(t.en)+'</div>':'')
+    +(t.gloss?'<details class="teach-more"><summary>Useful words</summary><p>'+esc(t.gloss)+'</p></details>':'')
+    +'<div class="typebox"><textarea class="type" id="tin" rows="3" aria-label="Your Vietnamese answer" autocapitalize="off" spellcheck="false" placeholder="Write in Vietnamese"></textarea><button class="btn" id="tgo">'+(open?'Compare':'Check')+'</button></div>'
+    +'<div class="hint">'+(type==='class_gap'?'Write the missing part only.':'Full sentences can have several valid wordings. You can compare yours with a model.')+'</div>'));
+  wireWhy();const input=$('#tin');input.focus();input.addEventListener('input',()=>markTimingInteraction('key'),{once:true});let reviewed=false;
+  function review(value){
+    reviewed=true;input.disabled=true;$('#tgo').disabled=true;
+    const box=document.createElement('div');box.className='verdict';
+    box.innerHTML='<div class="eyebrow">Compare your wording</div><div class="rightline"><b>One model</b> '+esc(t.model||t.answers[0])+'</div>'
+      +'<p class="hint">'+esc(t.why||'Check the meaning and word order.')+'</p>'
+      +'<p class="hint">'+(open?'Check: two connected sentences, the target structure, and a clear meaning.':'Check: same meaning, requested structure, and correct pronouns. Different wording can be valid.')+'</p>'
+      +'<div class="conf-row"><button class="conf" id="classSelfYes">My answer meets the checklist</button><button class="conf" id="classSelfNo">I need to practise this</button></div><p class="hint">Self-assessment earns partial credit.</p>';
+    $('#card').appendChild(box);
+    function self(ok){box.querySelectorAll('button').forEach(b=>b.disabled=true);settle(it,type,ok,{answer:t.model||t.answers[0],yours:value,say:t.model||t.answers[0],grade:normalizeGrade(ok,{outcome:ok?'self_assessed':'wrong',knowledgeCredit:ok?.65:0,masteryCredit:ok?.5:0,conceptError:!ok})});}
+    $('#classSelfYes').onclick=()=>self(true);$('#classSelfNo').onclick=()=>self(false);
+  }
+  function submit(){
+    if(reviewed||askAnswered)return;const value=input.value.trim();if(!value)return;markTimingInteraction('key');
+    if(open)return review(value);
+    const best=classAnswerGrade(value,t.answers);
+    if(!best.grade.skillCorrect&&best.grade.conceptError!==false&&type!=='class_gap')return review(value);
+    input.disabled=true;$('#tgo').disabled=true;
+    settle(it,type,best.grade.skillCorrect,{answer:t.model||best.answer,answerWhy:t.why,yours:value,say:t.model||best.answer,grade:best.grade});
+  }
+  $('#tgo').onclick=submit;input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();}};keyHandler=null;
+}
+
 function unitSheet(uid){
   const u = COURSE.units.find(x=>x.id===uid);
   const cs = COURSE.concepts.filter(c=>c.unit===uid);
