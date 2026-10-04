@@ -4,6 +4,25 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v11
+
+- **Exercises only** opens practice directly. Returning classes offer Challenge mode by default; reviewing the cards remains available.
+- 119 original beginner-to-intermediate extension examples and 31 focused tasks add new everyday contexts: work, cafés, shopping, family, schedules and routines.
+- Practice now mixes typed gaps, sentence building, question transformations, error correction, short readings, conversation replies, listening when available, and personal writing.
+- Each linked structure receives practice. Example history prioritizes unseen contexts and changes formats when material returns. Smaller pools still repeat for consolidation.
+- Whole-sentence alternatives can be compared with a model and self-assessed for partial credit; fixed-gap answers remain checked.
+- The October 1 class and its new vocabulary are included from the updated ALEXANDRE document. Future-dated homework is not presented as a completed class.
+- Existing learning progress is retained. Vocabulary-only imported lessons also support direct practice.
+
+### Language references
+
+The new extension sentences and reading passages are original teaching examples, not quotations or transcribed conversations. Their patterns were checked against:
+- [HowToVietnamese — beginner grammar](https://howtovietnamese.com/vietnamese-basic-grammar-beginners/): pronouns, word order and questions.
+- [HowToVietnamese — everyday conversation](https://howtovietnamese.com/vietnamese-easy-conversation-phrases/): Southern-oriented everyday situations and natural question/answer patterns.
+- [Michigan State University, Basic Vietnamese — chapter 6 grammar](https://openbooks.lib.msu.edu/vietnamese/chapter/u6-grammar/): chưa, đã and rồi.
+
+Validation: script syntax; course coverage and plan integrity across 24 lessons; accepted answer variants; typed submission and alternative-wording paths; returning-class direct entry; vocabulary-only imports; audio-enabled plans.
+
 ## What is new in v10
 
 - Class review, concept help and correction cards now lead with one short rule, a visual pattern or comparison, and one spoken example.
