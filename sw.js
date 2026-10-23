@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v11 — varied practice, original examples and exercises-only entry. */
-const CACHE = "vivu-v11";
+/* Ôn tiếng Việt · v12 — focused visual lessons with progressive exercise ladders. */
+const CACHE = "vivu-v12";
 const ASSETS = [
   "./",
   "./index.html",

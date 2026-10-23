@@ -4,6 +4,15 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v12
+
+- New **Lessons** tab (Bài học): 60 short lessons on one theme each, in 10 tracks — questions, time and frequency, past/now/future, pronouns, sentence building, verbs, adjectives, particles, numbers and Southern speech. The dated weekly classes are unchanged.
+- Each lesson opens with visuals instead of paragraphs: frequency scales, a question mind map, aspect timelines, comparison columns, colour-coded sentence patterns, clocks, a day bar, a position diagram and North → South word maps. Every Vietnamese word can be tapped to hear it.
+- Flip flashcards follow, then a nine-step exercise ladder that gets harder at each step: recognise → listen → match → recall → choose the natural sentence → fill the gap → build the sentence → type → translate. Mistakes come back in a short repair round at the end.
+- Lessons earn up to three stars. Completed lessons unlock a Challenge mode that skips the easy steps.
+- Today, Course and Classes screens carry less text; Today links straight to the next lesson.
+- Lesson sentences come from the course material already in the app.
+
 ## What is new in v11
 
 - **Exercises only** opens practice directly. Returning classes offer Challenge mode by default; reviewing the cards remains available.

@@ -842,6 +842,392 @@ body.in-session .brand-logo{width:34px;height:34px;opacity:.76}
 @media(max-width:700px){#nav #moreNav{display:flex}.studio-grid{grid-template-columns:1fr 1fr;gap:8px}.studio-card{min-height:118px;padding:14px 13px}.studio-card .sglyph{width:34px;height:34px;margin-bottom:10px}.tone-landscape{grid-template-columns:1fr 1fr}.figure-card{padding:15px;border-radius:16px}.pronoun-orbit{grid-template-columns:1fr 1fr}.qpattern{grid-template-columns:72px 1fr}.game-prompt{font-size:23px}.flashcard-card{min-height:270px;padding:23px 18px}.flashcard-card .fc-main{font-size:38px}.flashcard-actions{position:sticky;bottom:calc(6px + env(safe-area-inset-bottom));z-index:5;background:linear-gradient(180deg,transparent,rgba(12,24,22,.96) 30%,rgba(12,24,22,.99));padding-top:14px}.brand-logo{width:44px;height:44px}}
 @media(max-width:390px){.studio-grid{grid-template-columns:1fr}.studio-card{min-height:92px;display:grid;grid-template-columns:38px 1fr;column-gap:12px;align-items:center}.studio-card .sglyph{margin:0;grid-row:1/3}.studio-card small{margin-top:2px}.tone-landscape{grid-template-columns:1fr 1fr}.pronoun-orbit{grid-template-columns:1fr}.pronoun-self{grid-column:1}.aspect-point small{font-size:8.5px}.flashcard-card .fc-main{font-size:34px}}
 
+
+/* ═══ v12 · focused lessons ═══════════════════════════════════════════ */
+:root{--fl-c0:var(--gold);--fl-c1:var(--jade);--fl-c2:#E0866E;--fl-c3:#8FB4DA;--fl-panel:rgba(243,235,221,.032);--fl-r:18px}
+.c0{--c:var(--fl-c0)}.c1{--c:var(--fl-c1)}.c2{--c:var(--fl-c2)}.c3{--c:var(--fl-c3)}
+.fl{max-width:660px;margin:0 auto;padding-bottom:96px}
+.fl-say{cursor:pointer;border-radius:6px;transition:background .15s,color .15s}
+.fl-say:hover{background:rgba(201,165,101,.10)}
+.fl-say.said{color:var(--gold)}
+
+/* lesson list */
+.fl-list-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:4px 0 14px}
+.fl-list-head .screen-h{margin:0}
+.fl-count{font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.fl-next{width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:16px 18px;border-radius:22px;border:1px solid rgba(201,165,101,.26);
+  background:linear-gradient(135deg,rgba(201,165,101,.16),rgba(122,196,166,.06) 70%);color:var(--eggshell);cursor:pointer;transition:transform .16s var(--ease)}
+.fl-next:hover{transform:translateY(-1px)}
+.fl-next-g{flex:0 0 auto;min-width:64px;height:64px;padding:0 10px;border-radius:18px;display:grid;place-items:center;background:rgba(12,24,22,.55);
+  font-family:var(--serif);font-size:22px;color:var(--gold);white-space:nowrap}
+.fl-next-copy{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.fl-next-copy small{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:650}
+.fl-next-copy b{font-size:19px;font-weight:650;letter-spacing:-.01em}
+.fl-next-copy span{font-size:12.5px;color:var(--text-3)}
+.fl-next-go{font-size:22px;color:var(--gold)}
+.fl-chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:16px -2px 4px;padding:2px}
+.fl-chips::-webkit-scrollbar{display:none}
+.fl-chips button{flex:0 0 auto;border:1px solid var(--line);background:var(--fl-panel);color:var(--text-2);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:600;cursor:pointer}
+.fl-chips button[aria-selected="true"]{background:rgba(201,165,101,.16);border-color:rgba(201,165,101,.4);color:var(--eggshell)}
+.fl-track{margin-top:22px}
+.fl-track-h{display:flex;align-items:baseline;gap:9px;margin-bottom:10px}
+.fl-track-h h3{margin:0;font-family:var(--serif);font-weight:500;font-size:21px;letter-spacing:-.01em}
+.fl-track-h span{font-size:12px;color:var(--text-3);flex:1}
+.fl-track-h em{font-style:normal;font-size:11.5px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.fl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px}
+.fl-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;min-height:118px;padding:14px 14px 12px;border-radius:var(--fl-r);
+  border:1px solid var(--line);background:var(--fl-panel);color:var(--eggshell);cursor:pointer;transition:transform .16s var(--ease),border-color .16s,background .16s}
+.fl-card:hover{transform:translateY(-1px);border-color:rgba(201,165,101,.3)}
+.fl-card.next{border-color:rgba(201,165,101,.45);box-shadow:inset 0 0 0 1px rgba(201,165,101,.18)}
+.fl-card.done{background:rgba(122,196,166,.05)}
+.fl-card-g{font-family:var(--serif);font-size:23px;line-height:1.1;color:var(--gold);margin-bottom:auto;padding-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.fl-card-t{font-size:13.5px;font-weight:650;line-height:1.25}
+.fl-card-en{font-size:11.5px;color:var(--text-3);line-height:1.3}
+.fl-card-foot{display:flex;align-items:center;gap:6px;margin-top:7px}
+.fl-stars{display:inline-flex;gap:3px}
+.fl-stars i{width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:rgba(243,235,221,.12)}
+.fl-stars i.on{background:var(--gold)}
+.fl-hard-badge{font-size:10px;color:var(--jade)}
+
+/* session top */
+.fl-top{display:flex;align-items:center;gap:12px;margin:0 0 16px;min-height:40px}
+.fl-x{flex:0 0 auto;min-width:40px;height:40px;border-radius:13px;border:1px solid var(--line);background:var(--fl-panel);color:var(--text-2);font-size:21px;line-height:1;cursor:pointer;padding:0 10px}
+.fl-x.armed{font-size:12px;font-weight:650;color:var(--eggshell);border-color:var(--cinnabar)}
+.fl-top-track{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:650}
+.fl-steps{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-4);font-weight:600}
+.fl-steps i{width:16px;height:1px;background:var(--line-strong)}
+.fl-steps .on{color:var(--eggshell)}.fl-steps .done{color:var(--jade)}
+.fl-ladderbar{flex:1;display:flex;gap:4px;height:8px}
+.fl-ladderbar span{position:relative;border-radius:99px;background:rgba(243,235,221,.08);overflow:hidden}
+.fl-ladderbar span i{position:absolute;inset:0 auto 0 0;background:var(--gold);border-radius:99px;transition:width .3s var(--ease)}
+.fl-ladderbar span.on{background:rgba(201,165,101,.2)}
+.fl-ladderbar span.done i{width:100%!important;background:var(--jade)}
+
+/* intro */
+.fl-intro{text-align:center;padding:10px 0 4px}
+.fl-intro-g{display:inline-grid;place-items:center;min-width:104px;height:104px;padding:0 18px;border-radius:32px;margin-bottom:16px;
+  background:radial-gradient(circle at 30% 25%,rgba(201,165,101,.24),rgba(201,165,101,.05));border:1px solid rgba(201,165,101,.3);font-family:var(--serif);font-size:34px;color:var(--gold)}
+.fl-intro h2{font-family:var(--serif);font-weight:500;font-size:32px;margin:0;letter-spacing:-.02em}
+.fl-intro p{margin:6px 0 10px;color:var(--text-3);font-size:14px}
+.fl-route{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:22px 0 18px}
+.fl-route div{border:1px solid var(--line);border-radius:16px;padding:12px 10px;text-align:center;background:var(--fl-panel)}
+.fl-route b{display:block;font-family:var(--serif);font-size:13px;color:var(--gold);font-weight:500}
+.fl-route span{display:block;font-weight:650;font-size:14px;margin-top:2px}
+.fl-route small{display:block;font-size:11px;color:var(--text-3);margin-top:2px}
+.fl-ladder{display:flex;align-items:flex-end;gap:5px;height:118px;padding:12px 4px 0;border-bottom:1px solid var(--line)}
+.fl-rung{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fl-rung i{display:block;width:100%;height:var(--h);border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,rgba(201,165,101,.55),rgba(201,165,101,.12))}
+.fl-rung small{font-size:9.5px;color:var(--text-3);white-space:nowrap;padding-bottom:6px}
+.fl-actions{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.fl-actions .btn{width:100%;min-height:50px}
+
+/* see */
+.fl-see-head{display:flex;align-items:center;gap:14px;margin:2px 0 14px}
+.fl-see-g{flex:0 0 auto;min-width:56px;height:56px;padding:0 10px;border-radius:17px;display:grid;place-items:center;background:rgba(201,165,101,.1);border:1px solid rgba(201,165,101,.24);font-family:var(--serif);font-size:20px;color:var(--gold);white-space:nowrap}
+.fl-see-head h2{margin:0;font-family:var(--serif);font-weight:500;font-size:25px;letter-spacing:-.015em}
+.fl-see-head p{margin:2px 0 0;color:var(--text-3);font-size:13px}
+.fl-visual{border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px;background:linear-gradient(180deg,rgba(243,235,221,.035),rgba(243,235,221,.012))}
+.fl-tap-hint{text-align:center;font-size:11.5px;color:var(--text-4);margin:4px 0 0}
+.fl-bottom{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:6;margin-top:16px;padding:10px 0 2px;
+  background:linear-gradient(180deg,transparent,rgba(12,24,22,.94) 30%)}
+.fl-bottom .btn{width:100%;min-height:52px}
+.fl-bottom.two{display:grid;grid-template-columns:1fr 1.6fr;gap:9px}
+
+/* compare */
+.fl-cmp{display:grid;gap:9px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.fl-cmp.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fl-cmp-col{border-radius:16px;padding:13px 13px 12px;background:rgba(12,24,22,.4);border:1px solid var(--line);border-top:3px solid var(--c)}
+.fl-cmp-h{font-size:21px;font-weight:700;color:var(--c);letter-spacing:-.01em;line-height:1.15}
+.fl-cmp-en{font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.35}
+.fl-cmp-ex{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:14px;line-height:1.4}
+.fl-cmp-ex small{display:block;font-size:11.5px;color:var(--text-3);margin-top:2px;font-family:var(--en);font-style:italic}
+@media(max-width:560px){
+  .fl-cmp.n3{grid-template-columns:1fr}
+  .fl-cmp.n3 .fl-cmp-col,.fl-cmp.n1 .fl-cmp-col{display:grid;grid-template-columns:minmax(84px,32%) 1fr;column-gap:12px;border-top-width:1px;border-left:3px solid var(--c)}
+  .fl-cmp.n3 .fl-cmp-h{grid-row:1 / span 2;align-self:center}
+  .fl-cmp.n3 .fl-cmp-en{margin-top:0}
+  .fl-cmp.n3 .fl-cmp-ex{margin-top:6px;padding-top:6px}
+  .fl-cmp.n3 .fl-fig{grid-column:1}
+}
+.fl-fig{display:flex;gap:4px;margin-bottom:8px}
+.fl-fig i{width:14px;height:14px;border-radius:50%;border:1.5px dashed rgba(243,235,221,.3)}
+.fl-fig i.in.sp{background:var(--gold);border:0}.fl-fig i.in.li{background:var(--jade);border:0}
+
+/* scale */
+.fl-scale{display:flex;flex-direction:column;gap:7px}
+.fl-scale-end{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-4);font-weight:650}
+.fl-scale-row{display:grid;grid-template-columns:minmax(120px,42%) 1fr;align-items:center;gap:12px;padding:3px 0}
+.fl-scale-word{font-size:16px;font-weight:650;line-height:1.2}
+.fl-scale-word small{display:block;font-size:11.5px;font-weight:400;color:var(--text-3)}
+.fl-meter{height:12px;border-radius:99px;background:rgba(243,235,221,.06);overflow:hidden}
+.fl-meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,rgba(201,165,101,.45),var(--gold))}
+.fl-scale-row.me .fl-scale-word{color:var(--jade)}
+.fl-scale-row.me .fl-meter i{background:var(--jade)}
+
+/* pattern */
+.fl-pattern{display:flex;flex-direction:column;gap:10px}
+.fl-pattern-row{display:flex;flex-direction:column;gap:5px}
+.fl-slots{display:flex;flex-wrap:wrap;gap:6px}
+.fl-slot{display:flex;flex-direction:column;gap:3px}
+.fl-slot small{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-4);padding-left:3px;min-height:11px}
+.fl-slot .chip{display:inline-block;padding:9px 12px;border-radius:12px;border:1px solid var(--line-strong);background:rgba(12,24,22,.45);font-size:16px;font-weight:600;color:var(--eggshell);font-family:var(--vi);letter-spacing:0}
+.fl-slot.hl small{color:var(--gold)}
+.fl-slot.hl .chip{background:var(--gold);border-color:var(--gold);color:#0D1916}
+.fl-pattern-en{font-size:12.5px;color:var(--text-3);font-family:var(--en);font-style:italic;padding-left:3px}
+.fl-pattern-arrow{color:var(--gold);font-size:18px;line-height:1;padding-left:12px}
+
+/* mind map */
+.fl-map{position:relative;width:100%;max-width:520px;margin:0 auto;aspect-ratio:1/1}
+.fl-map svg{position:absolute;inset:0;width:100%;height:100%}
+.fl-map line{stroke:rgba(201,165,101,.3);stroke-width:.35;stroke-dasharray:1 1}
+.fl-map-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:23%;aspect-ratio:1/1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 35% 30%,rgba(201,165,101,.35),rgba(201,165,101,.08));border:1px solid rgba(201,165,101,.45)}
+.fl-map-center b{font-family:var(--serif);font-size:30px;color:var(--gold);font-weight:500;line-height:1}
+.fl-map-center small{font-size:9px;color:var(--text-3);margin-top:3px}
+.fl-map-node{position:absolute;transform:translate(-50%,-50%);width:27%;padding:7px 4px;border-radius:14px;border:1px solid var(--line-strong);background:#13241F;color:var(--eggshell);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:1px;transition:transform .15s var(--ease),border-color .15s,background .15s}
+.fl-map-node b{font-size:14.5px;font-weight:700;line-height:1.15}
+.fl-map-node small{font-size:10.5px;color:var(--text-3)}
+.fl-map-node:hover,.fl-map-node.on{border-color:var(--gold);background:#1D3129;transform:translate(-50%,-50%) scale(1.05)}
+.fl-map-node.on b{color:var(--gold)}
+.fl-caption{min-height:46px;margin-top:10px;text-align:center;font-size:16px;font-weight:600;line-height:1.35}
+.fl-caption small{display:block;font-size:12px;color:var(--text-3);font-weight:400;font-family:var(--en);font-style:italic;margin-top:2px}
+.fl-caption:empty::before{content:"Tap a word";font-size:12px;color:var(--text-4);font-weight:400}
+
+/* timeline */
+.fl-tl{display:flex;flex-direction:column;gap:6px}
+.fl-tl-row{position:relative;height:96px;margin:14px 6% 0}
+.fl-tl-axis{position:absolute;left:-4%;right:-4%;top:50%;height:2px;background:linear-gradient(90deg,rgba(243,235,221,.15),rgba(201,165,101,.6))}
+.fl-tl-axis::after{content:"";position:absolute;right:-2px;top:-5px;border:6px solid transparent;border-left:9px solid rgba(201,165,101,.75)}
+.fl-tl-now{position:absolute;top:22%;bottom:22%;width:0;border-left:1.5px dashed rgba(122,196,166,.55)}
+.fl-tl-now::before{content:"bây giờ";position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:8.5px;color:var(--jade);letter-spacing:.06em;white-space:nowrap;opacity:.8}
+.fl-tl-start{position:absolute;left:-6%;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--jade);color:#0D1916;font-size:9.5px;font-weight:700;display:grid;place-items:center;z-index:1}
+.fl-tl-pt{position:absolute;top:0;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:none;border:0;color:var(--text-3);cursor:pointer;padding:0;min-width:56px}
+.fl-tl-pt b{font-size:14px;font-weight:700;white-space:nowrap;color:var(--text-2)}
+.fl-tl-pt i{width:13px;height:13px;border-radius:50%;background:#13241F;border:2px solid rgba(243,235,221,.35)}
+.fl-tl-pt small{font-size:10.5px;white-space:nowrap}
+.fl-tl-pt.hl b{color:var(--gold);font-size:16px}
+.fl-tl-pt.hl i{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 5px rgba(201,165,101,.15)}
+.fl-tl-pt.on i{transform:scale(1.25)}
+.fl-tl-row:has(.fl-tl-start) .fl-tl-axis{left:-2%}
+
+/* pairs, transform */
+.fl-pairs{display:flex;flex-direction:column;gap:7px}
+.fl-pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(12,24,22,.4);border:1px solid var(--line)}
+.fl-pair div{font-size:17px;font-weight:650}
+.fl-pair div:last-child{text-align:right}
+.fl-pair small{display:block;font-size:11px;font-weight:400;color:var(--text-3)}
+.fl-pair-x{color:var(--gold);font-size:18px}
+.fl-xf{display:flex;flex-direction:column;gap:6px}
+.fl-xf-head,.fl-xf-row{display:grid;grid-template-columns:1fr 26px 1fr minmax(70px,auto);align-items:center;gap:8px}
+.fl-xf-head span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-4);font-weight:650}
+.fl-xf-row{padding:9px 12px;border-radius:13px;background:rgba(12,24,22,.4);border:1px solid var(--line)}
+.fl-xf-row > span{font-size:17px;font-weight:650}
+.fl-xf-row .to{color:var(--jade)}
+.fl-xf-arrow{color:var(--gold);text-align:center}
+.fl-xf-row small{font-size:11px;color:var(--text-3);text-align:right}
+
+/* day segments */
+.fl-day-bar{position:relative;height:38px;border-radius:12px;background:rgba(243,235,221,.05);overflow:hidden}
+.fl-day-seg{position:absolute;top:0;bottom:0;border:0;background:var(--c);opacity:.78;cursor:pointer;border-right:2px solid #10201C}
+.fl-day-seg:hover{opacity:1}
+.fl-day-ticks{position:relative;height:18px;margin-top:3px}
+.fl-day-ticks span{position:absolute;transform:translateX(-50%);font-size:10px;color:var(--text-4)}
+.fl-day-ticks span:first-child{transform:none}.fl-day-ticks span:last-child{transform:translateX(-100%)}
+.fl-day-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.fl-day-legend div{display:flex;flex-direction:column;padding:8px 10px 8px 26px;position:relative;border-radius:12px;background:rgba(12,24,22,.4);font-size:15px;font-weight:650}
+.fl-day-legend i{position:absolute;left:10px;top:13px;width:9px;height:9px;border-radius:3px;background:var(--c)}
+.fl-day-legend small{font-size:11px;color:var(--text-3);font-weight:400}
+
+/* bars */
+.fl-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fl-bars-g{display:flex;flex-direction:column;gap:8px}
+.fl-bars-plot{height:110px;display:flex;align-items:flex-end;justify-content:center;gap:6px;border-bottom:1px solid var(--line-strong);padding:0 4px}
+.fl-bar{flex:1;max-width:30px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative}
+.fl-bar i{width:100%;border-radius:7px 7px 2px 2px;background:rgba(243,235,221,.16)}
+.fl-bar.hl i{background:var(--gold)}
+.fl-bar small{position:absolute;bottom:-17px;font-size:9.5px;color:var(--text-3);white-space:nowrap}
+.fl-bars-cap{margin-top:14px;font-size:13.5px;font-weight:650;line-height:1.3;text-align:center}
+.fl-bars-cap small{display:block;font-weight:400;font-size:11px;color:var(--gold)}
+
+/* tiles, clocks */
+.fl-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.fl-tile{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 6px 10px;border-radius:15px;border:1px solid var(--line);background:rgba(12,24,22,.4);color:var(--eggshell);cursor:pointer;text-align:center}
+.fl-tile:hover{border-color:rgba(201,165,101,.35)}
+.fl-tile b{font-size:21px;font-weight:700;color:var(--gold);line-height:1.15}
+.fl-tile span{font-size:13px;font-weight:600}
+.fl-tile small{font-size:10.5px;color:var(--text-3)}
+.fl-clocks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.fl-clock{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:15px;border:1px solid var(--line);background:rgba(12,24,22,.4);color:var(--eggshell);cursor:pointer;text-align:center}
+.fl-clock svg{width:62px;height:62px}
+.fl-clock circle{fill:none;stroke:rgba(243,235,221,.25);stroke-width:1.5}
+.fl-clock .tk{stroke:rgba(243,235,221,.3);stroke-width:1.2}
+.fl-clock .hh{stroke:var(--eggshell);stroke-width:3;stroke-linecap:round}
+.fl-clock .mh{stroke:var(--gold);stroke-width:2;stroke-linecap:round}
+.fl-clock .pin{fill:var(--gold);stroke:none}
+.fl-clock b{font-size:12.5px;font-weight:650;line-height:1.25}
+.fl-clock small{font-size:10.5px;color:var(--text-3)}
+@media(max-width:480px){.fl-clocks{grid-template-columns:repeat(2,1fr)}}
+
+/* space */
+.fl-space{position:relative;height:250px;max-width:440px;margin:0 auto}
+.fl-space-box{position:absolute;left:36%;right:36%;top:34%;bottom:34%;border:2px solid rgba(201,165,101,.55);border-radius:10px;background:rgba(201,165,101,.06)}
+.fl-space-box::after{content:"bàn";position:absolute;right:6px;bottom:3px;font-size:9px;color:var(--text-4)}
+.fl-space-pt{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:0;color:var(--eggshell);cursor:pointer;padding:2px}
+.fl-space-pt i{width:12px;height:12px;border-radius:50%;background:var(--jade);box-shadow:0 0 0 4px rgba(122,196,166,.16)}
+.fl-space-pt b{font-size:14px;font-weight:700}
+.fl-space-pt small{font-size:10px;color:var(--text-3)}
+
+/* dots */
+.fl-dots{display:flex;flex-direction:column;gap:9px}
+.fl-dots-head,.fl-dots-row{display:grid;grid-template-columns:minmax(108px,1.6fr) repeat(7,1fr);align-items:center;gap:5px}
+.fl-dots-head span{font-size:9.5px;color:var(--text-4);text-align:center}
+.fl-dots-row > div{font-size:14.5px;font-weight:650;line-height:1.2}
+.fl-dots-row small{display:block;font-size:10.5px;font-weight:400;color:var(--text-3)}
+.fl-dots-row i{justify-self:center;width:15px;height:15px;border-radius:50%;border:1.5px solid rgba(243,235,221,.16)}
+.fl-dots-row i.on{background:var(--gold);border-color:var(--gold)}
+
+/* flow */
+.fl-flow{display:flex;flex-direction:column;gap:10px}
+.fl-flow-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(12,24,22,.4);color:var(--eggshell);cursor:pointer;text-align:center}
+.fl-flow-box{padding:9px 6px;border-radius:12px;background:rgba(243,235,221,.05);font-size:15px;font-weight:650}
+.fl-flow-box small{display:block;font-size:10.5px;color:var(--text-3);font-weight:400}
+.fl-flow-arrow{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:74px}
+.fl-flow-arrow b{font-size:13px;color:var(--gold)}
+.fl-flow-arrow i{display:block;width:100%;height:2px;background:var(--gold);position:relative}
+.fl-flow-arrow i::after{content:"";position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:7px solid var(--gold)}
+.fl-flow-ex{grid-column:1 / -1;font-size:13px;color:var(--text-2)}
+.fl-flow-ex em{color:var(--text-3)}
+
+/* flashcards */
+.fl-flash-count{text-align:center;font-size:12px;color:var(--text-3);margin-bottom:10px;font-variant-numeric:tabular-nums}
+.fl-flash{display:block;width:100%;height:310px;perspective:1200px;background:none;border:0;padding:0;cursor:pointer;color:var(--eggshell)}
+.fl-flash-in{position:relative;display:block;width:100%;height:100%;transition:transform .5s var(--ease);transform-style:preserve-3d}
+.fl-flash.flipped .fl-flash-in{transform:rotateY(180deg)}
+.fl-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;border-radius:26px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:1px solid rgba(201,165,101,.28);background:linear-gradient(160deg,#1C342D,#12231F);box-shadow:0 22px 50px rgba(0,0,0,.25)}
+.fl-face.back{transform:rotateY(180deg);background:linear-gradient(160deg,#20372F,#152822)}
+.fl-face b{font-size:42px;font-weight:750;letter-spacing:-.02em;line-height:1.1;text-align:center}
+.fl-face b.en{font-family:var(--serif);font-weight:500;font-size:30px;color:var(--gold)}
+.fl-face > small{font-size:11px;color:var(--text-4);letter-spacing:.1em;text-transform:uppercase}
+.fl-flash-ex{display:block;font-size:16px;font-weight:600;text-align:center;line-height:1.4;max-width:92%}
+.fl-flash-ex small{display:block;font-size:12.5px;font-weight:400;color:var(--text-3);font-family:var(--en);font-style:italic;margin-top:3px}
+.fl-flash-word{position:absolute;top:18px;left:0;right:0;text-align:center;font-size:13px;font-weight:650;color:var(--text-3)}
+.fl-flash-xf{font-style:normal;font-size:38px;font-weight:750;color:var(--jade)}
+.fl-flash-dots{display:flex;justify-content:center;gap:6px;margin:16px 0 12px;flex-wrap:wrap}
+.fl-flash-dots i{width:7px;height:7px;border-radius:50%;background:rgba(243,235,221,.14)}
+.fl-flash-dots i.done{background:rgba(201,165,101,.5)}.fl-flash-dots i.on{background:var(--gold);width:20px;border-radius:99px}
+.fl-flash-nav{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:9px}
+.fl-flash-nav .btn{font-size:16px}
+.fl-flash-nav #flHear{font-size:12px}
+
+/* practice */
+.fl-lv{display:flex;align-items:center;gap:9px;margin:0 0 12px}
+.fl-lv-n{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:rgba(201,165,101,.14);color:var(--gold);font-weight:700;font-size:12.5px}
+.fl-lv b{font-size:14px;font-weight:700}
+.fl-lv small{font-size:12px;color:var(--text-3)}
+.fl-qcard{border:1px solid var(--line);border-radius:24px;padding:22px 18px 18px;background:linear-gradient(180deg,rgba(243,235,221,.04),rgba(243,235,221,.015));transition:border-color .2s}
+.fl-qcard.ok{border-color:rgba(122,196,166,.45)}.fl-qcard.no{border-color:rgba(207,90,67,.45)}
+.fl-qcard.shake{animation:shake .32s}
+.fl-prompt{position:relative;margin-bottom:18px}
+.fl-ask{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+.fl-ask small{letter-spacing:.02em;text-transform:none;color:var(--text-4);font-weight:500;font-size:11.5px;margin-left:4px}
+.fl-big{line-height:1.2}
+.fl-big.vi{font-size:40px;font-weight:750;letter-spacing:-.02em}
+.fl-big.en{font-family:var(--serif);font-size:25px;font-weight:400;letter-spacing:-.01em}
+.fl-big.en.sm{font-size:21px}
+.fl-audio{display:grid;place-items:center;width:84px;height:84px;margin:4px auto 0;border-radius:50%;border:1px solid rgba(201,165,101,.4);background:rgba(201,165,101,.12);color:var(--gold);font-size:28px;cursor:pointer}
+.fl-mini-say{flex:0 0 auto;width:34px;height:34px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(12,24,22,.4);color:var(--gold);cursor:pointer;font-size:12px}
+.fl-prompt > .fl-mini-say{position:absolute;right:0;top:26px}
+.fl-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fl-opts.long{grid-template-columns:1fr}
+.fl-opt{display:flex;align-items:center;gap:10px;text-align:left;min-height:58px;padding:12px 13px;border-radius:15px;border:1px solid var(--line-strong);background:rgba(12,24,22,.35);color:var(--eggshell);font-size:15.5px;font-weight:600;cursor:pointer;line-height:1.3;transition:border-color .15s,background .15s,transform .12s}
+.fl-opt span{flex:0 0 auto;width:21px;height:21px;border-radius:7px;display:grid;place-items:center;font-size:10.5px;color:var(--text-4);border:1px solid var(--line)}
+.fl-opt:hover:not(:disabled){border-color:rgba(201,165,101,.45)}
+.fl-opt:active{transform:scale(.98)}
+.fl-opt.right{border-color:var(--jade);background:rgba(122,196,166,.15)}
+.fl-opt.wrong{border-color:var(--cinnabar);background:rgba(207,90,67,.13)}
+.fl-opt:disabled:not(.right):not(.wrong){opacity:.5}
+@media(max-width:420px){.fl-opts:not(.long){grid-template-columns:1fr}}
+.fl-match{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fl-match > div{display:flex;flex-direction:column;gap:8px}
+.fl-m{min-height:54px;padding:10px;border-radius:14px;border:1px solid var(--line-strong);background:rgba(12,24,22,.35);color:var(--eggshell);font-size:14px;font-weight:500;cursor:pointer;line-height:1.25}
+.fl-m.vi{font-size:16px;font-weight:700}
+.fl-m.sel{border-color:var(--gold);background:rgba(201,165,101,.15)}
+.fl-m.ok{border-color:rgba(122,196,166,.5);background:rgba(122,196,166,.12);color:var(--jade);opacity:.75}
+.fl-m.bad{border-color:var(--cinnabar);animation:shake .3s}
+.fl-sent{font-size:22px;font-weight:600;line-height:1.55;letter-spacing:-.005em}
+.fl-sent-en{font-size:14px;color:var(--text-3);font-family:var(--en);font-style:italic;margin-top:8px}
+.fl-blank{display:inline-block;min-width:76px;padding:0 8px;margin:0 3px;border-bottom:2.5px solid var(--gold);color:var(--gold);text-align:center}
+.fl-blank.right{color:var(--jade);border-color:var(--jade)}.fl-blank.wrong{color:var(--cinnabar);border-color:var(--cinnabar)}
+.fl-chipopts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.fl-chipopt,.fl-tilebtn{padding:12px 16px;border-radius:14px;border:1px solid var(--line-strong);background:rgba(12,24,22,.35);color:var(--eggshell);font-size:17px;font-weight:650;cursor:pointer;transition:transform .12s,border-color .15s,background .15s,opacity .15s}
+.fl-chipopt:active,.fl-tilebtn:active{transform:scale(.96)}
+.fl-chipopt.right{border-color:var(--jade);background:rgba(122,196,166,.15)}
+.fl-chipopt.wrong{border-color:var(--cinnabar);background:rgba(207,90,67,.13)}
+.fl-chipopt:disabled:not(.right):not(.wrong){opacity:.45}
+.fl-build{min-height:68px;display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px;border-radius:16px;border:1.5px dashed var(--line-strong);margin-bottom:14px}
+.fl-build.right{border-style:solid;border-color:var(--jade);background:rgba(122,196,166,.07)}
+.fl-build.wrong{border-style:solid;border-color:var(--cinnabar);background:rgba(207,90,67,.06)}
+.fl-build-ph{font-size:12.5px;color:var(--text-4);padding-left:4px}
+.fl-build-end{font-size:18px;font-weight:700;color:var(--text-3)}
+.fl-tilebtn.in{background:rgba(201,165,101,.14);border-color:rgba(201,165,101,.38);padding:10px 13px}
+.fl-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.fl-tilebtn.used{opacity:.18;pointer-events:none}
+.fl-gapin,.fl-input{font:inherit;color:var(--eggshell);background:rgba(12,24,22,.55);border:1.5px solid var(--line-strong);outline:none;transition:border-color .15s}
+.fl-gapin{display:inline-block;min-width:4ch;max-width:100%;font-size:20px;font-weight:650;padding:2px 8px;margin:0 3px;border-radius:10px;text-align:center;border-bottom-color:var(--gold)}
+.fl-input{width:100%;font-size:19px;font-weight:600;padding:14px 15px;border-radius:15px;margin-top:2px}
+.fl-input.area{resize:none;line-height:1.4;min-height:84px}
+.fl-gapin:focus,.fl-input:focus{border-color:var(--gold)}
+.fl-gapin.right,.fl-input.right{border-color:var(--jade)}.fl-gapin.wrong,.fl-input.wrong{border-color:var(--cinnabar)}.fl-input.close{border-color:var(--gold)}
+.fl-fb{margin-top:12px;padding:16px;border-radius:20px;border:1px solid;animation:flUp .22s var(--ease)}
+@keyframes flUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fl-fb.ok{border-color:rgba(122,196,166,.4);background:rgba(122,196,166,.09)}
+.fl-fb.no{border-color:rgba(207,90,67,.4);background:rgba(207,90,67,.08)}
+.fl-fb.close{border-color:rgba(201,165,101,.4);background:rgba(201,165,101,.08)}
+.fl-fb-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.fl-fb-h b{font-size:17px;font-weight:750}
+.fl-fb.ok .fl-fb-h b{color:var(--jade)}.fl-fb.no .fl-fb-h b{color:#E58470}.fl-fb.close .fl-fb-h b{color:var(--gold)}
+.fl-fb-h small{font-size:12.5px;color:var(--text-2)}
+.fl-fb-ans{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;margin-bottom:12px}
+.fl-fb-ans span{font-size:17px;font-weight:650;line-height:1.35}
+.fl-fb-ans small{grid-column:2;font-size:12.5px;color:var(--text-3);font-family:var(--en);font-style:italic}
+.fl-fb-ans .fl-mini-say{grid-row:1 / span 2}
+.fl-fb .btn{width:100%;min-height:50px}
+.fl-fb-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fl-cmp2{display:grid;gap:8px;margin-bottom:12px}
+.fl-cmp2 div{padding:10px 12px;border-radius:12px;background:rgba(12,24,22,.45);font-size:16px;font-weight:600}
+.fl-cmp2 small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-4);font-weight:650;margin-bottom:3px}
+
+/* result */
+.fl-result{position:relative;text-align:center;padding:6px 0 4px}
+.fl-ring{width:156px;height:156px;transform:rotate(-90deg)}
+.fl-ring circle{fill:none;stroke-width:9}
+.fl-ring .bg{stroke:rgba(243,235,221,.08)}
+.fl-ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .8s var(--ease)}
+.fl-result-pct{position:absolute;left:0;right:0;top:50px;display:flex;flex-direction:column;align-items:center}
+.fl-result-pct b{font-family:var(--serif);font-size:36px;font-weight:500;line-height:1}
+.fl-result-pct small{font-size:12px;color:var(--text-3);margin-top:4px}
+.fl-result-stars{margin-top:10px}.fl-result-stars .fl-stars i{width:14px;height:14px;border-radius:3px}.fl-result-stars .fl-stars{gap:8px}
+.fl-result h2{font-family:var(--serif);font-weight:500;font-size:28px;margin:10px 0 0}
+.fl-result-sub{color:var(--jade);font-size:13px;margin:4px 0 0}
+.fl-lvls{display:flex;gap:6px;justify-content:center;margin:20px 0 6px}
+.fl-lvls div{flex:1;max-width:58px;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.fl-lvls div::before{content:"";display:block;width:100%;height:44px;border-radius:9px;background:rgba(243,235,221,.06)}
+.fl-lvls i{position:absolute;left:0;right:0;top:0;height:44px;border-radius:9px;background:linear-gradient(0deg,var(--jade),rgba(122,196,166,.5));clip-path:inset(calc(100% - var(--h,100%)) 0 0 0)}
+.fl-lvls div.some i{background:linear-gradient(0deg,var(--gold),rgba(201,165,101,.5))}
+.fl-lvls div.none i{display:none}
+.fl-lvls b{font-size:11px;color:var(--text-2)}
+.fl-lvls small{font-size:9px;color:var(--text-4);white-space:nowrap}
+.fl-missed{margin-top:18px;padding:14px 16px;border-radius:18px;border:1px solid var(--line);background:var(--fl-panel)}
+.fl-missed .fl-ask{margin-bottom:8px}
+.fl-missed div:not(.fl-ask){font-size:14px;padding:6px 0;border-top:1px solid var(--line);line-height:1.4}
+
+/* today: next lesson row */
+.today-lesson{display:flex;align-items:center;gap:14px;width:100%;text-align:left;margin-top:12px;padding:14px 16px;border-radius:20px;border:1px solid rgba(201,165,101,.22);background:linear-gradient(135deg,rgba(201,165,101,.1),rgba(243,235,221,.02));color:var(--eggshell);cursor:pointer}
+.today-lesson .fl-next-g{min-width:52px;height:52px;font-size:18px;border-radius:15px}
+.today-lesson .fl-next-copy b{font-size:16px}
+@media(max-width:700px){.fl{padding-bottom:40px}}
 </style>
 </head>
 <body>
@@ -4263,6 +4649,7 @@ function migrateStateInPlace(){
   if (!Array.isArray(S.log)) S.log = [];
   if (!Array.isArray(S.diag)) S.diag = [];
   if (!S.writingMode) S.writingMode = "learning";
+  if (!S.focus || typeof S.focus !== "object") S.focus = {};
   if (!Number.isFinite(S.newPerDay)) S.newPerDay = 5;
   if (!S.newIntroductions||typeof S.newIntroductions!=="object") S.newIntroductions={date:"",ids:[]};
   if (!Array.isArray(S.newIntroductions.ids)) S.newIntroductions.ids=[];
@@ -6204,6 +6591,7 @@ function unitTitle(uid){ const u = COURSE.units.find(x=>x.id===uid); return u ? 
    ═══════════════════════════════════════════════════════════════════════ */
 const NAV = [
   {id:"today",      label:"Today",    glyph:"⌂",  primary:true},
+  {id:"lessons",    label:"Lessons",  glyph:"◆",  primary:true},
   {id:"course",     label:"Course",   glyph:"▤",  primary:true},
   {id:"review",     label:"Review",   glyph:"↺",  primary:true},
   {id:"listen",     label:"Listen",   glyph:"◖",  primary:false},
@@ -6216,7 +6604,7 @@ const NAV = [
 ];
 let VIEW = "today";
 function go(v){
-  VIEW = v; SESS = null; keyHandler = null;
+  VIEW = v; SESS = null; keyHandler = null; if (typeof FL!=="undefined") FL = null;
   document.body.classList.remove("in-session");
   document.body.dataset.view = v;
   const secondary = NAV.filter(n=>!n.primary).map(n=>n.id);
@@ -6226,7 +6614,7 @@ function go(v){
   });
   const host = $("#stage");
   host.scrollTop = 0;
-  ({today:viewToday, course:viewCourse, review:viewReview, listen:viewListen,
+  ({today:viewToday, lessons:viewLessons, course:viewCourse, review:viewReview, listen:viewListen,
     speak:viewSpeak, weaknesses:viewWeak, studio:viewStudio, words:viewWords, content:viewContent, progress:viewProgress}[v] || viewToday)();
   paintStats();
   window.scrollTo({top:0, behavior:"instant"});
@@ -6470,16 +6858,17 @@ function viewToday(){
   $("#stage").innerHTML=
     '<div class="today-compact-head"><div><div class="eyebrow">'+esc(greet)+', Alexandre</div><h2 class="today-h">Hôm nay</h2><div class="today-min">'+mins+' minutes</div></div>'
     +'<div class="mobile-streak" aria-label="'+S.streak+' day streak">▲ '+S.streak+'</div></div>'
-    +'<section class="today-focus"><div class="today-focus-copy"><div class="eyebrow">Today’s focus</div><div class="today-session-note">'+esc(objective)+'</div></div>'
+    +'<section class="today-focus"><div class="today-focus-copy"><div class="eyebrow">Ôn tập · Review</div></div>'
     +'<div class="today-metrics"><span class="today-metric"><b>'+dueN+'</b> due</span><span class="today-metric"><b>'+weakN+'</b> weak</span><span class="today-metric"><b>'+newN+'</b> new</span></div>'
     +'<button class="btn today-primary" id="start">Bắt đầu · '+mins+' min</button></section>'
+    +(function(){const nx=focusNext();return '<button class="today-lesson" id="todayLesson"><span class="fl-next-g">'+esc(nx.g)+'</span><span class="fl-next-copy"><small>Bài học tiếp theo</small><b>'+esc(nx.vi)+'</b><span>'+esc(nx.en)+'</span></span><span class="fl-next-go" aria-hidden="true">→</span></button>';})()
     +(diagnosticDue()?'<section class="today-inline-callout"><div><div class="eyebrow">Weekly check</div><div class="inline-title">Your diagnostic is due.</div></div><button class="btn ghost" id="startDiag">Run</button></section>':'')
     +(broken.length?'<section class="today-row-link" id="weakToday"><div><div class="eyebrow">Weak today</div><b>'+esc(broken[0].title)+'</b></div><span>Practice ›</span></section>':'')
     +'<section class="today-row-link" id="recentClass"><div><div class="eyebrow">Recent class</div><b>'+formatLessonDate(recentLesson.date)+' · '+esc(recentLesson.title)+'</b></div><span>Open ›</span></section>'
-    +'<div class="quickrow"><button class="quick" data-q="listen"><b>Listen</b><span>Ear work</span></button><button class="quick" data-q="speak"><b>Speak</b><span>Active production</span></button><button class="quick" data-q="weak"><b>Weak spots</b><span>Repair errors</span></button><button class="quick" data-q="south"><b>Miền Nam</b><span>Southern forms</span></button><button class="quick" data-q="studio"><b>Studio</b><span>Visual maps & games</span></button></div>'
-    +'<details class="today-details"><summary>Today’s mix</summary><div class="mixrow">'+bits.map(b=>'<span class="mixtag"><b>'+b.n+'</b> '+esc(b.t)+'</span>').join("")+'</div></details>'+tutorBlock();
+    +'<div class="quickrow"><button class="quick" data-q="listen"><b>Listen</b></button><button class="quick" data-q="speak"><b>Speak</b></button><button class="quick" data-q="weak"><b>Weak spots</b></button><button class="quick" data-q="south"><b>Miền Nam</b></button><button class="quick" data-q="studio"><b>Studio</b></button></div>';
   $("#start").onclick=()=>startSession(plan);
   if($("#startDiag"))$("#startDiag").onclick=runDiagnostic;
+  $("#todayLesson").onclick=()=>openFocus(focusNext().id);
   if($("#weakToday"))$("#weakToday").onclick=()=>go("weaknesses");
   if($("#recentClass"))$("#recentClass").onclick=function(){COURSE_VIEW_MODE="classes";go("course");setTimeout(()=>classSheet(recentLesson.id),0);};
   keyHandler=e=>{if(e.key==="Enter")startSession(plan);};
@@ -6493,12 +6882,11 @@ function viewCourse(){
   if(COURSE_VIEW_MODE==="classes"){
     const lessons=COURSE.lessons.filter(l=>!l.archived).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
     $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Classes</h2><span class="course-count">'+lessons.length+' classes</span></div>'+switcher
-      +'<div class="class-list">'+lessons.map(function(l){const cs=classConcepts(l),ids=cs.map(c=>c.id);const avg=ids.length?ids.reduce((sum,id)=>{const its=COURSE.itemsByConcept[id]||[];return sum+(its.length?its.reduce((a,x)=>a+overall(x.id),0)/its.length:0);},0)/ids.length:0;return '<button class="class-row" data-class="'+esc(l.id)+'"><span class="class-date">'+formatLessonDate(l.date)+'</span><span class="class-copy"><b>'+esc(l.title)+'</b><small>'+esc(l.summary||l.notes||'Weekly class')+'</small></span><span class="class-state">'+(avg?Math.round(avg*100)+'%':'New')+'</span></button>';}).join("")+'</div>';
+      +'<div class="class-list">'+lessons.map(function(l){const cs=classConcepts(l),ids=cs.map(c=>c.id);const avg=ids.length?ids.reduce((sum,id)=>{const its=COURSE.itemsByConcept[id]||[];return sum+(its.length?its.reduce((a,x)=>a+overall(x.id),0)/its.length:0);},0)/ids.length:0;return '<button class="class-row" data-class="'+esc(l.id)+'"><span class="class-date">'+formatLessonDate(l.date)+'</span><span class="class-copy"><b>'+esc(l.title)+'</b></span><span class="class-state">'+(avg?Math.round(avg*100)+'%':'New')+'</span></button>';}).join("")+'</div>';
     $$(".class-row").forEach(b=>b.onclick=()=>classSheet(b.dataset.class));
   }else{
-    $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Course map</h2><span class="course-count">'+COURSE.concepts.length+' concepts · '+COURSE.words.length+' words</span></div>'+switcher
-      +'<div class="course-intro">Browse by linguistic system. Progress reflects demonstrated performance, not pages completed.</div>'
-      +COURSE.units.map(function(u){const p=unitProgress(u.id);return '<button class="unit" data-u="'+u.id+'"><div class="unit-top"><span class="unit-t">'+esc(u.title)+'</span><span class="unit-pct">'+Math.round(p.pct*100)+'%</span></div><div class="ubar"><i style="width:'+(p.pct*100)+'%"></i></div><div class="unit-sub">'+esc(u.blurb)+' · '+p.seen+'/'+p.n+' met</div></button>';}).join("");
+    $("#stage").innerHTML='<div class="eyebrow">The course</div><div class="course-title-row"><h2 class="screen-h">Course map</h2><span class="course-count">'+COURSE.units.length+' topics</span></div>'+switcher
+      +COURSE.units.map(function(u){const p=unitProgress(u.id);return '<button class="unit" data-u="'+u.id+'"><div class="unit-top"><span class="unit-t">'+esc(u.title)+'</span><span class="unit-pct">'+Math.round(p.pct*100)+'%</span></div><div class="ubar"><i style="width:'+(p.pct*100)+'%"></i></div></button>';}).join("");
     $$(".unit").forEach(b=>b.onclick=function(){unitSheet(b.dataset.u);});
   }
   $$(".course-switch button").forEach(b=>b.onclick=function(){COURSE_VIEW_MODE=b.dataset.cm;viewCourse();});
@@ -7576,8 +7964,1528 @@ function settingsSheet(){
   $("#loadD").onclick=function(){try{const o=JSON.parse($("#dump").value);if(!o||!o.rev)throw new Error("shape");S=Object.assign(S,o);migrateStateInPlace();save();closeSheet();go("today");}catch(e){this.textContent="Not a valid progress backup";}};
   $("#openContent").onclick=function(){closeSheet();go("content");};
   $("#engineTests").onclick=engineTestSheet;
-  $("#reset").onclick=function(){if(!confirm("Clear every review record, note and mistake? Course content is kept."))return;S.rev={};S.concept={};S.mistakes=[];S.repairs=[];S.notes={};S.log=[];S.diag=[];S.xp=0;S.streak=0;S.streakDay=null;save();closeSheet();go("today");};
+  $("#reset").onclick=function(){if(!confirm("Clear every review record, note and mistake? Course content is kept."))return;S.rev={};S.concept={};S.mistakes=[];S.repairs=[];S.notes={};S.log=[];S.diag=[];S.focus={};S.focusLast=null;S.xp=0;S.streak=0;S.streakDay=null;save();closeSheet();go("today");};
   $("#closeS").onclick=closeSheet;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOCUSED LESSONS · v12
+   Small single-theme lessons, separate from the dated weekly classes.
+   Every sentence below is taken from the course material already in this
+   file (concepts, course sentences, class examples) unless marked "std"
+   — a short standard sentence built only from course vocabulary.
+   Lesson shape:
+     cards  [vi, en]                        flashcards + word drills
+     s      {v, e, k, d?, a?}               sentence · English · key word in
+                                            the sentence · explicit distractors ·
+                                            accepted alternative wordings
+     traps  {ok, bad:[…], e}                natural vs unnatural sentence
+     quiz   [question, options, answerIndex]
+     xf     [written, spoken/southern, en]  sound or word transformations
+     syn    groups of near-synonyms that must never be used as each
+            other's distractors
+     vis    visual explanations shown before the cards
+   ═══════════════════════════════════════════════════════════════════════ */
+const FS=(v,e,k,d,a)=>({v:v,e:e,k:k,d:d||null,a:a||null});
+const FT=(ok,bad,e)=>({ok:ok,bad:[].concat(bad),e:e});
+
+const FOCUS_TRACKS=[
+  {id:"q", vi:"Câu hỏi",   en:"Questions"},
+  {id:"t", vi:"Thời gian", en:"Time & frequency"},
+  {id:"a", vi:"Thì",       en:"Past, now, future"},
+  {id:"p", vi:"Xưng hô",   en:"Pronouns"},
+  {id:"s", vi:"Câu",       en:"Building sentences"},
+  {id:"v", vi:"Động từ",   en:"Verbs"},
+  {id:"j", vi:"Tính từ",   en:"Adjectives & comparing"},
+  {id:"m", vi:"Trợ từ",    en:"Particles"},
+  {id:"n", vi:"Số",        en:"Numbers & money"},
+  {id:"z", vi:"Miền Nam",  en:"Southern speech"}
+];
+
+/* shared visuals */
+const FV_ASPECT=function(hl){return {type:"timeline",rows:[{now:50,pts:[
+  {vi:"đã",en:"past",p:6,ex:["Tôi đã ăn sáng.","I ate breakfast."]},
+  {vi:"vừa mới",en:"just",p:30,ex:["Tôi vừa mới thức dậy.","I just woke up."]},
+  {vi:"đang",en:"now",p:50,ex:["Ba đang nghỉ ngơi.","Dad is resting."]},
+  {vi:"sắp",en:"soon",p:70,ex:["Trời sắp mưa.","It's about to rain."]},
+  {vi:"sẽ",en:"will",p:94,ex:["Tuần sau em sẽ đi Việt Nam.","Next week I will go to Vietnam."]}]}],hl:hl};};
+
+const FOCUS=[
+
+/* ══ Q · CÂU HỎI ═════════════════════════════════════════════════════ */
+{id:"q-what",t:"q",g:"gì?",vi:"Gì",en:"What",
+ vis:[{type:"pattern",arrow:true,rows:[
+   {slots:[["S","Em"],["V","muốn ăn"],["O","phở",1]],e:"I want to eat phở."},
+   {slots:[["S","Em"],["V","muốn ăn"],["Q","gì?",1]],e:"What do you want to eat?"}]},
+  {type:"compare",cols:[
+   {h:"gì",en:"what — after the verb",ex:["Bạn làm gì?","What are you doing?"]},
+   {h:"cái gì",en:"what thing",ex:["Đây là cái gì?","What is this?"]},
+   {h:"là gì",en:"what is · what does it mean",ex:["Công việc của bạn là gì?","What is your job?"]}]}],
+ cards:[["gì","what"],["cái gì","what (thing)"],["là gì","what is …?"],["làm gì","do what"],["tên gì","what name"],["nghĩa là gì","what does … mean"]],
+ syn:[["gì","cái gì"]],
+ s:[FS("Bạn làm gì?","What are you doing?","gì",["đâu","ai","nào"]),
+    FS("Đây là cái gì?","What is this?","cái gì",["cái nào","ở đâu","khi nào"]),
+    FS("Công việc của bạn là gì?","What is your job?","là gì",["ở đâu","khi nào","là ai"]),
+    FS("Em muốn ăn gì?","What do you want to eat?","gì",["đâu","ai","nào"]),
+    FS("Tối nay chị muốn nấu món gì?","What dish do you want to cook tonight?","gì",["đâu","ai","bao lâu"]),
+    FS("Màu yêu thích của em là gì?","What is your favourite colour?","là gì",["ở đâu","là ai","bao nhiêu"]),
+    FS("Từ này nghĩa là gì?","What does this word mean?","là gì",["ở đâu","là ai","khi nào"])],
+ traps:[FT("Công việc của bạn là gì?","Công việc của bạn gì?","What is your job?"),
+        FT("Em muốn ăn gì?","Gì em muốn ăn?","What do you want to eat?")]},
+
+{id:"q-where",t:"q",g:"đâu?",vi:"Ở đâu",en:"Where",
+ vis:[{type:"pattern",arrow:true,rows:[
+   {slots:[["S","Chị"],["V","sống"],["P","ở Sài Gòn",1]],e:"I live in Saigon."},
+   {slots:[["S","Chị"],["V","sống"],["Q","ở đâu?",1]],e:"Where do you live?"}]},
+  {type:"compare",cols:[
+   {h:"ở đâu",en:"where (a place)",ex:["Chị sống ở đâu?","Where do you live?"]},
+   {h:"đi đâu",en:"go where — after a movement verb",ex:["Em đi đâu?","Where are you going?"]},
+   {h:"từ đâu",en:"from where",ex:["Bạn đến từ đâu?","Where are you from?"]}]}],
+ cards:[["ở đâu","where"],["đi đâu","go where"],["đến từ đâu","come from where"],["gần nhất","nearest"],["kiếm","to find, look for"],["ở đó","over there"]],
+ syn:[["ở đâu","đâu"]],
+ s:[FS("Chị sống ở đâu?","Where do you live?","ở đâu",["ở đó","khi nào","là gì"]),
+    FS("Em đi đâu?","Where are you going?","đâu",["ai","nào","bao lâu"]),
+    FS("Bạn đến từ đâu?","Where are you from?","đâu",["ai","gì","nào"]),
+    FS("Siêu thị gần nhất ở đâu?","Where is the nearest supermarket?","gần nhất",["xa nhất","gần đây","ở đó"]),
+    FS("Chúng ta nên gặp nhau ở đâu?","Where should we meet?","ở đâu",["ở đó","khi nào","là ai"]),
+    FS("Chị có thể kiếm taxi ở đâu?","Where can you find a taxi?","kiếm",["kia","khi","đi đâu"]),
+    FS("Chìa khóa của em ở đâu?","Where are my keys?","ở đâu",["ở đó","là ai","bao nhiêu"])],
+ traps:[FT("Chị sống ở đâu?","Ở đâu chị sống?","Where do you live?"),
+        FT("Chúng ta nên gặp nhau ở đâu?","Ở đâu chúng ta nên gặp nhau?","Where should we meet?")]},
+
+{id:"q-when",t:"q",g:"khi nào?",vi:"Khi nào",en:"When",
+ vis:[{type:"compare",cols:[
+   {h:"khi nào · bao giờ",en:"when — a day, an occasion",ex:["Khi nào em đi?","When are you going?"]},
+   {h:"mấy giờ",en:"what time — the clock",ex:["Bây giờ là mấy giờ?","What time is it now?"]}]},
+  {type:"timeline",rows:[{now:50,pts:[
+   {vi:"Em đi khi nào?",en:"when did you go?",p:16,ex:["Em đi khi nào?","When did you go?"]},
+   {vi:"Khi nào em đi?",en:"when will you go?",p:84,ex:["Khi nào em đi?","When are you going?"]}]}]}],
+ cards:[["khi nào","when"],["bao giờ","when (also: ever)"],["chừng nào","when (spoken, Southern)"],["mấy giờ","what time"],["lúc mấy giờ","at what time"],["ngày nghỉ","day off"]],
+ syn:[["khi nào","bao giờ","chừng nào"]],
+ s:[FS("Khi nào em đi?","When are you going?","Khi nào",["Mấy giờ","Ở đâu","Tại sao"]),
+    FS("Khi nào tụi mình đi ăn tối?","When are we going for dinner?","Khi nào",["Ở đâu","Ai","Bao nhiêu"]),
+    FS("Bao giờ chị về?","When are you coming back?","Bao giờ",["Bao nhiêu","Ở đâu","Cái gì"]),
+    FS("Ngày nghỉ tiếp theo của chị là khi nào?","When is your next day off?","khi nào",["mấy giờ","ở đâu","bao nhiêu"]),
+    FS("Bây giờ là mấy giờ?","What time is it now?","mấy giờ",["khi nào","bao lâu","mấy tiếng"]),
+    FS("Buổi họp bắt đầu lúc mấy giờ?","What time does the meeting start?","mấy giờ",["khi nào","bao lâu","mấy tiếng"])],
+ traps:[FT("Bây giờ là mấy giờ?","Bây giờ là khi nào?","What time is it now?"),
+        FT("Buổi họp bắt đầu lúc mấy giờ?","Buổi họp bắt đầu lúc khi nào?","What time does the meeting start?")]},
+
+{id:"q-who",t:"q",g:"ai?",vi:"Ai",en:"Who & whose",
+ vis:[{type:"pattern",arrow:true,rows:[
+   {slots:[["S","Chị"],["V","đi tiệc"],["P","với"],["O","Lan",1]],e:"I'm going to the party with Lan."},
+   {slots:[["S","Chị"],["V","đi tiệc"],["P","với"],["Q","ai?",1]],e:"Who are you going to the party with?"}]},
+  {type:"compare",cols:[
+   {h:"ai",en:"who — unknown person",ex:["Ai đang ngồi ở đó?","Who is sitting over there?"]},
+   {h:"người nào",en:"which person — from a group",ex:["Bạn học với người nào?","Which person do you study with?"]},
+   {h:"của ai",en:"whose",ex:["Đây là xe hơi của ai?","Whose car is this?"]}]}],
+ cards:[["ai","who"],["với ai","with whom"],["người nào","which person"],["của ai","whose"],["ngồi","to sit"],["tiệc","party"]],
+ syn:[["ai","người nào"]],
+ s:[FS("Ai đang ngồi ở đó?","Who is sitting over there?","Ai",["Gì","Đâu","Nào"]),
+    FS("Chị đi tiệc với ai?","Who are you going to the party with?","ai",["gì","đâu","nào"]),
+    FS("Cuối tuần chị đi mua đồ với ai?","Who are you going shopping with this weekend?","ai",["gì","đâu","bao lâu"]),
+    FS("Bạn học với người nào?","Which person do you study with?","người nào",["cái gì","ở đâu","khi nào"]),
+    FS("Đây là xe hơi của ai?","Whose car is this?","của ai",["với ai","là ai","ở đâu"]),
+    FS("Chìa khóa này của ai?","Whose keys are these?","của ai",["với ai","ở đâu","là gì"]),
+    FS("Ai đang gọi điện thoại?","Who is calling?","Ai",["Gì","Nào","Đâu"])],
+ traps:[FT("Đây là xe hơi của ai?","Của ai đây là xe hơi?","Whose car is this?"),
+        FT("Ai đang ngồi ở đó?","Người nào đang ngồi ai?","Who is sitting over there?")]},
+
+{id:"q-why",t:"q",g:"sao?",vi:"Tại sao",en:"Why",
+ vis:[{type:"pattern",arrow:true,rows:[
+   {slots:[["Q","Tại sao",1],["S","em"],["V","học"],["O","tiếng Việt?"]],e:"Why are you learning Vietnamese?"},
+   {slots:[["K","Vì",1],["S","má em"],["V","là"],["O","người Việt."]],e:"Because my mom is Vietnamese."}]},
+  {type:"compare",cols:[
+   {h:"tại sao",en:"why — explicit, at the start",ex:["Tại sao em học tiếng Việt?","Why are you learning Vietnamese?"]},
+   {h:"sao",en:"why — short, spoken",ex:["Sao thức khuya vậy?","Why do you stay up so late?"]},
+   {h:"vì · tại vì",en:"because — the answer",ex:["Vì trời mưa, nên chúng tôi ở nhà.","Because it rained, we stayed home."]}]}],
+ cards:[["tại sao","why"],["sao","why (spoken)"],["vì","because"],["tại vì","because"],["bực mình","upset, annoyed"],["thức khuya","to stay up late"]],
+ syn:[["tại sao","sao"],["vì","tại vì"]],
+ s:[FS("Tại sao em học tiếng Việt?","Why are you learning Vietnamese?","Tại sao",["Ở đâu","Khi nào","Bao nhiêu"]),
+    FS("Sao thức khuya vậy?","Why do you stay up so late?","Sao",["Ai","Đâu","Nào"]),
+    FS("Sao chị chưa ăn trưa?","Why have you not had lunch yet?","Sao",["Ai","Đâu","Nào"]),
+    FS("Sao anh ấy bực mình?","Why is he upset?","bực mình",["bình thường","một mình","thức khuya"]),
+    FS("Tại sao chị gọi em sáng nay?","Why did you call me this morning?","Tại sao",["Ở đâu","Bao lâu","Cái gì"]),
+    FS("Vì trời mưa, nên chúng tôi ở nhà.","Because it rained, we stayed home.","Vì",["Nếu","Tuy","Sao"])],
+ traps:[FT("Tại sao em học tiếng Việt?","Em học tiếng Việt tại sao?","Why are you learning Vietnamese?"),
+        FT("Vì trời mưa, nên chúng tôi ở nhà.","Tại sao trời mưa, nên chúng tôi ở nhà.","Because it rained, we stayed home.")]},
+
+{id:"q-how",t:"q",g:"thế nào?",vi:"Thế nào",en:"How",
+ vis:[{type:"compare",cols:[
+   {h:"thế nào · sao",en:"how is it? — a state, an opinion",ex:["Em thấy sao?","How do you feel?"]},
+   {h:"làm sao",en:"how? — the method",ex:["Làm sao anh biết?","How do you know?"]}]},
+  {type:"pattern",rows:[
+   {slots:[["S","Thời tiết"],["P","ở ngoài"],["Q","sao?",1]],e:"How is the weather outside?"},
+   {slots:[["S","Chị"],["V","thấy"],["O","món cá này"],["Q","thế nào?",1]],e:"What do you think of this fish dish?"}]}],
+ cards:[["thế nào","how, what … like"],["sao","how (spoken)"],["làm sao","how (method)"],["như thế nào","in what way"],["cảm thấy","to feel"],["thấy","to find, to feel"]],
+ syn:[["thế nào","sao","như thế nào"]],
+ s:[FS("Em thấy sao?","How do you feel?","sao",["ai","đâu","nào"]),
+    FS("Thời tiết ở ngoài sao?","How is the weather outside?","sao",["ai","đâu","nào"]),
+    FS("Chị thấy món cá này thế nào?","What do you think of this fish dish?","thế nào",["ở đâu","khi nào","bao nhiêu"]),
+    FS("Làm sao anh biết?","How do you know?","Làm sao",["Ở đâu","Khi nào","Là ai"]),
+    FS("Cuối tuần của em sao?","How was your weekend?","sao",["ai","đâu","nào"]),
+    FS("Hôm nay em cảm thấy sao?","How do you feel today?","cảm thấy",["cảm ơn","thấy là","cần phải"])],
+ traps:[FT("Làm sao anh biết?","Ở đâu anh biết?","How do you know?"),
+        FT("Em thấy sao?","Em sao thấy?","How do you feel?")]},
+
+{id:"q-which",t:"q",g:"nào?",vi:"Nào",en:"Which",
+ vis:[{type:"pattern",rows:[
+   {slots:[["N","cái"],["Q","nào",1]],e:"which one"},
+   {slots:[["N","món ăn"],["Q","nào",1]],e:"which dish"},
+   {slots:[["N","loại trà"],["Q","nào",1]],e:"which kind of tea"}]},
+  {type:"compare",cols:[
+   {h:"gì",en:"what? — any answer",ex:["Bạn thích cái gì?","What do you like?"]},
+   {h:"nào",en:"which? — pick from a set",ex:["Bạn thích cái nào?","Which one do you like?"]}]}],
+ cards:[["nào","which"],["cái nào","which one"],["món nào","which dish"],["loại nào","which kind"],["ngày nào","which day"],["nước nào","which country"]],
+ s:[FS("Bạn thích cái nào?","Which one do you like?","nào",["gì","ai","đâu"]),
+    FS("Món ăn nào là ngon nhất?","Which dish is the best?","nào",["gì","ai","đâu"]),
+    FS("Chị muốn thử loại trà nào?","Which type of tea would you like to try?","nào",["ai","đâu","bao lâu"]),
+    FS("Tháng nào vui nhất?","Which month is the most fun?","nào",["gì","ai","đâu"]),
+    FS("Em là người nước nào?","What nationality are you?","nào",["ai","đâu","bao lâu"])],
+ traps:[FT("Bạn thích cái nào?","Bạn thích nào cái?","Which one do you like?"),
+        FT("Món ăn nào là ngon nhất?","Nào món ăn là ngon nhất?","Which dish is the best?")]},
+
+{id:"q-howmuch",t:"q",g:"bao nhiêu?",vi:"Bao nhiêu",en:"How much, how many",
+ vis:[{type:"compare",cols:[
+   {h:"bao nhiêu",en:"any amount or count",ex:["Chị cần bao nhiêu tiền?","How much money do you need?"]},
+   {h:"mấy",en:"a small count — before the noun",ex:["Có mấy trái táo trên bàn?","How many apples are on the table?"]},
+   {h:"bao nhiêu tiền",en:"price",ex:["Một ly cà phê bao nhiêu tiền?","How much is a cup of coffee?"]}]}],
+ cards:[["bao nhiêu","how much, how many"],["mấy","how many (small number)"],["bao nhiêu tiền","how much (money)"],["bao nhiêu tuổi","how old"],["mấy tuổi","how old (to a child)"],["giá","price"]],
+ syn:[["bao nhiêu","mấy"]],
+ s:[FS("Chị cần bao nhiêu tiền?","How much money do you need?","bao nhiêu",["bao lâu","nào","ai"]),
+    FS("Có mấy trái táo trên bàn?","How many apples are on the table?","mấy",["nào","ai","gì"]),
+    FS("Một ly cà phê bao nhiêu tiền?","How much is a cup of coffee?","bao nhiêu tiền",["bao lâu","mấy giờ","ở đâu"]),
+    FS("Bạn bao nhiêu tuổi?","How old are you?","bao nhiêu",["bao lâu","nào","ai"]),
+    FS("Em mấy tuổi?","How old are you? (to a child)","mấy",["nào","gì","đâu"]),
+    FS("Bạn có mấy quyển sách?","How many books do you have?","mấy",["nào","gì","ai"]),
+    FS("Cà phê này có bao nhiêu đường?","How much sugar is in this coffee?","bao nhiêu",["bao lâu","nào","ai"])],
+ traps:[FT("Chị cần bao nhiêu tiền?","Chị cần mấy tiền?","How much money do you need?"),
+        FT("Có mấy trái táo trên bàn?","Có trái táo mấy trên bàn?","How many apples are on the table?")],
+ quiz:[["Asking an adult their age:",["Anh mấy tuổi?","Anh bao nhiêu tuổi?"],1]]},
+
+{id:"q-howlong",t:"q",g:"bao lâu?",vi:"Bao lâu",en:"How long, how often",
+ vis:[{type:"compare",cols:[
+   {h:"bao lâu",en:"how long — duration",ex:["Từ nhà tới chỗ làm mất bao lâu?","How long does it take from home to work?"]},
+   {h:"bao lâu rồi",en:"how long — until now",ex:["Bạn học tiếng Việt bao lâu rồi?","How long have you studied Vietnamese?"]},
+   {h:"bao lâu một lần",en:"how often",ex:["Bạn tập thể dục bao lâu một lần?","How often do you exercise?"]}]}],
+ cards:[["bao lâu","how long"],["bao lâu rồi","how long (so far)"],["bao lâu một lần","how often"],["mất","to take (time)"],["tập thể dục","to exercise"],["một lần","once"]],
+ s:[FS("Bạn học tiếng Việt bao lâu rồi?","How long have you studied Vietnamese?","bao lâu",["bao nhiêu","mấy giờ","khi nào"]),
+    FS("Bạn tập thể dục bao lâu một lần?","How often do you exercise?","một lần",["rồi","nữa","mấy giờ"]),
+    FS("Chị gọi cho ba má bao lâu một lần?","How often do you call your parents?","một lần",["rồi","nữa","mấy giờ"]),
+    FS("Từ nhà tới chỗ làm mất bao lâu?","How long does it take from home to work?","bao lâu",["bao nhiêu","mấy giờ","ở đâu"]),
+    FS("Bạn ở đây bao lâu?","How long are you staying here?","bao lâu",["bao nhiêu","mấy giờ","khi nào"])],
+ traps:[FT("Bạn tập thể dục bao lâu một lần?","Bạn tập thể dục bao lâu?","How often do you exercise?"),
+        FT("Bạn học tiếng Việt bao lâu rồi?","Bạn học tiếng Việt mấy giờ rồi?","How long have you studied Vietnamese?")]},
+
+{id:"q-yesno",t:"q",g:"không?",vi:"Có … không?",en:"Yes / no questions",
+ vis:[{type:"pattern",rows:[
+   {slots:[["S","Bạn"],["K","có",1],["A","bận"],["K","không?",1]],e:"Are you busy?"},
+   {slots:[["S","Bạn"],["V","là"],["N","khách"],["K","phải không?",1]],e:"You're a customer, aren't you?"},
+   {slots:[["S","Bạn"],["V","là"],["N","nhân viên"],["K","hả?",1]],e:"Are you staff here?"}]},
+  {type:"compare",cols:[
+   {h:"Có. · Dạ.",en:"yes",ex:["Ở đây có nhà hàng không? — Có.","Is there a restaurant here? — Yes."]},
+   {h:"Đúng rồi.",en:"that's right",ex:["Bạn là giáo viên hả? — Đúng rồi.","Are you a teacher? — That's right."]},
+   {h:"Dạ không.",en:"no, thank you",ex:["Em cần giúp không? — Dạ không.","Do you need help? — No, thank you."]}]}],
+ cards:[["có … không?","yes/no question frame"],["phải không?","…isn't it?"],["hả?","…huh? (casual)"],["có","yes (it exists)"],["đúng rồi","that's right"],["dạ không","no, thank you"]],
+ s:[FS("Bạn có bận không?","Are you busy?","không",["gì","đâu","nào"]),
+    FS("Ngày mai chị có rảnh không?","Are you free tomorrow?","có",["là","đã","rất"]),
+    FS("Quán này có bán trà không?","Does this café sell tea?","có",["là","rất","ở"]),
+    FS("Cái áo này có mắc không?","Is this shirt expensive?","không",["gì","đâu","nào"]),
+    FS("Bạn là khách ở đây phải không?","You're a customer here, aren't you?","phải không",["có không","là gì","ở đâu"]),
+    FS("Bạn là nhân viên ở đây hả?","Are you staff here?","hả",["ạ","đi","nhé"])],
+ traps:[FT("Bạn có bận không?","Bạn không bận có?","Are you busy?"),
+        FT("Bạn là khách ở đây phải không?","Bạn có là khách ở đây không?","You're a customer here, aren't you?")]},
+
+{id:"q-yet",t:"q",g:"chưa?",vi:"… chưa?",en:"Have you … yet?",
+ vis:[{type:"pattern",arrow:true,rows:[
+   {slots:[["S","Bạn"],["V","ăn"],["O","cơm"],["K","chưa?",1]],e:"Have you eaten yet?"},
+   {slots:[["K","Rồi.",1]],e:"Yes, I have."},
+   {slots:[["K","Chưa.",1]],e:"Not yet."}]},
+  {type:"compare",cols:[
+   {h:"… chưa?",en:"at the end: a question",ex:["Bạn ăn tối chưa?","Have you eaten dinner yet?"]},
+   {h:"chưa + verb",en:"before the verb: not yet",ex:["Tôi chưa ăn.","I haven't eaten yet."]}]}],
+ cards:[["chưa?","…yet?"],["rồi","already · yes, I have"],["chưa","not yet"],["xong","finished, done"],["gửi email","to send an email"],["tập mới","new episode"]],
+ s:[FS("Bạn ăn cơm chưa?","Have you eaten yet?","chưa",["không","đâu","gì"]),
+    FS("Bạn gửi email chưa?","Have you sent the email yet?","chưa",["không","đâu","gì"]),
+    FS("Chị làm xong bài tập chưa?","Have you finished the exercise yet?","xong",["xa","sống","sang"]),
+    FS("Anh về nhà chưa?","Have you gone home yet?","chưa",["không","đâu","gì"]),
+    FS("Chị coi tập mới chưa?","Have you watched the new episode yet?","chưa",["không","đâu","gì"]),
+    FS("Em dọn phòng xong rồi.","I have finished cleaning the room.","rồi",["chưa","đâu","không"])],
+ traps:[FT("Bạn ăn tối chưa?","Bạn chưa ăn tối?","Have you eaten dinner yet?")]},
+
+{id:"q-map",t:"q",g:"?",vi:"Bản đồ câu hỏi",en:"Question map · review",
+ vis:[{type:"map",center:{vi:"?",en:"tap a word"},nodes:[
+   {vi:"gì",en:"what",ex:["Em muốn ăn gì?","What do you want to eat?"]},
+   {vi:"ở đâu",en:"where",ex:["Chị sống ở đâu?","Where do you live?"]},
+   {vi:"khi nào",en:"when",ex:["Khi nào em đi?","When are you going?"]},
+   {vi:"ai",en:"who",ex:["Ai đang ngồi ở đó?","Who is sitting over there?"]},
+   {vi:"tại sao",en:"why",ex:["Tại sao em học tiếng Việt?","Why are you learning Vietnamese?"]},
+   {vi:"thế nào",en:"how",ex:["Chị thấy món cá này thế nào?","What do you think of this fish dish?"]},
+   {vi:"nào",en:"which",ex:["Bạn thích cái nào?","Which one do you like?"]},
+   {vi:"bao nhiêu",en:"how much",ex:["Chị cần bao nhiêu tiền?","How much money do you need?"]},
+   {vi:"bao lâu",en:"how long",ex:["Bạn học tiếng Việt bao lâu rồi?","How long have you studied Vietnamese?"]}]}],
+ cards:[["gì","what"],["ở đâu","where"],["khi nào","when"],["ai","who"],["tại sao","why"],["thế nào","how"],["nào","which"],["bao nhiêu","how much, how many"],["bao lâu","how long"]],
+ s:[FS("Em muốn ăn gì?","What do you want to eat?","gì"),
+    FS("Chị sống ở đâu?","Where do you live?","ở đâu"),
+    FS("Khi nào em đi?","When are you going?","Khi nào"),
+    FS("Ai đang ngồi ở đó?","Who is sitting over there?","Ai"),
+    FS("Tại sao em học tiếng Việt?","Why are you learning Vietnamese?","Tại sao"),
+    FS("Chị thấy món cá này thế nào?","What do you think of this fish dish?","thế nào"),
+    FS("Chị cần bao nhiêu tiền?","How much money do you need?","bao nhiêu"),
+    FS("Bạn học tiếng Việt bao lâu rồi?","How long have you studied Vietnamese?","bao lâu"),
+    FS("Chị muốn thử loại trà nào?","Which type of tea would you like to try?","nào")],
+ traps:[FT("Chị sống ở đâu?","Ở đâu chị sống?","Where do you live?"),
+        FT("Bạn ngủ mấy tiếng?","Bạn ngủ mấy giờ?","How many hours do you sleep?"),
+        FT("Bạn thích cái nào?","Bạn thích cái ai?","Which one do you like?")]},
+
+/* ══ T · THỜI GIAN ════════════════════════════════════════════════════ */
+{id:"t-freq",t:"t",g:"thường",vi:"Tần suất",en:"How often · frequency words",
+ vis:[{type:"scale",rows:[
+   {vi:"luôn luôn",en:"always",v:100},{vi:"thường",en:"usually",v:85},{vi:"hay",en:"often",v:75},
+   {vi:"lâu lâu · thỉnh thoảng",en:"sometimes",v:48},{vi:"đôi khi",en:"occasionally",v:36},
+   {vi:"ít khi · hiếm khi",en:"rarely",v:14},{vi:"không bao giờ",en:"never",v:0}]},
+  {type:"pattern",rows:[
+   {slots:[["S","Em"],["F","thường",1],["V","gọi"],["O","cho má"]],e:"I usually call my mom."},
+   {slots:[["S","Ba"],["F","hiếm khi",1],["V","uống"],["O","cà phê"]],e:"Dad rarely drinks coffee."}]}],
+ cards:[["luôn luôn","always"],["thường","usually"],["hay","often"],["thỉnh thoảng","from time to time"],["lâu lâu","now and then (Southern)"],["đôi khi","occasionally"],["ít khi","rarely"],["hiếm khi","seldom"],["không bao giờ","never"]],
+ syn:[["thường","hay"],["lâu lâu","thỉnh thoảng","đôi khi"],["ít khi","hiếm khi"]],
+ s:[FS("Mình thường đi ngủ lúc 12 giờ.","I usually go to bed at 12.","thường"),
+    FS("Con luôn luôn mang theo áo khoác khi trời lạnh.","I always bring a jacket when it's cold.","luôn luôn"),
+    FS("Ba hiếm khi uống cà phê buổi tối.","Dad rarely drinks coffee at night.","hiếm khi"),
+    FS("Tụi em lâu lâu coi TV cùng nhau.","We sometimes watch TV together.","lâu lâu",null,["Lâu lâu tụi em coi TV cùng nhau."]),
+    FS("Con không bao giờ quên đem chìa khóa.","I never forget to bring my keys.","không bao giờ"),
+    FS("Mình hay thức dậy trễ.","I often wake up late.","hay"),
+    FS("Đôi khi, nhà mình ăn ngoài.","Occasionally, our family eats out.","Đôi khi",null,["Nhà mình đôi khi ăn ngoài."]),
+    FS("Em thường gọi cho má vào buổi tối.","I usually call my mom in the evening.","thường")],
+ traps:[FT("Con luôn luôn mang theo áo khoác.","Con mang theo luôn luôn áo khoác.","I always bring a jacket."),
+        FT("Ba hiếm khi uống cà phê.","Ba uống cà phê hiếm khi.","Dad rarely drinks coffee.")]},
+
+{id:"t-every",t:"t",g:"mỗi",vi:"Mỗi ngày",en:"Every day, twice a week",
+ vis:[{type:"dots",rows:[
+   {vi:"mỗi ngày",en:"every day",d:"1111111"},
+   {vi:"ba lần mỗi tuần",en:"three times a week",d:"1010100"},
+   {vi:"hai lần mỗi tuần",en:"twice a week",d:"0100100"},
+   {vi:"một lần mỗi tuần",en:"once a week",d:"0000010"}]},
+  {type:"pattern",rows:[
+   {slots:[["S","Em"],["V","đi bộ"],["F","ba lần mỗi tuần",1]],e:"I go for a walk three times a week."},
+   {slots:[["F","Mỗi buổi sáng",1],["S","em"],["V","uống"],["O","một ly nước"]],e:"Every morning I drink a glass of water."}]}],
+ cards:[["mỗi ngày","every day"],["mỗi tuần","every week"],["mỗi tháng","every month"],["một lần","once"],["hai lần","twice"],["ba lần mỗi tuần","three times a week"],["mỗi buổi sáng","every morning"],["dạo này","lately"]],
+ s:[FS("Tôi phải uống thuốc này mỗi ngày.","I have to take this medicine every day.","mỗi ngày",["mỗi tuần","mỗi tháng","một lần"]),
+    FS("Em đi bộ ba lần mỗi tuần.","I go for a walk three times a week.","ba lần",["hai lần","một lần","mỗi lần"]),
+    FS("Mỗi buổi sáng em uống một ly nước.","Every morning I drink a glass of water.","Mỗi",["Những","Các","Lần"]),
+    FS("Dạo này em học mỗi ngày.","Lately I study every day.","Dạo này",["Mỗi tháng","Một lần","Không bao giờ"]),
+    FS("Má giặt đồ mỗi chiều thứ Bảy.","Mom washes clothes every Saturday afternoon.","mỗi",["những","các","lần"]),
+    FS("Em học tiếng Việt một tiếng mỗi tối.","I study Vietnamese for one hour every evening.","mỗi tối",["mỗi tuần","mỗi tháng","mỗi sáng"])],
+ traps:[FT("Mỗi buổi sáng em uống một ly nước.","Buổi sáng mỗi em uống một ly nước.","Every morning I drink a glass of water."),
+        FT("Tôi phải uống thuốc này mỗi ngày.","Tôi phải uống thuốc này ngày mỗi.","I have to take this medicine every day.")]},
+
+{id:"t-day",t:"t",g:"buổi",vi:"Buổi trong ngày",en:"Parts of the day",
+ vis:[{type:"segments",segs:[
+   {vi:"buổi sáng",en:"morning",from:5,to:11},{vi:"buổi trưa",en:"midday",from:11,to:13},
+   {vi:"buổi chiều",en:"afternoon",from:13,to:18},{vi:"buổi tối",en:"evening",from:18,to:23}]},
+  {type:"pattern",rows:[
+   {slots:[["T","Buổi sáng",1],["S","em"],["V","ăn"],["O","bánh mì"],["P","ở nhà"]],e:"In the morning I eat bread at home."},
+   {slots:[["V","ăn"],["T","trưa",1]],e:"to have lunch"},{slots:[["V","ăn"],["T","tối",1]],e:"to have dinner"}]}],
+ cards:[["buổi sáng","morning"],["buổi trưa","midday"],["buổi chiều","afternoon"],["buổi tối","evening"],["sáng nay","this morning"],["tối nay","tonight"],["ăn trưa","to have lunch"],["ăn tối","to have dinner"]],
+ s:[FS("Buổi sáng em ăn bánh mì ở nhà.","In the morning I eat bread at home.","sáng",["trưa","chiều","tối"]),
+    FS("Buổi trưa em ăn cơm ở chỗ làm.","At lunchtime I eat at work.","trưa",["sáng","chiều","tối"]),
+    FS("Buổi chiều tụi mình đi uống trà.","In the afternoon we go for tea.","chiều",["sáng","trưa","tối"]),
+    FS("Buổi tối em đọc sách ở nhà.","In the evening I read at home.","tối",["sáng","trưa","chiều"]),
+    FS("Tối nay tụi mình ăn cơm cùng nhau.","Tonight we eat together.","Tối nay",["Sáng nay","Buổi trưa","Buổi chiều"]),
+    FS("Sáng nay em viết email cho chị.","This morning I write an email to you.","Sáng nay",["Tối nay","Buổi trưa","Buổi chiều"]),
+    FS("Em ăn trưa rồi, em không ăn tối hôm nay.","I've had lunch, I'm not having dinner today.","ăn trưa",["ăn sáng","ăn tối","ăn chiều"])],
+ traps:[FT("Buổi tối em đọc sách ở nhà.","Tối buổi em đọc sách ở nhà.","In the evening I read at home.")],
+ quiz:[["buổi chiều is:",["morning","afternoon","evening"],1]]},
+
+{id:"t-clock",t:"t",g:"mấy giờ?",vi:"Mấy giờ",en:"Telling the time",
+ vis:[{type:"clocks",items:[
+   {h:8,m:0,vi:"tám giờ",en:"8:00"},{h:9,m:30,vi:"chín giờ rưỡi",en:"9:30"},
+   {h:10,m:15,vi:"mười giờ mười lăm",en:"10:15"},{h:7,m:50,vi:"tám giờ kém mười",en:"7:50"}]},
+  {type:"pattern",rows:[
+   {slots:[["V","Em đi làm"],["K","lúc",1],["T","tám giờ"],["T","sáng"]],e:"I go to work at eight a.m."},
+   {slots:[["Q","Mấy giờ",1],["K","rồi?"]],e:"What time is it?"}]}],
+ cards:[["mấy giờ","what time"],["giờ","o'clock"],["rưỡi","half past"],["kém","to (before the hour)"],["lúc","at (a time)"],["phút","minute"],["mười lăm","fifteen"],["bây giờ","now"]],
+ s:[FS("Bây giờ là mấy giờ?","What time is it now?","mấy giờ",["mấy tiếng","bao lâu","khi nào"]),
+    FS("Mấy giờ rồi?","What time is it?","Mấy giờ",["Bao lâu","Mấy tiếng","Khi nào"]),
+    FS("Em đi làm lúc tám giờ sáng.","I go to work at eight in the morning.","lúc",["là","ở","giờ"]),
+    FS("Buổi họp bắt đầu lúc chín giờ rưỡi.","The meeting starts at half past nine.","rưỡi",["kém","phút","lúc"]),
+    FS("Bây giờ là mười giờ mười lăm.","It is now ten fifteen.","mười lăm",["mười năm","năm mươi","mười"]),
+    FS("Buổi học bắt đầu lúc bảy giờ tối.","Class starts at seven in the evening.","bảy giờ",["bảy tiếng","bảy phút","giờ bảy"]),
+    FS("Em về nhà lúc 5 giờ.","I go home at 5 o'clock.","lúc",["là","ở","khi"])],
+ traps:[FT("Bây giờ là mấy giờ?","Bây giờ là bao lâu?","What time is it now?"),
+        FT("Em đi làm lúc tám giờ sáng.","Em đi làm tám lúc giờ sáng.","I go to work at eight in the morning.")],
+ quiz:[["“What time is it?” most naturally:",["Mấy giờ?","Mấy giờ rồi?"],1]]},
+
+{id:"t-duration",t:"t",g:"tiếng",vi:"Giờ hay tiếng?",en:"Clock time or duration",
+ vis:[{type:"compare",cols:[
+   {h:"6 giờ",en:"six o'clock — a point on the clock",ex:["Khoảng sáu giờ.","Around six o'clock."]},
+   {h:"6 tiếng",en:"six hours — a length of time",ex:["Bạn ngủ mấy tiếng?","How many hours do you sleep?"]}]},
+  {type:"timeline",rows:[{pts:[
+   {vi:"giờ",en:"point",p:20,ex:["Bây giờ là 6 giờ 20 phút.","It is 6:20 now."]},
+   {vi:"nửa tiếng",en:"30 min",p:50,ex:["Em nghỉ ngơi nửa tiếng rồi đi làm.","I rest for half an hour, then go to work."]},
+   {vi:"một tiếng",en:"60 min",p:82,ex:["Em học tiếng Việt một tiếng mỗi tối.","I study Vietnamese for one hour every evening."]}]}]}],
+ cards:[["giờ","o'clock"],["tiếng","hour(s) of duration"],["nửa tiếng","half an hour"],["phút","minute"],["khoảng","around, about"],["gần","almost"],["kéo dài","to last"],["mấy tiếng","how many hours"]],
+ s:[FS("Bạn ngủ mấy tiếng?","How many hours do you sleep?","tiếng",["giờ","lần","tuổi"]),
+    FS("Em học tiếng Việt một tiếng mỗi tối.","I study Vietnamese for one hour every evening.","một tiếng",["một giờ","một lần","một tuổi"]),
+    FS("Buổi họp kéo dài ba mươi phút.","The meeting lasts thirty minutes.","phút",["giờ","tuổi","lần"]),
+    FS("Em nghỉ ngơi nửa tiếng rồi đi làm.","I rest for half an hour, then go to work.","nửa tiếng",["nửa giờ","nửa lần","một tiếng"]),
+    FS("Khoảng sáu giờ.","Around six o'clock.","Khoảng",["Kém","Lúc","Mấy"]),
+    FS("Gần bảy giờ.","Almost seven o'clock.","Gần",["Xa","Rưỡi","Mấy"])],
+ traps:[FT("Bạn ngủ mấy tiếng?","Bạn ngủ mấy giờ?","How many hours do you sleep?")],
+ quiz:[["6 tiếng means:",["six o'clock","six hours"],1]]},
+
+{id:"t-days",t:"t",g:"hôm nay",vi:"Hôm qua · ngày mai",en:"Yesterday, today, tomorrow",
+ vis:[{type:"timeline",rows:[
+   {now:50,pts:[{vi:"hôm qua",en:"yesterday",p:12,ex:["Em đi siêu thị hôm qua.","I went to the supermarket yesterday."]},
+     {vi:"hôm nay",en:"today",p:50,ex:["Hôm nay là ngày đặc biệt cho tụi em.","Today is a special day for us."]},
+     {vi:"ngày mai",en:"tomorrow",p:88,ex:["Ngày mai chị có rảnh không?","Are you free tomorrow?"]}]},
+   {now:50,pts:[{vi:"tuần trước",en:"last week",p:12,ex:["Em đã học bài này tuần trước.","I studied this lesson last week."]},
+     {vi:"tuần này",en:"this week",p:50},
+     {vi:"tuần sau",en:"next week",p:88,ex:["Tuần sau em sẽ đi Việt Nam.","Next week I will go to Vietnam."]}]}]}],
+ cards:[["hôm qua","yesterday"],["hôm nay","today"],["ngày mai","tomorrow"],["tuần trước","last week"],["tuần sau","next week"],["bây giờ","now"],["cuối tuần","weekend"],["bữa nay","today (Southern)"]],
+ syn:[["hôm nay","bữa nay"]],
+ s:[FS("Em đi siêu thị hôm qua.","I went to the supermarket yesterday.","hôm qua",null,["Hôm qua em đi siêu thị."]),
+    FS("Hôm nay là ngày đặc biệt cho tụi em.","Today is a special day for us.","Hôm nay"),
+    FS("Ngày mai chị có rảnh không?","Are you free tomorrow?","Ngày mai"),
+    FS("Tuần sau em sẽ đi Việt Nam.","Next week I will go to Vietnam.","Tuần sau"),
+    FS("Em đã học bài này tuần trước.","I studied this lesson last week.","tuần trước"),
+    FS("Cuối tuần em ăn cơm với ba má.","At the weekend I eat with my parents.","Cuối tuần"),
+    FS("Bữa nay tui thấy buồn quá.","I feel very sad today.","Bữa nay")],
+ traps:[FT("Tuần sau em sẽ đi Việt Nam.","Tuần sau em đã đi Việt Nam.","Next week I will go to Vietnam.")]},
+
+{id:"t-week",t:"t",g:"thứ Hai",vi:"Thứ trong tuần",en:"Days of the week",
+ vis:[{type:"tiles",items:[
+   {n:"T2",vi:"thứ Hai",en:"Monday"},{n:"T3",vi:"thứ Ba",en:"Tuesday"},{n:"T4",vi:"thứ Tư",en:"Wednesday"},
+   {n:"T5",vi:"thứ Năm",en:"Thursday"},{n:"T6",vi:"thứ Sáu",en:"Friday"},{n:"T7",vi:"thứ Bảy",en:"Saturday"},
+   {n:"CN",vi:"Chủ nhật",en:"Sunday"}]},
+  {type:"pattern",rows:[{slots:[["K","thứ",1],["#","Hai"]],e:"Monday = “day two”"},{slots:[["Q","thứ mấy?",1]],e:"which day?"}]}],
+ cards:[["thứ Hai","Monday"],["thứ Ba","Tuesday"],["thứ Tư","Wednesday"],["thứ Năm","Thursday"],["thứ Sáu","Friday"],["thứ Bảy","Saturday"],["Chủ nhật","Sunday"],["thứ mấy","which day of the week"]],
+ s:[FS("Mai học tiếng Việt vào thứ Ba và thứ Bảy.","Mai studies Vietnamese on Tuesday and Saturday.","thứ Ba"),
+    FS("Chủ nhật Mai đi bộ với má.","On Sunday Mai goes for a walk with her mom.","Chủ nhật"),
+    FS("Má giặt đồ mỗi chiều thứ Bảy.","Mom washes clothes every Saturday afternoon.","thứ Bảy"),
+    FS("Hôm nay là thứ mấy?","What day is it today?","thứ mấy"),
+    FS("Thứ Hai em đi làm sớm.","On Monday I go to work early.","Thứ Hai")],
+ quiz:[["Wednesday is:",["thứ Bốn","thứ Tư"],1]]},
+
+/* ══ A · THÌ ══════════════════════════════════════════════════════════ */
+{id:"a-past",t:"a",g:"đã",vi:"Đã · rồi",en:"Past and “already”",
+ vis:[FV_ASPECT(["đã"]),
+  {type:"pattern",rows:[
+   {slots:[["S","Tôi"],["K","đã",1],["V","ăn sáng."]],e:"I ate breakfast."},
+   {slots:[["S","Tôi"],["V","ăn sáng"],["K","rồi.",1]],e:"I've already had breakfast."}]}],
+ cards:[["đã","past marker"],["rồi","already"],["hôm qua","yesterday"],["tuần trước","last week"],["hồi nãy","a moment ago"],["xong","finished"]],
+ s:[FS("Tôi đã ăn sáng.","I ate breakfast.","đã",["đang","sẽ","sắp"]),
+    FS("Tôi ăn sáng rồi.","I have eaten breakfast already.","rồi",["chưa","đang","nữa"]),
+    FS("Anh đã đi siêu thị rồi.","I went to the supermarket already.","đã",["đang","sẽ","sắp"]),
+    FS("Hôm qua em đã gọi cho ba.","Yesterday I called my dad.","đã",["đang","sẽ","sắp"]),
+    FS("Em đã học bài này tuần trước.","I studied this lesson last week.","tuần trước",["tuần sau","ngày mai","bây giờ"]),
+    FS("Con làm xong bài tập rồi.","I've finished my homework.","rồi",["chưa","đang","nữa"])],
+ traps:[FT("Tôi đã ăn sáng.","Tôi ăn đã sáng.","I ate breakfast."),
+        FT("Hôm qua em đã gọi cho ba.","Hôm qua em sẽ gọi cho ba.","Yesterday I called my dad.")]},
+
+{id:"a-just",t:"a",g:"vừa mới",vi:"Vừa mới",en:"Have just",
+ vis:[FV_ASPECT(["vừa mới"]),
+  {type:"compare",cols:[
+   {h:"mới + verb",en:"have just",ex:["Ông ấy mới đến.","He has just arrived."]},
+   {h:"noun + mới",en:"new",ex:["Má mua một cái nón mới cho em.","Mom buys me a new hat."]}]}],
+ cards:[["vừa mới","have just (emphatic)"],["mới","have just"],["vừa","have just"],["thức dậy","to wake up"],["đến","to arrive"],["xong","finished"]],
+ syn:[["vừa mới","mới","vừa"]],
+ s:[FS("Ông ấy mới đến.","He has just arrived.","mới",["đang","sẽ","sắp"]),
+    FS("Tôi vừa mới thức dậy.","I just woke up.","vừa mới",["đang","sẽ","sắp"]),
+    FS("Tôi mới ăn bữa sáng.","I just had breakfast.","mới",["đang","sẽ","sắp"]),
+    FS("Em mới làm xong bài tập.","I have just finished the exercise.","mới",["đang","sẽ","sắp"]),
+    FS("Em vừa về nhà.","I have just come home.","vừa",["đang","sẽ","sắp"]),
+    FS("Má mua một cái nón mới cho em.","Mom buys me a new hat.","mới",["cũ","to","nhỏ"])],
+ traps:[FT("Tôi vừa mới thức dậy.","Tôi thức dậy vừa mới.","I just woke up."),
+        FT("Má mua một cái nón mới cho em.","Má mua một cái mới nón cho em.","Mom buys me a new hat.")]},
+
+{id:"a-now",t:"a",g:"đang",vi:"Đang",en:"Happening now",
+ vis:[FV_ASPECT(["đang"]),
+  {type:"pattern",rows:[{slots:[["S","Má"],["K","đang",1],["V","rửa chén"],["P","ở dưới bếp"]],e:"Mom is washing the dishes in the kitchen."}]}],
+ cards:[["đang","-ing (in progress)"],["bây giờ","now"],["nghỉ ngơi","to rest"],["nấu cơm","to cook"],["rửa chén","to wash the dishes"],["tìm","to look for"]],
+ s:[FS("Ba đang nghỉ ngơi.","Dad is resting.","đang",["đã","sẽ","chưa"]),
+    FS("Má đang rửa chén ở dưới bếp.","Mom is washing the dishes in the kitchen.","đang",["đã","sẽ","sắp"]),
+    FS("Em đang học tiếng Việt.","I am learning Vietnamese.","đang",["đã","sẽ","chưa"]),
+    FS("Bạn đang tìm gì đó hả?","Are you looking for something?","tìm",["tiền","tên","thử"]),
+    FS("Má đang nấu cơm trong bếp.","Mom is cooking in the kitchen.","nấu cơm",["rửa chén","giặt đồ","ăn cơm"]),
+    FS("Ai đang gọi điện thoại?","Who is calling?","đang",["đã","sẽ","chưa"])],
+ traps:[FT("Ba đang nghỉ ngơi.","Ba nghỉ ngơi đang.","Dad is resting.")]},
+
+{id:"a-future",t:"a",g:"sẽ",vi:"Sẽ · sắp",en:"Will and about to",
+ vis:[FV_ASPECT(["sắp","sẽ"]),
+  {type:"compare",cols:[
+   {h:"sắp",en:"about to — very soon",ex:["Trời sắp mưa.","It's about to rain."]},
+   {h:"sẽ",en:"will — later",ex:["Tuần sau em sẽ đi Việt Nam.","Next week I will go to Vietnam."]}]}],
+ cards:[["sẽ","will"],["sắp","about to"],["ngày mai","tomorrow"],["tuần sau","next week"],["hình như","it seems"],["nếu … thì","if … then"]],
+ s:[FS("Trời sắp mưa.","It's about to rain.","sắp",["đã","đang","vừa"]),
+    FS("Tuần sau em sẽ đi Việt Nam.","Next week I will go to Vietnam.","sẽ",["đã","đang","vừa"]),
+    FS("Nếu trời mưa, chúng ta sẽ ở nhà.","If it rains, we will stay home.","sẽ",["đã","đang","vừa"]),
+    FS("Mẹ sẽ làm danh sách mua đồ trước.","Mom will make a shopping list first.","sẽ",["đã","đang","vừa"]),
+    FS("Hình như trời sắp mưa.","It seems like it's going to rain.","Hình như",["Hình ảnh","Như thế","Bình thường"])],
+ traps:[FT("Trời sắp mưa.","Trời mưa sắp.","It's about to rain."),
+        FT("Tuần sau em sẽ đi Việt Nam.","Tuần sau sẽ em đi Việt Nam.","Next week I will go to Vietnam.")]},
+
+{id:"a-notyet",t:"a",g:"chưa",vi:"Chưa · chưa bao giờ",en:"Not yet, never",
+ vis:[{type:"compare",cols:[
+   {h:"chưa",en:"not yet",ex:["Tôi chưa ăn.","I haven't eaten yet."]},
+   {h:"chưa bao giờ",en:"have never (so far)",ex:["Em chưa bao giờ đi Đà Nẵng.","I have never been to Da Nang."]},
+   {h:"không bao giờ",en:"never (won't ever)",ex:["Con không bao giờ quên đem chìa khóa.","I never forget to bring my keys."]}]}],
+ cards:[["chưa","not yet"],["chưa bao giờ","have never"],["không bao giờ","never (won't ever)"],["hiểu","to understand"],["rồi","already"],["về nhà","to go home"]],
+ s:[FS("Tôi chưa ăn.","I haven't eaten yet.","chưa",["không","đã","rồi"]),
+    FS("Em chưa hiểu.","I don't understand yet.","chưa",["không","đã","rồi"]),
+    FS("Anh ấy chưa về.","He hasn't come home yet.","chưa",["không","đã","rồi"]),
+    FS("Tôi chưa bao giờ uống cà phê.","I have never drunk coffee.","chưa bao giờ",["không bao giờ","luôn luôn","thường"]),
+    FS("Chúng tôi chưa bao giờ đến đó.","We have never been there.","chưa bao giờ",["không bao giờ","luôn luôn","thường"]),
+    FS("Em chưa bao giờ đi Đà Nẵng.","I have never been to Da Nang.","chưa bao giờ",["không bao giờ","luôn luôn","hay"]),
+    FS("Ba chưa về nhà nên em đợi ba.","Dad has not come home yet, so I am waiting for him.","chưa",["không","đã","rồi"])],
+ traps:[FT("Tôi chưa ăn.","Tôi ăn chưa.","I haven't eaten yet."),
+        FT("Tôi chưa bao giờ uống cà phê.","Tôi không chưa uống cà phê.","I have never drunk coffee.")]},
+
+/* ══ P · XƯNG HÔ ══════════════════════════════════════════════════════ */
+{id:"p-basic",t:"p",g:"tôi",vi:"Tôi · bạn · mình",en:"The neutral pronouns",
+ vis:[{type:"compare",cols:[
+   {h:"tôi",en:"I — neutral, polite",ex:["Tôi học tiếng Việt.","I learn Vietnamese."]},
+   {h:"bạn",en:"you — a peer or a stranger",ex:["Bạn có bận không?","Are you busy?"]},
+   {h:"mình",en:"I — casual, warm",ex:["Giúp mình một chút nha!","Help me a bit, okay?"]},
+   {h:"tui",en:"I — casual, Southern",ex:["Tui thích coi phim ở nhà.","I like watching films at home."]}]}],
+ cards:[["tôi","I (neutral)"],["bạn","you (peer, stranger)"],["mình","I (casual)"],["tui","I (casual, Southern)"],["họ","they"],["mọi người","everyone"]],
+ syn:[["tôi","mình","tui"]],
+ s:[FS("Tôi học tiếng Việt.","I learn Vietnamese.","Tôi",["Bạn","Họ","Mọi người"]),
+    FS("Bạn là khách ở đây phải không?","Are you a customer here?","Bạn",["Tôi","Họ","Mình"]),
+    FS("Giúp mình một chút nha!","Help me a bit, okay?","mình",["họ","bạn","mọi người"]),
+    FS("Tui thích coi phim ở nhà.","I like watching films at home.","Tui",["Bạn","Họ","Mọi người"]),
+    FS("Họ không có xe hơi.","They do not have a car.","Họ",["Tôi","Bạn","Mình"]),
+    FS("Mình muốn học cùng bạn.","I want to study with you.","bạn",["họ","mình","tôi"])],
+ quiz:[["A stranger about your age. Which pair?",["tôi / bạn","con / ba","em / anh"],0]]},
+
+{id:"p-age",t:"p",g:"anh · chị",vi:"Anh · chị · em",en:"Choosing by age",
+ vis:[{type:"compare",cols:[
+   {h:"anh",en:"older man — I or you",ex:["Anh làm việc ở công ty này.","I work at this company."]},
+   {h:"chị",en:"older woman — I or you",ex:["Chị sống ở Sài Gòn.","I live in Saigon."]},
+   {h:"em",en:"the younger one — I or you",ex:["Em cảm ơn chị nhiều.","Thank you very much."]}]},
+  {type:"pattern",rows:[{slots:[["S","Em",1],["V","hỏi"],["O","anh",1],["X","một chút nhé"]],e:"younger → older man: let me ask you something"}]}],
+ cards:[["anh","older man: I / you"],["chị","older woman: I / you"],["em","younger person: I / you"],["anh ấy","he"],["chị ấy","she"],["chị gái","older sister"],["em trai","younger brother"]],
+ s:[FS("Anh làm việc ở công ty này.","I work at this company. (older man speaking)","Anh",["Chị","Em","Họ"]),
+    FS("Em hỏi anh một chút nhé.","Let me ask you something. (to an older man)","anh",["chị","em","họ"]),
+    FS("Chị sống ở Sài Gòn.","I live in Saigon. (older woman speaking)","Chị",["Anh","Em","Họ"]),
+    FS("Em cảm ơn chị nhiều.","Thank you very much. (to an older woman)","chị",["anh","em","họ"]),
+    FS("Chị lớn hơn em ba tuổi.","You are three years older than me. (to an older woman)","em",["chị","anh","họ"]),
+    FS("Em có một chị gái và một em trai.","I have an older sister and a younger brother.","chị gái",["em gái","anh trai","em trai"])],
+ quiz:[["A woman ten years older than you. You call her:",["em","chị","cô"],1],
+       ["A man five years younger than you. You call him:",["anh","em","chú"],1]]},
+
+{id:"p-family",t:"p",g:"ông · bà",vi:"Gia đình",en:"Family words as pronouns",
+ vis:[{type:"scale",top:"older",bottom:"younger",rows:[
+   {vi:"ông · bà",en:"grandparents' age",v:100},{vi:"bác",en:"older than your parents",v:84},
+   {vi:"chú · cô",en:"your parents' age",v:70},{vi:"anh · chị",en:"a little older",v:52},
+   {vi:"bạn",en:"same age",v:40,me:1},{vi:"em",en:"younger",v:26},{vi:"con · cháu",en:"a child",v:10}]}],
+ cards:[["ông","grandfather; sir"],["bà","grandmother; ma'am"],["bác","older than your parents"],["chú","a man your parents' age"],["cô","a woman your parents' age; teacher"],["con","I / you (child to parent)"],["cháu","I / you (to grandparents' generation)"],["ba má","dad and mom (Southern)"]],
+ s:[FS("Con chào bà ạ!","Hello, Grandma!","bà",["con","em","chú"]),
+    FS("Con đi học về rồi ạ.","I have come back from school. (to a parent)","Con",["Bà","Chú","Bác"]),
+    FS("Mẹ muốn hỏi con gì đó.","Mom wants to ask you something.","con",["bà","ông","chú"]),
+    FS("Dạ, em chào cô.","Hello. (to a woman your parents' age)","cô",["con","bà","em"]),
+    FS("Cuối tuần em ăn cơm với ba má.","At the weekend I eat with my parents.","ba má",["ông bà","anh chị","cô chú"]),
+    FS("Ba mẹ của con yêu con rất nhiều.","My parents love me very much.","con",["bà","ông","chú"])],
+ quiz:[["In “Mẹ muốn hỏi con gì đó”, con means:",["I","you","we"],1],
+       ["A man about your father's age. You call him:",["anh","chú","em"],1]]},
+
+{id:"p-we",t:"p",g:"chúng ta",vi:"Chúng ta · chúng tôi",en:"Two kinds of “we”",
+ vis:[{type:"compare",cols:[
+   {h:"chúng ta",en:"we — including you",fig:"SL",ex:["Chúng ta đi nha.","Let's go. (you're coming)"]},
+   {h:"chúng tôi",en:"we — not you",fig:"Sl",ex:["Chúng tôi đi trước.","We'll go ahead. (you're not)"]},
+   {h:"tụi mình",en:"we — casual, Southern",fig:"SL",ex:["Tụi mình đi uống cà phê nha.","Let's go for coffee together."]},
+   {h:"các bạn",en:"you all",fig:"sL",ex:["Các bạn ăn cơm chưa?","Have you all eaten yet?"]}]}],
+ cards:[["chúng ta","we (including you)"],["chúng tôi","we (not you)"],["tụi mình","we (casual)"],["các bạn","you all"],["họ","they"],["cùng nhau","together"]],
+ syn:[["chúng ta","tụi mình"]],
+ s:[FS("Nếu trời mưa, chúng ta sẽ ở nhà.","If it rains, we (you and I) will stay home.","chúng ta",["chúng tôi","các bạn","họ"]),
+    FS("Vì trời mưa, nên chúng tôi ở nhà.","Because it rained, we (not you) stayed home.","chúng tôi",["chúng ta","các bạn","tụi mình"]),
+    FS("Tối nay tụi mình ăn cơm cùng nhau.","Tonight we eat together.","tụi mình",["chúng tôi","các bạn","họ"]),
+    FS("Tụi mình đi uống cà phê nha.","Let's go for coffee together.","Tụi mình",["Chúng tôi","Các bạn","Họ"]),
+    FS("Chúng ta đi nha.","Let's go. (you are coming)","Chúng ta",["Chúng tôi","Các bạn","Họ"]),
+    FS("Chúng tôi đi trước.","We'll go ahead. (you are not)","Chúng tôi",["Chúng ta","Tụi mình","Các bạn"])],
+ quiz:[["“Shall we go?” — said to the person you want to bring:",["Chúng tôi đi nha?","Chúng ta đi nha?"],1]]},
+
+{id:"p-south",t:"p",g:"ảnh",vi:"Ảnh · chỉ · ổng",en:"Southern “he” and “she”",
+ vis:[{type:"transform",heads:["viết","nói (miền Nam)"],rows:[
+   ["anh ấy","ảnh","he"],["chị ấy","chỉ","she"],["ông ấy","ổng","he (older man)"],
+   ["bà ấy","bả","she (older woman)"],["cô ấy","cổ","she"],["tôi","tui","I"]]}],
+ cards:[["ảnh","he (= anh ấy)"],["chỉ","she (= chị ấy)"],["ổng","he (= ông ấy)"],["bả","she (= bà ấy)"],["cổ","she (= cô ấy)"],["tui","I (= tôi)"]],
+ xf:[["anh ấy","ảnh","he"],["chị ấy","chỉ","she"],["ông ấy","ổng","he, older man"],["bà ấy","bả","she, older woman"],["cô ấy","cổ","she"],["tôi","tui","I"]],
+ xfh:["Written","Southern speech"],
+ s:[FS("Ảnh về nhà sau giờ làm.","He goes home after work.","Ảnh",["Chỉ","Cổ","Tui"],["Anh ấy về nhà sau giờ làm."]),
+    FS("Chỉ ở trong nhà bếp.","She is in the kitchen.","Chỉ",["Ảnh","Ổng","Tui"],["Chị ấy ở trong nhà bếp."]),
+    FS("Ổng mới đến.","He (an older man) has just arrived.","Ổng",["Chỉ","Cổ","Tui"],["Ông ấy mới đến."]),
+    FS("Cổ chơi đàn piano.","She plays piano.","Cổ",["Ảnh","Ổng","Tui"],["Cô ấy chơi đàn piano."]),
+    FS("Tui thích coi phim ở nhà.","I like watching films at home.","Tui",["Ảnh","Chỉ","Cổ"],["Tôi thích coi phim ở nhà.","Tôi thích xem phim ở nhà."])],
+ traps:[FT("Ảnh về nhà sau giờ làm.","Ảnh ấy về nhà sau giờ làm.","He goes home after work.")]},
+
+/* ══ S · CÂU ══════════════════════════════════════════════════════════ */
+{id:"s-la",t:"s",g:"là",vi:"Là",en:"To be — identity",
+ vis:[{type:"compare",cols:[
+   {h:"là + noun",en:"identity: who or what",ex:["Tôi là giáo viên.","I am a teacher."]},
+   {h:"no là + adjective",en:"description: how it is",ex:["Đồ ăn đường phố rẻ.","Street food is cheap."]}]},
+  {type:"pattern",rows:[{slots:[["S","Hà Nội"],["K","là",1],["N","thủ đô của Việt Nam"]],e:"Hanoi is the capital of Vietnam."},
+   {slots:[["S","Phim"],["A","vui.",1]],e:"The film is fun."}]}],
+ cards:[["là","to be (identity)"],["giáo viên","teacher"],["bác sĩ","doctor"],["nhân viên","staff, employee"],["khách du lịch","tourist"],["người Pháp","French person"]],
+ s:[FS("Tôi là giáo viên.","I am a teacher.","là",["ở","có","thì"]),
+    FS("Hà Nội là thủ đô của Việt Nam.","Hanoi is the capital of Vietnam.","là",["ở","có","đang"]),
+    FS("Em là người Pháp, còn má em là người Việt.","I am French, and my mom is Vietnamese.","người Pháp",["nước Pháp","tiếng Pháp","người Việt"]),
+    FS("Bạn là nhân viên ở đây hả?","Are you staff here?","nhân viên",["khách du lịch","bác sĩ","giáo viên"]),
+    FS("Đây là nhà hàng yêu thích của em.","This is my favourite restaurant.","là",["ở","có","rất"]),
+    FS("Nhiều khách du lịch đến Việt Nam vào mùa hè.","Many tourists come to Vietnam in the summer.","khách du lịch",["nhân viên","giáo viên","bác sĩ"])],
+ traps:[FT("Phim vui.","Phim là vui.","The film is fun."),
+        FT("Đồ ăn đường phố rẻ.","Đồ ăn đường phố là rẻ.","Street food is cheap.")]},
+
+{id:"s-place",t:"s",g:"ở",vi:"Ở · trên · dưới",en:"Where things are",
+ vis:[{type:"space"},
+  {type:"pattern",rows:[{slots:[["S","Con mèo"],["K","ở",1],["P","trên",1],["N","bàn"]],e:"The cat is on the table."}]}],
+ cards:[["ở","at, in (to be located)"],["trên","on"],["dưới","under, below"],["trong","inside"],["bên cạnh","beside"],["gần","near"],["xa","far"]],
+ s:[FS("Con mèo ở trên bàn.","The cat is on the table.","trên"),
+    FS("Chìa khóa ở trong túi của em.","The keys are inside my bag.","trong"),
+    FS("Cái ly ở bên cạnh quyển sách.","The glass is beside the book.","bên cạnh"),
+    FS("Siêu thị ở gần nhà tôi.","The supermarket is near my house.","gần"),
+    FS("Anh ấy ở rất xa công ty.","He lives very far from the company.","xa"),
+    FS("Điện thoại của chị ở trên bàn.","Your phone is on the table.","trên"),
+    FS("Tôi ở nhà.","I am home.","ở",["là","có","đi"])],
+ traps:[FT("Con mèo ở trên bàn.","Con mèo trên ở bàn.","The cat is on the table.")]},
+
+{id:"s-have",t:"s",g:"có",vi:"Có",en:"Have · there is",
+ vis:[{type:"compare",cols:[
+   {h:"person + có",en:"to have",ex:["Tôi có một quyển sách.","I have a book."]},
+   {h:"place + có",en:"there is",ex:["Ở gần nhà em có một tiệm bánh.","There is a bakery near my home."]},
+   {h:"không có",en:"don't have · there isn't",ex:["Trong túi em không có tiền.","There is no money in my bag."]}]}],
+ cards:[["có","to have; there is"],["không có","don't have; there isn't"],["thời gian","time"],["tiệm bánh","bakery"],["tiền","money"],["xe hơi","car (Southern)"]],
+ s:[FS("Tôi có một quyển sách.","I have a book.","có",["là","ở","đang"]),
+    FS("Ở gần nhà em có một tiệm bánh.","There is a bakery near my home.","có",["là","ở","đang"]),
+    FS("Họ không có xe hơi.","They do not have a car.","không có",["không là","chưa","có"]),
+    FS("Trong túi em không có tiền.","There is no money in my bag.","không có",["không là","chưa","có"]),
+    FS("Ở đây có nhà hàng không?","Is there a restaurant here?","có",["là","ở","rất"]),
+    FS("Chị có thời gian học hôm nay không?","Do you have time to study today?","thời gian",["thời tiết","tiền","tiệm bánh"])],
+ traps:[FT("Họ không có xe hơi.","Họ có không xe hơi.","They do not have a car.")]},
+
+{id:"s-neg",t:"s",g:"không",vi:"Không",en:"Saying no, not",
+ vis:[{type:"compare",cols:[
+   {h:"không + verb / adj.",en:"not",ex:["Phim không hay.","The film is not good."]},
+   {h:"không phải là + noun",en:"is not (a thing)",ex:["Tôi không phải là giáo viên.","I am not a teacher."]},
+   {h:"đâu có … đâu",en:"not at all (spoken)",ex:["Tui đâu có quên, tui nhớ mà.","I did not forget; I do remember."]}]}],
+ cards:[["không","not"],["không phải là","is not (before a noun)"],["không biết","don't know"],["không thích","don't like"],["chưa","not yet"],["đâu có","not at all (spoken)"]],
+ s:[FS("Phim không hay.","The film is not good.","không",["chưa","là","có"]),
+    FS("Em không uống cà phê vào buổi tối.","I do not drink coffee in the evening.","không",["chưa","là","rất"]),
+    FS("Em không biết tên quán này.","I do not know this café's name.","không biết",["không thích","không có","chưa biết"]),
+    FS("Em không thích cà phê ngọt.","I do not like sweet coffee.","không thích",["không biết","không có","chưa thích"]),
+    FS("Tôi không phải là giáo viên.","I am not a teacher.","không phải là",["không có","chưa là","không"]),
+    FS("Tui đâu có quên, tui nhớ mà.","I did not forget; I do remember.","đâu có",["ở đâu","có đâu","đã có"])],
+ traps:[FT("Tôi không phải là giáo viên.","Tôi là không giáo viên.","I am not a teacher."),
+        FT("Phim không hay.","Phim không phải là hay.","The film is not good.")]},
+
+{id:"s-class",t:"s",g:"con",vi:"Cái · con · quyển",en:"Classifiers",
+ vis:[{type:"tiles",items:[
+   {n:"cái",vi:"cái bàn",en:"objects"},{n:"con",vi:"con mèo",en:"animals"},{n:"quyển",vi:"quyển sách",en:"books"},
+   {n:"chiếc",vi:"chiếc xe máy",en:"vehicles"},{n:"tờ",vi:"tờ tiền",en:"sheets, notes"},{n:"người",vi:"người bạn",en:"people"},
+   {n:"trái",vi:"trái cam",en:"fruit (Southern)"},{n:"ngôi",vi:"ngôi nhà",en:"buildings"}]},
+  {type:"pattern",rows:[{slots:[["#","hai"],["C","trái",1],["N","cam"]],e:"two oranges"},{slots:[["#","ba"],["C","con",1],["N","mèo"]],e:"three cats"}]}],
+ cards:[["cái","objects"],["con","animals"],["quyển","books"],["chiếc","vehicles"],["tờ","sheets of paper, banknotes"],["người","people"],["trái","fruit, round things"],["ngôi","houses, buildings"]],
+ s:[FS("một cái bàn","a table","cái"),
+    FS("ba con mèo","three cats","con"),
+    FS("một quyển sách","one book","quyển"),
+    FS("một chiếc xe máy","one motorbike","chiếc"),
+    FS("một tờ tiền","a banknote","tờ"),
+    FS("một người bạn","one friend","người"),
+    FS("hai trái cam","two oranges","trái"),
+    FS("Em cần ba cái ly và hai cái chén.","I need three glasses and two bowls.","cái",["con","quyển","tờ"])],
+ traps:[FT("ba con mèo","ba cái mèo","three cats"),FT("một quyển sách","một con sách","one book")]},
+
+{id:"s-adj",t:"s",g:"áo xanh",vi:"Tính từ đứng sau",en:"Adjective after the noun",
+ vis:[{type:"pattern",rows:[
+   {slots:[["A","blue",1],["N","shirt"]],e:"English: adjective first"},
+   {slots:[["N","áo"],["A","xanh",1]],e:"Vietnamese: noun first"}]},
+  {type:"pattern",rows:[{slots:[["N","cà phê"],["A","ngọt",1]],e:"sweet coffee"},{slots:[["N","cái túi"],["A","nhỏ",1]],e:"a small bag"}]}],
+ cards:[["xanh","blue, green"],["nhỏ","small"],["mới","new"],["ngọt","sweet"],["đẹp","beautiful"],["cũ","old (thing)"],["to","big"]],
+ s:[FS("Em muốn mua một cái áo xanh.","I want to buy a blue shirt.","xanh"),
+    FS("Em có một cái túi nhỏ.","I have a small bag.","nhỏ"),
+    FS("Cái bàn mới ở gần cửa sổ.","The new table is near the window.","mới"),
+    FS("Em không thích cà phê ngọt.","I do not like sweet coffee.","ngọt"),
+    FS("Quán cà phê này nhỏ nhưng đẹp.","This café is small but beautiful.","đẹp"),
+    FS("Áo thun này to quá.","This T-shirt is too big.","to")],
+ traps:[FT("Em muốn mua một cái áo xanh.","Em muốn mua một cái xanh áo.","I want to buy a blue shirt."),
+        FT("Em không thích cà phê ngọt.","Em không thích ngọt cà phê.","I do not like sweet coffee.")]},
+
+{id:"s-demo",t:"s",g:"này",vi:"Này · đó · kia",en:"This, that, over there",
+ vis:[{type:"timeline",rows:[{start:"tôi",pts:[
+   {vi:"này",en:"this (here)",p:22,ex:["Cái này là gì?","What is this?"]},
+   {vi:"đó",en:"that (there)",p:56,ex:["Cuốn sách đó là của tôi.","That book is mine."]},
+   {vi:"kia",en:"over there",p:90,ex:["Ngôi nhà kia đẹp quá.","That house over there is beautiful."]}]}]},
+  {type:"pattern",rows:[{slots:[["C","cái"],["N","nón"],["K","kia",1]],e:"that hat over there"},{slots:[["K","Đây",1],["V","là"],["N","nhà hàng"]],e:"This is a restaurant."}]}],
+ cards:[["này","this"],["đó","that"],["kia","that over there"],["đây","here; this"],["cái này","this one"],["cái kia","that one over there"]],
+ s:[FS("Cái này là gì?","What is this?","này"),
+    FS("Cuốn sách đó là của tôi.","That book is mine.","đó"),
+    FS("Ngôi nhà kia đẹp quá.","That house over there is beautiful.","kia"),
+    FS("Em thích cái nón kia hơn cái này.","I prefer that hat over there to this one.","kia"),
+    FS("Đây là nhà hàng yêu thích của em.","This is my favourite restaurant.","Đây"),
+    FS("Đem cái ly đó đây cho má.","Bring that glass here for Mom.","đó")],
+ traps:[FT("Cái này là gì?","Này cái là gì?","What is this?")]},
+
+{id:"s-conj",t:"s",g:"nhưng",vi:"Nhưng · vì · nếu",en:"Linking ideas",
+ vis:[{type:"compare",cols:[
+   {h:"nhưng",en:"but",ex:["Tôi muốn đi du lịch, nhưng tôi không có thời gian.","I want to travel, but I don't have time."]},
+   {h:"vì … nên",en:"because … so",ex:["Vì trời mưa, nên chúng tôi ở nhà.","Because it rained, we stayed home."]},
+   {h:"nếu … thì",en:"if … then",ex:["Nếu trời mưa, thì chúng ta sẽ ở nhà.","If it rains, then we'll stay home."]},
+   {h:"vừa … vừa",en:"both … and",ex:["Anh ấy vừa học vừa làm.","He both studies and works."]}]}],
+ cards:[["nhưng","but"],["vì … nên","because … so"],["nếu … thì","if … then"],["tuy … nhưng","although … still"],["vừa … vừa","both … and"],["và","and"]],
+ s:[FS("Tôi muốn đi du lịch, nhưng tôi không có thời gian.","I want to travel, but I don't have time.","nhưng",["nên","và","thì"]),
+    FS("Vì trời mưa, nên chúng tôi ở nhà.","Because it rained, we stayed home.","nên",["nhưng","thì","và"]),
+    FS("Nếu trời mưa, thì chúng ta sẽ ở nhà.","If it rains, then we'll stay home.","Nếu",["Vì","Tuy","Và"]),
+    FS("Tuy trời lạnh, nhưng cô ấy vẫn đi dạo.","Although it's cold, she still goes for a walk.","Tuy",["Nếu","Vì","Và"]),
+    FS("Anh ấy vừa học vừa làm.","He both studies and works.","vừa",["và","nhưng","nên"]),
+    FS("Tôi thích cà phê và trà.","I like coffee and tea.","và",["nhưng","nên","thì"])],
+ traps:[FT("Vì trời mưa, nên chúng tôi ở nhà.","Vì trời mưa, nhưng chúng tôi ở nhà.","Because it rained, we stayed home.")]},
+
+/* ══ V · ĐỘNG TỪ ══════════════════════════════════════════════════════ */
+{id:"v-modal",t:"v",g:"muốn",vi:"Muốn · cần · phải",en:"Want, need, must",
+ vis:[{type:"scale",top:"strong",bottom:"soft",rows:[
+   {vi:"phải",en:"must",v:100},{vi:"cần",en:"need",v:78},{vi:"nên",en:"should",v:55},
+   {vi:"muốn",en:"want",v:40},{vi:"có thể",en:"can",v:25}]},
+  {type:"pattern",rows:[{slots:[["S","Em"],["M","muốn",1],["V","ăn"],["O","phở"]],e:"I want to eat phở."},
+   {slots:[["S","Chị"],["M","nên",1],["V","nghỉ ngơi"],["X","một chút"]],e:"You should rest a little."}]}],
+ cards:[["muốn","to want"],["có thể","can"],["không thể","cannot"],["cần","to need"],["phải","must, have to"],["nên","should"],["cần phải","really need to"]],
+ syn:[["cần","cần phải"]],
+ s:[FS("Tôi muốn xem phim đó.","I want to watch that movie.","muốn"),
+    FS("Bạn tôi có thể nói tiếng Pháp.","My friend can speak French.","có thể"),
+    FS("Tôi cần nói chuyện với anh.","I need to talk to you.","cần"),
+    FS("Anh phải làm lại bài này.","You must do this drill again.","phải"),
+    FS("Chị nên nghỉ ngơi một chút.","You should rest a little.","nên"),
+    FS("Ngày mai tôi không thể đến thăm anh ấy.","Tomorrow I can't come to visit him.","không thể"),
+    FS("Ngày mai em phải đi làm sớm.","Tomorrow I have to go to work early.","phải")],
+ traps:[FT("Tôi muốn xem phim đó.","Tôi xem muốn phim đó.","I want to watch that movie."),
+        FT("Chị nên nghỉ ngơi một chút.","Chị nghỉ ngơi nên một chút.","You should rest a little.")]},
+
+{id:"v-seq",t:"v",g:"trước khi",vi:"Trước khi · sau khi",en:"Before and after",
+ vis:[{type:"flow",rows:[
+   {a:"đánh răng",ae:"brush teeth",b:"đi ngủ",be:"go to bed",lab:"trước khi",ex:["Trước khi đi ngủ, tôi đánh răng.","Before going to bed, I brush my teeth."]},
+   {a:"ăn cơm",ae:"eat",b:"đi làm",be:"go to work",lab:"sau khi",ex:["Sau khi ăn cơm, tôi đi làm.","After eating, I go to work."]},
+   {a:"đóng cửa",ae:"close the door",b:"đi ngủ",be:"go to bed",lab:"rồi",ex:["Em đóng cửa rồi đi ngủ.","I close the door, then go to bed."]}]}],
+ cards:[["trước khi","before"],["sau khi","after"],["rồi","then"],["đánh răng","to brush your teeth"],["đi ngủ","to go to bed"],["rửa tay","to wash your hands"]],
+ s:[FS("Trước khi đi ngủ, tôi đánh răng.","Before going to bed, I brush my teeth.","Trước khi",["Sau khi","Rồi","Khi nào"]),
+    FS("Sau khi ăn cơm, tôi đi làm.","After eating, I go to work.","Sau khi",["Trước khi","Rồi","Khi nào"]),
+    FS("Sau khi ăn tối, em gọi cho má.","After dinner, I call my mom.","Sau khi",["Trước khi","Rồi","Khi nào"]),
+    FS("Nhớ rửa tay trước khi ăn nha.","Remember to wash your hands before eating.","trước khi",["sau khi","rồi","khi nào"]),
+    FS("Em cần mua nước trước khi về nhà.","I need to buy water before going home.","trước khi",["sau khi","rồi","khi nào"]),
+    FS("Em đóng cửa rồi đi ngủ.","I close the door, then go to bed.","rồi",["trước khi","chưa","nữa"]),
+    FS("Tôi phải uống thuốc sau khi ăn.","I have to take medicine after eating.","sau khi",["trước khi","rồi","khi nào"])],
+ traps:[FT("Trước khi đi ngủ, tôi đánh răng.","Đi ngủ trước khi, tôi đánh răng.","Before going to bed, I brush my teeth.")]},
+
+{id:"v-wear",t:"v",g:"mặc",vi:"Mặc · đeo · đem theo",en:"Wear and bring",
+ vis:[{type:"compare",cols:[
+   {h:"mặc",en:"clothes",ex:["Trời lạnh nên em mặc áo khoác.","It is cold, so I wear a jacket."]},
+   {h:"đeo",en:"glasses, shoes",ex:["Chị đeo kính khi đọc sách.","You wear glasses when reading."]},
+   {h:"đem theo",en:"bring along",ex:["Em đem theo áo khoác vì trời lạnh.","I bring a jacket because it is cold."]}]}],
+ cards:[["mặc","to wear (clothes)"],["đeo","to wear (glasses, shoes)"],["đem theo","to bring along"],["áo khoác","jacket"],["kính","glasses"],["dù","umbrella (Southern)"],["giày","shoes"]],
+ s:[FS("Trời lạnh nên em mặc áo khoác.","It is cold, so I wear a jacket.","mặc",["đeo","đem","đóng"]),
+    FS("Đi làm em thường mặc áo sơ mi.","For work I usually wear a shirt.","mặc",["đeo","đem","mở"]),
+    FS("Chị đeo kính khi đọc sách.","You wear glasses when reading.","đeo",["mặc","đem","đóng"]),
+    FS("Tôi đeo đôi giày mới hôm nay.","I wear new shoes today.","đeo",["mặc","đem","mở"]),
+    FS("Em đem theo áo khoác vì trời lạnh.","I bring a jacket because it is cold.","đem theo",["mặc theo","đeo theo","đi theo"]),
+    FS("Trời mưa, nhớ mang dù nha.","It's raining, remember to bring an umbrella.","dù",["giày","kính","nón"])],
+ traps:[FT("Chị đeo kính khi đọc sách.","Chị mặc kính khi đọc sách.","You wear glasses when reading.")]},
+
+{id:"v-bi",t:"v",g:"bị",vi:"Bị · được",en:"Unwanted or welcome",
+ vis:[{type:"compare",cols:[
+   {h:"bị",en:"something unwanted happens",ex:["Tôi bị đau chân sau khi chạy.","My legs hurt after running."]},
+   {h:"được",en:"something welcome · it's okay",ex:["Em trả bằng tiền mặt được không?","Can I pay in cash?"]}]},
+  {type:"pattern",rows:[{slots:[["S","Em"],["K","bị",1],["A","đau đầu"]],e:"I have a headache."},{slots:[["S","Tôi"],["V","đang"],["K","bị",1],["A","bệnh"]],e:"I'm sick."}]}],
+ cards:[["bị","(something unwanted)"],["được","(something welcome); okay"],["đau","to hurt"],["bị bệnh","sick"],["đau đầu","headache"],["khỏe","well, healthy"]],
+ s:[FS("Tôi bị đau chân sau khi chạy.","My legs hurt after running.","bị",["được","là","có"]),
+    FS("Tôi không khỏe, tôi đang bị bệnh.","I don't feel well, I'm sick.","bị bệnh",["được bệnh","bị khỏe","có bệnh"]),
+    FS("Em bị đau đầu nên muốn nghỉ ngơi.","I have a headache, so I want to rest.","đau đầu",["đau chân","khỏe","mệt"]),
+    FS("Tay tôi bị đau vì tôi nấu ăn cả buổi.","My hands hurt because I cooked all morning.","bị",["được","là","có"]),
+    FS("Em trả bằng tiền mặt được không?","Can I pay in cash?","được",["bị","có","rồi"]),
+    FS("Hôm nay em khỏe hơn hôm qua.","Today I feel better than yesterday.","khỏe",["đau","bệnh","mệt"])],
+ traps:[FT("Tôi bị đau chân.","Tôi được đau chân.","My legs hurt.")]},
+
+{id:"v-action",t:"v",g:"viết",vi:"Viết · đọc · hỏi",en:"Everyday action verbs",
+ vis:[{type:"tiles",items:[
+   {n:"viết",vi:"viết",en:"write"},{n:"đọc",vi:"đọc",en:"read"},{n:"hỏi",vi:"hỏi",en:"ask"},{n:"thử",vi:"thử",en:"try"},
+   {n:"mở",vi:"mở",en:"open"},{n:"đóng",vi:"đóng",en:"close"},{n:"đợi",vi:"đợi",en:"wait"},{n:"lặp lại",vi:"lặp lại",en:"repeat"}]},
+  {type:"pattern",rows:[{slots:[["S","Em"],["V","thử",1],["O","món này"],["X","đi"]],e:"Try this dish. (đi = go on)"}]}],
+ cards:[["viết","to write"],["đọc","to read"],["hỏi","to ask"],["thử","to try"],["mở","to open"],["đóng","to close"],["đợi","to wait"],["lặp lại","to repeat"]],
+ s:[FS("Em viết tên của em vào đây.","Write your name here.","viết"),
+    FS("Em đọc quyển sách này đi.","Read this book.","đọc"),
+    FS("Em hỏi cô giáo một câu đi.","Ask the teacher a question.","hỏi"),
+    FS("Chị thử món này trước đi.","Try this dish first.","thử"),
+    FS("Bạn mở cửa sổ giùm tôi nha.","Please open the window for me.","mở"),
+    FS("Bạn nhớ đóng cửa trước khi đi ngủ nha.","Remember to close the door before going to bed.","đóng"),
+    FS("Chị đợi em năm phút nha.","Please wait for me for five minutes.","đợi")]},
+
+{id:"v-chores",t:"v",g:"rửa chén",vi:"Việc nhà",en:"Household chores",
+ vis:[{type:"tiles",items:[
+   {n:"rửa chén",vi:"rửa chén",en:"wash the dishes"},{n:"giặt đồ",vi:"giặt đồ",en:"do the laundry"},{n:"dọn phòng",vi:"dọn phòng",en:"tidy the room"},
+   {n:"nấu cơm",vi:"nấu cơm",en:"cook"},{n:"đi chợ",vi:"đi chợ",en:"go to the market"},{n:"mua đồ",vi:"mua đồ",en:"go shopping"}]}],
+ cards:[["rửa chén","to wash the dishes"],["giặt đồ","to do the laundry"],["dọn phòng","to tidy the room"],["nấu cơm","to cook"],["đi chợ","to go to the market"],["mua đồ","to go shopping"]],
+ s:[FS("Má đang rửa chén ở dưới bếp.","Mom is washing the dishes in the kitchen.","rửa chén"),
+    FS("Má giặt đồ mỗi chiều thứ Bảy.","Mom washes clothes every Saturday afternoon.","giặt đồ"),
+    FS("Em dọn phòng của em tối qua.","I cleaned my room last night.","dọn phòng"),
+    FS("Má đang nấu cơm trong bếp.","Mom is cooking in the kitchen.","nấu cơm"),
+    FS("Em đi chợ với má vào buổi sáng.","I go to the market with my mom in the morning.","đi chợ"),
+    FS("Cuối tuần này tôi đi mua đồ với chị tôi.","This weekend I am going shopping with my sister.","mua đồ")]},
+
+/* ══ J · TÍNH TỪ ══════════════════════════════════════════════════════ */
+{id:"j-opp1",t:"j",g:"to ↔ nhỏ",vi:"Trái nghĩa · kích thước",en:"Opposites: size and feel",
+ vis:[{type:"pairs",rows:[["to","big","nhỏ","small"],["cao","tall","thấp","short"],["dài","long","ngắn","short"],["nặng","heavy","nhẹ","light"],["nóng","hot","lạnh","cold"]]}],
+ cards:[["to","big"],["nhỏ","small"],["cao","tall"],["thấp","short (height)"],["dài","long"],["ngắn","short (length)"],["nặng","heavy"],["nhẹ","light"],["nóng","hot"],["lạnh","cold"]],
+ opp:[["to","nhỏ"],["cao","thấp"],["dài","ngắn"],["nặng","nhẹ"],["nóng","lạnh"]],
+ s:[FS("Áo thun này to quá.","This T-shirt is too big.","to"),
+    FS("Em có một cái túi nhỏ.","I have a small bag.","nhỏ"),
+    FS("Linh cao nhất lớp tôi.","Linh is the tallest in my class.","cao"),
+    FS("Bài hát này hay nhưng hơi dài.","This song is good but a little long.","dài"),
+    FS("Hôm qua trời nóng không?","Was it hot yesterday?","nóng"),
+    FS("Tuy trời lạnh, nhưng cô ấy vẫn đi dạo.","Although it's cold, she still goes for a walk.","lạnh")]},
+
+{id:"j-opp2",t:"j",g:"mắc ↔ rẻ",vi:"Trái nghĩa · hằng ngày",en:"Opposites: everyday",
+ vis:[{type:"pairs",rows:[["mắc","expensive","rẻ","cheap"],["dễ","easy","khó","difficult"],["gần","near","xa","far"],["nhanh","fast","chậm","slow"],["mới","new","cũ","old"],["sạch","clean","dơ","dirty"]]}],
+ cards:[["mắc","expensive (Southern)"],["rẻ","cheap"],["dễ","easy"],["khó","difficult"],["gần","near"],["xa","far"],["nhanh","fast"],["chậm","slow"],["sạch","clean"],["dơ","dirty (Southern)"]],
+ opp:[["mắc","rẻ"],["dễ","khó"],["gần","xa"],["nhanh","chậm"],["mới","cũ"],["sạch","dơ"]],
+ s:[FS("Cái áo này mắc quá.","This shirt is so expensive.","mắc"),
+    FS("Đồ ăn đường phố rẻ.","Street food is cheap.","rẻ"),
+    FS("Nhà chị xa nhưng quán này gần.","Your house is far away, but this café is nearby.","gần"),
+    FS("Xe chạy rất nhanh.","The car goes very fast.","nhanh"),
+    FS("Nói chậm thôi.","Speak slowly.","chậm"),
+    FS("Tui thích căn bếp này vì nó rất sạch.","I like this kitchen because it is very clean.","sạch")],
+ quiz:[["Southern for “expensive”:",["đắt","mắc","rẻ"],1]]},
+
+{id:"j-good",t:"j",g:"ngon",vi:"Tốt · ngon · hay · ngoan",en:"Four kinds of “good”",
+ vis:[{type:"compare",cols:[
+   {h:"tốt",en:"a person, a job",ex:["Cô ấy là một người tốt.","She is a good person."]},
+   {h:"ngon",en:"food, drink",ex:["Món ăn này rất ngon.","This dish is delicious."]},
+   {h:"hay",en:"a film, song, story",ex:["Phim này rất hay.","This movie is very good."]},
+   {h:"ngoan",en:"a child, a pet",ex:["Con chó của tôi rất ngoan.","My dog is very good."]}]}],
+ cards:[["tốt","good (person, job)"],["ngon","good, delicious (food)"],["hay","good, interesting (film, song)"],["ngoan","good, well-behaved (child, pet)"],["người tốt","a good person"],["giỏi","good at, skilled"]],
+ s:[FS("Cô ấy là một người tốt.","She is a good person.","tốt",["ngon","hay","ngoan"]),
+    FS("Món ăn này rất ngon.","This dish is delicious.","ngon",["tốt","hay","ngoan"]),
+    FS("Phim này rất hay.","This movie is very good.","hay",["tốt","ngon","ngoan"]),
+    FS("Con chó của tôi rất ngoan.","My dog is very good.","ngoan",["tốt","ngon","hay"]),
+    FS("Món cá này ngon nhưng hơi mắc.","This fish dish tastes good but is a little expensive.","ngon",["tốt","hay","ngoan"]),
+    FS("Bài hát này hay nhưng hơi dài.","This song is good but a little long.","hay",["tốt","ngon","ngoan"])],
+ traps:[FT("Món ăn này rất ngon.","Món ăn này rất hay.","This dish is delicious.")],
+ quiz:[["A good movie is:",["phim ngon","phim hay","phim ngoan"],1]]},
+
+{id:"j-bad",t:"j",g:"dở",vi:"Xấu · tệ · dở · hư",en:"Four kinds of “bad”",
+ vis:[{type:"compare",cols:[
+   {h:"xấu",en:"ugly · a bad person",ex:["Cái áo này rất xấu.","This T-shirt is very ugly."]},
+   {h:"tệ",en:"weather, a situation",ex:["Thời tiết hôm nay tệ.","Today's weather is bad."]},
+   {h:"dở",en:"food, a film",ex:["Bộ phim này rất dở.","This movie is bad."]},
+   {h:"hư",en:"a naughty child or pet",ex:["Cậu bé này rất hư.","This boy is really naughty."]}]}],
+ cards:[["xấu","ugly; bad (person)"],["tệ","bad (weather, situation)"],["dở","bad (food, film)"],["hư","naughty (child, pet)"],["xấu xí","ugly"],["người xấu","a bad person"]],
+ s:[FS("Cái áo này rất xấu.","This T-shirt is very ugly.","xấu",["tệ","dở","hư"]),
+    FS("Thời tiết hôm nay tệ.","Today's weather is bad.","tệ",["xấu","dở","hư"]),
+    FS("Bộ phim này rất dở.","This movie is bad.","dở",["xấu","tệ","hư"]),
+    FS("Cậu bé này rất hư.","This boy is really naughty.","hư",["xấu","tệ","dở"]),
+    FS("Món ăn này dở.","This dish is bad.","dở",["xấu","tệ","hư"]),
+    FS("Bộ phim này dở nhưng nhạc hay.","This film is bad, but its music is good.","dở",["xấu","tệ","hư"])],
+ quiz:[["A bad movie is:",["phim dở","phim hư","phim xấu xí"],0]]},
+
+{id:"j-compare",t:"j",g:"hơn",vi:"Bằng · hơn · nhất",en:"Comparing",
+ vis:[{type:"bars",groups:[
+   {cap:"Hoa cao bằng Mai.",e:"as tall as",bars:[["Hoa",62,1],["Mai",62]]},
+   {cap:"Ali cao hơn tôi.",e:"taller than",bars:[["Ali",84,1],["tôi",56]]},
+   {cap:"Linh cao nhất lớp.",e:"the tallest",bars:[["A",50],["Linh",96,1],["B",64]]}]},
+  {type:"pattern",rows:[{slots:[["S","Ali"],["A","cao"],["K","hơn",1],["O","tôi"]],e:"Ali is taller than me."},
+   {slots:[["S","Tôi"],["K","không",1],["A","giỏi"],["K","bằng",1],["O","bạn"]],e:"I am not as good as you."}]}],
+ cards:[["bằng","as … as"],["như","as, like"],["hơn","more … than"],["nhất","the most"],["không … bằng","not as … as"],["giỏi","good at, skilled"]],
+ s:[FS("Hoa cao bằng Mai.","Hoa is as tall as Mai.","bằng",["hơn","nhất","rất"]),
+    FS("Ali cao hơn tôi.","Ali is taller than me.","hơn",["bằng","nhất","rất"]),
+    FS("Linh cao nhất lớp tôi.","Linh is the tallest in my class.","nhất",["hơn","bằng","rất"]),
+    FS("Quán này rẻ hơn quán gần nhà em.","This place is cheaper than the one near my home.","hơn",["bằng","nhất","rất"]),
+    FS("Trong ba món này, em thích món cá nhất.","Of these three dishes, I like the fish best.","nhất",["hơn","bằng","rất"]),
+    FS("Tôi không giỏi bằng bạn.","I am not as good as you.","bằng",["hơn","nhất","rất"]),
+    FS("Ly trà này mắc bằng ly cà phê đó.","This tea costs as much as that coffee.","bằng",["hơn","nhất","rất"])],
+ traps:[FT("Ali cao hơn tôi.","Ali hơn cao tôi.","Ali is taller than me."),
+        FT("Linh cao nhất lớp tôi.","Linh nhất cao lớp tôi.","Linh is the tallest in my class.")]},
+
+/* ══ M · TRỢ TỪ ═══════════════════════════════════════════════════════ */
+{id:"m-nha",t:"m",g:"nha",vi:"Nha · nhé · đi",en:"Softening and urging",
+ vis:[{type:"compare",cols:[
+   {h:"nha",en:"soft, friendly — Southern",ex:["Đợi một chút nha.","Wait a little."]},
+   {h:"nhé",en:"soft, friendly — standard",ex:["Đi cẩn thận nhé!","Be careful, okay?"]},
+   {h:"đi",en:"go on, do it",ex:["Em thử món này đi.","Try this dish."]}]},
+  {type:"pattern",rows:[{slots:[["V","Chị nói"],["A","chậm"],["X","một chút"],["K","nha",1]],e:"Please speak a little more slowly."}]}],
+ cards:[["nha","okay? (soft, Southern)"],["nhé","okay? (soft)"],["đi","go on, do it"],["giùm","for me (Southern)"],["thôi","just; that's enough"],["một chút","a little"]],
+ syn:[["nha","nhé"]],
+ s:[FS("Đợi một chút nha.","Wait a little.","nha",["đi","thôi","giùm"]),
+    FS("Đi cẩn thận nhé!","Be careful, okay?","nhé",["đi","thôi","giùm"]),
+    FS("Ăn đi!","Eat it!","đi",["nha","thôi","giùm"]),
+    FS("Em thử món này đi.","Try this dish.","đi",["thôi","giùm","một chút"]),
+    FS("Chị nói chậm một chút nha.","Please speak a little more slowly.","nha",["đi","thôi","giùm"]),
+    FS("Bạn mở cửa sổ giùm tôi nha.","Please open the window for me.","giùm",["đi","thôi","nhé"]),
+    FS("Mình ăn cơm thôi.","Let's just eat.","thôi",["nha","giùm","nhé"])]},
+
+{id:"m-da",t:"m",g:"dạ",vi:"Dạ · ạ",en:"Being respectful",
+ vis:[{type:"pattern",rows:[{slots:[["K","Dạ,",1],["S","em"],["V","chào"],["O","cô"]],e:"Hello. (respectfully)"},
+   {slots:[["S","Con"],["V","chào"],["O","bà"],["K","ạ!",1]],e:"Hello, Grandma!"}]},
+  {type:"compare",cols:[
+   {h:"dạ",en:"polite yes — Southern, at the start",ex:["Dạ, chào chị.","Hello. (respectfully)"]},
+   {h:"ạ",en:"respect — at the end",ex:["Con đi học về rồi ạ.","I have come back from school."]},
+   {h:"vâng",en:"polite yes — Northern",ex:["Dạ, vâng ạ!","Yes, ma'am / sir!"]}]}],
+ cards:[["dạ","polite yes (Southern)"],["ạ","respect marker (sentence end)"],["vâng","polite yes (Northern)"],["dạ không","no, thank you"],["đúng rồi","that's right"],["chào","hello"]],
+ s:[FS("Con chào bà ạ!","Hello, Grandma!","ạ",["đi","nha","hả"]),
+    FS("Dạ, em chào cô.","Hello. (to an older woman)","Dạ",["Ừ","Hả","Đi"]),
+    FS("Con đi học về rồi ạ.","I have come back from school.","ạ",["đi","hả","nè"]),
+    FS("Dạ, vâng ạ!","Yes, ma'am / sir!","vâng",["không","hả","đi"]),
+    FS("Dạ chị có khoẻ không?","How are you? (politely)","Dạ",["Ừ","Hả","Đi"]),
+    FS("Dạ, chào chị.","Hello. (respectfully)","chào",["cảm ơn","xin lỗi","đi"])],
+ quiz:[["Your teacher asks if you understood. Polite Southern “yes”:",["Dạ","Hả","Đi"],0]]},
+
+{id:"m-ha",t:"m",g:"hả?",vi:"Hả · nè · ha",en:"Spoken reactions",
+ vis:[{type:"compare",cols:[
+   {h:"hả?",en:"…huh? — checking",ex:["Bạn là nhân viên ở đây hả?","Are you staff here?"]},
+   {h:"nè",en:"hey, here — attention",ex:["Cầm cái này nè!","Hold this!"]},
+   {h:"ha",en:"…huh! — friendly",ex:["Trời đẹp quá ha!","The weather is so nice, huh!"]},
+   {h:"á?",en:"really? — surprise",ex:["Vậy á?","Really?"]}]}],
+ cards:[["hả","…huh? (casual question)"],["nè","hey; here (Southern)"],["ha","…huh (friendly)"],["á","really? (surprise)"],["thiệt hả","really? (Southern)"],["lẹ","quickly (Southern)"]],
+ s:[FS("Bạn là nhân viên ở đây hả?","Are you staff here?","hả",["nè","lẹ","á"]),
+    FS("Cầm cái này nè!","Hold this!","nè",["hả","á","ha"]),
+    FS("Trời đẹp quá ha!","The weather is so nice, huh!","ha",["nè","lẹ","á"]),
+    FS("Vậy á?","Really?","á",["nè","lẹ","đi"]),
+    FS("Chị cũng học tiếng Việt hả?","You study Vietnamese too?","hả",["nè","lẹ","đi"]),
+    FS("Đi lẹ!","Hurry up!","lẹ",["hả","á","ha"])]},
+
+{id:"m-very",t:"m",g:"lắm",vi:"Rất · lắm · quá",en:"Very, so, too",
+ vis:[{type:"pattern",rows:[{slots:[["K","rất",1],["A","ngon"]],e:"very good — before"},
+   {slots:[["A","ngon"],["K","lắm",1]],e:"very good — after"},{slots:[["A","mắc"],["K","quá",1]],e:"so / too expensive — after"},
+   {slots:[["K","hơi",1],["A","mắc"]],e:"a little expensive — before"}]}],
+ cards:[["rất","very (before)"],["lắm","very (after)"],["quá","so, too (after)"],["hơi","a little, slightly"],["ghê","so (Southern)"],["một chút","a little"]],
+ s:[FS("Tôi rất thích đi du lịch.","I really like travelling.","rất",["lắm","quá","hơi"]),
+    FS("Cái này ngon lắm.","This one is very delicious.","lắm",["rất","hơi","một chút"]),
+    FS("Cái áo này mắc quá.","This shirt is so expensive.","quá",["rất","hơi","một chút"]),
+    FS("Món cá này ngon nhưng hơi mắc.","This fish dish tastes good but is a little expensive.","hơi",["lắm","quá","ghê"]),
+    FS("Nhìn sợ ghê!","It looks so scary!","ghê",["rất","hơi","một chút"]),
+    FS("Ngôi nhà kia đẹp quá.","That house over there is beautiful.","quá",["rất","hơi","một chút"]),
+    FS("Mình nhớ cậu lắm.","I miss you a lot.","lắm",["rất","hơi","một chút"])],
+ traps:[FT("Tôi rất thích đi du lịch.","Tôi thích rất đi du lịch.","I really like travelling."),
+        FT("Cái này ngon lắm.","Cái này lắm ngon.","This one is very delicious.")]},
+
+/* ══ N · SỐ ═══════════════════════════════════════════════════════════ */
+{id:"n-ten",t:"n",g:"1–10",vi:"Một đến mười",en:"Numbers 1–10",
+ vis:[{type:"tiles",items:[
+   {n:"1",vi:"một",en:"one"},{n:"2",vi:"hai",en:"two"},{n:"3",vi:"ba",en:"three"},{n:"4",vi:"bốn",en:"four"},{n:"5",vi:"năm",en:"five"},
+   {n:"6",vi:"sáu",en:"six"},{n:"7",vi:"bảy",en:"seven"},{n:"8",vi:"tám",en:"eight"},{n:"9",vi:"chín",en:"nine"},{n:"10",vi:"mười",en:"ten"}]}],
+ cards:[["một","1"],["hai","2"],["ba","3"],["bốn","4"],["năm","5"],["sáu","6"],["bảy","7"],["tám","8"],["chín","9"],["mười","10"]],
+ s:[FS("Nhà em có bốn người.","There are four people in my household.","bốn"),
+    FS("Em cần ba cái ly và hai cái chén.","I need three glasses and two bowls.","ba"),
+    FS("Chị đợi em năm phút nha.","Please wait for me for five minutes.","năm"),
+    FS("Em đi làm lúc tám giờ sáng.","I go to work at eight in the morning.","tám"),
+    FS("Buổi học bắt đầu lúc bảy giờ tối.","Class starts at seven in the evening.","bảy"),
+    FS("Buổi họp bắt đầu lúc chín giờ rưỡi.","The meeting starts at half past nine.","chín")]},
+
+{id:"n-tens",t:"n",g:"21",vi:"Mười một → chín mươi",en:"Numbers 11–99",
+ vis:[{type:"tiles",items:[
+   {n:"12",vi:"mười hai",en:"mười = ten"},{n:"15",vi:"mười lăm",en:"5 → lăm"},{n:"20",vi:"hai mươi",en:"mươi = tens"},
+   {n:"21",vi:"hai mươi mốt",en:"1 → mốt"},{n:"25",vi:"hai mươi lăm",en:"5 → lăm"},{n:"33",vi:"ba mươi ba",en:"spoken: ba ba"}]}],
+ cards:[["mười","ten"],["mươi","tens (20 and above)"],["mốt","one (after twenty)"],["lăm","five (after ten)"],["hai mươi mốt","21"],["mười lăm","15"],["một trăm","100"],["nghìn","thousand"]],
+ s:[FS("Năm nay em ba mươi tuổi.","I am thirty this year.","ba mươi",["ba mười","mười ba","ba mươi mốt"]),
+    FS("Chị mua mười hai trái táo.","You buy twelve apples.","mười hai",["hai mươi","hai mười","mười hai mươi"]),
+    FS("Bây giờ là mười giờ mười lăm.","It is now ten fifteen.","mười lăm",["mười năm","năm mươi","lăm mươi"]),
+    FS("Em hai mươi tuổi.","I am twenty years old.","hai mươi",["hai mười","mười hai","hai mươi mốt"]),
+    FS("Buổi họp kéo dài ba mươi phút.","The meeting lasts thirty minutes.","ba mươi",["ba mười","mười ba","ba trăm"]),
+    FS("Hai ly nước này hết bốn mươi nghìn đồng.","These two drinks cost forty thousand dong altogether.","bốn mươi",["bốn mười","mười bốn","bốn trăm"])],
+ quiz:[["21 is:",["hai mươi một","hai mươi mốt"],1],["15 is:",["mười năm","mười lăm"],1]]},
+
+{id:"n-money",t:"n",g:"đồng",vi:"Bao nhiêu tiền?",en:"Prices and paying",
+ vis:[{type:"pattern",arrow:true,rows:[
+   {slots:[["N","Một ly cà phê"],["Q","bao nhiêu tiền?",1]],e:"How much is a cup of coffee?"},
+   {slots:[["#","Bốn mươi"],["#","nghìn",1],["N","đồng"]],e:"40,000 dong"}]},
+  {type:"compare",cols:[
+   {h:"bằng thẻ",en:"by card",ex:["Em trả tiền bằng thẻ.","I pay by card."]},
+   {h:"bằng tiền mặt",en:"in cash",ex:["Em trả bằng tiền mặt được không?","Can I pay in cash?"]}]}],
+ cards:[["bao nhiêu tiền","how much (money)"],["giá","price"],["nghìn","thousand"],["đồng","dong"],["trả tiền","to pay"],["thẻ","card"],["tiền mặt","cash"],["giảm giá","discount, on sale"]],
+ s:[FS("Một ly cà phê bao nhiêu tiền?","How much is a cup of coffee?","bao nhiêu tiền",["bao lâu","mấy giờ","bao xa"]),
+    FS("Một lon coca giá bao nhiêu?","How much is a can of cola?","giá",["già","giờ","gì"]),
+    FS("Em trả tiền bằng thẻ.","I pay by card.","thẻ",["tiền mặt","giá","nghìn"]),
+    FS("Em trả bằng tiền mặt được không?","Can I pay in cash?","tiền mặt",["thẻ","giá","nghìn"]),
+    FS("Cái áo này một trăm nghìn đồng.","This shirt costs one hundred thousand dong.","nghìn",["mươi","giờ","lần"]),
+    FS("Cửa hàng đang giảm giá nên đông người mua.","The store is having a discount, so many people are shopping.","giảm giá",["tính tiền","trả tiền","tiền mặt"])],
+ traps:[FT("Em trả tiền bằng thẻ.","Em trả thẻ tiền.","I pay by card.")]},
+
+{id:"n-order",t:"n",g:"thứ nhất",vi:"Thứ nhất · thứ hai",en:"First, second, third",
+ vis:[{type:"compare",cols:[
+   {h:"thứ nhất",en:"first — not thứ một",ex:["Em là con thứ nhất trong gia đình của em.","I am the first child in my family."]},
+   {h:"thứ hai · thứ ba",en:"second · third",ex:["Hôm nay là lần thứ hai em tới đây.","Today is my second time here."]},
+   {h:"thứ tư",en:"fourth — not thứ bốn",ex:["lầu thứ tư","the fourth floor"]}]}],
+ cards:[["thứ nhất","first"],["thứ hai","second"],["thứ ba","third"],["thứ tư","fourth"],["thứ năm","fifth"],["lần thứ hai","the second time"]],
+ s:[FS("Em là con thứ nhất trong gia đình của em.","I am the first child in my family.","thứ nhất",["thứ một","thứ hai","thứ ba"]),
+    FS("Chị ấy là con gái thứ hai trong gia đình của chị ấy.","She is the second daughter in her family.","thứ hai",["thứ nhất","thứ ba","thứ tư"]),
+    FS("Chỗ ngồi em ở hàng thứ năm.","My seat is in the fifth row.","thứ năm",["thứ tư","thứ ba","thứ nhất"]),
+    FS("Hôm nay là lần thứ hai em tới đây.","Today is my second time here.","thứ hai",["thứ nhất","thứ ba","thứ tư"]),
+    FS("Hôm nay cô ấy là khách hàng thứ mười.","She is the tenth customer today.","thứ mười",["thứ năm","thứ nhất","thứ tư"])],
+ quiz:[["“first”:",["thứ một","thứ nhất"],1],["“fourth”:",["thứ bốn","thứ tư"],1]]},
+
+/* ══ Z · MIỀN NAM ═════════════════════════════════════════════════════ */
+{id:"z-initial",t:"z",g:"tr→ch",vi:"Phụ âm đầu",en:"Southern first sounds",
+ vis:[{type:"transform",heads:["viết","nghe (miền Nam)"],rows:[
+   ["trời","chời","tr → ch"],["sữa","xữa","s → x"],["về","dề","v → d"],["quên","wên","qu → w"]]}],
+ xf:[["trời","chời","sky, weather"],["trà","chà","tea"],["sữa","xữa","milk"],["sáng","xáng","morning"],["về","dề","to return"],["quên","wên","to forget"]],
+ xfh:["Written","Southern sound"],
+ quiz:[["In the South, tr and ch sound:",["different","the same"],1]]},
+
+{id:"z-final",t:"z",g:"n→ng",vi:"Phụ âm cuối",en:"Southern final sounds",
+ vis:[{type:"transform",heads:["viết","nghe (miền Nam)"],rows:[
+   ["ăn","ăng","n → ng"],["bận","bậng","n → ng"],["mát","mác","t → c"],["hết","hếc","t → c"]]}],
+ xf:[["ăn","ăng","to eat"],["chân","châng","leg"],["bận","bậng","busy"],["mát","mác","cool"],["hết","hếc","finished, all gone"],["chín","chính","nine"]],
+ xfh:["Written","Southern sound"]},
+
+{id:"z-hoinga",t:"z",g:"hỏi = ngã",vi:"Dấu hỏi · dấu ngã",en:"Two marks, one sound",
+ vis:[{type:"pairs",rows:[["nghỉ","to rest","nghĩ","to think"],["sửa","to repair","sữa","milk"],["rẻ","cheap","rẽ","to turn"]]},
+  {type:"compare",cols:[{h:"ả · ã",en:"written: two different marks"},{h:"= one sound",en:"Southern speech: the same dipping tone"}]}],
+ cards:[["nghỉ","to rest"],["nghĩ","to think"],["sữa","milk"],["sửa","to repair"],["rẻ","cheap"],["rẽ","to turn"]],
+ s:[FS("Tôi nhớ mua sữa cho mẹ.","I remember to buy milk for Mom.","sữa",["sửa","sứa","sựa"]),
+    FS("Ba đang nghỉ ngơi.","Dad is resting.","nghỉ",["nghĩ","nghị","nghi"]),
+    FS("Đồ ăn đường phố rẻ.","Street food is cheap.","rẻ",["rẽ","rè","ré"]),
+    FS("Em nghĩ trời sắp mưa.","I think it's about to rain.","nghĩ",["nghỉ","nghị","nghi"]),
+    FS("Ba sửa xe máy.","Dad repairs the motorbike.","sửa",["sữa","sứa","sựa"])],
+ quiz:[["A Southerner says nghỉ and nghĩ:",["differently","the same way"],1]]},
+
+{id:"z-words",t:"z",g:"chén",vi:"Từ miền Nam",en:"Southern everyday words",
+ vis:[{type:"transform",heads:["miền Bắc","miền Nam"],rows:[
+   ["bố mẹ","ba má","parents"],["bát","chén","rice bowl"],["cốc","ly","glass"],["ô","dù","umbrella"],
+   ["xem","coi","to watch"],["đắt","mắc","expensive"],["quả","trái","fruit"],["vào","vô","to go in"]]}],
+ xf:[["bố mẹ","ba má","parents"],["bát","chén","rice bowl"],["cốc","ly","glass"],["ô","dù","umbrella"],["xem","coi","to watch"],["đắt","mắc","expensive"],["quả","trái","fruit"],["vào","vô","to go in"]],
+ xfh:["Northern","Southern"],
+ cards:[["ba má","parents"],["chén","rice bowl"],["ly","glass"],["dù","umbrella"],["coi","to watch"],["mắc","expensive"],["trái cây","fruit"],["nón","hat"]],
+ s:[FS("Má đang rửa chén ở dưới bếp.","Mom is washing the dishes in the kitchen.","chén"),
+    FS("Cái áo này mắc quá.","This shirt is so expensive.","mắc"),
+    FS("Tụi em lâu lâu coi TV cùng nhau.","We sometimes watch TV together.","coi"),
+    FS("Em mua trái cây cho ba má.","I buy fruit for my parents.","trái cây"),
+    FS("Trời mưa, nhớ mang dù nha.","It's raining, remember to bring an umbrella.","dù"),
+    FS("Má mua một cái nón mới cho em.","Mom buys me a new hat.","nón"),
+    FS("Đem cái ly đó đây cho má.","Bring that glass here for Mom.","ly")],
+ quiz:[["Careful: in the South, ốm means:",["ill","skinny"],1]]}
+];
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOCUSED LESSONS · engine
+   intro → see (visuals) → cards (flip) → practice ladder → result
+   The ladder climbs nine steps; each step is harder than the last.
+   ═══════════════════════════════════════════════════════════════════════ */
+const FL_LEVELS=[
+  {id:1,vi:"Nhận ra",en:"Recognise"},{id:2,vi:"Nghe",en:"Listen"},{id:3,vi:"Ghép",en:"Match"},
+  {id:4,vi:"Nhớ",en:"Recall"},{id:5,vi:"Chọn",en:"Choose"},{id:6,vi:"Điền",en:"Fill in"},
+  {id:7,vi:"Xếp",en:"Build"},{id:8,vi:"Gõ",en:"Type"},{id:9,vi:"Dịch",en:"Translate"}
+];
+const FL_ROLE={S:"who",V:"verb",O:"object",Q:"question",F:"how often",T:"when",P:"where",M:"modal",A:"adjective",N:"noun",C:"classifier",X:"particle","#":"number",K:"key"};
+const FL_PROPER=["Hà","Việt","Paris","Sài","Đà","Alexandre","Lan","Linh","Ali","Hoa","Mai","Aris","Pháp","TV","Keiko"];
+let FL=null;
+
+/* ── progress ─────────────────────────────────────────────────────────── */
+function focusRec(id){ if(!S.focus||typeof S.focus!=="object") S.focus={}; return S.focus[id]||(S.focus[id]={runs:0,best:0,stars:0,hard:0,last:0}); }
+function focusStars(id){ const r=S.focus&&S.focus[id]; return r?r.stars||0:0; }
+function focusDone(id){ return focusStars(id)>0; }
+function focusNext(){
+  const last=S.focusLast&&FOCUS.findIndex(l=>l.id===S.focusLast);
+  if(last>-1){ for(let i=last+1;i<FOCUS.length;i++) if(!focusDone(FOCUS[i].id)) return FOCUS[i]; }
+  return FOCUS.find(l=>!focusDone(l.id))||FOCUS[0];
+}
+function focusTrack(id){ return FOCUS_TRACKS.find(t=>t.id===id)||FOCUS_TRACKS[0]; }
+function flStarsHTML(n,max){ let h='<span class="fl-stars" aria-label="'+n+' of 3 stars">'; for(let i=0;i<(max||3);i++) h+='<i class="'+(i<n?'on':'')+'"></i>'; return h+'</span>'; }
+
+/* ── small helpers ────────────────────────────────────────────────────── */
+function flSay(vi,cls){ return '<span class="fl-say'+(cls?' '+cls:'')+'" data-say="'+esc(String(vi).replace(/\s*…\s*/g," "))+'">'+esc(vi)+'</span>'; }
+function flReEsc(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
+function flClean(s){ return String(s||"").normalize("NFC").toLowerCase().replace(/[“”"«».,!?;:—–]/g," ").replace(/\s+/g," ").trim(); }
+function flCap(s,up){ s=String(s); return up?s.charAt(0).toUpperCase()+s.slice(1):s.charAt(0).toLowerCase()+s.slice(1); }
+function flFind(sentence,key){
+  const re=new RegExp("(^|[^\\p{L}])("+flReEsc(key)+")(?=$|[^\\p{L}])","iu");
+  const m=re.exec(sentence); if(!m) return null;
+  const start=m.index+m[1].length; return {start:start,end:start+m[2].length,text:m[2]};
+}
+function flSynOf(L,w){ const k=flClean(w); const g=(L.syn||[]).find(gr=>gr.some(x=>flClean(x)===k)); return g?g.map(flClean):[k]; }
+function flCards(L){ return (L.cards&&L.cards.length)?L.cards:(L.xf||[]).map(x=>[x[0],x[2]]); }
+function flExample(L,vi){
+  const k=String(vi).replace(/\s*…\s*.*/,"").trim(); if(!k) return null;
+  const s=(L.s||[]).find(x=>flFind(x.v,k)); return s?[s.v,s.e]:null;
+}
+function flPick(arr,n){ return shuffle(arr.slice()).slice(0,n); }
+function flUniq(arr){ const seen=new Set(); return arr.filter(x=>{const k=flClean(x); if(seen.has(k)) return false; seen.add(k); return true;}); }
+
+/* ── visuals ──────────────────────────────────────────────────────────── */
+function flVisual(v){
+  const t=v.type;
+  if(t==="compare"){
+    return '<div class="fl-cmp n'+v.cols.length+'">'+v.cols.map(function(c,i){
+      return '<div class="fl-cmp-col c'+(i%4)+'">'+(c.fig?flFig(c.fig):'')+'<div class="fl-cmp-h">'+flSay(c.h)+'</div><div class="fl-cmp-en">'+esc(c.en)+'</div>'
+        +(c.ex?'<div class="fl-cmp-ex">'+flSay(c.ex[0],"vi")+'<small>'+esc(c.ex[1])+'</small></div>':'')+'</div>';}).join("")+'</div>';
+  }
+  if(t==="scale"){
+    return '<div class="fl-scale">'+(v.top?'<div class="fl-scale-end">↑ '+esc(v.top)+'</div>':'')+v.rows.map(function(r){
+      return '<div class="fl-scale-row'+(r.me?' me':'')+'"><div class="fl-scale-word">'+flSay(r.vi)+'<small>'+esc(r.en)+'</small></div><div class="fl-meter"><i style="width:'+Math.max(3,r.v)+'%"></i></div></div>';}).join("")
+      +(v.bottom?'<div class="fl-scale-end">↓ '+esc(v.bottom)+'</div>':'')+'</div>';
+  }
+  if(t==="pattern"){
+    return '<div class="fl-pattern">'+v.rows.map(function(r,ri){
+      return (ri&&v.arrow?'<div class="fl-pattern-arrow" aria-hidden="true">↓</div>':'')+'<div class="fl-pattern-row"><div class="fl-slots">'+r.slots.map(function(s){
+        return '<div class="fl-slot'+(s[2]?' hl':'')+'"><small>'+esc(FL_ROLE[s[0]]||"")+'</small>'+flSay(s[1],"chip")+'</div>';}).join("")+'</div>'
+        +(r.e?'<div class="fl-pattern-en">'+esc(r.e)+'</div>':'')+'</div>';}).join("")+'</div>';
+  }
+  if(t==="map"){
+    const n=v.nodes.length;
+    const nodes=v.nodes.map(function(nd,i){
+      const a=-Math.PI/2+i*2*Math.PI/n, x=50+36*Math.cos(a), y=50+38*Math.sin(a);
+      return {x:x,y:y,nd:nd,i:i};});
+    return '<div class="fl-map"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'
+      +nodes.map(p=>'<line x1="50" y1="50" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'"/>').join("")+'</svg>'
+      +'<div class="fl-map-center"><b>'+esc(v.center.vi)+'</b><small>'+esc(v.center.en)+'</small></div>'
+      +nodes.map(p=>'<button class="fl-map-node" style="left:'+p.x.toFixed(1)+'%;top:'+p.y.toFixed(1)+'%" data-mi="'+p.i+'" data-say="'+esc(p.nd.vi)+'"><b>'+esc(p.nd.vi)+'</b><small>'+esc(p.nd.en)+'</small></button>').join("")
+      +'</div><div class="fl-caption" id="flCap" aria-live="polite"></div>';
+  }
+  if(t==="timeline"){
+    return '<div class="fl-tl">'+v.rows.map(function(r){
+      return '<div class="fl-tl-row">'+(r.start?'<span class="fl-tl-start">'+esc(r.start)+'</span>':'')+'<div class="fl-tl-axis"></div>'
+        +(r.now!=null?'<span class="fl-tl-now" style="left:'+r.now+'%"></span>':'')
+        +r.pts.map(function(p){const hl=!v.hl||v.hl.indexOf(p.vi)>-1;
+          return '<button class="fl-tl-pt'+(hl?' hl':'')+'" style="left:'+p.p+'%" data-say="'+esc(p.vi)+'"'+(p.ex?' data-ex="'+esc(p.ex[0])+'" data-exen="'+esc(p.ex[1])+'"':'')+'><b>'+esc(p.vi)+'</b><i></i><small>'+esc(p.en)+'</small></button>';}).join("")+'</div>';}).join("")
+      +'</div><div class="fl-caption" id="flCap" aria-live="polite"></div>';
+  }
+  if(t==="pairs"){
+    return '<div class="fl-pairs">'+v.rows.map(r=>'<div class="fl-pair"><div>'+flSay(r[0])+'<small>'+esc(r[1])+'</small></div><span class="fl-pair-x" aria-hidden="true">⟷</span><div>'+flSay(r[2])+'<small>'+esc(r[3])+'</small></div></div>').join("")+'</div>';
+  }
+  if(t==="transform"){
+    return '<div class="fl-xf"><div class="fl-xf-head"><span>'+esc(v.heads[0])+'</span><span></span><span>'+esc(v.heads[1])+'</span></div>'
+      +v.rows.map(r=>'<div class="fl-xf-row"><span>'+flSay(r[0])+'</span><span class="fl-xf-arrow">→</span><span class="to">'+flSay(r[1])+'</span><small>'+esc(r[2])+'</small></div>').join("")+'</div>';
+  }
+  if(t==="segments"){
+    return '<div class="fl-day"><div class="fl-day-bar">'+v.segs.map(function(s,i){
+      return '<button class="fl-day-seg c'+(i%4)+'" style="left:'+(s.from/24*100)+'%;width:'+((s.to-s.from)/24*100)+'%" data-say="'+esc(s.vi)+'"></button>';}).join("")+'</div>'
+      +'<div class="fl-day-ticks">'+[0,6,12,18,24].map(h=>'<span style="left:'+(h/24*100)+'%">'+h+'h</span>').join("")+'</div>'
+      +'<div class="fl-day-legend">'+v.segs.map((s,i)=>'<div class="c'+(i%4)+'"><i></i>'+flSay(s.vi)+'<small>'+esc(s.en)+' · '+s.from+'–'+s.to+'h</small></div>').join("")+'</div></div>';
+  }
+  if(t==="bars"){
+    return '<div class="fl-bars">'+v.groups.map(function(g){
+      return '<div class="fl-bars-g"><div class="fl-bars-plot">'+g.bars.map(b=>'<div class="fl-bar'+(b[2]?' hl':'')+'"><i style="height:'+b[1]+'%"></i><small>'+esc(b[0])+'</small></div>').join("")+'</div>'
+        +'<div class="fl-bars-cap">'+flSay(g.cap,"vi")+'<small>'+esc(g.e)+'</small></div></div>';}).join("")+'</div>';
+  }
+  if(t==="tiles"){
+    return '<div class="fl-tiles">'+v.items.map(it=>'<button class="fl-tile" data-say="'+esc(it.vi)+'"><b>'+esc(it.n)+'</b>'+(it.n!==it.vi?'<span>'+esc(it.vi)+'</span>':'')+'<small>'+esc(it.en)+'</small></button>').join("")+'</div>';
+  }
+  if(t==="clocks"){
+    return '<div class="fl-clocks">'+v.items.map(function(c){
+      const ma=c.m/60*360, ha=((c.h%12)+c.m/60)/12*360;
+      return '<button class="fl-clock" data-say="'+esc(c.vi)+'"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"/>'
+        +[0,1,2,3,4,5,6,7,8,9,10,11].map(i=>{const a=i*Math.PI/6;return '<line class="tk" x1="'+(32+24*Math.sin(a)).toFixed(1)+'" y1="'+(32-24*Math.cos(a)).toFixed(1)+'" x2="'+(32+27*Math.sin(a)).toFixed(1)+'" y2="'+(32-27*Math.cos(a)).toFixed(1)+'"/>';}).join("")
+        +'<line class="hh" x1="32" y1="32" x2="'+(32+14*Math.sin(ha*Math.PI/180)).toFixed(1)+'" y2="'+(32-14*Math.cos(ha*Math.PI/180)).toFixed(1)+'"/>'
+        +'<line class="mh" x1="32" y1="32" x2="'+(32+21*Math.sin(ma*Math.PI/180)).toFixed(1)+'" y2="'+(32-21*Math.cos(ma*Math.PI/180)).toFixed(1)+'"/><circle class="pin" cx="32" cy="32" r="2"/></svg>'
+        +'<b>'+esc(c.vi)+'</b><small>'+esc(c.en)+'</small></button>';}).join("")+'</div>';
+  }
+  if(t==="space"){
+    const P=[["trên","on",50,14],["trong","inside",50,50],["dưới","under",50,88],["bên cạnh","beside",84,50],["gần","near",22,50],["xa","far",4,50]];
+    return '<div class="fl-space"><div class="fl-space-box"></div><span class="fl-space-near"></span>'
+      +P.map(p=>'<button class="fl-space-pt" style="left:'+p[2]+'%;top:'+p[3]+'%" data-say="'+esc(p[0])+'"><i></i><b>'+esc(p[0])+'</b><small>'+esc(p[1])+'</small></button>').join("")+'</div>';
+  }
+  if(t==="dots"){
+    return '<div class="fl-dots"><div class="fl-dots-head"><span></span>'+["T2","T3","T4","T5","T6","T7","CN"].map(d=>'<span>'+d+'</span>').join("")+'</div>'
+      +v.rows.map(r=>'<div class="fl-dots-row"><div>'+flSay(r.vi)+'<small>'+esc(r.en)+'</small></div>'+r.d.split("").map(x=>'<i class="'+(x==="1"?"on":"")+'"></i>').join("")+'</div>').join("")+'</div>';
+  }
+  if(t==="flow"){
+    return '<div class="fl-flow">'+v.rows.map(r=>'<button class="fl-flow-row" data-say="'+esc(r.ex[0])+'"><span class="fl-flow-box">'+esc(r.a)+'<small>'+esc(r.ae)+'</small></span><span class="fl-flow-arrow"><b>'+esc(r.lab)+'</b><i></i></span><span class="fl-flow-box">'+esc(r.b)+'<small>'+esc(r.be)+'</small></span><span class="fl-flow-ex">'+esc(r.ex[0])+' · <em>'+esc(r.ex[1])+'</em></span></button>').join("")+'</div>';
+  }
+  return '';
+}
+function flFig(f){ /* S = speaker, L = listener; uppercase = included */
+  return '<div class="fl-fig" aria-hidden="true">'+f.split("").map(ch=>'<i class="'+(ch.toLowerCase()==="s"?"sp":"li")+(ch===ch.toUpperCase()?" in":"")+'"></i>').join("")+'</div>';
+}
+function flWireVisuals(root){
+  $$(".fl-map-node,.fl-tl-pt").forEach(function(b){b.onclick=function(){
+    $$(".fl-map-node.on,.fl-tl-pt.on").forEach(x=>x.classList.remove("on")); b.classList.add("on");
+    let ex=null; if(b.classList.contains("fl-map-node")){ const i=+b.dataset.mi, L=FL&&FL.L; const vis=L&&L.vis.find(v=>v.type==="map"); const nd=vis&&vis.nodes[i]; if(nd&&nd.ex) ex=nd.ex; }
+    else if(b.dataset.ex) ex=[b.dataset.ex,b.dataset.exen];
+    const cap=b.closest(".fl-visual").querySelector("#flCap");
+    if(cap) cap.innerHTML=ex?flSay(ex[0],"vi")+'<small>'+esc(ex[1])+'</small>':'';
+    TTS.seq(ex?[b.dataset.say,ex[0]]:[b.dataset.say]);
+  };});
+  $$(".fl-tile,.fl-clock,.fl-space-pt,.fl-day-seg,.fl-flow-row").forEach(b=>b.onclick=function(){TTS.say(b.dataset.say);});
+}
+document.addEventListener("click",function(e){ const t=e.target.closest&&e.target.closest(".fl-say"); if(t&&!t.closest("button")){ TTS.say(t.dataset.say); t.classList.add("said"); setTimeout(()=>t.classList.remove("said"),600);} });
+
+/* ── lesson list ──────────────────────────────────────────────────────── */
+let FL_FILTER="all";
+function viewLessons(){
+  const done=FOCUS.filter(l=>focusDone(l.id)).length, nx=focusNext();
+  const tracks=FOCUS_TRACKS.filter(t=>FL_FILTER==="all"||t.id===FL_FILTER);
+  $("#stage").innerHTML='<div class="fl-list">'
+    +'<div class="fl-list-head"><h2 class="screen-h">Bài học</h2><span class="fl-count">'+done+' / '+FOCUS.length+'</span></div>'
+    +'<button class="fl-next" id="flNext"><span class="fl-next-g">'+esc(nx.g)+'</span><span class="fl-next-copy"><small>'+(done?'Tiếp theo':'Bắt đầu')+' · '+esc(focusTrack(nx.t).vi)+'</small><b>'+esc(nx.vi)+'</b><span>'+esc(nx.en)+'</span></span><span class="fl-next-go" aria-hidden="true">→</span></button>'
+    +'<div class="fl-chips" role="tablist"><button data-f="all" aria-selected="'+(FL_FILTER==="all")+'">Tất cả</button>'+FOCUS_TRACKS.map(t=>'<button data-f="'+t.id+'" aria-selected="'+(FL_FILTER===t.id)+'">'+esc(t.vi)+'</button>').join("")+'</div>'
+    +tracks.map(function(t){
+      const ls=FOCUS.filter(l=>l.t===t.id), d=ls.filter(l=>focusDone(l.id)).length;
+      return '<section class="fl-track"><div class="fl-track-h"><h3>'+esc(t.vi)+'</h3><span>'+esc(t.en)+'</span><em>'+d+'/'+ls.length+'</em></div><div class="fl-grid">'
+        +ls.map(function(l){const r=S.focus&&S.focus[l.id];
+          return '<button class="fl-card'+(r&&r.stars?' done':'')+(l.id===nx.id?' next':'')+'" data-l="'+l.id+'"><span class="fl-card-g">'+esc(l.g)+'</span><span class="fl-card-t">'+esc(l.vi)+'</span><span class="fl-card-en">'+esc(l.en)+'</span><span class="fl-card-foot">'+flStarsHTML(r?r.stars:0)+(r&&r.hard?'<span class="fl-hard-badge" title="Challenge passed">◆</span>':'')+'</span></button>';}).join("")
+        +'</div></section>';}).join("")+'</div>';
+  $("#flNext").onclick=()=>openFocus(nx.id);
+  $$(".fl-card").forEach(b=>b.onclick=()=>openFocus(b.dataset.l));
+  $$(".fl-chips button").forEach(b=>b.onclick=function(){FL_FILTER=b.dataset.f;viewLessons();});
+  keyHandler=null;
+}
+
+/* ── session shell ────────────────────────────────────────────────────── */
+function openFocus(id){
+  const L=FOCUS.find(l=>l.id===id); if(!L) return;
+  SESS=null; CLASS_JOURNEY=null; FL={L:L,phase:"intro",card:0,flipped:false,qs:[],i:0,res:[],repairs:[],inRepair:false,mode:"full",armedExit:false};
+  document.body.classList.add("in-session"); flRender(); window.scrollTo({top:0,behavior:"instant"});
+}
+function flExit(){ FL=null; keyHandler=null; TTS.stop(); go("lessons"); }
+function flTop(step){
+  const steps=[["see","Xem"],["cards","Thẻ"],["practice","Luyện"]];
+  const idx=steps.findIndex(s=>s[0]===step);
+  return '<div class="fl-top"><button class="fl-x" id="flX" aria-label="Close lesson">×</button>'
+    +(step==="practice"?flLadderBar():'<div class="fl-steps">'+steps.map((s,i)=>'<span class="'+(i<idx?'done':i===idx?'on':'')+'">'+s[1]+'</span>').join('<i></i>')+'</div>')+'</div>';
+}
+function flWireTop(){
+  const x=$("#flX"); if(!x) return;
+  x.onclick=function(){
+    if(FL&&FL.phase==="practice"&&!FL.armedExit&&FL.i>0){FL.armedExit=true;x.textContent="Thoát?";x.classList.add("armed");setTimeout(()=>{if(FL){FL.armedExit=false;if(x.isConnected){x.textContent="×";x.classList.remove("armed");}}},2500);return;}
+    flExit();
+  };
+}
+function flRender(){
+  if(!FL) return; const L=FL.L;
+  if(FL.phase==="intro") return flIntro(L);
+  if(FL.phase==="see") return flSee(L);
+  if(FL.phase==="cards") return flFlash(L);
+  if(FL.phase==="practice") return flQuestion();
+  if(FL.phase==="result") return flResult();
+}
+function flIntro(L){
+  const r=S.focus&&S.focus[L.id], tr=focusTrack(L.t);
+  const ladder=FL_LEVELS.map((lv,i)=>'<div class="fl-rung" style="--h:'+(16+i*10)+'px"><i></i><small>'+esc(lv.vi)+'</small></div>').join("");
+  $("#stage").innerHTML='<div class="fl">'+'<div class="fl-top"><button class="fl-x" id="flX" aria-label="Close lesson">×</button><span class="fl-top-track">'+esc(tr.vi)+' · '+esc(tr.en)+'</span></div>'
+    +'<div class="fl-intro"><div class="fl-intro-g">'+esc(L.g)+'</div><h2>'+esc(L.vi)+'</h2><p>'+esc(L.en)+'</p>'+(r&&r.stars?flStarsHTML(r.stars):'')+'</div>'
+    +'<div class="fl-route"><div><b>1</b><span>Xem</span><small>see it</small></div><div><b>2</b><span>Thẻ</span><small>'+flCards(L).length+' cards</small></div><div><b>3</b><span>Luyện</span><small>step by step</small></div></div>'
+    +'<div class="fl-ladder" aria-label="Exercises get harder step by step">'+ladder+'</div>'
+    +'<div class="fl-actions"><button class="btn" id="flGo">Bắt đầu</button>'
+    +'<button class="btn ghost" id="flPractice">Chỉ luyện tập</button>'
+    +(r&&r.stars?'<button class="btn ghost" id="flHard">Thử thách ◆</button>':'')+'</div></div>';
+  flWireTop();
+  $("#flGo").onclick=function(){FL.phase="see";flRender();};
+  $("#flPractice").onclick=function(){flStartPractice("full");};
+  if($("#flHard")) $("#flHard").onclick=function(){flStartPractice("hard");};
+  keyHandler=e=>{if(e.key==="Enter"){FL.phase="see";flRender();}};
+}
+function flSee(L){
+  $("#stage").innerHTML='<div class="fl">'+flTop("see")
+    +'<div class="fl-see-head"><span class="fl-see-g">'+esc(L.g)+'</span><div><h2>'+esc(L.vi)+'</h2><p>'+esc(L.en)+'</p></div></div>'
+    +L.vis.map(v=>'<div class="fl-visual">'+flVisual(v)+'</div>').join("")
+    +'<div class="fl-tap-hint">Tap any Vietnamese word to hear it.</div>'
+    +'<div class="fl-bottom"><button class="btn" id="flNextStep">Thẻ học →</button></div></div>';
+  flWireTop(); flWireVisuals();
+  $("#flNextStep").onclick=function(){FL.phase="cards";FL.card=0;FL.flipped=false;flRender();window.scrollTo({top:0,behavior:"instant"});};
+  keyHandler=e=>{if(e.key==="Enter")$("#flNextStep").click();};
+}
+function flFlash(L){
+  const cards=flCards(L), n=cards.length, c=cards[FL.card], xf=!L.cards&&L.xf?L.xf[FL.card]:null;
+  const ex=xf?null:flExample(L,c[0]);
+  $("#stage").innerHTML='<div class="fl">'+flTop("cards")
+    +'<div class="fl-flash-count">'+(FL.card+1)+' / '+n+'</div>'
+    +'<button class="fl-flash'+(FL.flipped?' flipped':'')+'" id="flCard" aria-label="Flip card"><span class="fl-flash-in">'
+    +'<span class="fl-face front"><b>'+esc(c[0])+'</b><small>tap to flip</small></span>'
+    +'<span class="fl-face back"><span class="fl-flash-word">'+esc(c[0])+'</span>'+(xf?'<em class="fl-flash-xf">'+esc(xf[1])+'</em>':'')+'<b class="en">'+esc(c[1])+'</b>'+(ex?'<span class="fl-flash-ex">'+esc(ex[0])+'<small>'+esc(ex[1])+'</small></span>':'')+'</span>'
+    +'</span></button>'
+    +'<div class="fl-flash-dots">'+cards.map((x,i)=>'<i class="'+(i===FL.card?'on':i<FL.card?'done':'')+'"></i>').join("")+'</div>'
+    +'<div class="fl-flash-nav"><button class="btn ghost" id="flPrev"'+(FL.card?'':' disabled')+'>‹</button><button class="btn ghost" id="flHear">▶ Nghe</button><button class="btn ghost" id="flFwd">›</button></div>'
+    +'<div class="fl-bottom"><button class="btn'+(FL.card===n-1?'':' ghost')+'" id="flToPractice">Luyện tập →</button></div></div>';
+  flWireTop();
+  function say(){ TTS.seq(ex&&FL.flipped?[c[0],ex[0]]:[xf&&FL.flipped?xf[1]:c[0]]); }
+  $("#flCard").onclick=function(){FL.flipped=!FL.flipped;this.classList.toggle("flipped",FL.flipped);if(FL.flipped)say();};
+  $("#flHear").onclick=say;
+  $("#flPrev").onclick=function(){if(FL.card>0){FL.card--;FL.flipped=false;flRender();}};
+  $("#flFwd").onclick=function(){if(FL.card<n-1){FL.card++;FL.flipped=false;flRender();}else flStartPractice("full");};
+  $("#flToPractice").onclick=function(){flStartPractice("full");};
+  if(S.autoplay&&!FL.flipped) setTimeout(()=>TTS.say(c[0]),120);
+  keyHandler=function(e){ if(e.key===" "){e.preventDefault();$("#flCard").click();} if(e.key==="ArrowRight")$("#flFwd").click(); if(e.key==="ArrowLeft")$("#flPrev").click(); };
+}
+
+/* ── question building ────────────────────────────────────────────────── */
+function flPhraseSet(L){
+  const set=new Set();
+  function add(p){ p=flClean(p); if(p.indexOf(" ")>-1&&p.split(" ").length<=4&&p.indexOf("…")<0) set.add(p); }
+  (COURSE.words||[]).forEach(w=>add(w.vi||""));
+  flCards(L).forEach(c=>add(c[0])); (L.s||[]).forEach(s=>add(s.k));
+  return set;
+}
+function flTiles(s,L){
+  let text=s.v.trim(); const m=text.match(/[.?!]+$/); const end=m?m[0]:""; if(end) text=text.slice(0,-end.length);
+  const words=text.split(/\s+/), phrases=flPhraseSet(L), out=[]; let i=0;
+  while(i<words.length){ let took=1;
+    for(let n=Math.min(4,words.length-i);n>=2;n--){ if(phrases.has(flClean(words.slice(i,i+n).join(" ")))){took=n;break;} }
+    out.push(words.slice(i,i+took).join(" ")); i+=took; }
+  if(out.length&&FL_PROPER.indexOf(out[0].split(" ")[0])<0) out[0]=flCap(out[0],false);
+  return {tiles:out,end:end};
+}
+function flDistractVi(L,correct,n){
+  const syn=flSynOf(L,correct);
+  let pool=flCards(L).map(c=>c[0]).filter(v=>syn.indexOf(flClean(v))<0&&v.indexOf("…")<0);
+  if(pool.length<n){ const more=FOCUS.filter(x=>x.t===L.t&&x!==L).reduce((a,x)=>a.concat(flCards(x).map(c=>c[0])),[]).filter(v=>syn.indexOf(flClean(v))<0&&v.indexOf("…")<0); pool=pool.concat(shuffle(more)); }
+  return flUniq(shuffle(pool)).filter(v=>flClean(v)!==flClean(correct)).slice(0,n);
+}
+function flDistractEn(L,correctEn,n){
+  let pool=flCards(L).map(c=>c[1]).filter(e=>e!==correctEn);
+  if(pool.length<n) pool=pool.concat(shuffle(FOCUS.filter(x=>x.t===L.t&&x!==L).reduce((a,x)=>a.concat(flCards(x).map(c=>c[1])),[])));
+  return flUniq(shuffle(pool)).filter(e=>flClean(e)!==flClean(correctEn)).slice(0,n);
+}
+function flMCQ(lvl,prompt,correct,wrong,extra){
+  const opts=shuffle([correct].concat(wrong)); return Object.assign({type:"mcq",lvl:lvl,prompt:prompt,opts:opts,ans:opts.indexOf(correct)},extra||{});
+}
+function flGapQ(L,s,lvl){
+  const f=flFind(s.v,s.k); if(!f) return null;
+  const atStart=f.start===0, cs=x=>atStart?flCap(x,true):x;
+  const wrong=(s.d?s.d.slice(0,3):flDistractVi(L,s.k,3)).map(cs);
+  const opts=shuffle(flUniq([cs(f.text)].concat(wrong))).slice(0,4);
+  if(opts.indexOf(cs(f.text))<0) opts[0]=cs(f.text);
+  return {type:lvl===8?"typegap":"gap",lvl:lvl,s:s,before:s.v.slice(0,f.start),after:s.v.slice(f.end),key:f.text,opts:shuffle(opts)};
+}
+function flBuild(L,mode){
+  const cards=flCards(L), sents=shuffle((L.s||[]).slice()), xf=L.xf||[], qs=[];
+  const hard=mode==="hard", listen=TTS.ready&&TTS.engine;
+  let si=0; const nextS=()=>sents.length?sents[(si++)%sents.length]:null;
+  const cardPick=n=>flPick(cards,Math.min(n,cards.length));
+  const fromCards=!!(L.cards&&L.cards.length);
+  /* 1 · recognise */
+  if(!hard){
+    if(fromCards) cardPick(3).forEach(c=>qs.push(flMCQ(1,{vi:c[0],label:"Nghĩa là gì?",sub:"What does it mean?"},c[1],flDistractEn(L,c[1],3),{say:c[0],fb:[c[0],c[1]]})));
+    else flPick(xf,3).forEach(x=>qs.push(flMCQ(1,{vi:x[0],label:L.xfh?L.xfh[1]+"?":"Spoken form?",sub:x[2]},x[1],flPick(xf.filter(y=>y!==x).map(y=>y[1]),3),{fb:[x[0]+" → "+x[1],x[2]]})));
+  }
+  /* 2 · listen */
+  if(!hard&&listen&&fromCards) cardPick(2).forEach(c=>qs.push(flMCQ(2,{audio:c[0],label:"Nghe và chọn",sub:"Listen and pick"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]]})));
+  /* 3 · match */
+  if(!hard){
+    const src=fromCards?cards.map(c=>[c[0],c[1]]):xf.map(x=>[x[0],x[1]]);
+    const uniq=[]; src.forEach(p=>{ if(!uniq.some(u=>flClean(u[0])===flClean(p[0])||flClean(u[1])===flClean(p[1]))) uniq.push(p); });
+    if(uniq.length>=3) qs.push({type:"match",lvl:3,pairs:flPick(uniq,Math.min(4,uniq.length))});
+  }
+  /* 4 · recall */
+  if(fromCards) cardPick(hard?2:3).forEach(c=>qs.push(flMCQ(4,{en:c[1],label:"Tiếng Việt là gì?",sub:"Pick the Vietnamese"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]]})));
+  else flPick(xf,hard?2:3).forEach(x=>qs.push(flMCQ(4,{vi:x[1],label:"Viết thế nào?",sub:"Which written word?"},x[0],flPick(xf.filter(y=>y!==x).map(y=>y[0]),3),{fb:[x[1]+" = "+x[0],x[2]]})));
+  /* 5 · choose: natural sentence, situations, opposites, transformations */
+  const choose=[];
+  (L.traps||[]).forEach(t=>choose.push(flMCQ(5,{en:t.e,label:"Câu nào tự nhiên?",sub:"Which sounds natural?"},t.ok,t.bad,{say:t.ok,fb:[t.ok,t.e],long:true})));
+  (L.quiz||[]).forEach(q=>choose.push(flMCQ(5,{q:q[0],label:"Chọn",sub:"Choose"},q[1][q[2]],q[1].filter((x,i)=>i!==q[2]))));
+  (L.opp||[]).forEach(p=>choose.push(flMCQ(5,{vi:p[0],label:"Trái nghĩa?",sub:"Opposite?"},p[1],flPick(L.opp.filter(o=>o!==p).map(o=>o[0]).concat(L.opp.filter(o=>o!==p).map(o=>o[1])),3),{say:p[1],fb:[p[0]+" ⟷ "+p[1],""]})));
+  if(xf.length&&(fromCards||hard)) xf.forEach(x=>choose.push(flMCQ(5,{vi:x[0],label:(L.xfh?L.xfh[1]:"Southern")+"?",sub:x[2]},x[1],flPick(xf.filter(y=>y!==x).map(y=>y[1]),3),{fb:[x[0]+" → "+x[1],x[2]]})));
+  flPick(choose,hard?3:2).forEach(q=>qs.push(q));
+  /* 6 · fill the gap */
+  for(let k=0;k<(hard?2:3)&&sents.length;k++){ const q=flGapQ(L,nextS(),6); if(q) qs.push(q); }
+  /* 7 · build the sentence */
+  const buildable=shuffle(sents.filter(s=>{const t=flTiles(s,L).tiles.length;return t>=3&&t<=9&&s.v.indexOf("—")<0;}));
+  buildable.slice(0,hard?3:2).forEach(s=>{const tt=flTiles(s,L); qs.push({type:"order",lvl:7,s:s,tiles:tt.tiles,end:tt.end});});
+  /* 8 · type */
+  if(hard&&fromCards) cardPick(2).forEach(c=>qs.push({type:"typeword",lvl:8,card:c}));
+  if(!fromCards&&xf.length) flPick(xf,hard?4:2).forEach(x=>qs.push({type:"typexf",lvl:8,x:x}));
+  for(let k=0;k<(hard?2:2)&&sents.length;k++){ const q=flGapQ(L,nextS(),8); if(q) qs.push(q); }
+  /* 9 · translate */
+  shuffle(sents.filter(s=>s.v.indexOf("—")<0&&flTiles(s,L).tiles.length>=2)).slice(0,hard?3:2).forEach(s=>qs.push({type:"translate",lvl:9,s:s}));
+  return qs;
+}
+function flStartPractice(mode){
+  FL.mode=mode; FL.qs=flBuild(FL.L,mode); FL.i=0; FL.res=[]; FL.repairs=[]; FL.inRepair=false; FL.phase="practice"; FL.main=FL.qs.length;
+  flRender(); window.scrollTo({top:0,behavior:"instant"});
+}
+
+/* ── practice ─────────────────────────────────────────────────────────── */
+function flLadderBar(){
+  const qs=FL.qs.slice(0,FL.main), cur=FL.qs[FL.i], lv=cur?cur.lvl:9;
+  const lvls=[...new Set(qs.map(q=>q.lvl))];
+  return '<div class="fl-ladderbar">'+lvls.map(function(l){
+    const inL=qs.filter(q=>q.lvl===l), doneN=qs.slice(0,Math.min(FL.i,FL.main)).filter(q=>q.lvl===l).length;
+    return '<span class="'+(FL.inRepair||doneN===inL.length?'done':l===lv?'on':'')+'" style="flex:'+inL.length+'"><i style="width:'+(doneN/inL.length*100)+'%"></i></span>';}).join("")+'</div>';
+}
+function flLevelChip(q){
+  const lv=FL_LEVELS.find(x=>x.id===q.lvl);
+  return '<div class="fl-lv"><span class="fl-lv-n">'+(FL.inRepair?'↺':q.lvl)+'</span><b>'+(FL.inRepair?'Sửa lỗi':esc(lv.vi))+'</b><small>'+(FL.inRepair?'Fix mistakes':esc(lv.en))+'</small></div>';
+}
+function flQuestion(){
+  const q=FL.qs[FL.i]; if(!q) return flFinish();
+  FL.answered=false;
+  let body='';
+  const p=q.prompt||{};
+  if(q.type==="mcq"){
+    body+='<div class="fl-prompt">'+(p.label?'<div class="fl-ask">'+esc(p.label)+(p.sub?' <small>'+esc(p.sub)+'</small>':'')+'</div>':'')
+      +(p.vi?'<div class="fl-big vi">'+esc(p.vi)+'</div>':'')+(p.en?'<div class="fl-big en">'+esc(p.en)+'</div>':'')+(p.q?'<div class="fl-big en sm">'+esc(p.q)+'</div>':'')
+      +(p.audio?'<button class="fl-audio" id="flPlay" aria-label="Play">▶</button>':'')+(p.vi&&q.say?'<button class="fl-mini-say" data-say="'+esc(q.say)+'" aria-label="Play">▶</button>':'')+'</div>'
+      +'<div class="fl-opts'+(q.long?' long':'')+'">'+q.opts.map((o,i)=>'<button class="fl-opt" data-i="'+i+'"><span>'+(i+1)+'</span>'+esc(o)+'</button>').join("")+'</div>';
+  }else if(q.type==="match"){
+    const left=shuffle(q.pairs.map((p,i)=>({t:p[0],i:i}))), right=shuffle(q.pairs.map((p,i)=>({t:p[1],i:i})));
+    body+='<div class="fl-prompt"><div class="fl-ask">Ghép đôi <small>Match the pairs</small></div></div><div class="fl-match"><div>'+left.map(x=>'<button class="fl-m vi" data-side="l" data-i="'+x.i+'">'+esc(x.t)+'</button>').join("")+'</div><div>'+right.map(x=>'<button class="fl-m" data-side="r" data-i="'+x.i+'">'+esc(x.t)+'</button>').join("")+'</div></div>';
+  }else if(q.type==="gap"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Điền vào chỗ trống <small>Fill the gap</small></div><div class="fl-sent">'+esc(q.before)+'<span class="fl-blank" id="flBlank">　　</span>'+esc(q.after)+'</div><div class="fl-sent-en">'+esc(q.s.e)+'</div></div>'
+      +'<div class="fl-chipopts">'+q.opts.map((o,i)=>'<button class="fl-chipopt" data-i="'+i+'">'+esc(o)+'</button>').join("")+'</div>';
+  }else if(q.type==="order"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Xếp thành câu <small>Build the sentence</small></div><div class="fl-big en sm">'+esc(q.s.e)+'</div></div>'
+      +'<div class="fl-build" id="flBuild"><span class="fl-build-ph">Tap the words in order</span></div><div class="fl-bank" id="flBank">'+shuffle(q.tiles.map((t,i)=>({t:t,i:i}))).map(x=>'<button class="fl-tilebtn" data-i="'+x.i+'">'+esc(x.t)+'</button>').join("")+'</div>'
+      +'<div class="fl-bottom"><button class="btn" id="flCheck" disabled>Kiểm tra</button></div>';
+  }else if(q.type==="typegap"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Gõ từ còn thiếu <small>Type the missing word</small></div><div class="fl-sent">'+esc(q.before)+'<input class="fl-gapin" id="flIn" autocomplete="off" autocapitalize="off" spellcheck="false" lang="vi" style="width:'+Math.max(4,q.key.length+2)+'ch" aria-label="Missing word">'+esc(q.after)+'</div><div class="fl-sent-en">'+esc(q.s.e)+'</div></div>'
+      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Không biết</button><button class="btn" id="flCheck">Kiểm tra</button></div>';
+  }else if(q.type==="typeword"||q.type==="typexf"){
+    const pr=q.type==="typeword"?'<div class="fl-big en">'+esc(q.card[1])+'</div>':'<div class="fl-big vi">'+esc(q.x[1])+'</div><div class="fl-sent-en">'+esc(q.x[2])+'</div>';
+    body+='<div class="fl-prompt"><div class="fl-ask">'+(q.type==="typeword"?'Gõ tiếng Việt <small>Type it in Vietnamese</small>':'Viết thế nào? <small>Type the written form</small>')+'</div>'+pr+'</div>'
+      +'<input class="fl-input" id="flIn" autocomplete="off" autocapitalize="off" spellcheck="false" lang="vi" placeholder="…">'
+      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Không biết</button><button class="btn" id="flCheck">Kiểm tra</button></div>';
+  }else if(q.type==="translate"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Dịch sang tiếng Việt <small>Translate</small></div><div class="fl-big en">'+esc(q.s.e)+'</div></div>'
+      +'<textarea class="fl-input area" id="flIn" rows="2" autocomplete="off" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Viết câu…"></textarea>'
+      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Xem đáp án</button><button class="btn" id="flCheck">Kiểm tra</button></div>';
+  }
+  $("#stage").innerHTML='<div class="fl">'+flTop("practice")+flLevelChip(q)+'<div class="fl-qcard" id="flQ">'+body+'</div><div id="flFb"></div></div>';
+  flWireTop(); flWireQuestion(q);
+}
+function flWireQuestion(q){
+  keyHandler=null;
+  $$(".fl-mini-say").forEach(b=>b.onclick=()=>TTS.say(b.dataset.say));
+  if(q.type==="mcq"){
+    const pl=$("#flPlay"); if(pl){ pl.onclick=()=>TTS.say(q.prompt.audio); setTimeout(()=>TTS.say(q.prompt.audio),200); }
+    else if(q.prompt.vi&&q.say&&S.autoplay&&q.lvl===1) setTimeout(()=>TTS.say(q.say),150);
+    $$(".fl-opt").forEach(b=>b.onclick=function(){
+      if(FL.answered) return; const i=+b.dataset.i, ok=i===q.ans;
+      $$(".fl-opt").forEach((x,j)=>{x.disabled=true; if(j===q.ans)x.classList.add("right"); else if(j===i)x.classList.add("wrong");});
+      flAnswer(q,ok);
+    });
+    keyHandler=e=>{const n=parseInt(e.key,10); if(n>=1&&n<=q.opts.length&&!FL.answered) $$(".fl-opt")[n-1].click();};
+  }
+  if(q.type==="match"){
+    let sel=null, miss=0, done=0;
+    $$(".fl-m").forEach(b=>b.onclick=function(){
+      if(b.classList.contains("ok")) return;
+      if(b.dataset.side==="l") TTS.say(b.textContent);
+      if(!sel||sel.dataset.side===b.dataset.side){ $$(".fl-m.sel").forEach(x=>x.classList.remove("sel")); sel=b; b.classList.add("sel"); return; }
+      if(sel.dataset.i===b.dataset.i){ [sel,b].forEach(x=>{x.classList.remove("sel");x.classList.add("ok");x.disabled=true;}); sel=null; done++;
+        if(done===q.pairs.length) flAnswer(q,miss<=1,miss?miss+(miss>1?" mismatches":" mismatch"):null); }
+      else { miss++; const a=sel,c=b; [a,c].forEach(x=>x.classList.add("bad")); setTimeout(()=>[a,c].forEach(x=>x.classList.remove("bad","sel")),450); sel=null; }
+    });
+  }
+  if(q.type==="gap"){
+    $$(".fl-chipopt").forEach(b=>b.onclick=function(){
+      if(FL.answered) return; const ok=flClean(b.textContent)===flClean(q.key);
+      $("#flBlank").textContent=b.textContent; $("#flBlank").classList.add(ok?"right":"wrong");
+      $$(".fl-chipopt").forEach(x=>{x.disabled=true; if(flClean(x.textContent)===flClean(q.key))x.classList.add("right"); else if(x===b)x.classList.add("wrong");});
+      flAnswer(q,ok);
+    });
+    keyHandler=e=>{const n=parseInt(e.key,10); if(n>=1&&n<=q.opts.length&&!FL.answered) $$(".fl-chipopt")[n-1].click();};
+  }
+  if(q.type==="order"){
+    const built=[];
+    function paint(){
+      $("#flBuild").innerHTML=built.length?built.map((i,k)=>'<button class="fl-tilebtn in" data-k="'+k+'">'+esc(q.tiles[i])+'</button>').join("")+'<span class="fl-build-end">'+esc(q.end)+'</span>':'<span class="fl-build-ph">Tap the words in order</span>';
+      $$("#flBank .fl-tilebtn").forEach(b=>b.classList.toggle("used",built.indexOf(+b.dataset.i)>-1));
+      $("#flCheck").disabled=built.length!==q.tiles.length;
+      $$("#flBuild .fl-tilebtn").forEach(b=>b.onclick=function(){ if(FL.answered)return; built.splice(+b.dataset.k,1); paint(); });
+    }
+    $$("#flBank .fl-tilebtn").forEach(b=>b.onclick=function(){ if(FL.answered||b.classList.contains("used"))return; built.push(+b.dataset.i); paint(); });
+    $("#flCheck").onclick=function(){
+      if(FL.answered) return; const said=flClean(built.map(i=>q.tiles[i]).join(" "));
+      const ok=[q.s.v].concat(q.s.a||[]).some(x=>flClean(x)===said);
+      $("#flBuild").classList.add(ok?"right":"wrong"); this.disabled=true;
+      flAnswer(q,ok);
+    };
+    keyHandler=e=>{if(e.key==="Enter"&&!$("#flCheck").disabled)$("#flCheck").click();};
+  }
+  if(q.type==="typegap"||q.type==="typeword"||q.type==="typexf"||q.type==="translate"){
+    const inp=$("#flIn"); setTimeout(()=>{try{inp.focus({preventScroll:true});}catch(e){}},60);
+        $("#flSkip").onclick=function(){ if(FL.answered)return; inp.disabled=true; flAnswer(q,false); };
+    $("#flCheck").onclick=function(){
+      if(FL.answered) return; const val=inp.value.trim(); if(!val){inp.focus();return;}
+      inp.disabled=true;
+      const g=flGradeTyped(q,val);
+      inp.classList.add(g.ok?"right":g.close?"close":"wrong");
+      if(g.close&&!g.ok) return flClose(q,val,g);
+      flAnswer(q,g.ok,g.note);
+    };
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); $("#flCheck").click(); } });
+  }
+}
+function flGradeTyped(q,val){
+  let targets;
+  if(q.type==="typegap") targets=flSynOf(FL.L,q.key);
+  else if(q.type==="typeword") targets=flSynOf(FL.L,q.card[0]).concat([q.card[0]]);
+  else if(q.type==="typexf") targets=[q.x[0]];
+  else targets=[q.s.v].concat(q.s.a||[]);
+  const U=flClean(val); let best=null;
+  targets.forEach(function(t){ const g=classifyTypedAnswer(U,flClean(t)); if(!best||(g.skillCorrect&&!best.skillCorrect)||(g.masteryCredit>(best.masteryCredit||0)&&g.skillCorrect===best.skillCorrect)) best=Object.assign({t:t},g); });
+  const note=best&&best.skillCorrect&&best.outcome!=="exact"?(best.repair==="tone"?"Check the tone marks: "+best.t:"Small spelling slip: "+best.t):null;
+  if(best&&best.skillCorrect) return {ok:true,note:note};
+  const s=Math.max.apply(null,targets.map(t=>sim(U,t)));
+  return {ok:false,close:q.type==="translate"&&s>=0.74,sim:s};
+}
+function flClose(q,val,g){
+  FL.answered=true;
+  $("#flFb").innerHTML='<div class="fl-fb close"><div class="fl-fb-h"><b>Gần đúng</b><small>Compare with the model</small></div>'
+    +'<div class="fl-cmp2"><div><small>Bạn</small>'+esc(val)+'</div><div><small>Mẫu</small>'+flSay(q.s.v,"vi")+'</div></div>'
+    +'<div class="fl-fb-row"><button class="btn ghost" id="flMineWrong">Mình sai</button><button class="btn" id="flMineOk">Mình đúng</button></div></div>';
+  $("#flMineOk").onclick=()=>{FL.answered=false;flAnswer(q,true,"Counted as correct — your wording.");};
+  $("#flMineWrong").onclick=()=>{FL.answered=false;flAnswer(q,false);};
+  if(S.autoplay) TTS.say(q.s.v);
+  flScrollFb();
+}
+function flFeedback(q){
+  if(q.type==="mcq"){ if(q.fb) return {main:q.fb[0],en:q.fb[1],say:q.say||null}; return {main:q.opts[q.ans],say:q.say||null}; }
+  if(q.type==="match") return {quiet:true};
+  if(q.type==="typeword") return {main:q.card[0],en:q.card[1],say:q.card[0]};
+  if(q.type==="typexf") return {main:q.x[0]+" → "+q.x[1],en:q.x[2],say:q.x[0]};
+  return {main:q.s.v,en:q.s.e,say:q.s.v};
+}
+function flAnswer(q,ok,note){
+  if(FL.answered) return; FL.answered=true;
+  if(!FL.inRepair){ FL.res.push({q:q,ok:ok}); if(!ok) FL.repairs.push(q); }
+  logDay(ok); if(ok) S.xp+=2; save();
+  const card=$("#flQ"); if(card){ card.classList.add(ok?"ok":"no"); if(!ok){card.classList.add("shake");setTimeout(()=>card.classList.remove("shake"),340);} }
+  const fb=flFeedback(q);
+  const showAns=!fb.quiet&&fb.main&&!(ok&&q.type==="mcq"&&q.lvl<=2);
+  $("#flFb").innerHTML='<div class="fl-fb '+(ok?'ok':'no')+'"><div class="fl-fb-h"><b>'+(ok?pick(["Đúng rồi!","Giỏi quá!","Chính xác!","Hay lắm!"]):"Chưa đúng")+'</b>'+(note?'<small>'+esc(note)+'</small>':'')+'</div>'
+    +(showAns?'<div class="fl-fb-ans">'+(fb.say?'<button class="fl-mini-say" data-say="'+esc(fb.say)+'" aria-label="Play">▶</button>':'')+'<span>'+esc(fb.main)+'</span>'+(fb.en?'<small>'+esc(fb.en)+'</small>':'')+'</div>':'')
+    +'<button class="btn" id="flNextQ">Tiếp →</button></div>';
+  $$("#flFb .fl-mini-say").forEach(b=>b.onclick=()=>TTS.say(b.dataset.say));
+  if(fb.say&&S.autoplay&&!(q.type==="mcq"&&q.lvl<=2)) TTS.say(fb.say);
+  $("#flNextQ").onclick=flAdvance;
+  keyHandler=e=>{if(e.key==="Enter"){e.preventDefault();flAdvance();}};
+  flScrollFb();
+}
+function flScrollFb(){ setTimeout(function(){ const f=$("#flFb"); if(f&&f.getBoundingClientRect().bottom>window.innerHeight) f.scrollIntoView({behavior:"smooth",block:"end"}); },40); }
+function flReshuffle(q){
+  if(q.type==="mcq"){ const c=q.opts[q.ans], o=shuffle(q.opts.slice()); return Object.assign({},q,{opts:o,ans:o.indexOf(c)}); }
+  if(q.type==="gap") return Object.assign({},q,{opts:shuffle(q.opts.slice())});
+  return Object.assign({},q);
+}
+function flAdvance(){
+  FL.i++;
+  if(FL.i>=FL.qs.length&&!FL.inRepair&&FL.repairs.length){ FL.inRepair=true; FL.qs=FL.qs.concat(shuffle(FL.repairs.map(flReshuffle))); }
+  if(FL.i>=FL.qs.length) return flFinish();
+  flRender(); window.scrollTo({top:0,behavior:"instant"});
+}
+function flFinish(){
+  const total=FL.res.length, okN=FL.res.filter(r=>r.ok).length, pct=total?okN/total:0;
+  const stars=pct>=0.9?3:pct>=0.7?2:pct>=0.5?1:0, r=focusRec(FL.L.id);
+  r.runs++; r.last=Date.now(); r.best=Math.max(r.best||0,Math.round(pct*100));
+  const prevStars=r.stars||0; if(FL.mode!=="hard") r.stars=Math.max(prevStars,stars); else { r.stars=Math.max(prevStars,Math.min(3,stars)); if(pct>=0.8) r.hard=1; }
+  S.focusLast=FL.L.id; S.xp+=okN; bumpStreak(); save();
+  FL.phase="result"; FL.score={total:total,ok:okN,pct:pct,stars:stars,improved:r.stars>prevStars};
+  flRender(); window.scrollTo({top:0,behavior:"instant"});
+}
+function flResult(){
+  const sc=FL.score, L=FL.L, idx=FOCUS.indexOf(L), next=FOCUS[idx+1]||null;
+  const byLvl=FL_LEVELS.map(lv=>{const xs=FL.res.filter(r=>r.q.lvl===lv.id);return {lv:lv,n:xs.length,ok:xs.filter(r=>r.ok).length};}).filter(x=>x.n);
+  const missed=flUniq(FL.res.filter(r=>!r.ok).map(r=>{const q=r.q;return q.s?q.s.v+" — "+q.s.e:q.fb?q.fb[0]+(q.fb[1]?" — "+q.fb[1]:""):q.card?q.card[0]+" — "+q.card[1]:q.x?q.x[0]+" → "+q.x[1]:q.type==="match"?"Matching pairs":"";}).filter(Boolean)).slice(0,6);
+  const R=52, C=2*Math.PI*R;
+  $("#stage").innerHTML='<div class="fl"><div class="fl-top"><button class="fl-x" id="flX" aria-label="Close">×</button><span class="fl-top-track">'+esc(L.vi)+'</span></div>'
+    +'<div class="fl-result"><svg class="fl-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="'+R+'" class="bg"/><circle cx="60" cy="60" r="'+R+'" class="fg" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+(C*(1-sc.pct)).toFixed(1)+'"/></svg>'
+    +'<div class="fl-result-pct"><b>'+Math.round(sc.pct*100)+'%</b><small>'+sc.ok+' / '+sc.total+'</small></div>'
+    +'<div class="fl-result-stars">'+flStarsHTML(sc.stars)+'</div><h2>'+(sc.stars===3?"Xuất sắc!":sc.stars===2?"Tốt lắm!":sc.stars===1?"Khá rồi!":"Cố lên!")+'</h2>'
+    +(FL.mode==="hard"?'<p class="fl-result-sub">Thử thách ◆ '+(sc.pct>=0.8?'passed':'— 80% needed')+'</p>':'')+'</div>'
+    +'<div class="fl-lvls">'+byLvl.map(x=>'<div class="'+(x.ok===x.n?'all':x.ok?'some':'none')+'"><i style="--h:'+(x.ok/x.n*100)+'%"></i><b>'+x.lv.id+'</b><small>'+esc(x.lv.vi)+'</small></div>').join("")+'</div>'
+    +(missed.length?'<div class="fl-missed"><div class="fl-ask">Ôn lại <small>Worth another look</small></div>'+missed.map(m=>'<div>'+esc(m)+'</div>').join("")+'</div>':'')
+    +'<div class="fl-actions">'+(next?'<button class="btn" id="flNextL">Bài tiếp · '+esc(next.vi)+' →</button>':'')
+    +'<button class="btn ghost" id="flAgain">Làm lại</button>'+(sc.stars>=1&&FL.mode!=="hard"?'<button class="btn ghost" id="flHard2">Thử thách ◆</button>':'')+'<button class="btn ghost" id="flBack">Bài học</button></div></div>';
+  flWireTop();
+  if($("#flNextL")) $("#flNextL").onclick=()=>openFocus(next.id);
+  $("#flAgain").onclick=()=>flStartPractice(FL.mode);
+  if($("#flHard2")) $("#flHard2").onclick=()=>flStartPractice("hard");
+  $("#flBack").onclick=flExit;
+  keyHandler=e=>{if(e.key==="Enter"&&$("#flNextL"))$("#flNextL").click();};
 }
 
 /* timing guards */
