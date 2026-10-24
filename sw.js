@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v14 — visual redesign: fonts, colour roles, light mode, drawn icons, tone-mark identity. */
-const CACHE = "vivu-v14";
+/* Ôn tiếng Việt · v15 — calmer layout, Phosphor icons, navigation fits the screen. */
+const CACHE = "vivu-v15";
 const ASSETS = [
   "./",
   "./index.html",

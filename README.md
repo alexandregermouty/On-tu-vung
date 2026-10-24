@@ -4,6 +4,18 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v15 — calmer, aligned layout
+
+- **Fits the phone exactly.** The bottom bar was 24 px wider than the screen, which made Android zoom the whole page out and pushed everything off the edges. It now sits 12 px in from each side, and every screen has a single 20 px margin on the left and right.
+- **One header row.** The page title (Hôm nay, Bài học, Khóa học…) sits beside the logo with a short subtitle, instead of a second large heading underneath.
+- **New icons.** All hand-drawn icons are replaced with [Phosphor Icons](https://phosphoricons.com) (MIT licence), light weight for the interface and duotone for lesson tracks.
+- **Decoration removed.** The cement-tile pattern, tone-mark emblems, dividers, background watermarks and falling confetti marks are gone. Cards are plain solid surfaces.
+- **Today** is one main action card, a short "Tiếp tục" list, four practice tiles and three numbers.
+- **Lessons** is a single vertical path with numbered steps, all on the same left edge.
+- **Results** use a simple progress ring.
+
+Icons: Phosphor Icons © Phosphor Icons, MIT licence.
+
 ## What is new in v14 — visual redesign
 
 ### Foundations
