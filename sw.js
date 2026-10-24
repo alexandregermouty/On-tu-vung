@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v15 — calmer layout, Phosphor icons, navigation fits the screen. */
-const CACHE = "vivu-v15";
+/* Ôn tiếng Việt · v16 — colour illustrations, back button everywhere. */
+const CACHE = "vivu-v16";
 const ASSETS = [
   "./",
   "./index.html",

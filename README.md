@@ -4,6 +4,20 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v16 — colour, illustration and a way back
+
+- **A back button on every screen.** Every page except Today shows a back arrow in the top-left corner. Lessons, review sessions and games have the same arrow, and every pop-up sheet has a "Quay lại" button at the top. The phone's own back gesture now works too: it closes a sheet, leaves a lesson or session, and then steps back through the pages you visited. It only leaves the app from Today.
+- **Colour illustrations.** Lesson tracks, course topics, practice tiles, stats, games and the More menu use Microsoft's Fluent Emoji illustrations (MIT licence), bundled as small images so they work offline.
+- **One colour per track.** Each lesson track has its own gradient (blue for questions, green for southern speech and so on), used on the next-lesson card, the track header, the progress bars and the lesson intro.
+- **Today** opens with a coloured action card, one stats strip, the "Tiếp tục" list, a new "Từ của ngày" (word of the day) card with audio, and four coloured practice tiles.
+- **Cards** are white with a soft shadow in light mode and deep green in dark mode. The bottom bar is frosted and hides during lessons and sessions.
+
+### Optional banner image (Shutterstock)
+
+Save a wide image (about 2.5 : 1, for example 1500 × 600 px) as `banner.jpg` next to `index.html`. It then appears at the top of Today. Without the file, nothing is shown. Use only an image you have licensed: Shutterstock previews are watermarked and not licensed.
+
+Illustrations: Fluent Emoji © Microsoft Corporation, MIT licence. Interface icons: Phosphor Icons, MIT licence.
+
 ## What is new in v15 — calmer, aligned layout
 
 - **Fits the phone exactly.** The bottom bar was 24 px wider than the screen, which made Android zoom the whole page out and pushed everything off the edges. It now sits 12 px in from each side, and every screen has a single 20 px margin on the left and right.
