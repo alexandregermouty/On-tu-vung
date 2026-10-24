@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v13 — review scheduling, new exercise types, path view, situations, family and work lessons. */
-const CACHE = "vivu-v13";
+/* Ôn tiếng Việt · v14 — visual redesign: fonts, colour roles, light mode, drawn icons, tone-mark identity. */
+const CACHE = "vivu-v14";
 const ASSETS = [
   "./",
   "./index.html",

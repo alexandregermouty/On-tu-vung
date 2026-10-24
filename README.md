@@ -4,6 +4,38 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v14 — visual redesign
+
+### Foundations
+- The two typefaces are now actually loaded: Be Vietnam Pro (made for Vietnamese diacritics) for every Vietnamese word, Newsreader for titles and English glosses.
+- Colour has meaning. The accent (gold in dark mode, lacquer red in light mode) is reserved for the one main action and for your progress. Jade means correct or done, coral means wrong, blue means listening.
+- Grammar roles keep fixed colours everywhere — who, verb, question word, time word and place — in patterns, in fill-the-gap blanks, in answers and in the word list.
+- Four text sizes and three spacing steps; no small capital labels; fewer Vietnamese/English label pairs.
+- Every emoji is replaced by one drawn line-icon set (about 120 icons) that looks the same on every device; the navigation uses it too.
+- A light "rice paper" theme with ink-dark text and lacquer-red accents. It follows the phone, or can be fixed in Settings.
+
+### Identity
+- The six tone marks are the visual signature: the loading animation, the dividers between tracks, the results gauge, and each track emblem, where the track's illustration is the "letter" and its tone mark sits above it like a diacritic.
+- Cards read as layered lacquer: darker body, a fine edge and a soft inner glow.
+- Each track has a line illustration (a café stool and glass for situations, a ceremony tray for the wedding, river and mountain for work, a conical hat for Southern speech, a scooter for directions).
+- A very faint Saigon cement-tile pattern sits behind the header and the Today card.
+
+### Screens
+- Today is one clear next-step card with an illustration, three round buttons (review, next lesson, lessons due), a thin line of numbers and wrapping shortcuts; the old overflow is gone.
+- The Lessons path has track emblems, a gentle colour scene per track, a lacquer-gold seal on finished lessons and a slowly pulsing ring on lessons due. Studio's games and visual maps now live at the bottom of Lessons.
+- A lesson's visuals are swiped one at a time like stories, each with a single title line.
+- Exercises are full screen (no header), with larger answer tiles, a colour wash on correct and wrong, and feedback in a bottom sheet showing the sentence with each word's tone mark beneath it; "Vì sao?" is one line that expands.
+- Results show a filling tone-mark gauge, the fourteen steps as a staircase with climbed steps lit, and stars that land.
+- Flashcards use the full height, show the word's tone marks large, and sort by swipe: left for "again", right for "I know it".
+- Course and Classes use the same cards as Lessons: topics as tiles, classes as date tiles with topic badges.
+- Progress is drawn: a word garden, a chart of the six tones, a twenty-week calendar heatmap and one ring per track; the detailed numbers sit in a fold-out.
+- Review, Listen, Speak, Weak spots, Words and Content share the new style and lose their subtitles.
+
+### Feel
+- One motion rule: quick 200 ms ease-in, sideways slides inside a lesson, fades between sections, bounce only for stars and celebrations.
+- Light vibration on answers and tile taps, and a synthesized đàn bầu-like pluck for correct and a muted wood block for wrong — both switchable in Settings.
+- Full-screen celebrations only for big moments: finishing a track, a 7-, 14-, 30-, 60-, 100- or 365-day streak, and a perfect challenge run.
+
 ## What is new in v13
 
 ### Learning design
