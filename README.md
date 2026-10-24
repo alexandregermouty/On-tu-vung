@@ -4,6 +4,32 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v13
+
+### Learning design
+- Finished lessons come back for review on a growing interval (2, 5, 12 days and so on). Due lessons show a ↺ badge, their stars fade, and Today and the Lessons tab offer a mixed "Ôn bài học" review.
+- Lesson answers now also count in the main review engine whenever the word exists in the course, so they feed Review, Weak spots and Progress.
+- A wrong answer explains itself: a specific reason for natural-versus-unnatural sentences, the meaning of the word you chose against the right one, and the course's own contrast line for the concept.
+- Every three or four lessons, a mixed review lesson (Ôn tập) interleaves them. The last review in each track adds a short reading with comprehension questions.
+- Lessons not yet done offer a three-question quick check; a perfect score marks the lesson as known and schedules it for review.
+
+### Visuals
+- Statement-to-question patterns animate: the answer is struck out and the question word drops into its slot (↻ replays it).
+- Flashcards show the tone shapes of each word and an icon for concrete words; tiles and opposite pairs use icons too.
+- The Lessons tab has a path view (default) alongside the grid.
+
+### New exercise types
+The ladder now has 14 steps in four stages (notice, understand, write, use): recognise, listen, match, recall, choose, fill in, fix the mistake, build, converse and read, type, dictation, transform or write the question, translate, and speak (speech recognition where the browser supports it). A six-second-per-question speed round follows any lesson.
+
+### Content
+- Three new tracks: Everyday situations (café, directions, rides, shopping, weather, feelings), Family and wedding (family members, meeting her family, the wedding, toasts) and Talking about work (your job, meetings, climate and water).
+- Five new grammar lessons: đang … thì, cũng · vẫn · còn, để, cho, được.
+- Conversation turns, question-writing and sentence transformations added to the existing lessons; 13 short readings.
+- A "Lớp học" track drafts a lesson from each dated class (vocabulary plus its course examples), including classes added later through Content.
+
+### Audio
+- On any flashcard, "Ghi âm" records a native speaker saying the word. Recordings are stored on this device and replace the synthetic voice everywhere in the app.
+
 ## What is new in v12
 
 - New **Lessons** tab (Bài học): 60 short lessons on one theme each, in 10 tracks — questions, time and frequency, past/now/future, pronouns, sentence building, verbs, adjectives, particles, numbers and Southern speech. The dated weekly classes are unchanged.

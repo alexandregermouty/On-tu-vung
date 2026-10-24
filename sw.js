@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v12 — focused visual lessons with progressive exercise ladders. */
-const CACHE = "vivu-v12";
+/* Ôn tiếng Việt · v13 — review scheduling, new exercise types, path view, situations, family and work lessons. */
+const CACHE = "vivu-v13";
 const ASSETS = [
   "./",
   "./index.html",

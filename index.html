@@ -1228,6 +1228,137 @@ body.in-session .brand-logo{width:34px;height:34px;opacity:.76}
 .today-lesson .fl-next-g{min-width:52px;height:52px;font-size:18px;border-radius:15px}
 .today-lesson .fl-next-copy b{font-size:16px}
 @media(max-width:700px){.fl{padding-bottom:40px}}
+
+/* ═══ v13 · additions ═════════════════════════════════════════════════ */
+.fl-list-head{flex-wrap:nowrap}
+.fl-list-head .fl-count{flex:1;text-align:right}
+.fl-viewtog{display:flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:12px;background:var(--fl-panel)}
+.fl-viewtog button{width:34px;height:30px;border:0;border-radius:9px;background:none;color:var(--text-3);font-size:15px;cursor:pointer}
+.fl-viewtog button[aria-selected="true"]{background:rgba(201,165,101,.16);color:var(--gold)}
+.fl-due{width:100%;display:flex;align-items:center;gap:14px;text-align:left;margin-top:10px;padding:13px 16px;border-radius:18px;border:1px solid rgba(122,196,166,.35);background:rgba(122,196,166,.08);color:var(--eggshell);cursor:pointer}
+.fl-due-n{min-width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--jade);color:#0D1916;font-weight:800;font-size:16px}
+.fl-due > span:nth-child(2){flex:1}.fl-due b{display:block;font-size:15px}.fl-due small{font-size:12px;color:var(--text-3)}
+.fl-due > span:last-child{font-size:20px;color:var(--jade)}
+.fl-due-badge{font-size:11px;color:var(--jade);font-weight:800}
+.fl-stars.faded i.on{background:rgba(201,165,101,.38)}
+.fl-card.review{border-style:dashed}
+/* path */
+.fl-path{position:relative;margin:4px 0 6px}
+.fl-path svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fl-path path.bg{fill:none;stroke:rgba(201,165,101,.28);stroke-width:2.2;stroke-dasharray:5 6;vector-effect:non-scaling-stroke}
+.fl-node{position:absolute;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;border:2px solid var(--line-strong);background:#13241F;color:var(--eggshell);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:transform .16s var(--ease),box-shadow .2s;padding:0}
+.fl-node:hover{transform:translate(-50%,-50%) scale(1.05)}
+.fl-node-g{font-family:var(--serif);font-size:17px;color:var(--gold);line-height:1.05;text-align:center;max-width:68px;overflow:hidden;word-break:break-word}
+.fl-node.done{background:radial-gradient(circle at 35% 30%,rgba(201,165,101,.32),rgba(201,165,101,.1));border-color:rgba(201,165,101,.6)}
+.fl-node.next{border-color:var(--gold);box-shadow:0 0 0 6px rgba(201,165,101,.14),0 10px 30px rgba(0,0,0,.3);animation:flPulse 2.4s ease-in-out infinite}
+@keyframes flPulse{50%{box-shadow:0 0 0 11px rgba(201,165,101,.06),0 10px 30px rgba(0,0,0,.3)}}
+.fl-node.later{opacity:.62}
+.fl-node.review{border-style:dashed;width:62px;height:62px}
+.fl-node.review .fl-node-g{font-size:22px}
+.fl-node.due{border-color:var(--jade)}
+.fl-node .fl-due-badge{position:absolute;top:-4px;right:-4px;width:22px;height:22px;border-radius:50%;background:var(--jade);color:#0D1916;display:grid;place-items:center;font-size:12px}
+.fl-node-l{position:absolute;top:50%;transform:translateY(-50%);width:max-content;max-width:150px;display:flex;flex-direction:column;gap:2px;text-align:left;pointer-events:none}
+.fl-node-l.right{left:calc(100% + 12px)}.fl-node-l.left{right:calc(100% + 12px);text-align:right;align-items:flex-end}
+.fl-node-l.below{top:calc(100% + 6px);transform:translateX(-50%);left:50%;text-align:center;align-items:center;max-width:170px}
+.fl-node-l b{font-size:13.5px;font-weight:650;line-height:1.2}
+.fl-node-l small{font-size:11px;color:var(--text-3);line-height:1.25}
+.fl-node-l .fl-stars{margin-top:3px}
+.fl-node.review .fl-node-l small{display:none}
+.fl-path .fl-node:nth-child(4n+2) .fl-node-l.below,.fl-path .fl-node .fl-node-l.below{background:rgba(12,24,22,.8);padding:2px 6px;border-radius:8px}
+/* intro */
+.fl-intro-due{margin-top:8px;font-size:12.5px;color:var(--jade);font-weight:650}
+.fl-ladder{gap:3px;height:96px}
+.fl-rung i{height:var(--h);border-radius:6px 6px 2px 2px}
+.fl-stages{display:flex;gap:3px;margin-top:6px}
+.fl-stages div{display:flex;flex-direction:column;align-items:center;padding-top:6px;border-top:2px solid rgba(201,165,101,.35)}
+.fl-stages b{font-size:11.5px;font-weight:700}.fl-stages small{font-size:10px;color:var(--text-3)}
+/* recap + reading */
+.fl-recap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.fl-recap-item{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:12px;border-radius:15px;border:1px solid var(--line);background:rgba(12,24,22,.4);color:var(--eggshell);cursor:pointer}
+.fl-recap-g{font-family:var(--serif);font-size:20px;color:var(--gold)}
+.fl-recap-item b{font-size:13.5px}.fl-recap-item small{font-size:12px;color:var(--text-3);line-height:1.35}
+.fl-read{display:flex;flex-direction:column;gap:6px}
+.fl-read-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.fl-read-h span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.fl-read-h b{font-family:var(--serif);font-weight:500;font-size:20px}.fl-read-h small{font-size:11.5px;color:var(--text-4);flex-basis:100%}
+.fl-read-line{display:flex;flex-direction:column;gap:3px;text-align:left;padding:9px 12px;border-radius:12px;border:1px solid transparent;background:rgba(12,24,22,.35);color:var(--eggshell);cursor:pointer;font-size:16px;line-height:1.45}
+.fl-read-line small{display:none;font-size:12.5px;color:var(--text-3);font-family:var(--en);font-style:italic}
+.fl-read-line.open{border-color:rgba(201,165,101,.3)}.fl-read-line.open small{display:block}
+.fl-read.compact{margin-bottom:14px;padding:10px;border-radius:16px;background:rgba(12,24,22,.3)}
+.fl-read.compact > b{font-family:var(--serif);font-weight:500;font-size:17px;padding:0 4px 4px}
+.fl-read.compact .fl-read-line{font-size:14.5px;padding:7px 10px}
+/* chat */
+.fl-chat{display:flex;flex-direction:column;gap:8px;margin:2px 0 4px}
+.fl-bubble{display:flex;align-items:center;gap:10px;max-width:92%;padding:11px 12px;border-radius:18px}
+.fl-bubble.them{align-self:flex-start;background:rgba(243,235,221,.07);border:1px solid var(--line);border-bottom-left-radius:6px}
+.fl-bubble.me{align-self:flex-end;background:rgba(201,165,101,.14);border:1px dashed rgba(201,165,101,.45);border-bottom-right-radius:6px;min-width:70px;justify-content:center}
+.fl-bubble b{display:block;font-size:17px;font-weight:650;line-height:1.35}.fl-bubble small{display:block;font-size:12px;color:var(--text-3);font-family:var(--en);font-style:italic;margin-top:2px}
+.fl-bubble.me b{color:var(--gold);font-size:20px}
+.fl-avatar{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(122,196,166,.18);font-size:15px}
+.fl-opts.chat .fl-opt{border-radius:18px 18px 6px 18px;justify-content:flex-start}
+/* fix */
+.fl-fixline{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:4px}
+.fl-fixw{padding:10px 13px;border-radius:13px;border:1px solid var(--line-strong);background:rgba(12,24,22,.35);color:var(--eggshell);font-size:17px;font-weight:650;cursor:pointer;transition:.15s}
+.fl-fixw:hover:not(:disabled){border-color:rgba(207,90,67,.5)}
+.fl-fixw.found{border-color:var(--cinnabar);background:rgba(207,90,67,.14);text-decoration:line-through;text-decoration-color:var(--cinnabar)}
+.fl-fixw.right{border-color:var(--jade);background:rgba(122,196,166,.15)}.fl-fixw.wrong{border-color:var(--cinnabar);background:rgba(207,90,67,.12)}
+.fl-fix-ask{flex-basis:100%;text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);font-weight:650}
+.fl-tf-op{display:inline-block;margin:0 0 12px;padding:6px 11px;border-radius:999px;background:rgba(122,196,166,.13);color:var(--jade);font-size:12.5px;font-weight:650}
+.fl-dict{display:flex;align-items:center;justify-content:center;gap:14px}
+.fl-dict .fl-audio{margin:0}
+.fl-slow{padding:10px 14px;border-radius:14px;border:1px solid var(--line-strong);background:rgba(12,24,22,.35);color:var(--text-2);font-size:13px;cursor:pointer}
+.fl-hint{margin-top:10px;font-size:13px;color:var(--text-3)}.fl-hint summary{cursor:pointer}.fl-hint .fl-say{display:block;margin-top:6px;font-size:16px;color:var(--eggshell)}
+.fl-mic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin:10px 0}
+.fl-mic{width:92px;height:92px;border-radius:50%;border:1px solid rgba(201,165,101,.45);background:rgba(201,165,101,.12);font-size:34px;cursor:pointer}
+.fl-mic.on{background:rgba(207,90,67,.22);border-color:var(--cinnabar);animation:flPulse 1.2s infinite}
+.fl-heard{min-height:24px;font-size:14px;color:var(--text-3);text-align:center}.fl-heard b{font-size:17px;color:var(--eggshell)}
+/* explanations */
+.fl-why{margin:0 0 12px;padding:10px 12px;border-radius:14px;background:rgba(12,24,22,.5);border-left:3px solid var(--gold)}
+.fl-why span{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
+.fl-why p{margin:3px 0 0;font-size:13.5px;line-height:1.45;color:var(--text-2)}.fl-why b{color:var(--eggshell)}
+/* level chip */
+.fl-lv em{margin-left:auto;font-style:normal;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-4);font-weight:650}
+.fl-lv em.src{margin-left:8px;letter-spacing:0;text-transform:none;font-family:var(--serif);font-size:13px;color:var(--gold)}
+.fl-mini-say.corner{position:absolute;right:0;top:26px}
+.fl-prompt > .fl-mini-say:not(.corner){position:static}
+/* result, check, speed */
+.fl-result-next{color:var(--jade);font-size:13px;margin:6px 0 0}
+.fl-check-big{font-family:var(--serif);font-size:56px;color:var(--gold);line-height:1;margin:18px 0 6px}
+.fl-lvls div{max-width:40px}
+.fl-timer{height:6px;border-radius:99px;background:rgba(243,235,221,.08);overflow:hidden;margin-bottom:12px}
+.fl-timer i{display:block;height:100%;background:linear-gradient(90deg,var(--jade),var(--gold),var(--cinnabar));animation:flTimer 6s linear forwards;transform-origin:left}
+@keyframes flTimer{from{width:100%}to{width:0}}
+/* icons, tones, recordings */
+.fl-ic{display:inline-block;margin-right:7px;font-size:.85em;vertical-align:.04em}
+.fl-big.vi .fl-ic{font-size:.7em}
+.fl-flash-ic{font-size:44px;line-height:1}
+.fl-flash-tones .tones{justify-content:center;margin:0;height:22px}
+.fl-flash-tones .tone-syl svg{width:26px}
+.fl-tile b.ic{font-size:28px}
+.fl-rec-row{display:flex;gap:8px;margin-top:10px}
+.fl-rec{flex:1;padding:10px 12px;border-radius:13px;border:1px dashed var(--line-strong);background:none;color:var(--text-3);font-size:12px;cursor:pointer}
+.fl-rec.rec{border-style:solid;border-color:var(--cinnabar);color:var(--eggshell);background:rgba(207,90,67,.14)}
+.fl-rec.del{flex:0 0 44px}
+/* animation */
+.fl-replay{float:right;width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:none;color:var(--text-3);cursor:pointer;margin:-4px -4px 0 0}
+.fl-pattern.anim .r0 .fl-slot.hl .chip{animation:flStrike .5s .9s var(--ease) forwards}
+@keyframes flStrike{to{background:rgba(201,165,101,.18);color:var(--text-3);text-decoration:line-through;border-color:rgba(201,165,101,.3)}}
+.fl-pattern.anim .fl-pattern-arrow{opacity:0;animation:flFade .3s 1.3s forwards}
+.fl-pattern.anim .r1 .fl-slot,.fl-pattern.anim .r2 .fl-slot{opacity:0;transform:translateY(-8px);animation:flDrop .35s calc(1.5s + var(--i) * .12s) var(--ease) forwards}
+.fl-pattern.anim .r1 .fl-slot.hl,.fl-pattern.anim .r2 .fl-slot.hl{animation:flPop .45s calc(1.6s + var(--i) * .12s) var(--ease) forwards}
+.fl-pattern.anim .r1 .fl-pattern-en,.fl-pattern.anim .r2 .fl-pattern-en{opacity:0;animation:flFade .3s 2.3s forwards}
+@keyframes flFade{to{opacity:1}}
+@keyframes flDrop{to{opacity:1;transform:none}}
+@keyframes flPop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:none}}
+.fl-scale-row,.fl-xf-row,.fl-map-node,.fl-dots-row i{animation:flIn .4s var(--d,0ms) var(--ease) both}
+.fl-map-node{animation-name:flInMap}
+@keyframes flIn{from{opacity:0;transform:translateY(6px)}}
+@keyframes flInMap{from{opacity:0;transform:translate(-50%,-50%) scale(.7)}}
+.fl-meter i{transform-origin:left;animation:flGrow .7s calc(var(--d,0ms) + 150ms) var(--ease) both}
+@keyframes flGrow{from{transform:scaleX(0)}}
+@media(prefers-reduced-motion:reduce){.fl-pattern.anim *,.fl-scale-row,.fl-xf-row,.fl-map-node,.fl-dots-row i,.fl-meter i,.fl-node.next{animation:none!important;opacity:1!important;transform:none}}
+@media(max-width:420px){.fl-node-l{max-width:118px}.fl-node{width:70px;height:70px}.fl-node-g{font-size:15px;max-width:60px}}
 </style>
 </head>
 <body>
@@ -6861,7 +6992,7 @@ function viewToday(){
     +'<section class="today-focus"><div class="today-focus-copy"><div class="eyebrow">Ôn tập · Review</div></div>'
     +'<div class="today-metrics"><span class="today-metric"><b>'+dueN+'</b> due</span><span class="today-metric"><b>'+weakN+'</b> weak</span><span class="today-metric"><b>'+newN+'</b> new</span></div>'
     +'<button class="btn today-primary" id="start">Bắt đầu · '+mins+' min</button></section>'
-    +(function(){const nx=focusNext();return '<button class="today-lesson" id="todayLesson"><span class="fl-next-g">'+esc(nx.g)+'</span><span class="fl-next-copy"><small>Bài học tiếp theo</small><b>'+esc(nx.vi)+'</b><span>'+esc(nx.en)+'</span></span><span class="fl-next-go" aria-hidden="true">→</span></button>';})()
+    +(function(){const nx=focusNext();return '<button class="today-lesson" id="todayLesson"><span class="fl-next-g">'+esc(nx.g)+'</span><span class="fl-next-copy"><small>Bài học tiếp theo</small><b>'+esc(nx.vi)+'</b><span>'+esc(nx.en)+'</span></span><span class="fl-next-go" aria-hidden="true">→</span></button>'+(function(){const d=focusDueList();return d.length?'<button class="fl-due" id="todayDue"><span class="fl-due-n">'+d.length+'</span><span><b>Ôn bài học</b><small>'+d.length+' lesson'+(d.length>1?'s':'')+' due for review</small></span><span aria-hidden="true">↺</span></button>':'';})();})()
     +(diagnosticDue()?'<section class="today-inline-callout"><div><div class="eyebrow">Weekly check</div><div class="inline-title">Your diagnostic is due.</div></div><button class="btn ghost" id="startDiag">Run</button></section>':'')
     +(broken.length?'<section class="today-row-link" id="weakToday"><div><div class="eyebrow">Weak today</div><b>'+esc(broken[0].title)+'</b></div><span>Practice ›</span></section>':'')
     +'<section class="today-row-link" id="recentClass"><div><div class="eyebrow">Recent class</div><b>'+formatLessonDate(recentLesson.date)+' · '+esc(recentLesson.title)+'</b></div><span>Open ›</span></section>'
@@ -6869,6 +7000,7 @@ function viewToday(){
   $("#start").onclick=()=>startSession(plan);
   if($("#startDiag"))$("#startDiag").onclick=runDiagnostic;
   $("#todayLesson").onclick=()=>openFocus(focusNext().id);
+  if($("#todayDue"))$("#todayDue").onclick=openDueReview;
   if($("#weakToday"))$("#weakToday").onclick=()=>go("weaknesses");
   if($("#recentClass"))$("#recentClass").onclick=function(){COURSE_VIEW_MODE="classes";go("course");setTimeout(()=>classSheet(recentLesson.id),0);};
   keyHandler=e=>{if(e.key==="Enter")startSession(plan);};
@@ -7987,7 +8119,7 @@ function settingsSheet(){
      vis    visual explanations shown before the cards
    ═══════════════════════════════════════════════════════════════════════ */
 const FS=(v,e,k,d,a)=>({v:v,e:e,k:k,d:d||null,a:a||null});
-const FT=(ok,bad,e)=>({ok:ok,bad:[].concat(bad),e:e});
+const FT=(ok,bad,e,why)=>({ok:ok,bad:[].concat(bad),e:e,why:why||null});
 
 const FOCUS_TRACKS=[
   {id:"q", vi:"Câu hỏi",   en:"Questions"},
@@ -8961,30 +9093,492 @@ const FOCUS=[
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════
-   FOCUSED LESSONS · engine
-   intro → see (visuals) → cards (flip) → practice ladder → result
-   The ladder climbs nine steps; each step is harder than the last.
+   FOCUSED LESSONS · v13 additions
+   · c      the course concept each lesson belongs to (its contrast line is
+             used to explain wrong answers)
+   · why    one-line reasons for the natural/unnatural sentence items
+   · talk   [they say, English, you reply, English] — conversation turns
+   · ask    {a: answer, q: [accepted questions]} — write the question
+   · tf     {b: base, op, r: [accepted results]} — transform the sentence
+   · new lessons: situations, family and wedding, work, five grammar points
+   · FOCUS_READ: one short reading per track, used in the track's last review
+   ═══════════════════════════════════════════════════════════════════════ */
+FOCUS_TRACKS.splice(9,0,
+  {id:"h", vi:"Tình huống", en:"Everyday situations"},
+  {id:"f", vi:"Gia đình",   en:"Family & wedding"},
+  {id:"w", vi:"Công việc",  en:"Talking about work"});
+
+const FL_OPS={neg:"Phủ định · make it negative",q:"Câu hỏi · make it a yes/no question",yet:"Hỏi … chưa? · ask “yet?”",past:"Quá khứ · put it in the past",
+  fut:"Tương lai · put it in the future",now:"Đang · it is happening now",notyet:"Chưa · it hasn't happened yet",want:"Muốn · say you want to"};
+
+const FOCUS_EXT={
+ "q-what":{c:"c.question.what",why:["Use là gì to ask what something is — a job, a name, a meaning.","Gì stays where the answer would be, after the verb."],
+   talk:[["Em làm gì?","What are you doing?","Em đang học tiếng Việt.","I'm studying Vietnamese."],["Em muốn ăn gì?","What do you want to eat?","Em muốn ăn phở.","I want to eat phở."],["Đây là cái gì?","What is this?","Đây là một quyển sách.","This is a book."]],
+   ask:[{a:"Em muốn ăn phở.",q:["Em muốn ăn gì?"]},{a:"Công việc của chị là giáo viên.",q:["Công việc của chị là gì?"]}]},
+ "q-where":{c:"c.question.where",why:["Ở đâu stays in the place slot, at the end.","Ở đâu stays in the place slot, at the end."],
+   talk:[["Chị sống ở đâu?","Where do you live?","Chị sống ở Sài Gòn.","I live in Saigon."],["Em đi đâu?","Where are you going?","Em đi siêu thị.","I'm going to the supermarket."],["Bạn đến từ đâu?","Where are you from?","Mình đến từ Pháp.","I'm from France."]],
+   ask:[{a:"Chị sống ở Sài Gòn.",q:["Chị sống ở đâu?"]},{a:"Em đi siêu thị.",q:["Em đi đâu?"]}]},
+ "q-when":{c:"c.question.when",why:["Mấy giờ asks for a clock time; khi nào asks for a day or an occasion.","After lúc, ask for the clock time with mấy giờ."],
+   talk:[["Khi nào em đi Việt Nam?","When are you going to Vietnam?","Tuần sau em đi.","I'm going next week."],["Mấy giờ rồi?","What time is it?","Bảy giờ rưỡi rồi.","It's half past seven."]],
+   ask:[{a:"Tuần sau em đi Việt Nam.",q:["Khi nào em đi Việt Nam?","Bao giờ em đi Việt Nam?","Chừng nào em đi Việt Nam?"]},{a:"Buổi họp bắt đầu lúc chín giờ.",q:["Buổi họp bắt đầu lúc mấy giờ?","Mấy giờ buổi họp bắt đầu?"]}]},
+ "q-who":{c:"c.question.who",why:["Name the thing first, then ask của ai.","Ai goes where the unknown person is — here, the subject."],
+   talk:[["Ai đang gọi điện thoại?","Who is calling?","Má em đang gọi.","My mom is calling."],["Chìa khóa này của ai?","Whose keys are these?","Của em.","They're mine."]],
+   ask:[{a:"Chị đi tiệc với Lan.",q:["Chị đi tiệc với ai?"]},{a:"Đây là xe hơi của anh Nam.",q:["Đây là xe hơi của ai?","Xe hơi này của ai?"]}]},
+ "q-why":{c:"c.question.why",why:["Tại sao normally opens a why-question.","Vì gives a reason; tại sao asks for one."],
+   talk:[["Tại sao em học tiếng Việt?","Why are you learning Vietnamese?","Vì em thích Việt Nam.","Because I like Vietnam."],["Sao chị chưa ăn trưa?","Why haven't you had lunch yet?","Vì chị bận quá.","Because I'm too busy."]],
+   ask:[{a:"Em học tiếng Việt vì em thích Việt Nam.",q:["Tại sao em học tiếng Việt?","Sao em học tiếng Việt?"]}]},
+ "q-how":{c:"c.question.how",why:["Làm sao asks how (the method); ở đâu asks where.","Sao goes at the end, after thấy."],
+   talk:[["Em thấy sao?","How do you feel?","Em thấy mệt.","I feel tired."],["Thời tiết ở ngoài sao?","How is the weather outside?","Trời đẹp quá!","The weather is lovely!"]],
+   ask:[{a:"Em thấy mệt.",q:["Em thấy sao?","Em thấy thế nào?"]}]},
+ "q-which":{c:"c.question.which",why:["Nào follows the noun it selects: cái nào.","Nào follows the noun it selects: món ăn nào."],
+   talk:[["Chị muốn thử loại trà nào?","Which tea would you like to try?","Chị thử trà này.","I'll try this tea."],["Bạn thích cái nào?","Which one do you like?","Mình thích cái này.","I like this one."]],
+   ask:[{a:"Chị thích cái áo xanh.",q:["Chị thích cái áo nào?","Chị thích cái nào?"]}]},
+ "q-howmuch":{c:"c.question.quantity",why:["With tiền, use bao nhiêu; mấy expects a small count of things.","Mấy goes before the noun it counts: mấy trái táo."],
+   talk:[["Một ly cà phê bao nhiêu tiền?","How much is a coffee?","Hai mươi nghìn.","Twenty thousand."],["Bạn bao nhiêu tuổi?","How old are you?","Mình ba mươi tuổi.","I'm thirty."]],
+   ask:[{a:"Chị cần năm trăm nghìn.",q:["Chị cần bao nhiêu tiền?","Chị cần bao nhiêu?"]},{a:"Có ba trái táo trên bàn.",q:["Có mấy trái táo trên bàn?","Có bao nhiêu trái táo trên bàn?"]}]},
+ "q-howlong":{c:"c.question.duration",why:["Bao lâu alone asks how long; add một lần to ask how often.","Mấy giờ asks the clock time, not a length of time."],
+   talk:[["Bạn học tiếng Việt bao lâu rồi?","How long have you studied Vietnamese?","Hai năm rồi.","Two years."],["Bạn tập thể dục bao lâu một lần?","How often do you exercise?","Hai lần mỗi tuần.","Twice a week."]],
+   ask:[{a:"Em học tiếng Việt hai năm rồi.",q:["Em học tiếng Việt bao lâu rồi?"]}]},
+ "q-yesno":{c:"c.sent.yesno",why:["Có goes before the adjective or verb; không closes the question.","With là, ask with phải không — có does not go before là."],
+   talk:[["Em cần giúp không?","Do you need help?","Dạ không.","No, thank you."],["Ở đây có nhà hàng không?","Is there a restaurant here?","Có.","Yes, there is."],["Bạn là giáo viên hả?","Are you a teacher?","Đúng rồi.","That's right."]],
+   tf:[{b:"Chị rảnh.",op:"q",r:["Chị có rảnh không?","Chị rảnh không?"]},{b:"Quán này bán trà.",op:"q",r:["Quán này có bán trà không?","Quán này bán trà không?"]}]},
+ "q-yet":{c:"c.question.yet",why:["Chưa at the end asks “yet?”; chưa before the verb says “not yet”."],
+   talk:[["Bạn ăn cơm chưa?","Have you eaten yet?","Rồi.","Yes, I have."],["Em làm xong chưa?","Have you finished?","Dạ, em chưa làm xong.","Not yet."]],
+   ask:[{a:"Rồi, em ăn cơm rồi.",q:["Em ăn cơm chưa?"]}],tf:[{b:"Bạn gửi email.",op:"yet",r:["Bạn gửi email chưa?","Bạn đã gửi email chưa?"]}]},
+ "q-map":{c:"c.question.wh",why:["Ở đâu stays at the end, in the place slot.","Mấy tiếng asks how many hours; mấy giờ asks what time.","Cái nào asks which one; ai asks who."],
+   talk:[["Em đi đâu?","Where are you going?","Em đi siêu thị.","I'm going to the supermarket."],["Khi nào em đi Việt Nam?","When are you going to Vietnam?","Tuần sau em đi.","I'm going next week."],["Ai đang gọi điện thoại?","Who is calling?","Má em đang gọi.","My mom is calling."]]},
+ "t-freq":{c:"c.freq.adv",why:["Frequency words go before the verb.","Frequency words go before the verb."],
+   talk:[["Bạn có hay thức khuya không?","Do you often stay up late?","Ít khi.","Rarely."],["Ba có uống cà phê buổi tối không?","Does Dad drink coffee in the evening?","Ba hiếm khi uống.","He rarely does."]]},
+ "t-every":{c:"c.freq.adv",why:["Mỗi comes before the noun: mỗi buổi sáng.","Mỗi comes before the noun: mỗi ngày."],
+   talk:[["Chị gọi cho ba má bao lâu một lần?","How often do you call your parents?","Mỗi ngày.","Every day."],["Em đi bộ bao lâu một lần?","How often do you walk?","Ba lần mỗi tuần.","Three times a week."]]},
+ "t-day":{c:"c.time.buoi",why:["Buổi comes first: buổi tối."],talk:[["Buổi tối em làm gì?","What do you do in the evening?","Buổi tối em đọc sách.","In the evening I read."]]},
+ "t-clock":{c:"c.time.clock",why:["Mấy giờ asks the time; bao lâu asks how long.","Lúc comes before the time: lúc tám giờ."],
+   talk:[["Mấy giờ rồi?","What time is it?","Mười giờ mười lăm.","Ten fifteen."],["Buổi họp bắt đầu lúc mấy giờ?","What time does the meeting start?","Lúc chín giờ rưỡi.","At half past nine."]]},
+ "t-duration":{c:"c.time.duration",why:["Tiếng counts hours of duration; giờ names the clock time."],talk:[["Bạn ngủ mấy tiếng?","How many hours do you sleep?","Khoảng bảy tiếng.","About seven hours."]]},
+ "t-days":{c:"c.asp.se",why:["Tuần sau is in the future, so use sẽ, not đã."],talk:[["Ngày mai chị có rảnh không?","Are you free tomorrow?","Ngày mai chị bận.","I'm busy tomorrow."]]},
+ "t-week":{c:"c.num.ordinal",talk:[["Hôm nay là thứ mấy?","What day is it today?","Hôm nay là thứ Hai.","Today is Monday."]]},
+ "a-past":{c:"c.asp.da",why:["Đã goes before the verb.","Hôm qua is in the past: đã, not sẽ."],talk:[["Em ăn sáng chưa?","Have you had breakfast?","Em ăn sáng rồi.","I've had breakfast."]],
+   tf:[{b:"Em gọi cho ba.",op:"past",r:["Em đã gọi cho ba.","Em gọi cho ba rồi.","Em đã gọi cho ba rồi."]}]},
+ "a-just":{c:"c.asp.moi",why:["Vừa mới goes before the verb.","As an adjective, mới (new) follows the noun."],talk:[["Ông ấy đến chưa?","Has he arrived?","Ông ấy mới đến.","He's just arrived."]]},
+ "a-now":{c:"c.asp.dang",why:["Đang goes before the verb."],talk:[["Má đang làm gì?","What is Mom doing?","Má đang nấu cơm.","Mom is cooking."]],tf:[{b:"Má nấu cơm.",op:"now",r:["Má đang nấu cơm."]}]},
+ "a-future":{c:"c.asp.se",why:["Sắp goes before the verb.","Sẽ goes after the subject, before the verb."],talk:[["Tuần sau em làm gì?","What are you doing next week?","Tuần sau em sẽ đi Việt Nam.","Next week I'll go to Vietnam."]],
+   tf:[{b:"Em đi Việt Nam.",op:"fut",r:["Em sẽ đi Việt Nam."]}]},
+ "a-notyet":{c:"c.asp.chua",why:["Chưa before the verb says “not yet”; at the end it turns the sentence into a question.","Chưa bao giờ means “have never”; không and chưa do not combine."],
+   talk:[["Em đi Đà Nẵng chưa?","Have you been to Da Nang?","Em chưa bao giờ đi Đà Nẵng.","I've never been to Da Nang."]],tf:[{b:"Tôi ăn rồi.",op:"notyet",r:["Tôi chưa ăn."]}]},
+ "p-basic":{c:"c.pron.basic"},
+ "p-age":{c:"c.pron.age",talk:[["Em cảm ơn chị nhiều.","Thank you very much.","Không có gì em.","You're welcome."]]},
+ "p-family":{c:"c.pron.family",talk:[["Con chào bà ạ.","Hello, Grandma.","Bà chào con.","Hello, dear."]]},
+ "p-we":{c:"c.pron.plural",talk:[["Tụi mình đi uống cà phê nha?","Shall we go for coffee?","Ừ, đi!","Yeah, let's go!"]]},
+ "p-south":{c:"c.south.pronouns",why:["Ảnh already contains ấy — don't add it again."]},
+ "s-la":{c:"c.sent.la",why:["No là before an adjective.","No là before an adjective."],talk:[["Bạn là nhân viên ở đây hả?","Are you staff here?","Không, mình là khách.","No, I'm a customer."]]},
+ "s-place":{c:"c.sent.o",why:["Ở comes first, then the position word: ở trên."],talk:[["Chìa khóa của em ở đâu?","Where are my keys?","Ở trên bàn.","On the table."]]},
+ "s-have":{c:"c.sent.have",why:["Không goes before có: không có."],talk:[["Ở đây có nhà hàng không?","Is there a restaurant here?","Có, ở gần siêu thị.","Yes, near the supermarket."]],
+   tf:[{b:"Họ có xe hơi.",op:"neg",r:["Họ không có xe hơi."]}]},
+ "s-neg":{c:"c.sent.neg",why:["Before a noun, say không phải là.","Before an adjective, just không."],talk:[["Phim hay không?","Is the film good?","Phim không hay.","The film isn't good."]],
+   tf:[{b:"Em thích cà phê ngọt.",op:"neg",r:["Em không thích cà phê ngọt."]},{b:"Tôi là giáo viên.",op:"neg",r:["Tôi không phải là giáo viên.","Tôi không phải giáo viên."]}]},
+ "s-class":{c:"c.sent.classifier",why:["Animals take con.","Books take quyển."]},
+ "s-adj":{c:"c.sent.adjafter",why:["The adjective follows the noun.","The adjective follows the noun."]},
+ "s-demo":{c:"c.sent.demonstratives",why:["Này follows the classifier or noun: cái này."],talk:[["Em thích cái nào?","Which one do you like?","Em thích cái kia.","I like that one over there."]]},
+ "s-conj":{c:"c.sent.conj",why:["Vì pairs with nên; nhưng means “but”."]},
+ "v-modal":{c:"c.mod.core",why:["Muốn goes before the verb.","Nên goes before the verb."],talk:[["Chị có muốn ăn thêm không?","Would you like some more?","Dạ thôi, em no rồi.","No thanks, I'm full."]],
+   tf:[{b:"Em ăn phở.",op:"want",r:["Em muốn ăn phở."]}]},
+ "v-seq":{c:"c.mod.beforeafter",why:["Trước khi comes before the action it refers to."]},
+ "v-wear":{c:"c.mod.wear",why:["Glasses take đeo; mặc is for clothes."]},
+ "v-bi":{c:"c.mod.bi",why:["Pain is unwanted, so bị — not được."],talk:[["Em sao vậy?","What's wrong?","Em bị đau đầu.","I have a headache."]]},
+ "v-action":{c:"c.sent.svo"},
+ "v-chores":{c:"c.sent.svo",talk:[["Má đang làm gì?","What's Mom doing?","Má đang rửa chén.","Mom is washing the dishes."]]},
+ "j-opp1":{c:"c.sent.adjafter"},"j-opp2":{c:"c.south.lexicon"},
+ "j-good":{c:"c.lex.good",why:["Food is ngon; hay is for films, songs and stories."],talk:[["Món này ngon không?","Is this dish good?","Ngon lắm!","Very tasty!"]]},
+ "j-bad":{c:"c.lex.bad"},
+ "j-compare":{c:"c.cmp.more",why:["Hơn follows the adjective.","Nhất follows the adjective."],talk:[["Quán nào rẻ hơn?","Which place is cheaper?","Quán này rẻ hơn.","This one is cheaper."]]},
+ "m-nha":{c:"c.part.nhe",talk:[["Chị nói chậm một chút nha.","Please speak a little more slowly.","Dạ, được.","Yes, sure."]]},
+ "m-da":{c:"c.part.a",talk:[["Em hiểu chưa?","Do you understand?","Dạ, em hiểu rồi.","Yes, I understand."]]},
+ "m-ha":{c:"c.part.attention"},
+ "m-very":{c:"c.part.ma",why:["Rất goes before the adjective or verb.","Lắm goes after the adjective."]},
+ "n-ten":{c:"c.num.basic"},"n-tens":{c:"c.num.basic"},
+ "n-money":{c:"c.num.money",why:["Bằng introduces how you pay."],talk:[["Em trả bằng tiền mặt được không?","Can I pay in cash?","Được em.","Sure."]]},
+ "n-order":{c:"c.num.ordinal"},
+ "z-initial":{c:"c.south.consonants"},"z-final":{c:"c.south.finals"},"z-hoinga":{c:"c.south.hoinga"},"z-words":{c:"c.south.lexicon"}
+};
+FOCUS.forEach(function(L){ const x=FOCUS_EXT[L.id]; if(!x) return;
+  ["c","talk","ask","tf"].forEach(k=>{ if(x[k]) L[k]=x[k]; });
+  if(x.why&&L.traps) L.traps.forEach((t,i)=>{ if(x.why[i]&&!t.why) t.why=x.why[i]; });
+});
+
+/* ── new lessons ─────────────────────────────────────────────────────── */
+FOCUS.push(
+/* grammar */
+{id:"a-when",t:"a",g:"đang…thì",vi:"Đang … thì",en:"Was doing … when",c:"c.asp.dang",
+ vis:[{type:"flow",rows:[
+   {a:"đang ăn cơm",ae:"was eating",b:"má gọi",be:"Mom calls",lab:"thì",ex:["Em đang ăn cơm thì má gọi.","I was eating when Mom called."]},
+   {a:"đang ngủ",ae:"was sleeping",b:"trời mưa",be:"it rains",lab:"thì",ex:["Chị đang ngủ thì trời mưa.","I was sleeping when it started raining."]}]},
+  {type:"pattern",rows:[{slots:[["S","Em"],["K","đang",1],["V","nấu cơm"],["K","thì",1],["S","bạn"],["V","tới"]],e:"I was cooking when my friend arrived."}]}],
+ cards:[["đang … thì","was doing … when"],["thì","then, at that moment"],["gọi","to call"],["tới","to arrive, come"],["ngủ","to sleep"],["về","to come home"]],
+ s:[FS("Em đang ăn cơm thì má gọi.","I was eating when Mom called.","thì",["nên","để","vì"]),
+    FS("Chị đang ngủ thì trời mưa.","I was sleeping when it started raining.","thì",["nên","để","vì"]),
+    FS("Em đang nấu cơm thì bạn tới.","I was cooking when my friend arrived.","đang",["đã","sẽ","sắp"]),
+    FS("Ba đang đọc sách thì em về.","Dad was reading when I came home.","thì",["nên","để","vì"]),
+    FS("Tôi đang làm việc thì sếp gọi.","I was working when the boss called.","đang",["đã","sẽ","sắp"])],
+ traps:[FT("Em đang ăn cơm thì má gọi.","Em ăn cơm đang thì má gọi.","I was eating when Mom called.","Đang goes before the verb; thì introduces what interrupts it.")],
+ talk:[["Hồi nãy em làm gì?","What were you doing a moment ago?","Em đang nấu cơm thì chị gọi.","I was cooking when you called."]]},
+
+{id:"s-also",t:"s",g:"cũng",vi:"Cũng · vẫn · còn",en:"Also, still, and as for",c:"c.part.continuation",
+ vis:[{type:"compare",cols:[
+   {h:"cũng",en:"also, too — before the verb",ex:["Chị cũng học tiếng Việt hả?","You study Vietnamese too?"]},
+   {h:"vẫn",en:"still — despite something",ex:["Tuy trời lạnh, nhưng cô ấy vẫn đi dạo.","Although it's cold, she still goes for a walk."]},
+   {h:"còn",en:"and as for … (contrast)",ex:["Em là người Pháp, còn má em là người Việt.","I am French, and my mom is Vietnamese."]},
+   {h:"nữa",en:"more, again — at the end",ex:["Anh ăn nữa không?","Do you want to eat more?"]}]},
+  {type:"pattern",rows:[{slots:[["S","Chị"],["K","cũng",1],["V","học"],["O","tiếng Việt"]],e:"You study Vietnamese too."}]}],
+ cards:[["cũng","also, too"],["vẫn","still (despite)"],["còn","and as for; still"],["nữa","more, again"],["cũng vậy","the same, me too"],["vẫn chưa","still not yet"]],
+ s:[FS("Chị cũng học tiếng Việt hả?","You study Vietnamese too?","cũng",["vẫn","nữa","rồi"]),
+    FS("Tuy trời lạnh, nhưng cô ấy vẫn đi dạo.","Although it's cold, she still goes for a walk.","vẫn",["cũng","nữa","rồi"]),
+    FS("Em là người Pháp, còn má em là người Việt.","I am French, and my mom is Vietnamese.","còn",["cũng","vẫn","nữa"]),
+    FS("Em vẫn chưa hiểu.","I still don't understand.","vẫn",["cũng","nữa","rồi"]),
+    FS("Anh ăn nữa không?","Do you want to eat more?","nữa",["cũng","vẫn","rồi"]),
+    FS("Em cũng vậy.","Me too.","cũng",["vẫn","còn","nữa"])],
+ traps:[FT("Chị cũng học tiếng Việt.","Chị học cũng tiếng Việt.","You study Vietnamese too.","Cũng goes before the verb.")],
+ talk:[["Em thích cà phê sữa đá.","I like iced milk coffee.","Em cũng vậy.","Me too."]]},
+
+{id:"v-de",t:"v",g:"để",vi:"Để",en:"In order to",c:"c.sent.conj",
+ vis:[{type:"pattern",rows:[{slots:[["S","Em"],["V","học tiếng Việt"],["K","để",1],["V","nói chuyện với gia đình"]],e:"I learn Vietnamese to talk with the family."},
+   {slots:[["S","Mình"],["V","ở đây"],["K","để",1],["V","giúp bạn"]],e:"I'm here to help you."}]},
+  {type:"compare",cols:[{h:"để",en:"in order to — a purpose",ex:["Em đi chợ để mua trái cây.","I go to the market to buy fruit."]},
+   {h:"vì",en:"because — a cause",ex:["Em ở nhà vì trời mưa.","I stay home because it rains."]}]}],
+ cards:[["để","in order to"],["để làm gì","what for"],["vì","because"],["giúp","to help"],["mua","to buy"],["nói chuyện","to talk"]],
+ s:[FS("Mình ở đây để giúp bạn.","I'm here to help you.","để",["vì","nên","cho"]),
+    FS("Em học tiếng Việt để nói chuyện với gia đình.","I learn Vietnamese to talk with the family.","để",["vì","nên","thì"]),
+    FS("Em đi chợ để mua trái cây.","I go to the market to buy fruit.","để",["vì","nên","thì"]),
+    FS("Em dậy sớm để tập thể dục.","I get up early to exercise.","để",["vì","nên","thì"]),
+    FS("Chị đi Đà Nẵng để làm gì?","What are you going to Da Nang for?","để làm gì",["ở đâu","làm sao","khi nào"])],
+ traps:[FT("Em đi chợ để mua trái cây.","Em đi chợ vì mua trái cây.","I go to the market to buy fruit.","Để gives a purpose; vì gives a cause.")],
+ talk:[["Em học tiếng Việt để làm gì?","What are you learning Vietnamese for?","Để nói chuyện với gia đình.","To talk with the family."]]},
+
+{id:"v-cho",t:"v",g:"cho",vi:"Cho",en:"Give, for, to",c:"c.part.continuation",
+ vis:[{type:"compare",cols:[
+   {h:"cho",en:"to give · for",ex:["Cái này cho em.","This is for you."]},
+   {h:"verb + cho",en:"to someone, for someone",ex:["Em mua trái cây cho ba má.","I buy fruit for my parents."]},
+   {h:"để … cho",en:"let me … for you",ex:["Để tôi làm cho.","Let me do it for you."]},
+   {h:"làm cho",en:"to make (someone feel)",ex:["Tin này làm cho em vui.","This news makes me happy."]}]}],
+ cards:[["cho","to give; for"],["gọi cho","to call (someone)"],["gửi cho","to send to"],["mua … cho","to buy … for"],["để … cho","let me … for you"],["làm cho","to make (someone feel)"]],
+ s:[FS("Cái này cho em.","This is for you.","cho",["với","của","để"]),
+    FS("Em mua trái cây cho ba má.","I buy fruit for my parents.","cho",["với","của","để"]),
+    FS("Để tôi làm cho.","Let me do it for you.","cho",["với","của","nữa"]),
+    FS("Hôm qua em đã gọi cho ba.","Yesterday I called my dad.","cho",["với","của","để"]),
+    FS("Sáng nay em viết email cho chị.","This morning I write an email to you.","cho",["với","của","để"]),
+    FS("Tin này làm cho em vui.","This news makes me happy.","làm cho",["làm với","làm của","làm để"])],
+ traps:[FT("Em mua trái cây cho ba má.","Em mua cho trái cây ba má.","I buy fruit for my parents.","The thing comes first, then cho + the person.")]},
+
+{id:"v-duoc",t:"v",g:"được",vi:"Được",en:"Can, may, okay",c:"c.mod.bi",
+ vis:[{type:"compare",cols:[
+   {h:"verb + được",en:"can — ability",ex:["Em nói tiếng Việt được một chút.","I can speak a little Vietnamese."]},
+   {h:"… được không?",en:"may I? can I?",ex:["Em trả bằng tiền mặt được không?","Can I pay in cash?"]},
+   {h:"không được",en:"not allowed · can't",ex:["Ở đây không được hút thuốc.","Smoking isn't allowed here."]}]},
+  {type:"pattern",rows:[{slots:[["V","nói"],["O","tiếng Việt"],["K","được",1]],e:"can speak Vietnamese"},{slots:[["K","có thể",1],["V","nói"],["O","tiếng Việt"]],e:"can speak Vietnamese"}]}],
+ cards:[["được","okay; can"],["… được không?","can I …?"],["không được","not allowed; can't"],["được rồi","all right"],["có thể","can"],["hút thuốc","to smoke"]],
+ s:[FS("Em trả bằng tiền mặt được không?","Can I pay in cash?","được không",["chưa","phải không","hả"]),
+    FS("Em nói tiếng Việt được một chút.","I can speak a little Vietnamese.","được",["bị","rồi","nữa"]),
+    FS("Ở đây không được hút thuốc.","Smoking isn't allowed here.","không được",["không có","chưa","không phải"]),
+    FS("Được rồi, em hiểu rồi.","All right, I understand.","Được rồi",["Chưa","Không có","Bị rồi"]),
+    FS("Em thử cái này được không?","Can I try this one on?","được không",["chưa","phải không","hả"]),
+    FS("Bạn tôi có thể nói tiếng Pháp.","My friend can speak French.","có thể",["có không","phải","được không"])],
+ traps:[FT("Em nói tiếng Việt được.","Em được nói tiếng Việt.","I can speak Vietnamese.","After the verb, được means “can” (ability); before it, it means “allowed”.")],
+ talk:[["Em nói tiếng Việt được không?","Can you speak Vietnamese?","Dạ, được một chút.","Yes, a little."]]},
+
+/* situations */
+{id:"h-cafe",t:"h",g:"cho em",vi:"Ở quán cà phê",en:"Ordering at a café",c:"c.part.nhe",
+ vis:[{type:"pattern",rows:[{slots:[["K","Cho em",1],["#","một ly"],["N","cà phê sữa đá"],["X","nha"]],e:"An iced milk coffee for me, please."},
+   {slots:[["N","Chị ơi,"],["K","tính tiền",1]],e:"Excuse me, the bill please."}]},
+  {type:"tiles",items:[{n:"☕",vi:"cà phê sữa đá",en:"iced milk coffee"},{n:"🍵",vi:"trà đá",en:"iced tea"},{n:"🥤",vi:"mang về",en:"take away"},{n:"🧾",vi:"tính tiền",en:"the bill"}]}],
+ cards:[["cho em","I'd like (ordering)"],["cà phê sữa đá","iced milk coffee"],["trà đá","iced tea"],["thêm","more, extra"],["ít đường","less sugar"],["mang về","to take away"],["tính tiền","the bill, please"],["chị ơi","excuse me (to a woman)"]],
+ s:[FS("Cho em hai ly trà đá.","Two glasses of iced tea, please.","Cho em",["Của em","Với em","Để em"]),
+    FS("Cho em một ly cà phê sữa đá nha.","An iced milk coffee for me, please.","cà phê sữa đá",["trà đá","tính tiền","mang về"]),
+    FS("Em muốn uống thêm một ly nữa.","I would like one more glass.","thêm",["ít","rồi","đã"]),
+    FS("Chị ơi, tính tiền.","Excuse me, the bill please.","tính tiền",["trả tiền","giảm giá","mang về"]),
+    FS("Cho em ít đường nha.","Less sugar for me, please.","ít đường",["nhiều đường","ít đá","thêm đá"]),
+    FS("Cho em mang về.","To take away, please.","mang về",["mang theo","tính tiền","đem tới"])],
+ traps:[FT("Cho em một ly cà phê.","Cho một ly em cà phê.","A coffee, please.","Cho em comes first, then the amount and the drink.")],
+ talk:[["Em uống gì?","What would you like to drink?","Cho em một ly cà phê sữa đá.","An iced milk coffee, please."],["Uống ở đây hay mang về?","For here or to take away?","Mang về, chị.","To take away."],["Em ăn gì nữa không?","Anything else to eat?","Dạ thôi, tính tiền chị.","No thanks — the bill, please."]]},
+
+{id:"h-way",t:"h",g:"quẹo trái",vi:"Hỏi đường",en:"Asking the way",c:"c.sent.prepositions",
+ vis:[{type:"tiles",items:[{n:"↑",vi:"đi thẳng",en:"go straight"},{n:"←",vi:"quẹo trái",en:"turn left"},{n:"→",vi:"quẹo phải",en:"turn right"},
+   {n:"✚",vi:"ngã tư",en:"crossroads"},{n:"⇄",vi:"đối diện",en:"opposite"},{n:"⇠",vi:"bên trái",en:"on the left"}]},
+  {type:"pattern",rows:[{slots:[["V","Đi thẳng"],["X","rồi"],["V","quẹo trái",1]],e:"Go straight, then turn left."}]}],
+ cards:[["đi thẳng","go straight"],["quẹo trái","turn left (Southern)"],["quẹo phải","turn right (Southern)"],["ngã tư","crossroads"],["đối diện","opposite"],["bên trái","on the left"],["bên phải","on the right"]],
+ s:[FS("Anh đi thẳng, rồi quẹo trái.","Go straight, then turn left.","quẹo trái",["quẹo phải","đi thẳng","đối diện"]),
+    FS("Quẹo phải ở ngã tư.","Turn right at the crossroads.","ngã tư",["bên trái","đối diện","ở đâu"]),
+    FS("Siêu thị gần nhất ở đâu?","Where is the nearest supermarket?","ở đâu",["ở đó","khi nào","bên phải"]),
+    FS("Ngân hàng ở đối diện quán cà phê.","The bank is opposite the café.","đối diện",["bên trái","ngã tư","đi thẳng"]),
+    FS("Nhà thuốc ở bên trái.","The pharmacy is on the left.","bên trái",["bên phải","đối diện","đi thẳng"]),
+    FS("Đi thẳng khoảng năm phút.","Go straight for about five minutes.","Đi thẳng",["Quẹo trái","Quẹo phải","Đối diện"])],
+ talk:[["Chị ơi, ngân hàng ở đâu?","Excuse me, where is the bank?","Em đi thẳng, rồi quẹo phải.","Go straight, then turn right."],["Xa không chị?","Is it far?","Không xa, khoảng năm phút.","Not far, about five minutes."]]},
+
+{id:"h-ride",t:"h",g:"Grab",vi:"Đi xe",en:"Taking a Grab or taxi",c:"c.part.nhe",
+ vis:[{type:"pattern",rows:[{slots:[["S","Anh"],["V","dừng",1],["P","ở đây"],["X","nha"]],e:"Stop here, please."},
+   {slots:[["S","Anh"],["V","chở",1],["O","em"],["P","tới quận Ba"]],e:"Take me to District 3."}]}],
+ cards:[["đặt xe","to book a ride"],["chở","to give a ride, take"],["đón","to pick up"],["dừng","to stop"],["chạy chậm","to drive slowly"],["tới","to arrive; to"],["tài xế","driver"]],
+ s:[FS("Anh đón em ở trước khách sạn nha.","Please pick me up in front of the hotel.","đón",["dừng","chở","đặt"]),
+    FS("Anh dừng ở đây nha.","Stop here, please.","dừng",["đón","chở","đặt"]),
+    FS("Anh chạy chậm một chút nha.","Please drive a bit more slowly.","chậm",["nhanh","xa","gần"]),
+    FS("Từ đây tới sân bay mất bao lâu?","How long does it take from here to the airport?","bao lâu",["bao nhiêu","mấy giờ","ở đâu"]),
+    FS("Em đặt xe Grab rồi.","I've booked a Grab already.","đặt xe",["đón xe","dừng xe","chở xe"]),
+    FS("Anh chở em tới quận Ba.","Take me to District 3.","chở",["đón","dừng","đặt"])],
+ talk:[["Em đi đâu?","Where are you going?","Anh chở em tới quận Ba.","Take me to District 3."],["Mất bao lâu anh?","How long will it take?","Khoảng hai mươi phút.","About twenty minutes."]]},
+
+{id:"h-shop",t:"h",g:"bớt",vi:"Mua sắm",en:"Shopping and bargaining",c:"c.num.money",
+ vis:[{type:"flow",rows:[{a:"Mắc quá!",ae:"too expensive",b:"bớt đi",be:"lower the price",lab:"→",ex:["Mắc quá, chị bớt cho em đi.","Too expensive, give me a discount."]},
+   {a:"thử",ae:"try it on",b:"lấy",be:"take it",lab:"rồi",ex:["Em lấy cái này.","I'll take this one."]}]}],
+ cards:[["bao nhiêu tiền","how much"],["mắc quá","too expensive"],["bớt","to lower the price (Southern)"],["rẻ hơn","cheaper"],["thử","to try (on)"],["lấy","to take (buy)"],["giảm giá","discount, on sale"]],
+ s:[FS("Cái áo này bao nhiêu tiền?","How much is this shirt?","bao nhiêu tiền",["bao lâu","mấy giờ","bao xa"]),
+    FS("Mắc quá, chị bớt cho em đi.","Too expensive, give me a discount.","bớt",["thêm","lấy","thử"]),
+    FS("Có cái nào rẻ hơn không?","Is there a cheaper one?","rẻ hơn",["mắc hơn","rẻ nhất","rẻ quá"]),
+    FS("Em thử cái này được không?","Can I try this one on?","thử",["bớt","lấy","đem"]),
+    FS("Em lấy cái này.","I'll take this one.","lấy",["bớt","thử","đem"]),
+    FS("Cửa hàng đang giảm giá.","The store is having a sale.","giảm giá",["tính tiền","trả tiền","tiền mặt"])],
+ talk:[["Một trăm nghìn em.","One hundred thousand.","Mắc quá, tám mươi nghìn được không?","Too expensive — would eighty thousand be okay?"],["Em lấy màu nào?","Which colour do you want?","Em lấy màu xanh.","I'll take the blue one."]]},
+
+{id:"h-weather",t:"h",g:"☀",vi:"Thời tiết",en:"The weather",c:"c.sent.thi",
+ vis:[{type:"tiles",items:[{n:"☀️",vi:"trời nắng",en:"sunny"},{n:"🌧️",vi:"trời mưa",en:"raining"},{n:"🔥",vi:"trời nóng",en:"hot"},{n:"❄️",vi:"trời lạnh",en:"cold"},{n:"🍃",vi:"trời mát",en:"cool"}]},
+  {type:"compare",cols:[{h:"mùa mưa",en:"rainy season — Saigon, about May to November"},{h:"mùa khô",en:"dry season — about December to April"}]}],
+ cards:[["thời tiết","weather"],["trời nắng","sunny"],["trời mưa","raining"],["trời nóng","hot"],["trời lạnh","cold"],["mát","cool"],["mùa mưa","rainy season"],["mùa khô","dry season"]],
+ s:[FS("Hôm nay trời nắng quá.","It's very sunny today.","nắng",["mưa","lạnh","mát"]),
+    FS("Trời sắp mưa.","It's about to rain.","mưa",["nắng","nóng","mát"]),
+    FS("Thời tiết hôm nay tệ.","Today's weather is bad.","Thời tiết",["Thời gian","Thời điểm","Mùa khô"]),
+    FS("Buổi tối trời mát.","The evenings are cool.","mát",["nóng","nắng","mưa"]),
+    FS("Sài Gòn có hai mùa: mùa mưa và mùa khô.","Saigon has two seasons: rainy and dry.","mùa khô",["mùa lạnh","mùa nóng","mùa nắng"]),
+    FS("Hôm qua trời nóng không?","Was it hot yesterday?","nóng",["lạnh","mát","mưa"])],
+ talk:[["Thời tiết ở ngoài sao?","How's the weather outside?","Trời đang mưa.","It's raining."],["Hôm nay nóng không em?","Is it hot today?","Nóng lắm chị.","Very hot."]]},
+
+{id:"h-feel",t:"h",g:"vui",vi:"Cảm xúc",en:"How you feel",c:"c.intro.health",
+ vis:[{type:"tiles",items:[{n:"😊",vi:"vui",en:"happy"},{n:"😢",vi:"buồn",en:"sad"},{n:"😴",vi:"mệt",en:"tired"},{n:"🍜",vi:"đói",en:"hungry"},{n:"💧",vi:"khát",en:"thirsty"},{n:"😟",vi:"lo",en:"worried"}]},
+  {type:"pattern",rows:[{slots:[["S","Em"],["V","thấy"],["A","hơi",1],["A","mệt"]],e:"I feel a little tired."}]}],
+ cards:[["vui","happy"],["buồn","sad"],["mệt","tired"],["đói","hungry"],["khát","thirsty"],["no","full (after eating)"],["lo","worried"],["nhớ","to miss"]],
+ s:[FS("Bữa nay tui thấy buồn quá.","I feel very sad today.","buồn",["vui","đói","no"]),
+    FS("Em có mệt sau giờ làm không?","Are you tired after work?","mệt",["đói","khát","no"]),
+    FS("Em đói quá!","I'm so hungry!","đói",["no","khát","buồn"]),
+    FS("Mình nhớ cậu lắm.","I miss you a lot.","nhớ",["lo","vui","đói"]),
+    FS("Sao anh ấy bực mình?","Why is he upset?","bực mình",["vui vẻ","một mình","bình thường"]),
+    FS("Em no rồi.","I'm full.","no",["đói","khát","lo"])],
+ talk:[["Em thấy sao?","How do you feel?","Em thấy hơi mệt.","I feel a little tired."],["Em ăn thêm không?","Will you have more?","Dạ thôi, em no rồi.","No thanks, I'm full."]]},
+
+/* family and wedding */
+{id:"f-members",t:"f",g:"nội · ngoại",vi:"Người trong nhà",en:"Family members",c:"c.pron.family",
+ vis:[{type:"compare",cols:[{h:"nội",en:"father's side",ex:["ông nội · bà nội","paternal grandparents"]},{h:"ngoại",en:"mother's side",ex:["ông ngoại · bà ngoại","maternal grandparents"]}]},
+  {type:"pairs",rows:[["anh trai","older brother","em trai","younger brother"],["chị gái","older sister","em gái","younger sister"],["chồng","husband","vợ","wife"]]}],
+ cards:[["ông nội","paternal grandfather"],["bà ngoại","maternal grandmother"],["anh trai","older brother"],["chị gái","older sister"],["em gái","younger sister"],["em trai","younger brother"],["vợ","wife"],["chồng","husband"],["anh chị em","siblings"]],
+ s:[FS("Em có một chị gái và một em trai.","I have an older sister and a younger brother.","chị gái",["em gái","anh trai","vợ"]),
+    FS("Bà ngoại của em sống ở Cần Thơ.","My maternal grandmother lives in Can Tho.","Bà ngoại",["Bà nội","Ông ngoại","Chị gái"]),
+    FS("Ông nội của em năm nay tám mươi tuổi.","My paternal grandfather is eighty this year.","Ông nội",["Ông ngoại","Bà nội","Anh trai"]),
+    FS("Vợ em là người Việt.","My wife is Vietnamese.","Vợ",["Chồng","Em gái","Bà"]),
+    FS("Bạn có bao nhiêu anh chị em?","How many siblings do you have?","anh chị em",["ông bà","vợ chồng","ba má"]),
+    FS("Nhà em có bốn người.","There are four people in my household.","người",["con","cái","trái"])],
+ talk:[["Bạn có anh chị em không?","Do you have siblings?","Mình có một chị gái.","I have an older sister."]]},
+
+{id:"f-inlaws",t:"f",g:"hai bác",vi:"Ra mắt gia đình",en:"Meeting her family",c:"c.pron.family",
+ vis:[{type:"compare",cols:[{h:"con",en:"you say for yourself",fig:"S"},{h:"hai bác",en:"you say to her parents (or cô chú)",fig:"L"}]},
+  {type:"pattern",rows:[{slots:[["K","Dạ,",1],["S","con"],["V","chào"],["O","hai bác"],["K","ạ",1]],e:"Hello to you both. (respectfully)"}]}],
+ cards:[["ra mắt","to be introduced (to the family)"],["hai bác","you both (her parents)"],["giới thiệu","to introduce"],["rất vui được gặp","very happy to meet"],["quà","gift"],["mời","to invite; please (go ahead)"],["xin phép","to ask permission; excuse me"],["con rể","son-in-law"]],
+ s:[FS("Dạ, con chào hai bác ạ.","Hello to you both. (to her parents)","hai bác",["hai bạn","hai em","hai anh"]),
+    FS("Con xin giới thiệu, con tên là Alexandre.","Let me introduce myself, my name is Alexandre.","giới thiệu",["xin phép","ra mắt","mời"]),
+    FS("Con rất vui được gặp hai bác.","I'm very happy to meet you both.","rất vui được gặp",["rất buồn được gặp","rất vui được đi","rất mệt được gặp"]),
+    FS("Con có chút quà cho hai bác.","I have a small gift for you both.","quà",["tiền","việc","bài"]),
+    FS("Mời hai bác ăn cơm.","Please, go ahead and eat. (to the elders)","Mời",["Cho","Để","Xin lỗi"]),
+    FS("Con xin phép về ạ.","Please excuse me, I'll take my leave.","xin phép",["giới thiệu","mời","ra mắt"])],
+ traps:[FT("Dạ, con chào hai bác ạ.","Dạ, tôi chào hai bạn.","Hello to you both. (to her parents)","With her parents' generation: con for yourself, bác (or cô, chú) for them.")],
+ talk:[["Con làm nghề gì?","What's your job?","Dạ, con làm việc ở UNESCO ạ.","I work at UNESCO."],["Con ăn thêm đi.","Have some more.","Dạ, con cảm ơn bác, con no rồi ạ.","Thank you, I'm full."]]},
+
+{id:"f-wedding",t:"f",g:"đám cưới",vi:"Đám cưới",en:"The wedding",c:"c.intro.greeting",
+ vis:[{type:"timeline",rows:[{pts:[
+   {vi:"đám hỏi",en:"engagement",p:15,ex:["Đám hỏi tổ chức trước đám cưới.","The engagement ceremony is held before the wedding."]},
+   {vi:"thiệp cưới",en:"invitations",p:50,ex:["Đây là thiệp cưới của tụi em.","This is our wedding invitation."]},
+   {vi:"đám cưới",en:"wedding",p:85,ex:["Tụi em mời anh chị tới dự đám cưới.","We invite you to our wedding."]}]}]},
+  {type:"compare",cols:[{h:"cô dâu",en:"bride"},{h:"chú rể",en:"groom"}]}],
+ cards:[["đám cưới","wedding"],["đám hỏi","engagement ceremony"],["thiệp cưới","wedding invitation"],["cô dâu","bride"],["chú rể","groom"],["tiệc cưới","wedding banquet"],["tới dự","to attend"],["cưới","to marry"]],
+ s:[FS("Tụi em mời anh chị tới dự đám cưới.","We invite you to our wedding.","đám cưới",["đám hỏi","tiệc","thiệp cưới"]),
+    FS("Đây là thiệp cưới của tụi em.","This is our wedding invitation.","thiệp cưới",["tiệc cưới","đám hỏi","cô dâu"]),
+    FS("Cô dâu đẹp quá!","The bride is so beautiful!","Cô dâu",["Chú rể","Đám cưới","Tiệc cưới"]),
+    FS("Chú rể là người Pháp.","The groom is French.","Chú rể",["Cô dâu","Đám hỏi","Thiệp cưới"]),
+    FS("Tiệc cưới bắt đầu lúc sáu giờ tối.","The wedding banquet starts at six in the evening.","Tiệc cưới",["Đám hỏi","Thiệp cưới","Cô dâu"]),
+    FS("Đám hỏi tổ chức trước đám cưới.","The engagement ceremony is held before the wedding.","Đám hỏi",["Tiệc cưới","Thiệp cưới","Chú rể"])],
+ talk:[["Khi nào hai em cưới?","When are you two getting married?","Dạ, tháng một ạ.","In January."],["Đám cưới tổ chức ở đâu?","Where is the wedding?","Ở Sài Gòn ạ.","In Saigon."]]},
+
+{id:"f-toast",t:"f",g:"dô!",vi:"Chúc mừng",en:"Toasts and good wishes",c:"c.intro.greeting",
+ vis:[{type:"compare",cols:[
+   {h:"Chúc mừng …!",en:"congratulations",ex:["Chúc mừng hạnh phúc!","Congratulations and happiness!"]},
+   {h:"Chúc + người + …",en:"wish someone something",ex:["Chúc hai em trăm năm hạnh phúc.","Wishing you both a hundred years of happiness."]},
+   {h:"Một, hai, ba, dô!",en:"the Southern toast",ex:["Một, hai, ba, dô!","One, two, three, cheers!"]}]}],
+ cards:[["chúc mừng","congratulations"],["chúc","to wish"],["hạnh phúc","happiness"],["trăm năm hạnh phúc","a hundred years of happiness"],["dô","cheers (Southern)"],["cạn ly","bottoms up"],["sức khỏe","health"]],
+ s:[FS("Chúc mừng hạnh phúc!","Congratulations and happiness!","Chúc mừng",["Cảm ơn","Xin lỗi","Mời"]),
+    FS("Chúc hai em trăm năm hạnh phúc.","Wishing you both a hundred years of happiness.","trăm năm",["một năm","mười năm","mỗi năm"]),
+    FS("Một, hai, ba, dô!","One, two, three, cheers!","dô",["đi","nha","ạ"]),
+    FS("Chúc sức khỏe mọi người!","Good health, everyone!","sức khỏe",["hạnh phúc","cạn ly","chúc mừng"]),
+    FS("Cạn ly!","Bottoms up!","Cạn ly",["Chúc mừng","Một ly","Hết ly"]),
+    FS("Cảm ơn mọi người đã tới.","Thank you all for coming.","mọi người",["chúng tôi","các em","người ta"])],
+ talk:[["Chúc mừng hai em!","Congratulations, you two!","Dạ, tụi em cảm ơn anh chị.","Thank you."],["Một, hai, ba…","One, two, three…","Dô!","Cheers!"]]},
+
+/* work */
+{id:"w-job",t:"w",g:"công việc",vi:"Nói về công việc",en:"Describing your job",c:"c.sent.la",
+ vis:[{type:"pattern",rows:[{slots:[["S","Em"],["V","làm việc",1],["K","cho"],["N","một tổ chức quốc tế"]],e:"I work for an international organisation."},
+   {slots:[["N","Văn phòng của em"],["K","ở",1],["P","Paris"]],e:"My office is in Paris."}]}],
+ cards:[["làm việc","to work"],["công việc","job, work"],["tổ chức quốc tế","international organisation"],["văn phòng","office"],["đồng nghiệp","colleague"],["dự án","project"],["sếp","boss"],["nghề","profession"]],
+ s:[FS("Em làm việc cho một tổ chức quốc tế.","I work for an international organisation.","tổ chức quốc tế",["văn phòng","đồng nghiệp","dự án"]),
+    FS("Văn phòng của em ở Paris.","My office is in Paris.","Văn phòng",["Đồng nghiệp","Dự án","Nghề"]),
+    FS("Đồng nghiệp của em rất tốt.","My colleagues are very nice.","Đồng nghiệp",["Văn phòng","Dự án","Công việc"]),
+    FS("Công việc của bạn là gì?","What is your job?","Công việc",["Văn phòng","Đồng nghiệp","Dự án"]),
+    FS("Sếp gọi anh vào phòng.","The boss calls me into the office.","Sếp",["Đồng nghiệp","Khách","Bạn"]),
+    FS("Em quản lý dự án về nước.","I manage water projects.","dự án",["văn phòng","đồng nghiệp","công ty"])],
+ talk:[["Em làm nghề gì?","What do you do?","Em làm việc cho UNESCO.","I work for UNESCO."],["Văn phòng của em ở đâu?","Where is your office?","Ở Paris.","In Paris."]],
+ ask:[{a:"Em làm việc ở Paris.",q:["Em làm việc ở đâu?"]}]},
+
+{id:"w-meet",t:"w",g:"họp",vi:"Họp và lịch",en:"Meetings and schedules",c:"c.time.clock",
+ vis:[{type:"clocks",items:[{h:9,m:0,vi:"họp lúc chín giờ",en:"meeting 9:00"},{h:14,m:0,vi:"hai giờ chiều",en:"2 p.m."}]},
+  {type:"compare",cols:[{h:"bận",en:"busy"},{h:"rảnh",en:"free"},{h:"trễ",en:"late"},{h:"đúng giờ",en:"on time"}]}],
+ cards:[["buổi họp","meeting"],["họp","to have a meeting"],["lịch","schedule, calendar"],["gửi email","to send an email"],["bận","busy"],["rảnh","free"],["trễ","late"],["đúng giờ","on time"]],
+ s:[FS("Ngày mai tôi có buổi họp lúc 9 giờ sáng.","I have a meeting at 9 a.m. tomorrow.","buổi họp",["buổi học","buổi tối","buổi trưa"]),
+    FS("Bạn gửi email chưa?","Have you sent the email yet?","gửi email",["đọc email","viết thư","gọi điện"]),
+    FS("Hôm nay em bận quá.","I'm very busy today.","bận",["rảnh","trễ","đúng giờ"]),
+    FS("Thứ Sáu chị có rảnh không?","Are you free on Friday?","rảnh",["bận","trễ","mệt"]),
+    FS("Xin lỗi, em tới trễ.","Sorry, I'm late.","trễ",["sớm","đúng giờ","rảnh"]),
+    FS("Buổi họp kéo dài ba mươi phút.","The meeting lasts thirty minutes.","kéo dài",["bắt đầu","tới","gửi"])],
+ talk:[["Mình họp lúc mấy giờ?","What time do we meet?","Lúc hai giờ chiều.","At two in the afternoon."],["Chiều nay chị có rảnh không?","Are you free this afternoon?","Chiều nay chị bận rồi.","I'm busy this afternoon."]]},
+
+{id:"w-climate",t:"w",g:"khí hậu",vi:"Khí hậu và nước",en:"Climate and water",c:"c.sent.svo",
+ vis:[{type:"tiles",items:[{n:"🌡️",vi:"biến đổi khí hậu",en:"climate change"},{n:"🏔️",vi:"sông băng",en:"glacier"},{n:"🌊",vi:"lũ",en:"flood"},{n:"🏜️",vi:"hạn hán",en:"drought"},{n:"💧",vi:"nước ngọt",en:"fresh water"},{n:"🌿",vi:"môi trường",en:"environment"}]}],
+ cards:[["biến đổi khí hậu","climate change"],["sông băng","glacier"],["lũ","flood"],["hạn hán","drought"],["nước ngọt","fresh water"],["môi trường","environment"],["sông","river"],["tan","to melt"]],
+ s:[FS("Biến đổi khí hậu ảnh hưởng tới nước.","Climate change affects water.","Biến đổi khí hậu",["Môi trường","Hạn hán","Sông băng"]),
+    FS("Sông băng đang tan.","Glaciers are melting.","Sông băng",["Sông","Nước ngọt","Lũ"]),
+    FS("Mùa mưa có nhiều lũ.","The rainy season brings many floods.","lũ",["hạn hán","sông băng","nắng"]),
+    FS("Đồng bằng sông Cửu Long thiếu nước ngọt.","The Mekong Delta lacks fresh water.","nước ngọt",["nước mía","sông băng","môi trường"]),
+    FS("Em làm việc về môi trường.","I work on the environment.","môi trường",["thời tiết","hạn hán","văn phòng"]),
+    FS("Hạn hán làm cây chết.","Drought kills plants.","Hạn hán",["Lũ","Sông băng","Mùa mưa"])],
+ talk:[["Em làm việc về gì?","What do you work on?","Em làm việc về nước và biến đổi khí hậu.","I work on water and climate change."]]}
+);
+
+/* ── one short reading per track ─────────────────────────────────────── */
+const FOCUS_READ={
+ q:{title:"Ở quán bánh mì",lines:[["Chị ơi, quán mở cửa lúc mấy giờ?","What time does the shop open?"],["Bảy giờ sáng em.","Seven in the morning."],["Ở đây có bánh mì trứng không?","Do you have egg bánh mì here?"],["Có. Em muốn mấy ổ?","Yes. How many do you want?"],["Một ổ. Bao nhiêu tiền chị?","One. How much is it?"],["Hai mươi lăm nghìn.","Twenty-five thousand."]],
+   qs:[["What time does the shop open?",["7 a.m.","8 a.m.","7 p.m."],0],["How much is the bánh mì?",["25,000 dong","20,000 dong","35,000 dong"],0]]},
+ t:{title:"Một ngày của Minh",lines:[["Minh thường thức dậy lúc sáu giờ.","Minh usually wakes up at six."],["Buổi sáng anh ấy uống cà phê và đọc sách.","In the morning he drinks coffee and reads."],["Anh ấy đi làm lúc bảy giờ rưỡi.","He goes to work at half past seven."],["Buổi tối anh ấy hay nấu cơm với vợ.","In the evening he often cooks with his wife."],["Cuối tuần anh ấy đi bộ hai lần.","At the weekend he goes for a walk twice."]],
+   qs:[["When does Minh go to work?",["7:30","6:00","8:30"],0],["How often does he walk at the weekend?",["twice","every day","never"],0]]},
+ a:{title:"Hôm qua và ngày mai",lines:[["Hôm qua Lan đã đi chợ với má.","Yesterday Lan went to the market with her mom."],["Bây giờ Lan đang nấu cơm.","Now Lan is cooking."],["Ba Lan vừa mới về nhà.","Lan's dad has just come home."],["Ngày mai cả nhà sẽ đi Vũng Tàu.","Tomorrow the whole family will go to Vung Tau."],["Lan chưa bao giờ đi Vũng Tàu.","Lan has never been to Vung Tau."]],
+   qs:[["What is Lan doing now?",["cooking","shopping","sleeping"],0],["Has Lan been to Vung Tau before?",["never","once","many times"],0]]},
+ p:{title:"Về nhà bà",lines:[["Cuối tuần, em về nhà bà ngoại.","At the weekend I go to my grandmother's."],["Em chào bà: “Con chào bà ạ.”","I greet her: “Hello, Grandma.”"],["Bà hỏi: “Con ăn cơm chưa?”","She asks: “Have you eaten?”"],["Em nói: “Dạ, con ăn rồi ạ.”","I say: “Yes, I have.”"],["Rồi em nói chuyện với cô và chú.","Then I talk with my aunt and uncle."]],
+   qs:[["Whose house does he visit?",["his grandmother's","his teacher's","his boss's"],0],["Has he eaten?",["yes","not yet"],0]]},
+ s:{title:"Phòng của em",lines:[["Phòng của em nhỏ nhưng đẹp.","My room is small but nice."],["Trong phòng có một cái bàn và hai cái ghế.","In the room there is a table and two chairs."],["Cái bàn ở gần cửa sổ.","The table is near the window."],["Trên bàn có một quyển sách và một cái ly.","On the table there is a book and a glass."],["Em không có tivi.","I don't have a TV."]],
+   qs:[["Where is the table?",["near the window","near the door","in the kitchen"],0],["What is on the table?",["a book and a glass","a TV","two chairs"],0]]},
+ v:{title:"Trước khi đi làm",lines:[["Mỗi sáng, trước khi đi làm, em đánh răng và mặc áo sơ mi.","Every morning, before work, I brush my teeth and put on a shirt."],["Em muốn ăn sáng nhưng em phải đi sớm.","I want to have breakfast but I have to leave early."],["Sau khi họp, em uống cà phê với đồng nghiệp.","After the meeting, I have coffee with colleagues."],["Hôm nay em bị đau đầu nên em nghỉ ngơi một chút.","Today I have a headache, so I rest a little."]],
+   qs:[["Why does he skip breakfast?",["he must leave early","he is not hungry","he is sick"],0],["What is wrong today?",["a headache","a sore leg","nothing"],0]]},
+ j:{title:"Ba quán ăn",lines:[["Quán A rẻ hơn quán B.","Place A is cheaper than place B."],["Nhưng món ăn ở quán B ngon hơn.","But the food at place B is tastier."],["Quán C mắc nhất.","Place C is the most expensive."],["Em thích quán B nhất vì phở rất ngon.","I like place B best because the phở is very good."]],
+   qs:[["Which is cheaper, A or B?",["A","B"],0],["Which place does he like best?",["B","A","C"],0]]},
+ m:{title:"Ở chợ",lines:[["Em ơi, mua gì nè?","Hey, what would you like?"],["Dạ, cái này bao nhiêu vậy cô?","How much is this one?"],["Năm mươi nghìn.","Fifty thousand."],["Mắc quá à, bốn mươi được không cô?","That's too expensive — would forty be okay?"],["Thôi được, lấy đi!","Oh all right, take it!"]],
+   qs:[["What is the final price?",["40,000","50,000","45,000"],0],["Does the seller agree?",["yes","no"],0]]},
+ n:{title:"Đi chợ",lines:[["Em mua ba trái xoài, hai mươi nghìn một trái.","I buy three mangoes, twenty thousand each."],["Em mua thêm một ký thịt, một trăm hai mươi nghìn.","I also buy a kilo of meat, one hundred and twenty thousand."],["Tổng cộng là một trăm tám mươi nghìn.","The total is one hundred and eighty thousand."],["Em trả bằng tiền mặt.","I pay in cash."]],
+   qs:[["How many mangoes?",["3","2","20"],0],["What is the total?",["180,000","120,000","160,000"],0]]},
+ h:{title:"Đi Grab tới quán",lines:[["Em đặt xe Grab tới quận Ba.","I book a Grab to District 3."],["Tài xế chạy nhanh quá, em nói: “Anh chạy chậm một chút nha.”","The driver goes too fast, so I say: “Please drive a bit more slowly.”"],["Tới ngã tư, anh ấy quẹo trái.","At the crossroads, he turns left."],["Ở quán, em gọi một ly cà phê sữa đá, ít đường.","At the café, I order an iced milk coffee with less sugar."],["Trời nắng quá!","It's so sunny!"]],
+   qs:[["What does he ask the driver?",["to drive more slowly","to stop here","to turn right"],0],["What does he order?",["iced milk coffee, less sugar","iced tea","hot black coffee"],0]]},
+ f:{title:"Đám cưới của Nam và Mai",lines:[["Tháng sau, Nam và Mai sẽ cưới.","Next month, Nam and Mai will marry."],["Đám hỏi tổ chức ở nhà cô dâu.","The engagement ceremony is held at the bride's home."],["Tiệc cưới bắt đầu lúc sáu giờ tối ở một nhà hàng ở quận Một.","The banquet starts at six p.m. in a restaurant in District 1."],["Ai cũng nói: “Chúc mừng hạnh phúc!”","Everyone says: “Congratulations and happiness!”"],["Rồi mọi người cùng nói: “Một, hai, ba, dô!”","Then everyone says together: “One, two, three, cheers!”"]],
+   qs:[["Where is the engagement ceremony?",["at the bride's home","at a restaurant","at the groom's home"],0],["When does the banquet start?",["6 p.m.","6 a.m.","8 p.m."],0]]},
+ w:{title:"Một ngày ở văn phòng",lines:[["Em làm việc cho một tổ chức quốc tế ở Paris.","I work for an international organisation in Paris."],["Buổi sáng em đọc email và gửi email.","In the morning I read and send emails."],["Lúc mười giờ em có buổi họp với đồng nghiệp.","At ten I have a meeting with colleagues."],["Dự án của em về nước và biến đổi khí hậu.","My project is about water and climate change."],["Buổi chiều em viết báo cáo.","In the afternoon I write reports."]],
+   qs:[["When is the meeting?",["10:00","9:00","14:00"],0],["What is the project about?",["water and climate change","schools","tourism"],0]]},
+ z:{title:"Giọng Sài Gòn",lines:[["Ở Sài Gòn, người ta nói “về” giống như “dề”.","In Saigon, people say “về” like “dề”."],["Người miền Nam nói “ly” và “chén”, không nói “cốc” và “bát”.","Southerners say “ly” and “chén”, not “cốc” and “bát”."],["Họ hay nói “nha” ở cuối câu.","They often say “nha” at the end of a sentence."],["Ví dụ: “Đi cẩn thận nha!”","For example: “Be careful, okay?”"]],
+   qs:[["The Southern word for “glass” is:",["ly","cốc","bát"],0],["What do Southerners often add at the end of a sentence?",["nha","ạ","hả"],0]]}
+};
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOCUSED LESSONS · engine v13
+   intro → (quick check) → see → cards → practice ladder → result → speed
+   Fourteen steps in four stages; each step is harder than the last.
+   Lesson answers also feed the main review engine when the word exists
+   in the course, and every lesson is rescheduled for its own review.
    ═══════════════════════════════════════════════════════════════════════ */
 const FL_LEVELS=[
-  {id:1,vi:"Nhận ra",en:"Recognise"},{id:2,vi:"Nghe",en:"Listen"},{id:3,vi:"Ghép",en:"Match"},
-  {id:4,vi:"Nhớ",en:"Recall"},{id:5,vi:"Chọn",en:"Choose"},{id:6,vi:"Điền",en:"Fill in"},
-  {id:7,vi:"Xếp",en:"Build"},{id:8,vi:"Gõ",en:"Type"},{id:9,vi:"Dịch",en:"Translate"}
+  {id:1,vi:"Nhận ra",en:"Recognise"},{id:2,vi:"Nghe",en:"Listen"},{id:3,vi:"Ghép",en:"Match"},{id:4,vi:"Nhớ",en:"Recall"},
+  {id:5,vi:"Chọn",en:"Choose"},{id:6,vi:"Điền",en:"Fill in"},{id:7,vi:"Sửa",en:"Fix the mistake"},{id:8,vi:"Xếp",en:"Build"},{id:9,vi:"Hội thoại",en:"Converse & read"},
+  {id:10,vi:"Gõ",en:"Type"},{id:11,vi:"Nghe viết",en:"Dictation"},{id:12,vi:"Biến đổi",en:"Transform"},
+  {id:13,vi:"Dịch",en:"Translate"},{id:14,vi:"Nói",en:"Speak"}
 ];
+const FL_STAGES=[{vi:"Nhận biết",en:"notice",from:1,to:4},{vi:"Hiểu",en:"understand",from:5,to:9},{vi:"Viết",en:"write",from:10,to:12},{vi:"Dùng",en:"use",from:13,to:14}];
+const FL_QUOTA={full:{1:2,2:2,3:1,4:2,5:2,6:2,7:1,8:2,9:2,10:2,11:1,12:2,13:2,14:1},
+                hard:{4:2,5:2,6:1,7:2,8:2,9:2,10:3,11:2,12:2,13:3,14:1}};
 const FL_ROLE={S:"who",V:"verb",O:"object",Q:"question",F:"how often",T:"when",P:"where",M:"modal",A:"adjective",N:"noun",C:"classifier",X:"particle","#":"number",K:"key"};
-const FL_PROPER=["Hà","Việt","Paris","Sài","Đà","Alexandre","Lan","Linh","Ali","Hoa","Mai","Aris","Pháp","TV","Keiko"];
-let FL=null;
+const FL_PROPER=["Hà","Việt","Paris","Sài","Đà","Alexandre","Lan","Linh","Ali","Hoa","Mai","Aris","Pháp","TV","Keiko","UNESCO","Grab","Cần","Vũng","Nam"];
+const FL_SR=(typeof window!=="undefined")&&(window.SpeechRecognition||window.webkitSpeechRecognition)||null;
+const FL_ICON={"cà phê":"☕","cà phê sữa đá":"☕","trà đá":"🍵","trà":"🍵","mang về":"🥡","tính tiền":"🧾","bánh mì":"🥖","phở":"🍜","cơm":"🍚","nấu cơm":"🍳","trứng":"🥚","sữa":"🥛","nước":"💧","nước ngọt":"💧","bia":"🍺",
+ "trái cây":"🍎","trái":"🍊","táo":"🍎","cam":"🍊","xoài":"🥭","chén":"🥣","ly":"🥛","dù":"☂️","nón":"👒","áo khoác":"🧥","giày":"👟","kính":"👓","áo":"👕","cái quần":"👖",
+ "mèo":"🐈","con":"🐈","chó":"🐕","heo":"🐖","quyển":"📘","quyển sách":"📘","sách":"📘","đọc":"📖","viết":"✍️","hỏi":"❓","mở":"🔓","đóng":"🔒","đợi":"⏳","thử":"👅","lặp lại":"🔁",
+ "chiếc":"🛵","xe máy":"🛵","xe hơi":"🚗","đặt xe":"📱","tài xế":"🧑‍✈️","dừng":"🛑","đón":"🙋","chở":"🛵","tờ":"📄","tiền":"💵","tiền mặt":"💵","thẻ":"💳","đồng":"💵","nghìn":"💵","giảm giá":"🏷️","bớt":"🏷️",
+ "người":"🧍","ngôi":"🏠","nhà":"🏠","bàn":"🪑","cửa sổ":"🪟","cửa":"🚪","chìa khóa":"🔑","điện thoại":"📱",
+ "rửa chén":"🍽️","giặt đồ":"🧺","dọn phòng":"🧹","đi chợ":"🧺","mua đồ":"🛍️","đánh răng":"🪥","đi ngủ":"🛏️","ngủ":"😴","rửa tay":"🧼","thức dậy":"⏰",
+ "trời nắng":"☀️","nắng":"☀️","trời mưa":"🌧️","mưa":"🌧️","mùa mưa":"🌧️","mùa khô":"🏜️","trời nóng":"🔥","nóng":"🔥","trời lạnh":"❄️","lạnh":"❄️","mát":"🍃","thời tiết":"🌤️",
+ "vui":"😊","buồn":"😢","mệt":"😴","đói":"🍜","khát":"💧","no":"😌","lo":"😟","nhớ":"💭","bị bệnh":"🤒","đau đầu":"🤕","đau":"🤕","khỏe":"💪",
+ "đi thẳng":"⬆️","quẹo trái":"⬅️","quẹo phải":"➡️","ngã tư":"✚","đối diện":"⇄","bên trái":"⬅️","bên phải":"➡️",
+ "đám cưới":"💒","đám hỏi":"💍","thiệp cưới":"💌","cô dâu":"👰","chú rể":"🤵","tiệc cưới":"🎉","chúc mừng":"🎉","dô":"🍻","cạn ly":"🥂","hạnh phúc":"💕","quà":"🎁",
+ "văn phòng":"🏢","đồng nghiệp":"👥","dự án":"📋","buổi họp":"🗓️","họp":"🗓️","lịch":"📅","gửi email":"📧","sông băng":"🏔️","lũ":"🌊","hạn hán":"🏜️","môi trường":"🌿","biến đổi khí hậu":"🌡️","sông":"🏞️",
+ "to":"🐘","nhỏ":"🐭","cao":"🦒","thấp":"🐧","dài":"📏","nặng":"🏋️","nhẹ":"🪶","nhanh":"⚡","chậm":"🐢","mắc":"💸","rẻ":"🪙","sạch":"✨","dơ":"🫧","gần":"📍","xa":"🗺️"};
+let FL=null, FL_FILTER="all", FL_PREP=null, FL_GLOSS=null;
 
-/* ── progress ─────────────────────────────────────────────────────────── */
-function focusRec(id){ if(!S.focus||typeof S.focus!=="object") S.focus={}; return S.focus[id]||(S.focus[id]={runs:0,best:0,stars:0,hard:0,last:0}); }
+/* ── preparation: order, track reviews, lessons drafted from classes ──── */
+function flPrepare(){
+  if(FL_PREP===COURSE&&FOCUS.length) return;
+  for(let i=FOCUS.length-1;i>=0;i--) if(FOCUS[i].review||FOCUS[i].gen) FOCUS.splice(i,1);
+  if(!FOCUS_TRACKS.find(t=>t.id==="k")) FOCUS_TRACKS.push({id:"k",vi:"Lớp học",en:"Drafted from your classes"});
+  const order=FOCUS_TRACKS.map(t=>t.id), base=FOCUS.slice();
+  base.sort((a,b)=>order.indexOf(a.t)-order.indexOf(b.t)||base.indexOf(a)-base.indexOf(b));
+  const out=[];
+  order.forEach(function(tid){
+    const ls=base.filter(l=>l.t===tid); if(!ls.length) return;
+    const chunks=[]; for(let i=0;i<ls.length;i+=4) chunks.push(ls.slice(i,i+4));
+    if(chunks.length>1&&chunks[chunks.length-1].length<2) chunks[chunks.length-2]=chunks[chunks.length-2].concat(chunks.pop());
+    chunks.forEach(function(ch,ci){
+      ch.forEach(l=>out.push(l));
+      if(ch.length<2) return;
+      const last=ci===chunks.length-1, rd=last&&typeof FOCUS_READ!=="undefined"?FOCUS_READ[tid]:null;
+      const vis=[{type:"recap",items:ch.map(l=>({id:l.id,g:l.g,vi:l.vi,ex:(l.s&&l.s[0])?[l.s[0].v,l.s[0].e]:(l.talk&&l.talk[0])?[l.talk[0][0],l.talk[0][1]]:null}))}];
+      if(rd) vis.push({type:"reading",title:rd.title,lines:rd.lines});
+      out.push({id:"rv-"+tid+"-"+(ci+1),t:tid,g:"↺",vi:"Ôn tập "+(ci+1),en:ch.map(l=>l.vi).join(" · "),review:true,mix:ch.map(l=>l.id),read:rd,vis:vis,cards:[]});
+    });
+  });
+  flClassLessons().forEach(l=>out.push(l));
+  FOCUS.length=0; out.forEach(l=>FOCUS.push(l));
+  FL_PREP=COURSE; FL_GLOSS=null;
+}
+function flClassLessons(){
+  const res=[];
+  (COURSE.lessons||[]).filter(l=>l&&!l.archived).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).forEach(function(l){
+    let words=[]; try{ words=classVocabulary(l)||[]; }catch(e){ return; }
+    words=words.filter(w=>w&&w.vi&&w.en&&w.vi.length<=26&&w.vi.indexOf("…")<0&&!/[=→]/.test(w.vi));
+    const seen=new Set(); words=words.filter(w=>{const k=flClean(w.vi); if(seen.has(k)) return false; seen.add(k); return true;});
+    const withEx=words.filter(w=>w.ex&&w.ex.vi&&w.ex.en&&flFind(w.ex.vi,w.vi));
+    if(words.length<4||withEx.length<3) return;
+    const cards=withEx.concat(words.filter(w=>withEx.indexOf(w)<0)).slice(0,8).map(w=>[w.vi,String(w.en).split(/[;(]/)[0].trim()||w.en]);
+    const cc={}; words.forEach(w=>{ if(w.concept) cc[w.concept]=(cc[w.concept]||0)+1; }); const topC=Object.keys(cc).sort((a,b)=>cc[b]-cc[a])[0]||"c.sent.svo";
+    res.push({id:"cls-"+l.id,t:"k",g:formatLessonDate(l.date),vi:l.title,en:"Class of "+formatLessonDate(l.date),gen:true,c:topC,
+      vis:[{type:"tiles",items:cards.map(c=>({n:c[0],vi:c[0],en:c[1]}))}],cards:cards,
+      s:withEx.slice(0,8).map(w=>FS(w.ex.vi,w.ex.en,w.vi))});
+  });
+  return res;
+}
+function flLesson(id){ flPrepare(); return FOCUS.find(l=>l.id===id)||null; }
+
+/* ── progress and review scheduling ──────────────────────────────────── */
+function focusRec(id){ if(!S.focus||typeof S.focus!=="object") S.focus={}; return S.focus[id]||(S.focus[id]={runs:0,best:0,stars:0,hard:0,last:0,ivl:0,due:0}); }
 function focusStars(id){ const r=S.focus&&S.focus[id]; return r?r.stars||0:0; }
 function focusDone(id){ return focusStars(id)>0; }
+function focusIsDue(id){ const r=S.focus&&S.focus[id]; return !!(r&&r.stars&&r.due&&r.due<=Date.now()); }
+function focusDueList(){ flPrepare(); return FOCUS.filter(l=>!l.review&&!l.gen&&focusIsDue(l.id)).sort((a,b)=>S.focus[a.id].due-S.focus[b.id].due); }
+function focusSchedule(id,pct){
+  const r=focusRec(id);
+  if(pct>=0.7) r.ivl=r.ivl?Math.min(90,Math.round(r.ivl*2.5)):2; else r.ivl=1;
+  r.due=Date.now()+r.ivl*DAY;
+}
 function focusNext(){
-  const last=S.focusLast&&FOCUS.findIndex(l=>l.id===S.focusLast);
-  if(last>-1){ for(let i=last+1;i<FOCUS.length;i++) if(!focusDone(FOCUS[i].id)) return FOCUS[i]; }
-  return FOCUS.find(l=>!focusDone(l.id))||FOCUS[0];
+  flPrepare();
+  const pool=FOCUS.filter(l=>!l.gen);
+  const last=S.focusLast?pool.findIndex(l=>l.id===S.focusLast):-1;
+  if(last>-1){ for(let i=last+1;i<pool.length;i++) if(!focusDone(pool[i].id)) return pool[i]; }
+  return pool.find(l=>!focusDone(l.id))||pool[0];
 }
 function focusTrack(id){ return FOCUS_TRACKS.find(t=>t.id===id)||FOCUS_TRACKS[0]; }
-function flStarsHTML(n,max){ let h='<span class="fl-stars" aria-label="'+n+' of 3 stars">'; for(let i=0;i<(max||3);i++) h+='<i class="'+(i<n?'on':'')+'"></i>'; return h+'</span>'; }
+function flStarsHTML(n,due){ let h='<span class="fl-stars'+(due?' faded':'')+'" aria-label="'+n+' of 3 stars">'; for(let i=0;i<3;i++) h+='<i class="'+(i<n?'on':'')+'"></i>'; return h+'</span>'; }
 
 /* ── small helpers ────────────────────────────────────────────────────── */
 function flSay(vi,cls){ return '<span class="fl-say'+(cls?' '+cls:'')+'" data-say="'+esc(String(vi).replace(/\s*…\s*/g," "))+'">'+esc(vi)+'</span>'; }
@@ -8996,14 +9590,48 @@ function flFind(sentence,key){
   const m=re.exec(sentence); if(!m) return null;
   const start=m.index+m[1].length; return {start:start,end:start+m[2].length,text:m[2]};
 }
-function flSynOf(L,w){ const k=flClean(w); const g=(L.syn||[]).find(gr=>gr.some(x=>flClean(x)===k)); return g?g.map(flClean):[k]; }
+function flSynOf(L,w){ const k=flClean(w); const g=((L&&L.syn)||[]).find(gr=>gr.some(x=>flClean(x)===k)); return g?g.map(flClean):[k]; }
 function flCards(L){ return (L.cards&&L.cards.length)?L.cards:(L.xf||[]).map(x=>[x[0],x[2]]); }
-function flExample(L,vi){
-  const k=String(vi).replace(/\s*…\s*.*/,"").trim(); if(!k) return null;
-  const s=(L.s||[]).find(x=>flFind(x.v,k)); return s?[s.v,s.e]:null;
-}
-function flPick(arr,n){ return shuffle(arr.slice()).slice(0,n); }
+function flExample(L,vi){ const k=String(vi).replace(/\s*…\s*.*/,"").trim(); if(!k) return null; const s=(L.s||[]).find(x=>flFind(x.v,k)); return s?[s.v,s.e]:null; }
+function flPick(arr,n){ return shuffle(arr.slice()).slice(0,Math.max(0,n)); }
 function flUniq(arr){ const seen=new Set(); return arr.filter(x=>{const k=flClean(x); if(seen.has(k)) return false; seen.add(k); return true;}); }
+function flIcon(vi){ return FL_ICON[flClean(vi)]||""; }
+function flGloss(vi){
+  if(!FL_GLOSS){ FL_GLOSS={}; (COURSE.words||[]).forEach(w=>{ if(w.vi&&w.en&&!FL_GLOSS[flClean(w.vi)]) FL_GLOSS[flClean(w.vi)]=w.en; }); FOCUS.forEach(L=>flCards(L).forEach(c=>{ FL_GLOSS[flClean(c[0])]=c[1]; })); }
+  return FL_GLOSS[flClean(vi)]||"";
+}
+
+/* ── recordings of a native speaker replace the synthetic voice ──────── */
+const FL_AUDIO={keys:new Set(),db:null,urls:{},
+  open(){ if(this.db) return Promise.resolve(this.db); const self=this;
+    return new Promise(function(res,rej){ try{ const q=indexedDB.open("vivu-audio",1); q.onupgradeneeded=()=>q.result.createObjectStore("clips"); q.onsuccess=()=>{self.db=q.result;res(self.db);}; q.onerror=()=>rej(q.error);}catch(e){rej(e);} }); },
+  async init(){ try{ const db=await this.open(); const tx=db.transaction("clips","readonly").objectStore("clips").getAllKeys(); tx.onsuccess=()=>{ (tx.result||[]).forEach(k=>this.keys.add(k)); }; }catch(e){} },
+  async put(key,blob){ const db=await this.open(); return new Promise((res,rej)=>{ const t=db.transaction("clips","readwrite"); t.objectStore("clips").put(blob,key); t.oncomplete=()=>{this.keys.add(key); if(this.urls[key]){URL.revokeObjectURL(this.urls[key]);delete this.urls[key];} res();}; t.onerror=()=>rej(t.error); }); },
+  async del(key){ const db=await this.open(); return new Promise(res=>{ const t=db.transaction("clips","readwrite"); t.objectStore("clips").delete(key); t.oncomplete=()=>{this.keys.delete(key);res();}; }); },
+  async url(key){ if(this.urls[key]) return this.urls[key]; const db=await this.open(); return new Promise(res=>{ const g=db.transaction("clips","readonly").objectStore("clips").get(key); g.onsuccess=()=>{ if(!g.result) return res(null); this.urls[key]=URL.createObjectURL(g.result); res(this.urls[key]); }; g.onerror=()=>res(null); }); },
+  async play(key){ const u=await this.url(key); if(!u) return false; try{ TTS.stop(); const a=new Audio(u); await a.play(); return true; }catch(e){ return false; } }
+};
+(function patchTTS(){
+  const say=TTS.say.bind(TTS), seq=TTS.seq.bind(TTS);
+  TTS.say=function(text,rate,btn){ const k=flClean(text); if(FL_AUDIO.keys.has(k)){ FL_AUDIO.play(k).then(ok=>{ if(!ok) say(text,rate,btn); }); return; } return say(text,rate,btn); };
+  TTS.seq=function(list,rate){ const xs=(Array.isArray(list)?list:[list]).filter(Boolean); if(xs.length&&FL_AUDIO.keys.has(flClean(xs[0]))){ FL_AUDIO.play(flClean(xs[0])); if(xs.length>1) setTimeout(()=>seq(xs.slice(1),rate),1800); return; } return seq(list,rate); };
+  FL_AUDIO.init();
+})();
+let FL_REC=null;
+async function flRecordToggle(text,btn){
+  const key=flClean(text);
+  if(FL_REC&&FL_REC.state==="recording"){ FL_REC.stop(); return; }
+  if(!navigator.mediaDevices||typeof MediaRecorder==="undefined"){ btn.textContent="Recording not supported here"; return; }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true}), chunks=[];
+    FL_REC=new MediaRecorder(stream);
+    FL_REC.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+    FL_REC.onstop=async function(){ stream.getTracks().forEach(t=>t.stop()); btn.classList.remove("rec");
+      if(chunks.length){ await FL_AUDIO.put(key,new Blob(chunks,{type:FL_REC.mimeType||"audio/webm"})); btn.textContent="✓ Đã ghi · saved"; FL_AUDIO.play(key); setTimeout(()=>flRender(),900); } };
+    FL_REC.start(); btn.classList.add("rec"); btn.textContent="■ Dừng · stop";
+    setTimeout(()=>{ if(FL_REC&&FL_REC.state==="recording") FL_REC.stop(); },6000);
+  }catch(e){ btn.textContent="Microphone not available"; }
+}
 
 /* ── visuals ──────────────────────────────────────────────────────────── */
 function flVisual(v){
@@ -9014,26 +9642,25 @@ function flVisual(v){
         +(c.ex?'<div class="fl-cmp-ex">'+flSay(c.ex[0],"vi")+'<small>'+esc(c.ex[1])+'</small></div>':'')+'</div>';}).join("")+'</div>';
   }
   if(t==="scale"){
-    return '<div class="fl-scale">'+(v.top?'<div class="fl-scale-end">↑ '+esc(v.top)+'</div>':'')+v.rows.map(function(r){
-      return '<div class="fl-scale-row'+(r.me?' me':'')+'"><div class="fl-scale-word">'+flSay(r.vi)+'<small>'+esc(r.en)+'</small></div><div class="fl-meter"><i style="width:'+Math.max(3,r.v)+'%"></i></div></div>';}).join("")
+    return '<div class="fl-scale">'+(v.top?'<div class="fl-scale-end">↑ '+esc(v.top)+'</div>':'')+v.rows.map(function(r,i){
+      return '<div class="fl-scale-row'+(r.me?' me':'')+'" style="--d:'+(i*70)+'ms"><div class="fl-scale-word">'+flSay(r.vi)+'<small>'+esc(r.en)+'</small></div><div class="fl-meter"><i style="width:'+Math.max(3,r.v)+'%"></i></div></div>';}).join("")
       +(v.bottom?'<div class="fl-scale-end">↓ '+esc(v.bottom)+'</div>':'')+'</div>';
   }
   if(t==="pattern"){
-    return '<div class="fl-pattern">'+v.rows.map(function(r,ri){
-      return (ri&&v.arrow?'<div class="fl-pattern-arrow" aria-hidden="true">↓</div>':'')+'<div class="fl-pattern-row"><div class="fl-slots">'+r.slots.map(function(s){
-        return '<div class="fl-slot'+(s[2]?' hl':'')+'"><small>'+esc(FL_ROLE[s[0]]||"")+'</small>'+flSay(s[1],"chip")+'</div>';}).join("")+'</div>'
+    const anim=!!v.arrow;
+    return '<div class="fl-pattern'+(anim?' anim':'')+'">'+(anim?'<button class="fl-replay" aria-label="Replay animation">↻</button>':'')+v.rows.map(function(r,ri){
+      return (ri&&v.arrow?'<div class="fl-pattern-arrow" aria-hidden="true">↓</div>':'')+'<div class="fl-pattern-row r'+ri+'"><div class="fl-slots">'+r.slots.map(function(s,si){
+        return '<div class="fl-slot'+(s[2]?' hl':'')+'" style="--i:'+si+'"><small>'+esc(FL_ROLE[s[0]]||"")+'</small>'+flSay(s[1],"chip")+'</div>';}).join("")+'</div>'
         +(r.e?'<div class="fl-pattern-en">'+esc(r.e)+'</div>':'')+'</div>';}).join("")+'</div>';
   }
   if(t==="map"){
     const n=v.nodes.length;
-    const nodes=v.nodes.map(function(nd,i){
-      const a=-Math.PI/2+i*2*Math.PI/n, x=50+36*Math.cos(a), y=50+38*Math.sin(a);
-      return {x:x,y:y,nd:nd,i:i};});
+    const nodes=v.nodes.map(function(nd,i){ const a=-Math.PI/2+i*2*Math.PI/n; return {x:50+36*Math.cos(a),y:50+38*Math.sin(a),nd:nd,i:i}; });
     return '<div class="fl-map"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'
       +nodes.map(p=>'<line x1="50" y1="50" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'"/>').join("")+'</svg>'
       +'<div class="fl-map-center"><b>'+esc(v.center.vi)+'</b><small>'+esc(v.center.en)+'</small></div>'
-      +nodes.map(p=>'<button class="fl-map-node" style="left:'+p.x.toFixed(1)+'%;top:'+p.y.toFixed(1)+'%" data-mi="'+p.i+'" data-say="'+esc(p.nd.vi)+'"><b>'+esc(p.nd.vi)+'</b><small>'+esc(p.nd.en)+'</small></button>').join("")
-      +'</div><div class="fl-caption" id="flCap" aria-live="polite"></div>';
+      +nodes.map(p=>'<button class="fl-map-node" style="left:'+p.x.toFixed(1)+'%;top:'+p.y.toFixed(1)+'%;--d:'+(p.i*60)+'ms" data-say="'+esc(p.nd.vi)+'"'+(p.nd.ex?' data-ex="'+esc(p.nd.ex[0])+'" data-exen="'+esc(p.nd.ex[1])+'"':'')+'><b>'+esc(p.nd.vi)+'</b><small>'+esc(p.nd.en)+'</small></button>').join("")
+      +'</div><div class="fl-caption" aria-live="polite"></div>';
   }
   if(t==="timeline"){
     return '<div class="fl-tl">'+v.rows.map(function(r){
@@ -9041,28 +9668,24 @@ function flVisual(v){
         +(r.now!=null?'<span class="fl-tl-now" style="left:'+r.now+'%"></span>':'')
         +r.pts.map(function(p){const hl=!v.hl||v.hl.indexOf(p.vi)>-1;
           return '<button class="fl-tl-pt'+(hl?' hl':'')+'" style="left:'+p.p+'%" data-say="'+esc(p.vi)+'"'+(p.ex?' data-ex="'+esc(p.ex[0])+'" data-exen="'+esc(p.ex[1])+'"':'')+'><b>'+esc(p.vi)+'</b><i></i><small>'+esc(p.en)+'</small></button>';}).join("")+'</div>';}).join("")
-      +'</div><div class="fl-caption" id="flCap" aria-live="polite"></div>';
+      +'</div><div class="fl-caption" aria-live="polite"></div>';
   }
-  if(t==="pairs"){
-    return '<div class="fl-pairs">'+v.rows.map(r=>'<div class="fl-pair"><div>'+flSay(r[0])+'<small>'+esc(r[1])+'</small></div><span class="fl-pair-x" aria-hidden="true">⟷</span><div>'+flSay(r[2])+'<small>'+esc(r[3])+'</small></div></div>').join("")+'</div>';
-  }
+  if(t==="pairs") return '<div class="fl-pairs">'+v.rows.map(r=>'<div class="fl-pair"><div>'+flIconHTML(r[0])+flSay(r[0])+'<small>'+esc(r[1])+'</small></div><span class="fl-pair-x" aria-hidden="true">⟷</span><div>'+flIconHTML(r[2])+flSay(r[2])+'<small>'+esc(r[3])+'</small></div></div>').join("")+'</div>';
   if(t==="transform"){
     return '<div class="fl-xf"><div class="fl-xf-head"><span>'+esc(v.heads[0])+'</span><span></span><span>'+esc(v.heads[1])+'</span></div>'
-      +v.rows.map(r=>'<div class="fl-xf-row"><span>'+flSay(r[0])+'</span><span class="fl-xf-arrow">→</span><span class="to">'+flSay(r[1])+'</span><small>'+esc(r[2])+'</small></div>').join("")+'</div>';
+      +v.rows.map((r,i)=>'<div class="fl-xf-row" style="--d:'+(i*80)+'ms"><span>'+flSay(r[0])+'</span><span class="fl-xf-arrow">→</span><span class="to">'+flSay(r[1])+'</span><small>'+esc(r[2])+'</small></div>').join("")+'</div>';
   }
   if(t==="segments"){
-    return '<div class="fl-day"><div class="fl-day-bar">'+v.segs.map(function(s,i){
-      return '<button class="fl-day-seg c'+(i%4)+'" style="left:'+(s.from/24*100)+'%;width:'+((s.to-s.from)/24*100)+'%" data-say="'+esc(s.vi)+'"></button>';}).join("")+'</div>'
+    return '<div class="fl-day"><div class="fl-day-bar">'+v.segs.map((s,i)=>'<button class="fl-day-seg c'+(i%4)+'" style="left:'+(s.from/24*100)+'%;width:'+((s.to-s.from)/24*100)+'%" data-say="'+esc(s.vi)+'" aria-label="'+esc(s.vi)+'"></button>').join("")+'</div>'
       +'<div class="fl-day-ticks">'+[0,6,12,18,24].map(h=>'<span style="left:'+(h/24*100)+'%">'+h+'h</span>').join("")+'</div>'
       +'<div class="fl-day-legend">'+v.segs.map((s,i)=>'<div class="c'+(i%4)+'"><i></i>'+flSay(s.vi)+'<small>'+esc(s.en)+' · '+s.from+'–'+s.to+'h</small></div>').join("")+'</div></div>';
   }
   if(t==="bars"){
-    return '<div class="fl-bars">'+v.groups.map(function(g){
-      return '<div class="fl-bars-g"><div class="fl-bars-plot">'+g.bars.map(b=>'<div class="fl-bar'+(b[2]?' hl':'')+'"><i style="height:'+b[1]+'%"></i><small>'+esc(b[0])+'</small></div>').join("")+'</div>'
-        +'<div class="fl-bars-cap">'+flSay(g.cap,"vi")+'<small>'+esc(g.e)+'</small></div></div>';}).join("")+'</div>';
+    return '<div class="fl-bars">'+v.groups.map(g=>'<div class="fl-bars-g"><div class="fl-bars-plot">'+g.bars.map(b=>'<div class="fl-bar'+(b[2]?' hl':'')+'"><i style="height:'+b[1]+'%"></i><small>'+esc(b[0])+'</small></div>').join("")+'</div><div class="fl-bars-cap">'+flSay(g.cap,"vi")+'<small>'+esc(g.e)+'</small></div></div>').join("")+'</div>';
   }
   if(t==="tiles"){
-    return '<div class="fl-tiles">'+v.items.map(it=>'<button class="fl-tile" data-say="'+esc(it.vi)+'"><b>'+esc(it.n)+'</b>'+(it.n!==it.vi?'<span>'+esc(it.vi)+'</span>':'')+'<small>'+esc(it.en)+'</small></button>').join("")+'</div>';
+    return '<div class="fl-tiles">'+v.items.map(function(it){ const ic=flIcon(it.vi); const big=it.n===it.vi&&ic?ic:it.n;
+      return '<button class="fl-tile" data-say="'+esc(it.vi)+'"><b'+(big!==it.n||/^\p{Extended_Pictographic}/u.test(big)?' class="ic"':'')+'>'+esc(big)+'</b>'+(big!==it.vi?'<span>'+esc(it.vi)+'</span>':'')+'<small>'+esc(it.en)+'</small></button>';}).join("")+'</div>';
   }
   if(t==="clocks"){
     return '<div class="fl-clocks">'+v.items.map(function(c){
@@ -9075,65 +9698,92 @@ function flVisual(v){
   }
   if(t==="space"){
     const P=[["trên","on",50,14],["trong","inside",50,50],["dưới","under",50,88],["bên cạnh","beside",84,50],["gần","near",22,50],["xa","far",4,50]];
-    return '<div class="fl-space"><div class="fl-space-box"></div><span class="fl-space-near"></span>'
-      +P.map(p=>'<button class="fl-space-pt" style="left:'+p[2]+'%;top:'+p[3]+'%" data-say="'+esc(p[0])+'"><i></i><b>'+esc(p[0])+'</b><small>'+esc(p[1])+'</small></button>').join("")+'</div>';
+    return '<div class="fl-space"><div class="fl-space-box"></div>'+P.map(p=>'<button class="fl-space-pt" style="left:'+p[2]+'%;top:'+p[3]+'%" data-say="'+esc(p[0])+'"><i></i><b>'+esc(p[0])+'</b><small>'+esc(p[1])+'</small></button>').join("")+'</div>';
   }
   if(t==="dots"){
     return '<div class="fl-dots"><div class="fl-dots-head"><span></span>'+["T2","T3","T4","T5","T6","T7","CN"].map(d=>'<span>'+d+'</span>').join("")+'</div>'
-      +v.rows.map(r=>'<div class="fl-dots-row"><div>'+flSay(r.vi)+'<small>'+esc(r.en)+'</small></div>'+r.d.split("").map(x=>'<i class="'+(x==="1"?"on":"")+'"></i>').join("")+'</div>').join("")+'</div>';
+      +v.rows.map(r=>'<div class="fl-dots-row"><div>'+flSay(r.vi)+'<small>'+esc(r.en)+'</small></div>'+r.d.split("").map((x,i)=>'<i class="'+(x==="1"?"on":"")+'" style="--d:'+(i*60)+'ms"></i>').join("")+'</div>').join("")+'</div>';
   }
   if(t==="flow"){
     return '<div class="fl-flow">'+v.rows.map(r=>'<button class="fl-flow-row" data-say="'+esc(r.ex[0])+'"><span class="fl-flow-box">'+esc(r.a)+'<small>'+esc(r.ae)+'</small></span><span class="fl-flow-arrow"><b>'+esc(r.lab)+'</b><i></i></span><span class="fl-flow-box">'+esc(r.b)+'<small>'+esc(r.be)+'</small></span><span class="fl-flow-ex">'+esc(r.ex[0])+' · <em>'+esc(r.ex[1])+'</em></span></button>').join("")+'</div>';
   }
+  if(t==="recap"){
+    return '<div class="fl-recap">'+v.items.map(it=>'<button class="fl-recap-item" data-open="'+esc(it.id)+'"><span class="fl-recap-g">'+esc(it.g)+'</span><b>'+esc(it.vi)+'</b>'+(it.ex?'<small>'+esc(it.ex[0])+'</small>':'')+'</button>').join("")+'</div>';
+  }
+  if(t==="reading"){
+    return '<div class="fl-read"><div class="fl-read-h"><span>Đọc</span><b>'+esc(v.title)+'</b><small>Tap a line for its meaning</small></div>'
+      +v.lines.map(l=>'<button class="fl-read-line" data-say="'+esc(l[0])+'"><span>'+esc(l[0])+'</span><small>'+esc(l[1])+'</small></button>').join("")+'</div>';
+  }
   return '';
 }
-function flFig(f){ /* S = speaker, L = listener; uppercase = included */
-  return '<div class="fl-fig" aria-hidden="true">'+f.split("").map(ch=>'<i class="'+(ch.toLowerCase()==="s"?"sp":"li")+(ch===ch.toUpperCase()?" in":"")+'"></i>').join("")+'</div>';
-}
-function flWireVisuals(root){
+function flIconHTML(vi){ const ic=flIcon(vi); return ic?'<span class="fl-ic" aria-hidden="true">'+ic+'</span>':''; }
+function flFig(f){ return '<div class="fl-fig" aria-hidden="true">'+f.split("").map(ch=>'<i class="'+(ch.toLowerCase()==="s"?"sp":"li")+(ch===ch.toUpperCase()?" in":"")+'"></i>').join("")+'</div>'; }
+function flWireVisuals(){
   $$(".fl-map-node,.fl-tl-pt").forEach(function(b){b.onclick=function(){
-    $$(".fl-map-node.on,.fl-tl-pt.on").forEach(x=>x.classList.remove("on")); b.classList.add("on");
-    let ex=null; if(b.classList.contains("fl-map-node")){ const i=+b.dataset.mi, L=FL&&FL.L; const vis=L&&L.vis.find(v=>v.type==="map"); const nd=vis&&vis.nodes[i]; if(nd&&nd.ex) ex=nd.ex; }
-    else if(b.dataset.ex) ex=[b.dataset.ex,b.dataset.exen];
-    const cap=b.closest(".fl-visual").querySelector("#flCap");
+    const vis=b.closest(".fl-visual"); vis.querySelectorAll(".fl-map-node.on,.fl-tl-pt.on").forEach(x=>x.classList.remove("on")); b.classList.add("on");
+    const ex=b.dataset.ex?[b.dataset.ex,b.dataset.exen]:null, cap=vis.querySelector(".fl-caption");
     if(cap) cap.innerHTML=ex?flSay(ex[0],"vi")+'<small>'+esc(ex[1])+'</small>':'';
     TTS.seq(ex?[b.dataset.say,ex[0]]:[b.dataset.say]);
   };});
   $$(".fl-tile,.fl-clock,.fl-space-pt,.fl-day-seg,.fl-flow-row").forEach(b=>b.onclick=function(){TTS.say(b.dataset.say);});
+  $$(".fl-read-line").forEach(b=>b.onclick=function(){ b.classList.toggle("open"); TTS.say(b.dataset.say); });
+  $$(".fl-recap-item").forEach(b=>b.onclick=function(){ openFocus(b.dataset.open); });
+  $$(".fl-replay").forEach(b=>b.onclick=function(){ const p=b.closest(".fl-pattern"); p.classList.remove("anim"); void p.offsetWidth; p.classList.add("anim"); });
 }
 document.addEventListener("click",function(e){ const t=e.target.closest&&e.target.closest(".fl-say"); if(t&&!t.closest("button")){ TTS.say(t.dataset.say); t.classList.add("said"); setTimeout(()=>t.classList.remove("said"),600);} });
 
-/* ── lesson list ──────────────────────────────────────────────────────── */
-let FL_FILTER="all";
+/* ── lesson list: path or grid ───────────────────────────────────────── */
 function viewLessons(){
-  const done=FOCUS.filter(l=>focusDone(l.id)).length, nx=focusNext();
-  const tracks=FOCUS_TRACKS.filter(t=>FL_FILTER==="all"||t.id===FL_FILTER);
+  flPrepare();
+  const core=FOCUS.filter(l=>!l.gen), done=core.filter(l=>focusDone(l.id)).length, nx=focusNext(), due=focusDueList();
+  const mode=S.focusView==="grid"?"grid":"path";
+  const tracks=FOCUS_TRACKS.filter(t=>(FL_FILTER==="all"||t.id===FL_FILTER)&&FOCUS.some(l=>l.t===t.id));
   $("#stage").innerHTML='<div class="fl-list">'
-    +'<div class="fl-list-head"><h2 class="screen-h">Bài học</h2><span class="fl-count">'+done+' / '+FOCUS.length+'</span></div>'
+    +'<div class="fl-list-head"><h2 class="screen-h">Bài học</h2><span class="fl-count">'+done+' / '+core.length+'</span>'
+    +'<div class="fl-viewtog" role="tablist"><button data-vm="path" aria-selected="'+(mode==="path")+'" aria-label="Path view">⟟</button><button data-vm="grid" aria-selected="'+(mode==="grid")+'" aria-label="Grid view">▦</button></div></div>'
     +'<button class="fl-next" id="flNext"><span class="fl-next-g">'+esc(nx.g)+'</span><span class="fl-next-copy"><small>'+(done?'Tiếp theo':'Bắt đầu')+' · '+esc(focusTrack(nx.t).vi)+'</small><b>'+esc(nx.vi)+'</b><span>'+esc(nx.en)+'</span></span><span class="fl-next-go" aria-hidden="true">→</span></button>'
-    +'<div class="fl-chips" role="tablist"><button data-f="all" aria-selected="'+(FL_FILTER==="all")+'">Tất cả</button>'+FOCUS_TRACKS.map(t=>'<button data-f="'+t.id+'" aria-selected="'+(FL_FILTER===t.id)+'">'+esc(t.vi)+'</button>').join("")+'</div>'
+    +(due.length?'<button class="fl-due" id="flDue"><span class="fl-due-n">'+due.length+'</span><span><b>Ôn bài học</b><small>'+due.length+' lesson'+(due.length>1?'s':'')+' due for review</small></span><span aria-hidden="true">↺</span></button>':'')
+    +'<div class="fl-chips" role="tablist"><button data-f="all" aria-selected="'+(FL_FILTER==="all")+'">Tất cả</button>'+FOCUS_TRACKS.filter(t=>FOCUS.some(l=>l.t===t.id)).map(t=>'<button data-f="'+t.id+'" aria-selected="'+(FL_FILTER===t.id)+'">'+esc(t.vi)+'</button>').join("")+'</div>'
     +tracks.map(function(t){
       const ls=FOCUS.filter(l=>l.t===t.id), d=ls.filter(l=>focusDone(l.id)).length;
-      return '<section class="fl-track"><div class="fl-track-h"><h3>'+esc(t.vi)+'</h3><span>'+esc(t.en)+'</span><em>'+d+'/'+ls.length+'</em></div><div class="fl-grid">'
-        +ls.map(function(l){const r=S.focus&&S.focus[l.id];
-          return '<button class="fl-card'+(r&&r.stars?' done':'')+(l.id===nx.id?' next':'')+'" data-l="'+l.id+'"><span class="fl-card-g">'+esc(l.g)+'</span><span class="fl-card-t">'+esc(l.vi)+'</span><span class="fl-card-en">'+esc(l.en)+'</span><span class="fl-card-foot">'+flStarsHTML(r?r.stars:0)+(r&&r.hard?'<span class="fl-hard-badge" title="Challenge passed">◆</span>':'')+'</span></button>';}).join("")
-        +'</div></section>';}).join("")+'</div>';
+      return '<section class="fl-track"><div class="fl-track-h"><h3>'+esc(t.vi)+'</h3><span>'+esc(t.en)+'</span><em>'+d+'/'+ls.length+'</em></div>'+(mode==="path"?flPathHTML(ls,nx):flGridHTML(ls,nx))+'</section>';}).join("")+'</div>';
   $("#flNext").onclick=()=>openFocus(nx.id);
-  $$(".fl-card").forEach(b=>b.onclick=()=>openFocus(b.dataset.l));
+  if($("#flDue")) $("#flDue").onclick=openDueReview;
+  $$("[data-l]").forEach(b=>b.onclick=()=>openFocus(b.dataset.l));
   $$(".fl-chips button").forEach(b=>b.onclick=function(){FL_FILTER=b.dataset.f;viewLessons();});
+  $$(".fl-viewtog button").forEach(b=>b.onclick=function(){S.focusView=b.dataset.vm;save();viewLessons();});
   keyHandler=null;
+}
+function flGridHTML(ls,nx){
+  return '<div class="fl-grid">'+ls.map(function(l){const r=S.focus&&S.focus[l.id], due=focusIsDue(l.id);
+    return '<button class="fl-card'+(r&&r.stars?' done':'')+(l.id===nx.id?' next':'')+(l.review?' review':'')+'" data-l="'+l.id+'"><span class="fl-card-g">'+esc(l.g)+'</span><span class="fl-card-t">'+esc(l.vi)+'</span><span class="fl-card-en">'+esc(l.en)+'</span><span class="fl-card-foot">'+flStarsHTML(r?r.stars:0,due)+(r&&r.hard?'<span class="fl-hard-badge" title="Challenge passed">◆</span>':'')+(due?'<span class="fl-due-badge">↺</span>':'')+'</span></button>';}).join("")+'</div>';
+}
+function flPathHTML(ls,nx){
+  const X=[30,70], H=104, pts=ls.map((l,i)=>({x:X[i%2],y:i*H+50,l:l}));
+  let d=""; pts.forEach((p,i)=>{ if(!i) d="M"+p.x+" "+p.y; else { const q=pts[i-1], my=(q.y+p.y)/2; d+=" C"+q.x+" "+my+" "+p.x+" "+my+" "+p.x+" "+p.y; } });
+  const doneUpTo=(function(){ let k=-1; ls.forEach((l,i)=>{ if(focusDone(l.id)) k=i; }); return k; })();
+  return '<div class="fl-path" style="height:'+(ls.length*H)+'px"><svg viewBox="0 0 100 '+(ls.length*H)+'" preserveAspectRatio="none" aria-hidden="true"><path d="'+d+'" class="bg"/></svg>'
+    +pts.map(function(p,i){ const l=p.l, r=S.focus&&S.focus[l.id], due=focusIsDue(l.id), st=r&&r.stars?'done':l.id===nx.id?'next':i<=doneUpTo+1?'open':'later';
+      return '<button class="fl-node '+st+(l.review?' review':'')+(due?' due':'')+'" data-l="'+l.id+'" style="left:'+p.x+'%;top:'+p.y+'px"><span class="fl-node-g">'+esc(l.g)+'</span>'
+        +'<span class="fl-node-l '+(p.x>50?'left':'right')+'"><b>'+esc(l.vi)+'</b><small>'+esc(l.en)+'</small>'+flStarsHTML(r?r.stars:0,due)+'</span>'+(due?'<span class="fl-due-badge">↺</span>':'')+'</button>';}).join("")+'</div>';
+}
+function openDueReview(){
+  const due=focusDueList().slice(0,4); if(!due.length) return;
+  if(due.length===1) { openFocus(due[0].id); return flStartPractice("full"); }
+  const L={id:"due-"+Date.now(),t:due[0].t,g:"↺",vi:"Ôn bài học",en:due.map(l=>l.vi).join(" · "),review:true,dynamic:true,mix:due.map(l=>l.id),vis:[{type:"recap",items:due.map(l=>({id:l.id,g:l.g,vi:l.vi,ex:l.s&&l.s[0]?[l.s[0].v,l.s[0].e]:null}))}],cards:[]};
+  flOpenObj(L); flStartPractice("full");
 }
 
 /* ── session shell ────────────────────────────────────────────────────── */
-function openFocus(id){
-  const L=FOCUS.find(l=>l.id===id); if(!L) return;
-  SESS=null; CLASS_JOURNEY=null; FL={L:L,phase:"intro",card:0,flipped:false,qs:[],i:0,res:[],repairs:[],inRepair:false,mode:"full",armedExit:false};
+function openFocus(id){ const L=flLesson(id); if(L) flOpenObj(L); }
+function flOpenObj(L){
+  SESS=null; if(typeof CLASS_JOURNEY!=="undefined") CLASS_JOURNEY=null;
+  FL={L:L,phase:"intro",card:0,flipped:false,qs:[],i:0,res:[],repairs:[],inRepair:false,mode:"full",armedExit:false};
   document.body.classList.add("in-session"); flRender(); window.scrollTo({top:0,behavior:"instant"});
 }
-function flExit(){ FL=null; keyHandler=null; TTS.stop(); go("lessons"); }
+function flExit(){ FL=null; keyHandler=null; clearTimeout(FL_SPEED_T); TTS.stop(); go("lessons"); }
 function flTop(step){
-  const steps=[["see","Xem"],["cards","Thẻ"],["practice","Luyện"]];
-  const idx=steps.findIndex(s=>s[0]===step);
+  const steps=[["see","Xem"],["cards","Thẻ"],["practice","Luyện"]], idx=steps.findIndex(s=>s[0]===step);
   return '<div class="fl-top"><button class="fl-x" id="flX" aria-label="Close lesson">×</button>'
     +(step==="practice"?flLadderBar():'<div class="fl-steps">'+steps.map((s,i)=>'<span class="'+(i<idx?'done':i===idx?'on':'')+'">'+s[1]+'</span>').join('<i></i>')+'</div>')+'</div>';
 }
@@ -9151,52 +9801,64 @@ function flRender(){
   if(FL.phase==="cards") return flFlash(L);
   if(FL.phase==="practice") return flQuestion();
   if(FL.phase==="result") return flResult();
+  if(FL.phase==="speed") return flSpeedQ();
+}
+function flStairsHTML(){
+  return '<div class="fl-ladder" aria-label="Exercises get harder step by step">'+FL_LEVELS.map((lv,i)=>'<div class="fl-rung" style="--h:'+(12+i*6.4)+'px" title="'+esc(lv.vi+' · '+lv.en)+'"><i></i></div>').join("")+'</div>'
+    +'<div class="fl-stages">'+FL_STAGES.map(s=>'<div style="flex:'+(s.to-s.from+1)+'"><b>'+esc(s.vi)+'</b><small>'+esc(s.en)+'</small></div>').join("")+'</div>';
 }
 function flIntro(L){
-  const r=S.focus&&S.focus[L.id], tr=focusTrack(L.t);
-  const ladder=FL_LEVELS.map((lv,i)=>'<div class="fl-rung" style="--h:'+(16+i*10)+'px"><i></i><small>'+esc(lv.vi)+'</small></div>').join("");
-  $("#stage").innerHTML='<div class="fl">'+'<div class="fl-top"><button class="fl-x" id="flX" aria-label="Close lesson">×</button><span class="fl-top-track">'+esc(tr.vi)+' · '+esc(tr.en)+'</span></div>'
-    +'<div class="fl-intro"><div class="fl-intro-g">'+esc(L.g)+'</div><h2>'+esc(L.vi)+'</h2><p>'+esc(L.en)+'</p>'+(r&&r.stars?flStarsHTML(r.stars):'')+'</div>'
-    +'<div class="fl-route"><div><b>1</b><span>Xem</span><small>see it</small></div><div><b>2</b><span>Thẻ</span><small>'+flCards(L).length+' cards</small></div><div><b>3</b><span>Luyện</span><small>step by step</small></div></div>'
-    +'<div class="fl-ladder" aria-label="Exercises get harder step by step">'+ladder+'</div>'
-    +'<div class="fl-actions"><button class="btn" id="flGo">Bắt đầu</button>'
+  const r=S.focus&&S.focus[L.id], tr=focusTrack(L.t), due=focusIsDue(L.id);
+  $("#stage").innerHTML='<div class="fl"><div class="fl-top"><button class="fl-x" id="flX" aria-label="Close lesson">×</button><span class="fl-top-track">'+esc(tr.vi)+' · '+esc(tr.en)+'</span></div>'
+    +'<div class="fl-intro"><div class="fl-intro-g">'+esc(L.g)+'</div><h2>'+esc(L.vi)+'</h2><p>'+esc(L.en)+'</p>'+(r&&r.stars?flStarsHTML(r.stars,due):'')+(due?'<div class="fl-intro-due">↺ Due for review</div>':'')+'</div>'
+    +(L.mix?'':'<div class="fl-route"><div><b>1</b><span>Xem</span><small>see it</small></div><div><b>2</b><span>Thẻ</span><small>'+flCards(L).length+' cards</small></div><div><b>3</b><span>Luyện</span><small>step by step</small></div></div>')
+    +flStairsHTML()
+    +'<div class="fl-actions">'+(due?'<button class="btn" id="flReview">Ôn tập · review now</button>':'')
+    +'<button class="btn'+(due?' ghost':'')+'" id="flGo">'+(L.mix?'Xem lại · then practise':'Bắt đầu')+'</button>'
     +'<button class="btn ghost" id="flPractice">Chỉ luyện tập</button>'
+    +(!L.mix&&!(r&&r.stars)?'<button class="btn ghost" id="flCheckBtn">Kiểm tra nhanh · I may know this</button>':'')
     +(r&&r.stars?'<button class="btn ghost" id="flHard">Thử thách ◆</button>':'')+'</div></div>';
   flWireTop();
-  $("#flGo").onclick=function(){FL.phase="see";flRender();};
-  $("#flPractice").onclick=function(){flStartPractice("full");};
-  if($("#flHard")) $("#flHard").onclick=function(){flStartPractice("hard");};
-  keyHandler=e=>{if(e.key==="Enter"){FL.phase="see";flRender();}};
+  $("#flGo").onclick=function(){FL.phase="see";flRender();window.scrollTo({top:0,behavior:"instant"});};
+  $("#flPractice").onclick=()=>flStartPractice("full");
+  if($("#flReview")) $("#flReview").onclick=()=>flStartPractice("full");
+  if($("#flCheckBtn")) $("#flCheckBtn").onclick=()=>flStartPractice("check");
+  if($("#flHard")) $("#flHard").onclick=()=>flStartPractice("hard");
+  keyHandler=e=>{if(e.key==="Enter")$("#flGo").click();};
 }
 function flSee(L){
   $("#stage").innerHTML='<div class="fl">'+flTop("see")
     +'<div class="fl-see-head"><span class="fl-see-g">'+esc(L.g)+'</span><div><h2>'+esc(L.vi)+'</h2><p>'+esc(L.en)+'</p></div></div>'
     +L.vis.map(v=>'<div class="fl-visual">'+flVisual(v)+'</div>').join("")
     +'<div class="fl-tap-hint">Tap any Vietnamese word to hear it.</div>'
-    +'<div class="fl-bottom"><button class="btn" id="flNextStep">Thẻ học →</button></div></div>';
+    +'<div class="fl-bottom"><button class="btn" id="flNextStep">'+(L.mix?'Luyện tập →':'Thẻ học →')+'</button></div></div>';
   flWireTop(); flWireVisuals();
-  $("#flNextStep").onclick=function(){FL.phase="cards";FL.card=0;FL.flipped=false;flRender();window.scrollTo({top:0,behavior:"instant"});};
+  $("#flNextStep").onclick=function(){ if(L.mix) return flStartPractice("full"); FL.phase="cards";FL.card=0;FL.flipped=false;flRender();window.scrollTo({top:0,behavior:"instant"});};
   keyHandler=e=>{if(e.key==="Enter")$("#flNextStep").click();};
 }
 function flFlash(L){
   const cards=flCards(L), n=cards.length, c=cards[FL.card], xf=!L.cards&&L.xf?L.xf[FL.card]:null;
-  const ex=xf?null:flExample(L,c[0]);
+  const ex=xf?null:flExample(L,c[0]), ic=flIcon(c[0]), rec=FL_AUDIO.keys.has(flClean(c[0]));
+  let tones=""; try{ tones=toneRail(c[0].replace(/…/g," ")); }catch(e){}
   $("#stage").innerHTML='<div class="fl">'+flTop("cards")
     +'<div class="fl-flash-count">'+(FL.card+1)+' / '+n+'</div>'
     +'<button class="fl-flash'+(FL.flipped?' flipped':'')+'" id="flCard" aria-label="Flip card"><span class="fl-flash-in">'
-    +'<span class="fl-face front"><b>'+esc(c[0])+'</b><small>tap to flip</small></span>'
+    +'<span class="fl-face front">'+(ic?'<span class="fl-flash-ic">'+ic+'</span>':'')+'<span class="fl-flash-tones">'+tones+'</span><b>'+esc(c[0])+'</b><small>tap to flip</small></span>'
     +'<span class="fl-face back"><span class="fl-flash-word">'+esc(c[0])+'</span>'+(xf?'<em class="fl-flash-xf">'+esc(xf[1])+'</em>':'')+'<b class="en">'+esc(c[1])+'</b>'+(ex?'<span class="fl-flash-ex">'+esc(ex[0])+'<small>'+esc(ex[1])+'</small></span>':'')+'</span>'
     +'</span></button>'
     +'<div class="fl-flash-dots">'+cards.map((x,i)=>'<i class="'+(i===FL.card?'on':i<FL.card?'done':'')+'"></i>').join("")+'</div>'
-    +'<div class="fl-flash-nav"><button class="btn ghost" id="flPrev"'+(FL.card?'':' disabled')+'>‹</button><button class="btn ghost" id="flHear">▶ Nghe</button><button class="btn ghost" id="flFwd">›</button></div>'
+    +'<div class="fl-flash-nav"><button class="btn ghost" id="flPrev"'+(FL.card?'':' disabled')+'>‹</button><button class="btn ghost" id="flHear">▶ Nghe'+(rec?' · 🎙':'')+'</button><button class="btn ghost" id="flFwd">›</button></div>'
+    +'<div class="fl-rec-row"><button class="fl-rec" id="flRec">● Ghi âm giọng thật · record a native speaker</button>'+(rec?'<button class="fl-rec del" id="flRecDel" aria-label="Delete recording">✕</button>':'')+'</div>'
     +'<div class="fl-bottom"><button class="btn'+(FL.card===n-1?'':' ghost')+'" id="flToPractice">Luyện tập →</button></div></div>';
   flWireTop();
   function say(){ TTS.seq(ex&&FL.flipped?[c[0],ex[0]]:[xf&&FL.flipped?xf[1]:c[0]]); }
   $("#flCard").onclick=function(){FL.flipped=!FL.flipped;this.classList.toggle("flipped",FL.flipped);if(FL.flipped)say();};
   $("#flHear").onclick=say;
+  $("#flRec").onclick=function(){ flRecordToggle(c[0],this); };
+  if($("#flRecDel")) $("#flRecDel").onclick=async function(){ await FL_AUDIO.del(flClean(c[0])); flRender(); };
   $("#flPrev").onclick=function(){if(FL.card>0){FL.card--;FL.flipped=false;flRender();}};
   $("#flFwd").onclick=function(){if(FL.card<n-1){FL.card++;FL.flipped=false;flRender();}else flStartPractice("full");};
-  $("#flToPractice").onclick=function(){flStartPractice("full");};
+  $("#flToPractice").onclick=()=>flStartPractice("full");
   if(S.autoplay&&!FL.flipped) setTimeout(()=>TTS.say(c[0]),120);
   keyHandler=function(e){ if(e.key===" "){e.preventDefault();$("#flCard").click();} if(e.key==="ArrowRight")$("#flFwd").click(); if(e.key==="ArrowLeft")$("#flPrev").click(); };
 }
@@ -9205,8 +9867,7 @@ function flFlash(L){
 function flPhraseSet(L){
   const set=new Set();
   function add(p){ p=flClean(p); if(p.indexOf(" ")>-1&&p.split(" ").length<=4&&p.indexOf("…")<0) set.add(p); }
-  (COURSE.words||[]).forEach(w=>add(w.vi||""));
-  flCards(L).forEach(c=>add(c[0])); (L.s||[]).forEach(s=>add(s.k));
+  (COURSE.words||[]).forEach(w=>add(w.vi||"")); flCards(L).forEach(c=>add(c[0])); (L.s||[]).forEach(s=>add(s.k));
   return set;
 }
 function flTiles(s,L){
@@ -9218,133 +9879,199 @@ function flTiles(s,L){
   if(out.length&&FL_PROPER.indexOf(out[0].split(" ")[0])<0) out[0]=flCap(out[0],false);
   return {tiles:out,end:end};
 }
+function flPool(L,f){ const own=flCards(L).map(f); return own.concat(shuffle(FOCUS.filter(x=>x.t===L.t&&x!==L&&!x.mix).reduce((a,x)=>a.concat(flCards(x).map(f)),[]))); }
 function flDistractVi(L,correct,n){
   const syn=flSynOf(L,correct);
-  let pool=flCards(L).map(c=>c[0]).filter(v=>syn.indexOf(flClean(v))<0&&v.indexOf("…")<0);
-  if(pool.length<n){ const more=FOCUS.filter(x=>x.t===L.t&&x!==L).reduce((a,x)=>a.concat(flCards(x).map(c=>c[0])),[]).filter(v=>syn.indexOf(flClean(v))<0&&v.indexOf("…")<0); pool=pool.concat(shuffle(more)); }
-  return flUniq(shuffle(pool)).filter(v=>flClean(v)!==flClean(correct)).slice(0,n);
+  const own=shuffle(flCards(L).map(c=>c[0])), more=flPool(L,c=>c[0]).slice(own.length);
+  return flUniq(own.concat(more).filter(v=>syn.indexOf(flClean(v))<0&&v.indexOf("…")<0&&flClean(v)!==flClean(correct))).slice(0,n);
 }
 function flDistractEn(L,correctEn,n){
-  let pool=flCards(L).map(c=>c[1]).filter(e=>e!==correctEn);
-  if(pool.length<n) pool=pool.concat(shuffle(FOCUS.filter(x=>x.t===L.t&&x!==L).reduce((a,x)=>a.concat(flCards(x).map(c=>c[1])),[])));
-  return flUniq(shuffle(pool)).filter(e=>flClean(e)!==flClean(correctEn)).slice(0,n);
+  const own=shuffle(flCards(L).map(c=>c[1])), more=flPool(L,c=>c[1]).slice(own.length);
+  return flUniq(own.concat(more).filter(e=>flClean(e)!==flClean(correctEn))).slice(0,n);
 }
-function flMCQ(lvl,prompt,correct,wrong,extra){
-  const opts=shuffle([correct].concat(wrong)); return Object.assign({type:"mcq",lvl:lvl,prompt:prompt,opts:opts,ans:opts.indexOf(correct)},extra||{});
-}
+function flMCQ(lvl,prompt,correct,wrong,extra){ const opts=shuffle(flUniq([correct].concat(wrong))); return Object.assign({type:"mcq",lvl:lvl,prompt:prompt,opts:opts,ans:opts.indexOf(correct)},extra||{}); }
 function flGapQ(L,s,lvl){
   const f=flFind(s.v,s.k); if(!f) return null;
   const atStart=f.start===0, cs=x=>atStart?flCap(x,true):x;
   const wrong=(s.d?s.d.slice(0,3):flDistractVi(L,s.k,3)).map(cs);
-  const opts=shuffle(flUniq([cs(f.text)].concat(wrong))).slice(0,4);
-  if(opts.indexOf(cs(f.text))<0) opts[0]=cs(f.text);
-  return {type:lvl===8?"typegap":"gap",lvl:lvl,s:s,before:s.v.slice(0,f.start),after:s.v.slice(f.end),key:f.text,opts:shuffle(opts)};
+  const opts=shuffle(flUniq([cs(f.text)].concat(wrong))).slice(0,4); if(opts.indexOf(cs(f.text))<0) opts[0]=cs(f.text);
+  return {type:lvl===10?"typegap":"gap",lvl:lvl,s:s,before:s.v.slice(0,f.start),after:s.v.slice(f.end),key:f.text,opts:shuffle(opts)};
 }
+function flFixQ(L,s){
+  if(!s.d||!s.d.length) return null;
+  const tt=flTiles(s,L), idx=tt.tiles.findIndex(t=>flClean(t)===flClean(s.k)); if(idx<0||tt.tiles.length<3) return null;
+  const wrongW=s.d[0], tiles=tt.tiles.slice(); tiles[idx]=wrongW; tiles[0]=flCap(tiles[0],true);
+  return {type:"fix",lvl:7,s:s,tiles:tiles,end:tt.end,idx:idx,right:tt.tiles[idx],wrongW:wrongW,fixOpts:shuffle(flUniq([tt.tiles[idx]].concat(s.d.slice(1,3))))};
+}
+function flTrapFixQ(t){
+  const a=t.ok.replace(/[.?!]+$/,"").split(/\s+/), b=t.bad[0].replace(/[.?!]+$/,"").split(/\s+/);
+  if(a.length!==b.length) return null; const diff=a.map((w,i)=>flClean(w)!==flClean(b[i])?i:-1).filter(i=>i>-1);
+  if(diff.length!==1) return null; const i=diff[0], end=(t.ok.match(/[.?!]+$/)||[""])[0];
+  return {type:"fix",lvl:7,s:{v:t.ok,e:t.e},tiles:b,end:end,idx:i,right:a[i],wrongW:b[i],fixOpts:shuffle(flUniq([a[i],b[i]])),why:t.why};
+}
+function flChatQs(L){
+  const talk=L.talk||[]; if(!talk.length) return [];
+  const pool=flUniq(talk.map(t=>t[2]).concat(FOCUS.filter(x=>x.t===L.t&&x!==L&&x.talk).reduce((a,x)=>a.concat(x.talk.map(t=>t[2])),[])).concat(FOCUS.filter(x=>x.talk&&x!==L).reduce((a,x)=>a.concat(x.talk.map(t=>t[2])),[])));
+  return talk.map(t=>flMCQ(9,{chat:[t[0],t[1]],label:"Trả lời",sub:"Pick the reply"},t[2],pool.filter(p=>flClean(p)!==flClean(t[2])).slice(0,8).sort(()=>Math.random()-.5).slice(0,2),{say:t[2],fb:[t[2],t[3]],long:true,chatSay:t[0]}));
+}
+function flReadQs(rd){ if(!rd) return []; return rd.qs.map(q=>flMCQ(9,{read:rd,q:q[0],label:"Đọc hiểu",sub:"Read and answer"},q[1][q[2]],q[1].filter((x,i)=>i!==q[2]),{long:true})); }
 function flBuild(L,mode){
+  if(L.mix) return flBuildMix(L,mode);
   const cards=flCards(L), sents=shuffle((L.s||[]).slice()), xf=L.xf||[], qs=[];
-  const hard=mode==="hard", listen=TTS.ready&&TTS.engine;
+  const hard=mode==="hard", check=mode==="check", listen=TTS.ready&&TTS.engine, fromCards=!!(L.cards&&L.cards.length);
   let si=0; const nextS=()=>sents.length?sents[(si++)%sents.length]:null;
   const cardPick=n=>flPick(cards,Math.min(n,cards.length));
-  const fromCards=!!(L.cards&&L.cards.length);
+  const tag=q=>{ if(q){ q.L=L; qs.push(q);} };
+  if(check){
+    if(fromCards) cardPick(1).forEach(c=>tag(flMCQ(4,{en:c[1],label:"Tiếng Việt là gì?",sub:"Pick the Vietnamese"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]],card:c})));
+    if(sents.length){ tag(flGapQ(L,nextS(),6)); tag(flGapQ(L,nextS(),10)); }
+    else flPick(xf,2).forEach(x=>tag({type:"typexf",lvl:10,x:x}));
+    return qs;
+  }
   /* 1 · recognise */
   if(!hard){
-    if(fromCards) cardPick(3).forEach(c=>qs.push(flMCQ(1,{vi:c[0],label:"Nghĩa là gì?",sub:"What does it mean?"},c[1],flDistractEn(L,c[1],3),{say:c[0],fb:[c[0],c[1]]})));
-    else flPick(xf,3).forEach(x=>qs.push(flMCQ(1,{vi:x[0],label:L.xfh?L.xfh[1]+"?":"Spoken form?",sub:x[2]},x[1],flPick(xf.filter(y=>y!==x).map(y=>y[1]),3),{fb:[x[0]+" → "+x[1],x[2]]})));
+    if(fromCards) cardPick(3).forEach(c=>tag(flMCQ(1,{vi:c[0],label:"Nghĩa là gì?",sub:"What does it mean?"},c[1],flDistractEn(L,c[1],3),{say:c[0],fb:[c[0],c[1]],card:c})));
+    else flPick(xf,3).forEach(x=>tag(flMCQ(1,{vi:x[0],label:L.xfh?L.xfh[1]+"?":"Spoken form?",sub:x[2]},x[1],flPick(xf.filter(y=>y!==x).map(y=>y[1]),3),{fb:[x[0]+" → "+x[1],x[2]]})));
   }
   /* 2 · listen */
-  if(!hard&&listen&&fromCards) cardPick(2).forEach(c=>qs.push(flMCQ(2,{audio:c[0],label:"Nghe và chọn",sub:"Listen and pick"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]]})));
+  if(!hard&&listen&&fromCards) cardPick(2).forEach(c=>tag(flMCQ(2,{audio:c[0],label:"Nghe và chọn",sub:"Listen and pick"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]],card:c})));
   /* 3 · match */
   if(!hard){
-    const src=fromCards?cards.map(c=>[c[0],c[1]]):xf.map(x=>[x[0],x[1]]);
-    const uniq=[]; src.forEach(p=>{ if(!uniq.some(u=>flClean(u[0])===flClean(p[0])||flClean(u[1])===flClean(p[1]))) uniq.push(p); });
-    if(uniq.length>=3) qs.push({type:"match",lvl:3,pairs:flPick(uniq,Math.min(4,uniq.length))});
+    const src=fromCards?cards.map(c=>[c[0],c[1]]):xf.map(x=>[x[0],x[1]]), uniq=[];
+    src.forEach(p=>{ if(!uniq.some(u=>flClean(u[0])===flClean(p[0])||flClean(u[1])===flClean(p[1]))) uniq.push(p); });
+    if(uniq.length>=3) tag({type:"match",lvl:3,pairs:flPick(uniq,Math.min(4,uniq.length))});
   }
   /* 4 · recall */
-  if(fromCards) cardPick(hard?2:3).forEach(c=>qs.push(flMCQ(4,{en:c[1],label:"Tiếng Việt là gì?",sub:"Pick the Vietnamese"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]]})));
-  else flPick(xf,hard?2:3).forEach(x=>qs.push(flMCQ(4,{vi:x[1],label:"Viết thế nào?",sub:"Which written word?"},x[0],flPick(xf.filter(y=>y!==x).map(y=>y[0]),3),{fb:[x[1]+" = "+x[0],x[2]]})));
-  /* 5 · choose: natural sentence, situations, opposites, transformations */
-  const choose=[];
-  (L.traps||[]).forEach(t=>choose.push(flMCQ(5,{en:t.e,label:"Câu nào tự nhiên?",sub:"Which sounds natural?"},t.ok,t.bad,{say:t.ok,fb:[t.ok,t.e],long:true})));
-  (L.quiz||[]).forEach(q=>choose.push(flMCQ(5,{q:q[0],label:"Chọn",sub:"Choose"},q[1][q[2]],q[1].filter((x,i)=>i!==q[2]))));
-  (L.opp||[]).forEach(p=>choose.push(flMCQ(5,{vi:p[0],label:"Trái nghĩa?",sub:"Opposite?"},p[1],flPick(L.opp.filter(o=>o!==p).map(o=>o[0]).concat(L.opp.filter(o=>o!==p).map(o=>o[1])),3),{say:p[1],fb:[p[0]+" ⟷ "+p[1],""]})));
-  if(xf.length&&(fromCards||hard)) xf.forEach(x=>choose.push(flMCQ(5,{vi:x[0],label:(L.xfh?L.xfh[1]:"Southern")+"?",sub:x[2]},x[1],flPick(xf.filter(y=>y!==x).map(y=>y[1]),3),{fb:[x[0]+" → "+x[1],x[2]]})));
-  flPick(choose,hard?3:2).forEach(q=>qs.push(q));
+  if(fromCards) cardPick(3).forEach(c=>tag(flMCQ(4,{en:c[1],label:"Tiếng Việt là gì?",sub:"Pick the Vietnamese"},c[0],flDistractVi(L,c[0],3),{say:c[0],fb:[c[0],c[1]],card:c})));
+  else flPick(xf,3).forEach(x=>tag(flMCQ(4,{vi:x[1],label:"Viết thế nào?",sub:"Which written word?"},x[0],flPick(xf.filter(y=>y!==x).map(y=>y[0]),3),{fb:[x[1]+" = "+x[0],x[2]]})));
+  /* 5 · choose */
+  (L.traps||[]).forEach(t=>tag(flMCQ(5,{en:t.e,label:"Câu nào tự nhiên?",sub:"Which sounds natural?"},t.ok,t.bad,{say:t.ok,fb:[t.ok,t.e],long:true,why:t.why})));
+  (L.quiz||[]).forEach(q=>tag(flMCQ(5,{q:q[0],label:"Chọn",sub:"Choose"},q[1][q[2]],q[1].filter((x,i)=>i!==q[2]),{why:q[3]||null})));
+  (L.opp||[]).forEach(p=>tag(flMCQ(5,{vi:p[0],label:"Trái nghĩa?",sub:"Opposite?"},p[1],flPick(L.opp.filter(o=>o!==p).map(o=>o[0]).concat(L.opp.filter(o=>o!==p).map(o=>o[1])),3),{say:p[1],fb:[p[0]+" ⟷ "+p[1],""]})));
+  if(xf.length) xf.forEach(x=>tag(flMCQ(5,{vi:x[0],label:(L.xfh?L.xfh[1]:"Southern")+"?",sub:x[2]},x[1],flPick(xf.filter(y=>y!==x).map(y=>y[1]),3),{fb:[x[0]+" → "+x[1],x[2]]})));
   /* 6 · fill the gap */
-  for(let k=0;k<(hard?2:3)&&sents.length;k++){ const q=flGapQ(L,nextS(),6); if(q) qs.push(q); }
-  /* 7 · build the sentence */
-  const buildable=shuffle(sents.filter(s=>{const t=flTiles(s,L).tiles.length;return t>=3&&t<=9&&s.v.indexOf("—")<0;}));
-  buildable.slice(0,hard?3:2).forEach(s=>{const tt=flTiles(s,L); qs.push({type:"order",lvl:7,s:s,tiles:tt.tiles,end:tt.end});});
-  /* 8 · type */
-  if(hard&&fromCards) cardPick(2).forEach(c=>qs.push({type:"typeword",lvl:8,card:c}));
-  if(!fromCards&&xf.length) flPick(xf,hard?4:2).forEach(x=>qs.push({type:"typexf",lvl:8,x:x}));
-  for(let k=0;k<(hard?2:2)&&sents.length;k++){ const q=flGapQ(L,nextS(),8); if(q) qs.push(q); }
-  /* 9 · translate */
-  shuffle(sents.filter(s=>s.v.indexOf("—")<0&&flTiles(s,L).tiles.length>=2)).slice(0,hard?3:2).forEach(s=>qs.push({type:"translate",lvl:9,s:s}));
-  return qs;
+  for(let k=0;k<3&&sents.length;k++) tag(flGapQ(L,nextS(),6));
+  /* 7 · fix the mistake */
+  shuffle(sents.map(s=>flFixQ(L,s)).filter(Boolean).concat((L.traps||[]).map(flTrapFixQ).filter(Boolean))).slice(0,3).forEach(q=>tag(q));
+  /* 8 · build */
+  shuffle(sents.filter(s=>{const t=flTiles(s,L).tiles.length;return t>=3&&t<=9&&s.v.indexOf("—")<0;})).slice(0,3).forEach(s=>{const tt=flTiles(s,L); tag({type:"order",lvl:8,s:s,tiles:tt.tiles,end:tt.end});});
+  /* 9 · converse */
+  flChatQs(L).forEach(q=>tag(q));
+  /* 10 · type */
+  if(hard&&fromCards) cardPick(2).forEach(c=>tag({type:"typeword",lvl:10,card:c}));
+  if(!fromCards&&xf.length) flPick(xf,hard?4:2).forEach(x=>tag({type:"typexf",lvl:10,x:x}));
+  for(let k=0;k<3&&sents.length;k++) tag(flGapQ(L,nextS(),10));
+  /* 11 · dictation */
+  if(TTS.engine) shuffle(sents.filter(s=>s.v.split(" ").length>=3&&s.v.split(" ").length<=10&&s.v.indexOf("—")<0)).slice(0,2).forEach(s=>tag({type:"dict",lvl:11,s:s}));
+  /* 12 · transform and write the question */
+  (L.tf||[]).forEach(t=>tag({type:"tf",lvl:12,t:t}));
+  (L.ask||[]).forEach(a=>tag({type:"ask",lvl:12,a:a}));
+  /* 13 · translate */
+  shuffle(sents.filter(s=>s.v.indexOf("—")<0&&flTiles(s,L).tiles.length>=2)).slice(0,3).forEach(s=>tag({type:"translate",lvl:13,s:s}));
+  /* 14 · speak */
+  if(FL_SR) shuffle(sents.filter(s=>s.v.split(" ").length>=3&&s.v.split(" ").length<=9)).slice(0,1).forEach(s=>tag({type:"speak",lvl:14,s:s}));
+  return flApplyQuota(qs,mode);
+}
+function flApplyQuota(qs,mode){
+  const quota=FL_QUOTA[mode]||FL_QUOTA.full, out=[];
+  FL_LEVELS.forEach(lv=>{ const n=quota[lv.id]||0; if(!n) return; const xs=qs.filter(q=>q.lvl===lv.id);
+    /* keep variety: one of each type first */
+    const byType={}; xs.forEach(q=>(byType[q.type]=byType[q.type]||[]).push(q));
+    const pick=[]; let more=true; while(pick.length<n&&more){ more=false; Object.keys(byType).forEach(k=>{ if(pick.length<n&&byType[k].length){ pick.push(byType[k].shift()); more=true; } }); }
+    pick.forEach(q=>out.push(q)); });
+  return out;
+}
+function flBuildMix(L,mode){
+  const subs=L.mix.map(id=>FOCUS.find(x=>x.id===id)).filter(Boolean);
+  const all=subs.map(s=>flBuild(s,"full"));
+  const quota={1:1,4:3,5:3,6:3,7:2,8:2,9:2,10:2,11:1,12:2,13:3,14:1}, out=[];
+  FL_LEVELS.forEach(function(lv){ let n=quota[lv.id]||0, k=0, guard=0; const seen=new Set();
+    while(n>0&&guard++<40){ const src=all[k%all.length]; k++; const i=src.findIndex(q=>q.lvl===lv.id&&!seen.has(q)); if(i>-1){ const q=src.splice(i,1)[0]; seen.add(q); out.push(q); n--; } } });
+  flReadQs(L.read).forEach(q=>{ q.L=subs[0]; out.splice(out.findIndex(x=>x.lvl>9)>-1?out.findIndex(x=>x.lvl>9):out.length,0,q); });
+  return out;
 }
 function flStartPractice(mode){
   FL.mode=mode; FL.qs=flBuild(FL.L,mode); FL.i=0; FL.res=[]; FL.repairs=[]; FL.inRepair=false; FL.phase="practice"; FL.main=FL.qs.length;
+  if(!FL.qs.length){ FL.phase="intro"; return flRender(); }
   flRender(); window.scrollTo({top:0,behavior:"instant"});
 }
 
 /* ── practice ─────────────────────────────────────────────────────────── */
 function flLadderBar(){
-  const qs=FL.qs.slice(0,FL.main), cur=FL.qs[FL.i], lv=cur?cur.lvl:9;
-  const lvls=[...new Set(qs.map(q=>q.lvl))];
+  const qs=FL.qs.slice(0,FL.main), cur=FL.qs[FL.i], lv=cur?cur.lvl:14, lvls=[...new Set(qs.map(q=>q.lvl))];
   return '<div class="fl-ladderbar">'+lvls.map(function(l){
     const inL=qs.filter(q=>q.lvl===l), doneN=qs.slice(0,Math.min(FL.i,FL.main)).filter(q=>q.lvl===l).length;
     return '<span class="'+(FL.inRepair||doneN===inL.length?'done':l===lv?'on':'')+'" style="flex:'+inL.length+'"><i style="width:'+(doneN/inL.length*100)+'%"></i></span>';}).join("")+'</div>';
 }
 function flLevelChip(q){
-  const lv=FL_LEVELS.find(x=>x.id===q.lvl);
-  return '<div class="fl-lv"><span class="fl-lv-n">'+(FL.inRepair?'↺':q.lvl)+'</span><b>'+(FL.inRepair?'Sửa lỗi':esc(lv.vi))+'</b><small>'+(FL.inRepair?'Fix mistakes':esc(lv.en))+'</small></div>';
+  const lv=FL_LEVELS.find(x=>x.id===q.lvl), stage=FL_STAGES.find(s=>q.lvl>=s.from&&q.lvl<=s.to);
+  if(FL.mode==="check") return '<div class="fl-lv"><span class="fl-lv-n">✓</span><b>Kiểm tra nhanh</b><small>Quick check · '+(FL.i+1)+' / '+FL.main+'</small></div>';
+  return '<div class="fl-lv"><span class="fl-lv-n">'+(FL.inRepair?'↺':q.lvl)+'</span><b>'+(FL.inRepair?'Sửa lỗi':esc(lv.vi))+'</b><small>'+(FL.inRepair?'Fix mistakes':esc(lv.en))+'</small>'+(!FL.inRepair&&stage?'<em>'+esc(stage.vi)+'</em>':'')+(FL.L.mix&&q.L&&q.L!==FL.L&&!(q.prompt&&q.prompt.read)?'<em class="src">'+esc(q.L.g)+'</em>':'')+'</div>';
 }
 function flQuestion(){
   const q=FL.qs[FL.i]; if(!q) return flFinish();
-  FL.answered=false;
-  let body='';
-  const p=q.prompt||{};
+  FL.answered=false; FL.plays=0;
+  let body=''; const p=q.prompt||{};
   if(q.type==="mcq"){
     body+='<div class="fl-prompt">'+(p.label?'<div class="fl-ask">'+esc(p.label)+(p.sub?' <small>'+esc(p.sub)+'</small>':'')+'</div>':'')
-      +(p.vi?'<div class="fl-big vi">'+esc(p.vi)+'</div>':'')+(p.en?'<div class="fl-big en">'+esc(p.en)+'</div>':'')+(p.q?'<div class="fl-big en sm">'+esc(p.q)+'</div>':'')
-      +(p.audio?'<button class="fl-audio" id="flPlay" aria-label="Play">▶</button>':'')+(p.vi&&q.say?'<button class="fl-mini-say" data-say="'+esc(q.say)+'" aria-label="Play">▶</button>':'')+'</div>'
-      +'<div class="fl-opts'+(q.long?' long':'')+'">'+q.opts.map((o,i)=>'<button class="fl-opt" data-i="'+i+'"><span>'+(i+1)+'</span>'+esc(o)+'</button>').join("")+'</div>';
+      +(p.read?'<div class="fl-read compact"><b>'+esc(p.read.title)+'</b>'+p.read.lines.map(l=>'<button class="fl-read-line" data-say="'+esc(l[0])+'"><span>'+esc(l[0])+'</span><small>'+esc(l[1])+'</small></button>').join("")+'</div>':'')
+      +(p.chat?'<div class="fl-chat"><div class="fl-bubble them"><span class="fl-avatar" aria-hidden="true">👤</span><div><b>'+esc(p.chat[0])+'</b><small>'+esc(p.chat[1])+'</small></div><button class="fl-mini-say" data-say="'+esc(p.chat[0])+'" aria-label="Play">▶</button></div></div>':'')
+      +(p.vi?'<div class="fl-big vi">'+flIconHTML(p.vi)+esc(p.vi)+'</div>':'')+(p.en?'<div class="fl-big en">'+esc(p.en)+'</div>':'')+(p.q?'<div class="fl-big en sm">'+esc(p.q)+'</div>':'')
+      +(p.audio?'<button class="fl-audio" id="flPlay" aria-label="Play">▶</button>':'')+(p.vi&&q.say?'<button class="fl-mini-say corner" data-say="'+esc(q.say)+'" aria-label="Play">▶</button>':'')+'</div>'
+      +'<div class="fl-opts'+(q.long?' long':'')+(p.chat?' chat':'')+'">'+q.opts.map((o,i)=>'<button class="fl-opt" data-i="'+i+'"><span>'+(i+1)+'</span>'+esc(o)+'</button>').join("")+'</div>';
   }else if(q.type==="match"){
     const left=shuffle(q.pairs.map((p,i)=>({t:p[0],i:i}))), right=shuffle(q.pairs.map((p,i)=>({t:p[1],i:i})));
     body+='<div class="fl-prompt"><div class="fl-ask">Ghép đôi <small>Match the pairs</small></div></div><div class="fl-match"><div>'+left.map(x=>'<button class="fl-m vi" data-side="l" data-i="'+x.i+'">'+esc(x.t)+'</button>').join("")+'</div><div>'+right.map(x=>'<button class="fl-m" data-side="r" data-i="'+x.i+'">'+esc(x.t)+'</button>').join("")+'</div></div>';
   }else if(q.type==="gap"){
     body+='<div class="fl-prompt"><div class="fl-ask">Điền vào chỗ trống <small>Fill the gap</small></div><div class="fl-sent">'+esc(q.before)+'<span class="fl-blank" id="flBlank">　　</span>'+esc(q.after)+'</div><div class="fl-sent-en">'+esc(q.s.e)+'</div></div>'
       +'<div class="fl-chipopts">'+q.opts.map((o,i)=>'<button class="fl-chipopt" data-i="'+i+'">'+esc(o)+'</button>').join("")+'</div>';
+  }else if(q.type==="fix"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Tìm lỗi sai <small>Tap the wrong word</small></div><div class="fl-fixline" id="flFix">'+q.tiles.map((t,i)=>'<button class="fl-fixw" data-i="'+i+'">'+esc(t)+'</button>').join("")+'<span class="fl-build-end">'+esc(q.end)+'</span></div><div class="fl-sent-en">'+esc(q.s.e)+'</div></div>'
+      +'<div class="fl-chipopts" id="flFixOpts" hidden></div>';
   }else if(q.type==="order"){
     body+='<div class="fl-prompt"><div class="fl-ask">Xếp thành câu <small>Build the sentence</small></div><div class="fl-big en sm">'+esc(q.s.e)+'</div></div>'
       +'<div class="fl-build" id="flBuild"><span class="fl-build-ph">Tap the words in order</span></div><div class="fl-bank" id="flBank">'+shuffle(q.tiles.map((t,i)=>({t:t,i:i}))).map(x=>'<button class="fl-tilebtn" data-i="'+x.i+'">'+esc(x.t)+'</button>').join("")+'</div>'
       +'<div class="fl-bottom"><button class="btn" id="flCheck" disabled>Kiểm tra</button></div>';
   }else if(q.type==="typegap"){
     body+='<div class="fl-prompt"><div class="fl-ask">Gõ từ còn thiếu <small>Type the missing word</small></div><div class="fl-sent">'+esc(q.before)+'<input class="fl-gapin" id="flIn" autocomplete="off" autocapitalize="off" spellcheck="false" lang="vi" style="width:'+Math.max(4,q.key.length+2)+'ch" aria-label="Missing word">'+esc(q.after)+'</div><div class="fl-sent-en">'+esc(q.s.e)+'</div></div>'
-      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Không biết</button><button class="btn" id="flCheck">Kiểm tra</button></div>';
+      +flTypeBtns("Không biết");
   }else if(q.type==="typeword"||q.type==="typexf"){
     const pr=q.type==="typeword"?'<div class="fl-big en">'+esc(q.card[1])+'</div>':'<div class="fl-big vi">'+esc(q.x[1])+'</div><div class="fl-sent-en">'+esc(q.x[2])+'</div>';
     body+='<div class="fl-prompt"><div class="fl-ask">'+(q.type==="typeword"?'Gõ tiếng Việt <small>Type it in Vietnamese</small>':'Viết thế nào? <small>Type the written form</small>')+'</div>'+pr+'</div>'
-      +'<input class="fl-input" id="flIn" autocomplete="off" autocapitalize="off" spellcheck="false" lang="vi" placeholder="…">'
-      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Không biết</button><button class="btn" id="flCheck">Kiểm tra</button></div>';
+      +'<input class="fl-input" id="flIn" autocomplete="off" autocapitalize="off" spellcheck="false" lang="vi" placeholder="…">'+flTypeBtns("Không biết");
+  }else if(q.type==="dict"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Nghe và viết <small>Listen and write the whole sentence</small></div><div class="fl-dict"><button class="fl-audio" id="flPlay" aria-label="Play">▶</button><button class="fl-slow" id="flSlow">🐢 chậm</button></div></div>'
+      +'<textarea class="fl-input area" id="flIn" rows="2" autocomplete="off" spellcheck="false" lang="vi" placeholder="Viết câu bạn nghe…"></textarea>'+flTypeBtns("Xem đáp án");
+  }else if(q.type==="tf"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Biến đổi câu <small>Transform</small></div><div class="fl-tf-op">'+esc(FL_OPS[q.t.op]||q.t.op)+'</div><div class="fl-sent">'+flSay(q.t.b)+'</div></div>'
+      +'<input class="fl-input" id="flIn" autocomplete="off" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="…">'+flTypeBtns("Xem đáp án");
+  }else if(q.type==="ask"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Đặt câu hỏi <small>Write the question for this answer</small></div><div class="fl-chat"><div class="fl-bubble me ghost"><div><b>?</b></div></div><div class="fl-bubble them"><span class="fl-avatar" aria-hidden="true">👤</span><div><b>'+esc(q.a.a)+'</b></div><button class="fl-mini-say" data-say="'+esc(q.a.a)+'" aria-label="Play">▶</button></div></div></div>'
+      +'<input class="fl-input" id="flIn" autocomplete="off" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Câu hỏi…">'+flTypeBtns("Xem đáp án");
   }else if(q.type==="translate"){
     body+='<div class="fl-prompt"><div class="fl-ask">Dịch sang tiếng Việt <small>Translate</small></div><div class="fl-big en">'+esc(q.s.e)+'</div></div>'
-      +'<textarea class="fl-input area" id="flIn" rows="2" autocomplete="off" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Viết câu…"></textarea>'
-      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Xem đáp án</button><button class="btn" id="flCheck">Kiểm tra</button></div>';
+      +'<textarea class="fl-input area" id="flIn" rows="2" autocomplete="off" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Viết câu…"></textarea>'+flTypeBtns("Xem đáp án");
+  }else if(q.type==="speak"){
+    body+='<div class="fl-prompt"><div class="fl-ask">Nói to <small>Say it in Vietnamese</small></div><div class="fl-big en">'+esc(q.s.e)+'</div><details class="fl-hint"><summary>Gợi ý · show the sentence</summary>'+flSay(q.s.v,"vi")+'</details></div>'
+      +'<div class="fl-mic-wrap"><button class="fl-mic" id="flMic" aria-label="Start speaking">🎙</button><div class="fl-heard" id="flHeard">Tap the microphone and speak</div></div>'
+      +'<div class="fl-bottom two"><button class="btn ghost" id="flSkip">Bỏ qua</button><button class="btn" id="flCheck" disabled>Kiểm tra</button></div>';
   }
   $("#stage").innerHTML='<div class="fl">'+flTop("practice")+flLevelChip(q)+'<div class="fl-qcard" id="flQ">'+body+'</div><div id="flFb"></div></div>';
   flWireTop(); flWireQuestion(q);
 }
+function flTypeBtns(skip){ return '<div class="fl-bottom two"><button class="btn ghost" id="flSkip">'+skip+'</button><button class="btn" id="flCheck">Kiểm tra</button></div>'; }
 function flWireQuestion(q){
   keyHandler=null;
   $$(".fl-mini-say").forEach(b=>b.onclick=()=>TTS.say(b.dataset.say));
+  $$("#flQ .fl-read-line").forEach(b=>b.onclick=function(){ b.classList.toggle("open"); TTS.say(b.dataset.say); });
   if(q.type==="mcq"){
-    const pl=$("#flPlay"); if(pl){ pl.onclick=()=>TTS.say(q.prompt.audio); setTimeout(()=>TTS.say(q.prompt.audio),200); }
+    const pl=$("#flPlay"); if(pl){ pl.onclick=()=>{FL.plays++;TTS.say(q.prompt.audio);}; setTimeout(()=>TTS.say(q.prompt.audio),200); }
+    else if(q.prompt.chat&&S.autoplay) setTimeout(()=>TTS.say(q.prompt.chat[0]),150);
     else if(q.prompt.vi&&q.say&&S.autoplay&&q.lvl===1) setTimeout(()=>TTS.say(q.say),150);
     $$(".fl-opt").forEach(b=>b.onclick=function(){
       if(FL.answered) return; const i=+b.dataset.i, ok=i===q.ans;
       $$(".fl-opt").forEach((x,j)=>{x.disabled=true; if(j===q.ans)x.classList.add("right"); else if(j===i)x.classList.add("wrong");});
-      flAnswer(q,ok);
+      flAnswer(q,ok,null,q.opts[i]);
     });
     keyHandler=e=>{const n=parseInt(e.key,10); if(n>=1&&n<=q.opts.length&&!FL.answered) $$(".fl-opt")[n-1].click();};
   }
@@ -9364,9 +10091,26 @@ function flWireQuestion(q){
       if(FL.answered) return; const ok=flClean(b.textContent)===flClean(q.key);
       $("#flBlank").textContent=b.textContent; $("#flBlank").classList.add(ok?"right":"wrong");
       $$(".fl-chipopt").forEach(x=>{x.disabled=true; if(flClean(x.textContent)===flClean(q.key))x.classList.add("right"); else if(x===b)x.classList.add("wrong");});
-      flAnswer(q,ok);
+      flAnswer(q,ok,null,b.textContent);
     });
     keyHandler=e=>{const n=parseInt(e.key,10); if(n>=1&&n<=q.opts.length&&!FL.answered) $$(".fl-chipopt")[n-1].click();};
+  }
+  if(q.type==="fix"){
+    $$(".fl-fixw").forEach(b=>b.onclick=function(){
+      if(FL.answered||FL.fixStep) return; const i=+b.dataset.i;
+      $$(".fl-fixw").forEach(x=>x.disabled=true);
+      if(i!==q.idx){ b.classList.add("wrong"); $$(".fl-fixw")[q.idx].classList.add("right"); return flAnswer(q,false,null,b.textContent); }
+      b.classList.add("found"); FL.fixStep=true;
+      const box=$("#flFixOpts"); box.hidden=false;
+      box.innerHTML='<div class="fl-fix-ask">Sửa thành · replace with</div>'+q.fixOpts.map(o=>'<button class="fl-chipopt">'+esc(o)+'</button>').join("");
+      box.querySelectorAll(".fl-chipopt").forEach(c=>c.onclick=function(){
+        if(FL.answered) return; const ok=flClean(c.textContent)===flClean(q.right);
+        box.querySelectorAll(".fl-chipopt").forEach(x=>{x.disabled=true; if(flClean(x.textContent)===flClean(q.right))x.classList.add("right"); else if(x===c)x.classList.add("wrong");});
+        if(ok){ b.textContent=q.idx===0?flCap(q.right,true):q.right; b.classList.remove("found"); b.classList.add("right"); }
+        flAnswer(q,ok,null,c.textContent);
+      });
+    });
+    FL.fixStep=false;
   }
   if(q.type==="order"){
     const built=[];
@@ -9380,46 +10124,74 @@ function flWireQuestion(q){
     $("#flCheck").onclick=function(){
       if(FL.answered) return; const said=flClean(built.map(i=>q.tiles[i]).join(" "));
       const ok=[q.s.v].concat(q.s.a||[]).some(x=>flClean(x)===said);
-      $("#flBuild").classList.add(ok?"right":"wrong"); this.disabled=true;
-      flAnswer(q,ok);
+      $("#flBuild").classList.add(ok?"right":"wrong"); this.disabled=true; flAnswer(q,ok);
     };
     keyHandler=e=>{if(e.key==="Enter"&&!$("#flCheck").disabled)$("#flCheck").click();};
   }
-  if(q.type==="typegap"||q.type==="typeword"||q.type==="typexf"||q.type==="translate"){
+  if(q.type==="dict"){
+    const play=rate=>{FL.plays++;TTS.say(q.s.v,rate);};
+    $("#flPlay").onclick=()=>play(); $("#flSlow").onclick=()=>play(0.6); setTimeout(()=>play(),250);
+  }
+  if(q.type==="speak") return flWireSpeak(q);
+  if(["typegap","typeword","typexf","translate","dict","tf","ask"].indexOf(q.type)>-1){
     const inp=$("#flIn"); setTimeout(()=>{try{inp.focus({preventScroll:true});}catch(e){}},60);
-        $("#flSkip").onclick=function(){ if(FL.answered)return; inp.disabled=true; flAnswer(q,false); };
+    $("#flSkip").onclick=function(){ if(FL.answered)return; inp.disabled=true; flAnswer(q,false); };
     $("#flCheck").onclick=function(){
       if(FL.answered) return; const val=inp.value.trim(); if(!val){inp.focus();return;}
-      inp.disabled=true;
-      const g=flGradeTyped(q,val);
+      inp.disabled=true; const g=flGradeTyped(q,val);
       inp.classList.add(g.ok?"right":g.close?"close":"wrong");
       if(g.close&&!g.ok) return flClose(q,val,g);
-      flAnswer(q,g.ok,g.note);
+      flAnswer(q,g.ok,g.note,val,g);
     };
     inp.addEventListener("keydown",function(e){ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); $("#flCheck").click(); } });
   }
 }
+function flWireSpeak(q){
+  let heard="", best=0, rec=null;
+  $("#flSkip").onclick=()=>{ if(!FL.answered) flAnswer(q,false); };
+  $("#flMic").onclick=function(){
+    const b=this; if(rec){ try{rec.stop();}catch(e){} return; }
+    try{ rec=new FL_SR(); }catch(e){ $("#flHeard").textContent="Speech recognition is not available in this browser."; return; }
+    rec.lang="vi-VN"; rec.interimResults=true; rec.maxAlternatives=3;
+    b.classList.add("on"); $("#flHeard").textContent="Đang nghe… · listening";
+    rec.onresult=function(e){ const r=e.results[e.results.length-1]; const alts=[...r].map(a=>a.transcript);
+      alts.forEach(t=>{ const s=Math.max.apply(null,[q.s.v].concat(q.s.a||[]).map(x=>sim(t,x))); if(s>=best){best=s;heard=t;} });
+      $("#flHeard").innerHTML='<b>'+esc(heard)+'</b>'; $("#flCheck").disabled=!heard; };
+    rec.onerror=function(e){ $("#flHeard").textContent=e.error==="not-allowed"?"Microphone permission was refused.":"Didn't catch that — try again."; };
+    rec.onend=function(){ b.classList.remove("on"); rec=null; };
+    rec.start();
+  };
+  $("#flCheck").onclick=function(){
+    if(FL.answered||!heard) return;
+    if(best>=0.8) return flAnswer(q,true,"Heard: “"+heard+"”",heard);
+    flClose(q,heard,{sim:best},"Heard");
+  };
+}
+function flTargets(q){
+  if(q.type==="typegap") return flSynOf(q.L||FL.L,q.key);
+  if(q.type==="typeword") return flSynOf(q.L||FL.L,q.card[0]).concat([q.card[0]]);
+  if(q.type==="typexf") return [q.x[0]];
+  if(q.type==="tf") return q.t.r;
+  if(q.type==="ask") return q.a.q;
+  return [q.s.v].concat(q.s.a||[]);
+}
 function flGradeTyped(q,val){
-  let targets;
-  if(q.type==="typegap") targets=flSynOf(FL.L,q.key);
-  else if(q.type==="typeword") targets=flSynOf(FL.L,q.card[0]).concat([q.card[0]]);
-  else if(q.type==="typexf") targets=[q.x[0]];
-  else targets=[q.s.v].concat(q.s.a||[]);
-  const U=flClean(val); let best=null;
+  const targets=flTargets(q), U=flClean(val); let best=null;
   targets.forEach(function(t){ const g=classifyTypedAnswer(U,flClean(t)); if(!best||(g.skillCorrect&&!best.skillCorrect)||(g.masteryCredit>(best.masteryCredit||0)&&g.skillCorrect===best.skillCorrect)) best=Object.assign({t:t},g); });
   const note=best&&best.skillCorrect&&best.outcome!=="exact"?(best.repair==="tone"?"Check the tone marks: "+best.t:"Small spelling slip: "+best.t):null;
-  if(best&&best.skillCorrect) return {ok:true,note:note};
+  if(best&&best.skillCorrect) return {ok:true,note:note,grade:best};
   const s=Math.max.apply(null,targets.map(t=>sim(U,t)));
-  return {ok:false,close:q.type==="translate"&&s>=0.74,sim:s};
+  const long=["translate","dict","tf","ask"].indexOf(q.type)>-1;
+  return {ok:false,close:long&&s>=0.74,sim:s,grade:best};
 }
-function flClose(q,val,g){
-  FL.answered=true;
+function flClose(q,val,g,label){
+  FL.answered=true; const model=flTargets(q)[0];
   $("#flFb").innerHTML='<div class="fl-fb close"><div class="fl-fb-h"><b>Gần đúng</b><small>Compare with the model</small></div>'
-    +'<div class="fl-cmp2"><div><small>Bạn</small>'+esc(val)+'</div><div><small>Mẫu</small>'+flSay(q.s.v,"vi")+'</div></div>'
+    +'<div class="fl-cmp2"><div><small>'+(label||"Bạn")+'</small>'+esc(val)+'</div><div><small>Mẫu</small>'+flSay(model,"vi")+'</div></div>'
     +'<div class="fl-fb-row"><button class="btn ghost" id="flMineWrong">Mình sai</button><button class="btn" id="flMineOk">Mình đúng</button></div></div>';
-  $("#flMineOk").onclick=()=>{FL.answered=false;flAnswer(q,true,"Counted as correct — your wording.");};
-  $("#flMineWrong").onclick=()=>{FL.answered=false;flAnswer(q,false);};
-  if(S.autoplay) TTS.say(q.s.v);
+  $("#flMineOk").onclick=()=>{FL.answered=false;flAnswer(q,true,"Counted as correct — your wording.",val);};
+  $("#flMineWrong").onclick=()=>{FL.answered=false;flAnswer(q,false,null,val);};
+  if(S.autoplay) TTS.say(model);
   flScrollFb();
 }
 function flFeedback(q){
@@ -9427,20 +10199,51 @@ function flFeedback(q){
   if(q.type==="match") return {quiet:true};
   if(q.type==="typeword") return {main:q.card[0],en:q.card[1],say:q.card[0]};
   if(q.type==="typexf") return {main:q.x[0]+" → "+q.x[1],en:q.x[2],say:q.x[0]};
+  if(q.type==="tf") return {main:q.t.r[0],en:FL_OPS[q.t.op],say:q.t.r[0]};
+  if(q.type==="ask") return {main:q.a.q[0],en:"Answer: "+q.a.a,say:q.a.q[0]};
   return {main:q.s.v,en:q.s.e,say:q.s.v};
 }
-function flAnswer(q,ok,note){
+/* why was it wrong? specific reason → meaning of what was chosen → the course's own contrast */
+function flExplain(q,chosen){
+  const out=[], L=q.L||FL.L;
+  if(q.why) out.push(esc(q.why));
+  if(chosen&&q.type!=="match"){
+    const fb=flFeedback(q), right=q.type==="gap"?q.key:q.type==="fix"?q.right:q.type==="mcq"?q.opts[q.ans]:null;
+    if(right&&flClean(chosen)!==flClean(right)){
+      const gc=flGloss(chosen), gr=flGloss(right);
+      if(gc&&gr) out.push('<b>'+esc(chosen)+'</b> = '+esc(gc)+' · <b>'+esc(right)+'</b> = '+esc(gr));
+      else if(gc) out.push('<b>'+esc(chosen)+'</b> means “'+esc(gc)+'”.');
+    }
+    void fb;
+  }
+  if(!q.why){ const c=L&&L.c&&COURSE.conceptById&&COURSE.conceptById[L.c]; const m=c&&c.micro; const tip=m&&(m.contrast||m.rule); if(tip) out.push(esc(tip)); }
+  return out.slice(0,2);
+}
+/* lesson answers also count in the main review engine when the word is in the course */
+const FL_SRS_TYPE={1:"mc_vi_en",2:"listen_word",4:"mc_en_vi",gap:"gap",fix:"error_fix",order:"build",typegap:"class_gap",typeword:"translate_h",dict:"listen_type",tf:"class_ask",ask:"class_ask",translate:"translate",speak:"free",chat:"dialogue_gap"};
+function flSRS(q,ok,gr){
+  if(FL.inRepair||typeof applyResult!=="function"||typeof existingWordFor!=="function") return false;
+  let word=null, type=null;
+  if(q.card){ word=existingWordFor(q.card[0]); type=q.type==="typeword"?FL_SRS_TYPE.typeword:FL_SRS_TYPE[q.lvl]; }
+  else if(q.s&&q.s.k){ word=existingWordFor(q.s.k); type=FL_SRS_TYPE[q.type]; }
+  else if(q.type==="mcq"&&q.prompt&&q.prompt.chat){ return false; }
+  if(!word||!type||!word.concept) return false;
+  try{ const g=gr&&gr.grade?gr.grade:{skillCorrect:ok}; applyResult(word,type,Object.assign({},g,{skillCorrect:ok}),null,"none"); return true; }catch(e){ return false; }
+}
+function flAnswer(q,ok,note,chosen,gr){
   if(FL.answered) return; FL.answered=true;
   if(!FL.inRepair){ FL.res.push({q:q,ok:ok}); if(!ok) FL.repairs.push(q); }
-  logDay(ok); if(ok) S.xp+=2; save();
+  if(!flSRS(q,ok,gr)){ logDay(ok); if(ok) S.xp+=2; }
+  save();
   const card=$("#flQ"); if(card){ card.classList.add(ok?"ok":"no"); if(!ok){card.classList.add("shake");setTimeout(()=>card.classList.remove("shake"),340);} }
-  const fb=flFeedback(q);
+  const fb=flFeedback(q), why=ok?[]:flExplain(q,chosen);
   const showAns=!fb.quiet&&fb.main&&!(ok&&q.type==="mcq"&&q.lvl<=2);
   $("#flFb").innerHTML='<div class="fl-fb '+(ok?'ok':'no')+'"><div class="fl-fb-h"><b>'+(ok?pick(["Đúng rồi!","Giỏi quá!","Chính xác!","Hay lắm!"]):"Chưa đúng")+'</b>'+(note?'<small>'+esc(note)+'</small>':'')+'</div>'
     +(showAns?'<div class="fl-fb-ans">'+(fb.say?'<button class="fl-mini-say" data-say="'+esc(fb.say)+'" aria-label="Play">▶</button>':'')+'<span>'+esc(fb.main)+'</span>'+(fb.en?'<small>'+esc(fb.en)+'</small>':'')+'</div>':'')
+    +(why.length?'<div class="fl-why"><span>Vì sao?</span>'+why.map(w=>'<p>'+w+'</p>').join("")+'</div>':'')
     +'<button class="btn" id="flNextQ">Tiếp →</button></div>';
   $$("#flFb .fl-mini-say").forEach(b=>b.onclick=()=>TTS.say(b.dataset.say));
-  if(fb.say&&S.autoplay&&!(q.type==="mcq"&&q.lvl<=2)) TTS.say(fb.say);
+  if(fb.say&&S.autoplay&&!(q.type==="mcq"&&q.lvl<=2)&&q.type!=="dict") TTS.say(fb.say);
   $("#flNextQ").onclick=flAdvance;
   keyHandler=e=>{if(e.key==="Enter"){e.preventDefault();flAdvance();}};
   flScrollFb();
@@ -9453,39 +10256,98 @@ function flReshuffle(q){
 }
 function flAdvance(){
   FL.i++;
-  if(FL.i>=FL.qs.length&&!FL.inRepair&&FL.repairs.length){ FL.inRepair=true; FL.qs=FL.qs.concat(shuffle(FL.repairs.map(flReshuffle))); }
+  if(FL.i>=FL.qs.length&&!FL.inRepair&&FL.repairs.length&&FL.mode!=="check"){ FL.inRepair=true; FL.qs=FL.qs.concat(shuffle(FL.repairs.map(flReshuffle))); }
   if(FL.i>=FL.qs.length) return flFinish();
   flRender(); window.scrollTo({top:0,behavior:"instant"});
 }
 function flFinish(){
-  const total=FL.res.length, okN=FL.res.filter(r=>r.ok).length, pct=total?okN/total:0;
-  const stars=pct>=0.9?3:pct>=0.7?2:pct>=0.5?1:0, r=focusRec(FL.L.id);
-  r.runs++; r.last=Date.now(); r.best=Math.max(r.best||0,Math.round(pct*100));
-  const prevStars=r.stars||0; if(FL.mode!=="hard") r.stars=Math.max(prevStars,stars); else { r.stars=Math.max(prevStars,Math.min(3,stars)); if(pct>=0.8) r.hard=1; }
-  S.focusLast=FL.L.id; S.xp+=okN; bumpStreak(); save();
-  FL.phase="result"; FL.score={total:total,ok:okN,pct:pct,stars:stars,improved:r.stars>prevStars};
-  flRender(); window.scrollTo({top:0,behavior:"instant"});
+  const total=FL.res.length, okN=FL.res.filter(r=>r.ok).length, pct=total?okN/total:0, L=FL.L;
+  const stars=pct>=0.9?3:pct>=0.7?2:pct>=0.5?1:0;
+  FL.score={total:total,ok:okN,pct:pct,stars:stars};
+  if(FL.mode==="check"){
+    if(okN===total&&total){ const r=focusRec(L.id); r.stars=Math.max(r.stars||0,2); r.last=Date.now(); r.runs++; focusSchedule(L.id,1); S.focusLast=L.id; save(); }
+    FL.phase="result"; return flRender();
+  }
+  if(!L.dynamic){
+    const r=focusRec(L.id); r.runs++; r.last=Date.now(); r.best=Math.max(r.best||0,Math.round(pct*100));
+    const prev=r.stars||0; r.stars=Math.max(prev,stars); if(FL.mode==="hard"&&pct>=0.8) r.hard=1;
+    FL.score.improved=r.stars>prev; focusSchedule(L.id,pct);
+    if(!L.gen) S.focusLast=L.id;
+  }
+  if(L.mix){ /* refresh each lesson that was mixed in */
+    const by={}; FL.res.forEach(x=>{ const id=x.q.L&&x.q.L.id; if(!id) return; (by[id]=by[id]||{n:0,ok:0}); by[id].n++; if(x.ok) by[id].ok++; });
+    Object.keys(by).forEach(id=>{ const r=S.focus&&S.focus[id]; if(r&&r.stars) focusSchedule(id,by[id].ok/by[id].n); });
+  }
+  S.xp+=okN; bumpStreak(); save();
+  FL.phase="result"; flRender(); window.scrollTo({top:0,behavior:"instant"});
 }
 function flResult(){
-  const sc=FL.score, L=FL.L, idx=FOCUS.indexOf(L), next=FOCUS[idx+1]||null;
+  const sc=FL.score, L=FL.L;
+  if(FL.mode==="check"){
+    const passed=sc.ok===sc.total&&sc.total;
+    $("#stage").innerHTML='<div class="fl"><div class="fl-top"><button class="fl-x" id="flX" aria-label="Close">×</button><span class="fl-top-track">'+esc(L.vi)+'</span></div>'
+      +'<div class="fl-result"><div class="fl-check-big">'+sc.ok+' / '+sc.total+'</div><h2>'+(passed?'Bạn đã biết bài này!':'Học bài này nhé')+'</h2><p class="fl-result-sub">'+(passed?'Marked as known (2 stars) and scheduled for review.':'A few gaps — the full lesson will close them.')+'</p></div>'
+      +'<div class="fl-actions">'+(passed?'<button class="btn" id="flSkipOn">Bài tiếp theo →</button><button class="btn ghost" id="flLearn">Học bài này</button>':'<button class="btn" id="flLearn">Học bài này</button>')+'<button class="btn ghost" id="flBack">Bài học</button></div></div>';
+    flWireTop();
+    $("#flLearn").onclick=()=>{FL.phase="see";flRender();};
+    if($("#flSkipOn")) $("#flSkipOn").onclick=()=>openFocus(focusNext().id);
+    $("#flBack").onclick=flExit; return;
+  }
+  const idx=FOCUS.indexOf(L), next=L.dynamic?null:FOCUS.slice(idx+1).find(x=>!x.gen)||null;
   const byLvl=FL_LEVELS.map(lv=>{const xs=FL.res.filter(r=>r.q.lvl===lv.id);return {lv:lv,n:xs.length,ok:xs.filter(r=>r.ok).length};}).filter(x=>x.n);
-  const missed=flUniq(FL.res.filter(r=>!r.ok).map(r=>{const q=r.q;return q.s?q.s.v+" — "+q.s.e:q.fb?q.fb[0]+(q.fb[1]?" — "+q.fb[1]:""):q.card?q.card[0]+" — "+q.card[1]:q.x?q.x[0]+" → "+q.x[1]:q.type==="match"?"Matching pairs":"";}).filter(Boolean)).slice(0,6);
-  const R=52, C=2*Math.PI*R;
+  const missed=flUniq(FL.res.filter(r=>!r.ok).map(r=>{const q=r.q;return q.s?q.s.v+" — "+q.s.e:q.fb?q.fb[0]+(q.fb[1]?" — "+q.fb[1]:""):q.card?q.card[0]+" — "+q.card[1]:q.x?q.x[0]+" → "+q.x[1]:q.t?q.t.r[0]:q.a?q.a.q[0]:q.type==="match"?"Matching pairs":"";}).filter(Boolean)).slice(0,6);
+  const R=52, C=2*Math.PI*R, rr=S.focus&&S.focus[L.id], days=rr&&rr.ivl?rr.ivl:0;
   $("#stage").innerHTML='<div class="fl"><div class="fl-top"><button class="fl-x" id="flX" aria-label="Close">×</button><span class="fl-top-track">'+esc(L.vi)+'</span></div>'
     +'<div class="fl-result"><svg class="fl-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="'+R+'" class="bg"/><circle cx="60" cy="60" r="'+R+'" class="fg" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+(C*(1-sc.pct)).toFixed(1)+'"/></svg>'
     +'<div class="fl-result-pct"><b>'+Math.round(sc.pct*100)+'%</b><small>'+sc.ok+' / '+sc.total+'</small></div>'
     +'<div class="fl-result-stars">'+flStarsHTML(sc.stars)+'</div><h2>'+(sc.stars===3?"Xuất sắc!":sc.stars===2?"Tốt lắm!":sc.stars===1?"Khá rồi!":"Cố lên!")+'</h2>'
-    +(FL.mode==="hard"?'<p class="fl-result-sub">Thử thách ◆ '+(sc.pct>=0.8?'passed':'— 80% needed')+'</p>':'')+'</div>'
-    +'<div class="fl-lvls">'+byLvl.map(x=>'<div class="'+(x.ok===x.n?'all':x.ok?'some':'none')+'"><i style="--h:'+(x.ok/x.n*100)+'%"></i><b>'+x.lv.id+'</b><small>'+esc(x.lv.vi)+'</small></div>').join("")+'</div>'
+    +(FL.mode==="hard"?'<p class="fl-result-sub">Thử thách ◆ '+(sc.pct>=0.8?'passed':'— 80% needed')+'</p>':'')
+    +(days&&!L.dynamic?'<p class="fl-result-next">↺ Next review in '+days+' day'+(days>1?'s':'')+'</p>':'')+'</div>'
+    +'<div class="fl-lvls">'+byLvl.map(x=>'<div class="'+(x.ok===x.n?'all':x.ok?'some':'none')+'" title="'+esc(x.lv.vi+' · '+x.lv.en)+'"><i style="--h:'+(x.ok/x.n*100)+'%"></i><b>'+x.lv.id+'</b></div>').join("")+'</div>'
     +(missed.length?'<div class="fl-missed"><div class="fl-ask">Ôn lại <small>Worth another look</small></div>'+missed.map(m=>'<div>'+esc(m)+'</div>').join("")+'</div>':'')
     +'<div class="fl-actions">'+(next?'<button class="btn" id="flNextL">Bài tiếp · '+esc(next.vi)+' →</button>':'')
-    +'<button class="btn ghost" id="flAgain">Làm lại</button>'+(sc.stars>=1&&FL.mode!=="hard"?'<button class="btn ghost" id="flHard2">Thử thách ◆</button>':'')+'<button class="btn ghost" id="flBack">Bài học</button></div></div>';
+    +(flSpeedPool(L).length>=6?'<button class="btn ghost" id="flSpeed">⚡ Vòng tốc độ · speed round</button>':'')
+    +'<button class="btn ghost" id="flAgain">Làm lại</button>'+(sc.stars>=1&&FL.mode!=="hard"&&!L.mix?'<button class="btn ghost" id="flHard2">Thử thách ◆</button>':'')+'<button class="btn ghost" id="flBack">Bài học</button></div></div>';
   flWireTop();
   if($("#flNextL")) $("#flNextL").onclick=()=>openFocus(next.id);
+  if($("#flSpeed")) $("#flSpeed").onclick=flStartSpeed;
   $("#flAgain").onclick=()=>flStartPractice(FL.mode);
   if($("#flHard2")) $("#flHard2").onclick=()=>flStartPractice("hard");
   $("#flBack").onclick=flExit;
   keyHandler=e=>{if(e.key==="Enter"&&$("#flNextL"))$("#flNextL").click();};
+}
+
+/* ── speed round: ten quick questions, six seconds each ─────────────── */
+let FL_SPEED_T=0;
+function flSpeedPool(L){
+  const ls=L.mix?L.mix.map(id=>FOCUS.find(x=>x.id===id)).filter(Boolean):[L];
+  return ls.reduce((a,x)=>a.concat(flCards(x).filter(c=>c[0].indexOf("…")<0).map(c=>({c:c,L:x}))),[]);
+}
+function flStartSpeed(){
+  const pool=shuffle(flSpeedPool(FL.L)).slice(0,10);
+  FL.sp={qs:pool.map((p,i)=>i%2?flMCQ(4,{en:p.c[1]},p.c[0],flDistractVi(p.L,p.c[0],3)):flMCQ(1,{vi:p.c[0]},p.c[1],flDistractEn(p.L,p.c[1],3))),i:0,ok:0,t0:Date.now()};
+  FL.phase="speed"; flRender();
+}
+function flSpeedQ(){
+  const sp=FL.sp; clearTimeout(FL_SPEED_T);
+  if(sp.i>=sp.qs.length){
+    const r=focusRec(FL.L.id), secs=Math.round((Date.now()-sp.t0)/1000); r.speed=Math.max(r.speed||0,sp.ok); save();
+    $("#stage").innerHTML='<div class="fl"><div class="fl-top"><button class="fl-x" id="flX" aria-label="Close">×</button><span class="fl-top-track">⚡ Vòng tốc độ</span></div>'
+      +'<div class="fl-result"><div class="fl-check-big">'+sp.ok+' / '+sp.qs.length+'</div><h2>'+(sp.ok>=9?'Nhanh quá!':sp.ok>=7?'Tốt lắm!':'Thử lại nhé')+'</h2><p class="fl-result-sub">'+secs+' seconds · best '+r.speed+' / 10</p></div>'
+      +'<div class="fl-actions"><button class="btn" id="flSpAgain">⚡ Lần nữa</button><button class="btn ghost" id="flBack">Bài học</button></div></div>';
+    flWireTop(); $("#flSpAgain").onclick=flStartSpeed; $("#flBack").onclick=flExit; return;
+  }
+  const q=sp.qs[sp.i], p=q.prompt;
+  $("#stage").innerHTML='<div class="fl"><div class="fl-top"><button class="fl-x" id="flX" aria-label="Close">×</button><span class="fl-top-track">⚡ '+(sp.i+1)+' / '+sp.qs.length+' · '+sp.ok+' ✓</span></div>'
+    +'<div class="fl-timer"><i></i></div><div class="fl-qcard" id="flQ"><div class="fl-prompt">'+(p.vi?'<div class="fl-big vi">'+esc(p.vi)+'</div>':'<div class="fl-big en">'+esc(p.en)+'</div>')+'</div>'
+    +'<div class="fl-opts">'+q.opts.map((o,i)=>'<button class="fl-opt" data-i="'+i+'"><span>'+(i+1)+'</span>'+esc(o)+'</button>').join("")+'</div></div></div>';
+  flWireTop();
+  function done(i){ clearTimeout(FL_SPEED_T); const ok=i===q.ans; if(ok) sp.ok++;
+    $$(".fl-opt").forEach((x,j)=>{x.disabled=true; if(j===q.ans)x.classList.add("right"); else if(j===i)x.classList.add("wrong");});
+    setTimeout(()=>{ if(FL&&FL.phase==="speed"){ sp.i++; flSpeedQ(); } },ok?350:900); }
+  $$(".fl-opt").forEach(b=>b.onclick=()=>done(+b.dataset.i));
+  keyHandler=e=>{const n=parseInt(e.key,10); if(n>=1&&n<=q.opts.length) done(n-1);};
+  FL_SPEED_T=setTimeout(()=>done(-1),6000);
 }
 
 /* timing guards */
