@@ -4,6 +4,44 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v18 — Practice
+
+The fifth tab is now **Practice** (Thực hành): 21 tools beyond the lessons, plus the old library (Nghe, Nói, Điểm yếu, Từ vựng, Nội dung, Tiến bộ). Every exercise uses the same cards, feedback and back arrow as the lessons.
+
+**Sounds and listening**
+- Gương thanh điệu (tone mirror) records one word and draws your pitch curve over the target tone curve, with a score. It runs on the phone; nothing is sent anywhere.
+- Luyện tai is a one-minute drill of tone minimal pairs (chờ / chợ / chở, mua / mùa / múa…) that shows the tones you confuse more often. Hỏi and ngã count as one tone, as in the south.
+- Nhại theo (shadowing): hear the model, record yourself, play yours back, then compare model and yours. Native recordings you made are used as the model when they exist.
+- Nghe tốc độ thật plays sentences fast, some with a simulated southern accent (v → d, tr → ch, s → x, không → hông).
+- Tin nhắn thoại: realistic voice messages (Grab driver, Má, a colleague, the landlady…) where you fill in the missing words and answer a question about the gist.
+
+**Speaking and writing**
+- Hội thoại nhiều nhánh: four conversations (meeting Lan Anh's parents, a Grab ride, bargaining at the market, a phone call from Má) where an impolite or odd choice gets a reaction and an explanation before you try again.
+- Mở rộng câu grows one sentence step by step (time, place, frequency, particle).
+- Câu của tôi stores your own true sentences and turns them into gap-fills, sentence building and dictation. Every lesson result now invites you to write one.
+- Nói 30 giây: twelve topics, a 30-second timer, playback, a self-check, and earlier recordings kept on the phone so you can hear progress.
+- Nói cách khác: sixteen "say it another way" transformations.
+
+**Grammar tools**
+- Every rule card has a "Pour un francophone" note in French — all 82 course concepts.
+- Xưng hô gia đình: a family tree of Lan Anh's family showing what you call each person, what you call yourself, and what they call you, with a quiz and optional real names.
+- Đếm với loại từ: count pictured objects with the right classifier (con, cái, chiếc, quyển, trái, cây, căn, ly, lá).
+- Thẻ cứu: words you have missed three times or more, with look-alike words, your own memory hook and a three-question drill.
+
+**Real life**
+- Gõ Telex teaches the Vietnamese keyboard with a live converter and a typing drill.
+- Nhắn tin kiểu Việt covers chat abbreviations (ko, dc, j, r…), real-looking chats, and restoring accents.
+- Số và giá tiền gives unlimited drills on prices (southern ngàn), times, phone numbers and years.
+- Nhiệm vụ tuần sets three real-world missions each week, with useful phrases and a note for each.
+- Bài phát biểu đám cưới is a draft toast for 8 January 2028, line by line, with shadowing, memorising and a full rehearsal. It is editable — check it with Lan Anh or your teacher.
+
+**Progress**
+- Tôi có thể…: sixteen can-do statements that unlock as you finish their lessons.
+- Hồ sơ lỗi: your mistakes from the last seven days by type (tones, spelling, word order, vocabulary, grammar, pronouns, classifiers, listening, numbers), with suggested lessons. Lessons and practice tools both feed it.
+- Báo cáo cho giáo viên: a weekly summary to share, copy or download before class.
+
+Today's practice tiles now open the ear drill, conversations, numbers and missions, and a "Thẻ cứu" row appears when you have words to rescue. Microphone tools need microphone permission; recordings stay in the browser's storage on this device.
+
 ## What is new in v17 — one lesson format for the whole course
 
 - **Course topics are pages now.** Tapping a topic under Course opens a page with a coloured header, its lessons on the same path as the Lessons tab, an "Ôn tập chương" mixed review, and a "Kiến thức" list of every grammar point, each opening its rule.

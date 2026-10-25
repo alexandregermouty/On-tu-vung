@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v17 — one lesson format for the whole course. */
-const CACHE = "vivu-v17";
+/* Ôn tiếng Việt · v18 — Practice tools. */
+const CACHE = "vivu-v18";
 const ASSETS = [
   "./",
   "./index.html",
