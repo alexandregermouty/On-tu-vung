@@ -2192,6 +2192,131 @@ body.in-session .wrap{padding-bottom:calc(32px + env(safe-area-inset-bottom))!im
 .v16-pagehead-art img.fe{width:36px;height:36px}
 .v16-pagehead b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.1;color:var(--ink)}
 .v16-pagehead small{display:block;margin-top:3px;font-size:13.5px;color:var(--ink-2);line-height:1.35}
+
+/* ═══ v17 · course pages, rule card ═══════════════════════════════════ */
+/* the rule card (first slide of every lesson) */
+.v17-rule{display:flex;flex-direction:column;gap:12px;text-align:left}
+.v17-rule-head{display:flex;gap:12px;align-items:flex-start}
+.v17-rule-head img.fe{width:40px;height:40px;flex:0 0 auto;padding:6px;border-radius:13px;background:color-mix(in srgb,#F2C94C 22%,transparent)}
+.v17-rule-head small{display:block;font-size:12px;font-weight:600;color:var(--ink-3);margin-bottom:3px}
+.v17-rule-head p{margin:0;font-size:16.5px;line-height:1.45;color:var(--ink);font-weight:500}
+.v17-rule-ex{display:flex;flex-direction:column;gap:8px}
+.v17-rule-ex button{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;width:100%;padding:11px 14px;border-radius:14px;border:1px solid var(--card-line);background:var(--card-2);cursor:pointer;text-align:left;font-family:var(--vi);color:var(--ink)}
+.v17-rule-ex button span{font-size:16px;font-weight:600;line-height:1.35}
+.v17-rule-ex button small{grid-row:2;font-size:13px;color:var(--ink-3);margin-top:2px}
+.v17-rule-ex button svg.ic{grid-row:1/3;grid-column:2;width:20px;height:20px;color:var(--accent)}
+.v17-rule-ex button.speaking,.v17-rule-ex button:active{border-color:var(--accent)}
+.v17-rule-tip{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--accent) 8%,transparent);border-left:3px solid var(--accent)}
+.v17-rule-tip b{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.v17-rule-tip span{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.v17-rule-more summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--ink-3);list-style:none;padding:4px 0}
+.v17-rule-more summary::-webkit-details-marker{display:none}
+.v17-rule-more summary::before{content:"+ "}
+.v17-rule-more[open] summary::before{content:"− "}
+.v17-rule-more p{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.v17-rule-more p.note{font-style:italic;color:var(--ink-3)}
+.sheet .v17-rule{margin-top:6px}
+
+/* unit and class pages */
+.v17-prog{display:flex;align-items:center;gap:12px;margin:14px 2px 0}
+.v17-prog .v16-tbar{flex:1;margin:0}
+.v17-prog span{font-size:13px;font-weight:700;color:var(--ink-2)}
+.v17-unit-rail{margin-top:0!important}
+.v17-unit-rail .v15-rail{margin-top:0}
+.v17-concepts{display:flex;flex-direction:column;gap:8px}
+.v17-concept{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;width:100%;padding:14px 16px;border-radius:18px;cursor:pointer;text-align:left;font-family:var(--vi);color:var(--ink);background:var(--card);border:1px solid var(--card-line);box-shadow:var(--shadow)}
+.v17-concept b{font-size:15px;font-weight:700;line-height:1.3}
+.v17-concept small{grid-row:2;font-size:13px;line-height:1.4;color:var(--ink-3);margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.v17-concept svg.ic{grid-row:1/3;grid-column:2;width:16px;height:16px;color:var(--ink-4)}
+.v17-class-hero h2{font-size:28px!important;line-height:1.12!important}
+.v17-class-hero p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.v17-class-hero .v16-hero-copy{max-width:66%}
+.v17-vocab{display:flex;flex-wrap:wrap;gap:8px}
+.v17-vocab button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:9px 13px;border-radius:14px;background:var(--card);border:1px solid var(--card-line);box-shadow:var(--shadow);cursor:pointer;font-family:var(--vi);color:var(--ink);text-align:left;max-width:100%}
+.v17-vocab b{font-size:15px;font-weight:700}
+.v17-vocab small{font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.v17-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.v17-ucount{font-style:normal;font-size:12.5px;font-weight:600;color:var(--ink-2);margin:auto 0 6px}
+.v16-unit .v16-ubar{margin-top:0!important}
+
+/* ═══ v17 · review sessions use the same look as lessons ══════════════ */
+body.in-session:not(.fl-session) #stage > .foot{position:fixed;z-index:29;top:calc(10px + env(safe-area-inset-top));left:max(68px,calc(50% - 300px + 68px));right:max(16px,calc(50% - 300px + 16px));
+  height:40px;margin:0!important;display:flex;align-items:center;gap:12px;background:none!important;border:0!important}
+body.in-session:not(.fl-session) .foot .bar{flex:1;height:8px!important;border-radius:9px!important;background:rgba(var(--ink-rgb),.1)!important;overflow:hidden}
+body.in-session:not(.fl-session) .foot .bar i{border-radius:9px;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 70%,#fff))!important}
+body.in-session:not(.fl-session) .foot .count{font:700 13px var(--vi)!important;color:var(--ink-2)!important;letter-spacing:0!important}
+:root:not([data-theme="light"]) body.in-session:not(.fl-session) .foot .bar i{background:linear-gradient(90deg,#D9B26A,#F0D49A)!important}
+
+body.in-session:not(.fl-session) #stage .card{background:var(--card)!important;border:1px solid var(--card-line)!important;border-radius:26px!important;padding:22px 20px 20px!important;box-shadow:var(--shadow-lg)!important;margin-top:4px!important}
+:root:not([data-theme="light"]) body.in-session:not(.fl-session) #stage .card{box-shadow:none!important}
+body.in-session:not(.fl-session) #stage .q-label,body.in-session:not(.fl-session) #stage .card > .eyebrow{display:flex!important;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px!important;font:600 13px var(--vi)!important;color:var(--ink-3)!important;text-transform:none!important;letter-spacing:0!important}
+body.in-session:not(.fl-session) #stage .q-label > span:first-child{padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+:root:not([data-theme="light"]) body.in-session:not(.fl-session) #stage .q-label > span:first-child{color:#E2C17A;background:rgba(226,193,122,.12)}
+body.in-session:not(.fl-session) #stage .q-label .why{font:500 12.5px var(--vi)!important;color:var(--ink-4)!important;letter-spacing:0!important;text-transform:none!important}
+body.in-session:not(.fl-session) #stage .why-btn{margin-left:auto;height:32px!important;min-height:32px!important;padding:0 13px!important;border-radius:999px!important;border:1px solid var(--card-line)!important;background:var(--card-2)!important;font:600 12.5px var(--vi)!important;color:var(--ink-2)!important;letter-spacing:0!important}
+body.in-session:not(.fl-session) #stage h2.word{font-family:var(--vi)!important;font-size:46px!important;font-weight:700!important;letter-spacing:-.02em!important;line-height:1.1!important;margin:8px 0 4px!important;color:var(--ink)!important}
+body.in-session:not(.fl-session) #stage .gloss,body.in-session:not(.fl-session) #stage .prompt-en,body.in-session:not(.fl-session) #stage .sent-en{font-family:var(--vi)!important;font-style:normal!important;font-size:17px!important;line-height:1.4!important;color:var(--ink-2)!important}
+body.in-session:not(.fl-session) #stage .prompt-en{font-size:24px!important;font-weight:700!important;color:var(--ink)!important;margin:10px 0 6px!important}
+body.in-session:not(.fl-session) #stage .sent,body.in-session:not(.fl-session) #stage .vi{font-family:var(--vi)!important;font-style:normal!important}
+body.in-session:not(.fl-session) #stage .note{font-family:var(--vi)!important;font-style:normal!important;font-size:15px!important;line-height:1.5!important;color:var(--ink)!important;background:var(--card-2)!important;border:1px solid var(--card-line)!important;border-left:3px solid var(--accent)!important;border-radius:14px!important;padding:12px 14px!important;margin:14px 0 0!important}
+body.in-session:not(.fl-session) #stage .note span[style]{display:block;margin-top:2px;color:var(--ink-3);opacity:1!important;font-size:13.5px}
+body.in-session:not(.fl-session) #stage .note b{font-weight:700}
+body.in-session:not(.fl-session) #stage .south-note{border-left-color:var(--ok)!important}
+body.in-session:not(.fl-session) #stage .audio{display:flex!important;gap:8px!important;flex-wrap:wrap;margin-top:14px!important}
+body.in-session:not(.fl-session) #stage .speak{height:38px!important;min-height:38px!important;padding:0 14px!important;border-radius:12px!important;border:0!important;background:color-mix(in srgb,var(--accent) 12%,transparent)!important;color:var(--accent)!important;font:700 13.5px var(--vi)!important;letter-spacing:0!important}
+:root:not([data-theme="light"]) body.in-session:not(.fl-session) #stage .speak{background:rgba(226,193,122,.12)!important;color:#E2C17A!important}
+body.in-session:not(.fl-session) #stage .next-row{display:flex!important;gap:10px!important;margin-top:18px!important;background:none!important;position:static!important;padding:0!important}
+body.in-session:not(.fl-session) #stage .next-row .btn{flex:1;min-height:54px!important;border-radius:16px!important;font:700 16px var(--vi)!important}
+body.in-session:not(.fl-session) #stage .next-row .btn.ghost,body.in-session:not(.fl-session) #stage .next-row .why-btn{flex:0 0 auto;min-height:54px!important;height:54px!important;border-radius:16px!important;padding:0 18px!important}
+body.in-session:not(.fl-session) #stage .next-row .hint{display:none!important}
+@media (hover:hover) and (pointer:fine){body.in-session:not(.fl-session) #stage .next-row .hint{display:inline-flex!important;align-self:center;font-size:12px;color:var(--ink-4)}}
+body.in-session:not(.fl-session) #stage .notebar{display:flex!important;gap:8px!important;flex-wrap:wrap;margin-top:14px!important;padding:0!important;border:0!important}
+body.in-session:not(.fl-session) #stage .tag{height:32px!important;min-height:32px!important;padding:0 12px!important;border-radius:999px!important;font:600 12.5px var(--vi)!important;background:transparent!important;border:1px solid var(--card-line)!important;color:var(--ink-3)!important;letter-spacing:0!important}
+body.in-session:not(.fl-session) #stage .tag.on{border-color:var(--accent)!important;color:var(--accent)!important}
+
+/* answer choices */
+body.in-session:not(.fl-session) #stage .opt,body.in-session:not(.fl-session) #stage .sentopt{display:flex!important;align-items:center;gap:12px;width:100%;min-height:58px!important;padding:12px 14px!important;margin:0 0 10px!important;border-radius:16px!important;background:var(--card-2)!important;border:1.5px solid var(--card-line)!important;
+  font:600 16.5px var(--vi)!important;color:var(--ink)!important;text-align:left;box-shadow:none!important;letter-spacing:0!important}
+body.in-session:not(.fl-session) #stage .opt .k{flex:0 0 auto;width:28px;height:28px;border-radius:50%!important;display:grid;place-items:center;border:0!important;background:rgba(var(--ink-rgb),.08)!important;color:var(--ink-3)!important;font:700 12px var(--vi)!important}
+body.in-session:not(.fl-session) #stage .opt:not(:disabled):active,body.in-session:not(.fl-session) #stage .sentopt:not(:disabled):active{transform:scale(.985)}
+body.in-session:not(.fl-session) #stage .opt.right,body.in-session:not(.fl-session) #stage .sentopt.right{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 14%,var(--card))!important}
+body.in-session:not(.fl-session) #stage .opt.right .k{background:var(--ok)!important;color:#fff!important}
+body.in-session:not(.fl-session) #stage .opt.wrong,body.in-session:not(.fl-session) #stage .sentopt.wrong{border-color:var(--bad)!important;background:color-mix(in srgb,var(--bad) 12%,var(--card))!important}
+body.in-session:not(.fl-session) #stage .opt.wrong .k{background:var(--bad)!important;color:#fff!important}
+body.in-session:not(.fl-session) #stage .conf{min-height:46px!important;border-radius:14px!important;font:600 14px var(--vi)!important;background:var(--card-2)!important;border:1px solid var(--card-line)!important;color:var(--ink)!important}
+
+/* typing */
+body.in-session:not(.fl-session) #stage input.type,body.in-session:not(.fl-session) #stage .typebox input,body.in-session:not(.fl-session) #stage textarea{width:100%;min-height:56px!important;padding:14px 16px!important;border-radius:16px!important;border:1.5px solid var(--card-line)!important;background:var(--card-2)!important;color:var(--ink)!important;font:600 18px var(--vi)!important;box-shadow:none!important}
+body.in-session:not(.fl-session) #stage input.type:focus,body.in-session:not(.fl-session) #stage textarea:focus{outline:none;border-color:var(--accent)!important;box-shadow:0 0 0 4px rgba(var(--accent-rgb),.14)!important}
+
+/* building sentences */
+body.in-session:not(.fl-session) #stage .tile,body.in-session:not(.fl-session) #stage .tok{min-height:44px!important;padding:8px 14px!important;border-radius:12px!important;background:var(--card-2)!important;border:1.5px solid var(--card-line)!important;font:600 16px var(--vi)!important;color:var(--ink)!important;box-shadow:0 2px 0 var(--card-line)!important}
+body.in-session:not(.fl-session) #stage .slot,body.in-session:not(.fl-session) #stage .answer-line,body.in-session:not(.fl-session) #stage .tokens{min-height:58px;border-radius:16px!important;border:1.5px dashed var(--card-line)!important;background:transparent!important}
+body.in-session:not(.fl-session) #stage .blank{border-bottom:2px solid var(--accent)!important;min-width:2.5em;display:inline-block}
+
+/* feedback */
+body.in-session:not(.fl-session) #stage .vtag{display:inline-flex!important;align-items:center;gap:6px;height:30px;padding:0 12px!important;border-radius:999px!important;font:700 13px var(--vi)!important;letter-spacing:0!important;text-transform:none!important;margin:14px 0 8px!important;border:0!important}
+body.in-session:not(.fl-session) #stage .vtag.ok{background:color-mix(in srgb,var(--ok) 16%,transparent)!important;color:var(--ok)!important}
+body.in-session:not(.fl-session) #stage .vtag.no{background:color-mix(in srgb,var(--bad) 14%,transparent)!important;color:var(--bad)!important}
+body.in-session:not(.fl-session) #stage .vtag.near{background:color-mix(in srgb,#E0A13A 18%,transparent)!important;color:#C9861A!important}
+body.in-session:not(.fl-session) #stage .rightline,body.in-session:not(.fl-session) #stage .wrongline{display:flex;gap:10px;align-items:baseline;padding:8px 0!important;font:600 16px var(--vi)!important;color:var(--ink)!important;border:0!important}
+body.in-session:not(.fl-session) #stage .rightline b,body.in-session:not(.fl-session) #stage .wrongline b{flex:0 0 74px;font:600 12px var(--vi)!important;color:var(--ink-3)!important;text-transform:none!important;letter-spacing:0!important}
+body.in-session:not(.fl-session) #stage .rightline{color:var(--ok)!important}
+body.in-session:not(.fl-session) #stage .wrongline{color:var(--bad)!important;text-decoration:none}
+body.in-session:not(.fl-session) #stage .vrow{display:flex;align-items:baseline;gap:10px;margin-top:10px}
+body.in-session:not(.fl-session) #stage .vrow .w{font:700 22px var(--vi)!important;color:var(--ink)!important}
+body.in-session:not(.fl-session) #stage .vrow .g{font:500 15px var(--vi)!important;color:var(--ink-3)!important;font-style:normal!important}
+body.in-session:not(.fl-session) #stage .speedline{margin-top:10px;font:500 12px var(--vi)!important;color:var(--ink-4)!important}
+body.in-session:not(.fl-session) #stage .card.shake{animation:v17Shake .32s ease}
+@keyframes v17Shake{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* dialogues */
+body.in-session:not(.fl-session) #stage .dlg-line{padding:10px 14px!important;border-radius:16px!important;background:var(--card-2)!important;border:1px solid var(--card-line)!important;margin:0 0 8px!important;font-family:var(--vi)!important;font-style:normal!important}
+body.in-session:not(.fl-session) #stage .dlg-line .who{font:700 12px var(--vi)!important;color:var(--ink-3)!important}
+
+/* tone marks above the word: calmer */
+body.in-session:not(.fl-session) #stage .tones{opacity:.85}
+body.in-session:not(.fl-session) #stage .tone-syl em{font:600 10.5px var(--vi)!important;color:var(--ink-4)!important;letter-spacing:0!important}
 </style>
 </head>
 <body>
@@ -7583,10 +7708,11 @@ function go(v,opt){
   const host = $("#stage");
   host.scrollTop = 0;
   ({today:viewToday, lessons:viewLessons, course:viewCourse, review:viewReview, listen:viewListen,
-    speak:viewSpeak, weaknesses:viewWeak, words:viewWords, content:viewContent, progress:viewProgress}[v] || viewToday)();
+    speak:viewSpeak, weaknesses:viewWeak, words:viewWords, content:viewContent, progress:viewProgress, unit:viewUnit, lop:viewClass}[v] || viewToday)();
   host.classList.remove("v14-in-slide","v14-in-fade"); void host.offsetWidth; host.classList.add("v14-in-fade");
   v15Header();
   if(typeof v16Decorate==="function") v16Decorate();
+  if(typeof v17AfterGo==="function") v17AfterGo();
   paintStats();
   window.scrollTo({top:0, behavior:"instant"});
 }
@@ -7964,7 +8090,7 @@ function renderClassTask(it,type){
   $('#tgo').onclick=submit;input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();}};keyHandler=null;
 }
 
-function unitSheet(uid){
+function unitSheet_v14(uid){
   const u = COURSE.units.find(x=>x.id===uid);
   const cs = COURSE.concepts.filter(c=>c.unit===uid);
   const items = COURSE.all.filter(x=>x.unit===uid);
@@ -10177,6 +10303,358 @@ FOCUS.push(
 );
 
 /* ── one short reading per track ─────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════
+   v17 · LESSONS FOR EVERY COURSE TOPIC
+   Seventeen new focused lessons for the course concepts that had none, built
+   from each concept's rule, examples, micro-lesson and linked words, plus
+   short standard sentences that use only course vocabulary.
+   ═══════════════════════════════════════════════════════════════════════ */
+FOCUS_TRACKS.push({id:"r",vi:"Chữ và dấu",en:"Letters & tones"});
+FOCUS.push(
+
+/* ══ R · CHỮ VÀ DẤU ═════════════════════════════════════════════════ */
+{id:"r-tones",t:"r",g:"ma · má",vi:"Sáu thanh",en:"The six tones",c:"c.tones.six",
+ vis:[{type:"tiles",title:"Một chữ, sáu nghĩa · one syllable, six words",items:[{n:"ma",vi:"ma",en:"ghost · ngang"},{n:"mà",vi:"mà",en:"but · huyền"},{n:"má",vi:"má",en:"mum · sắc"},{n:"mả",vi:"mả",en:"tomb · hỏi"},{n:"mã",vi:"mã",en:"horse · ngã"},{n:"mạ",vi:"mạ",en:"rice seedling · nặng"}]},
+  {type:"compare",title:"Cao và thấp · level, falling, rising",cols:[
+   {h:"ngang",en:"no mark — level and mid",ex:["Nhà em xa lắm.","My house is very far."]},
+   {h:"huyền ( ` )",en:"falls low and smooth",ex:["Em muốn đi, mà trời mưa.","I want to go, but it's raining."]},
+   {h:"sắc ( ´ )",en:"rises sharply",ex:["Má em nấu ăn ngon lắm.","My mum cooks really well."]}]},
+  {type:"compare",title:"Gãy và nặng · dipping, broken, heavy",cols:[
+   {h:"hỏi ( ? )",en:"dips, then rises",ex:["Ba chở em đi học.","Dad drives me to school."]},
+   {h:"ngã ( ~ )",en:"broken rise — sounds like hỏi in the south",ex:["Em nghĩ vậy.","I think so."]},
+   {h:"nặng ( . )",en:"low, heavy, cut short",ex:["Mẹ đi chợ mua rau.","Mum goes to the market for vegetables."]}]}],
+ cards:[["ma","ghost"],["mà","but"],["má","mum (southern)"],["mả","tomb"],["mã","horse; code"],["mạ","rice seedling"],["chờ","to wait"],["chợ","market"],["chở","to give a ride"]],
+ s:[FS("Má em nấu ăn ngon lắm.","My mum cooks really well.","Má",["Mà","Ma","Mạ"]),
+    FS("Em muốn đi, mà trời mưa.","I want to go, but it's raining.","mà",["má","ma","mạ"]),
+    FS("Mẹ đi chợ mua rau.","Mum goes to the market to buy vegetables.","chợ",["chờ","chở","chớ"]),
+    FS("Anh chờ em một chút nha.","Wait for me a moment, okay?","chờ",["chợ","chở","chớ"]),
+    FS("Ba chở em đi học.","Dad drives me to school.","chở",["chờ","chợ","chớ"]),
+    FS("Cái túi này nặng lắm.","This bag is very heavy.","nặng",["nắng","năng","nàng"]),
+    FS("Hôm nay trời nắng quá.","It's so sunny today.","nắng",["nặng","năng","nàng"])],
+ traps:[FT("Má em nấu ăn ngon lắm.","Ma em nấu ăn ngon lắm.","My mum cooks really well.","Without the sắc mark, ma means ghost."),
+        FT("Mẹ đi chợ mua rau.","Mẹ đi chờ mua rau.","Mum goes to the market to buy vegetables.","Chợ (nặng) is the market; chờ (huyền) means to wait.")],
+ quiz:[["How many tones does a southern speaker actually produce?",["six","five","four"],1,"Hỏi and ngã merge in the south: five in speech, six on the page."],
+       ["Which tone is on “cẩn”?",["hỏi","ngã","sắc"],0],
+       ["Which mark makes the voice fall low and smooth?",["huyền","sắc","nặng"],0]]},
+
+{id:"r-syllable",t:"r",g:"m+a+´",vi:"Đọc một âm tiết",en:"Consonant → vowel → tone",c:"c.read.sequence",
+ vis:[{type:"transform",title:"Ba bước · three moves",heads:["ghép","đọc"],rows:[["m + a","ma","ghost"],["m + a + sắc","má","mum"],["b + an + huyền","bàn","table"],["c + ao","cao","tall"]]},
+  {type:"pairs",title:"Chỉ khác dấu · only the tone changes",rows:[["sạch","clean","sách","book"],["khó","difficult","khô","dry"],["mới","new","mời","to invite"],["gần","near","cần","to need"]]}],
+ xf:[["m + a + sắc","má","mum"],["m + a + huyền","mà","but"],["b + an + huyền","bàn","table"],["b + an + nặng","bạn","friend"],["b + an + sắc","bán","to sell"],["c + ao","cao","tall"],["s + ach + nặng","sạch","clean"],["kh + ô","khô","dry"]],
+ xfh:["Parts","Syllable"],
+ s:[FS("Phòng em sạch lắm.","My room is very clean.","sạch",["sách","sắc","sát"]),
+    FS("Quyển sách này hay lắm.","This book is really good.","sách",["sạch","sắc","sát"]),
+    FS("Bài này khó quá.","This lesson is so hard.","khó",["khô","kho","khổ"]),
+    FS("Trời hôm nay khô lắm.","The weather is very dry today.","khô",["khó","kho","khổ"]),
+    FS("Em mời chị uống cà phê.","Let me treat you to a coffee.","mời",["mới","mỗi","mồi"]),
+    FS("Cái áo này mới mua.","I just bought this shirt.","mới",["mời","mỗi","mồi"]),
+    FS("Em cần một ly nước.","I need a glass of water.","cần",["gần","cấn","cân"])],
+ traps:[FT("Phòng em sạch lắm.","Phòng em sách lắm.","My room is very clean.","Sạch (nặng) is clean; sách (sắc) is a book."),
+        FT("Em mời chị uống cà phê.","Em mới chị uống cà phê.","Let me treat you to a coffee.","Mời (huyền) is to invite; mới (sắc) is new.")],
+ quiz:[["Which step carries the tone?",["the initial consonant","the vowel","the mark over or under the vowel"],2,"Read the consonant, then the vowel, and put the tone on last."],
+       ["b + an + huyền →",["bàn","bán","bạn"],0]]},
+
+{id:"r-glides",t:"r",g:"ai · ao",vi:"Nguyên âm đôi",en:"Vowels that glide",c:"c.read.vowelglides",
+ vis:[{type:"tiles",title:"Một hơi, hai vị trí · one breath, two mouth shapes",items:[{n:"ai",vi:"hai",en:"two"},{n:"ay",vi:"hay",en:"often; good"},{n:"ao",vi:"cao",en:"tall"},{n:"au",vi:"đau",en:"to hurt"},{n:"eo",vi:"mèo",en:"cat"},{n:"ưa",vi:"mưa",en:"rain"}]},
+  {type:"compare",title:"Đừng nhầm · don't mix them up",cols:[
+   {h:"tay",en:"hand — short a, then y",ex:["Rửa tay trước khi ăn nha.","Wash your hands before eating."]},
+   {h:"tai",en:"ear — long a, then i",ex:["Em bị đau tai.","My ear hurts."]},
+   {h:"mưa · mua",en:"rain · to buy",ex:["Trời mưa rồi, em đi mua dù.","It's raining, I'm going to buy an umbrella."]}]}],
+ cards:[["hai","two"],["hay","often; good"],["tai","ear"],["tay","hand"],["cao","tall"],["đau","to hurt"],["mèo","cat"],["mưa","rain"],["mua","to buy"]],
+ s:[FS("Em có hai con mèo.","I have two cats.","hai",["hay","hơi","hài"]),
+    FS("Phim này hay lắm.","This film is really good.","hay",["hai","hơi","hài"]),
+    FS("Rửa tay trước khi ăn nha.","Wash your hands before eating.","tay",["tai","tây","tao"]),
+    FS("Em bị đau tai.","My ear hurts.","tai",["tay","tây","tao"]),
+    FS("Trời mưa rồi.","It's raining.","mưa",["mua","múa","mùa"]),
+    FS("Em đi mua rau.","I'm going to buy vegetables.","mua",["mưa","múa","mùa"]),
+    FS("Con mèo này dễ thương quá.","This cat is so cute.","mèo",["mào","méo","mẹo"]),
+    FS("Anh ấy cao lắm.","He is very tall.","cao",["cau","câu","cạo"])],
+ traps:[FT("Rửa tay trước khi ăn nha.","Rửa tai trước khi ăn nha.","Wash your hands before eating.","Tay (hand) and tai (ear) differ in the vowel glide, not the tone."),
+        FT("Em đi mua rau.","Em đi mưa rau.","I'm going to buy vegetables.","Mua is to buy; mưa is rain.")],
+ quiz:[["Which pair differs in vowel quality rather than tone?",["tay / tai","má / mà"],0,"Losing ư, ơ, â and the others changes the word, just like a tone does."],
+       ["“rain” is written:",["mưa","mua"],0]]},
+
+{id:"r-clusters",t:"r",g:"nh · ng",vi:"Phụ âm ghép",en:"Letter pairs, one sound",c:"c.read.clusters",
+ vis:[{type:"tiles",title:"Đọc cả nhóm · read the pair as one sound",items:[{n:"ch",vi:"chó",en:"dog"},{n:"kh",vi:"không",en:"no, not"},{n:"ng",vi:"người",en:"person"},{n:"ngh",vi:"nghe",en:"to listen"},{n:"nh",vi:"nhà",en:"house"},{n:"ph",vi:"phở",en:"noodle soup"},{n:"th",vi:"thích",en:"to like"},{n:"tr",vi:"trời",en:"sky, weather"},{n:"qu",vi:"quán",en:"shop, eatery"}]},
+  {type:"compare",title:"ng hay ngh? · which spelling?",cols:[
+   {h:"ng",en:"before a, o, ô, ơ, u, ư",ex:["Người Việt thích ăn phở.","Vietnamese people like phở."]},
+   {h:"ngh",en:"before i, e, ê",ex:["Em thích nghe nhạc.","I like listening to music."]},
+   {h:"g · gh",en:"same rule: gh before i, e, ê",ex:["Em ghé quán cà phê.","I drop by the café."]}]}],
+ cards:[["chó","dog"],["không","no, not"],["người","person"],["nghe","to listen"],["nhà","house"],["phở","phở noodle soup"],["thích","to like"],["trời","sky, weather"],["quán","shop, eatery"],["ghé","to drop by"]],
+ s:[FS("Em thích nghe nhạc.","I like listening to music.","nghe",["nge","nhe","ghe"]),
+    FS("Nhà em ở gần chợ.","My house is near the market.","Nhà",["Nghà","Ngà","Nà"]),
+    FS("Bạn có thích phở không?","Do you like phở?","phở",["fở","pở","thở"]),
+    FS("Trời hôm nay đẹp quá.","The weather is lovely today.","Trời",["Chời","Tời","Thời"]),
+    FS("Người này là ai?","Who is this person?","Người",["Nghười","Nười","Gười"]),
+    FS("Mình đi quán cà phê nha.","Let's go to the café.","quán",["cuán","wán","koán"]),
+    FS("Em ghé nhà chị một chút.","I'll drop by your place for a moment.","ghé",["gé","ghế","khé"])],
+ traps:[FT("Em thích nghe nhạc.","Em thích nge nhạc.","I like listening to music.","Before e, ê and i the ng sound is spelt ngh."),
+        FT("Trời hôm nay đẹp quá.","Chời hôm nay đẹp quá.","The weather is lovely today.","Southern speech says chời, but the spelling stays trời.")],
+ quiz:[["Which spelling begins with the ng sound in “sing”?",["ng / ngh","ph","th"],0],
+       ["Before i, e and ê you write:",["ngh","ng"],0,"The h is a spelling rule only; the sound does not change."]]},
+
+/* ══ S · CÂU ════════════════════════════════════════════════════════ */
+{id:"s-plural",t:"s",g:"các",vi:"Những · các · mọi",en:"Plural markers",c:"c.sent.plural",
+ vis:[{type:"compare",title:"Ba cách chỉ số nhiều · three plural words",cols:[
+   {h:"những",en:"some, certain ones of a group",ex:["Những con mèo này là của chị Lan.","These cats are Lan's."]},
+   {h:"các",en:"all of them, the whole set",ex:["Các bạn ơi, ăn cơm nha!","Everyone, come and eat!"]},
+   {h:"mọi",en:"every, each and all",ex:["Mọi người khỏe không?","How is everyone?"]}]},
+  {type:"pattern",title:"Đứng trước danh từ · before the noun",rows:[{slots:[["K","các",1],["N","học sinh"]],e:"all the students"},{slots:[["K","những",1],["C","con"],["N","mèo"]],e:"the cats (certain ones)"},{slots:[["S","Tôi"],["V","có"],["N","bạn"]],e:"I have friends. (plural from context)"}]}],
+ cards:[["những","some, certain ones"],["các","all the"],["mọi","every"],["mọi người","everyone"],["các bạn","you all"],["học sinh","student"]],
+ s:[FS("Mọi người khỏe không?","How is everyone?","Mọi",["Các","Những","Mấy"]),
+    FS("Các bạn ơi, ăn cơm nha!","Everyone, come and eat!","Các",["Mọi","Mỗi","Những"]),
+    FS("Những con mèo này là của chị Lan.","These cats are Lan's.","Những",["Mọi","Mỗi","Cả"]),
+    FS("Mình chụp hình với mọi người nha.","Let's take a photo with everyone.","mọi",["các","những","mấy"]),
+    FS("Mọi học sinh phải làm bài tập.","Every student must do the homework.","Mọi",["Cái","Con","Chiếc"]),
+    FS("Các học sinh đang học.","The students are studying.","Các",["Mỗi","Cái","Con"])],
+ traps:[FT("Các học sinh đang học.","Học sinh các đang học.","The students are studying.","Plural words sit before the noun."),
+        FT("Mọi người khỏe không?","Mọi những người khỏe không?","How is everyone?","One plural word is enough.")],
+ quiz:[["“all the students”:",["những học sinh","các học sinh"],1,"Các sweeps up the whole group; những picks out some of them."],
+       ["“Tôi có bạn.” can mean:",["I have friends","I have no friends"],0,"A bare noun can already be plural from context."]],
+ talk:[["Mọi người đi đâu rồi?","Where has everyone gone?","Các bạn đi ăn trưa rồi.","They've all gone to lunch."]]},
+
+{id:"s-quant",t:"s",g:"vài",vi:"Nhiều · ít · vài · mỗi",en:"How many, how much",c:"c.sent.quantifiers",
+ vis:[{type:"scale",title:"Bao nhiêu? · how much?",top:"tất cả · all",bottom:"ít · few",rows:[{vi:"tất cả",en:"all",v:100},{vi:"nhiều",en:"many, much",v:80},{vi:"một số",en:"some",v:50},{vi:"vài",en:"a few",v:30},{vi:"ít",en:"few, little",v:14}]},
+  {type:"pattern",title:"Số lượng trước, danh từ sau · amount first",rows:[{slots:[["#","nhiều",1],["C","con"],["N","mèo"]],e:"many cats"},{slots:[["#","vài",1],["N","người bạn"]],e:"a few friends"},{slots:[["#","mỗi",1],["N","ngày"]],e:"every day"}]}],
+ cards:[["nhiều","many, much"],["ít","few, little"],["vài","a few"],["một số","some"],["tất cả","all"],["mỗi","each, every"],["đủ","enough"],["thêm","more, extra"]],
+ syn:[["vài","một vài","một số"]],
+ opp:[["nhiều","ít"]],
+ s:[FS("Nhà chị có nhiều con mèo.","There are many cats at my house.","nhiều",["ít","đủ","mỗi"]),
+    FS("Em có vài người bạn ở Đà Lạt.","I have a few friends in Da Lat.","vài",["nhiều","mỗi","tất cả"]),
+    FS("Mỗi ngày em uống hai ly cà phê.","Every day I drink two coffees.","Mỗi",["Vài","Nhiều","Tất cả"]),
+    FS("Tất cả học sinh đều có mặt.","All the students are present.","Tất cả",["Mỗi","Vài","Ít"]),
+    FS("Mình có đủ tiền không?","Do we have enough money?","đủ",["thêm","nhiều","ít"]),
+    FS("Cho em thêm một ly nữa.","One more glass for me, please.","thêm",["đủ","mỗi","vài"]),
+    FS("Một số người không thích sầu riêng.","Some people don't like durian.","Một số",["Mỗi","Tất cả","Đủ"]),
+    FS("Hôm nay ít người quá.","There are so few people today.","ít",["nhiều","đủ","mỗi"])],
+ traps:[FT("Em có vài người bạn.","Em có bạn vài người.","I have a few friends.","Amount comes before the noun."),
+        FT("Mỗi ngày em đi làm.","Em đi làm ngày mỗi.","I go to work every day.","Mỗi sits before the noun it counts: mỗi ngày.")],
+ quiz:[["“a few friends”:",["bạn vài người","vài người bạn"],1],
+       ["Nhiều and con in “nhiều con mèo”:",["nhiều says how many; con sorts the noun","they mean the same"],0,"Quantifiers give the amount; classifiers classify the counted noun."]],
+ ask:[{a:"Em có vài người bạn ở Đà Lạt.",q:["Em có bao nhiêu người bạn ở Đà Lạt?","Em có mấy người bạn ở Đà Lạt?","Em có bao nhiêu bạn ở Đà Lạt?"]}]},
+
+/* ══ M · TRỢ TỪ ═════════════════════════════════════════════════════ */
+{id:"m-roi",t:"m",g:"rồi",vi:"Rồi",en:"Already, done",c:"c.part.roi",
+ vis:[{type:"compare",title:"Rồi hay chưa? · done or not yet?",cols:[
+   {h:"rồi",en:"done; yes, I have",ex:["Bạn ăn cơm chưa? — Rồi.","Have you eaten? — Yes."]},
+   {h:"chưa",en:"not yet",ex:["Bạn ăn cơm chưa? — Chưa.","Have you eaten? — Not yet."]},
+   {h:"xong rồi",en:"finished, all done",ex:["Xong rồi!","It's done!"]}]},
+  {type:"pattern",title:"Rồi đứng cuối · rồi closes the sentence",rows:[{slots:[["S","Em"],["V","biết"],["X","rồi",1]],e:"I already know."},{slots:[["S","Anh"],["V","đi siêu thị"],["X","rồi",1]],e:"I already went to the supermarket."}]}],
+ cards:[["rồi","already; done"],["xong rồi","finished"],["biết rồi","already know"],["chưa","not yet"],["được rồi","okay, fine"],["trễ rồi","it's late already"]],
+ s:[FS("Em biết rồi.","I already know.","rồi",["chưa","sẽ","đang"]),
+    FS("Con làm xong bài tập rồi.","I've finished my homework.","rồi",["chưa","sẽ","đang"]),
+    FS("Anh đi siêu thị rồi.","I already went to the supermarket.","rồi",["chưa","sẽ","đang"]),
+    FS("Trễ rồi, mình về thôi.","It's late, let's go home.","rồi",["chưa","sẽ","đang"]),
+    FS("Được rồi, để em làm.","Okay, let me do it.","Được rồi",["Chưa được","Sẽ được","Đang được"]),
+    FS("Bạn ăn cơm chưa?","Have you eaten yet?","chưa",["đã","sẽ","đang"])],
+ traps:[FT("Em biết rồi.","Em rồi biết.","I already know.","Rồi closes the sentence."),
+        FT("Con làm xong bài tập rồi.","Con rồi làm xong bài tập.","I've finished my homework.","Rồi comes after the whole action, at the end.")],
+ quiz:[["“Have you eaten?” — you have. You answer:",["Chưa.","Rồi."],1],
+       ["“Em đã ăn rồi” uses đã and rồi together. It is:",["fine — rồi often makes đã optional","wrong"],0]],
+ talk:[["Bạn ăn cơm chưa?","Have you eaten yet?","Rồi, mình ăn rồi.","Yes, I have."],["Em làm bài tập xong chưa?","Have you finished your homework?","Dạ, xong rồi.","Yes, it's done."],["Mình đi chưa?","Shall we go now?","Đi thôi, trễ rồi.","Let's go, it's late."]],
+ tf:[{b:"Em làm bài tập.",op:"past",r:["Em làm bài tập rồi.","Em đã làm bài tập rồi.","Em đã làm bài tập.","Em làm xong bài tập rồi."]}]},
+
+{id:"m-real",t:"m",g:"ra là",vi:"À · ra là · vậy ta",en:"Realising and reacting",c:"c.part.realization",
+ vis:[{type:"compare",title:"Phản ứng · how you react",cols:[
+   {h:"ra là",en:"oh, so… — you've just understood",ex:["À, ra là cậu làm việc ở đó.","Oh, so you work there."]},
+   {h:"vậy ta",en:"really? — curious surprise",ex:["Cậu học tiếng Nhật hả? Vậy ta!","You're learning Japanese? Really?"]},
+   {h:"ủa",en:"huh? — puzzled",ex:["Ủa, sao em ở đây?","Huh, why are you here?"]},
+   {h:"lẹ",en:"hurry — southern",ex:["Đi lẹ lên!","Hurry up!"]}]}],
+ cards:[["à","oh (noticing)"],["ra là","oh, so…; it turns out"],["vậy ta","really? is that so?"],["ủa","huh? (surprise)"],["trời ơi","oh my goodness"],["lẹ","quickly, hurry (southern)"]],
+ s:[FS("À, ra là cậu làm việc ở đó.","Oh, so you work there.","ra là",["vậy ta","lẹ","ủa"]),
+    FS("Ủa, sao em ở đây?","Huh, why are you here?","Ủa",["Lẹ","Ra là","Vậy ta"]),
+    FS("Đi lẹ lên, trễ rồi!","Hurry up, we're late!","lẹ",["ra là","ủa","vậy ta"]),
+    FS("Trời ơi, nóng quá!","Oh my goodness, it's so hot!","Trời ơi",["Lẹ","Ra là","Vậy ta"]),
+    FS("Chị biết nói tiếng Pháp hả? Vậy ta!","You can speak French? Really?","Vậy ta",["Lẹ","Ra là","Ủa"])],
+ traps:[FT("Đi lẹ lên!","Lẹ đi lên!","Hurry up!","Lẹ follows the verb.")],
+ quiz:[["You have just understood the situation:",["ra là","lẹ"],0],
+       ["Your friend is slow and you are late:",["Đi lẹ lên!","Ra là vậy!"],0]],
+ talk:[["Mình là y tá ở bệnh viện.","I'm a nurse at the hospital.","À, ra là vậy!","Oh, I see!"],["Tui mới học tiếng Nhật.","I've just started learning Japanese.","Vậy ta! Khó không?","Really? Is it hard?"]]},
+
+/* ══ N · SỐ ═════════════════════════════════════════════════════════ */
+{id:"n-age",t:"n",g:"tuổi",vi:"Bao nhiêu tuổi",en:"Asking someone's age",c:"c.intro.age",cs:["c.num.age"],
+ vis:[{type:"pattern",title:"Hỏi và trả lời · ask and answer",rows:[{slots:[["S","Chị"],["Q","bao nhiêu tuổi?",1]],e:"How old are you?"},{slots:[["S","Em"],["#","hai mươi"],["N","tuổi",1]],e:"I am twenty."}]},
+  {type:"compare",title:"Chọn đúng câu hỏi · pick the right question",cols:[
+   {h:"bao nhiêu tuổi",en:"anyone — an open number",ex:["Bác năm nay bao nhiêu tuổi?","How old are you this year? (to an elder)"]},
+   {h:"mấy tuổi",en:"children — a small number",ex:["Con mấy tuổi rồi?","How old are you now? (to a child)"]},
+   {h:"bằng tuổi",en:"the same age",ex:["Mình bằng tuổi nhau.","We are the same age."]}]}],
+ cards:[["tuổi","years old"],["bao nhiêu tuổi","how old"],["mấy tuổi","how old (to a child)"],["bằng tuổi","the same age"],["lớn hơn","older than"],["nhỏ hơn","younger than"],["sinh năm","born in (year)"]],
+ s:[FS("Chị bao nhiêu tuổi?","How old are you?","bao nhiêu tuổi",["mấy giờ","bao nhiêu tiền","bao lâu"]),
+    FS("Con mấy tuổi rồi?","How old are you now? (to a child)","mấy tuổi",["mấy giờ","bao lâu","mấy người"]),
+    FS("Em hai mươi lăm tuổi.","I am twenty-five.","tuổi",["giờ","tiền","người"]),
+    FS("Anh lớn hơn em ba tuổi.","I am three years older than you.","lớn hơn",["nhỏ hơn","bằng","cao hơn"]),
+    FS("Mình bằng tuổi nhau.","We are the same age.","bằng tuổi",["tuổi bằng","như tuổi","tuổi như"]),
+    FS("Em sinh năm hai ngàn.","I was born in 2000.","sinh năm",["năm sinh","sinh ngày","tuổi năm"]),
+    FS("Bác năm nay bao nhiêu tuổi?","How old are you this year? (to an elder)","bao nhiêu tuổi",["mấy giờ","bao lâu","bao nhiêu tiền"])],
+ traps:[FT("Chị bao nhiêu tuổi?","Bao nhiêu tuổi chị?","How old are you?","The age question follows the person."),
+        FT("Mình bằng tuổi nhau.","Mình tuổi bằng nhau.","We are the same age.","For age the fixed form is bằng tuổi.")],
+ quiz:[["Asking an adult their age:",["Anh mấy tuổi?","Anh bao nhiêu tuổi?"],1,"Mấy expects a small number — keep it for children."],
+       ["Why do Vietnamese people ask your age early on?",["To choose the right pronouns","Out of curiosity only"],0,"Age decides anh, chị, em, cô, chú — the whole conversation."]],
+ talk:[["Em bao nhiêu tuổi?","How old are you?","Dạ, em ba mươi tuổi.","I'm thirty."],["Con mấy tuổi rồi?","How old are you now?","Con bảy tuổi.","I'm seven."],["Anh sinh năm mấy?","What year were you born?","Anh sinh năm chín mươi lăm.","I was born in '95."]],
+ ask:[{a:"Em hai mươi lăm tuổi.",q:["Em bao nhiêu tuổi?","Em mấy tuổi?","Em năm nay bao nhiêu tuổi?"]}]},
+
+/* ══ J · TÍNH TỪ ════════════════════════════════════════════════════ */
+{id:"j-equal",t:"j",g:"bằng",vi:"Bằng · như · không bằng",en:"As … as, not as … as",c:"c.cmp.equal",cs:["c.cmp.notas"],
+ vis:[{type:"bars",title:"Bằng nhau hay không? · equal or not?",groups:[
+   {cap:"Hoa cao bằng Mai.",e:"as tall as",bars:[["Hoa",62,1],["Mai",62]]},
+   {cap:"Tôi không giỏi bằng bạn.",e:"not as good as",bars:[["tôi",44,1],["bạn",78]]}]},
+  {type:"pattern",title:"Thứ tự · word order",rows:[{slots:[["S","Hoa"],["A","cao"],["K","bằng",1],["O","Mai"]],e:"Hoa is as tall as Mai."},
+   {slots:[["S","Tôi"],["K","không",1],["A","giỏi"],["K","bằng",1],["O","bạn"]],e:"I am not as good as you."}]},
+  {type:"compare",title:"Bằng, như, bằng tuổi",cols:[
+   {h:"bằng",en:"exactly as … as",ex:["Em gái tôi nặng bằng tôi.","My younger sister is as heavy as me."]},
+   {h:"như",en:"like, as — an image",ex:["Cái cây này cao như ngôi nhà kia.","This tree is as tall as that house."]},
+   {h:"bằng tuổi",en:"same age — never tuổi bằng",ex:["Aris bằng tuổi bạn của bạn.","Aris is the same age as your friend."]}]}],
+ cards:[["bằng","as … as"],["như","like, as"],["không … bằng","not as … as"],["bằng tuổi","the same age"],["giống","similar, alike"],["khác","different"]],
+ opp:[["giống","khác"]],
+ s:[FS("Em gái tôi nặng bằng tôi.","My younger sister is as heavy as me.","bằng",["hơn","nhất","lắm"]),
+    FS("Cái bút chì này dài bằng cái bút chì kia.","This pencil is as long as that one.","bằng",["hơn","nhất","quá"]),
+    FS("Cái cây này cao như ngôi nhà kia.","This tree is as tall as that house.","như",["nhất","rất","lắm"]),
+    FS("Phim này không hay bằng phim kia.","This film is not as good as that one.","không hay bằng",["hay không bằng","không bằng hay","hay bằng không"]),
+    FS("Tôi không giỏi bằng bạn.","I am not as good as you.","không giỏi bằng",["giỏi không bằng","không bằng giỏi","giỏi bằng không"]),
+    FS("Aris bằng tuổi bạn của bạn.","Aris is the same age as your friend.","bằng tuổi",["tuổi bằng","như tuổi","tuổi như"]),
+    FS("Quán này không rẻ bằng quán kia.","This place isn't as cheap as that one.","không rẻ bằng",["rẻ không bằng","không bằng rẻ","rẻ bằng không"])],
+ traps:[FT("Tôi không giỏi bằng bạn.","Tôi giỏi không bằng bạn.","I am not as good as you.","Không goes in front of the adjective; bằng stays behind it."),
+        FT("Aris bằng tuổi bạn của bạn.","Aris tuổi bằng bạn của bạn.","Aris is the same age as your friend.","For age the fixed form is bằng tuổi.")],
+ quiz:[["“Aris is the same age as your friend.”",["Aris tuổi bằng…","Aris bằng tuổi…"],1]],
+ tf:[{b:"Tôi giỏi bằng bạn.",op:"neg",r:["Tôi không giỏi bằng bạn."]},{b:"Quán này rẻ bằng quán kia.",op:"neg",r:["Quán này không rẻ bằng quán kia."]}]},
+
+/* ══ P · XƯNG HÔ ════════════════════════════════════════════════════ */
+{id:"p-possess",t:"p",g:"của",vi:"Của · của ai",en:"Mine, yours, whose",c:"c.pron.possessive",cs:["c.question.whose"],
+ vis:[{type:"pattern",title:"Vật trước, chủ sau · the thing, then the owner",rows:[{slots:[["N","chìa khoá"],["K","của",1],["S","em"]],e:"my keys"},{slots:[["N","Xe hơi"],["K","của",1],["Q","ai?",1]],e:"Whose car?"}]},
+  {type:"compare",title:"Đừng nhầm dấu · mind the tone",cols:[
+   {h:"của",en:"of, belonging to",ex:["Đây là nhà của tôi.","This is my house."]},
+   {h:"của ai",en:"whose?",ex:["Cái áo này của ai?","Whose shirt is this?"]},
+   {h:"cửa",en:"door — a different word: ư with hỏi",ex:["Em đóng cửa giùm chị nha.","Close the door for me, please."]}]}],
+ cards:[["của","of, belonging to"],["của ai","whose"],["của tôi","mine"],["của bạn","yours"],["chìa khoá","keys"],["cửa","door"]],
+ s:[FS("Chìa khoá của em ở đâu?","Where are my keys?","của",["cửa","cho","với"]),
+    FS("Đây là xe hơi của ai?","Whose car is this?","của ai",["là ai","ở đâu","cái gì"]),
+    FS("Cái áo này của ai?","Whose shirt is this?","của ai",["là ai","ở đâu","bao nhiêu"]),
+    FS("Ba mẹ của con yêu con rất nhiều.","My parents love me very much.","của",["cửa","cho","với"]),
+    FS("Công việc của bạn là gì?","What is your job?","của",["cửa","cho","với"]),
+    FS("Em đóng cửa giùm chị nha.","Close the door for me, please.","cửa",["của","cưa","cứa"]),
+    FS("Cái áo khoác trên ghế là của ai?","Whose jacket is on the chair?","của ai",["là ai","ở đâu","khi nào"])],
+ traps:[FT("Chìa khoá của em ở đâu?","Của em chìa khoá ở đâu?","Where are my keys?","The thing comes first, then của + the owner."),
+        FT("Đây là xe hơi của ai?","Của ai đây là xe hơi?","Whose car is this?","Name the thing first, then ask của ai.")],
+ quiz:[["Asking who owns something:",["ai","của ai"],1,"Ai asks who a person is; của ai asks who it belongs to."]],
+ talk:[["Cái áo này của ai?","Whose shirt is this?","Của em đó chị.","It's mine."],["Đây là xe của ai?","Whose motorbike is this?","Của anh Huy.","It's Huy's."]],
+ ask:[{a:"Cái áo này của chị Lan.",q:["Cái áo này của ai?","Đây là áo của ai?"]}]},
+
+{id:"p-peers",t:"p",g:"cậu",vi:"Mình · cậu · tớ",en:"Pronouns between friends",c:"c.pron.peers",
+ vis:[{type:"scale",title:"Từ lịch sự đến rất thân · polite to very close",top:"lịch sự · polite",bottom:"rất thân · very close",rows:[{vi:"tôi / bạn",en:"neutral, polite",v:88},{vi:"mình / bạn",en:"friendly",v:64},{vi:"tớ / cậu",en:"close friends",v:40},{vi:"tao / mày",en:"very close — or rough",v:12,me:1}]},
+  {type:"compare",title:"Đi theo cặp · they come in pairs",cols:[
+   {h:"mình / cậu",en:"warm, between peers",ex:["Mình nhớ cậu lắm.","I miss you a lot."]},
+   {h:"tớ / cậu",en:"school-friend feel",ex:["Tớ với cậu cùng đi nhé.","You and I will go together, okay?"]},
+   {h:"tao / mày",en:"recognise first — can sound aggressive",ex:["Tao nói rồi mà!","I told you already! (very informal)"]}]}],
+ cards:[["mình","I (friendly)"],["cậu","you (close friend)"],["tớ","I (close friend)"],["tụi mình","we, us friends"],["tao","I (very familiar)"],["mày","you (very familiar)"]],
+ syn:[["mình","tớ","tao"],["cậu","mày"]],
+ s:[FS("Tớ với cậu cùng đi nhé.","You and I will go together, okay?","cậu",["bác","ông","con"]),
+    FS("Mình nhớ cậu lắm.","I miss you a lot.","nhớ",["thương","ghét","biết"]),
+    FS("Cậu rảnh tối nay không?","Are you free tonight?","rảnh",["bận","mệt","đói"]),
+    FS("Tụi mình đi ăn nha.","Let's go and eat, guys.","Tụi mình",["Các ông","Quý vị","Các bác"]),
+    FS("Gặp nhau lúc bảy giờ nha.","Let's meet at seven.","Gặp nhau",["Gặp tôi","Thấy nhau","Gọi nhau"])],
+ traps:[FT("Tớ với cậu cùng đi nhé.","Tớ với bác cùng đi nhé.","You and I will go together, okay?","Tớ pairs with cậu, between close friends.")],
+ quiz:[["Close friends of similar age, warm but not rough:",["mình / cậu","ông / cháu","tao / mày"],0],
+       ["Using tao / mày with a new colleague:",["sounds rude or aggressive","sounds friendly"],0,"Tao / mày is for very close friends; with anyone else it can sound rough."]],
+ talk:[["Cậu rảnh tối nay không?","Are you free tonight?","Ừ, mình rảnh. Cậu muốn đi ăn không?","Yeah, I'm free. Do you want to go eat?"],["Gặp nhau lúc mấy giờ?","What time shall we meet?","Bảy giờ nha.","Seven, okay?"]]},
+
+/* ══ H · TÌNH HUỐNG ═════════════════════════════════════════════════ */
+{id:"h-name",t:"h",g:"tên",vi:"Tên của bạn",en:"Names and first meetings",c:"c.intro.name",
+ vis:[{type:"pattern",title:"Hai cách hỏi tên · two ways to ask",rows:[{slots:[["N","Tên",1],["S","chị"],["V","là"],["Q","gì?",1]],e:"What is your name?"},{slots:[["S","Chị"],["N","tên",1],["V","là"],["Q","gì?",1]],e:"What is your name?"},{slots:[["S","Em"],["N","tên",1],["V","là"],["O","Alexandre"]],e:"My name is Alexandre."}]},
+  {type:"reading",title:"Lần đầu gặp · first meeting",lines:[["Chào chị. Tôi tên là Huy. Chị tên là gì?","Hello. My name is Huy. What is your name?"],["Chào anh. Tôi tên là Jane.","Hello. My name is Jane."],["Rất vui được gặp chị.","Nice to meet you."],["Rất vui được gặp anh.","Nice to meet you too."]]}],
+ cards:[["tên","name"],["tên là gì","what is … name"],["rất vui được gặp","nice to meet"],["xin chào","hello"],["họ tên","full name"],["gọi","to call"]],
+ s:[FS("Tên chị là gì?","What is your name?","Tên",["Tuổi","Nhà","Việc"]),
+    FS("Em tên là Alexandre.","My name is Alexandre.","tên",["tuổi","nhà","gọi"]),
+    FS("Bác tên là gì?","What is your name? (to an elder)","tên là gì",["là ai","ở đâu","bao nhiêu tuổi"]),
+    FS("Rất vui được gặp chị.","Nice to meet you.","vui",["buồn","mệt","bận"]),
+    FS("Mọi người gọi em là Alex.","Everyone calls me Alex.","gọi",["tên","nói","hỏi"]),
+    FS("Chào anh, tôi tên là Huy.","Hello, my name is Huy.","tên",["tuổi","gọi","nhà"])],
+ traps:[FT("Tên chị là gì?","Chị gì tên là?","What is your name?","Là gì closes the question; tên goes before or right after the pronoun."),
+        FT("Em tên là Alexandre.","Em là tên Alexandre.","My name is Alexandre.","Pronoun, then tên là, then the name.")],
+ quiz:[["Natural name question:",["Tên chị là gì?","Chị gì tên là?"],0,"Tên can lead or follow the pronoun, but là gì always closes it."]],
+ talk:[["Chào em, em tên là gì?","Hi, what's your name?","Dạ, em tên là Alexandre.","My name is Alexandre."],["Rất vui được gặp em.","Nice to meet you.","Dạ, em cũng rất vui được gặp chị.","Nice to meet you too."]],
+ ask:[{a:"Em tên là Alexandre.",q:["Em tên là gì?","Tên em là gì?","Em tên gì?"]}]},
+
+{id:"h-origin",t:"h",g:"từ đâu",vi:"Quê · quốc tịch · nơi ở",en:"Where you're from, where you live",c:"c.intro.origin",
+ vis:[{type:"compare",title:"Ba câu hỏi khác nhau · three separate questions",cols:[
+   {h:"đến từ đâu?",en:"origin",ex:["Bạn đến từ đâu?","Where are you from?"]},
+   {h:"người nước nào?",en:"nationality",ex:["Em là người nước nào?","What nationality are you?"]},
+   {h:"sống ở đâu?",en:"where you live now",ex:["Anh sống ở đâu?","Where do you live?"]}]},
+  {type:"pattern",title:"Trả lời · answering",rows:[{slots:[["S","Em"],["V","đến từ",1],["P","Pháp"]],e:"I'm from France."},{slots:[["S","Em"],["V","là"],["N","người",1],["P","Pháp"]],e:"I'm French."},{slots:[["S","Em"],["V","sống",1],["P","ở Paris"]],e:"I live in Paris."}]}],
+ cards:[["đến từ","to come from"],["người nước nào","which nationality"],["sống ở","to live in"],["người Pháp","French person"],["người Việt","Vietnamese person"],["quê","home town"],["nước","country"]],
+ s:[FS("Bạn đến từ đâu?","Where are you from?","đến từ",["sống ở","làm ở","học ở"]),
+    FS("Em đến từ Pháp.","I am from France.","đến từ",["sống ở","là người","ở với"]),
+    FS("Em là người nước nào?","What nationality are you?","nước nào",["ở đâu","khi nào","bao nhiêu"]),
+    FS("Tôi là người Mỹ.","I'm American.","người",["nước","nhà","quê"]),
+    FS("Anh sống ở đâu?","Where do you live?","sống",["đến","đi","làm"]),
+    FS("Em sống ở Paris, nhưng quê em ở Lyon.","I live in Paris, but my home town is Lyon.","quê",["nước","nhà","tên"]),
+    FS("Tôi sống ở Bình Dương.","I live in Binh Duong.","sống ở",["đến từ","là người","đi từ"])],
+ traps:[FT("Em là người Pháp.","Em là Pháp người.","I'm French.","Người comes before the country."),
+        FT("Bạn đến từ đâu?","Bạn đến đâu từ?","Where are you from?","Đến từ stays together; đâu closes the question.")],
+ quiz:[["Ask where someone lives:",["Anh đến từ đâu?","Anh sống ở đâu?"],1,"Origin and residence are separate questions."]],
+ talk:[["Chị là người nước nào?","What nationality are you?","Tôi là người Mỹ.","I'm American."],["Chị sống ở đâu?","Where do you live?","Tôi sống ở Bình Dương.","I live in Binh Duong."],["Bạn đến từ đâu?","Where are you from?","Mình đến từ Pháp.","I'm from France."]],
+ ask:[{a:"Em đến từ Pháp.",q:["Em đến từ đâu?","Bạn đến từ đâu?","Anh đến từ đâu?","Chị đến từ đâu?"]}]},
+
+/* ══ Z · MIỀN NAM ═══════════════════════════════════════════════════ */
+{id:"z-tui",t:"z",g:"tui",vi:"Tui · bữa nay",en:"Everyday southern words",c:"c.south.tui",
+ vis:[{type:"transform",title:"Nói ở miền Nam · how the south says it",heads:["chuẩn","miền Nam"],rows:[["tôi","tui","I"],["hôm nay","bữa nay","today"],["hôm qua","bữa qua","yesterday"],["không","hông","no, not"]]},
+  {type:"compare",title:"Chọn theo người nghe · pick by who's listening",cols:[
+   {h:"tôi",en:"neutral, polite, at work",ex:["Tôi là luật sư.","I'm a lawyer."]},
+   {h:"tui",en:"casual southern",ex:["Bữa nay tui thấy buồn quá.","I feel so sad today."]},
+   {h:"mình",en:"friendly, everywhere",ex:["Mình đi ăn nha.","Let's go eat."]}]}],
+ cards:[["tui","I (casual southern)"],["bữa nay","today (southern)"],["bữa qua","yesterday (southern)"],["hông","no, not (southern speech)"],["lùn","short (height)"]],
+ xf:[["tôi","tui","I"],["hôm nay","bữa nay","today"],["hôm qua","bữa qua","yesterday"],["không","hông","no, not"]],
+ xfh:["Standard","Southern"],
+ s:[FS("Bữa nay tui thấy buồn quá.","I feel so sad today.","tui",["họ","nó","bả"]),
+    FS("Tui thích căn bếp này vì nó rất sạch.","I like this kitchen because it's very clean.","Tui",["Họ","Nó","Ảnh"]),
+    FS("Anh tui cao, còn tui thì lùn.","My brother is tall, but I'm short.","lùn",["cao","mập","ốm"]),
+    FS("Bữa nay trời nóng quá.","It's so hot today.","Bữa nay",["Bữa qua","Ngày mai","Tuần sau"]),
+    FS("Bữa qua tui đi chợ Bến Thành.","Yesterday I went to Ben Thanh market.","Bữa qua",["Bữa nay","Ngày mai","Tuần sau"])],
+ traps:[FT("Tui thích căn bếp này.","Thích tui căn bếp này.","I like this kitchen.","The pronoun comes first, as with tôi: tui + verb.")],
+ quiz:[["Casual southern “I”:",["tui","họ"],0],
+       ["At a meeting with your boss, you say:",["tôi or em","tui"],0,"Tui is for casual talk; keep tôi or a relationship pronoun when you need distance or respect."]],
+ talk:[["Bữa nay bà khỏe hông?","Are you well today?","Tui khỏe, cảm ơn con.","I'm well, thank you, dear."]]},
+
+{id:"z-dauco",t:"z",g:"đâu có",vi:"Đâu có … đâu",en:"Saying “not at all”",c:"c.south.dauco",
+ vis:[{type:"pattern",title:"Bọc lấy điều bị phủ nhận · wrap the denial",rows:[{slots:[["S","Tui"],["K","đâu có",1],["V","nói vậy"],["K","đâu",1]],e:"I didn't say that at all!"},{slots:[["S","Em"],["K","đâu có",1],["A","mệt"],["K","đâu",1]],e:"I'm not tired at all."}]},
+  {type:"compare",title:"Mạnh hay nhẹ? · how strong?",cols:[
+   {h:"không",en:"plain negation",ex:["Tui không biết.","I don't know."]},
+   {h:"đâu có … đâu",en:"emphatic, spoken",ex:["Tui đâu có biết đâu!","I had no idea!"]},
+   {h:"đâu có",en:"short reply: not at all",ex:["Em mệt hả? — Đâu có.","Tired? — Not at all."]}]}],
+ cards:[["đâu có","not at all (spoken)"],["đâu có … đâu","not … at all"],["chỉ … thôi","only, just"],["nói vậy","to say that"],["giận","to be angry"]],
+ s:[FS("Tui đâu có nói vậy đâu.","I didn't say that at all.","đâu có",["có đâu","đã có","sẽ có"]),
+    FS("Tui đâu có ngu đâu, tui chỉ không biết thôi.","I'm not stupid, I just don't know.","thôi",["đâu","rồi","nha"]),
+    FS("Em đâu có mệt đâu.","I'm not tired at all.","đâu có",["có đâu","đã có","sẽ có"]),
+    FS("Anh đâu có giận em đâu.","I'm not angry with you at all.","giận",["vui","nhớ","thương"]),
+    FS("Em chỉ hỏi thôi.","I'm just asking.","chỉ",["đâu","cũng","rất"])],
+ traps:[FT("Tui đâu có nói vậy đâu.","Tui nói đâu có vậy đâu.","I didn't say that at all.","Đâu có goes before the verb; đâu closes the sentence.")],
+ quiz:[["Which sounds most emphatic?",["Tui không biết.","Tui đâu có biết đâu!"],1]],
+ talk:[["Em mệt hả?","Are you tired?","Đâu có, em khỏe mà.","Not at all, I'm fine."],["Anh giận em hả?","Are you angry with me?","Đâu có giận đâu.","I'm not angry at all."]]},
+
+/* ══ A · THÌ ════════════════════════════════════════════════════════ */
+{id:"a-danuance",t:"a",g:"đã",vi:"Ba nghĩa của đã",en:"Three uses of đã",c:"c.asp.da.nuance",
+ vis:[{type:"compare",title:"Một chữ, ba việc · one word, three jobs",cols:[
+   {h:"đã + verb",en:"done, in the past",ex:["Tôi đã ăn cơm.","I have eaten."]},
+   {h:"… đã",en:"first, before we go on",ex:["Để mình lấy ví đã.","Let me get my wallet first."]},
+   {h:"đã quá!",en:"so satisfying",ex:["Uống ly nước mía mát lạnh đã quá!","That cold sugarcane juice is so refreshing!"]}]},
+  {type:"pattern",title:"Vị trí đổi nghĩa · position changes the meaning",rows:[{slots:[["S","Tôi"],["K","đã",1],["V","ăn cơm"]],e:"I have eaten."},{slots:[["V","Để mình lấy ví"],["K","đã",1]],e:"Let me get my wallet first."}]}],
+ cards:[["đã","already (past); first"],["để … đã","let … first"],["đã quá","so satisfying"],["ví","wallet"],["nước mía","sugarcane juice"],["mát lạnh","cool, ice-cold"]],
+ s:[FS("Tôi đã ăn cơm.","I have eaten.","đã",["sẽ","đang","sắp"]),
+    FS("Để mình lấy ví đã.","Let me get my wallet first.","đã",["rồi","sẽ","chưa"]),
+    FS("Uống ly nước mía mát lạnh đã quá!","That cold sugarcane juice is so refreshing!","đã quá",["rồi quá","sẽ quá","chưa quá"]),
+    FS("Ăn cơm đã, rồi mình đi.","Let's eat first, then we'll go.","đã",["sẽ","chưa","đang"]),
+    FS("Chờ chút, để em uống nước đã.","Wait a moment, let me drink some water first.","đã",["sẽ","chưa","đang"]),
+    FS("Năm ngoái em đã sống ở Sài Gòn.","Last year I lived in Saigon.","đã",["sẽ","sắp","chưa"])],
+ traps:[FT("Để mình lấy ví đã.","Đã để mình lấy ví.","Let me get my wallet first.","Đã meaning “first” closes the sentence.")],
+ quiz:[["In “Để mình lấy ví đã”, đã means:",["past tense","first, before continuing"],1],
+       ["“Đã quá!” after a cold drink means:",["it happened in the past","it's so satisfying"],1]],
+ talk:[["Đi chưa em?","Shall we go?","Chờ chút, để em lấy ví đã.","Wait a sec, let me grab my wallet first."],["Nước mía ngon không?","Is the sugarcane juice good?","Mát lạnh, đã quá!","Ice-cold — so good!"]],
+ tf:[{b:"Em ăn sáng.",op:"past",r:["Em đã ăn sáng.","Em ăn sáng rồi.","Em đã ăn sáng rồi."]}]}
+);
+
+/* concepts already taught inside an existing lesson */
+const FOCUS_ALIAS={"m-nha":["c.part.di"],"m-ha":["c.part.south"],"v-modal":["c.mod.canphai"],"j-compare":["c.cmp.most"]};
+FOCUS.forEach(function(L){ const a=FOCUS_ALIAS[L.id]; if(a) L.cs=(L.cs||[]).concat(a); });
+
 const FOCUS_READ={
  q:{title:"Ở quán bánh mì",lines:[["Chị ơi, quán mở cửa lúc mấy giờ?","What time does the shop open?"],["Bảy giờ sáng em.","Seven in the morning."],["Ở đây có bánh mì trứng không?","Do you have egg bánh mì here?"],["Có. Em muốn mấy ổ?","Yes. How many do you want?"],["Một ổ. Bao nhiêu tiền chị?","One. How much is it?"],["Hai mươi lăm nghìn.","Twenty-five thousand."]],
    qs:[["What time does the shop open?",["7 a.m.","8 a.m.","7 p.m."],0],["How much is the bánh mì?",["25,000 dong","20,000 dong","35,000 dong"],0]]},
@@ -10252,7 +10730,7 @@ function flPrepare(){
   FOCUS.length=0; out.forEach(l=>FOCUS.push(l));
   FL_PREP=COURSE; FL_GLOSS=null;
 }
-function flClassLessons(){
+function flClassLessons_v12(){
   const res=[];
   (COURSE.lessons||[]).filter(l=>l&&!l.archived).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).forEach(function(l){
     let words=[]; try{ words=classVocabulary(l)||[]; }catch(e){ return; }
@@ -10344,7 +10822,7 @@ async function flRecordToggle(text,btn){
 }
 
 /* ── visuals ──────────────────────────────────────────────────────────── */
-function flVisual(v){
+function flVisual_v12(v){
   const t=v.type;
   if(t==="compare"){
     return '<div class="fl-cmp n'+v.cols.length+'">'+v.cols.map(function(c,i){
@@ -10457,7 +10935,7 @@ function flOpenObj(L){
   FL={L:L,phase:"intro",card:0,flipped:false,qs:[],i:0,res:[],repairs:[],inRepair:false,mode:"full",armedExit:false};
   document.body.classList.add("in-session","fl-session"); flRender(); window.scrollTo({top:0,behavior:"instant"});
 }
-function flExit(){ FL=null; keyHandler=null; clearTimeout(FL_SPEED_T); TTS.stop(); go(VIEW==="today"?"today":"lessons"); }
+function flExit(){ FL=null; keyHandler=null; clearTimeout(FL_SPEED_T); TTS.stop(); go(["today","unit","lop","course"].indexOf(VIEW)>-1?VIEW:"lessons"); }
 function flTop(step){
   const steps=[["see","Xem"],["cards","Thẻ"],["practice","Luyện"]], idx=steps.findIndex(s=>s[0]===step);
   return '<div class="fl-top"><button class="fl-x" id="flX" aria-label="Quay lại">'+ICON("back")+'</button>'
@@ -11071,7 +11549,7 @@ function flIcon(vi){ const n=wordIcon(vi); return n?ICON(n):""; }
 function flIconHTML(vi){ const ic=flIcon(vi); return ic?'<span class="fl-ic" aria-hidden="true">'+ic+'</span>':''; }
 const V14_VIS_TITLE={compare:"Side by side",pattern:"The pattern",scale:"From most to least",map:"The map",timeline:"On the timeline",pairs:"Opposites",transform:"How it changes",
   segments:"Through the day",bars:"Comparing",tiles:"At a glance",clocks:"On the clock",space:"Where things are",dots:"Across the week",flow:"In order",recap:"In this review",reading:"Read"};
-function flSee(L){
+function flSee_v14(L){
   const n=L.vis.length, last=()=>L.mix?'Luyện tập →':'Thẻ học →';
   $("#stage").innerHTML='<div class="fl">'+flTop("see")
     +'<div class="fl-see-head">'+emblem(L.t,"sm",LESSON_ILLUS[L.id])+'<div><h2>'+esc(L.vi)+'</h2><p>'+esc(L.en)+'</p></div></div>'
@@ -11218,7 +11696,7 @@ function viewCourse_old(){
   }
   $$(".course-switch button").forEach(b=>b.onclick=function(){COURSE_VIEW_MODE=b.dataset.cm;viewCourse();v15Header();});
 }
-function classSheet(id){
+function classSheet_v14(id){
   const l=COURSE.lessons.find(x=>x.id===id); if(!l) return;
   const cs=classConcepts(l), returning=classRecord(id).visits>0;
   openSheet('<div class="v14-class" style="padding:0;background:none!important;border:0!important;box-shadow:none">'+v14DateTile(l.date)+'<span><strong style="font-family:var(--serif);font-size:var(--fs-4);font-weight:500">'+esc(l.title)+'</strong><span class="v14-badges">'+v14ClassTopics(l).map(t=>'<i>'+esc(t)+'</i>').join("")+'</span></span></div>'
@@ -11512,8 +11990,8 @@ function viewCourse(){
     $$(".v14-class").forEach(b=>b.onclick=()=>classSheet(b.dataset.class));
   }else{
     $("#stage").innerHTML='<div class="course-title-row"><h2 class="screen-h">Khóa học</h2><span class="course-count">'+COURSE.units.length+' chủ đề</span></div>'+switcher
-      +'<div class="v16-units">'+COURSE.units.map(function(u,i){const p=unitProgress(u.id), t=u.title.split(" · "), f=UNIT_FE[u.id]||["books","k"];
-        return '<button class="v16-unit" data-u="'+u.id+'" style="'+v16Grad(f[1])+'"><span class="v16-unit-top">'+v16Art(f[0],TRACK_GRAD[f[1]][0])+'<span class="n">'+String(i+1).padStart(2,"0")+'</span></span><b>'+esc(t[0])+'</b><small>'+esc(t[1]||"")+'</small><span class="v16-ubar"><i style="width:'+Math.round(p.pct*100)+'%"></i></span></button>';}).join("")+'</div>';
+      +'<div class="v16-units">'+COURSE.units.map(function(u,i){const p=v17UnitProgress(u.id), t=u.title.split(" · "), f=UNIT_FE[u.id]||["books","k"];
+        return '<button class="v16-unit" data-u="'+u.id+'" style="'+v16Grad(f[1])+'"><span class="v16-unit-top">'+v16Art(f[0],TRACK_GRAD[f[1]][0])+'<span class="n">'+String(i+1).padStart(2,"0")+'</span></span><b>'+esc(t[0])+'</b><small>'+esc(t[1]||"")+'</small><em class="v17-ucount">'+p.done+' / '+p.n+' bài</em><span class="v16-ubar"><i style="width:'+Math.round(p.pct*100)+'%"></i></span></button>';}).join("")+'</div>';
     $$(".v16-unit").forEach(b=>b.onclick=()=>unitSheet(b.dataset.u));
   }
   $$(".course-switch button").forEach(b=>b.onclick=function(){COURSE_VIEW_MODE=b.dataset.cm;viewCourse();v15Header();});
@@ -11552,6 +12030,149 @@ function v16IntroDecor(L){
   const key=LESSON_ILLUS[L.id]||L.t; f.setAttribute("style",v16Grad(key)); f.classList.add("v16-intro");
   box.insertAdjacentHTML("beforeend",'<span class="v16-intro-art" aria-hidden="true">'+FE(TRACK_FE[key]||"books")+'</span>');
 }
+/* ═══════════════════════════════════════════════════════════════════════
+   v17 · ONE LESSON FORMAT FOR THE WHOLE COURSE
+   Course topics and dated classes open the same lessons as the Lessons
+   tab: Xem (see) → Thẻ (cards) → Luyện (14-level practice). Every lesson
+   now opens with its course rule, and every word's example sentence is
+   checked against the word it illustrates.
+   ═══════════════════════════════════════════════════════════════════════ */
+TRACK_GRAD.r=["#E0A13A","#B9771B"]; TRACK_HUE.r=TRACK_GRAD.r[0]; TRACK_FE.r="input-latin-letters";
+UNIT_FE.u2=["input-latin-letters","r"];
+
+/* ── the course rule, as the first thing every lesson shows ──────────── */
+function v17RuleFor(cid){
+  const c=COURSE.conceptById&&COURSE.conceptById[cid]; if(!c) return null;
+  const m=c.micro||{}, seen=new Set(), ex=[];
+  (m.examples||[]).concat(c.examples||[]).forEach(e=>{ if(!e||!e.vi) return; const k=flClean(e.vi); if(seen.has(k)) return; seen.add(k); ex.push([e.vi,e.en||""]); });
+  return {type:"rule",title:"Quy tắc · the rule",cid:cid,head:m.rule||c.rule,full:m.rule&&c.rule&&m.rule!==c.rule?c.rule:null,tip:m.contrast||null,note:c.courseNote||null,ex:ex.slice(0,4),name:c.title};
+}
+function v17RuleHTML(v){
+  return '<div class="v17-rule"><div class="v17-rule-head">'+FE("light-bulb")+'<div><small>'+esc(v.name)+'</small><p>'+esc(v.head)+'</p></div></div>'
+    +(v.ex.length?'<div class="v17-rule-ex">'+v.ex.map(e=>'<button data-say="'+esc(String(e[0]).replace(/\s*[—…].*$/,""))+'"><span>'+esc(e[0])+'</span>'+(e[1]?'<small>'+esc(e[1])+'</small>':'')+ICON("speakR")+'</button>').join("")+'</div>':'')
+    +(v.tip?'<div class="v17-rule-tip"><b>Lưu ý</b><span>'+esc(v.tip)+'</span></div>':'')
+    +(v.full||v.note?'<details class="v17-rule-more"><summary>Chi tiết · more</summary>'+(v.full?'<p>'+esc(v.full)+'</p>':'')+(v.note?'<p class="note">'+esc(v.note)+'</p>':'')+'</details>':'')+'</div>';
+}
+function flVisual(v){ if(v&&v.type==="rule") return v17RuleHTML(v); return flVisual_v12(v); }
+function flSee(L){
+  if(!L._ruled&&!L.mix&&L.c){ const r=v17RuleFor(L.c); if(r) L.vis=[r].concat(L.vis||[]); L._ruled=1; }
+  flSee_v14(L);
+  $$("#stage .v17-rule-ex button").forEach(b=>b.onclick=function(){ TTS.say(b.dataset.say,S.rate,b); });
+}
+
+/* ── which lessons teach a concept ───────────────────────────────────── */
+function v17ConceptLessons(cid){ flPrepare(); return FOCUS.filter(l=>!l.gen&&!l.review&&(l.c===cid||(l.cs||[]).indexOf(cid)>-1)); }
+function v17UnitLessons(uid){
+  const out=[]; Object.values(COURSE.conceptById).filter(c=>c.unit===uid).forEach(c=>v17ConceptLessons(c.id).forEach(l=>{ if(out.indexOf(l)<0) out.push(l); }));
+  return out;
+}
+function v17Mix(id,t,title,ls){
+  const pick=ls.length<=6?ls.slice():ls.filter((l,i)=>i%Math.ceil(ls.length/6)===0).slice(0,6);
+  return {id:id,t:t,g:"↺",vi:"Ôn tập",en:title,review:true,mix:pick.map(l=>l.id),cards:[],
+    vis:[{type:"recap",items:pick.map(l=>({id:l.id,g:l.g,vi:l.vi,ex:(l.s&&l.s[0])?[l.s[0].v,l.s[0].e]:null}))}]};
+}
+function v17ConceptSheet(cid){
+  const c=COURSE.conceptById[cid]; if(!c) return; const ls=v17ConceptLessons(cid), r=v17RuleFor(cid);
+  openSheet('<h2 class="sheet-h">'+esc(c.title)+'</h2>'+(r?v17RuleHTML(r):'')
+    +(ls.length?'<div class="v15-group" style="margin-top:14px">'+ls.map(l=>v15Row({id:"cs-"+l.id,icon:emblem(l.t,"",LESSON_ILLUS[l.id]),title:l.vi,sub:l.en+(focusDone(l.id)?' · ✓':''),count:null})).join("")+'</div>':''));
+  $$("#sheet .v17-rule-ex button").forEach(b=>b.onclick=function(){ TTS.say(b.dataset.say,S.rate,b); });
+  ls.forEach(l=>{ const b=$("#cs-"+CSS.escape(l.id)); if(b) b.onclick=function(){ closeSheet(); openFocus(l.id); }; });
+}
+
+/* ── Course › topic: a page, not a sheet ─────────────────────────────── */
+let UNIT_OPEN=null, CLASS_OPEN=null;
+function unitSheet(uid){ UNIT_OPEN=uid; go("unit"); }
+function v17UnitProgress(uid){ const ls=v17UnitLessons(uid); const d=ls.filter(l=>focusDone(l.id)).length; return {done:d,n:ls.length,pct:ls.length?d/ls.length:0}; }
+function viewUnit(){
+  const u=COURSE.units.find(x=>x.id===UNIT_OPEN)||COURSE.units[0], i=COURSE.units.indexOf(u)+1, f=UNIT_FE[u.id]||["books","k"], t=u.title.split(" · ");
+  const ls=v17UnitLessons(u.id), done=ls.filter(l=>focusDone(l.id)).length, nx=ls.find(l=>!focusDone(l.id))||ls[0];
+  const cs=Object.values(COURSE.conceptById).filter(c=>c.unit===u.id), mix=ls.length>1?v17Mix("uv-"+u.id,f[1],t[0],ls):null;
+  $("#stage").innerHTML='<h2 class="screen-h" data-sub="Chương '+i+' · '+done+' / '+ls.length+' bài đã xong">'+esc(t[0])+'</h2>'
+    +'<section class="v16-hero" style="'+v16Grad(f[1])+'"><div class="v16-hero-copy"><span class="v16-chip">Chương '+String(i).padStart(2,"0")+' · '+ls.length+' bài</span><h2>'+esc(t[0])+'</h2><p>'+esc(t[1]||"")+'</p>'
+    +(nx?'<button class="v16-hero-btn" id="uGo">'+(done?'Học tiếp':'Bắt đầu')+ICON("arrowR")+'</button>':'')+'</div><div class="v16-hero-art" aria-hidden="true"><i></i><i></i>'+FE(f[0],"hero")+'</div></section>'
+    +'<div class="v17-prog" style="'+v16Grad(f[1])+'"><div class="v16-tbar"><i style="width:'+Math.round(done/Math.max(1,ls.length)*100)+'%"></i></div><span>'+done+' / '+ls.length+'</span></div>'
+    +'<section class="v15-section"><h3>Bài học</h3><div class="fl-track v16-track v17-unit-rail" style="'+v16Grad(f[1])+'">'+flPathHTML(ls,nx)+'</div>'
+    +(mix?'<button class="v16-due" id="uMix" style="margin-top:12px">'+v16Art("brain",TRACK_GRAD.review[0],"sm")+'<span><b>Ôn tập chương</b><small>Mixed practice across this topic</small></span>'+(focusDone(mix.id)?flStarsHTML(focusStars(mix.id)):ICON("chevron"))+'</button>':'')+'</section>'
+    +'<section class="v15-section"><h3>Kiến thức</h3><div class="v17-concepts">'+cs.map(c=>'<button class="v17-concept" data-c="'+esc(c.id)+'"><b>'+esc(c.title)+'</b><small>'+esc((c.micro&&c.micro.rule)||c.rule||"")+'</small>'+ICON("chevron")+'</button>').join("")+'</div></section>';
+  if($("#uGo")) $("#uGo").onclick=()=>openFocus(nx.id);
+  if($("#uMix")) $("#uMix").onclick=()=>flOpenObj(mix);
+  $$("#stage [data-l]").forEach(b=>b.onclick=()=>openFocus(b.dataset.l));
+  $$("#stage .v17-concept").forEach(b=>b.onclick=()=>v17ConceptSheet(b.dataset.c));
+  keyHandler=e=>{ if(e.key==="Enter"&&nx) openFocus(nx.id); };
+}
+
+/* ── Course › class: a page with one lesson in the new format ────────── */
+function classSheet(id){ CLASS_OPEN=id; go("lop"); }
+function viewClass(){
+  const l=COURSE.lessons.find(x=>x.id===CLASS_OPEN)||COURSE.lessons[0]; flPrepare();
+  const L=FOCUS.find(x=>x.id==="cls-"+l.id), cs=classConcepts(l), d=new Date(l.date+"T12:00:00");
+  let vocab=[]; try{ vocab=(classVocabulary(l)||[]).filter(w=>w&&w.vi&&w.en&&w.vi.length<=24).slice(0,12); }catch(e){}
+  const rows=cs.map(c=>({c:c,l:v17ConceptLessons(c.id)[0]||null}));
+  const first=L||(rows.find(r=>r.l&&!focusDone(r.l.id))||rows.find(r=>r.l)||{}).l;
+  const dateTxt=isNaN(d)?(l.date||""):d.toLocaleDateString("vi-VN",{weekday:"long",day:"numeric",month:"numeric"});
+  $("#stage").innerHTML='<h2 class="screen-h" data-sub="Lớp học · '+esc(formatLessonDate(l.date))+'">'+esc(l.title)+'</h2>'
+    +'<section class="v16-hero v17-class-hero" style="'+v16Grad("k")+'"><div class="v16-hero-copy"><span class="v16-chip">'+esc(dateTxt)+'</span><h2>'+esc(l.title)+'</h2><p>'+esc(l.summary||v14ClassTopics(l).join(" · "))+'</p>'
+    +(first?'<button class="v16-hero-btn" id="cGo">'+(L&&focusDone(L.id)?'Học lại':'Học bài này')+ICON("arrowR")+'</button>':'')+'</div><div class="v16-hero-art" aria-hidden="true"><i></i><i></i>'+FE("school","hero")+'</div></section>'
+    +'<section class="v16-stats"><div>'+FE("books")+'<b>'+vocab.length+'</b><small>từ mới</small></div><div>'+FE("light-bulb")+'<b>'+cs.length+'</b><small>điểm ngữ pháp</small></div><div>'+FE("chart-increasing")+'<b>'+Math.round(v14ClassPct(l)*100)+'%</b><small>đã nắm</small></div></section>'
+    +(vocab.length?'<section class="v15-section"><h3>Từ vựng</h3><div class="v17-vocab">'+vocab.map(w=>'<button data-say="'+esc(w.vi)+'"><b>'+esc(w.vi)+'</b><small>'+esc(String(w.en).split(/[;(]/)[0])+'</small></button>').join("")+'</div></section>':'')
+    +(rows.length?'<section class="v15-section"><h3>Ngữ pháp trong buổi học</h3><div class="v15-group">'+rows.map(function(r,i){
+        return r.l?v15Row({id:"cr"+i,icon:emblem(r.l.t,"",LESSON_ILLUS[r.l.id]),title:r.l.vi,sub:r.c.title,count:null})
+                  :v15Row({id:"cr"+i,icon:v16Art("light-bulb",TRACK_GRAD.k[0]),title:r.c.title,sub:"Quy tắc",count:null});}).join("")+'</div></section>':'')
+    +(L?'<section class="v15-section"><h3>Luyện tập</h3><div class="v17-actions"><button class="v16-tile" id="cCards" style="'+v16Grad("s")+'">'+FE("flower-playing-cards")+'<b>Thẻ từ</b><small>Flashcards</small></button>'
+      +'<button class="v16-tile" id="cPractice" style="'+v16Grad("n")+'">'+FE("bullseye")+'<b>Chỉ luyện tập</b><small>Straight to exercises</small></button></div></section>':'');
+  wireSpeak();
+  if($("#cGo")) $("#cGo").onclick=()=>L?flOpenObj(L):openFocus(first.id);
+  rows.forEach((r,i)=>{ const b=$("#cr"+i); if(b) b.onclick=()=>r.l?openFocus(r.l.id):v17ConceptSheet(r.c.id); });
+  if($("#cCards")) $("#cCards").onclick=function(){ flOpenObj(L); FL.phase="cards"; FL.deck=null; flRender(); };
+  if($("#cPractice")) $("#cPractice").onclick=function(){ flOpenObj(L); flStartPractice("full"); };
+  keyHandler=e=>{ if(e.key==="Enter"&&first) (L?flOpenObj(L):openFocus(first.id)); };
+}
+
+/* ── class lessons: the rule, real checks, natural-or-not, short chats ─ */
+function flClassLessons(){
+  const res=flClassLessons_v12();
+  res.forEach(function(L){
+    const cl=COURSE.lessons.find(x=>"cls-"+x.id===L.id); if(!cl) return;
+    const ids=classConcepts(cl).map(c=>c.id);
+    L.c=ids[0]||L.c; L._ruled=1;
+    L.vis=ids.slice(0,2).map(v17RuleFor).filter(Boolean).concat(L.vis||[]);
+    L.quiz=ids.map(id=>{ const m=(COURSE.conceptById[id]||{}).micro; return m&&m.check&&m.check.options?[m.check.q,m.check.options,m.check.answer]:null; }).filter(Boolean).slice(0,3);
+    L.traps=COURSE.all.filter(x=>x.kind==="judge"&&ids.indexOf(x.concept)>-1&&x.judge&&x.judge.good).slice(0,3).map(x=>FT(x.judge.good,x.judge.bad,"",x.judge.why||null));
+    const talk=[]; COURSE.all.filter(x=>x.kind==="dialogue"&&ids.indexOf(x.concept)>-1).forEach(function(dl){
+      const ln=(dl.dialogue&&dl.dialogue.lines)||[]; for(let i=0;i<ln.length-1&&talk.length<3;i++) if(/\?\s*$/.test(ln[i].vi)&&ln[i+1].who!==ln[i].who) talk.push([ln[i].vi,ln[i].en,ln[i+1].vi,ln[i+1].en]); });
+    if(talk.length) L.talk=talk;
+  });
+  return res;
+}
+
+/* ── example sentences that actually contain their word ──────────────── */
+let V17_FIXED=null;
+function v17FixExamples(){
+  if(V17_FIXED===COURSE) return; V17_FIXED=COURSE;
+  const pool=[], seen=new Set(), add=(vi,en)=>{ if(!vi||!en) return; vi=String(vi).trim(); const k=flClean(vi); if(seen.has(k)||vi.split(" ").length<2||/[=→…\/]/.test(vi)) return; seen.add(k); pool.push({vi:vi,en:String(en).trim()}); };
+  FOCUS.forEach(L=>{ (L.s||[]).forEach(s=>add(s.v,s.e)); (L.talk||[]).forEach(t=>{ add(t[0],t[1]); add(t[2],t[3]); }); });
+  Object.values(COURSE.conceptById).forEach(c=>{ (c.examples||[]).forEach(e=>add(e.vi,e.en)); ((c.micro&&c.micro.examples)||[]).forEach(e=>add(e.vi,e.en)); });
+  COURSE.all.forEach(x=>{ if(x.ex&&x.ex.vi&&flFind(x.ex.vi,x.vi)) add(x.ex.vi,x.ex.en); if(x.kind==="dialogue") ((x.dialogue&&x.dialogue.lines)||[]).forEach(l=>add(l.vi,l.en)); });
+  let fixed=0, cleared=0;
+  COURSE.all.forEach(function(x){
+    if(!(x.kind==="word"||x.kind==="phrase")||!x.vi||!x.ex||!x.ex.vi) return;
+    if(flFind(x.ex.vi,x.vi)) return;
+    const key=String(x.vi).split(/\s*[\/;(]\s*/)[0].trim(); if(key&&key!==x.vi&&flFind(x.ex.vi,key)) return;
+    const hit=pool.filter(p=>flFind(p.vi,key||x.vi)).sort((a,b)=>a.vi.length-b.vi.length)[0];
+    if(hit){ x.ex={vi:hit.vi,en:hit.en}; fixed++; } else { x.ex=null; cleared++; }
+  });
+  V17_FIX_STATS={fixed:fixed,cleared:cleared};
+}
+let V17_FIX_STATS=null;
+
+/* ── header and navigation for the two new pages ─────────────────────── */
+function v17AfterGo(){
+  if(VIEW==="unit"||VIEW==="lop"){
+    const b=$('#nav button[data-v="course"]'); if(b) b.setAttribute("aria-selected","true");
+    const h=$("#stage .screen-h"); if(h&&h.dataset.sub) $(".brand-sub").textContent=h.dataset.sub;
+  }
+}
+
 /* timing guards */
 document.addEventListener("visibilitychange",function(){
   if(!CURRENT_TIMING) return;
@@ -11588,6 +12209,7 @@ $("#backBtn").onclick = function(){ appBack(); };
   await load();
   v14Theme();
   await loadCustomContent();
+  try{ v17FixExamples(); }catch(e){ console.warn(e); }
   TTS.refresh();
   go("today");
   v14SplashDone();

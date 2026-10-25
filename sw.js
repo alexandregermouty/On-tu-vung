@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v16 — colour illustrations, back button everywhere. */
-const CACHE = "vivu-v16";
+/* Ôn tiếng Việt · v17 — one lesson format for the whole course. */
+const CACHE = "vivu-v17";
 const ASSETS = [
   "./",
   "./index.html",

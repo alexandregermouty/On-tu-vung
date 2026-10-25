@@ -4,6 +4,15 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v17 — one lesson format for the whole course
+
+- **Course topics are pages now.** Tapping a topic under Course opens a page with a coloured header, its lessons on the same path as the Lessons tab, an "Ôn tập chương" mixed review, and a "Kiến thức" list of every grammar point, each opening its rule.
+- **Every course concept has a lesson.** All 82 concepts are linked to at least one lesson. Seventeen new lessons cover the ones that had none: a new "Chữ và dấu" track (Sáu thanh, Đọc một âm tiết, Nguyên âm đôi, Phụ âm ghép), plus Những · các · mọi, Nhiều · ít · vài · mỗi, Rồi, À · ra là · vậy ta, Bao nhiêu tuổi, Bằng · như · không bằng, Của · của ai, Mình · cậu · tớ, Tên của bạn, Quê · quốc tịch · nơi ở, Tui · bữa nay, Đâu có … đâu and Ba nghĩa của đã. Each has visual explanations, flashcards, natural-or-not traps, short chats and, where it fits, transformations and "write the question" exercises.
+- **The rule first.** Every lesson now opens with the course rule: a short headline, examples you can tap to hear, a "Lưu ý" contrast, and the full rule and course note under "Chi tiết".
+- **Classes are pages too.** A class opens a page with its date, summary, new words (tap to hear), its grammar points linked to their lessons, and "Học bài này", "Thẻ từ" and "Chỉ luyện tập" buttons, all in the new lesson format. Class lessons now include the class's rules, check questions, natural-or-not traps and dialogue replies.
+- **Review sessions match the lessons.** Ôn từ vựng, Điểm yếu, Miền Nam and the Review tiles use the same cards, answer choices and feedback as the lessons, with the progress bar beside the back arrow.
+- **Correct example sentences.** Many words carried an example that did not contain the word (for example tao with a sentence about apples). Each example is now checked: 35 were replaced with a course sentence that uses the word, and 24 with no correct replacement are no longer shown.
+
 ## What is new in v16 — colour, illustration and a way back
 
 - **A back button on every screen.** Every page except Today shows a back arrow in the top-left corner. Lessons, review sessions and games have the same arrow, and every pop-up sheet has a "Quay lại" button at the top. The phone's own back gesture now works too: it closes a sheet, leaves a lesson or session, and then steps back through the pages you visited. It only leaves the app from Today.
