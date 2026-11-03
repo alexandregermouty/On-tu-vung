@@ -4,6 +4,24 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v20 — deeper, modern Southern content
+
+**About 1,100 new sentences.** The 93 track lessons that use sentences each gained 9 to 14 new everyday Saigon sentences on top of the course sentences, so every lesson now has 16 to 21 of its own. They cover modern life — Grab, Zalo, Shopee, bank transfers and QR codes, bạc xỉu and trà sữa, overtime, rent, the landlady, flooding and king tides, Tết, đám giỗ, the engagement and the wedding — in the way people in Saigon actually speak (tui, nha, hông, bữa nay, chừng nào, hồi nào, quẹo, rước, mắc, bự, dĩa, muỗng, ngàn).
+
+**More of every exercise.** Lessons also gained 250 new chats, 173 natural-or-not traps, 147 choice questions on usage and politeness, and 165 new cards, which feed every exercise type: fill the gap, fix the mistake, build the sentence, chat replies, dictation, translation and speaking.
+
+**A new sentence each time.** Each sentence question now takes the lesson's least-seen sentence, so two runs of the same lesson use different sentences. Later levels may also borrow up to two sentences from elsewhere in the app, but only for fixed expressions (bao nhiêu tiền, hồi nãy, kế bên…), so a borrowed sentence always uses the word in the lesson's sense.
+
+**"Người Sài Gòn nói" in every lesson.** The Xem part of each of the 95 track lessons has a new slide on how the point is really said in Saigon. It gives a short note, a table of written forms beside their Southern spoken forms (bao giờ → chừng nào, rẽ → quẹo, đi giày → mang giày, nghìn → ngàn, cậu / tớ → ông / bà / tui), and three of the new sentences to tap and hear.
+
+**60 reading scenes.** Thirty-five new scenes join the 25 from v19, including the morning bánh mì, a late Shopee delivery, the family Zalo group, overtime, the pharmacy, the king tide, karaoke, drinks with colleagues, the barber, a trip to the Delta, bargaining at Bà Chiểu, a flat tyre, Lan Anh's birthday, the landlady, a weekend in Đà Lạt, the honeymoon plan, đám giỗ, asking for her hand, trying on the wedding áo dài, football, cooking canh chua, the new neighbours, the bank, a lost wallet, chè at night, cleaning for Tết, a video call to Paris, the dentist and moving house. Each one names the lessons it serves. A lesson now picks its scene and its two reading questions from all the scenes that fit it, so the reading changes from run to run.
+
+**Clearer right answers.** Southern words that mean the same thing (nha / nhé / nghen, hay / thường, đón / rước, bà / ông / bạn between friends, lắm / quá / ghê) are never offered as each other's wrong answer, and a typed answer accepts any of them.
+
+**Fixes to older content.** Prices now use ngàn instead of nghìn, shoes take mang instead of đeo, a pencil is cây viết chì, the time card teaches thiếu (with kém marked as Northern), and a few nhé became nha.
+
+The new sentences, chats and scenes were written for this app. Please check any that sound off with Lan Anh or your teacher.
+
 ## What is new in v19 — calmer, greener, and harder in the right way
 
 **Five clear tabs.** The app now has five tabs, and every tool lives in exactly one of them.

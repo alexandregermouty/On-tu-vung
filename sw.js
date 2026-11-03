@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v19 — calmer layout, logo colours, resume, reading scenes. */
-const CACHE = "vivu-v19";
+/* Ôn tiếng Việt · v20 — deeper Southern content: 1,100 new sentences, 60 reading scenes. */
+const CACHE = "vivu-v20";
 const ASSETS = [
   "./",
   "./index.html",
