@@ -1,5 +1,5 @@
-/* Ôn tiếng Việt · v18 — Practice tools. */
-const CACHE = "vivu-v18";
+/* Ôn tiếng Việt · v19 — calmer layout, logo colours, resume, reading scenes. */
+const CACHE = "vivu-v19";
 const ASSETS = [
   "./",
   "./index.html",

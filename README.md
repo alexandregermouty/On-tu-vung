@@ -4,6 +4,37 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v19 — calmer, greener, and harder in the right way
+
+**Five clear tabs.** The app now has five tabs, and every tool lives in exactly one of them.
+- Hôm nay (Today) shows the logo, one main button, and a three-step plan for the day: review, one new or unfinished lesson, and one suggested practice tool. Each step ticks itself off when it is done.
+- Học (Learn) holds all the lessons. A switcher at the top moves between Lộ trình (the lesson path), Chủ đề (course topics) and Lớp học (your classes), so Course is no longer a separate place.
+- Luyện (Practice) groups every practice tool by skill: listening and reading, speaking, sentences and grammar, and real life, followed by the games and the visual grammar maps. A "Gợi ý hôm nay" card at the top picks one tool for you, rotating through the skills.
+- Ôn tập (Review) gathers everything that brings old material back: due words, weak words, lesson reviews, Thẻ cứu, the mistake notebook and the vocabulary library.
+- Tôi (Me) holds progress, the can-do list, the error profile, the teacher report, class content, voice and settings. The can-do and error panels open their tools when you tap them.
+
+**Logo colours.** The palette now comes from the logo: deep forest and jade greens as the background, gold for the main buttons, and the five brush-stroke colours (gold, orange, red, sage and teal) as a small accent line on the hero cards. Progress bars run from jade to gold. Light mode uses a warm paper background with forest-green buttons.
+
+**Leave a lesson and come back.** The back arrow in a lesson now saves where you are and leaves at once, with a small "Đã lưu ở câu 14" message. The lesson shows a "▶ 14/23" chip on the path, Today turns its main card into "Đang học dở · Tiếp tục", and opening the lesson shows a "Bạn đang học dở bài này · Tiếp tục" banner. "Học lại từ đầu" starts over instead. The app keeps up to six unfinished lessons; finishing a lesson clears its save.
+
+**Wrong answers that look right.** The wrong options are now close to the right one instead of random sentences from other lessons.
+- In a conversation about a phone call, the wrong replies are the same reply with one change: the tense (đang → chưa), a negation (Má không nấu cơm), the time (hôm qua → ngày mai), a number, a place, or a word swapped with its opposite. Off-topic replies such as ordering coffee no longer appear.
+- Negations are built the Vietnamese way: "đang" becomes "không" (Má không nấu cơm), "là" becomes "không phải là", "sẽ" becomes "sẽ không", and sentences where a negation would sound wrong are skipped.
+- Word choices prefer the lesson's own words, tone twins (chờ / chợ / chở) and look-alike spellings, then words from the same track.
+- English options get the same treatment (is / isn't, yesterday / tomorrow, near / far from).
+
+**Reading in context.** Twenty-five short scenes of everyday southern life (a call from Má, ordering at a café, a Grab ride, the market, a rainy afternoon, meeting the family, Tết, a weekend in Vũng Tàu, the doctor, a wedding invitation and more) are written with the lesson words highlighted.
+- Each lesson's "Xem" part now includes the scene that best uses its words, under "Trong ngữ cảnh · in context". Tap a line to hear it and see the English.
+- Each lesson adds two reading-comprehension questions about that scene before the harder levels.
+- Class pages show "Đọc trong ngữ cảnh": the scenes that use the most words from that class.
+- Luyện has a "Bài đọc" library with all twenty-five scenes, three questions each, and your best score.
+
+**A new sentence each time.** Every sentence in the app (lessons, dialogues, scenes, course examples and your own sentences, about a thousand in total) is now a pool. A lesson uses its own taught sentences in the early levels, then moves to sentences you have not seen yet with the same word as the levels rise. No sentence repeats within one lesson, and the least-seen sentences come first. In review sessions, each word shows a different example sentence each time, and the examples get longer as you master the word.
+
+**Phone fixes.** The "Đúng rồi! · Tiếp →" sheet now sits at the bottom of the screen, the dark band behind "Kiểm tra" is gone, and the "Kiểm tra" button disappears once you have answered.
+
+The scenes and the new southern sentences are written for this app. Please check them with Lan Anh or your teacher, as with the wedding toast.
+
 ## What is new in v18 — Practice
 
 The fifth tab is now **Practice** (Thực hành): 21 tools beyond the lessons, plus the old library (Nghe, Nói, Điểm yếu, Từ vựng, Nội dung, Tiến bộ). Every exercise uses the same cards, feedback and back arrow as the lessons.
