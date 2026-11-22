@@ -1,5 +1,5 @@
 /* Ôn tiếng Việt · v20 — deeper Southern content: 1,100 new sentences, 60 reading scenes. */
-const CACHE = "vivu-v20";
+const CACHE = "vivu-v21";
 const ASSETS = [
   "./",
   "./index.html",

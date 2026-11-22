@@ -4,6 +4,28 @@ Alexandre's personal Vietnamese-learning PWA, built around the material in **ALE
 
 **Learn to belong.**
 
+## What is new in v21 — your six new classes, and translation work
+
+**Six new classes from the latest course file.** The classes of 09/10, 23/10, 31/10, 05/11, 13/11 and 21/11 are now in Học → Lớp học, each with its own word list, a class lesson, and its words in your spaced-repetition review. Together they add 145 words and expressions (114 of them new to the app, the rest linked to words you already had), 58 example sentences, 20 short chats and 14 traps.
+- The 09/10 class covers một mình, bực mình, tùy vào, ngày nghỉ, tiếp theo and the other words from the vocabulary list.
+- The 23/10 class covers the frequency words (luôn luôn, thường, đôi khi, lâu lâu, hiếm khi, không bao giờ, chưa bao giờ) and the reading about Lan.
+- The 31/10 class covers sau giờ làm, đồng nghiệp, ăn ngoài, trong tương lai and building your own questions.
+- The 05/11 class covers about fifty daily activities, from thức dậy and đánh răng to dọn dẹp, giặt đồ, đổ rác and dắt chó đi dạo.
+- The 13/11 class covers the eleven situations (waking up late, the toothpaste, the interview outfit, the helmet, coffee or tea…).
+- The 21/11 class covers Lisa's day and the Koga family text (thay đồ, đồ ăn lành mạnh, trong khi, thời gian rảnh, cố gắng, dành thời gian cho).
+
+**Your homework corrections are built in.** The traps and the new checker catch the mistakes from your homework: "Nếu em sẽ sống…" (no sẽ inside the nếu part), đeo giày or đội vớ (it is mang giày, mang vớ), hỏi làm việc ở nhà (xin làm việc ở nhà), and rất … lắm used together.
+
+**Đọc, dịch, trả lời (10 texts).** A new exercise in Luyện → Dịch và viết gives you a whole Vietnamese text to read and hear, then asks you to translate every sentence into English, then to answer five or six questions on it in Vietnamese. The texts include Lan's day and the Koga family from your classes, plus new ones about your working week, a Sunday at Lan Anh's family, a rushed morning, a job interview, roommates, eating out, a new exercise habit and a day off alone. Your English is compared with a model translation and its key ideas, and your Vietnamese answers are checked for the key words and their tones.
+
+**Dịch sang tiếng Việt (10 texts).** The other way round: a whole English text, from Lisa's day to living in Saigon one day, to translate into Vietnamese with no help. Each sentence is checked for its key words, shows which ones are missing or only miss a tone, flags the homework mistakes and Northern words (nghìn, bố, muộn, rửa bát, xem phim), and lets you hear the model translation.
+
+**Tình huống (11 situations).** The eleven situations of the 13/11 class, word for word, with a hidden English translation and 24 open questions. After you answer, the app shows a corrected sample answer based on your own homework answers, and you rate yourself.
+
+**Linked from the class pages.** The pages of the 09/10, 23/10, 31/10, 13/11 and 21/11 classes end with the translation exercises that belong to them. Your drafts are kept if you leave halfway, and your best scores show in the lists and count toward the daily plan.
+
+The new texts, model translations and sample answers were written for this app from your course material. Please check any that sound off with Lan Anh or your teacher.
+
 ## What is new in v20 — deeper, modern Southern content
 
 **About 1,100 new sentences.** The 93 track lessons that use sentences each gained 9 to 14 new everyday Saigon sentences on top of the course sentences, so every lesson now has 16 to 21 of its own. They cover modern life — Grab, Zalo, Shopee, bank transfers and QR codes, bạc xỉu and trà sữa, overtime, rent, the landlady, flooding and king tides, Tết, đám giỗ, the engagement and the wedding — in the way people in Saigon actually speak (tui, nha, hông, bữa nay, chừng nào, hồi nào, quẹo, rước, mắc, bự, dĩa, muỗng, ngàn).

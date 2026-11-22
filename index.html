@@ -2706,6 +2706,57 @@ body.in-session #v19Toast{bottom:calc(24px + env(safe-area-inset-bottom))}
 .v20-exl span{font-size:15.5px;line-height:1.4}
 .v20-exl em{display:none;font-style:normal;font-size:13px;color:var(--ink-3)}
 .v20-exl.open em{display:block}
+
+/* v21 · translate & write */
+.v21-text{padding:16px 16px;border-radius:20px;background:var(--card);border:1px solid var(--card-line);box-shadow:var(--shadow);font:500 17px/1.7 var(--vi);color:var(--ink)}
+.v21-text.en{font-size:15.5px;line-height:1.6;color:var(--ink-2);margin-bottom:14px}
+.v21-s{cursor:pointer;border-radius:6px;transition:background .15s}
+.v21-s:active,.v21-s.speaking{background:color-mix(in srgb,var(--g1) 22%,transparent)}
+.v21-gloss{margin-top:12px}
+.v21-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.v21-chips span{padding:5px 10px;border-radius:10px;background:var(--card);border:1px solid var(--card-line);font-size:13px;color:var(--ink-2)}
+.v21-chips b{color:var(--ink)}
+.v21-row{margin:0 0 14px}
+.v21-src,.v21-q{display:flex;gap:10px;align-items:flex-start;margin:0 2px 6px;font:600 15.5px/1.45 var(--vi);color:var(--ink);cursor:pointer}
+.v21-src.en{cursor:default;font-weight:500;color:var(--ink-2)}
+.v21-src i,.v21-q i{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;margin-top:1px;background:color-mix(in srgb,var(--g1) 22%,transparent);font:700 12px var(--vi);font-style:normal;color:var(--ink)}
+.v21-open{font:600 11px var(--vi);font-style:normal;padding:2px 7px;border-radius:8px;background:var(--card-2);color:var(--ink-3);white-space:nowrap}
+.v21-en{margin:-2px 2px 6px 34px;font-size:13px;color:var(--ink-3)}
+.v21-en summary{display:inline-block;cursor:pointer;padding:1px 8px;border-radius:8px;background:var(--card-2);font:700 11px var(--vi);color:var(--ink-3);list-style:none}
+.v21-en summary::-webkit-details-marker{display:none}
+.v21-en[open] summary{margin-right:6px}
+.v21-in{width:100%;box-sizing:border-box;min-height:60px;padding:12px 14px;border-radius:14px;border:1px solid var(--card-line);background:var(--card);color:var(--ink);font:500 16px/1.4 var(--vi);resize:vertical}
+.v21-in:focus{outline:none;border-color:var(--g1);box-shadow:0 0 0 3px color-mix(in srgb,var(--g1) 22%,transparent)}
+.v21-res{margin:0 0 12px;padding:12px 14px;border-radius:18px;background:var(--card);border:1px solid var(--card-line);border-left-width:5px}
+.v21-res.good{border-left-color:var(--ok)}.v21-res.mid{border-left-color:#E0A13A}.v21-res.low{border-left-color:var(--bad)}.v21-res.open{border-left-color:var(--g1)}
+.v21-res .v21-src,.v21-res .v21-q{font-size:14.5px}
+.v21-you{margin:6px 0 0 34px;font:600 15px/1.45 var(--vi);color:var(--ink)}
+.v21-you em{font-weight:500;color:var(--ink-4)}
+.v21-model{margin:8px 0 0 34px;padding:8px 10px;border-radius:12px;background:var(--card-2);font:500 14.5px/1.45 var(--vi);color:var(--ink-2)}
+.v21-model[data-say]{cursor:pointer}
+.v21-model small{display:flex;align-items:center;gap:4px;font:700 11px var(--vi);color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.v21-model small svg.ic{width:12px;height:12px}
+.v21-keys{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0 34px}
+.v21-keys span{padding:3px 9px;border-radius:9px;font:600 12.5px var(--vi)}
+.v21-keys .ok{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.v21-keys .tone{background:color-mix(in srgb,#E0A13A 18%,transparent);color:#B9771B}
+.v21-keys .miss{background:var(--card-2);color:var(--ink-4);text-decoration:line-through;text-decoration-thickness:1px}
+.v21-flag{margin:6px 0 0 34px;padding:7px 10px;border-radius:10px;font-size:13px;line-height:1.45}
+.v21-flag.bad{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--ink)}
+.v21-flag.tip{background:color-mix(in srgb,#E0A13A 14%,transparent);color:var(--ink-2)}
+.v18-score + .v21-flag,.v18-note + .v21-flag{margin-left:0;margin-bottom:12px}
+.v21-res .v18-rate{margin:10px 0 0 34px}
+.v21-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.v21-sum div{padding:12px;border-radius:16px;background:var(--card);border:1px solid var(--card-line);text-align:center}
+.v21-sum small{display:block;font-size:12px;color:var(--ink-3)}.v21-sum b{font:700 22px var(--vi);color:var(--ink)}
+.v21-pct{flex:none;padding:3px 9px;border-radius:10px;font:700 12.5px var(--vi)}
+.v21-pct.good{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.v21-pct.mid{background:color-mix(in srgb,#E0A13A 18%,transparent);color:#B9771B}
+.v21-pct.low{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.v21-sithead{display:flex;align-items:center;gap:14px;margin:0 2px 14px}
+.v21-sithead b{display:block;font:700 20px var(--vi)}.v21-sithead small{display:block;font-size:13px;color:var(--ink-3)}
+.v18-page .fl-actions{flex-wrap:wrap}
+@media (max-width:420px){ .v21-you,.v21-model,.v21-keys,.v21-flag,.v21-res .v18-rate,.v21-en{margin-left:0} }
 </style>
 </head>
 <body>
@@ -8320,7 +8371,7 @@ function classConcepts(l){
   const ids=[].concat(l.concepts||[],pack?(pack.concepts||[]).map(c=>c.id):[],pack?(pack.vocabulary||[]).map(w=>w.concept):[]);
   return [...new Set(ids)].map(id=>COURSE.conceptById[id]).filter(Boolean);
 }
-function classVocabulary(l){
+function classVocabulary_v20(l){
   const linked=new Set(classConcepts(l).map(c=>c.id));
   const isCore=CORE_LESSONS.some(x=>x.id===l.id);
   const dated=COURSE.words.filter(w=>(isCore&&w.sourceDate===l.date)||w.appearsIn&&w.appearsIn.indexOf(l.id)>-1);
@@ -12754,7 +12805,7 @@ function viewLab_v18(){
   $$("#stage .v18-tool").forEach(b=>b.onclick=()=>{ const f=V18_OPEN[b.dataset.tool]; if(f) f(); });
   old.forEach(o=>{ const b=$("#lab-"+o[0]); if(b) b.onclick=()=>go(o[0]); });
 }
-function v18Badge(id){
+function v18Badge_v20(id){
   try{ if(id==="rescue"){ const n=v18Leeches().length; return n?'<em class="v18-badge">'+n+'</em>':''; }
     if(id==="missions"){ const w=v18WeekMissions(), d=w.filter(m=>v18S().missions[v18Week()+":"+m.id]).length; return '<em class="v18-badge soft">'+d+'/'+w.length+'</em>'; }
     if(id==="mine"){ const n=v18S().mine.length; return n?'<em class="v18-badge soft">'+n+'</em>':''; } }catch(e){}
@@ -14139,7 +14190,7 @@ function v19OpenScene(sc,back){
 V18_OPEN.reading=()=>v19OpenReading();
 
 /* ── classes: read the class words in context ────────────────────────── */
-function viewClass(){
+function viewClass_v20(){
   viewClass_v17();
   try{ const l=COURSE.lessons.find(x=>x.id===CLASS_OPEN)||COURSE.lessons[0]; let words=[]; try{ words=(classVocabulary(l)||[]).map(w=>w.vi).filter(Boolean); }catch(e){}
     const scs=v19ScenesFor(words,"k",2); if(!scs.length) return;
@@ -17242,6 +17293,732 @@ function v19OpenReading(){
   v18Page({title:"Bài đọc",key:"q",body:'<p class="v18-lead">'+V19_SCENES.length+' short scenes from everyday Southern life. Read, tap a line to hear it and see the meaning, then answer three questions.</p><div class="v18-list">'
     +V19_SCENES.map((sc,i)=>'<button class="v18-listrow" data-i="'+i+'">'+v16Art(V20_SCENE_FE[sc.id]||"open-book",TRACK_GRAD[(sc.tags&&sc.tags[0])||"q"]?TRACK_GRAD[sc.tags[0]][0]:TRACK_GRAD.q[0],"sm")+'<span><b>'+esc(sc.title)+'</b><small>'+esc(sc.en)+(done[sc.id]?' · '+Math.round(done[sc.id]*100)+'%':'')+'</small></span>'+(done[sc.id]?ICON("checkR"):ICON("chevron"))+'</button>').join("")+'</div>',
    wire:()=>$$(".v18-listrow").forEach(b=>b.onclick=()=>v19OpenScene(V19_SCENES[+b.dataset.i],v19OpenReading))});
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   v21 · THE SIX NEW CLASSES (9 Oct – 21 Nov 2026)
+   Each class becomes a dated lesson with its own vocabulary, example
+   sentences, chats and corrections taken from the course document.
+   Words already in the app are linked to the new class instead of copied.
+   word = [vi, en, concept, example vi, example en]
+   ═══════════════════════════════════════════════════════════════════════ */
+const V21_CLASSES=[
+{id:"core-2026-10-09",date:"2026-10-09",title:"Everyday words: alone, upset, depends on",summary:"một mình, gọi, bực mình, đi mua đồ, ngày nghỉ, tiếp theo, tùy vào, buổi họp, xong, yêu thích — and lạnh or nắng.",concepts:["c.sent.svo","c.mod.beforeafter"],
+ words:[
+  ["nắng","sunny; sunshine","c.sent.svo","Em thích lạnh hay là nắng?","Do you prefer cold or sunny weather?"],
+  ["một mình","alone; by oneself","c.sent.svo","Hôm nay tôi ở nhà một mình.","Today I'm staying home alone."],
+  ["gọi","to call","c.sent.svo","Má tôi sẽ gọi cho tôi tối nay.","My mum will call me tonight."],
+  ["bực mình","upset, annoyed","c.sent.svo","Tôi hơi bực mình vì xe bị hư.","I'm a little upset because my motorbike broke down."],
+  ["đi mua đồ","to go shopping","c.sent.svo","Cuối tuần này tôi muốn đi mua đồ.","I want to go shopping this weekend."],
+  ["ngày nghỉ","day off","c.sent.svo","Ngày mai là ngày nghỉ của tôi.","Tomorrow is my day off."],
+  ["tiếp theo","next","c.sent.svo","Bài học tiếp theo sẽ khó hơn một chút.","The next lesson will be a little harder."],
+  ["tùy vào","to depend on","c.sent.svo","Thời gian đi chơi tùy vào công việc của bạn.","The time to go out depends on your work."],
+  ["buổi họp","meeting","c.sent.svo","Tôi có buổi họp lúc 9 giờ sáng.","I have a meeting at 9 a.m."],
+  ["xong","to finish; done","c.mod.beforeafter","Tôi dọn phòng xong rồi.","I have finished cleaning the room."],
+  ["yêu thích","favourite","c.sent.svo","Món ăn yêu thích của tôi là phở.","My favourite food is phở."],
+  ["tới","next (week, month); to arrive","c.sent.svo","Tuần tới em rảnh.","I'm free next week."]],
+ s:[["Hôm nay tôi muốn đi mua đồ với má.","Today I want to go shopping with my mum.","đi mua đồ"],
+    ["Tôi thích ở nhà một mình khi không có ai ở nhà.","I like staying home alone when nobody is home.","một mình"],
+    ["Bạn nhớ gọi cho tôi khi tới nơi nha.","Remember to call me when you get there.","gọi"],
+    ["Đừng bực mình vì chuyện nhỏ đó nha.","Don't get upset about that small thing.","bực mình"],
+    ["Tôi thường ngủ tới 9 giờ vào ngày nghỉ.","I usually sleep until 9 on my day off.","ngày nghỉ"],
+    ["Tiếp theo tụi mình sẽ học bài này.","Next, we'll study this lesson.","Tiếp theo"],
+    ["Giờ đi ăn tùy vào bạn nha.","When we go and eat is up to you.","tùy vào"],
+    ["Má tôi đang ở buổi họp.","My mum is in a meeting.","buổi họp"],
+    ["Tôi làm bài xong rồi mới đi ngủ.","I finish my homework before going to bed.","xong"],
+    ["Đây là quán cà phê yêu thích của tôi.","This is my favourite coffee shop.","yêu thích"],
+    ["Nếu em sống ở Việt Nam, em muốn ở Bình Thạnh.","If I lived in Vietnam, I'd want to live in Binh Thanh.","Nếu"],
+    ["Em đã sống ở quận 1 và quận 7.","I have lived in District 1 and District 7.","đã sống"]],
+ t:[["Em thích lạnh hay là nắng?","Do you prefer cold or sunny?","Em thích nắng hơn, nhưng đừng nóng quá.","I prefer sunny, as long as it's not too hot."],
+    ["Mai em rảnh không?","Are you free tomorrow?","Dạ rảnh, mai là ngày nghỉ của em.","Yes, tomorrow's my day off."],
+    ["Mấy giờ mình đi ăn?","What time shall we go and eat?","Tùy vào anh, em sao cũng được.","Up to you, any time is fine with me."]],
+ x:[["Nếu em sống ở Việt Nam, em muốn ở Bình Thạnh.","Nếu em sẽ sống ở Việt Nam, em muốn sống ở Bình Thạnh.","If I lived in Vietnam, I'd want to live in Binh Thanh.","After nếu, leave out sẽ — the if-part takes no future marker (from your 27/09 answer)."],
+    ["Thời gian đi chơi tùy vào công việc.","Thời gian đi chơi tùy công việc vào.","The time to go out depends on work.","Tùy vào stays together before what it depends on."]]},
+
+{id:"core-2026-10-23",date:"2026-10-23",title:"Frequency review and a first reading",summary:"luôn luôn, hay, bình thường, lâu lâu, đôi khi, hiếm khi, chưa bao giờ, không bao giờ, once a day / three times a month, and the reading about Lan.",concepts:["c.freq.adv"],
+ words:[
+  ["đọc báo","to read the news (paper)","c.freq.adv","Ba tôi thích đọc báo sau khi ăn sáng.","My dad likes reading the news after breakfast."],
+  ["đọc tin tức","to read the news","c.freq.adv","Em hay đọc tin tức trên điện thoại.","I often read the news on my phone."],
+  ["luôn luôn","always","c.freq.adv","Em luôn luôn ăn sáng.","I always eat breakfast."],
+  ["bình thường","normally, usually","c.freq.adv","Em bình thường đi bộ tới chợ.","I normally walk to the market."],
+  ["lâu lâu","now and then","c.freq.adv","Tụi em lâu lâu coi TV cùng nhau.","We sometimes watch TV together."],
+  ["đôi khi","occasionally","c.freq.adv","Anh đôi khi uống bia.","He occasionally drinks beer."],
+  ["chưa bao giờ","have never","c.freq.adv","Em chưa bao giờ đi Đà Nẵng.","I've never been to Da Nang."],
+  ["không bao giờ","never","c.freq.adv","Họ không bao giờ hút thuốc.","They never smoke."],
+  ["hút thuốc","to smoke","c.freq.adv","Cô ấy không bao giờ hút thuốc vì không tốt cho sức khỏe.","She never smokes because it isn't good for her health."],
+  ["một lần một ngày","once a day","c.freq.adv","Em dọn nhà một lần một ngày.","I clean the house once a day."],
+  ["ăn ngoài","to eat out","c.freq.adv","Tụi em ăn ngoài ba lần một tháng.","We eat out three times a month."],
+  ["tan làm","to finish work","c.freq.adv","Lâu lâu, cô uống cà phê sau khi tan làm.","Now and then she has a coffee after work."],
+  ["nhân viên văn phòng","office worker","c.freq.adv","Lan là nhân viên văn phòng.","Lan is an office worker."],
+  ["giữ sức khỏe","to stay healthy","c.freq.adv","Cô hiếm khi thức khuya vì muốn giữ sức khỏe.","She rarely stays up late because she wants to stay healthy."],
+  ["Nhật Bản","Japan","c.freq.adv","Lan chưa bao giờ đi Nhật Bản.","Lan has never been to Japan."]],
+ s:[["Chị hay làm bánh.","She often makes cakes.","hay"],
+    ["Em hay đi ngủ lúc 10 giờ tối.","I usually go to bed at 10 p.m.","hay"],
+    ["Mỗi ngày, Lan thức dậy lúc 6 giờ sáng.","Every day Lan wakes up at 6 a.m.","Mỗi ngày"],
+    ["Lan bình thường tập thể dục hai lần mỗi tuần.","Lan normally exercises twice a week.","bình thường"],
+    ["Lan gọi điện cho ba mẹ một lần mỗi ngày.","Lan calls her parents once a day.","một lần"],
+    ["Lâu lâu, cả gia đình đi du lịch cùng nhau.","Now and then the whole family travels together.","Lâu lâu"],
+    ["Dạo này, Lan bận hơn nên cô hiếm khi coi phim.","Lately Lan is busier, so she rarely watches films.","hiếm khi"]],
+ t:[["Lan luôn luôn làm gì trước khi đi làm?","What does Lan always do before work?","Cô ấy luôn luôn ăn sáng trước khi đi làm.","She always has breakfast before work."],
+    ["Em có hay ăn ngoài không?","Do you eat out often?","Lâu lâu thôi, khoảng ba lần một tháng.","Only now and then — about three times a month."],
+    ["Em đi Nhật Bản chưa?","Have you been to Japan?","Chưa bao giờ, nhưng em muốn đi trong tương lai.","Never, but I'd like to go in the future."]],
+ x:[["Em chưa bao giờ đi Đà Nẵng.","Em chưa bao giờ đi Da Nang.","I've never been to Da Nang.","Place names keep their tone marks: Đà Nẵng."],
+    ["Tụi em ăn ngoài ba lần một tháng.","Tụi em ăn ngoài một tháng lần ba.","We eat out three times a month.","Say ba lần (number + lần), then the period: ba lần một tháng."]]},
+
+{id:"core-2026-10-31",date:"2026-10-31",title:"After work, co-workers and building questions",summary:"sau giờ làm, đồng nghiệp, quần áo, cả gia đình, trong tương lai, ăn ngoài, and putting question words in the right place.",concepts:["c.freq.adv","c.question.wh","c.question.where","c.question.what","c.question.how","c.question.why","c.question.quantity"],
+ words:[
+  ["sau giờ làm","after work","c.freq.adv","Sau giờ làm, tôi đi tập thể dục.","After work, I go and exercise."],
+  ["đồng nghiệp","co-worker","c.freq.adv","Tôi thường nói chuyện với đồng nghiệp ở công ty.","I often talk with my co-workers at work."],
+  ["quần áo","clothes","c.freq.adv","Em tôi thích mua quần áo mới.","My younger sibling likes buying new clothes."],
+  ["cả gia đình","the whole family","c.freq.adv","Cả gia đình thường ăn cơm chung vào buổi tối.","The whole family usually eats dinner together in the evening."],
+  ["trong tương lai","in the future","c.freq.adv","Tôi muốn có một căn nhà lớn trong tương lai.","I want to have a big house in the future."],
+  ["vui tính","funny, good-humoured","c.freq.adv","Đồng nghiệp của tôi rất vui tính.","My co-workers are very funny."],
+  ["hờ hững","indifferent, lukewarm","c.freq.adv","Ảnh hờ hững lắm, không thích cũng không ghét.","He's indifferent — he neither likes nor dislikes it."],
+  ["thực phẩm tươi","fresh food","c.question.where","Bạn có thể mua thực phẩm tươi ở đâu?","Where can you buy fresh food?"],
+  ["món","dish","c.question.how","Bạn nấu món này sao?","How do you cook this dish?"],
+  ["bạn bè","friends (in general)","c.freq.adv","Cuối tuần, tôi thích ăn ngoài với bạn bè.","At the weekend I like eating out with friends."],
+  ["chung","together, shared","c.freq.adv","Tụi em ăn cơm chung mỗi tối.","We eat dinner together every evening."],
+  ["đá","ice; stone; to kick","c.sent.svo","Cho em một ly trà đá.","An iced tea, please."]],
+ s:[["Tôi thường đọc báo vào buổi sáng.","I often read the news in the morning.","đọc báo"],
+    ["Tôi đi ăn với cả gia đình vào Chủ nhật.","I eat out with the whole family on Sundays.","cả gia đình"],
+    ["Tối nay, nhà tôi muốn ăn ngoài ở nhà hàng.","Tonight my family wants to eat out at a restaurant.","ăn ngoài"],
+    ["Sau giờ làm, tôi thường về nhà nghỉ ngơi.","After work I usually go home and rest.","Sau giờ làm"],
+    ["Tôi muốn học tiếng Anh giỏi hơn trong tương lai.","I want to be better at English in the future.","trong tương lai"],
+    ["Bạn thường uống cà phê ở đâu vào buổi sáng?","Where do you usually drink coffee in the morning?","ở đâu"],
+    ["Bạn mua đôi giày này ở đâu?","Where did you buy these shoes?","ở đâu"],
+    ["Bạn thường làm gì sau giờ làm?","What do you usually do after work?","gì"],
+    ["Bạn thường mua gì ở chợ?","What do you usually buy at the market?","gì"],
+    ["Tại sao hôm qua bạn không đi làm?","Why didn't you go to work yesterday?","Tại sao"],
+    ["Sao bạn không ăn cái bánh này?","Why aren't you eating this cake?","Sao"],
+    ["Trong gia đình bạn có bao nhiêu người?","How many people are there in your family?","bao nhiêu"],
+    ["Hôm qua bạn đã mua mấy cái bánh?","How many cakes did you buy yesterday?","mấy"],
+    ["Ngày mai mấy giờ bạn phải đi làm?","What time do you have to go to work tomorrow?","mấy giờ"],
+    ["Một ký thịt bò ở chợ bao nhiêu tiền?","How much is a kilo of beef at the market?","bao nhiêu tiền"]],
+ t:[["Em gặp bạn ở Pháp hay là ở Việt Nam?","Did you meet your friend in France or in Vietnam?","Dạ, em gặp bạn ở Việt Nam.","I met them in Vietnam."],
+    ["Sau giờ làm em hay làm gì?","What do you usually do after work?","Em hay đi tập thể dục, lâu lâu đi ăn ngoài với đồng nghiệp.","I usually exercise, and now and then eat out with co-workers."]],
+ x:[["Đôi giày bạn mang bao nhiêu tiền?","Đôi giày bạn đeo bao nhiêu tiền?","How much were the shoes you're wearing?","Shoes take mang (South) or đi (North), never đeo (from your homework)."],
+    ["Làm sao bạn học tiếng Anh giỏi vậy?","Bạn học tiếng Anh tốt sao?","How did you get so good at English?","Sao at the end after an adjective sounds surprised (“you're good at English?”). To ask the method, start with Làm sao."],
+    ["Làm sao mở được cái cửa này?","Bạn có thể mở cái cửa này sao?","How do you open this door?","To ask how to do something, use Làm sao … ? or … sao? right after the verb: Mở cửa này sao?"]],
+ q:[["“Đá” in “trà đá” means:",["ice","stone","to kick"],0,"Đá is ice, stone or to kick — context decides."]]},
+
+{id:"core-2026-11-05",date:"2026-11-05",title:"Daily activities",summary:"About fifty everyday verbs: waking up, washing, dressing, getting to work, chores, free time and going to bed.",concepts:["c.mod.wear","c.time.buoi"],
+ words:[
+  ["thức dậy","to wake up","c.time.buoi","Em thức dậy lúc 6 giờ sáng.","I wake up at 6 a.m."],
+  ["đánh răng","to brush your teeth","c.time.buoi","Em đánh răng hai lần một ngày.","I brush my teeth twice a day."],
+  ["rửa mặt","to wash your face","c.time.buoi","Em rửa mặt bằng nước lạnh.","I wash my face with cold water."],
+  ["tắm","to take a shower, bathe","c.time.buoi","Em thường tắm vào buổi sáng.","I usually shower in the morning."],
+  ["mặc quần áo","to get dressed","c.mod.wear","Em mặc quần áo rồi ăn sáng.","I get dressed, then have breakfast."],
+  ["mang giày","to put on / wear shoes","c.mod.wear","Em mang giày rồi đi làm.","I put on my shoes and go to work."],
+  ["mang vớ","to wear socks (vớ, Southern; tất in the North)","c.mod.wear","Em thích mang vớ khi mang giày.","I like wearing socks with shoes."],
+  ["đội nón","to wear a hat","c.mod.wear","Trời nắng, nhớ đội nón nha.","It's sunny — remember to wear a hat."],
+  ["nón bảo hiểm","helmet","c.mod.wear","Đi xe máy phải đội nón bảo hiểm.","On a motorbike you must wear a helmet."],
+  ["ăn sáng","to eat breakfast","c.time.buoi","Em ăn sáng lúc 7 giờ.","I have breakfast at 7."],
+  ["tập thể dục","to exercise","c.time.buoi","Em tập thể dục ba lần một tuần.","I exercise three times a week."],
+  ["đi học","to go to school / class","c.time.buoi","Thứ Tư em đi học tiếng Việt.","On Wednesday I go to Vietnamese class."],
+  ["đi làm","to go to work","c.time.buoi","Em đi làm bằng xe đạp.","I go to work by bike."],
+  ["chuẩn bị","to get ready, prepare","c.time.buoi","Em có 20 phút để chuẩn bị đi làm.","I have 20 minutes to get ready for work."],
+  ["đi bằng xe buýt","to go by bus","c.time.buoi","Chị Lan đi làm bằng xe buýt.","Lan goes to work by bus."],
+  ["lái xe","to drive","c.time.buoi","Thỉnh thoảng em lái xe đi mua đồ.","Sometimes I drive to go shopping."],
+  ["đọc sách","to read a book","c.time.buoi","Em đọc sách trước khi đi ngủ.","I read a book before I sleep."],
+  ["làm việc","to work","c.time.buoi","Em làm việc tám tiếng một ngày.","I work eight hours a day."],
+  ["nói chuyện với bạn","to talk with friends","c.time.buoi","Em nói chuyện với bạn bè ở nhà.","I talk with my friends at home."],
+  ["đi chơi","to hang out, go out","c.time.buoi","Cuối tuần em đi chơi với bạn bè.","At the weekend I hang out with friends."],
+  ["đổ rác","to take out the rubbish","c.time.buoi","Tối nay ai đổ rác?","Who's taking out the rubbish tonight?"],
+  ["tự","by yourself, on your own","c.time.buoi","Em tự nấu ăn mỗi tối.","I cook for myself every evening."],
+  ["chia sẻ","to share","c.time.buoi","Hai đứa chia sẻ việc nhà.","The two of them share the housework."],
+  ["ăn trưa","to eat lunch","c.time.buoi","Em ăn trưa với đồng nghiệp.","I have lunch with my co-workers."],
+  ["nghỉ trưa","to take a lunch break / nap","c.time.buoi","Em nghỉ trưa lúc 12 giờ.","I take my lunch break at noon."],
+  ["dọn dẹp nhà","to clean the house","c.time.buoi","Em dọn dẹp nhà vào Chủ nhật.","I clean the house on Sunday."],
+  ["giặt quần áo","to do the laundry","c.time.buoi","Em giặt đồ vào buổi sáng.","I do the laundry in the morning."],
+  ["rửa chén","to wash the dishes","c.time.buoi","Em rửa chén sau khi ăn tối.","I wash the dishes after dinner."],
+  ["đi siêu thị","to go to the supermarket","c.time.buoi","Thứ Bảy em đi siêu thị.","On Saturday I go to the supermarket."],
+  ["nấu ăn","to cook","c.time.buoi","Khi em làm việc ở nhà, em nấu đồ ăn Pháp.","When I work from home, I cook French food."],
+  ["ăn tối","to eat dinner","c.time.buoi","Tụi em ăn tối lúc 7 giờ.","We have dinner at 7."],
+  ["đi mua sắm","to go shopping","c.time.buoi","Em đi mua đồ khi trời đẹp.","I go shopping when the weather is nice."],
+  ["nghe nhạc","to listen to music","c.time.buoi","Em nghe nhạc trên xe buýt.","I listen to music on the bus."],
+  ["coi TV","to watch TV","c.time.buoi","Buổi tối em coi TV với gia đình.","In the evening I watch TV with my family."],
+  ["lướt mạng","to surf the internet","c.time.buoi","Em lướt mạng trước khi ngủ.","I surf the internet before I sleep."],
+  ["chơi game","to play games","c.time.buoi","Em chơi game với bạn bè.","I play games with my friends."],
+  ["chơi thể thao","to play sports","c.time.buoi","Em chơi thể thao với ba vào mỗi thứ Tư.","I play sport with my dad every Wednesday."],
+  ["dắt chó đi dạo","to walk the dog","c.time.buoi","Mỗi tối em dắt chó đi dạo.","Every evening I walk the dog."],
+  ["đi dạo","to take a walk","c.time.buoi","Cuối tuần tụi em đi dạo ở công viên.","At the weekend we take a walk in the park."],
+  ["gọi điện thoại","to make a phone call","c.time.buoi","Em gọi điện thoại cho ba má.","I phone my parents."],
+  ["gửi email","to send an email","c.time.buoi","Buổi sáng em gửi email cho khách.","In the morning I send emails to clients."],
+  ["nhắn tin cho","to text (someone)","c.time.buoi","Em nhắn tin cho gia đình khi em ở ngoài.","I text my family when I'm out."],
+  ["chạy","to run","c.time.buoi","Ba em chạy ở công viên mỗi sáng.","My dad runs in the park every morning."],
+  ["ngủ","to sleep","c.time.buoi","Em ngủ lúc 11 giờ.","I sleep at 11."],
+  ["mơ","to dream","c.time.buoi","Tối qua em mơ về Sài Gòn.","Last night I dreamt about Saigon."],
+  ["lau nhà","to mop the floor","c.time.buoi","Chủ nhật em lau nhà.","On Sunday I mop the floor."],
+  ["làm việc nhà","to do housework","c.time.buoi","Buổi tối em làm việc nhà.","In the evening I do the housework."],
+  ["thư giãn","to relax","c.time.buoi","Bạn làm gì để thư giãn?","What do you do to relax?"],
+  ["ngày thường","weekday","c.time.buoi","Bạn thường làm gì vào ngày thường?","What do you usually do on weekdays?"],
+  ["hoạt động hằng ngày","daily activities","c.time.buoi","Hoạt động hằng ngày của em rất đơn giản.","My daily activities are very simple."]],
+ s:[["Bạn thường làm gì vào cuối tuần?","What do you usually do at weekends?","cuối tuần"],
+    ["Bạn đi ngủ lúc mấy giờ?","What time do you go to bed?","đi ngủ"],
+    ["Em học 2 tiếng mỗi tối.","I study for two hours every evening.","học"]],
+ t:[["Bạn làm gì để thư giãn?","What do you do to relax?","Em nghe nhạc hoặc đi dạo.","I listen to music or take a walk."],
+    ["Bạn thường làm gì vào ngày thường?","What do you usually do on weekdays?","Em đi làm, tối về nấu ăn rồi coi TV.","I work, then cook and watch TV in the evening."],
+    ["Bạn đi ngủ lúc mấy giờ?","What time do you go to bed?","Khoảng 11 giờ.","Around 11."]],
+ x:[["Em mang giày rồi đi làm.","Em đeo giày rồi đi làm.","I put on my shoes and go to work.","Your 5/11 table had đeo giày and đeo dớ; the 13/11 class corrected them to mang giày and mang vớ."],
+    ["Em mang vớ.","Em đeo dớ.","I'm wearing socks.","Socks are vớ (Southern spelling, sounds like “dớ” in Saigon) and take mang."]]},
+
+{id:"core-2026-11-13",date:"2026-11-13",title:"Daily situations: what would you do?",summary:"Eleven morning situations to read, understand and answer: being late, toothpaste, a tired face, the shower, a job interview, shoes, socks, the helmet, breakfast, coffee or tea, exercise.",concepts:["c.mod.wear","c.mod.core"],
+ words:[
+  ["vội","in a rush, hurried","c.mod.core","Bạn rất vội và không biết nên làm gì trước.","You're in a rush and don't know what to do first."],
+  ["nếu là bạn","if you were in that situation","c.mod.core","Nếu là bạn, bạn sẽ làm gì?","If it were you, what would you do?"],
+  ["phát hiện","to discover, realise","c.mod.core","Bạn phát hiện kem đánh răng đã hết.","You realise the toothpaste has run out."],
+  ["kem đánh răng","toothpaste","c.mod.core","Kem đánh răng hết rồi.","The toothpaste has run out."],
+  ["trễ giờ","late (for a set time)","c.mod.core","Bạn sắp trễ giờ làm.","You're about to be late for work."],
+  ["chăm sóc răng miệng","to look after your teeth","c.mod.core","Theo bạn, điều gì quan trọng khi chăm sóc răng miệng?","In your opinion, what matters when looking after your teeth?"],
+  ["quan trọng","important","c.mod.core","Hôm nay bạn có một buổi gặp mặt quan trọng.","Today you have an important meeting."],
+  ["gương","mirror","c.mod.core","Bạn nhìn vào gương.","You look in the mirror."],
+  ["mệt mỏi","tired, worn out","c.mod.core","Mặt mình trông rất mệt mỏi.","My face looks very tired."],
+  ["tươi tắn","fresh, bright (face)","c.mod.core","Bạn muốn khuôn mặt trông tươi tắn hơn.","You want your face to look fresher."],
+  ["mồ hôi","sweat","c.mod.core","Trời nóng, người em đầy mồ hôi.","It's hot and I'm covered in sweat."],
+  ["bạn cùng phòng","roommate","c.mod.core","Bạn cùng phòng đang dùng nhà tắm.","My roommate is using the bathroom."],
+  ["nhà tắm","bathroom","c.mod.core","Nhà tắm ở cuối hành lang.","The bathroom is at the end of the corridor."],
+  ["trong lúc chờ","while waiting","c.mod.core","Trong lúc chờ, em sẽ đọc báo.","While I wait, I'll read the news."],
+  ["sạch sẽ","clean","c.mod.core","Em muốn cảm thấy sạch sẽ trước khi đi làm.","I want to feel clean before work."],
+  ["phỏng vấn xin việc","job interview","c.mod.wear","Ngày mai bạn có một buổi phỏng vấn xin việc.","Tomorrow you have a job interview."],
+  ["tủ","wardrobe, cupboard","c.mod.wear","Bạn mở tủ và thấy rất nhiều quần áo.","You open the wardrobe and see lots of clothes."],
+  ["áo sơ mi","shirt","c.mod.wear","Em sẽ mặc áo sơ mi trắng.","I'll wear a white shirt."],
+  ["áo thun","T-shirt","c.mod.wear","Bạn có một cái áo thun đen.","You have a black T-shirt."],
+  ["quần jean","jeans","c.mod.wear","Áo sơ mi với quần jean vừa lịch sự vừa thoải mái.","A shirt with jeans is both smart and comfortable."],
+  ["lịch sự","smart, polite, proper","c.mod.wear","Bạn muốn trông lịch sự.","You want to look smart."],
+  ["thoải mái","comfortable","c.mod.wear","Đôi giày này rất thoải mái.","These shoes are very comfortable."],
+  ["kiểu dáng","style, design","c.mod.wear","Khi mua giày, em quan tâm đến kiểu dáng.","When buying shoes, I care about the style."],
+  ["quan tâm đến","to care about","c.mod.wear","Bạn quan tâm đến giá tiền hay sự thoải mái?","Do you care about the price or the comfort?"],
+  ["vớ","socks (Southern)","c.mod.wear","Bạn thường mua vớ màu gì?","What colour socks do you usually buy?"],
+  ["cách","away (distance)","c.mod.core","Siêu thị chỉ cách nhà 5 phút.","The supermarket is only 5 minutes from home."],
+  ["nguy hiểm","dangerous","c.mod.core","Không đội nón bảo hiểm rất nguy hiểm.","Not wearing a helmet is very dangerous."],
+  ["trên đường đi làm","on the way to work","c.mod.core","Bạn có thể mua phở trên đường đi làm.","You can buy phở on the way to work."],
+  ["bánh mì ốp la","bread with fried eggs","c.mod.core","Em sẽ ăn bánh mì ốp la.","I'll have bread with fried eggs."],
+  ["sữa tươi","fresh milk","c.mod.core","Em uống một ly sữa tươi.","I drink a glass of fresh milk."],
+  ["thực đơn","menu","c.mod.core","Thực đơn có rất nhiều loại đồ uống.","The menu has lots of kinds of drinks."],
+  ["đồ uống","drink, beverage","c.mod.core","Bạn sẽ chọn đồ uống nào?","Which drink will you choose?"],
+  ["gần đây","recently, lately","c.mod.core","Gần đây bạn thường ngồi làm việc cả ngày.","Recently you often sit working all day."],
+  ["duy trì","to maintain, keep up","c.mod.core","Làm sao để duy trì thói quen tập thể dục?","How do you keep up an exercise habit?"],
+  ["thói quen","habit","c.mod.core","Đi làm bằng xe đạp là một thói quen tốt.","Cycling to work is a good habit."],
+  ["căng thẳng","stressed, tense","c.mod.core","Gần đây em cảm thấy căng thẳng.","Lately I've been feeling stressed."]],
+ s:[["Em rửa chén sau khi ăn tối.","I wash the dishes after dinner.","rửa chén"],
+    ["Em dọn dẹp nhà vào Chủ nhật.","I clean the house on Sunday.","dọn dẹp"],
+    ["Em giặt đồ vào buổi sáng.","I do the laundry in the morning.","giặt đồ"],
+    ["Em đọc sách trước khi đi ngủ.","I read a book before going to sleep.","trước khi"],
+    ["Em chơi game với bạn bè.","I play games with my friends.","chơi game"],
+    ["Em đi mua đồ khi trời đẹp.","I go shopping when the weather is nice.","đi mua đồ"],
+    ["Em nhắn tin cho gia đình khi em ở ngoài.","I text my family when I'm out.","nhắn tin"],
+    ["Nếu là em, em sẽ nhắn tin cho sếp để xin làm việc ở nhà.","If it were me, I'd text my boss to ask to work from home.","xin"],
+    ["Em thường đánh răng hai lần một ngày.","I usually brush my teeth twice a day.","đánh răng"],
+    ["Em sẽ mang đôi giày mới vì đôi cũ bị hư rồi.","I'll wear the new shoes because the old ones are broken.","mang"],
+    ["Theo em, đội nón bảo hiểm rất quan trọng.","In my opinion, wearing a helmet is very important.","quan trọng"],
+    ["Em sẽ tập yoga ở nhà vì gần đây em cảm thấy căng thẳng.","I'll do yoga at home because I've felt stressed lately.","căng thẳng"]],
+ t:[["Nếu là bạn, bạn sẽ làm gì?","If it were you, what would you do?","Nếu là em, em sẽ nhắn tin cho sếp để xin làm việc ở nhà.","If it were me, I'd text my boss to ask to work from home."],
+    ["Bạn thích rửa mặt bằng nước lạnh hay nước ấm?","Cold or warm water for your face?","Em thích nước lạnh, cho tỉnh ngủ.","Cold — it wakes me up."],
+    ["Bạn thường tắm vào buổi sáng hay buổi tối?","Do you shower in the morning or the evening?","Buổi sáng, vì em muốn sạch sẽ trước khi đi làm.","In the morning — I want to feel clean before work."]],
+ x:[["Em sẽ nhắn tin cho sếp để xin làm việc ở nhà.","Em sẽ nhắn tin cho sếp để hỏi làm việc ở nhà.","I'll text my boss to ask to work from home.","To ask for permission is xin; hỏi asks a question (from your homework)."],
+    ["Em thường uống cà phê đen nóng.","Em thường uống cà phê den nong.","I usually drink hot black coffee.","Write the tone marks: đen nóng."],
+    ["Em mang vớ trước khi mang giày.","Em đội vớ trước khi mang giày.","I put on socks before my shoes.","Socks and shoes take mang; đội is only for the head."]]},
+
+{id:"core-2026-11-21",date:"2026-11-21",title:"Talking about your day",summary:"Lisa's whole day as a dialogue, the Koga family text, and the words for husband, son, free time, trying, healthy food and making time for yourself.",concepts:["c.freq.adv","c.time.clock","c.mod.beforeafter"],
+ words:[
+  ["thay đồ","to change clothes","c.time.buoi","Về tới nhà, em thay đồ rồi dọn dẹp nhà.","When I get home, I change and clean the house."],
+  ["đồ ăn lành mạnh","healthy food","c.time.buoi","Em nấu ăn ở nhà vì muốn ăn đồ ăn lành mạnh.","I cook at home because I want to eat healthy food."],
+  ["trong khi","while","c.mod.beforeafter","Em rửa chén trong khi chồng em dọn dẹp.","I wash the dishes while my husband tidies up."],
+  ["chồng","husband","c.pron.family","Chồng tôi đã đến Việt Nam để làm việc.","My husband came to Vietnam to work."],
+  ["thời gian rảnh","free time","c.freq.adv","Khi có thời gian rảnh, em chơi game trên điện thoại.","When I have free time, I play games on my phone."],
+  ["cố gắng","to try","c.freq.adv","Em cố gắng chơi thể thao ba lần một tuần.","I try to play sport three times a week."],
+  ["khỏe mạnh","healthy, fit","c.freq.adv","Chơi thể thao giúp em khỏe mạnh.","Playing sport keeps me healthy."],
+  ["trong ngày","during the day","c.time.buoi","Trong ngày em làm việc, buổi tối em làm việc nhà.","I work during the day and do housework in the evening."],
+  ["dành thời gian cho","to make time for","c.freq.adv","Em luôn cố gắng dành thời gian cho bản thân.","I always try to make time for myself."],
+  ["khoảng","around, about","c.time.clock","Em ngủ khoảng 10 giờ rưỡi.","I go to sleep at around 10:30."],
+  ["bận rộn","busy","c.time.buoi","Vào ngày thường, chúng tôi rất bận rộn.","On weekdays we're very busy."],
+  ["dẫn","to take (someone somewhere)","c.time.buoi","Tôi dẫn con trai đi học.","I take my son to school."],
+  ["trung tâm ngôn ngữ","language centre","c.time.buoi","Tôi đi đến trung tâm ngôn ngữ để học tiếng Việt.","I go to the language centre to learn Vietnamese."],
+  ["tập luyện","to practise, train","c.time.buoi","Tôi ăn trưa với bạn Việt Nam để tập luyện tiếng Việt.","I have lunch with a Vietnamese friend to practise Vietnamese."],
+  ["đón","to pick up","c.time.buoi","Bốn giờ chiều, tôi đón con trai.","At four in the afternoon I pick up my son."],
+  ["kỳ nghỉ","holiday, vacation","c.time.buoi","Vào kỳ nghỉ, chúng tôi đi du lịch hoặc thăm bạn bè.","On holiday we travel or visit friends."],
+  ["thăm","to visit","c.time.buoi","Thỉnh thoảng em lái xe đi thăm gia đình.","Sometimes I drive to visit my family."],
+  ["con trai","son","c.pron.family","Con trai tôi và tôi đã đến Việt Nam để sống với anh ấy.","My son and I came to Vietnam to live with him."],
+  ["người Nhật","Japanese (person)","c.intro.origin","Chúng tôi là người Nhật.","We're Japanese."],
+  ["bữa trưa","lunch (the meal)","c.time.buoi","Buổi trưa, tôi có bữa trưa với bạn Việt Nam.","At midday I have lunch with a Vietnamese friend."]],
+ s:[["Em thức dậy lúc 6 giờ sáng.","I wake up at 6 a.m.","thức dậy"],
+    ["Em rửa mặt, đánh răng và tắm.","I wash my face, brush my teeth and take a shower.","rửa mặt"],
+    ["Em ăn sáng và uống cà phê trước khi đi làm.","I have breakfast and a coffee before work.","trước khi"],
+    ["Em đi làm bằng xe đạp lúc 7 giờ rưỡi.","I go to work by bike at 7:30.","bằng xe đạp"],
+    ["Ở công ty, em gửi email, nói chuyện với đồng nghiệp và gọi điện thoại.","At work I send emails, talk with co-workers and make phone calls.","gửi email"],
+    ["Sau giờ làm, thỉnh thoảng em đi siêu thị mua đồ ăn.","After work I sometimes go to the supermarket for groceries.","đi siêu thị"],
+    ["Mỗi tối, em dắt chó đi dạo sau khi ăn tối.","Every evening I walk the dog after dinner.","dắt chó đi dạo"],
+    ["Em đọc sách trước khi ngủ để thư giãn.","I read a book before bed to relax.","thư giãn"],
+    ["Sau 8 giờ tối, tôi luôn học tiếng Việt.","After 8 p.m. I always study Vietnamese.","luôn"]],
+ t:[["Bạn làm gì sau khi thức dậy?","What do you do after you wake up?","Em rửa mặt, đánh răng rồi đi tắm.","I wash my face, brush my teeth, then shower."],
+    ["Bạn đi làm bằng gì?","How do you get to work?","Em đi làm bằng xe đạp lúc 7 giờ rưỡi.","By bike, at 7:30."],
+    ["Bạn có ăn trưa ở công ty không?","Do you have lunch at work?","Có, em ăn trưa với đồng nghiệp rồi nghỉ trưa.","Yes, with my co-workers, then I take a break."],
+    ["Bạn có nấu ăn mỗi ngày không?","Do you cook every day?","Có, em hay nấu bữa tối vì muốn ăn đồ ăn lành mạnh.","Yes, I usually cook dinner because I want to eat healthily."],
+    ["Bạn làm gì vào cuối tuần?","What do you do at weekends?","Em đi chơi với bạn bè, đi mua sắm hoặc đi dạo ở công viên.","I hang out with friends, go shopping or walk in the park."],
+    ["Ngày của bạn có bận không?","Is your day busy?","Bận lắm, nhưng em luôn cố gắng dành thời gian cho mình.","Very, but I always try to make time for myself."]],
+ x:[["Em rửa chén trong khi chồng em dọn dẹp.","Em rửa chén trong khi chồng em là dọn dẹp.","I wash the dishes while my husband tidies up.","No là before a verb."],
+    ["Em cố gắng chơi thể thao ba lần một tuần.","Em cố gắng chơi thể thao lần ba một tuần.","I try to play sport three times a week.","The number goes before lần: ba lần."]]}
+];
+
+/* merge into the course once, before anything reads it */
+(function v21MergeCourse(){
+  const B=s=>flClean(String(s||""));
+  V21_CLASSES.forEach(function(c){
+    if(!CORE_LESSONS.some(l=>l.id===c.id)) CORE_LESSONS.push({id:c.id,date:c.date,title:c.title,summary:c.summary,concepts:c.concepts.slice()});
+    c.words.forEach(function(w,i){
+      const ex=w[3]?{vi:w[3],en:w[4]||""}:null;
+      const prior=CORE_COURSE.words.find(x=>B(x.vi)===B(w[0]));
+      if(prior){
+        [prior].concat(CORE_COURSE.all.filter(x=>x.id===prior.id)).forEach(x=>{ x.appearsIn=Array.from(new Set((x.appearsIn||[]).concat(c.id))); if(!x.ex&&ex) x.ex=ex; });
+        return;
+      }
+      const it={id:"course.v21."+c.date.replace(/-/g,"")+"."+i,vi:w[0],en:w[1],unit:"u10",theme:"",concept:w[2]||"c.sent.svo",north:null,opp:null,syn:null,note:null,ex:ex,sourceDate:c.date,origin:"course",south:/vớ|mang giày|mang vớ|nón|coi TV/.test(w[0])};
+      CORE_COURSE.words.push(it);
+      const a=Object.assign({kind:"word"},it); CORE_COURSE.all.push(a); CORE_COURSE.byId[a.id]=a;
+      (CORE_COURSE.itemsByConcept[it.concept]=CORE_COURSE.itemsByConcept[it.concept]||[]).push(it);
+    });
+    (c.s||[]).forEach(s=>{ CORE_COURSE.sentences.push({vi:s[0],en:s[1],c:c.concepts[0]}); });
+    const extra={}; if(c.s) extra.s=c.s; if(c.t) extra.t=c.t; if(c.x) extra.x=c.x; if(c.q) extra.q=c.q;
+    V20C("cls-"+c.id,extra);
+  });
+  if(typeof rebuildCourse==="function"&&COURSE===CORE_COURSE){ try{ rebuildCourse(); }catch(e){ console.warn("v21 rebuild",e); } }
+})();
+
+/* from 09/10 on, a class's word list is exactly the words taught that day
+   (the shared grammar concepts would otherwise pull in a hundred older words) */
+function classVocabulary(l){
+  if(l&&l.date&&l.date>="2026-10-09"&&/^core-/.test(l.id)) return COURSE.words.filter(w=>w.sourceDate===l.date||(w.appearsIn&&w.appearsIn.indexOf(l.id)>-1));
+  return classVocabulary_v20(l);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   v21 · TEXTS FOR THE TRANSLATION EXERCISES
+   VN: a whole Vietnamese text → translate it into English → answer questions
+       vi[] sentences, en[] model translation, ek[] English key ideas per
+       sentence ("a|b" = either, "wake*" = any ending), qs = questions.
+       A question with k (Vietnamese keys) is checked; one marked o is open
+       (your own answer) and shows a sample instead.
+   EN: a whole English text → translate it into Vietnamese with no help
+       en[] sentences, vi[] model, vk[] Vietnamese keys per sentence.
+   SIT: the eleven situations of 13/11 (read, understand, answer).
+   ═══════════════════════════════════════════════════════════════════════ */
+const V21_VN=[
+{id:"lan",title:"Một ngày của Lan",en:"Lan's day",cls:"core-2026-10-23",lvl:1,
+ vi:["Lan là nhân viên văn phòng.","Mỗi ngày, cô thức dậy lúc 6 giờ sáng.","Cô luôn luôn ăn sáng trước khi đi làm và thường đi làm bằng xe máy.","Sau giờ làm, Lan hay đi bộ ở công viên với bạn.","Lâu lâu, cô uống cà phê sau khi tan làm.","Đôi khi, cô đi ăn tối với đồng nghiệp.","Lan bình thường tập thể dục hai lần mỗi tuần.","Cô cũng học tiếng Việt mỗi tuần.","Cô đi mua quần áo mỗi tháng.","Lan gọi điện cho ba mẹ một lần mỗi ngày.","Cô gặp em gái ba lần mỗi tháng.","Lâu lâu, cả gia đình đi du lịch cùng nhau.","Dạo này, Lan bận hơn nên cô ấy hiếm khi coi phim.","Cô hiếm khi thức khuya vì muốn giữ sức khỏe.","Lan chưa bao giờ đi Nhật Bản, nhưng cô muốn đi trong tương lai.","Cô ấy nói mình không bao giờ hút thuốc vì không tốt cho sức khỏe."],
+ en:["Lan is an office worker.","Every day she wakes up at 6 a.m.","She always has breakfast before work and usually goes to work by motorbike.","After work, Lan often walks in the park with a friend.","Now and then she has a coffee after work.","Sometimes she goes out for dinner with her co-workers.","Lan normally exercises twice a week.","She also studies Vietnamese every week.","She goes clothes shopping every month.","Lan phones her parents once a day.","She sees her younger sister three times a month.","Now and then the whole family travels together.","Lately Lan is busier, so she rarely watches films.","She rarely stays up late because she wants to stay healthy.","Lan has never been to Japan, but she wants to go in the future.","She says she never smokes because it isn't good for her health."],
+ ek:[["office"],["every day|each day|daily","wake*|get* up|6"],["always","breakfast","motorbike|motorcycle|scooter"],["after work","walk*","park"],["now and then|sometimes|occasionally|from time to time","coffee"],["sometimes|occasionally","dinner","co-worker*|coworker*|colleague*"],["normally|usually","exercise*|work* out","twice|two times"],["also","vietnamese","every week|each week|weekly"],["clothes","every month|each month|monthly"],["call*|phone*","parents","once"],["sister","three times"],["family","travel*|trip*"],["busier|busy","so","rarely|seldom|hardly","film*|movie*"],["rarely|seldom","late","health*"],["never","japan","future"],["never","smok*","health*"]],
+ qs:[{q:"Lan luôn luôn làm gì trước khi đi làm?",en:"What does Lan always do before work?",a:"Cô ấy luôn luôn ăn sáng trước khi đi làm.",k:["ăn sáng"]},
+     {q:"Lan tập thể dục bao nhiêu lần mỗi tuần?",en:"How many times a week does Lan exercise?",a:"Lan tập thể dục hai lần mỗi tuần.",k:["hai lần|2 lần"]},
+     {q:"Dạo này, vì sao Lan hiếm khi coi phim?",en:"Why does Lan rarely watch films lately?",a:"Vì dạo này Lan bận hơn.",k:["bận"]},
+     {q:"Lan chưa bao giờ đi nước nào?",en:"Which country has Lan never been to?",a:"Lan chưa bao giờ đi Nhật Bản.",k:["Nhật"]},
+     {q:"Lan nói cô không bao giờ làm gì?",en:"What does Lan say she never does?",a:"Cô ấy nói cô không bao giờ hút thuốc.",k:["hút thuốc"]},
+     {q:"Còn bạn, bạn gọi điện cho ba mẹ bao lâu một lần?",en:"And you — how often do you phone your parents?",a:"Em gọi điện cho ba mẹ một lần một tuần.",o:1}]},
+
+{id:"koga",title:"Gia đình Koga",en:"The Koga family",cls:"core-2026-11-21",lvl:2,
+ vi:["Xin chào, mọi người.","Tôi tên là Koga.","Nhà tôi có ba người: chồng tôi, con trai tôi và tôi.","Chúng tôi là người Nhật.","Chồng tôi đã đến Việt Nam để làm việc.","Con trai tôi và tôi đã đến Việt Nam để sống với anh ấy.","Vào ngày thường, chúng tôi rất bận rộn.","Vào buổi sáng, chúng tôi thức dậy lúc 6 giờ 30 và ăn sáng lúc 7 giờ.","Sau đó, chồng tôi đi làm.","Tôi dẫn con trai đi học và đi siêu thị để mua đồ ăn.","Lúc 10 giờ, tôi đi đến trung tâm ngôn ngữ để học tiếng Việt.","Vào buổi trưa, tôi ăn trưa với một người bạn Việt Nam để tập luyện tiếng Việt.","Lúc 4 giờ chiều, tôi đón con trai.","Buổi tối, chúng tôi đi ăn lúc 7 giờ.","Sau 8 giờ tối, tôi luôn học tiếng Việt trong khi chồng tôi chơi với con trai.","Trước khi đi ngủ, tôi thường nghe nhạc hoặc đọc sách.","Vào kỳ nghỉ, chúng tôi đi du lịch hoặc thăm bạn bè."],
+ en:["Hello, everyone.","My name is Koga.","There are three of us: my husband, my son and me.","We are Japanese.","My husband came to Vietnam to work.","My son and I came to Vietnam to live with him.","On weekdays we are very busy.","In the morning we wake up at 6:30 and have breakfast at 7.","Then my husband goes to work.","I take my son to school and go to the supermarket to buy food.","At 10 I go to the language centre to study Vietnamese.","At midday I have lunch with a Vietnamese friend to practise Vietnamese.","At 4 p.m. I pick up my son.","In the evening we go out to eat at 7.","After 8 p.m. I always study Vietnamese while my husband plays with our son.","Before going to bed I usually listen to music or read a book.","On holiday we travel or visit friends."],
+ ek:[["hello|hi","everyone|everybody"],["name"],["three","husband","son"],["japanese"],["husband","vietnam","work*"],["son","live"],["weekday*","busy"],["morning","6:30|six thirty|half past six","breakfast","7|seven"],["then|after that","work"],["take*|bring*","school","supermarket","food|groceries"],["10|ten","language","vietnamese"],["lunch","friend","practi*"],["4|four","pick* up|collect*"],["evening","eat|dinner","7|seven"],["8|eight","always","while","play*"],["before","bed|sleep*","music","read*"],["holiday*|vacation*","travel*","visit*"]],
+ qs:[{q:"Gia đình của Koga có bao nhiêu người?",en:"How many people are in Koga's family?",a:"Gia đình Koga có ba người.",k:["ba|3"]},
+     {q:"Chồng của Koga đến Việt Nam để làm gì?",en:"Why did Koga's husband come to Vietnam?",a:"Chồng Koga đến Việt Nam để làm việc.",k:["làm việc"]},
+     {q:"Tại sao Koga và con trai đến Việt Nam?",en:"Why did Koga and her son come to Vietnam?",a:"Họ đến Việt Nam để sống với chồng Koga.",k:["sống"]},
+     {q:"Gia đình Koga thức dậy lúc mấy giờ vào ngày thường?",en:"What time does the family get up on weekdays?",a:"Họ thức dậy lúc 6 giờ 30.",k:["6 giờ 30|sáu giờ rưỡi|6 giờ rưỡi|6:30"]},
+     {q:"Sau khi ăn sáng, chồng của Koga đi đâu?",en:"Where does her husband go after breakfast?",a:"Sau khi ăn sáng, chồng Koga đi làm.",k:["đi làm"]},
+     {q:"Koga đưa con trai đi đâu vào buổi sáng?",en:"Where does Koga take her son in the morning?",a:"Koga dẫn con trai đi học.",k:["đi học|trường"]},
+     {q:"Koga đi học tiếng Việt lúc mấy giờ?",en:"What time does Koga go to her Vietnamese class?",a:"Koga đi học tiếng Việt lúc 10 giờ.",k:["10 giờ|mười giờ"]},
+     {q:"Buổi trưa, Koga ăn trưa với ai, để làm gì?",en:"Who does Koga have lunch with, and why?",a:"Koga ăn trưa với một người bạn Việt Nam để tập luyện tiếng Việt.",k:["bạn","tập|luyện"]},
+     {q:"Koga đón con trai lúc mấy giờ?",en:"What time does Koga pick up her son?",a:"Koga đón con trai lúc 4 giờ chiều.",k:["4 giờ|bốn giờ"]},
+     {q:"Sau 8 giờ tối, Koga làm gì trong khi chồng chơi với con trai?",en:"What does Koga do after 8 p.m. while her husband plays with their son?",a:"Koga học tiếng Việt.",k:["học tiếng Việt|học"]},
+     {q:"Trước khi đi ngủ, Koga hay làm gì?",en:"What does Koga usually do before bed?",a:"Koga thường nghe nhạc hoặc đọc sách.",k:["nghe nhạc|đọc sách"]},
+     {q:"Vào kỳ nghỉ, gia đình Koga làm gì?",en:"What does the Koga family do on holiday?",a:"Họ đi du lịch hoặc thăm bạn bè.",k:["du lịch|thăm"]}]},
+
+{id:"alexweek",title:"Tuần làm việc của Alex",en:"Alex's working week",lvl:2,gl:[["tổ chức quốc tế","international organisation"],["cách","away (distance)"],["quên","to forget"]],
+ vi:["Alex làm việc ở một tổ chức quốc tế ở Paris.","Ngày thường, anh thức dậy lúc 7 giờ, đánh răng, tắm rồi mặc quần áo.","Anh thường đi làm bằng xe đạp vì văn phòng chỉ cách nhà 15 phút.","Buổi sáng anh có nhiều buổi họp, nên anh hay uống hai ly cà phê.","Buổi trưa, anh ăn trưa với đồng nghiệp ở một quán gần công ty.","Sau giờ làm, lâu lâu anh đi tập thể dục, đôi khi anh đi uống bia với bạn bè.","Thứ Tư và thứ Bảy, anh học tiếng Việt.","Anh cố gắng nói tiếng Việt với Lan Anh mỗi ngày, nhưng đôi khi anh hơi bực mình vì quên từ.","Cuối tuần, hai người thường đi mua đồ hoặc ăn ngoài.","Trong tương lai, Alex muốn sống ở Sài Gòn."],
+ en:["Alex works at an international organisation in Paris.","On weekdays he wakes up at 7, brushes his teeth, showers and then gets dressed.","He usually goes to work by bike because the office is only 15 minutes from home.","In the morning he has a lot of meetings, so he often drinks two coffees.","At lunchtime he eats with his co-workers at a place near the office.","After work he sometimes goes to exercise, and occasionally he goes for a beer with friends.","On Wednesdays and Saturdays he studies Vietnamese.","He tries to speak Vietnamese with Lan Anh every day, but sometimes he gets a bit annoyed because he forgets words.","At the weekend the two of them usually go shopping or eat out.","In the future Alex wants to live in Saigon."],
+ ek:[["work*","international","paris"],["weekday*","7|seven","teeth","shower*","dress*"],["usually|often","bike|bicycle|cycl*","15|fifteen","minute*"],["morning","meeting*","so","two","coffee*"],["lunch*","co-worker*|coworker*|colleague*","near"],["after work","exercis*|gym|work* out","beer","friend*"],["wednesday*","saturday*","vietnamese"],["tr*","every day|each day|daily","annoy*|upset|frustrat*","forget*|forgot*"],["weekend","shopping|shop","eat out"],["future","live","saigon"]],
+ qs:[{q:"Alex đi làm bằng gì? Tại sao?",en:"How does Alex get to work, and why?",a:"Anh đi làm bằng xe đạp vì văn phòng chỉ cách nhà 15 phút.",k:["xe đạp","15 phút|mười lăm phút|gần"]},
+     {q:"Tại sao buổi sáng Alex hay uống hai ly cà phê?",en:"Why does Alex often drink two coffees in the morning?",a:"Vì buổi sáng anh có nhiều buổi họp.",k:["họp"]},
+     {q:"Alex ăn trưa với ai?",en:"Who does Alex have lunch with?",a:"Anh ăn trưa với đồng nghiệp.",k:["đồng nghiệp"]},
+     {q:"Khi nào Alex học tiếng Việt?",en:"When does Alex study Vietnamese?",a:"Alex học tiếng Việt vào thứ Tư và thứ Bảy.",k:["thứ Tư|thứ tư","thứ Bảy|thứ bảy"]},
+     {q:"Vì sao đôi khi Alex bực mình?",en:"Why does Alex sometimes get annoyed?",a:"Vì anh quên từ.",k:["quên"]},
+     {q:"Còn bạn, sau giờ làm bạn thường làm gì?",en:"And you — what do you usually do after work?",a:"Sau giờ làm, em thường đi tập thể dục rồi về nhà nấu ăn.",o:1}]},
+
+{id:"chunhat",title:"Chủ nhật của nhà Lan Anh",en:"Sunday at Lan Anh's",lvl:2,gl:[["canh chua","sour soup"],["cá kho","braised fish"],["thời tiết","weather"]],
+ vi:["Chủ nhật là ngày nghỉ của cả gia đình Lan Anh.","Buổi sáng, ba Lan Anh thường đọc báo và uống trà.","Má đi chợ sớm để mua thực phẩm tươi.","Lan Anh dọn dẹp nhà, còn em trai cô giặt quần áo và đổ rác.","Buổi trưa, cả gia đình ăn cơm chung.","Má nấu canh chua và cá kho, đó là món yêu thích của ba.","Buổi chiều, mọi người nghỉ trưa, rồi Lan Anh dắt chó đi dạo ở công viên.","Buổi tối, tùy vào thời tiết, cả nhà ăn ngoài hoặc ở nhà coi TV.","Lan Anh nói Chủ nhật là ngày cô thích nhất trong tuần."],
+ en:["Sunday is the whole family's day off at Lan Anh's.","In the morning, Lan Anh's dad usually reads the paper and drinks tea.","Her mum goes to the market early to buy fresh food.","Lan Anh cleans the house, and her younger brother does the laundry and takes out the rubbish.","At midday the whole family eats together.","Her mum cooks sour soup and braised fish — her dad's favourite dish.","In the afternoon everyone has a nap, then Lan Anh walks the dog in the park.","In the evening, depending on the weather, the family eats out or stays home and watches TV.","Lan Anh says Sunday is her favourite day of the week."],
+ ek:[["sunday","day off","family"],["morning","dad|father","read*","news*|paper","tea"],["mum|mom|mother","market","early","fresh"],["clean*|tid*","brother","laundry|wash*","rubbish|trash|garbage"],["midday|noon|lunch*","whole family|everyone","together"],["cook*","soup","fish","favourite|favorite"],["afternoon","nap|rest","walk*","dog","park"],["evening","depend*","weather","eat* out","tv|television"],["sunday","favourite|favorite|like* best|like* most","week"]],
+ qs:[{q:"Ai đọc báo vào buổi sáng?",en:"Who reads the paper in the morning?",a:"Ba của Lan Anh đọc báo.",k:["ba"]},
+     {q:"Tại sao má đi chợ sớm?",en:"Why does her mum go to the market early?",a:"Để mua thực phẩm tươi.",k:["tươi"]},
+     {q:"Em trai Lan Anh làm việc nhà gì?",en:"Which chores does her brother do?",a:"Em trai cô giặt quần áo và đổ rác.",k:["giặt","đổ rác"]},
+     {q:"Món yêu thích của ba là gì?",en:"What is her dad's favourite dish?",a:"Canh chua và cá kho.",k:["canh chua|cá kho"]},
+     {q:"Buổi tối, cả nhà ăn ngoài hay ở nhà tùy vào cái gì?",en:"Whether they eat out or stay home depends on what?",a:"Tùy vào thời tiết.",k:["thời tiết"]},
+     {q:"Ngày nào trong tuần bạn thích nhất? Tại sao?",en:"Which day of the week do you like best, and why?",a:"Em thích thứ Bảy nhất vì em được ngủ trễ và đi chơi với bạn bè.",o:1}]},
+
+{id:"voivang",title:"Buổi sáng vội vàng",en:"A rushed morning",lvl:2,gl:[["đồng hồ báo thức","alarm clock"],["kêu","to ring (an alarm)"],["bắt đầu","to start"],["báo","to let someone know"]],
+ vi:["Sáng thứ Hai, đồng hồ báo thức không kêu.","Minh thức dậy lúc 8 giờ, trong khi buổi họp bắt đầu lúc 8 giờ 30.","Anh rất vội.","Anh đánh răng, rửa mặt và thay đồ trong năm phút.","Anh không có thời gian ăn sáng, nên anh mua một ổ bánh mì trên đường đi làm.","Nhưng trời mưa và đường kẹt xe.","Minh gọi điện cho đồng nghiệp để báo là anh sẽ tới trễ mười lăm phút.","Đồng nghiệp nói: “Không sao, tụi mình chờ anh.”","Từ hôm đó, Minh luôn luôn đặt hai cái đồng hồ báo thức."],
+ en:["On Monday morning the alarm clock didn't go off.","Minh woke up at 8, while the meeting started at 8:30.","He was in a real rush.","He brushed his teeth, washed his face and got changed in five minutes.","He had no time for breakfast, so he bought a bánh mì on the way to work.","But it was raining and the roads were jammed.","Minh called a co-worker to say he would be fifteen minutes late.","The co-worker said: “No problem, we'll wait for you.”","Since that day Minh always sets two alarms."],
+ ek:[["monday","alarm"],["wok*|wake*","8|eight","meeting","8:30|half past eight|eight thirty"],["rush*|hurr*"],["teeth","face","chang*|dress*","five|5"],["time","breakfast","so","b*nh m*|sandwich|bread|baguette","way to work"],["rain*","traffic|jam*"],["call*|phon*","co-worker*|coworker*|colleague*","late","fifteen|15"],["no problem|it's fine|it's ok*|don't worry","wait*"],["since|from then|from that day","always","two","alarm*"]],
+ qs:[{q:"Tại sao Minh thức dậy trễ?",en:"Why did Minh wake up late?",a:"Vì đồng hồ báo thức không kêu.",k:["báo thức"]},
+     {q:"Buổi họp bắt đầu lúc mấy giờ?",en:"What time did the meeting start?",a:"Buổi họp bắt đầu lúc 8 giờ 30.",k:["8 giờ 30|tám giờ rưỡi|8 giờ rưỡi|8:30"]},
+     {q:"Minh ăn sáng ở đâu?",en:"Where did Minh have breakfast?",a:"Anh mua bánh mì trên đường đi làm.",k:["bánh mì","trên đường"]},
+     {q:"Minh gọi điện cho ai, để làm gì?",en:"Who did Minh call, and why?",a:"Anh gọi cho đồng nghiệp để báo là anh sẽ tới trễ.",k:["đồng nghiệp","trễ"]},
+     {q:"Bây giờ Minh làm gì để không thức dậy trễ?",en:"What does Minh do now so as not to oversleep?",a:"Minh đặt hai cái đồng hồ báo thức.",k:["hai|2"]},
+     {q:"Còn bạn, bạn có cách nào để không thức dậy trễ?",en:"And you — how do you make sure you don't oversleep?",a:"Em đi ngủ sớm và đặt điện thoại xa giường.",o:1}]},
+
+{id:"phongvan",title:"Phỏng vấn xin việc",en:"The job interview",lvl:2,gl:[["công ty du lịch","travel company"],["đầm","dress"],["chật","tight"],["quần tây","trousers"],["hồ sơ","CV, application file"]],
+ vi:["Ngày mai, Thảo có một buổi phỏng vấn xin việc ở một công ty du lịch.","Tối nay, cô mở tủ quần áo và không biết nên mặc gì.","Cô có một cái đầm đỏ rất đẹp, nhưng hơi chật.","Cô cũng có áo sơ mi trắng và quần tây đen.","Thảo muốn trông lịch sự nhưng vẫn thoải mái, nên cô chọn áo sơ mi trắng.","Cô chuẩn bị giày, túi xách và hồ sơ trước khi đi ngủ.","Cô hơi căng thẳng, nên cô nghe nhạc và đọc sách một chút để thư giãn.","Cô đi ngủ lúc mười giờ để sáng mai trông tươi tắn."],
+ en:["Tomorrow Thao has a job interview at a travel company.","Tonight she opens her wardrobe and doesn't know what to wear.","She has a very pretty red dress, but it's a bit tight.","She also has a white shirt and black trousers.","Thao wants to look smart but still comfortable, so she chooses the white shirt.","She gets her shoes, bag and CV ready before going to bed.","She's a bit stressed, so she listens to music and reads a little to relax.","She goes to bed at ten so she'll look fresh tomorrow morning."],
+ ek:[["tomorrow","interview","travel"],["tonight","wardrobe|closet","what to wear"],["red","dress","tight"],["white","shirt","black","trousers|pants"],["smart|professional|neat|polite","comfortable","choos*|pick*"],["shoes","bag","cv|resume|résumé|file|documents","before"],["stress*|nervous|tense","music","read*","relax*"],["ten|10","fresh"]],
+ qs:[{q:"Thảo phỏng vấn ở công ty gì?",en:"What kind of company is Thao's interview with?",a:"Ở một công ty du lịch.",k:["du lịch"]},
+     {q:"Tại sao Thảo không mặc đầm đỏ?",en:"Why doesn't Thao wear the red dress?",a:"Vì cái đầm hơi chật.",k:["chật"]},
+     {q:"Cuối cùng Thảo chọn mặc gì?",en:"What does Thao choose in the end?",a:"Cô chọn áo sơ mi trắng và quần tây đen.",k:["áo sơ mi"]},
+     {q:"Thảo làm gì để thư giãn?",en:"What does Thao do to relax?",a:"Cô nghe nhạc và đọc sách.",k:["nghe nhạc|đọc sách"]},
+     {q:"Tại sao Thảo đi ngủ lúc mười giờ?",en:"Why does Thao go to bed at ten?",a:"Để sáng mai trông tươi tắn.",k:["tươi tắn"]},
+     {q:"Theo bạn, mặc đẹp hay mặc thoải mái quan trọng hơn?",en:"For you, is looking good or being comfortable more important?",a:"Theo em, mặc thoải mái quan trọng hơn, nhưng đi phỏng vấn thì phải lịch sự.",o:1}]},
+
+{id:"cungphong",title:"Bạn cùng phòng",en:"Roommates",lvl:3,gl:[["ở chung","to share a flat"],["công bằng","fair"],["chia lại","to divide again"]],
+ vi:["Hùng ở chung với một bạn cùng phòng tên là Tuấn.","Hai người chia tiền nhà, tiền điện và tiền nước.","Mỗi tuần, họ chia việc nhà: Hùng rửa chén và đổ rác, Tuấn lau nhà và giặt quần áo.","Nhưng dạo này Tuấn rất bận, nên anh hiếm khi lau nhà.","Hùng hơi bực mình, nhưng anh không nói gì.","Tối qua, Hùng đi làm về, trời rất nóng và người anh đầy mồ hôi.","Anh muốn đi tắm ngay, nhưng Tuấn đang dùng nhà tắm.","Trong lúc chờ, Hùng nghĩ: “Tụi mình phải nói chuyện.”","Sau đó, hai người ngồi uống trà và chia lại việc nhà cho công bằng."],
+ en:["Hung shares a flat with a roommate called Tuan.","The two of them split the rent, the electricity and the water.","Every week they divide the housework: Hung washes the dishes and takes out the rubbish, Tuan mops the floor and does the laundry.","But lately Tuan is very busy, so he rarely mops the floor.","Hung is a little annoyed, but he doesn't say anything.","Last night Hung came home from work; it was very hot and he was covered in sweat.","He wanted a shower straight away, but Tuan was using the bathroom.","While he waited, Hung thought: “We need to talk.”","Afterwards the two of them sat down over tea and shared out the housework again, fairly."],
+ ek:[["roommate|flatmate|room-mate","tuan"],["split*|share*|divide*","rent","electric*","water"],["every week|each week","housework|chores","dishes","rubbish|trash|garbage","mop*|floor","laundry"],["lately|recently","busy","rarely|seldom|hardly"],["annoy*|upset|irritat*","say|said"],["last night|yesterday evening","home","hot","sweat*"],["shower","bathroom"],["while","wait*","talk"],["tea","fair*"]],
+ qs:[{q:"Hùng và Tuấn chia những tiền gì?",en:"Which costs do Hung and Tuan split?",a:"Họ chia tiền nhà, tiền điện và tiền nước.",k:["tiền nhà|tiền điện|tiền nước"]},
+     {q:"Việc nhà của Hùng là gì?",en:"What are Hung's chores?",a:"Hùng rửa chén và đổ rác.",k:["rửa chén","đổ rác"]},
+     {q:"Tại sao Hùng bực mình?",en:"Why is Hung annoyed?",a:"Vì dạo này Tuấn hiếm khi lau nhà.",k:["lau nhà"]},
+     {q:"Tối qua tại sao Hùng phải chờ?",en:"Why did Hung have to wait last night?",a:"Vì Tuấn đang dùng nhà tắm.",k:["nhà tắm|tắm"]},
+     {q:"Cuối cùng hai người làm gì?",en:"What do they do in the end?",a:"Họ ngồi uống trà và chia lại việc nhà.",k:["chia"]},
+     {q:"Bạn thích ở một mình hay ở với bạn cùng phòng? Vì sao?",en:"Do you prefer living alone or with a roommate? Why?",a:"Em thích ở một mình vì em thích yên tĩnh.",o:1}]},
+
+{id:"anngoai",title:"Ăn ngoài hay nấu ở nhà?",en:"Eat out or cook at home?",lvl:2,gl:[["để dành tiền","to save money"],["mời","to invite"],["giúp","to help"]],
+ vi:["Ở Sài Gòn, nhiều người ăn ngoài vì đồ ăn ngon và rẻ.","Một tô phở chỉ khoảng năm mươi ngàn, một dĩa cơm tấm khoảng bốn mươi ngàn.","Chị Mai là nhân viên văn phòng, chị ăn sáng và ăn trưa ở ngoài gần như mỗi ngày.","Nhưng buổi tối, chị cố gắng nấu ăn ở nhà vì muốn ăn đồ ăn lành mạnh và để dành tiền.","Cuối tuần, chị đi siêu thị mua thực phẩm tươi cho cả tuần.","Chị nói nấu ăn giúp chị thư giãn sau một ngày làm việc.","Lâu lâu, chị mời đồng nghiệp tới nhà ăn tối."],
+ en:["In Saigon many people eat out because the food is good and cheap.","A bowl of phở is only about fifty thousand, a plate of broken rice about forty thousand.","Mai is an office worker; she has breakfast and lunch out almost every day.","But in the evening she tries to cook at home because she wants to eat healthy food and save money.","At the weekend she goes to the supermarket to buy fresh food for the whole week.","She says cooking helps her relax after a day at work.","Now and then she invites her co-workers round for dinner."],
+ ek:[["saigon","eat out","good|delicious|tasty","cheap"],["bowl","about|around","fifty|50","plate","rice","forty|40"],["office","breakfast","lunch","almost|nearly","every day"],["evening","tr*","cook*","healthy","sav*"],["weekend","supermarket","fresh","week"],["cook*","help*","relax*"],["now and then|sometimes|occasionally|from time to time","invit*","co-worker*|coworker*|colleague*","dinner"]],
+ qs:[{q:"Tại sao nhiều người ở Sài Gòn ăn ngoài?",en:"Why do many people in Saigon eat out?",a:"Vì đồ ăn ngon và rẻ.",k:["ngon|rẻ"]},
+     {q:"Một tô phở khoảng bao nhiêu tiền?",en:"About how much is a bowl of phở?",a:"Khoảng năm mươi ngàn.",k:["năm mươi|50|năm chục"]},
+     {q:"Tại sao buổi tối chị Mai nấu ăn ở nhà?",en:"Why does Mai cook at home in the evening?",a:"Vì chị muốn ăn đồ ăn lành mạnh và để dành tiền.",k:["lành mạnh|để dành"]},
+     {q:"Nấu ăn giúp chị Mai làm gì?",en:"What does cooking help Mai do?",a:"Nấu ăn giúp chị thư giãn.",k:["thư giãn"]},
+     {q:"Bạn thích ăn ngoài hay nấu ở nhà? Vì sao?",en:"Do you prefer eating out or cooking at home? Why?",a:"Em thích nấu ở nhà vì em thích nấu đồ ăn Pháp.",o:1}]},
+
+{id:"thoiquen",title:"Một thói quen tốt",en:"A good habit",lvl:3,gl:[["đau lưng","backache"],["khuyên","to advise"],["ít nhất","at least"],["lúc đầu","at first"],["thay vì","instead of"],["bắt đầu","to start"]],
+ vi:["Gần đây, anh Phúc ngồi làm việc cả ngày nên anh hay đau lưng và cảm thấy căng thẳng.","Bác sĩ khuyên anh nên tập thể dục ít nhất ba lần một tuần.","Lúc đầu, anh thấy khó vì anh không thích những bài tập quá khó.","Bây giờ, mỗi sáng anh đi bộ ba mươi phút ở công viên, và thứ Bảy anh chơi thể thao với bạn bè.","Anh cũng đi làm bằng xe đạp thay vì xe máy.","Sau hai tháng, anh khỏe mạnh hơn và ngủ ngon hơn.","Anh nói: “Muốn duy trì thói quen, phải bắt đầu từ những việc nhỏ.”"],
+ en:["Recently Phuc has been sitting at work all day, so he often has backache and feels stressed.","The doctor advised him to exercise at least three times a week.","At first he found it hard, because he doesn't like workouts that are too difficult.","Now he walks for thirty minutes in the park every morning, and on Saturdays he plays sport with friends.","He also cycles to work instead of taking his motorbike.","After two months he is fitter and sleeps better.","He says: “To keep up a habit, you have to start with small things.”"],
+ ek:[["recent*|lately","sit*","all day","back*","stress*"],["doctor","advis*|told|recommend*","exercise","at least","three"],["at first|in the beginning","hard|difficult","too"],["every morning|each morning","walk*","thirty|30","park","saturday*","sport*"],["bike|bicycle|cycl*","instead"],["two|2","month*","healthier|fitter|healthy","sleep*"],["habit","start*|begin*","small"]],
+ qs:[{q:"Tại sao anh Phúc hay đau lưng?",en:"Why does Phuc often have backache?",a:"Vì anh ngồi làm việc cả ngày.",k:["ngồi"]},
+     {q:"Bác sĩ khuyên anh làm gì?",en:"What did the doctor advise?",a:"Bác sĩ khuyên anh tập thể dục ít nhất ba lần một tuần.",k:["tập thể dục","ba lần|3 lần"]},
+     {q:"Bây giờ mỗi sáng anh Phúc làm gì?",en:"What does Phuc do every morning now?",a:"Anh đi bộ ba mươi phút ở công viên.",k:["đi bộ"]},
+     {q:"Anh đi làm bằng gì?",en:"How does he get to work?",a:"Anh đi làm bằng xe đạp.",k:["xe đạp"]},
+     {q:"Sau hai tháng thì sao?",en:"What happened after two months?",a:"Anh khỏe mạnh hơn và ngủ ngon hơn.",k:["khỏe|ngủ ngon"]},
+     {q:"Bạn làm gì để duy trì thói quen tập thể dục?",en:"What do you do to keep up an exercise habit?",a:"Em đi làm bằng xe đạp mỗi ngày và tập yoga cuối tuần.",o:1}]},
+
+{id:"ngaynghi",title:"Một ngày nghỉ một mình",en:"A day off alone",lvl:2,gl:[["đi công tác","to be on a business trip"],["pha","to make (a drink)"],["đặt","to order"],["nhớ","to miss; to remember"]],
+ vi:["Hôm nay là ngày nghỉ của Lan Anh.","Alex đi công tác ở Hà Nội, nên cô ở nhà một mình.","Cô ngủ tới chín giờ, rồi pha một ly cà phê sữa đá.","Buổi sáng, cô lướt mạng, nghe nhạc và nhắn tin cho bạn bè.","Buổi trưa, cô không muốn nấu ăn, nên cô đặt đồ ăn trên app.","Buổi chiều, trời nắng đẹp, cô đi mua đồ ở chợ Bến Thành và mua một cái áo dài mới.","Buổi tối, Alex gọi điện cho cô và hai người nói chuyện một tiếng.","Lan Anh nói: “Ở một mình cũng vui, nhưng em nhớ anh.”"],
+ en:["Today is Lan Anh's day off.","Alex is on a business trip in Hanoi, so she's home alone.","She sleeps until nine, then makes an iced milk coffee.","In the morning she surfs the internet, listens to music and texts her friends.","At midday she doesn't feel like cooking, so she orders food on an app.","In the afternoon it's sunny and lovely, so she goes shopping at Ben Thanh market and buys a new áo dài.","In the evening Alex calls her and they talk for an hour.","Lan Anh says: “Being on my own is fun too, but I miss you.”"],
+ ek:[["today","day off"],["business","hanoi","alone|by herself|on her own"],["sleep*|slept","nine|9","coffee"],["morning","internet|online|web","music","text*|messag*","friend*"],["midday|noon|lunch*","cook*","order*","app"],["afternoon","sun*","shop*","market","new","dress|ao dai|áo dài"],["evening","call*|phon*","hour"],["alone|on my own|by myself","fun","miss"]],
+ qs:[{q:"Tại sao Lan Anh ở nhà một mình?",en:"Why is Lan Anh home alone?",a:"Vì Alex đi công tác ở Hà Nội.",k:["công tác|Hà Nội"]},
+     {q:"Buổi sáng cô làm gì?",en:"What does she do in the morning?",a:"Cô lướt mạng, nghe nhạc và nhắn tin cho bạn bè.",k:["lướt mạng|nghe nhạc|nhắn tin"]},
+     {q:"Tại sao cô đặt đồ ăn trên app?",en:"Why does she order food on an app?",a:"Vì cô không muốn nấu ăn.",k:["nấu"]},
+     {q:"Buổi chiều cô mua gì?",en:"What does she buy in the afternoon?",a:"Cô mua một cái áo dài mới.",k:["áo dài"]},
+     {q:"Alex và Lan Anh nói chuyện bao lâu?",en:"How long do they talk?",a:"Hai người nói chuyện một tiếng.",k:["một tiếng|1 tiếng"]},
+     {q:"Bạn thích làm gì vào ngày nghỉ?",en:"What do you like doing on your day off?",a:"Vào ngày nghỉ, em thích ngủ trễ rồi đi uống cà phê với bạn.",o:1}]}
+];
+
+const V21_EN=[
+{id:"lisa",title:"Lisa's day",vi_t:"Một ngày của Lisa",cls:"core-2026-11-21",lvl:2,
+ en:["I wake up at 6 a.m.","I wash my face, brush my teeth and take a shower.","Then I get dressed and put on my socks and shoes.","I eat breakfast and drink coffee before work.","I go to work by bike at 7:30.","At work I send emails, talk with my co-workers and make phone calls.","I eat lunch with my co-workers and take a lunch break at noon.","After work I sometimes go to the supermarket to buy groceries.","When I get home, I change clothes, clean the house and do the laundry.","I usually cook dinner because I want to eat healthy food.","I wash the dishes while my husband tidies up.","Before bed I read a book to relax."],
+ vi:["Em thức dậy lúc 6 giờ sáng.","Em rửa mặt, đánh răng và tắm.","Sau đó em mặc quần áo, mang vớ và mang giày.","Em ăn sáng và uống cà phê trước khi đi làm.","Em đi làm bằng xe đạp lúc 7 giờ rưỡi.","Ở công ty, em gửi email, nói chuyện với đồng nghiệp và gọi điện thoại.","Em ăn trưa với đồng nghiệp và nghỉ trưa lúc 12 giờ.","Sau giờ làm, thỉnh thoảng em đi siêu thị mua đồ ăn.","Khi về nhà, em thay đồ, dọn dẹp nhà và giặt quần áo.","Em thường nấu bữa tối vì em muốn ăn đồ ăn lành mạnh.","Em rửa chén trong khi chồng em dọn dẹp.","Trước khi đi ngủ, em đọc sách để thư giãn."],
+ vk:[["thức dậy","6 giờ|sáu giờ"],["rửa mặt","đánh răng","tắm"],["mặc quần áo|mặc đồ|thay đồ","mang vớ|đi tất","mang giày|đi giày"],["ăn sáng","uống cà phê","trước khi"],["đi làm","xe đạp","rưỡi|30"],["gửi email","nói chuyện","đồng nghiệp","gọi điện"],["ăn trưa","nghỉ trưa","12 giờ|mười hai giờ|buổi trưa"],["sau giờ làm|tan làm","thỉnh thoảng|đôi khi|lâu lâu","siêu thị","mua"],["về nhà|về tới nhà","thay đồ|thay quần áo","dọn dẹp|dọn nhà","giặt"],["thường|hay","nấu","vì","lành mạnh"],["rửa chén","trong khi","chồng"],["trước khi","đọc sách","để","thư giãn"]]},
+
+{id:"weekday",title:"My weekday",vi_t:"Ngày thường của tôi",lvl:2,
+ en:["On weekdays I am very busy.","I always eat breakfast at home, but I rarely have time to cook.","I usually go to work by motorbike.","I have a meeting every morning at nine.","After work I sometimes eat out with my co-workers.","I call my parents once a week.","I have never been to Japan, but I want to go in the future.","I never smoke because it is not good for my health."],
+ vi:["Ngày thường em rất bận.","Em luôn luôn ăn sáng ở nhà, nhưng em hiếm khi có thời gian nấu ăn.","Em thường đi làm bằng xe máy.","Mỗi sáng em có buổi họp lúc chín giờ.","Sau giờ làm, đôi khi em ăn ngoài với đồng nghiệp.","Em gọi điện cho ba má một lần một tuần.","Em chưa bao giờ đi Nhật Bản, nhưng em muốn đi trong tương lai.","Em không bao giờ hút thuốc vì nó không tốt cho sức khỏe."],
+ vk:[["ngày thường","bận"],["luôn luôn|luôn","ăn sáng","hiếm khi|ít khi","thời gian","nấu"],["thường|hay","đi làm","xe máy"],["mỗi sáng|mỗi buổi sáng|sáng nào","họp","9 giờ|chín giờ"],["sau giờ làm|tan làm","đôi khi|thỉnh thoảng|lâu lâu","ăn ngoài","đồng nghiệp"],["gọi","ba má|ba mẹ|bố mẹ","một lần","tuần"],["chưa bao giờ","Nhật","trong tương lai|sau này"],["không bao giờ","hút thuốc","sức khỏe"]]},
+
+{id:"dayoff",title:"My day off",vi_t:"Ngày nghỉ của tôi",cls:"core-2026-10-09",lvl:2,
+ en:["Tomorrow is my day off.","I want to stay home alone and sleep until ten.","In the afternoon I will go shopping with my mum.","My favourite shop is near Ben Thanh market.","The time we come home depends on the weather.","I am a little upset because my motorbike broke down.","Remember to call me when you get there.","The next lesson will be a little harder."],
+ vi:["Ngày mai là ngày nghỉ của em.","Em muốn ở nhà một mình và ngủ tới mười giờ.","Buổi chiều em sẽ đi mua đồ với má.","Tiệm yêu thích của em ở gần chợ Bến Thành.","Giờ về nhà tùy vào thời tiết.","Em hơi bực mình vì xe máy bị hư.","Nhớ gọi cho em khi tới nơi nha.","Bài học tiếp theo sẽ khó hơn một chút."],
+ vk:[["ngày mai","ngày nghỉ"],["ở nhà","một mình","ngủ","10 giờ|mười giờ"],["buổi chiều","sẽ","mua đồ|mua sắm","má|mẹ"],["yêu thích|thích nhất","gần","Bến Thành"],["tùy vào|tùy","thời tiết"],["hơi","bực mình","hư"],["nhớ","gọi","khi","tới nơi|đến nơi"],["bài học","tiếp theo","khó hơn","một chút|chút"]]},
+
+{id:"rushed",title:"A rushed morning",vi_t:"Buổi sáng vội vàng",cls:"core-2026-11-13",lvl:3,
+ en:["This morning I woke up late because I went to bed late last night.","I had a meeting at half past eight, so I was in a hurry.","I brushed my teeth, but the toothpaste had run out.","I did not have time to eat breakfast.","I bought a bánh mì on the way to work.","I texted my boss to say I would be ten minutes late.","Next time I will set two alarms."],
+ vi:["Sáng nay em thức dậy trễ vì tối qua em ngủ trễ.","Em có một buổi họp lúc tám giờ rưỡi, nên em rất vội.","Em đánh răng, nhưng kem đánh răng hết rồi.","Em không có thời gian ăn sáng.","Em mua một ổ bánh mì trên đường đi làm.","Em nhắn tin cho sếp để báo là em sẽ tới trễ mười phút.","Lần sau em sẽ đặt hai cái báo thức."],
+ vk:[["sáng nay","thức dậy","trễ|muộn","tối qua"],["họp","rưỡi|30","nên","vội"],["đánh răng","nhưng","kem đánh răng","hết"],["không có thời gian","ăn sáng"],["mua","bánh mì","trên đường đi làm"],["nhắn tin","sếp","sẽ","trễ|muộn","10 phút|mười phút"],["lần sau","sẽ","báo thức"]]},
+
+{id:"sunday",title:"Sunday with the family",vi_t:"Chủ nhật với gia đình",cls:"core-2026-10-31",lvl:2,
+ en:["On Sunday the whole family eats together.","My dad likes reading the news after breakfast.","My mum goes to the market early to buy fresh food.","My little brother takes out the rubbish and I wash the dishes.","In the afternoon everyone takes a nap.","In the evening we sometimes eat out at a restaurant.","After dinner my sister walks the dog.","Sunday is my favourite day of the week."],
+ vi:["Chủ nhật cả gia đình ăn cơm chung.","Ba em thích đọc báo sau khi ăn sáng.","Má em đi chợ sớm để mua thực phẩm tươi.","Em trai em đổ rác còn em rửa chén.","Buổi chiều mọi người ngủ trưa.","Buổi tối thỉnh thoảng nhà em ăn ngoài ở nhà hàng.","Sau khi ăn tối, chị em dắt chó đi dạo.","Chủ nhật là ngày em thích nhất trong tuần."],
+ vk:[["Chủ nhật","cả gia đình|cả nhà","chung|cùng nhau"],["ba|bố","đọc báo|đọc tin tức","sau khi ăn sáng|ăn sáng xong"],["má|mẹ","đi chợ","sớm","thực phẩm tươi|đồ ăn tươi"],["em trai","đổ rác","rửa chén"],["buổi chiều","ngủ trưa|nghỉ trưa"],["buổi tối","thỉnh thoảng|đôi khi|lâu lâu","ăn ngoài","nhà hàng"],["ăn tối","dắt chó đi dạo"],["Chủ nhật","thích nhất|yêu thích","tuần"]]},
+
+{id:"interview",title:"Job interview tomorrow",vi_t:"Mai đi phỏng vấn",cls:"core-2026-11-13",lvl:3,
+ en:["Tomorrow I have a job interview.","I opened the wardrobe but did not know what to wear.","I want to look smart but still comfortable.","I will wear a white shirt and black trousers.","My new shoes are comfortable, so I will wear them.","I am a bit stressed, so I will listen to music to relax.","I will go to bed early to look fresh tomorrow."],
+ vi:["Ngày mai em có một buổi phỏng vấn xin việc.","Em mở tủ quần áo nhưng không biết mặc gì.","Em muốn trông lịch sự nhưng vẫn thoải mái.","Em sẽ mặc áo sơ mi trắng và quần đen.","Đôi giày mới của em thoải mái, nên em sẽ mang nó.","Em hơi căng thẳng, nên em sẽ nghe nhạc để thư giãn.","Em sẽ đi ngủ sớm để mai trông tươi tắn."],
+ vk:[["ngày mai","phỏng vấn"],["mở","tủ","không biết","mặc gì"],["trông","lịch sự","vẫn","thoải mái"],["sẽ","mặc","áo sơ mi","trắng","quần"],["giày mới","thoải mái","nên","mang"],["hơi","căng thẳng","nghe nhạc","thư giãn"],["đi ngủ","sớm","để","tươi tắn"]]},
+
+{id:"roommate",title:"My roommate",vi_t:"Bạn cùng phòng của tôi",lvl:3,
+ en:["I live with a roommate.","We share the rent and the housework.","I wash the dishes and take out the rubbish.","My roommate mops the floor and does the laundry.","Yesterday I came home from work covered in sweat.","I wanted to take a shower, but he was using the bathroom.","While I was waiting, I read the news."],
+ vi:["Em ở chung với một bạn cùng phòng.","Tụi em chia tiền nhà và việc nhà.","Em rửa chén và đổ rác.","Bạn cùng phòng của em lau nhà và giặt quần áo.","Hôm qua em đi làm về, người đầy mồ hôi.","Em muốn đi tắm, nhưng bạn ấy đang dùng nhà tắm.","Trong lúc chờ, em đọc báo."],
+ vk:[["ở chung|sống chung|ở với|sống với","bạn cùng phòng"],["chia","tiền nhà","việc nhà"],["rửa chén","đổ rác"],["bạn cùng phòng","lau nhà","giặt"],["hôm qua","về","mồ hôi"],["muốn","tắm","nhưng","đang","nhà tắm"],["trong lúc chờ|trong khi chờ|trong lúc đợi","đọc báo|đọc tin tức"]]},
+
+{id:"healthy",title:"Staying healthy",vi_t:"Giữ sức khỏe",lvl:3,
+ en:["Recently I often sit and work all day.","I feel stressed and my back hurts.","So I try to exercise three times a week.","I go to work by bicycle instead of by motorbike.","I cook at home because I want to eat healthy food.","I rarely stay up late.","I always try to make time for myself."],
+ vi:["Gần đây em thường ngồi làm việc cả ngày.","Em cảm thấy căng thẳng và đau lưng.","Vì vậy em cố gắng tập thể dục ba lần một tuần.","Em đi làm bằng xe đạp thay vì xe máy.","Em nấu ăn ở nhà vì em muốn ăn đồ ăn lành mạnh.","Em hiếm khi thức khuya.","Em luôn cố gắng dành thời gian cho bản thân."],
+ vk:[["gần đây|dạo này","thường|hay","ngồi","cả ngày"],["cảm thấy|thấy","căng thẳng","đau lưng"],["cố gắng","tập thể dục","ba lần|3 lần","tuần"],["đi làm","xe đạp","thay vì"],["nấu","ở nhà","vì","lành mạnh"],["hiếm khi|ít khi","thức khuya"],["luôn","cố gắng","dành thời gian"]]},
+
+{id:"coworkers",title:"Lunch with my co-workers",vi_t:"Ăn trưa với đồng nghiệp",cls:"core-2026-10-31",lvl:2,
+ en:["My co-workers are very funny.","Every day we eat lunch together near the office.","Today we ate broken rice; it was cheap but delicious.","My favourite co-worker is from Can Tho.","She often teaches me Southern words.","After lunch we take a short break before the meeting.","In the future I want to invite them to France."],
+ vi:["Đồng nghiệp của em rất vui tính.","Mỗi ngày tụi em ăn trưa chung gần văn phòng.","Hôm nay tụi em ăn cơm tấm, rẻ mà ngon.","Người đồng nghiệp em thích nhất là người Cần Thơ.","Chị ấy hay dạy em từ miền Nam.","Ăn trưa xong, tụi em nghỉ một chút trước buổi họp.","Trong tương lai em muốn mời họ qua Pháp."],
+ vk:[["đồng nghiệp","vui tính"],["mỗi ngày|ngày nào","ăn trưa","chung|cùng nhau","văn phòng|công ty"],["hôm nay","cơm tấm","rẻ","ngon"],["đồng nghiệp","thích nhất|yêu thích","Cần Thơ"],["hay|thường","dạy","miền Nam"],["ăn trưa xong|sau khi ăn trưa|sau bữa trưa","nghỉ","trước","họp"],["trong tương lai|sau này","mời","Pháp"]]},
+
+{id:"saigonlife",title:"Living in Saigon one day",vi_t:"Mai mốt sống ở Sài Gòn",lvl:3,
+ en:["In the future, Lan Anh and I want to live in Saigon.","I have lived in District 1 and District 7.","If I live in Vietnam, I want to live in Binh Thanh.","I like the sunny weather, but riding a motorbike in Saigon is a bit dangerous.","At weekends we will eat out and go shopping.","I will study Vietnamese at a language centre.","I hope my Vietnamese will be better by then."],
+ vi:["Trong tương lai, em và Lan Anh muốn sống ở Sài Gòn.","Em đã sống ở quận 1 và quận 7.","Nếu em sống ở Việt Nam, em muốn ở Bình Thạnh.","Em thích trời nắng, nhưng chạy xe máy ở Sài Gòn hơi nguy hiểm.","Cuối tuần tụi em sẽ ăn ngoài và đi mua đồ.","Em sẽ học tiếng Việt ở trung tâm ngôn ngữ.","Em hy vọng lúc đó tiếng Việt của em sẽ giỏi hơn."],
+ vk:[["trong tương lai|sau này","muốn","Sài Gòn"],["đã sống|từng sống|đã ở","quận 1|quận Một","quận 7|quận Bảy"],["nếu","Việt Nam","muốn","Bình Thạnh"],["nắng","nhưng","chạy xe|lái xe|đi xe","hơi","nguy hiểm"],["cuối tuần","sẽ","ăn ngoài","mua đồ|mua sắm"],["sẽ","học tiếng Việt","trung tâm ngôn ngữ"],["hy vọng|mong","tiếng Việt","giỏi hơn|tốt hơn"]]}
+];
+
+const V21_SIT=[
+{id:"s1",title:"Thức dậy",en:"Wake up",fe:"alarm-clock",
+ vi:["Bạn thường thức dậy lúc 6 giờ sáng để đi làm.","Nhưng hôm nay, bạn thức dậy lúc 8 giờ vì tối qua ngủ trễ.","Bạn có một cuộc họp lúc 8 giờ 30.","Bạn rất vội và không biết nên làm gì trước."],
+ tr:["You usually wake up at 6 a.m. to go to work.","But today you woke up at 8 because you went to bed late last night.","You have a meeting at 8:30.","You're in a real rush and don't know what to do first."],
+ qs:[["Nếu là bạn, bạn sẽ làm gì?","If it were you, what would you do?","Nếu là em, em sẽ nhắn tin cho sếp để xin làm việc ở nhà."],["Bạn có cách nào để không thức dậy trễ không?","Do you have a way to avoid waking up late?","Em đặt hai cái báo thức và đi ngủ sớm hơn."]]},
+{id:"s2",title:"Đánh răng",en:"Brush your teeth",fe:"sparkles",
+ vi:["Sáng nay, bạn thức dậy và chuẩn bị đi làm.","Bạn đánh răng nhưng phát hiện kem đánh răng đã hết.","Bạn không có thời gian đi mua vì sắp trễ giờ."],
+ tr:["This morning you woke up and got ready for work.","You went to brush your teeth but found the toothpaste had run out.","You have no time to buy more because you're about to be late."],
+ qs:[["Bạn sẽ làm gì?","What will you do?","Em sẽ đánh răng bằng nước, rồi mua kem đánh răng trên đường đi làm."],["Bạn thường đánh răng mấy lần một ngày?","How many times a day do you brush your teeth?","Em thường đánh răng hai lần một ngày, buổi sáng và buổi tối trước khi đi ngủ."],["Theo bạn, điều gì quan trọng khi chăm sóc răng miệng?","In your opinion, what matters when looking after your teeth?","Theo em, đánh răng hai lần một ngày rất quan trọng."]]},
+{id:"s3",title:"Rửa mặt",en:"Wash your face",fe:"mirror",
+ vi:["Bạn vừa thức dậy sau một đêm ngủ không ngon.","Bạn nhìn vào gương và thấy mặt mình rất mệt mỏi.","Hôm nay, bạn có một buổi gặp mặt quan trọng.","Bạn muốn khuôn mặt trông tươi tắn hơn."],
+ tr:["You've just woken up after a bad night's sleep.","You look in the mirror and your face looks very tired.","Today you have an important meeting.","You want your face to look fresher."],
+ qs:[["Bạn sẽ làm gì?","What will you do?","Em sẽ rửa mặt bằng nước lạnh, đi tắm rồi uống một ly cà phê."],["Bạn thích rửa mặt bằng nước lạnh hay nước ấm?","Do you prefer washing your face with cold or warm water?","Em thích rửa mặt bằng nước lạnh vào buổi sáng."]]},
+{id:"s4",title:"Tắm",en:"Take a shower",fe:"sun-behind-small-cloud",
+ vi:["Bạn vừa đi làm về.","Trời rất nóng và bạn cảm thấy người đầy mồ hôi.","Bạn muốn đi tắm nhưng bạn cùng phòng đang dùng nhà tắm.","Bạn phải đợi 30 phút."],
+ tr:["You've just come home from work.","It's very hot and you feel covered in sweat.","You want a shower but your roommate is using the bathroom.","You have to wait 30 minutes."],
+ qs:[["Trong lúc chờ, bạn sẽ làm gì?","While you wait, what will you do?","Trong lúc chờ, em sẽ đọc báo."],["Bạn thường tắm vào buổi sáng hay buổi tối? Vì sao?","Do you usually shower in the morning or the evening? Why?","Em thường tắm vào buổi sáng vì em muốn cảm thấy sạch sẽ trước khi đi làm."]]},
+{id:"s5",title:"Mặc quần áo",en:"Get dressed",fe:"t-shirt",
+ vi:["Ngày mai, bạn có một buổi phỏng vấn xin việc.","Bạn mở tủ và thấy rất nhiều quần áo nhưng không biết mặc gì.","Bạn có áo sơ mi trắng, áo thun đen và quần jean.","Bạn muốn trông lịch sự nhưng vẫn thoải mái."],
+ tr:["Tomorrow you have a job interview.","You open the wardrobe and see lots of clothes but don't know what to wear.","You have a white shirt, a black T-shirt and jeans.","You want to look smart but still comfortable."],
+ qs:[["Bạn sẽ chọn bộ nào?","Which outfit will you choose?","Em sẽ mặc áo sơ mi trắng với quần jean, vừa lịch sự vừa thoải mái."],["Theo bạn, mặc đẹp hay mặc thoải mái quan trọng hơn?","For you, is looking good or being comfortable more important?","Theo em, mặc đẹp quan trọng hơn."]]},
+{id:"s6",title:"Mang giày",en:"Wear shoes",fe:"running-shoe",
+ vi:["Bạn chuẩn bị đi làm thì phát hiện đôi giày thường mang đã bị hư.","Bạn có một đôi giày mới nhưng chưa mang lần nào.","Hôm nay, bạn phải đi bộ khá nhiều."],
+ tr:["You're getting ready for work when you discover your usual shoes are broken.","You have a new pair you've never worn.","Today you have to walk quite a lot."],
+ qs:[["Bạn sẽ mang đôi giày nào?","Which shoes will you wear?","Em sẽ mang đôi giày mới vì em không thể đi bộ nhiều với đôi giày bị hư."],["Khi mua giày, bạn quan tâm đến giá tiền, kiểu dáng hay sự thoải mái?","When buying shoes, do you care about price, style or comfort?","Khi mua giày, em quan tâm đến kiểu dáng và sự thoải mái hơn."]]},
+{id:"s7",title:"Mang vớ",en:"Wear socks",fe:"label",
+ vi:["Sáng nay, bạn chuẩn bị mang giày nhưng không tìm thấy đôi vớ sạch nào.","Bạn chỉ còn một đôi vớ hơi cũ và một đôi vớ mới chưa giặt.","Bạn sắp trễ giờ làm."],
+ tr:["This morning you're about to put your shoes on but can't find a single clean pair of socks.","You only have a slightly old pair and a new pair that hasn't been washed.","You're about to be late for work."],
+ qs:[["Bạn sẽ chọn đôi nào?","Which pair will you choose?","Em sẽ chọn đôi vớ mới, vì vớ mới vẫn sạch hơn vớ cũ."],["Bạn thường mua vớ màu gì?","What colour socks do you usually buy?","Em thường mua vớ màu đen hoặc màu trắng."],["Bạn thích mang vớ hay không mang vớ?","Do you like wearing socks or not?","Em thích mang vớ khi mang giày."]]},
+{id:"s8",title:"Đội nón bảo hiểm",en:"Wear a helmet",fe:"motor-scooter",
+ vi:["Bạn chuẩn bị đi xe máy đến siêu thị.","Trời đang nắng rất đẹp nhưng bạn không tìm thấy nón bảo hiểm.","Siêu thị chỉ cách nhà 5 phút.","Bạn của bạn nói rằng đi gần thì không cần đội nón."],
+ tr:["You're about to ride your motorbike to the supermarket.","It's lovely and sunny, but you can't find your helmet.","The supermarket is only 5 minutes from home.","Your friend says that for a short trip you don't need a helmet."],
+ qs:[["Bạn nghĩ sao? Bạn sẽ làm gì?","What do you think? What will you do?","Em nghĩ bạn em nói sai. Em sẽ đi bộ tới siêu thị."],["Theo bạn, đội nón bảo hiểm có quan trọng không?","In your opinion, is wearing a helmet important?","Theo em, đội nón bảo hiểm rất quan trọng, vì không đội nón bảo hiểm rất nguy hiểm."]]},
+{id:"s9",title:"Ăn sáng",en:"Eat breakfast",fe:"steaming-bowl",
+ vi:["Sáng nay, bạn có 20 phút để chuẩn bị đi làm.","Bạn rất đói nhưng không biết nên ăn gì.","Trong nhà có bánh mì, trứng và sữa.","Bạn cũng có thể mua phở trên đường đi làm."],
+ tr:["This morning you have 20 minutes to get ready for work.","You're very hungry but don't know what to eat.","At home there's bread, eggs and milk.","You could also buy phở on the way to work."],
+ qs:[["Bạn sẽ chọn món nào?","Which will you choose?","Em sẽ ở nhà ăn bánh mì ốp la và uống một ly sữa tươi, vì ngon và rẻ."],["Bạn thích ăn sáng ở nhà hay ở ngoài? Vì sao?","Do you prefer breakfast at home or out? Why?","Em không thích ăn sáng ở nhà hay ở ngoài, vì buổi sáng em thường không đói."]]},
+{id:"s10",title:"Uống cà phê hay trà",en:"Coffee or tea",fe:"hot-beverage",
+ vi:["Bạn và đồng nghiệp đến quán cà phê vào buổi sáng.","Bạn muốn uống cà phê nhưng đồng nghiệp thích trà.","Hai người nhìn thấy thực đơn có rất nhiều loại đồ uống."],
+ tr:["You and a co-worker go to a café in the morning.","You want coffee but your co-worker prefers tea.","The two of you see that the menu has lots of kinds of drinks."],
+ qs:[["Bạn thường uống gì vào buổi sáng?","What do you usually drink in the morning?","Em thường uống cà phê đen nóng vào buổi sáng."],["Nếu hôm nay phải chọn một loại đồ uống mới, bạn sẽ chọn gì?","If you had to pick a new drink today, what would you choose?","Nếu hôm nay phải chọn một loại đồ uống mới, em sẽ chọn trà sữa."]]},
+{id:"s11",title:"Tập thể dục",en:"Exercise",fe:"person-running",
+ vi:["Bạn muốn tập thể dục vì gần đây bạn thường ngồi làm việc cả ngày.","Bạn có 30 phút rảnh vào buổi sáng.","Bạn có thể đi bộ, chạy bộ hoặc tập yoga ở nhà.","Nhưng bạn không thích những bài tập quá khó."],
+ tr:["You want to exercise because lately you often sit working all day.","You have 30 free minutes in the morning.","You could walk, jog or do yoga at home.","But you don't like workouts that are too hard."],
+ qs:[["Bạn sẽ chọn hoạt động nào?","Which activity will you choose?","Em sẽ tập yoga ở nhà vì gần đây em cảm thấy căng thẳng."],["Làm sao để bạn có thể duy trì thói quen tập thể dục mỗi ngày?","How can you keep up a daily exercise habit?","Em có thể duy trì thói quen bằng cách đi làm bằng xe đạp mỗi ngày."]]}
+];
+
+/* ═══════════════════════════════════════════════════════════════════════
+   v21 · TRANSLATE & WRITE
+   Three exercises modelled on Alex's homework:
+   · Đọc, dịch, trả lời — a whole Vietnamese text: read it, translate every
+     sentence into English, then answer questions on it in Vietnamese.
+   · Dịch sang tiếng Việt — a whole English text to translate into Vietnamese
+     with no help at all; the check looks for the key words and the tones.
+   · Tình huống — the eleven situations of the 13/11 class: read, understand,
+     answer in your own words, compare with a corrected sample.
+   ═══════════════════════════════════════════════════════════════════════ */
+const V21_NORM=s=>String(s||"").normalize("NFC").toLowerCase().replace(/[’‘]/g,"'").replace(/[“”"«»()\[\].,!?;…]/g," ").replace(/:(?!\d)/g," ").replace(/\s+/g," ").trim();
+const V21_FLAT=s=>V21_NORM(s).normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").normalize("NFC");
+function v21Has(text,key){
+  const k=V21_NORM(key); if(!k) return false;
+  const pat=k.split(" ").map(w=>w.split("*").map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("\\S*")).join("\\s+");
+  try{ return new RegExp("(^|\\s)"+pat+"(?:'s)?(?=\\s|$)").test(text); }catch(e){ return text.indexOf(k)>-1; }
+}
+/* 2 = found, 1 = found without the right tones (Vietnamese only), 0 = missing */
+function v21Match(user,key,viet){
+  const alts=String(key).split("|"), n=V21_NORM(user);
+  if(alts.some(a=>v21Has(n,a))) return 2;
+  const f=V21_FLAT(user); if(alts.some(a=>v21Has(f,V21_FLAT(a)))) return viet?1:2;
+  return 0;
+}
+function v21Score(user,keys,viet){
+  if(!String(user||"").trim()) return {s:0,hits:keys.map(()=>0)};
+  const hits=keys.map(k=>v21Match(user,k,viet));
+  return {s:keys.length?hits.reduce((a,h)=>a+(h===2?1:h===1?.5:0),0)/keys.length:1,hits:hits};
+}
+/* the mistakes from the homework, and Southern word choices */
+const V21_FLAGS=[
+ [/(^|\s)(đeo|đội)\s+(đôi\s+|cái\s+)?(giày|dép|vớ|dớ|tất)/,"bad","Giày, dép and vớ take mang: mang giày, mang vớ. Đeo is for glasses, watches and masks; đội is for hats and helmets."],
+ [/(^|[\s.!?])nếu\s+[^,.!?]*?\ssẽ(\s|$)/,"bad","Inside the nếu part there is no sẽ: “Nếu em sống ở Việt Nam, em sẽ…”."],
+ [/(^|\s)rất\s+\S+(\s+\S+)?\s+(lắm|quá)([\s.,!?]|$)/,"bad","Use rất or lắm/quá, not both: rất ngon or ngon lắm."],
+ [/(^|\s)hỏi\s+(\S+\s+){0,3}làm việc ở nhà/,"bad","To ask for permission, use xin: xin làm việc ở nhà."],
+ [/(^|\s)dớ(\s|[.,!?]|$)/,"bad","It is spelled vớ."],
+ [/(^|\s)nghìn/,"tip","In the South people say ngàn: năm mươi ngàn."],
+ [/(^|\s)bố(\s|[.,!?]|$)/,"tip","In the South, dad is ba (bố is Northern)."],
+ [/(^|\s)muộn/,"tip","In the South people usually say trễ: tới trễ, ngủ trễ."],
+ [/rửa bát/,"tip","In the South it is rửa chén."],
+ [/(đi|mang|đeo)\s+tất/,"tip","In the South socks are vớ: mang vớ."],
+ [/(^|\s)xem\s+(phim|tv|ti vi|tivi)/,"tip","In the South people usually say coi: coi phim, coi TV."]
+];
+function v21Flags(text){ const raw=" "+String(text||"").normalize("NFC").toLowerCase()+" "; return V21_FLAGS.filter(f=>f[0].test(raw)); }
+function v21FlagHTML(text){ return v21Flags(text).map(f=>'<p class="v21-flag '+f[1]+'">'+(f[1]==="bad"?"Sửa: ":"Mẹo: ")+esc(f[2])+'</p>').join(""); }
+
+function v21St(){ const v=v18S(); if(!v.trd||typeof v.trd!=="object") v.trd={}; return v; }
+function v21Draft(k){ const v=v21St(); if(!v.trd[k]||typeof v.trd[k]!=="object") v.trd[k]={a:[],q:[],r:{}}; const d=v.trd[k]; if(!Array.isArray(d.a)) d.a=[]; if(!Array.isArray(d.q)) d.q=[]; if(!d.r||typeof d.r!=="object") d.r={}; return d; }
+function v21Run(k){ return (v18S().runs||{})[k]||null; }
+function v21Done(k,pct){ const v=v18S(); v.runs[k]=v.runs[k]||{n:0,best:0,last:0}; v.runs[k].n++; v.runs[k].best=Math.max(v.runs[k].best||0,pct); v.runs[k].last=Date.now();
+  S.xp+=Math.round(6+pct*14); try{ bumpStreak(); }catch(e){} save(); }
+const V21_LVL=["","Dễ","Vừa","Khó"];
+function v21Wire(){ wireSpeak(); $$("#v18Body textarea[data-k]").forEach(t=>{ t.oninput=function(){ const d=v21Draft(t.dataset.k); d[t.dataset.f][+t.dataset.i]=t.value; clearTimeout(v21Wire.t); v21Wire.t=setTimeout(save,400); }; }); }
+function v21Para(lines){ return '<div class="v21-text">'+lines.map(s=>'<span class="v21-s" data-say="'+esc(s)+'">'+esc(s)+'</span>').join(" ")+'</div>'; }
+function v21Gloss(gl){ return gl&&gl.length?'<details class="v19-peek v21-gloss"><summary>Từ mới trong bài · '+gl.length+' new words</summary><div class="v21-chips">'+gl.map(g=>'<span><b>'+esc(g[0])+'</b> '+esc(g[1])+'</span>').join("")+'</div></details>':''; }
+function v21Pct(p){ return Math.round(p*100)+"%"; }
+function v21Badge(p){ return '<span class="v21-pct '+(p>=.8?"good":p>=.5?"mid":"low")+'">'+v21Pct(p)+'</span>'; }
+
+/* ── lists ───────────────────────────────────────────────────────────── */
+function v21List(kind,back){
+  const L=kind==="vn"?V21_VN:kind==="en"?V21_EN:V21_SIT;
+  const title=kind==="vn"?"Đọc, dịch, trả lời":kind==="en"?"Dịch sang tiếng Việt":"Tình huống";
+  const lead=kind==="vn"?"Read a whole Vietnamese text, translate every sentence into English, then answer the questions in Vietnamese. Tap a sentence to hear it."
+    :kind==="en"?"Translate a whole English text into Vietnamese with no help, using the words you know. Write the tones: the check looks for the key words of each sentence and tells you when only a tone is missing."
+    :"The eleven situations from your 13/11 class. Read, decide what you would do, answer in Vietnamese, then compare with a corrected sample answer.";
+  const art=kind==="vn"?"closed-book":kind==="en"?"pen":"thinking-face";
+  v18Page({title:title,key:"t",back:back||null,body:'<p class="v18-lead">'+lead+'</p><div class="v18-list">'+L.map((T,i)=>{ const r=v21Run("tr-"+kind+"-"+T.id);
+      const sub=kind==="sit"?T.en:(kind==="vn"?T.en:T.vi_t)+" · "+(kind==="vn"?T.vi.length:T.en.length)+" câu · "+V21_LVL[T.lvl||2]+(T.cls?" · lớp "+formatLessonDate(T.cls.slice(5)):"");
+      return '<button class="v18-listrow" data-i="'+i+'">'+v16Art(kind==="sit"?(T.fe||art):art,TRACK_GRAD.t[0],"sm")+'<span><b>'+esc(T.title)+'</b><small>'+esc(sub)+'</small></span>'+(r?v21Badge(r.best):ICON("chevron"))+'</button>'; }).join("")+'</div>',
+   wire:()=>$$("#v18Body .v18-listrow").forEach(b=>b.onclick=()=>{ const T=L[+b.dataset.i], bk=()=>v21List(kind,back); if(kind==="vn") v21OpenVN(T,bk); else if(kind==="en") v21OpenEN(T,bk); else v21OpenSit(T,bk); })});
+}
+V18_OPEN.trvn=()=>v21List("vn");
+V18_OPEN.tren=()=>v21List("en");
+V18_OPEN.sit=()=>v21List("sit");
+
+/* ── Vietnamese text → English → questions ───────────────────────────── */
+function v21OpenVN(T,back){
+  const k="vn:"+T.id;
+  v18Page({title:T.title,key:"t",back:back,body:'<p class="v18-lead">Bước 1 · Đọc cả bài. Read it once or twice; tap a sentence to hear it.</p>'+v21Para(T.vi)+v21Gloss(T.gl)
+    +'<div class="fl-actions"><button class="btn ghost" id="trAll">'+ICON("speakR")+' Nghe cả bài</button><button class="btn" id="trGo">Dịch sang tiếng Anh</button></div>',
+   wire:()=>{ wireSpeak(); $("#trAll").onclick=()=>TTS.seq(T.vi,S.rate); $("#trGo").onclick=()=>v21TransVN(T,back); }});
+}
+function v21TransVN(T,back){
+  const k="vn:"+T.id, d=v21Draft(k);
+  v18Page({title:"Dịch · "+T.title,key:"t",back:()=>v21OpenVN(T,back),body:'<p class="v18-lead">Bước 2 · Translate each sentence into English. Your drafts are kept if you leave.</p>'
+    +T.vi.map((s,i)=>'<div class="v21-row"><p class="v21-src" data-say="'+esc(s)+'"><i>'+(i+1)+'</i>'+esc(s)+'</p><textarea class="v21-in" rows="2" data-k="'+k+'" data-f="a" data-i="'+i+'" autocapitalize="sentences" spellcheck="true" lang="en" placeholder="In English…">'+esc(d.a[i]||"")+'</textarea></div>').join("")
+    +v21Gloss(T.gl)+'<div class="fl-actions"><button class="btn" id="trCheck">Kiểm tra bản dịch</button></div>',
+   wire:()=>{ v21Wire(); $("#trCheck").onclick=()=>v21CheckVN(T,back); }});
+}
+function v21CheckVN(T,back){
+  const k="vn:"+T.id, d=v21Draft(k); let tot=0;
+  const rows=T.vi.map((s,i)=>{ const u=d.a[i]||"", r=v21Score(u,T.ek[i]||[],false); tot+=r.s;
+    return '<div class="v21-res '+(r.s>=.8?"good":r.s>=.5?"mid":"low")+'"><p class="v21-src" data-say="'+esc(s)+'"><i>'+(i+1)+'</i>'+esc(s)+'</p>'
+      +'<p class="v21-you">'+(u.trim()?esc(u):'<em>Bạn chưa dịch câu này.</em>')+'</p><p class="v21-model"><small>Bản mẫu</small>'+esc(T.en[i])+'</p>'
+      +'<div class="v21-keys">'+(T.ek[i]||[]).map((key,j)=>'<span class="'+(r.hits[j]?"ok":"miss")+'">'+esc(key.split("|")[0].replace(/\*/g,"…"))+'</span>').join("")+'</div></div>'; });
+  const pct=T.vi.length?tot/T.vi.length:0; d.r.t=pct; save();
+  v18Page({title:"Bản dịch · "+T.title,key:"t",back:()=>v21TransVN(T,back),body:'<div class="v18-score '+(pct>=.8?"good":pct>=.5?"mid":"low")+'"><span>Bản dịch</span><span>'+v21Pct(pct)+'</span></div>'
+    +'<p class="v18-note">Green chips are the key ideas found in your English, grey ones are missing. Your sentence can be right with other words: compare it with the model.</p>'
+    +rows.join("")+'<div class="fl-actions"><button class="btn ghost" id="trRe">Sửa bản dịch</button><button class="btn" id="trQ">Trả lời câu hỏi</button></div>',
+   wire:()=>{ wireSpeak(); $("#trRe").onclick=()=>v21TransVN(T,back); $("#trQ").onclick=()=>v21QuestVN(T,back); }});
+}
+function v21QuestVN(T,back){
+  const k="vn:"+T.id, d=v21Draft(k);
+  v18Page({title:"Câu hỏi · "+T.title,key:"t",back:()=>v21CheckVN(T,back),body:'<p class="v18-lead">Bước 3 · Answer in Vietnamese, in a full sentence when you can. The text is below if you need it.</p>'
+    +'<details class="v19-peek"><summary>Xem lại bài đọc</summary>'+v21Para(T.vi)+'</details>'
+    +T.qs.map((q,i)=>'<div class="v21-row"><p class="v21-q" data-say="'+esc(q.q)+'"><i>'+(i+1)+'</i>'+esc(q.q)+(q.o?' <em class="v21-open">câu hỏi mở</em>':'')+'</p><details class="v21-en"><summary>EN</summary>'+esc(q.en)+'</details>'
+      +'<textarea class="v21-in" rows="2" data-k="'+k+'" data-f="q" data-i="'+i+'" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Trả lời bằng tiếng Việt…">'+esc(d.q[i]||"")+'</textarea></div>').join("")
+    +'<div class="fl-actions"><button class="btn" id="trQc">Kiểm tra câu trả lời</button></div>',
+   wire:()=>{ v21Wire(); $("#trQc").onclick=()=>v21QResVN(T,back); }});
+}
+function v21AnsRow(q,u,i){
+  if(q.o) return {html:'<div class="v21-res open"><p class="v21-q" data-say="'+esc(q.q)+'"><i>'+(i+1)+'</i>'+esc(q.q)+'</p><p class="v21-you">'+(u.trim()?esc(u):'<em>Chưa trả lời.</em>')+'</p>'+v21FlagHTML(u)
+     +'<p class="v21-model" data-say="'+esc(q.a)+'"><small>Ví dụ</small>'+esc(q.a)+'</p><p class="v18-dim">Câu hỏi mở: any true answer about you is right.</p></div>',s:null};
+  const hits=q.k.map(x=>v21Match(u,x,true)), all2=u.trim()&&hits.every(h=>h===2), all1=u.trim()&&hits.every(h=>h>0), bad=v21Flags(u).some(f=>f[1]==="bad");
+  const st=all2&&!bad?"good":all1?"mid":"low", s=all2&&!bad?1:all1?.5:0;
+  return {s:s,html:'<div class="v21-res '+st+'"><p class="v21-q" data-say="'+esc(q.q)+'"><i>'+(i+1)+'</i>'+esc(q.q)+'</p><p class="v21-you">'+(u.trim()?esc(u):'<em>Chưa trả lời.</em>')+'</p>'
+    +(st==="mid"&&!all2?'<p class="v21-flag tip">Mẹo: the idea is right — check the tones of the key words.</p>':'')+v21FlagHTML(u)
+    +'<p class="v21-model" data-say="'+esc(q.a)+'"><small>Đáp án</small>'+esc(q.a)+'</p></div>'};
+}
+function v21QResVN(T,back){
+  const k="vn:"+T.id, d=v21Draft(k); let got=0, n=0;
+  const rows=T.qs.map((q,i)=>{ const r=v21AnsRow(q,d.q[i]||"",i); if(r.s!=null){ got+=r.s; n++; } return r.html; });
+  const qp=n?got/n:1, tp=d.r.t||0, pct=(tp+qp)/2; d.r.q=qp;
+  try{ v18Log("word",tp>=.6); v18Log("grammar",qp>=.6); }catch(e){}
+  v21Done("tr-vn-"+T.id,pct);
+  v18Page({title:"Kết quả · "+T.title,key:"t",back:()=>v21QuestVN(T,back),body:'<div class="v21-sum"><div><small>Bản dịch</small><b>'+v21Pct(tp)+'</b></div><div><small>Câu hỏi</small><b>'+(Math.round(got*2)/2)+' / '+n+'</b></div><div><small>Tổng</small><b>'+v21Pct(pct)+'</b></div></div>'
+    +rows.join("")+'<div class="fl-actions"><button class="btn ghost" id="trAgain">Làm lại từ đầu</button><button class="btn" id="trNext">Bài khác</button></div>',
+   wire:()=>{ wireSpeak(); $("#trAgain").onclick=()=>{ v21St().trd[k]={a:[],q:[],r:{}}; save(); v21OpenVN(T,back); }; $("#trNext").onclick=()=>v21List("vn"); }});
+}
+
+/* ── English text → Vietnamese, no help ──────────────────────────────── */
+function v21OpenEN(T,back){
+  const k="en:"+T.id, d=v21Draft(k);
+  v18Page({title:T.title,key:"t",back:back,body:'<p class="v18-lead">Translate the whole text into Vietnamese, with no help. Southern words, full tones. Drafts are kept if you leave.</p>'
+    +'<div class="v21-text en">'+T.en.map(s=>esc(s)).join(" ")+'</div>'
+    +T.en.map((s,i)=>'<div class="v21-row"><p class="v21-src en"><i>'+(i+1)+'</i>'+esc(s)+'</p><textarea class="v21-in" rows="2" data-k="'+k+'" data-f="a" data-i="'+i+'" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Viết bằng tiếng Việt…">'+esc(d.a[i]||"")+'</textarea></div>').join("")
+    +'<div class="fl-actions"><button class="btn" id="trCheck">Kiểm tra</button></div>',
+   wire:()=>{ v21Wire(); $("#trCheck").onclick=()=>v21CheckEN(T,back); }});
+}
+function v21CheckEN(T,back){
+  const k="en:"+T.id, d=v21Draft(k); let tot=0, toneN=0, badN=0;
+  const rows=T.en.map((s,i)=>{ const u=d.a[i]||"", r=v21Score(u,T.vk[i]||[],true), fl=v21Flags(u); tot+=r.s; if(r.hits.some(h=>h===1)) toneN++; if(fl.some(f=>f[1]==="bad")) badN++;
+    return '<div class="v21-res '+(r.s>=.8?"good":r.s>=.5?"mid":"low")+'"><p class="v21-src en"><i>'+(i+1)+'</i>'+esc(s)+'</p>'
+      +'<p class="v21-you">'+(u.trim()?esc(u):'<em>Bạn chưa dịch câu này.</em>')+'</p>'+v21FlagHTML(u)
+      +'<p class="v21-model" data-say="'+esc(T.vi[i])+'"><small>Bản mẫu '+ICON("speakR")+'</small>'+esc(T.vi[i])+'</p>'
+      +'<div class="v21-keys">'+(T.vk[i]||[]).map((key,j)=>'<span class="'+(r.hits[j]===2?"ok":r.hits[j]===1?"tone":"miss")+'">'+esc(key.split("|")[0])+(r.hits[j]===1?' · dấu?':'')+'</span>').join("")+'</div></div>'; });
+  const pct=T.en.length?tot/T.en.length:0;
+  try{ v18Log("word",pct>=.6); if(toneN) v18Log("tone",false); if(badN) v18Log("grammar",false); }catch(e){}
+  v21Done("tr-en-"+T.id,pct);
+  v18Page({title:"Kết quả · "+T.title,key:"t",back:()=>v21OpenEN(T,back),body:'<div class="v18-score '+(pct>=.8?"good":pct>=.5?"mid":"low")+'"><span>Bản dịch</span><span>'+v21Pct(pct)+'</span></div>'
+    +'<p class="v18-note">Green: key word found. Orange: the word is there but a tone or a letter is missing. Grey: not found — maybe you used another correct word, so compare with the model and listen to it.</p>'
+    +(toneN?'<p class="v21-flag tip">'+toneN+' câu có từ thiếu dấu hoặc sai dấu.</p>':'')
+    +rows.join("")+'<div class="fl-actions"><button class="btn ghost" id="trRe">Sửa bản dịch</button><button class="btn ghost" id="trAll">'+ICON("speakR")+' Nghe bản mẫu</button><button class="btn" id="trNext">Bài khác</button></div>',
+   wire:()=>{ wireSpeak(); $("#trRe").onclick=()=>v21OpenEN(T,back); $("#trAll").onclick=()=>TTS.seq(T.vi,S.rate); $("#trNext").onclick=()=>v21List("en"); }});
+}
+
+/* ── situations ──────────────────────────────────────────────────────── */
+function v21OpenSit(T,back){
+  const k="sit:"+T.id, d=v21Draft(k);
+  v18Page({title:T.title,key:"t",back:back,body:'<div class="v21-sithead">'+v16Art(T.fe||"thinking-face",TRACK_GRAD.t[0])+'<span><b>'+esc(T.title)+'</b><small>'+esc(T.en)+'</small></span></div>'
+    +v21Para(T.vi)+'<details class="v19-peek"><summary>Dịch · translation</summary>'+T.tr.map(esc).join(" ")+'</details>'
+    +T.qs.map((q,i)=>'<div class="v21-row"><p class="v21-q" data-say="'+esc(q[0])+'"><i>'+(i+1)+'</i>'+esc(q[0])+'</p><details class="v21-en"><summary>EN</summary>'+esc(q[1])+'</details>'
+      +'<textarea class="v21-in" rows="2" data-k="'+k+'" data-f="q" data-i="'+i+'" autocapitalize="sentences" spellcheck="false" lang="vi" placeholder="Trả lời bằng tiếng Việt…">'+esc(d.q[i]||"")+'</textarea></div>').join("")
+    +'<div class="fl-actions"><button class="btn ghost" id="trAll">'+ICON("speakR")+' Nghe</button><button class="btn" id="trCmp">So sánh</button></div>',
+   wire:()=>{ v21Wire(); $("#trAll").onclick=()=>TTS.seq(T.vi,S.rate); $("#trCmp").onclick=()=>v21SitRes(T,back); }});
+}
+function v21SitRes(T,back){
+  const k="sit:"+T.id, d=v21Draft(k);
+  const rows=T.qs.map((q,i)=>{ const u=d.q[i]||""; return '<div class="v21-res open"><p class="v21-q"><i>'+(i+1)+'</i>'+esc(q[0])+'</p><p class="v21-you">'+(u.trim()?esc(u):'<em>Chưa trả lời.</em>')+'</p>'+v21FlagHTML(u)
+    +'<p class="v21-model" data-say="'+esc(q[2])+'"><small>Câu mẫu '+ICON("speakR")+'</small>'+esc(q[2])+'</p>'
+    +'<div class="v18-rate" data-i="'+i+'"><span>Câu của bạn thế nào?</span><div>'+[["2","Tốt"],["1","Gần đúng"],["0","Chưa"]].map(x=>'<button data-r="'+x[0]+'"'+(String(d.r[i])===x[0]?' class="on"':'')+'>'+x[1]+'</button>').join("")+'</div></div></div>'; });
+  v18Page({title:"So sánh · "+T.title,key:"t",back:()=>v21OpenSit(T,back),body:'<p class="v18-lead">There is no single right answer. Compare your sentence with the corrected sample, listen to it, and rate yourself honestly.</p>'+rows.join("")
+    +'<div class="fl-actions"><button class="btn ghost" id="trRe">Sửa câu trả lời</button><button class="btn" id="trNext">Tình huống tiếp theo</button></div>',
+   wire:()=>{ wireSpeak();
+     $$("#v18Body .v18-rate").forEach(box=>box.querySelectorAll("button").forEach(b=>b.onclick=()=>{ d.r[+box.dataset.i]=+b.dataset.r; box.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); save(); }));
+     $("#trRe").onclick=()=>v21OpenSit(T,back);
+     $("#trNext").onclick=()=>{ const rs=T.qs.map((q,i)=>d.r[i]); const pct=rs.reduce((a,r)=>a+(+r||0),0)/(2*T.qs.length); v21Done("tr-sit-"+T.id,pct);
+       const j=V21_SIT.indexOf(T); if(j<V21_SIT.length-1) v21OpenSit(V21_SIT[j+1],back); else v21List("sit"); }; }});
+}
+
+/* ── Luyện: a new first group, suggestions, badges ───────────────────── */
+V19_GROUPS.unshift({h:"Dịch và viết",en:"Translate & write",key:"t",items:[["trvn","closed-book","Đọc, dịch, trả lời",V21_VN.length+" bài: dịch sang tiếng Anh, trả lời câu hỏi"],["tren","pen","Dịch sang tiếng Việt",V21_EN.length+" bài tiếng Anh, không gợi ý"],["sit","thinking-face","Tình huống",V21_SIT.length+" tình huống của lớp 13/11"]]});
+Object.assign(V19_TOOL_FE,{trvn:"closed-book",tren:"pen",sit:"thinking-face"});
+V19_ROT.push(["trvn","Đọc, dịch, trả lời","dịch một bài văn ngắn"],["tren","Dịch sang tiếng Việt","viết một đoạn không gợi ý"]);
+function v18Badge(id){
+  if(id==="trvn"||id==="tren"||id==="sit"){ const kind=id==="trvn"?"vn":id==="tren"?"en":"sit", L=kind==="vn"?V21_VN:kind==="en"?V21_EN:V21_SIT, r=v18S().runs||{};
+    const n=L.filter(T=>r["tr-"+kind+"-"+T.id]).length; return n?'<em class="v18-badge soft">'+n+'/'+L.length+'</em>':''; }
+  return v18Badge_v20(id);
+}
+
+/* ── the class page links to its own translation work ────────────────── */
+function viewClass(){
+  viewClass_v20();
+  try{ const id=CLASS_OPEN; const vn=V21_VN.filter(T=>T.cls===id), en=V21_EN.filter(T=>T.cls===id), sit=id==="core-2026-11-13";
+    if(!vn.length&&!en.length&&!sit) return;
+    const rows=vn.map((T,i)=>'<button class="v18-listrow" data-tr="vn" data-i="'+V21_VN.indexOf(T)+'">'+v16Art("closed-book",TRACK_GRAD.t[0],"sm")+'<span><b>'+esc(T.title)+'</b><small>Đọc, dịch, trả lời</small></span>'+ICON("chevron")+'</button>')
+      .concat(en.map(T=>'<button class="v18-listrow" data-tr="en" data-i="'+V21_EN.indexOf(T)+'">'+v16Art("pen",TRACK_GRAD.t[0],"sm")+'<span><b>'+esc(T.title)+'</b><small>Dịch sang tiếng Việt</small></span>'+ICON("chevron")+'</button>'))
+      .concat(sit?['<button class="v18-listrow" data-tr="sit">'+v16Art("thinking-face",TRACK_GRAD.t[0],"sm")+'<span><b>11 tình huống</b><small>Đọc và trả lời như trong lớp</small></span>'+ICON("chevron")+'</button>']:[]);
+    $("#stage").insertAdjacentHTML("beforeend",'<section class="v15-section v21-classwork"><h3>Dịch và viết <small>translation work from this class</small></h3><div class="v18-list">'+rows.join("")+'</div></section>');
+    $$("#stage .v21-classwork [data-tr]").forEach(b=>b.onclick=()=>{ const t=b.dataset.tr, bk=()=>classSheet(id); if(t==="vn") v21OpenVN(V21_VN[+b.dataset.i],bk); else if(t==="en") v21OpenEN(V21_EN[+b.dataset.i],bk); else v21List("sit",bk); });
+  }catch(e){ console.warn(e); }
 }
 
 /* timing guards */
